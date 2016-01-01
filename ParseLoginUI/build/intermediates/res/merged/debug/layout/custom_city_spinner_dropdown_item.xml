@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <LinearLayout
+        style="?android:attr/spinnerDropDownItemStyle"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/city_in_en_textview"
+            style="@style/SpinnerItem.TownshipInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="marquee"
+            android:layout_gravity="center_vertical"
+            android:singleLine="true"
+            android:textAlignment="inherit"
+            android:textColor="@color/body_text_2"/>
+
+        <com.parse.widget.CustomTextView
+            android:id="@+id/city_in_mm_textview"
+            style="@style/SpinnerItem.TownshipInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center_vertical"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:textAlignment="inherit"
+            android:textColor="@color/body_text_2"/>
+
+    </LinearLayout>
+
+
+<!--
+<FrameLayout
+style="?android:attr/spinnerDropDownItemStyle"
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="?attr/dropdownListPreferredItemHeight"
+    >
+</FrameLayout>-->
