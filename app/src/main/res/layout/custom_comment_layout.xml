@@ -9,12 +9,47 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:layout_margin="8dp">
 
-    <org.undp_iwomen.iwomen.ui.widget.ProfilePictureView
+    <!--<org.undp_iwomen.iwomen.ui.widget.ProfilePictureView
         android:id="@+id/custom_comment_profilepicture"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentLeft="true"
-        android:layout_marginRight="8dp"/>
+        android:layout_marginRight="8dp"/>-->
+    <FrameLayout
+        android:id="@+id/custom_comment_profilepicture_ly"
+        android:layout_width="@dimen/feed_item_profile_pic"
+        android:layout_height="@dimen/feed_item_profile_pic">
+
+
+        <com.makeramen.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/custom_comment_profilepicture"
+            android:layout_width="@dimen/feed_item_profile_pic"
+            android:layout_height="@dimen/feed_item_profile_pic"
+
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/blank_profile"
+            android:visibility="visible"
+            app:riv_border_color="#333333"
+            app:riv_border_width="0dip"
+            app:riv_corner_radius="30dip"
+            app:riv_mutate_background="true"
+            app:riv_oval="true"></com.makeramen.RoundedImageView>
+
+        <ProgressBar
+            android:id="@+id/custom_comment_progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="@dimen/feed_item_profile_pic"
+            android:layout_height="@dimen/feed_item_profile_pic"
+
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="left"
+            android:visibility="visible" />
+    </FrameLayout>
 
     <TextView
         android:id="@+id/custom_comment_name"
@@ -22,18 +57,19 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:text="Khin Khin"
+        android:layout_marginLeft="8dp"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:layout_toRightOf="@id/custom_comment_profilepicture"/>
+        android:layout_toRightOf="@id/custom_comment_profilepicture_ly"/>
 
     <com.algo.hha.emojiicon.EmojiconTextView
         android:id="@+id/custom_comment_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Thanks for sharing"
-
+        android:layout_marginLeft="8dp"
         android:layout_below="@id/custom_comment_name"
-        android:layout_toRightOf="@id/custom_comment_profilepicture" />
+        android:layout_toRightOf="@id/custom_comment_profilepicture_ly" />
 
     <TextView
         android:id="@+id/custom_comment_timestamp"

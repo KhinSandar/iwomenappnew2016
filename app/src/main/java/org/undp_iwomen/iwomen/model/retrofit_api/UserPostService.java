@@ -37,10 +37,10 @@ public interface UserPostService {
 
 
     @GET(CommonConfig.STICKERS_URL)
-    public void getAllStickers(Callback<String> callback);
+    public void getAllStickers( Callback<String> callback);
 
     @GET(CommonConfig.SISTERAPP_URL)
-    public void getSisterAppList(@Query("order") String s, @Query("where") String sWhere, Callback<String> callback);
+    public void getSisterAppList( @Query("order") String s,@Query("where") String sWhere, Callback<String> callback);
 
 
 }

@@ -295,12 +295,16 @@
         <activity
             android:name=".ui.activity.ProfileEditTLGActivity"
             android:label="@string/title_activity_post_detail"
+            android:windowSoftInputMode="stateAlwaysHidden"
             android:parentActivityName=".ui.activity.ProfileEditActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.activity.ProfileEditTLGActivity" />
+                android:value=".ui.activity.ProfileEditTLGActivity"/>
+        </activity>
+        <activity
+            android:name=".ui.activity.PostNewsActivity"
+            android:label="@string/title_activity_post_news" >
         </activity>
         <activity
             android:name=".ui.activity.PostNewsActivity"

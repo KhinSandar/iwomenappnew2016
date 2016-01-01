@@ -815,7 +815,10 @@ public class ParseSignupFragment extends ParseLoginFragmentBase implements OnCli
                     user.put("isTlgTownshipExit",isTlgmember);
 
                     if(isTlgmember){
-                        user.put("tlg_city_address",mFromCityName);
+
+                        if(mFromCityName != null) {
+                            user.put("tlg_city_address", mFromCityName);
+                        }
 
                     }
 
@@ -901,7 +904,9 @@ public class ParseSignupFragment extends ParseLoginFragmentBase implements OnCli
 
             user.put("isTlgTownshipExit",isTlgmember);
             if(isTlgmember){
-                user.put("tlg_city_address",mFromCityName);
+                if(mFromCityName != null) {
+                    user.put("tlg_city_address", mFromCityName);
+                }
 
             }
 

@@ -65,7 +65,7 @@ public class CustomButton extends Button{
 		}
 		super.setText(text, type);
 	}
-	
-	
+
+
 
 }

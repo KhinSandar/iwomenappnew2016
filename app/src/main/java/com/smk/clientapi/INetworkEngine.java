@@ -57,7 +57,6 @@ public interface INetworkEngine {
 	void getUserAnswer(
 			@Path("id") Integer id,
 			Callback<List<Answer>> callback);
-
 	@GET("/api-v1/review")
 	void getReview(
 			@Query("function") String function,
@@ -70,7 +69,7 @@ public interface INetworkEngine {
 			@Field("ratings") Double ratings,
 			@Field("function") String function,
 			Callback<Review> callback);
-	
+
 	
 	
 	

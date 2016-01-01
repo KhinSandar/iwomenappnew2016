@@ -59,7 +59,7 @@ public class CommentAdapter extends BaseAdapter {
             vh.tv_name = (TextView) view.findViewById(R.id.custom_comment_name);
             vh.tv_message = (EmojiconTextView) view.findViewById(R.id.custom_comment_message);
             vh.tv_timestamp = (TextView) view.findViewById(R.id.custom_comment_timestamp);
-            //vh.progressBar = (ProgressBar)view.findViewById(R.id.custom_comment_progress);
+            vh.progressBar = (ProgressBar)view.findViewById(R.id.custom_comment_progressBar);
             view.setTag(vh);
 
         }else{
@@ -75,13 +75,23 @@ public class CommentAdapter extends BaseAdapter {
                         .load(datalist.get(i).get_profile_picture()) //"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
                         .placeholder(R.drawable.blank_profile)
                         .error(R.drawable.blank_profile)
-                        .into(vh.pictureView);
+                        .into(vh.pictureView, new ImageLoadedCallback(vh.progressBar) {
+                            @Override
+                            public void onSuccess() {
+                                if (this.progressBar != null) {
+                                    this.progressBar.setVisibility(View.GONE);
+                                } else {
+                                    this.progressBar.setVisibility(View.VISIBLE);
+                                }
+                            }
+
+                        });
             } catch (OutOfMemoryError outOfMemoryError) {
                 outOfMemoryError.printStackTrace();
             }
         } else {
             //Log.e("adapter==","=else=>"+ datalist.get(i).get_profile_picture());
-            //vh.progressBar.setVisibility(View.GONE);
+            vh.progressBar.setVisibility(View.GONE);
         }
 
         vh.tv_name.setText(datalist.get(i).get_user_name());
@@ -95,7 +105,8 @@ public class CommentAdapter extends BaseAdapter {
         RoundedImageView pictureView;
         TextView tv_name , tv_timestamp;
         EmojiconTextView tv_message;
-        //ProgressBar progressBar;
+
+        ProgressBar progressBar;
     }
 
     private class ImageLoadedCallback implements com.squareup.picasso.Callback {

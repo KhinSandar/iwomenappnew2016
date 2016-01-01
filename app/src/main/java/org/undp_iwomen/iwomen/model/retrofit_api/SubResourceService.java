@@ -13,8 +13,6 @@ public interface SubResourceService {
 
 
     @GET(CommonConfig.SUB_RESOURCE_URL)
-    public void getSubResourceByResourceId(@Query("where") String s, @Query("where") String sWhere, @Query("order") String orderby, Callback<String> callback);
-
-
+    public void getSubResourceByResourceId(@Query("where") String s,@Query("where") String sWhere, @Query("order") String orderby, Callback<String> callback);
 
 }

@@ -543,6 +543,7 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
             }
 
             if(arg0 == img_camera || arg0 == profileImg){
+
                 /*if (strLang.equals(Utils.ENG_LANG)) {
                     new MaterialDialog.Builder(ProfileEditActivity.this)
                             .title(R.string.choose_photo_eng)
@@ -559,6 +560,7 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
                                         chooseImage();
                                     }
                                     //Utils.doToastEng(mContext, "Choose Comming Soon" + which + text.toString());
+
                                 *//*String phno = "tel:" + text.toString();
                                 Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse(phno));
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -594,6 +596,7 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
                                 }
                             })
                             .show();
+
                 }*/
             }
         }
