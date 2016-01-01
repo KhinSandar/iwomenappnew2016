@@ -1,5 +1,6 @@
 package org.undp_iwomen.iwomen.ui.fragment;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,6 +15,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -28,6 +32,8 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.smk.clientapi.NetworkEngine;
+import com.smk.iwomen.BaseActionBarActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -62,6 +68,9 @@ public class GoogleMapFragment extends Fragment {//
     private String mstr_lang;
     SharedPreferences sharePrefLanguageUtil;
     private StorageUtil storageUtil;
+    private Menu menu;
+    private Integer  avgRatings;
+
     public GoogleMapFragment() {
     }
 
@@ -82,7 +91,7 @@ public class GoogleMapFragment extends Fragment {//
         mstr_lang = sharePrefLanguageUtil.getString(com.parse.utils.Utils.PREF_SETTING_LANG, com.parse.utils.Utils.ENG_LANG);
 
         init(rootView);
-
+        getReview();
         return rootView;
     }
 
@@ -371,8 +380,11 @@ public class GoogleMapFragment extends Fragment {//
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
 
-
+        
         inflater.inflate(R.menu.refresh_menu, menu);
+
+        this.menu = menu;
+        this.menu.findItem(R.id.action_rating).setVisible(false);
 
     }
 
@@ -387,9 +399,53 @@ public class GoogleMapFragment extends Fragment {//
             case R.id.action_refresh:
                 setUpMapIfNeeded();
                 return true;
+            case R.id.action_rating:
+                showReviewDetailDialog();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void getReview(){
+        NetworkEngine.getInstance().getReview("Be Together", new Callback<Integer>() {
+
+
+            @Override
+            public void success(Integer arg0, Response response) {
+                menu.findItem(R.id.action_rating).setVisible(true);
+                menu.findItem(R.id.action_rating).setIcon(BaseActionBarActivity.getRatingIcon(arg0));
+                avgRatings = arg0;
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
+    }
+
+    public void showReviewDetailDialog(){
+        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+        View convertView = View.inflate(getActivity(),R.layout.dialog_reviews_detial,null);
+        TextView txt_avg_title = (TextView ) convertView.findViewById(R.id.txt_avg_title);
+        RatingBar avg_ratings = (RatingBar) convertView.findViewById(R.id.avg_ratings);
+        TextView txt_avg_ratings = (TextView) convertView.findViewById(R.id.txt_avg_ratings);
+        Button btn_ok = (Button)convertView.findViewById(R.id.btn_ok);
+        alertDialog.setView(convertView);
+
+        txt_avg_title.setText("Be Together");
+        avg_ratings.setRating(avgRatings);
+        txt_avg_ratings.setText(BaseActionBarActivity.getRatingDesc(avgRatings) + ": " + avgRatings + "/5 Ratings");
+
+        final AlertDialog ad = alertDialog.show();
+
+        btn_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ad.dismiss();
+            }
+        });
     }
 
 

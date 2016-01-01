@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="primary">#E91E63</color>
+    <color name="primary_dark">#C2185B</color>
+    <color name="primary_light">#F8BBD0</color>
+    <color name="accent">#7C4DFF</color><!--FF4081-->
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#727272</color>
+    <color name="icons">#FFFFFF</color>
+    <color name="divider">#B6B6B6</color>
+
+    <color name="lime_color">#cddc39</color>
+
+    <color name="secondary">#03A9F4</color>
+
+
+    <color name="colorPressed">#aa3F51B5</color>
+    <color name="tranWhite">#88ffffff</color>
+
+    <color name="list_background">#fff</color>
+    <color name="drawer_text">#5c5c5c</color>
+    <color name="drawer_text_selected">#fff</color>
+    <color name="list_background_pressed">#be0000</color><!--b90606 -->
+
+    <!-- List View Divider color-->
+    <color name="drawer_list_div">#c3c3c3</color>
+    <color name="drawer_list_item_txt">#5d5d5d</color>
+    <color name="drawer_list_item_press">#E91E63</color><!--bd2a2a -->
+
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="feed_bg">#d3d6db</color>
+    <color name="feed_item_bg">#ffffff</color>
+    <color name="feed_item_border">#c2c3c8</color>
+    <color name="link">#0a80d1</color>
+    <color name="timestamp">#a0a3a7</color>
+    <color name="btn_bg_colorPrimary">#3F51B5</color>
+    <color name="btn_bg_tranprimary">#B39BBD</color>
+
+    <color name="line_color">#c3c3c3</color>
+
+    <color name="video_button_bg">#E1E1E1</color>
+
+    <color name="text_bg">#F4F4F4</color>
+
+    <color name="fill_color">#F4F4F4</color>
+    <color name="border_color">#5c5c5c</color>
+
+    <color name="viber_color">#59267c</color>
+    <color name="vi_color">#8f5db7</color>
+    <color name="fb_color">#3b5998</color>
+
+    <color name="yellow_700">#FBC02D</color>
+    <color name="blue_700">#1976D2</color>
+
+    <color name="red_500">#f44336</color>
+    <color name="pink_500">#e91e63</color>
+    <color name="purple_500">#9c27b0</color>
+    <color name="deep_purple_500">#673ab7</color>
+    <color name="indigo_500">#3f51b5</color>
+    <color name="blue_500">#2196f3</color>
+    <color name="light_blue_500">#03a9f4</color>
+    <color name="cyan_500">#00bcd4</color>
+    <color name="teal_500">#009688</color>
+    <color name="green_500">#4caf50</color>
+    <color name="light_green_500">#8bc34a</color>
+    <color name="lime_500">#cddc39</color>
+    <color name="yellow_500">#ffeb3b</color>
+    <color name="amber_500">#ffc107</color>
+    <color name="orange_500">#ff9800</color>
+    <color name="deep_orange_500">#ff5722</color>
+    <color name="brown_500">#795548</color>
+    <color name="grey_500">#9e9e9e</color>
+    <color name="blue_grey_500">#607d8b</color>
+    <color name="notification_light">#88ff0000</color>
+
+    <color name="error">#FF1D25</color>
+    <color name="black_overlay">#66000000</color>
+
+    <color name="competition_black_overlay">#66000000</color>
+    <color name="competition_primary">#F5A623</color>
+    <color name="competition_accent">#ED670A</color>
+    <color name="competition_text">#FFFFFF</color>
+    <color name="competition_progress">#7ED321</color>
+    <color name="competition_progress_bar">#D8D8D8</color>
+    <color name="competition_phone">#01AC46</color>
+    <color name="competition_viber">#8F66AE</color>
+    <color name="competition_user_status_1">#C20000</color>
+    <color name="competition_user_status_2">#C27800</color>
+    <color name="competition_user_status_3">#00C200</color>
+
+</resources>

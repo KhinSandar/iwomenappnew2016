@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="org.undp_iwomen.iwomen" >
+    package="org.undp_iwomen.iwomen"> <!-- crop images library -->
+    <uses-sdk tools:overrideLibrary="com.android.camera" />
 
     <!-- Permissions -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -16,8 +17,9 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-    <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <permission
         android:name="org.undp_iwomen.iwomen.permission.C2D_MESSAGE"
@@ -32,36 +34,35 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-
-
     <permission
         android:name="org.undp_iwomen.iwomen.permission.MAPS_RECEIVE"
         android:protectionLevel="signature" />
 
-    <uses-permission android:name="org.undp_iwomen.iwomen.permission.MAPS_RECEIVE"/>
+    <uses-permission android:name="org.undp_iwomen.iwomen.permission.MAPS_RECEIVE" />
 
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true" />
+
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-feature android:name="android.hardware.camera" > </uses-feature>
-    <uses-feature android:name="android.hardware.camera.autofocus"/>
-    <!--crop images library -->
-    <uses-sdk tools:overrideLibrary="com.android.camera"/>
+
+    <uses-feature android:name="android.hardware.camera"></uses-feature>
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
     <application
         android:name=".manager.MainApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
-        android:largeHeap="true">
+        android:largeHeap="true"
+        android:theme="@style/AppTheme">
 
         <!-- replace @drawable/push_icon with your push icon identifier -->
         <meta-data
             android:name="com.parse.push.notification_icon"
             android:resource="@drawable/ic_launcher" />
 
-        <!--Content Provider -->
+        <!-- Content Provider -->
         <provider
             android:name=".provider.IwomenProvider"
             android:authorities="org.undp_iwomen.iwomen" />
@@ -69,14 +70,11 @@
         <!-- Google Analytics -->
         <meta-data
             android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version"/>
+            android:value="@integer/google_play_services_version" />
         <!-- Google Map -->
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="@string/google_maps_key"
-            />
-
-
+            android:value="@string/google_maps_key" />
 
         <!-- PARSE LOGIN AND MAIN ACTIVITY -->
         <activity
@@ -88,18 +86,19 @@
             android:windowSoftInputMode="adjustResize|stateHidden">
             <meta-data
                 android:name="com.parse.ui.ParseLoginActivity.PARSE_LOGIN_ENABLED"
-                android:value="true"/>
+                android:value="true" />
             <meta-data
                 android:name="com.parse.ui.ParseLoginActivity.PARSE_LOGIN_EMAIL_AS_USERNAME"
-                android:value="true"/>
+                android:value="true" />
             <meta-data
                 android:name="com.parse.ui.ParseLoginActivity.FACEBOOK_LOGIN_ENABLED"
-                android:value="false"/>
+                android:value="false" />
             <meta-data
                 android:name="com.parse.ui.ParseLoginActivity.TWITTER_LOGIN_ENABLED"
-                android:value="false"/>
+                android:value="false" />
         </activity>
         <!-- PARSE LOGIN END -->
+
 
         <!-- FB LOGIN AND MAIN ACTIVITY -->
         <meta-data
@@ -113,21 +112,18 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name=".ui.activity.SplashActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.activity.DrawerMainActivity"
             android:label="@string/app_name"
-            android:windowSoftInputMode="stateAlwaysHidden"
-
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden"></activity>
         <activity android:name=".ui.activity.MainActivity" />
         <!--
         Optionally, register AnalyticsReceiver and AnalyticsService to support background
@@ -135,7 +131,7 @@
         -->
         <receiver
             android:name="com.google.android.gms.analytics.AnalyticsReceiver"
-            android:enabled="true" >
+            android:enabled="true">
             <intent-filter>
                 <action android:name="com.google.android.gms.analytics.ANALYTICS_DISPATCH" />
             </intent-filter>
@@ -148,7 +144,7 @@
         <!-- PARSE PUSH NOTRIFICATION -->
         <service android:name="com.parse.PushService" />
 
-        <receiver android:name="com.parse.ParseBroadcastReceiver" >
+        <receiver android:name="com.parse.ParseBroadcastReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.USER_PRESENT" />
@@ -158,14 +154,14 @@
             android:name=".Receiver"
             android:exported="false">
             <intent-filter>
-                <action android:name="com.parse.push.intent.RECEIVE"/>
-                <action android:name="com.parse.push.intent.DELETE"/>
-                <action android:name="com.parse.push.intent.OPEN"/>
+                <action android:name="com.parse.push.intent.RECEIVE" />
+                <action android:name="com.parse.push.intent.DELETE" />
+                <action android:name="com.parse.push.intent.OPEN" />
             </intent-filter>
         </receiver>
         <receiver
             android:name="com.parse.GcmBroadcastReceiver"
-            android:permission="com.google.android.c2dm.permission.SEND" >
+            android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
@@ -174,7 +170,8 @@
                 <category android:name="org.undp_iwomen.iwomen" />
             </intent-filter>
         </receiver>
-        <!--<receiver
+        <!--
+        <receiver
             android:name="com.parse.ParsePushBroadcastReceiver"
             android:exported="false" >
             <intent-filter>
@@ -182,7 +179,8 @@
                 <action android:name="com.parse.push.intent.DELETE" />
                 <action android:name="com.parse.push.intent.OPEN" />
             </intent-filter>
-        </receiver>-->
+        </receiver>
+        -->
         <!-- PARSE PUSH NOTRIFICATION END -->
         <!--
              Optionally, register CampaignTrackingReceiver and CampaignTrackingService to enable
@@ -190,7 +188,7 @@
         -->
         <receiver
             android:name="com.google.android.gms.analytics.CampaignTrackingReceiver"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.android.vending.INSTALL_REFERRER" />
             </intent-filter>
@@ -206,60 +204,53 @@
         <activity
             android:name=".ui.activity.PostDetailActivity"
             android:label="@string/title_activity_post_detail"
-            android:windowSoftInputMode="stateAlwaysHidden"
-
-            android:screenOrientation="portrait">
-
-        </activity>
-
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden"></activity>
         <activity
             android:name=".ui.activity.TLGUserPostDetailActivity"
             android:label="@string/title_activity_post_detail"
-            android:windowSoftInputMode="stateAlwaysHidden"
-
-            android:screenOrientation="portrait">
-
-        </activity>
-        <activity android:name=".ui.activity.AboutUsWebActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden"></activity>
+        <activity
+            android:name=".ui.activity.AboutUsWebActivity"
             android:label="@string/title_activity_post_detail"
             android:parentActivityName=".ui.activity.DrawerMainActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.activity.DrawerMainActivity"/>
+                android:value=".ui.activity.DrawerMainActivity" />
         </activity>
-        <activity android:name=".ui.activity.SettingActivity"
+        <activity
+            android:name=".ui.activity.SettingActivity"
             android:label="@string/title_activity_post_detail"
             android:parentActivityName=".ui.activity.DrawerMainActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.activity.DrawerMainActivity"/>
+                android:value=".ui.activity.DrawerMainActivity" />
         </activity>
-
-        <activity android:name=".ui.activity.AboutUsmmActivity"
+        <activity
+            android:name=".ui.activity.AboutUsmmActivity"
             android:label="@string/title_activity_post_detail"
             android:parentActivityName=".ui.activity.DrawerMainActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.activity.DrawerMainActivity"/>
+                android:value=".ui.activity.DrawerMainActivity" />
         </activity>
-
         <activity
             android:name=".ui.activity.SubResourceListActivity"
             android:label="@string/title_activity_post_detail"
-            android:windowSoftInputMode="stateHidden"
-            android:screenOrientation="portrait">
-
-        </activity>
-        <activity android:name=".ui.activity.ResourceDetailActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"></activity>
+        <activity
+            android:name=".ui.activity.ResourceDetailActivity"
             android:label="@string/leadership_eng"
             android:parentActivityName=".ui.activity.SubResourceListActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.activity.SubResourceListActivity"/>
+                android:value=".ui.activity.SubResourceListActivity" />
         </activity>
         <activity
             android:name=".ui.activity.MainPhotoPostActivity"
@@ -268,71 +259,73 @@
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.activity.DrawerMainActivity"/>
+                android:value=".ui.activity.DrawerMainActivity" />
         </activity>
         <activity
             android:name=".ui.activity.YouTubeWebviewActivity"
-            android:label="@string/app_name"
-            android:configChanges="keyboardHidden|orientation|screenSize" > <!-- Prevent Activity restart on such events (specially on orientation change) -->
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/app_name"> <!-- Prevent Activity restart on such events (specially on orientation change) -->
 
         </activity>
         <activity
             android:name=".ui.activity.TlgProfileActivity"
             android:label="@string/title_activity_post_detail"
-            android:windowSoftInputMode="stateAlwaysHidden"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden"></activity>
         <activity
             android:name=".ui.activity.TLGListActivity"
             android:label="@string/title_activity_post_detail"
-            android:windowSoftInputMode="stateAlwaysHidden"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden"></activity>
         <activity
             android:name=".ui.activity.AuthorDetailActivity"
             android:label="@string/title_activity_post_detail"
-            android:windowSoftInputMode="stateAlwaysHidden"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden"></activity>
         <activity
             android:name=".ui.activity.ProfileEditActivity"
             android:label="@string/title_activity_post_detail"
-            android:windowSoftInputMode="stateAlwaysHidden"
             android:parentActivityName=".ui.activity.DrawerMainActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.activity.DrawerMainActivity"/>
+                android:value=".ui.activity.DrawerMainActivity" />
+        </activity>
+        <activity
+            android:name=".ui.activity.ProfileEditTLGActivity"
+            android:label="@string/title_activity_post_detail"
+            android:parentActivityName=".ui.activity.ProfileEditActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.activity.ProfileEditTLGActivity" />
         </activity>
         <activity
             android:name=".ui.activity.PostNewsActivity"
-            android:label="@string/title_activity_post_news" >
-        </activity>
+            android:label="@string/title_activity_post_news"></activity>
         <activity
             android:name="com.smk.iwomen.CompetitionNewGameActivity"
-            android:label="@string/title_activity_competition_new_game" >
-        </activity>
+            android:label="@string/title_activity_competition_new_game"></activity>
         <activity
             android:name="com.smk.iwomen.CompetitionWinnerGroupActivity"
-            android:label="@string/title_activity_competition_winner_group" >
-        </activity>
+            android:label="@string/title_activity_competition_winner_group"></activity>
         <activity
             android:name="com.smk.iwomen.CompetitionSubmitAnswerActivity"
-            android:label="@string/title_activity_competition_submit_answer" >
-        </activity>
+            android:label="@string/title_activity_competition_submit_answer"></activity>
         <activity
             android:name="com.smk.iwomen.CompetitionGroupUserActivity"
-            android:label="@string/title_activity_competition_group_user" >
-        </activity>
+            android:label="@string/title_activity_competition_group_user"></activity>
         <activity
             android:name="com.smk.iwomen.GameOverActivity"
-            android:label="@string/title_activity_game_over" >
-        </activity>
+            android:label="@string/title_activity_game_over"></activity>
         <!-- Declare the bundled CropImage Activity -->
-        <activity android:name="com.android.camera.CropImage"/>
+        <activity android:name="com.android.camera.CropImage" />
+        <activity
+            android:name="com.smk.iwomen.AudioRecordingActivity"
+            android:label="@string/title_activity_audio_recording"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

@@ -25,4 +25,3 @@
     app:contentInsetStart="0dp"
     app:popupTheme="@style/ActionBarPopupThemeOverlay"
     app:theme="@style/ActionBarThemeOverlay"/>
-<!-- From: file:/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/ParseLoginUI/res/layout/toolbar_actionbar.xml -->

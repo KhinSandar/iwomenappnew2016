@@ -1,34 +1,229 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="app_name">iwomen</string>
+    <string name="app_name_mm">စြမ္းရည္ၿမင္ ့မား ေမ့အင္အား</string>
+    <string name="parse_app_id">WyU802fB70eNhyF9uSoj1SgKVKGLYYAZ0kX96xhr</string>
+    <string name="parse_client_key">qnaqxGzfOLEgFAWXUTUJpTkgbOgn3CVxTqtTD6pn</string>
+    <string name="hello_world">Hello world!</string>
+
+    <string name="betogether_title_eng">Be Together</string>
+    <string name="betogether_title_mm">ေပါင္းစည္းေဆာင္ရြက္ရန္</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="action_settings_mm">ၿပင္ဆင္မည္</string>
+    <string name="title_action_settings_eng">Language Settings</string>
+    <string name="title_action_settings_mm">ဘာသာ စကားေၿပာင္းရန္</string>
+    <string name="title_notrification_eng">Get Notification</string>
+    <string name="title_notrification_mm">အသိေပးအေၾကာင္းၾကားစာလက္ခံရန္</string>
+
+    <string name="title_change_theme_eng">Change Theme</string>
+    <string name="title_change_theme_mm">အေရာင္ေၿပာင္းလဲရန္</string>
+
+
+    <string name="login_fb_appid">909633732437583</string>
+    <string name="action_refresh">Refresh</string>
+    <string name="title_activity_post_detail">PostDetailActivity</string>
+    <string name="title_activity_about_us_eng">About Us</string>
+    <string name="title_activity_about_us_mm">ကြ်ႏုုပ္တိုု ့အေၾကာင္း</string>
+    <string name="title_activity_post_news">News</string>
+
+    <string name="open_internet_warning">Internet Connection needed.</string>
+    <string name="open_internet_warning_mm">အင္တာနက္ ခ်ိတ္ဆက္မွုုဖြင္ ့ရန္လိုုအပ္ပါသည္။</string>
+
+    <string name="loading_mm">ခဏေစာင့္ပါ ….</string>
+    <string name="loading_eng">Loading...</string>
+
+    <string name="about_us_mm">ကြ်ႏုုပ္တိုု ့အေၾကာင္း</string>
+    <string name="about_us_eng">About</string>
+
+    <string name="leadership_mm">ေခါင္းေဆာင္မႈသင္ခန္းစာမ်ား</string>
+    <string name="leadership_eng">Leadership Lessons</string>
+
+    <string name="title_activity_new_post_eng">New Post</string>
+    <string name="title_activity_new_post_mm">ပိုု ့စ္အသစ္တင္မည္</string>
+
+
+    <string name="title_activity_beinspired_new_post_eng">New Be Inspired Post</string>
+    <string name="title_activity_beinspired_new_post_mm">New Post</string>
+
+
+    <string name="new_post_mm">ပိုု ့စ္အသစ္တင္မည္</string>
+    <string name="new_post_eng">Post New Story</string>
+
+    <string name="character_count_placeholder">0/400</string>
+
+    <string name="new_post_hint_title_mm">ယခုု ေနရာတြင္ အၿခားTLGs အဖြဲ ့၀င္မ်ားသိုု ့ေမးခြန္းမ်ားေမးၿခင္း၊ အၾကံညဏ္မ်ားေတာင္းၿခင္း ႏွင့္ မိမိတိုု ့အဖြဲ ့အသက္ေမြး၀မ္းေၾကာင္းဆိုုင္ရာကြ်မ္းက်င္မွုုတိုု ့ကိုုမွွ်ေ၀ေဖာ္ၿပႏိုုင္ပါသည္။
+ေအာင္ၿမင္ေသာ လုုပ္ငန္းေဆာင္တာမ်ား အဖြဲ ့လွုုပ္ရွားေဆာင္ရြက္ ခ်က္မ်ား ကိုုလည္းတင္ၿပႏိုုင္ပါသည္။
+ </string>
+    <string name="new_post_hint_title_eng">Here you can ask a question to other TLGs, ask for advice to other TLGs and share your livelihood skills with other TLGs.And of course you can aslo post your successful TLG activities.</string>
+
+    <string name="new_iwomen_post_hint_title_eng">Here you can post an insiprational story of your life.</string>
+    <string name="new_iwomen_post_hint_title_mm">ယခုု ေနရာတြင္ မိမိဘ၀တစ္ေလ်ာက္လံုုးအမွတ္ရေနသည္ ့လြမ္းမိုုးသည္ ့စိတ္ဓာတ္ခြန္အားေပးသည့္
+အေၾကာင္းအရာကိုုေရးသားတင္ပိုု ့ေပးႏိုုင္ပါသည္။</string>
+
+    <string name="new_post_hint_body_mm">ပိုု ့စ္အသစ္</string>
+    <string name="new_post_hint_body_eng">Story</string>
+
+    <string name="new_post_take_photo_mm">ဓာတ္ပံုုရိုုက္မည္</string>
+    <string name="new_post_take_photo_eng">Take Photo</string>
+
+    <string name="new_post_upload_photo_mm">ဓာတ္ပံုုတင္မည္</string>
+    <string name="new_post_upload_photo_eng">Upload Image</string>
+
+    <string name="choose_photo_mm">ေရြး ခ်ယ္ပါ</string>
+    <string name="choose_photo_eng">Choose</string>
+
+    <string name="new_post_audio_mm">အသံဖိုုင္တင္ရန္ ႏွိပ္ေရြးပါ</string>
+    <string name="new_post_audio_eng">Click Here to Upload Audio</string>
+
+    <string name="new_post_video_mm">ဗြီဒီယိုုဖိုုင္တင္ရန္ ႏွိပ္ေရြးပါ</string>
+    <string name="new_post_video_eng">Click Here to Upload Video</string>
+
+    <string name="post_detail_comment_mm">မွတ္ ခ်က္ (သိုု ့မဟုုတ္) ေကာမန္ ့ေရးရန္</string>
+    <string name="post_detail_comment_eng">Enter your Comment</string>
+
+    <string name="post_detail_share_post_mm">ရွဲမွ်ေ၀ပါသည္။</string>
+    <string name="post_detail_share_post_eng">Share This Post</string>
+
+
+    <string name="post_detail_share_post">Share This Post</string>
+
+    <string name="post_detail_like_post_mm">ကိဳက္ႏွစ္သက္ပါသည္။ </string>
+    <string name="post_detail_like_post_eng">Like This Post</string>
+
+
+    <string name="com_parse_ui_username_input_hint_mm">အမည္</string>
+    <string name="com_parse_ui_password_input_hint_mm">လွ်ိဳ ့၀ွက္ စာလံုုး</string>
+    <string name="com_parse_ui_confirm_password_input_hint_mm">လွ်ိဳ ့၀ွက္ စာလံုုးေနာက္တစ္ၾကိမ္ၿပန္ရိုုက္ပါ</string>
+    <string name="com_parse_ui_parse_login_button_label_mm">၀င္ရန္</string>
+    <string name="com_parse_ui_parse_signup_button_label_mm">အေကာင့္ အသစ္ၿပဳလုုပ္ရန္</string>
+
+    <string name="com_parse_ui_forgot_password_button_mm"><u>လွ်ိဳ ့၀ွက္ စာလံုုးေမ ့ေနပါသလား</u></string>
+    <string name="com_parse_ui_ph_input_hint_mm">ဖုုန္းနံပါတ္</string>
+    <string name="com_parse_ui_create_account_button_label_mm">၀င္မည္</string>
+    <string name="com_parse_ui_edit_account_button_label_mm">ၿပင္ဆင္မည္</string>
+    <string name="i_agree_mm">မွတ္ပံုုတင္အခ်က္ အလက္မ်ားကိုုသေဘာတူပါသည္ <a href="https://www.facebook.com/UndpMyanmar"></a></string>
+
+
+    <string name="signup_tlg_member_exit_mm">TLG (သိုု့) SRG အဖြဲ ့၀င္ၿဖစ္လ်င္အမွန္ၿခစ္ လုုပ္ပါ</string>
+    <string name="signup_tlg_member_exit_eng">I am a TLG or SRG member</string>
+
+    <string name="signup_tlg_member_exit">I am a TLG or SRG member</string>
+    <string name="success">Success</string>
+    <string name="successfully_posted_post">Post ID: %1$s</string>
+    <string name="error">Error</string>
+    <string name="status_update">Updating status for %1$s at %2$s</string>
+    <string name="ok">OK</string>
+    <string name="post">Post</string>
+    <string name="prompt_post">Post</string>
+    <string name="error_dialog_title">Error!</string>
+        <string name="native_share_error">Native sharing requires the Facebook for Android
+        application.</string>
+
+    <!-- Detail -->
+    <string name="detail_download_text_mm">MM</string>
+    <string name="detail_download_text_eng">Download</string>
+
+    <string name="detail_play_text_mm">ဗြီဒီယိုု </string>
+    <string name="detail_play_text_eng">Watch Now</string>
+
+    <string name="detail_listen_text_mm">နားေထာင္ရန္</string>
+    <string name="detail_listen_text_eng">Listen Now</string>
+
+    <string name="sister_app_gen_link_mm">www.gen.org </string>
+    <string name="sister_app_gen_link_eng"> www.gen.org <a href="https://www.gen.org"></a></string>
+
+    <string name="sister_app_undp_link_mm">www.undpmyanmar.org</string>
+    <string name="sister_app_undp_link_eng">www.undpmyanmar.org <a href="https://www.facebook.com/UndpMyanmar"></a></string>
+
+    <!-- TLG Profile -->
+    <string name="tlg_group_name_mm">ေမတိုု ့အားမာန္</string>
+    <string name="tlg_group_name_eng">May Doe Arr Man</string>
+
+    <string name="tlg_group_address_mm">က်ိဳက္လတ္ ၊ ဧရာ၀တီ</string>
+    <string name="tlg_group_address_eng">KyeitLet , Ayeyarwady</string>
+
+    <string name="tlg_leader_name_mm">လွစန္းေထြး</string>
+    <string name="tlg_leader_name_eng">Hla San Htwae</string>
+
+    <string name="tlg_leader_role_mm">အဖြဲ ့ေခါင္းေဆာင္</string>
+    <string name="tlg_leader_role_eng">TLG Leader</string>
+
+    <string name="tlg_who_we_r_mm">အဖြဲ ့အေၾကာင္း</string>
+    <string name="tlg_who_we_r_eng">Who we are</string>
+
+    <string name="tlg_member_lbl_mm">ၿမိဳ ့နယ္ဦးေဆာင္အဖြဲ ့ </string>
+    <string name="tlg_member_lbl_eng">TLG Member</string>
+    <string name="tlg_member_txt_mm">၁၅</string>
+    <string name="tlg_member_txt_eng">15</string>
+
+    <string name="tlg_srg_member_lbl_mm">စိတ္တူ ကိုုယ္တူအဖြဲ ့</string>
+    <string name="tlg_srg_member_lbl_eng">SRG Member</string>
+    <string name="tlg_srg_member_txt_mm">၆၈၈</string>
+    <string name="tlg_srg_member_txt_eng">688</string>
+
+    <string name="tlg_key_activity_lbl_mm">အဓိက လုုပ္ငန္းစဥ္မ်ား</string>
+    <string name="tlg_key_activity_lbl_eng">Key Activities</string>
+    <string name="tlg_key_activity_txt_mm">အပင္ဆိုုက္ၿခင္း ၊ ဆပ္ၿပာဆီၿပဳလုုပ္ၿခင္း</string>
+    <string name="tlg_key_activity_txt_eng">Planting Trees and Making soap </string>
+
+    <string name="tlg_key_skill_lbl_mm">အသက္ေမြး ၀မ္းေၾကာင္းဆိုုင္ရာ ကြ်မ္းက်င္မွုု</string>
+    <string name="tlg_key_skill_lbl_eng">Key Skills</string>
+    <string name="tlg_key_skill_txt_mm">စာရင္းအင္းစီမံခန္ ့ခြဲမွုုပညာ</string>
+    <string name="tlg_key_skill_txt_eng">Statics and Management</string>
+
+    <string name="upload_post_warning_mm">ေက်းဇူးၿပဳၿပီးပိုု ့စ္တင္ရန္ ေခါင္းစဥ္ သိုု ့မဟုုတ္ စာကိုုယ္ ရိုုက္ထည့္ပါ</string>
+    <string name="upload_post_warning_eng">Please enter Title or Story text at least for post.</string>
+
+    <string name="upload_success_toast_mm">ပိုု ့စ္တင္ၿခင္းေရာက္ရွိပါသည္။</string>
+    <string name="upload_success_toast_eng">Success Upload post</string>
+
+    <string name="iwomen_postupload_success_toast_mm">သင္၏ စိတ္ဓာတ္ခြန္အားေပးၿဖစ္ရပ္အေၾကာင္းအရာေပးပိုု ့မွုုလက္ခံရရွိပါသည္။ တာ၀န္ရွိသူမွ စစ္ေဆး
+ၾကည့္ရွုု ၿပီးမွ ပိုု ့စ္ေပါ ္လာပါမည္။</string>
+    <string name="iwomen_postupload_success_toast_eng">Thank you for submitting your inspiring story. The administrator will review it and will publish it. You will be motified when your story is being published.</string>
+    <string name="google_maps_key">AIzaSyC0x9igzav3skQvcf2RDdD2xZPNXr0GUlY</string>
+
+    <string name="resource_coming_soon_eng">Coming soon</string>
+    <string name="resource_coming_soon_mm">မၾကာမွီတင္ေပးပါမည္။</string>
+
+    <string name="author_title_mm">စာေရးသူအေၾကာင္း</string>
+    <string name="author_title_eng">Author Detail</string>
+
+    <string name="edit_profile_mm">ဓာတ္ပံုု ၿပင္ရန္</string>
+    <string name="edit_profile_eng">Edit Profile</string>
+
+
+    <string name="dialog_refresh_msg_mm">ထိုု ၿမွားပါ အဝိုုင္းပံုု ကိုု ႏွိပ္၍ အင္တာနက္ဖြင္ ့ပီးအသစ္ မ်ား ရယူပါ။</string>
+    <string name="dialog_refresh_msg_eng">Please click on this icon to download new content from the app.</string>
+
     <string name="competition_take_challenge">စြမ္းရည္ စမ္းသပ္မည္</string>
     <string name="competition_congratulation">ဂုဏ္ယူပါတယ္</string>
     <string name="competition_winner">အႏိုင္ရ အဖြဲ႕</string>
     <string name="competition_winning_answer">အႏိုင္ရသူ၏ အေျဖ</string>
-    <string name="competition_answer_1">Answer 1</string>
-    <string name="competition_answer_2">Answer 2</string>
-    <string name="competition_answer_3">Answer 3</string>
+    <string name="competition_answer_1">အေျဖ</string>
+    <string name="competition_answer_2">အေျဖ 2</string>
+    <string name="competition_answer_3">အေျဖ 3</string>
     <string name="competition_save">သိမ္းမည္</string>
     <string name="competition_save_desc">မိမိ၏ အေျဖကို ခနသိမ္းထားမည္ဆိုလွ်င္ ဒီ ခလုပ္ကို ႏိွပ္ပါ။</string>
     <string name="competition_submit">ေပးပို႕မည္</string>
     <string name="competition_submit_desc">မိမိ၏ အေျဖကို ေပးပို႕မည္ဆိုလွ်င္ ဒီ ခလုပ္ကိုႏိွပ္ပါ။</string>
     <string name="competition_group_answer">အဖြဲဲ႕၏ အေျဖ</string>
-    <string name="competition_group_answer_desc">မိမိ၏ အဖြဲ႕ဝင္ အေျဖမ်ားကို သြားၾကည့္မည္ဆိုလွ်င္ ဒီ ခလုပ္ကိုႏိွပ္ပါ။</string>
-    <string name="competition_answer_hit_1">၁) ဒီေနရာမွာ အေျဖျဖည့္ပါ။</string>
-    <string name="competition_answer_hit_2">၂) ဒီေနရာမွာ အေျဖျဖည့္ပါ။</string>
-    <string name="competition_answer_hit_3">၃) ဒီေနရာမွာ အေျဖျဖည့္ပါ။</string>
-    <string name="competition_go_to_answer">မိမိ၏ အျဖည့္သို႕</string>
-    <string name="competition_compelete">ဂုဏ္ယူပါတယ္ဗ်ာ...ကံေကာင္းပါေစ။</string>
+    <string name="competition_group_answer_desc">မိမိ၏ အဖြဲ႕ဝင္ အေျဖမ်ားကို သြားၾကည့္မည္ဆိုလွ်င္ ဒီ ခလုပ္ကိုႏိွပ္ပါ။</string>
+    <string name="competition_answer_hit_1">၁) ဒီေနရာမွာ အေျဖျဖည့္ပါ။</string>
+    <string name="competition_answer_hit_2">၂) ဒီေနရာမွာ အေျဖျဖည့္ပါ။</string>
+    <string name="competition_answer_hit_3">၃) ဒီေနရာမွာ အေျဖျဖည့္ပါ။</string>
+    <string name="competition_go_to_answer">မိမိ၏ အေျဖသိုု႕</string>
+    <string name="competition_enter_the_answer">အေျဖမ်ား ျဖည့္ရန္</string>
+    <string name="competition_compelete">ဂုဏ္ယူပါတယ္...ကံေကာင္းပါေစ။</string>
     <string name="competition_day">ရက္</string>
     <string name="competition_hour">နာရီ</string>
     <string name="competition_minute">မိနစ္</string>
     <string name="competition_second">စကၠန္႕</string>
-	<string name="competition_not_answer">အေျဖတစ္ခုမွ မရိွေသးပါ။</string>
+    <string name="competition_not_answer">အေျဖတစ္ခုမွ မရိွေသးပါ။</string>
     <string name="competition_finished">ၿပီးၿပီ</string>
-    
-    <string name="app_name">I Women</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="competition_go_to_group_answer">မိမိ၏ အဖြဲ႕သိုု႕ သြားမည္</string>
+    <string name="competition_how_to_play_game">ဂိမ္းကိုု ဘယ္လိုုပါဝင္ ကစားရမလဲ</string>
     <string name="title_activity_competition_new_game">Competition NewGame</string>
     <string name="title_activity_competition_winner_group">Competition Winner Group</string>
     <string name="title_activity_competition_submit_answer">Competition Submit Answer</string>
@@ -36,5 +231,19 @@
     <string name="title_activity_game_over">Game Over</string>
     <string name="competition_play_game">စ ၿပိဳင္ပါမည္</string>
     <string name="competition_discover_winner">ဘယ္သူ ႏိုုင္လဲ</string>
+
+    <string name="edit_profile_btn_cancel">ၿပင္ဆင္မွုုမၿပဳလုုပ္ပါ</string>
+    <string name="edit_profile_btn_next_tlg_edit">TLG or SRG အခ်က္အလက္ၿပင္ဆင္ရန္ဒိေနရာကိုုႏွိပ္ပါ။!</string>
+
+
+    <string name="edit_profile_tlg_township">မိဳ ့နယ္ေရြးမည္</string>
+    <string name="str_rating_reviews">Please rate the functions !</string>
+    <string name="str_be_inspired">Be Inspired</string>
+    <string name="str_be_knowledgeable">Be Knowledgeable</string>
+    <string name="str_be_together">Be Together</string>
+    <string name="str_talk_together">Talk Together</string>
+    <string name="str_ok">OK</string>
+    <string name="str_not_now">Not Now</string>
+
 
 </resources>

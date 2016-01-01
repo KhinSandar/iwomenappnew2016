@@ -19,7 +19,8 @@
             android:layout_height="wrap_content"
             android:nextFocusDown="@+id/login_password_input"
             android:nextFocusForward="@+id/login_password_input"
-            android:textColor="@color/body_text_1"/>
+            android:textColor="@color/body_text_1"
+            android:textSize="15sp"/>
     </android.support.design.widget.TextInputLayout>
 
 
@@ -38,7 +39,8 @@
             android:nextFocusDown="@+id/parse_login_button"
             android:nextFocusForward="@+id/parse_login_button"
             android:selectAllOnFocus="true"
-            android:textColor="@color/body_text_1"/>
+            android:textColor="@color/body_text_1"
+            android:textSize="15sp"/>
     </android.support.design.widget.TextInputLayout>
     <CheckBox
         android:id="@+id/login_showpwd"
@@ -50,6 +52,7 @@
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
         android:padding="10dp"
+        android:textSize="15sp"
         android:text="Show Password"
         android:textColor="@color/theme_primary"
         android:visibility="visible" />
@@ -63,6 +66,7 @@
         <Button
             android:id="@+id/parse_login_button"
             style="@style/ParseLoginUI.Button"
+            android:textSize="15sp"
             android:text="@string/com_parse_ui_parse_login_button_label_mm"/>
 
     </LinearLayout>
@@ -70,9 +74,10 @@
     <Button
         android:id="@+id/parse_login_help"
         style="@style/ParseLoginUI.HelpButton"
-        android:visibility="visible"
+        android:visibility="gone"
         android:layout_marginBottom="@dimen/com_parse_ui_small_vertical_spacing"
         android:layout_marginTop="@dimen/com_parse_ui_small_vertical_spacing"
+
         android:text="@string/com_parse_ui_forgot_password_button_label"/>
     <RadioGroup
         android:id="@+id/settings_language"
@@ -85,6 +90,7 @@
             android:id="@+id/settings_english_language"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="15sp"
             android:text="English"
             android:checked="true"/>
 
@@ -92,6 +98,8 @@
             android:id="@+id/settings_myanmar_language"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="15sp"
+
             android:text="Myanmar"/>
 
     </RadioGroup>

@@ -1,0 +1,96 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/competition_primary"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.smk.iwomen.CompetitionWinnerGroupActivity" >
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="100dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="@dimen/competition_vertical_margin"
+                android:src="@drawable/winner" />
+
+            <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/competition_congratulation"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/competition_text" />
+
+            <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/competition_vertical_margin"
+                android:text="@string/competition_winner"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/competition_text"
+                android:textStyle="bold" />
+
+            <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                android:id="@+id/txt_winner_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Winner Group 1"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/competition_text"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/competition_vertical_margin"
+                android:orientation="vertical" >
+
+                <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/competition_winning_answer"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/competition_text"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/competition_answer_1"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/competition_text" />
+
+                <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                    android:id="@+id/txt_winner_answer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Winner group answer is comgraculation !!!"
+                    android:textColor="@color/competition_text" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

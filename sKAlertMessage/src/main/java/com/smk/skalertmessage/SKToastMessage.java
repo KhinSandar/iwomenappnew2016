@@ -2,6 +2,8 @@ package com.smk.skalertmessage;
 
 
 import android.content.Context;
+import android.graphics.Typeface;
+import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +19,7 @@ public class SKToastMessage extends Toast {
 	private View mView;
 	private Context context;
 	private TextView txt_message;
+	private Typeface typeface;
 	public SKToastMessage(Context context) {
 		super(context);
 		this.context = context;
@@ -38,6 +41,24 @@ public class SKToastMessage extends Toast {
 		instance.setMessageType(messageType);
 		instance.setDuration(LENGTH_LONG);
 		instance.show();
+
+	}
+
+	public static void showMessage(Context context, String message, int messageType, int duration){
+		if(instance == null){
+			instance = new SKToastMessage(context);
+		}
+		instance.setMessage(message);
+		instance.setMessageType(messageType);
+        instance.setDuration(LENGTH_LONG);
+        instance.show();
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                instance.cancel();
+            }
+        }, 3000 * 5);
 	}
 	
 	public String getMessage() {
@@ -49,6 +70,15 @@ public class SKToastMessage extends Toast {
 	public int getMessageType() {
 		return MessageType;
 	}
+	
+	public Typeface getTypeface() {
+		return typeface;
+	}
+
+	public void setTypeface(Typeface typeface) {
+		this.typeface = typeface;
+	}
+
 	public void setMessageType(int messageType) {
 		MessageType = messageType;
 		
@@ -76,7 +106,11 @@ public class SKToastMessage extends Toast {
 		txt_message = (TextView) mView.findViewById(R.id.sk_txt_message);
 		txt_message.setText(getMessage());
 		
+		if(getTypeface() != null)
+			txt_message.setTypeface(getTypeface());
+		
 		setView(mView);
 
 	}
+	
 }

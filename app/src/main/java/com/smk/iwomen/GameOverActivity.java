@@ -1,13 +1,12 @@
 package com.smk.iwomen;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import org.undp_iwomen.iwomen.R;
 
-public class GameOverActivity extends ActionBarActivity {
+public class GameOverActivity extends BaseActionBarActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

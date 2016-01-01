@@ -65,7 +65,7 @@ public class PostListRecyclerViewAdapter extends RecyclerView.Adapter<PostListRe
         private ProgressBar profile_item_progressBar;
         private org.undp_iwomen.iwomen.ui.widget.ProfilePictureView profilePictureView;
         private RoundedImageView profile;
-        private org.undp_iwomen.iwomen.ui.widget.ResizableImageView postIMg;
+        private ResizableImageView postIMg;
 
         public NamesViewHolder(View itemView) {
             super(itemView);
@@ -179,7 +179,7 @@ public class PostListRecyclerViewAdapter extends RecyclerView.Adapter<PostListRe
             viewHolder.profile_item_progressBar.setVisibility(View.GONE);
         }
 
-        // Feed image
+        //// Feed image
         if (item.getPost_img_path() != null && !item.getPost_img_path().isEmpty()) {
             try {
                 viewHolder.postIMg.setVisibility(View.VISIBLE);

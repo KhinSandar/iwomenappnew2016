@@ -1,6 +1,7 @@
 package org.undp_iwomen.iwomen.ui.fragment;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
@@ -27,12 +28,17 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
+import android.widget.TextView;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.pnikosis.materialishprogress.ProgressWheel;
+import com.smk.clientapi.NetworkEngine;
+import com.smk.iwomen.BaseActionBarActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -79,6 +85,8 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
 
     private int offsetlimit = 10;
     private int skipLimit = 0;
+    private Menu menu;
+    private static Integer avgRatings;
 
     public StoriesRecentFragment() {
         // Empty constructor required for fragment subclasses
@@ -96,6 +104,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
     public void onActivityCreated(final Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+
     }
 
     @Override
@@ -107,7 +116,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
         //SetUserData();
         //SetPostData();
         init(rootView);
-
+        getReview();
         return rootView;
     }
 
@@ -386,6 +395,10 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
 
         inflater.inflate(R.menu.refresh_menu, menu);
 
+        this.menu = menu;
+        if(avgRatings == null)
+            this.menu.findItem(R.id.action_rating).setVisible(false);
+
         final MenuItem item = menu.add(0, 12, 0, "Search");
         //menu.removeItem(12);
         item.setIcon(R.drawable.ic_action_search);
@@ -470,9 +483,55 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
                 //getPostDataOrderByLikesDate();
                 getIWomenPostByLimit();
                 return true;
+            case R.id.action_rating:
+                showReviewDetailDialog();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void getReview(){
+        NetworkEngine.getInstance().getReview("Be Inspired", new Callback<Integer>() {
+
+
+            @Override
+            public void success(Integer arg0, Response response) {
+                if(menu != null && arg0 > 0){
+                    menu.findItem(R.id.action_rating).setVisible(true);
+                    menu.findItem(R.id.action_rating).setIcon(BaseActionBarActivity.getRatingIcon(arg0));
+                    avgRatings = arg0;
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
+    }
+
+    public void showReviewDetailDialog(){
+        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+        View convertView = View.inflate(getActivity(),R.layout.dialog_reviews_detial,null);
+        TextView txt_avg_title = (TextView ) convertView.findViewById(R.id.txt_avg_title);
+        RatingBar avg_ratings = (RatingBar) convertView.findViewById(R.id.avg_ratings);
+        TextView txt_avg_ratings = (TextView) convertView.findViewById(R.id.txt_avg_ratings);
+        Button btn_ok = (Button)convertView.findViewById(R.id.btn_ok);
+        alertDialog.setView(convertView);
+
+        txt_avg_title.setText("Be Inspired");
+        avg_ratings.setRating(avgRatings);
+        txt_avg_ratings.setText(BaseActionBarActivity.getRatingDesc(avgRatings) + ": " + avgRatings + "/5 Ratings");
+
+        final AlertDialog ad = alertDialog.show();
+
+        btn_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ad.dismiss();
+            }
+        });
     }
 
 
@@ -489,7 +548,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
         cv.put(TableAndColumnsName.UserUtil.STATUS, "0");
         cv.put(TableAndColumnsName.UserUtil.CREATED_DATE, "01-06-2015");
         cv.put(TableAndColumnsName.UserUtil.UPDATED_DATE, "01-06-2015");
-        Log.e("saveUserLocal : ", "= = = = = = = : " + cv.toString());
+        //Log.e("saveUserLocal : ", "= = = = = = = : " + cv.toString());
 
         getActivity().getContentResolver().insert(IwomenProviderData.UserProvider.CONTENT_URI, cv);
 
@@ -791,7 +850,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
                                 cv.put(TableAndColumnsName.PostUtil.UPDATED_DATE, each_object.get("updatedAt").toString());
 
 
-                                Log.e("savePostLocal : ", "= = = = = = = : " + cv.toString());
+                                //Log.e("savePostLocal : ", "= = = = = = = : " + cv.toString());
 
 
                                 getActivity().getContentResolver().insert(IwomenProviderData.PostProvider.CONTETN_URI, cv);
@@ -1074,7 +1133,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
                                 cv.put(TableAndColumnsName.PostUtil.UPDATED_DATE, each_object.get("updatedAt").toString());
 
 
-                                Log.e("savePostLocal : ", "= = = = = = = : " + cv.toString());
+                                //Log.e("savePostLocal : ", "= = = = = = = : " + cv.toString());
 
 
                                 getActivity().getContentResolver().insert(IwomenProviderData.PostProvider.CONTETN_URI, cv);

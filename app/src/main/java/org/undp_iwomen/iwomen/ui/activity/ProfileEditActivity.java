@@ -13,11 +13,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.camera.CropImageIntentBuilder;
 import com.kbeanie.imagechooser.api.ChooserType;
 import com.kbeanie.imagechooser.api.ChosenImage;
@@ -97,6 +98,10 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
 
     //After imagchose
     private ParseUser currentUser;
+    private TextView txt_edit_next;
+    private Button btn_edit;
+    private Button btn_cancel;
+    private ImageView img_camera;
 
 
     @Override
@@ -132,20 +137,34 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
         profileImg.setAdjustViewBounds(true);
         profileImg.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
+        txt_edit_next = (TextView) findViewById(R.id.edit_profile_txt_edit_next);
+        btn_edit = (Button) findViewById(R.id.edit_profile_btn_save);
+        btn_cancel = (Button) findViewById(R.id.edit_profile_btn_cancel);
+        img_camera = (ImageView)findViewById(R.id.edit_profile_camera_icon);
+
 
         strLang = sharePrefLanguageUtil.getString(com.parse.utils.Utils.PREF_SETTING_LANG, com.parse.utils.Utils.ENG_LANG);
+
+
+
+        btn_cancel.setOnClickListener(clickListener);
+        btn_edit.setOnClickListener(clickListener);
+        txt_edit_next.setOnClickListener(clickListener);
+        img_camera.setOnClickListener(clickListener);
+        profileImg.setOnClickListener(clickListener);
+
+
 
 
         if (strLang.equals(Utils.ENG_LANG)) {
 
             textViewTitle.setText(R.string.edit_profile_eng);
-
             cameraList = new String[]{getResources().getString(R.string.new_post_take_photo_eng), getResources().getString(R.string.new_post_upload_photo_eng)};
+
 
         } else //FOR ALl MM FONT
         {
             textViewTitle.setText(R.string.edit_profile_mm);
-
             cameraList = new String[]{getResources().getString(R.string.new_post_take_photo_mm), getResources().getString(R.string.new_post_upload_photo_mm)};
 
 
@@ -184,61 +203,12 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
         /**********Ajust Layout Image size depend on screen at Explore ************/
         prepareList();
 
+        View padding = new View(ProfileEditActivity.this);
+        padding.setMinimumHeight(20);
+        gridView.setExpanded(true);
 
-        profileImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
 
-                if (strLang.equals(Utils.ENG_LANG)) {
-                    new MaterialDialog.Builder(ProfileEditActivity.this)
-                            .title(R.string.choose_photo_eng)
-                            .items(cameraList)
-                            .typeface("roboto-medium.ttf", "roboto-medium.ttf")
-                            .itemsCallback(new MaterialDialog.ListCallback() {
-                                @Override
-                                public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
-
-                                    Utils.doToastEng(mContext, "Choose Comming Soon" + which + text.toString());
-                                /*String phno = "tel:" + text.toString();
-                                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse(phno));
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-                                startActivity(intent);*/
-
-                                }
-                            })
-                            .show();
-                } else {
-                    new MaterialDialog.Builder(ProfileEditActivity.this)
-                            .title(R.string.choose_photo_mm)
-                            .items(cameraList)
-                            .typeface("zawgyi.ttf", "zawgyi.ttf")
-
-                            .itemsCallback(new MaterialDialog.ListCallback() {
-                                @Override
-                                public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
-
-                                    //Utils.doToastEng(mContext, "Choose Comming Soon" + which + text.toString());
-
-                                    if (which == 0) {
-                                        takePicture();
-                                    } else {
-                                        chooseImage();
-                                    }
-                                /*String phno = "tel:" + text.toString();
-                                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse(phno));
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-                                startActivity(intent);*/
-
-                                }
-                            })
-                            .show();
-                }
-
-            }
-        });
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -302,148 +272,10 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
 
         if (item.getItemId() == android.R.id.home) {
 
-            //finish();
-
-
-            if (crop_file_path != null) {
-
-                mProgressDialog.show();
-
-                File photo = new File(crop_file_path);
-
-                FileInputStream fileInputStream = null;
-
-
-                byte[] bFile = new byte[(int) photo.length()];
-
-                try {
-                    //convert file into array of bytes
-                    fileInputStream = new FileInputStream(photo);
-                    fileInputStream.read(bFile);
-                    fileInputStream.close();
-
-                    for (int i = 0; i < bFile.length; i++) {
-                        //System.out.print((char)bFile[i]);
-                    }
-
-
-                    //System.out.println("Done");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    Log.e("Image Upload Sing up", "==>" + e.toString());
-                }
-
-
-                final ParseFile ParsephotoFile = new ParseFile("photo.jpg", bFile);
-                ParsephotoFile.saveInBackground(new SaveCallback() {
-                    @Override
-                    public void done(ParseException e) {
-                        if (e != null) {
-                            //btSignup.setText(e.getMessage());
-                        }
-                    }
-                }, new ProgressCallback() {
-                    @Override
-                    public void done(Integer integer) {
-                        ParseQuery<ParseUser> userQuery = ParseUser.getQuery();
-                        userQuery.getInBackground(mstrUserId, new GetCallback<ParseUser>() {
-                            @Override
-                            public void done(ParseUser parseUser, ParseException e) {
-                                if (e == null) {
-
-                                    parseUser.put("user_profile_img", ParsephotoFile);
-                                    parseUser.saveInBackground(new SaveCallback() {
-                                        @Override
-                                        public void done(ParseException e) {
-                                            if (e == null) {
-                                                mProgressDialog.dismiss();
-
-                                                currentUser = ParseUser.getCurrentUser();
-                                                if (currentUser != null) {
-                                                    if (currentUser.get("user_profile_img") != null && currentUser.get("user_profile_img") != "null") {
-                                                        userprofile_Image_path = currentUser.getParseFile("user_profile_img").getUrl();
-
-                                                        Log.e("User Img Camera", "==>" + userprofile_Image_path);
-                                                        if (userprofile_Image_path != null && !userprofile_Image_path.isEmpty()) {
-                                                            ParseQuery<ParseUser> userQuery = ParseUser.getQuery();
-                                                            userQuery.getInBackground(mstrUserId, new GetCallback<ParseUser>() {
-                                                                @Override
-                                                                public void done(ParseUser parseUser, ParseException e) {
-                                                                    if (e == null) {
-                                                                        parseUser.put("userImgPath", userprofile_Image_path);
-
-                                                                        parseUser.saveInBackground(new SaveCallback() {
-                                                                            @Override
-                                                                            public void done(ParseException e) {
-                                                                                if (e == null) {
-                                                                                    mProgressDialog.dismiss();
-
-                                                                                    Log.e("User Img Sticker", "==>" + userprofile_Image_path);
-                                                                                    mEditorUserInfo = mSharedPreferencesUserInfo.edit();
-                                                                                    mEditorUserInfo.putString(CommonConfig.USER_IMAGE_PATH, userprofile_Image_path);
-                                                                                    mEditorUserInfo.commit();
-                                                                                    startDrawerMainActivity();
-                                                                                }
-                                                                            }
-                                                                        });
-                                                                    }
-                                                                }
-                                                            });
-                                                        } else {
-                                                            mProgressDialog.dismiss();
-                                                            startDrawerMainActivity();
-                                                        }
-                                                    }
-                                                }
-
-                                            } else {
-                                                mProgressDialog.dismiss();
-                                            }
-                                        }
-                                    });
-                                }
-                            }
-                        });
-                    }
-                });
-            } else { //TODO When user choose sticker case
-                mProgressDialog.show();
-                Log.e("User Img Sticker", "==>" + userprofile_Image_path);
-
-                if (userprofile_Image_path != null && !userprofile_Image_path.isEmpty()) {
-                    ParseQuery<ParseUser> userQuery = ParseUser.getQuery();
-                    userQuery.getInBackground(mstrUserId, new GetCallback<ParseUser>() {
-                        @Override
-                        public void done(ParseUser parseUser, ParseException e) {
-                            if (e == null) {
-                                parseUser.put("userImgPath", userprofile_Image_path);
-
-                                parseUser.saveInBackground(new SaveCallback() {
-                                    @Override
-                                    public void done(ParseException e) {
-                                        if (e == null) {
-                                            mProgressDialog.dismiss();
-
-                                            Log.e("User Img Sticker", "==>" + userprofile_Image_path);
-                                            mEditorUserInfo = mSharedPreferencesUserInfo.edit();
-                                            mEditorUserInfo.putString(CommonConfig.USER_IMAGE_PATH, userprofile_Image_path);
-                                            mEditorUserInfo.commit();
-                                            startDrawerMainActivity();
-                                        }
-                                    }
-                                });
-                            }
-                        }
-                    });
-                } else {
-                    mProgressDialog.dismiss();
-                    startDrawerMainActivity();
-                }
-
-            }
-
-
+            finish();
             return true;
+
+
         }
 
 
@@ -462,8 +294,9 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
         if (Connection.isOnline(mContext)) {
             listShopName = new ArrayList<String>();
             listShopImg = new ArrayList<String>();
-
+            mProgressDialog.setMessage("Loading...");
             mProgressDialog.show();
+
 
             UserPostAPI.getInstance().getService().getAllStickers(new Callback<String>() {
                 @Override
@@ -536,43 +369,235 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
         }
 
 
-
-        /*listShopName.add("sticker_bird");
-        listShopName.add("sticker_black_cat");
-        listShopName.add("sticker_chicken");
-        listShopName.add("sticker_chihuahua");
-
-        listShopName.add("sticker_cow");
-        listShopName.add("sticker_frog");
-        listShopName.add("sticker_hamster");
-        listShopName.add("sticker_horse");
-        listShopName.add("sticker_mouse");
-
-        listShopName.add("sticker_pig");
-        listShopName.add("sticker_pony");
-        listShopName.add("sticker_puppy");*/
-
-
-
-
-        /*listShopImg.add(R.drawable.sticker_bird);
-        listShopImg.add(R.drawable.sticker_black_cat);
-        listShopImg.add(R.drawable.sticker_chicken);
-        listShopImg.add(R.drawable.sticker_chihuahua);
-
-        listShopImg.add(R.drawable.sticker_cow);
-        listShopImg.add(R.drawable.sticker_frog);
-        listShopImg.add(R.drawable.sticker_hamster);
-        listShopImg.add(R.drawable.sticker_horse);
-
-        listShopImg.add(R.drawable.sticker_mouse);
-        listShopImg.add(R.drawable.sticker_pig);
-        listShopImg.add(R.drawable.sticker_pony);
-        listShopImg.add(R.drawable.sticker_puppy);*/
-
-
-        //1.ic_westernfood  2. ic_streetfoods 3. ic_tea
     }
+
+    private View.OnClickListener clickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View arg0) {
+            // TODO Auto-generated method stub
+            if (arg0 == btn_edit) {
+
+                if (Connection.isOnline(mContext)) {
+
+
+                    if (crop_file_path != null) {
+
+                        mProgressDialog.show();
+
+                        File photo = new File(crop_file_path);
+
+                        FileInputStream fileInputStream = null;
+
+
+                        byte[] bFile = new byte[(int) photo.length()];
+
+                        try {
+                            //convert file into array of bytes
+                            fileInputStream = new FileInputStream(photo);
+                            fileInputStream.read(bFile);
+                            fileInputStream.close();
+
+                            for (int i = 0; i < bFile.length; i++) {
+                                //System.out.print((char)bFile[i]);
+                            }
+
+
+                            //System.out.println("Done");
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            Log.e("Image Upload Sing up", "==>" + e.toString());
+                        }
+
+
+                        final ParseFile ParsephotoFile = new ParseFile("photo.jpg", bFile);
+                        ParsephotoFile.saveInBackground(new SaveCallback() {
+                            @Override
+                            public void done(ParseException e) {
+                                if (e != null) {
+                                    //btSignup.setText(e.getMessage());
+                                }
+                            }
+                        }, new ProgressCallback() {
+                            @Override
+                            public void done(Integer integer) {
+                                ParseQuery<ParseUser> userQuery = ParseUser.getQuery();
+                                userQuery.getInBackground(mstrUserId, new GetCallback<ParseUser>() {
+                                    @Override
+                                    public void done(ParseUser parseUser, ParseException e) {
+                                        if (e == null) {
+
+                                            parseUser.put("user_profile_img", ParsephotoFile);
+                                            parseUser.saveInBackground(new SaveCallback() {
+                                                @Override
+                                                public void done(ParseException e) {
+                                                    if (e == null) {
+                                                        mProgressDialog.dismiss();
+
+                                                        currentUser = ParseUser.getCurrentUser();
+                                                        if (currentUser != null) {
+                                                            if (currentUser.get("user_profile_img") != null && currentUser.get("user_profile_img") != "null") {
+                                                                userprofile_Image_path = currentUser.getParseFile("user_profile_img").getUrl();
+
+                                                                Log.e("User Img Camera", "==>" + userprofile_Image_path);
+                                                                if (userprofile_Image_path != null && !userprofile_Image_path.isEmpty()) {
+                                                                    ParseQuery<ParseUser> userQuery = ParseUser.getQuery();
+                                                                    userQuery.getInBackground(mstrUserId, new GetCallback<ParseUser>() {
+                                                                        @Override
+                                                                        public void done(ParseUser parseUser, ParseException e) {
+                                                                            if (e == null) {
+                                                                                parseUser.put("userImgPath", userprofile_Image_path);
+
+                                                                                parseUser.saveInBackground(new SaveCallback() {
+                                                                                    @Override
+                                                                                    public void done(ParseException e) {
+                                                                                        if (e == null) {
+                                                                                            mProgressDialog.dismiss();
+
+                                                                                            Log.e("User Img Sticker", "==>" + userprofile_Image_path);
+                                                                                            mEditorUserInfo = mSharedPreferencesUserInfo.edit();
+                                                                                            mEditorUserInfo.putString(CommonConfig.USER_IMAGE_PATH, userprofile_Image_path);
+                                                                                            mEditorUserInfo.commit();
+                                                                                            startDrawerMainActivity();
+                                                                                        }
+                                                                                    }
+                                                                                });
+                                                                            }
+                                                                        }
+                                                                    });
+                                                                } else {
+                                                                    mProgressDialog.dismiss();
+                                                                    startDrawerMainActivity();
+                                                                }
+                                                            }
+                                                        }
+
+                                                    } else {
+                                                        mProgressDialog.dismiss();
+                                                    }
+                                                }
+                                            });
+                                        }
+                                    }
+                                });
+                            }
+                        });
+                    } else { //TODO When user choose sticker case
+                        mProgressDialog.show();
+                        Log.e("User Img Sticker", "==>" + userprofile_Image_path);
+
+                        if (userprofile_Image_path != null && !userprofile_Image_path.isEmpty()) {
+                            ParseQuery<ParseUser> userQuery = ParseUser.getQuery();
+                            userQuery.getInBackground(mstrUserId, new GetCallback<ParseUser>() {
+                                @Override
+                                public void done(ParseUser parseUser, ParseException e) {
+                                    if (e == null) {
+                                        parseUser.put("userImgPath", userprofile_Image_path);
+
+                                        parseUser.saveInBackground(new SaveCallback() {
+                                            @Override
+                                            public void done(ParseException e) {
+                                                if (e == null) {
+                                                    mProgressDialog.dismiss();
+
+                                                    Log.e("User Img Sticker", "==>" + userprofile_Image_path);
+                                                    mEditorUserInfo = mSharedPreferencesUserInfo.edit();
+                                                    mEditorUserInfo.putString(CommonConfig.USER_IMAGE_PATH, userprofile_Image_path);
+                                                    mEditorUserInfo.commit();
+                                                    startDrawerMainActivity();
+                                                }
+                                            }
+                                        });
+                                    }
+                                }
+                            });
+                        } else {
+                            mProgressDialog.dismiss();
+                            startDrawerMainActivity();
+                        }
+
+                    }
+                } else {
+                    //Utils.doToast(mContext, "Internet Connection need!");
+
+                    if (strLang.equals(Utils.ENG_LANG)) {
+                        Utils.doToastEng(mContext, getResources().getString(R.string.open_internet_warning_eng));
+                    } else {
+
+                        Utils.doToastMM(mContext, getResources().getString(R.string.open_internet_warning_mm));
+                    }
+
+
+                }
+            }
+            if (arg0 == btn_cancel) {
+
+                startDrawerMainActivity();
+            }
+            if(arg0 == txt_edit_next){
+                Intent intent = new Intent(getApplicationContext(), ProfileEditTLGActivity.class);
+
+                intent.putExtra("UserId", mstrUserId);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+
+            if(arg0 == img_camera || arg0 == profileImg){
+                /*if (strLang.equals(Utils.ENG_LANG)) {
+                    new MaterialDialog.Builder(ProfileEditActivity.this)
+                            .title(R.string.choose_photo_eng)
+                            .items(cameraList)
+                            .typeface("roboto-medium.ttf", "roboto-medium.ttf")
+                            .itemsCallback(new MaterialDialog.ListCallback() {
+                                @Override
+                                public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
+
+
+                                    if (which == 0) {
+                                        takePicture();
+                                    } else {
+                                        chooseImage();
+                                    }
+                                    //Utils.doToastEng(mContext, "Choose Comming Soon" + which + text.toString());
+                                *//*String phno = "tel:" + text.toString();
+                                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse(phno));
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                                startActivity(intent);*//*
+
+                                }
+                            })
+                            .show();
+                } else {
+                    new MaterialDialog.Builder(ProfileEditActivity.this)
+                            .title(R.string.choose_photo_mm)
+                            .items(cameraList)
+                            .typeface("zawgyi.ttf", "zawgyi.ttf")
+
+                            .itemsCallback(new MaterialDialog.ListCallback() {
+                                @Override
+                                public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
+
+                                    //Utils.doToastEng(mContext, "Choose Comming Soon" + which + text.toString());
+
+                                    if (which == 0) {
+                                        takePicture();
+                                    } else {
+                                        chooseImage();
+                                    }
+                                *//*String phno = "tel:" + text.toString();
+                                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse(phno));
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                                startActivity(intent);*//*
+
+                                }
+                            })
+                            .show();
+                }*/
+            }
+        }
+    };
 
     /**
      * *****************Image Chooser***************

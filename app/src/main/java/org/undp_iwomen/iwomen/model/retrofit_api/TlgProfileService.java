@@ -12,7 +12,7 @@ import retrofit.http.Path;
 public interface TlgProfileService {
 
     @GET(CommonConfig.TLGPROFILE_URL)
-    public void getTlgProfileList( Callback<String> callback);
+    public void getTlgProfileList(Callback<String> callback);
 
     @GET(CommonConfig.TLGPROFILE_DETAILBYID_URL)
     public void getTlgProfileDetailById(@Path("id") String id, Callback<String> callback);

@@ -85,7 +85,7 @@ public class MainPhotoPostFragment extends Fragment implements ImageChooserListe
     String crop_absolute_path;
     String str_report_type;
 
-    private int maxCharacterCount = 400;
+    private int maxCharacterCount = 1000;
     private TextView characterCountTextView;
     private Button postButton;
 
@@ -488,7 +488,10 @@ public class MainPhotoPostFragment extends Fragment implements ImageChooserListe
             postParse.setLikes(0);
             postParse.setCommentCount(0);
             postParse.setShareCount(0);
-            postParse.setPostUploadUserImgPath(userprofile_Image_path);
+            if(userprofile_Image_path != null) {
+                postParse.setPostUploadUserImgPath(userprofile_Image_path);
+            }
+            //postParse.setPostUploadUserImgPath(userprofile_Image_path);
             postParse.setContentTypes("Story");
             postParse.setPostUploadedDate(new Date());
 
@@ -581,7 +584,10 @@ public class MainPhotoPostFragment extends Fragment implements ImageChooserListe
             postParse.setLikes(0);
             postParse.setCommentCount(0);
             postParse.setShareCount(0);
-            postParse.setPostUploadUserImgPath(userprofile_Image_path);
+            if(userprofile_Image_path != null) {
+                postParse.setPostUploadUserImgPath(userprofile_Image_path);
+            }
+            //postParse.setPostUploadUserImgPath(userprofile_Image_path);
             postParse.setContentTypes("Story");
             postParse.setPostUploadedDate(new Date());
 

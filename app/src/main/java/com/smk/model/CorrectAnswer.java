@@ -32,7 +32,9 @@ private String createdAt;
 @SerializedName("updated_at")
 @Expose
 private String updatedAt;
-
+@SerializedName("competitiongroupuser")
+@Expose
+private GroupUser groupUser;
 /**
 * 
 * @return
@@ -195,4 +197,11 @@ public void setUpdatedAt(String updatedAt) {
 this.updatedAt = updatedAt;
 }
 
+public GroupUser getGroupUser() {
+    return groupUser;
+}
+
+public void setGroupUser(GroupUser groupUser) {
+    this.groupUser = groupUser;
+}
 }

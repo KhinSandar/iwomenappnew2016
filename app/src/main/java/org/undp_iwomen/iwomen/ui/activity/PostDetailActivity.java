@@ -12,7 +12,6 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.BaseColumns;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.Spannable;
@@ -119,7 +118,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     private ProgressBar profile_item_progressBar;
     //private org.undp_iwomen.iwomen.ui.widget.ProfilePictureView profilePictureView;
     private RoundedImageView profile;
-    private org.undp_iwomen.iwomen.ui.widget.ResizableImageView postIMg;
+    private ResizableImageView postIMg;
     private SharedPreferences mSharedPreferencesUserInfo;
     private String user_name, user_obj_id, user_ph;
     SharedPreferences sharePrefLanguageUtil;
@@ -196,6 +195,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     private ImageView video_icon;
     String cmd_count = "0";
     String authorID;
+    private String userprofile_Image_path;
     private FacebookCallback<Sharer.Result> shareCallback = new FacebookCallback<Sharer.Result>() {
         @Override
         public void onCancel() {
@@ -286,6 +286,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
             user_obj_id = mSharedPreferencesUserInfo.getString(CommonConfig.USER_OBJ_ID, null);
 
         }
+        userprofile_Image_path = mSharedPreferencesUserInfo.getString(CommonConfig.USER_IMAGE_PATH, null);
 
 
         profile = (RoundedImageView) findViewById(R.id.postdetail_profilePic_rounded);
@@ -302,7 +303,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         post_suggest_text = (TextView) findViewById(R.id.postdetail_suggest_title);
 
         //profilePictureView = (org.undp_iwomen.iwomen.ui.widget.ProfilePictureView) findViewById(R.id.postdetail_profilePic);
-        postIMg = (org.undp_iwomen.iwomen.ui.widget.ResizableImageView) findViewById(R.id.postdetail_content_img);
+        postIMg = (ResizableImageView) findViewById(R.id.postdetail_content_img);
         feed_item_progressBar = (ProgressBar) findViewById(R.id.postdetail_feed_item_progressBar);
         profile_item_progressBar = (ProgressBar) findViewById(R.id.postdetail_progressBar_profile_item);
 
@@ -336,10 +337,10 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         txt_lbl_like_post = (CustomTextView) findViewById(R.id.postdetail_like_post_lbl);
         txt_lbl_share_post = (CustomTextView) findViewById(R.id.postdetail_share_post_lbl);
 
-        img_credit_logo = (ResizableImageView)findViewById(R.id.postdetail_credit_img);
-        txt_credit_link = (TextView)findViewById(R.id.postdetail_credit_link);
-        progressBar_credit = (ProgressBar)findViewById(R.id.postdetail_credit_progress);
-        ly_credit = (LinearLayout)findViewById(R.id.postdetail_ly_credit);
+        img_credit_logo = (ResizableImageView) findViewById(R.id.postdetail_credit_img);
+        txt_credit_link = (TextView) findViewById(R.id.postdetail_credit_link);
+        progressBar_credit = (ProgressBar) findViewById(R.id.postdetail_credit_progress);
+        ly_credit = (LinearLayout) findViewById(R.id.postdetail_ly_credit);
 
 
         if (postId != null) {
@@ -558,6 +559,8 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                     String comment_created_time;
                     String comment_user_name;
 
+                    String comment_img_path;
+
                     try {
                         JSONObject whole_body = new JSONObject(s);
                         JSONArray result = whole_body.getJSONArray("results");
@@ -570,14 +573,13 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                             } else {
                                 comment = each_object.getString("comment_contents");
                             }
-                            //Log.e("Comments>>>", ">>>>" + comment);
 
-                       /* if (each_object.isNull("comment_created_time")) {
-                            comment_created_time = "null";
-                        } else {
-                            comment_created_time = each_object.getString("comment_created_time");
-                        }*/
-                            if (each_object.isNull("user_name")) {
+                            if (each_object.isNull("user_img_path")) {
+                                comment_img_path = "null";
+                            } else {
+                                comment_img_path = each_object.getString("user_img_path");
+                            }
+                             if (each_object.isNull("user_name")) {
                                 comment_user_name = "null";
                             } else {
                                 comment_user_name = each_object.getString("user_name");
@@ -585,11 +587,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
                             //Calculate Date Difference
                             Date d1 = new Date();
-                        /*try {
-                            Thread.sleep(750);
-                        } catch (InterruptedException e) {
-                            //Ingnore
-                        }*/
+
                             //Date d0 = null; // About 3 days ago
                             try {
                                 ParsePosition pp = new ParsePosition(0);
@@ -649,7 +647,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                                 TimeDiff.getTimeDifference(d0, d1, TimeDiff.TimeField.DAY));*/
 
 
-                            listComment.add(new CommentItem("", comment_user_name, comment, str_comment_time_long));
+                            listComment.add(new CommentItem(comment_img_path, comment_user_name, comment, str_comment_time_long));
                             str_comment_time_long = "";
                         }
 
@@ -722,6 +720,17 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         String created_at = "";
         String updated_at = "";
 
+        //TODO TableColumnUpdate 5
+        String author_id;
+        String author_role;
+        String author_role_mm;
+        String credit_name;
+        String credit_logo_link;
+        String credit_link_mm;
+        String credit_link_eng;
+        int post_comment_count = 0;
+        int post_share_count = 0;
+
         try {
 
             if (cursor != null && cursor.moveToFirst()) {
@@ -743,6 +752,17 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                     post_content_mm = cursor.getString(cursor.getColumnIndex(TableAndColumnsName.PostUtil.POST_CONTENT_MM));
                     post_content_title_mm = cursor.getString(cursor.getColumnIndex(TableAndColumnsName.PostUtil.POST_CONTENT_TITLE_MM));
 
+                    //TODO TableColumnUpdate 6
+                    author_id = cursor.getString(cursor.getColumnIndex(TableAndColumnsName.PostUtil.POST_CONTENT_AUTHOR_ID));
+                    author_role = cursor.getString(cursor.getColumnIndex(TableAndColumnsName.PostUtil.POST_CONTENT_AUTHOR_ROLE));
+
+                    author_role_mm = cursor.getString(cursor.getColumnIndex(TableAndColumnsName.PostUtil.POST_CONTENT_AUTHOR_ROLE_MM));
+                    credit_name = cursor.getString(cursor.getColumnIndex(TableAndColumnsName.PostUtil.CREDIT_NAME));
+                    credit_logo_link = cursor.getString(cursor.getColumnIndex(TableAndColumnsName.PostUtil.CREDIT_LOGO_URL));
+                    credit_link_mm = cursor.getString(cursor.getColumnIndex(TableAndColumnsName.PostUtil.CREDIT_LINK_MM));
+                    credit_link_eng = cursor.getString(cursor.getColumnIndex(TableAndColumnsName.PostUtil.CREDIT_LINK_ENG));
+                    post_comment_count = cursor.getInt(cursor.getColumnIndex(TableAndColumnsName.PostUtil.COMMENT_COUNT));
+                    post_share_count = cursor.getInt(cursor.getColumnIndex(TableAndColumnsName.PostUtil.SHARE_COUNT));
 
                     like_status = cursor.getString(cursor.getColumnIndex(TableAndColumnsName.PostUtil.LIKE_STATUS));
                     status = cursor.getString(cursor.getColumnIndex(TableAndColumnsName.PostUtil.STATUS));
@@ -766,6 +786,19 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                     item.setPost_content_video_id(video_id);
                     item.setPost_content_suggest_text(post_content_suggest_text);
                     item.setPost_title_mm(post_content_title_mm);
+
+                    //TODO TableColumnUpdate 7
+                    item.setPost_content_author_id(author_id);
+                    item.setPost_content_author_role(author_role);
+
+
+                    item.setAuthor_role_mm(author_role_mm);//author_role_mm
+                    item.setCredit_name(credit_name); //credit_name
+                    item.setCredit_logo_link(credit_logo_link); //credit_logo_link
+                    item.setCredit_link_mm(credit_link_mm); //credit_link_mm
+                    item.setCredit_link_eng(credit_link_eng); //credit_link_eng
+                    item.setPost_comment_count(post_comment_count);
+                    item.setPost_share_count(post_share_count);
 
                     item.setPost_like_status(like_status);
                     item.setStatus(status);
@@ -808,10 +841,10 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
     private void stripUnderlines(TextView tv) {
 
-        Spannable s = (Spannable)tv.getText();
+        Spannable s = (Spannable) tv.getText();
         URLSpan[] spans = s.getSpans(0, s.length(), URLSpan.class);
 
-        for (URLSpan span: spans) {
+        for (URLSpan span : spans) {
             int start = s.getSpanStart(span);
             int end = s.getSpanEnd(span);
             s.removeSpan(span);
@@ -883,8 +916,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         } catch (java.text.ParseException e) {
             e.printStackTrace();
         }
-
-
+        txt_lbl_share_post.setText(getResources().getString(R.string.post_detail_share_post));
 
         mstrPostType = item.getPost_content_type();
         //TODO TableColumnUpdate 10 data set show in UI
@@ -933,8 +965,11 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
             mPostTile.setText(item.getPost_title());
             post_content.setText(item.getPost_content());
             et_comment.setHint(R.string.post_detail_comment_eng);
-            txt_lbl_like_post.setText(R.string.post_detail_like_post_eng);
-            txt_lbl_share_post.setText(R.string.post_detail_share_post_eng);
+            txt_like_count.setText(item.getPost_like() + "");
+
+
+            txt_cmd_count.setText(item.getPost_comment_count() + "Comments");
+            txt_lbl_share_post.setText(item.getPost_share_count() + R.string.post_detail_share_post_eng);
 
             et_comment.setTypeface(MyTypeFace.get(this, MyTypeFace.NORMAL));
             mPostTile.setTypeface(MyTypeFace.get(this, MyTypeFace.NORMAL));
@@ -942,45 +977,28 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
             post_suggest_text.setTypeface(MyTypeFace.get(this, MyTypeFace.NORMAL));
 
             txt_credit_link.setText("Credit to " + item.getCredit_name());
-            Log.e("Link===","==>" +item.getCredit_link_eng());
-            if(item.getCredit_name()!= null && !item.getCredit_name().isEmpty()){
+            Log.e("Link===", "==>" + item.getCredit_link_eng());
+            if (item.getCredit_name() != null && !item.getCredit_name().isEmpty()) {
                 txt_credit_link.setVisibility(View.VISIBLE);
-                /*Pattern pattern = Pattern.compile("[a-zA-Z]+");
-                Linkify.addLinks(txt_credit_link,pattern, item.getCredit_link_eng());*/
 
-
-                /*txt_credit_link.setText(
-                        Html.fromHtml(
-                                "<a href=" + item.getCredit_link_eng() + ">" + "Credit to " + item.getCredit_name() + " < / a > "));
-                txt_credit_link.setMovementMethod(LinkMovementMethod.getInstance());
-                stripUnderlines(txt_credit_link);*/
-
-
-                /*String value = "<html> Credit to <font color=#9e9e9e><b><a href=\""+ item.getCredit_link_eng() +"\">"+ item.getCredit_name() +" </a></b></font> </html>";
-                Spannable spannedText = (Spannable)
-                        Html.fromHtml(value);
-                txt_credit_link.setMovementMethod(LinkMovementMethod.getInstance());
-
-                Spannable processedText = removeUnderlines(spannedText);*/
 
                 txt_credit_link.setText("Credit to " + item.getCredit_name());
-                if(item.getCredit_link_eng()!= null && !item.getCredit_link_eng().isEmpty()){
+                if (item.getCredit_link_eng() != null && !item.getCredit_link_eng().isEmpty()) {
                     txt_credit_link.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             Intent intent2 = new Intent(getApplicationContext(), AboutUsWebActivity.class);
-                            intent2.putExtra("ActivityName","PostDetailActivity");
-                            intent2.putExtra("URL",item.getCredit_link_eng());
+                            intent2.putExtra("ActivityName", "PostDetailActivity");
+                            intent2.putExtra("URL", item.getCredit_link_eng());
                             startActivity(intent2);
                         }
                     });
-                }else{
-                    Utils.doToastEng(getApplicationContext(),"there is no link");
+                } else {
+                    //Utils.doToastEng(getApplicationContext(),"there is no link");
                 }
 
 
-
-            }else{
+            } else {
                 txt_credit_link.setVisibility(View.GONE);
             }
 
@@ -1029,10 +1047,10 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
             et_comment.setTypeface(MyTypeFace.get(this, MyTypeFace.ZAWGYI));
 
             txt_lbl_like_post.setText(R.string.post_detail_like_post_mm);
-            txt_lbl_share_post.setText(R.string.post_detail_share_post_mm);
+            txt_lbl_share_post.setText(item.getPost_share_count() + R.string.post_detail_share_post_mm);
 
             txt_credit_link.setText("Credit to " + item.getCredit_name());
-            if(item.getCredit_name()!= null && !item.getCredit_name().isEmpty()){
+            if (item.getCredit_name() != null && !item.getCredit_name().isEmpty()) {
                 txt_credit_link.setVisibility(View.VISIBLE);
                 /*Pattern pattern = Pattern.compile("[a-zA-Z]+");
                 Linkify.addLinks(txt_credit_link,pattern, item.getCredit_link_eng());*/
@@ -1052,21 +1070,21 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                 txt_credit_link.setText(processedText);*/
 
                 txt_credit_link.setText("Credit to " + item.getCredit_name());
-                if(item.getCredit_link_mm()!= null && !item.getCredit_link_mm().isEmpty()){
+                if (item.getCredit_link_mm() != null && !item.getCredit_link_mm().isEmpty()) {
                     txt_credit_link.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             Intent intent2 = new Intent(getApplicationContext(), AboutUsWebActivity.class);
-                            intent2.putExtra("ActivityName","PostDetailActivity");
-                            intent2.putExtra("URL",item.getCredit_link_mm());
+                            intent2.putExtra("ActivityName", "PostDetailActivity");
+                            intent2.putExtra("URL", item.getCredit_link_mm());
                             startActivity(intent2);
 
                         }
                     });
-                }else{
-                    Utils.doToastEng(getApplicationContext(), "there is no link");
+                } else {
+                    // Utils.doToastEng(getApplicationContext(), "there is no link");
                 }
-            }else{
+            } else {
                 txt_credit_link.setVisibility(View.GONE);
             }
             /*et_comment.setTypeface(MyTypeFace.get(this, MyTypeFace.ZAWGYI));
@@ -1076,17 +1094,16 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         }
 
 
-
-
         if (like_status.equalsIgnoreCase("0")) {
             img_like.setImageResource(R.drawable.like_stroke);
         } else {
 
             img_like.setImageResource(R.drawable.like_fill);
         }
-        txt_like_count.setText(item.getPost_like()+" " );
+        txt_like_count.setText(item.getPost_like() + " ");
 
 
+        txt_cmd_count.setText(item.getPost_comment_count() + "Comments");
         if (item.getCredit_logo_link() != null && !item.getCredit_logo_link().isEmpty()) {
             try {
                 img_credit_logo.setVisibility(View.VISIBLE);
@@ -1243,11 +1260,11 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                     author_role = cursor.getString(cursor.getColumnIndex(TableAndColumnsName.PostUtil.POST_CONTENT_AUTHOR_ROLE));
 
 
-                     author_role_mm = cursor.getString(cursor.getColumnIndex(TableAndColumnsName.PostUtil.POST_CONTENT_AUTHOR_ROLE_MM));
-                     credit_name = cursor.getString(cursor.getColumnIndex(TableAndColumnsName.PostUtil.CREDIT_NAME));
-                     credit_logo_link = cursor.getString(cursor.getColumnIndex(TableAndColumnsName.PostUtil.CREDIT_LOGO_URL));
-                     credit_link_mm = cursor.getString(cursor.getColumnIndex(TableAndColumnsName.PostUtil.CREDIT_LINK_MM));
-                     credit_link_eng = cursor.getString(cursor.getColumnIndex(TableAndColumnsName.PostUtil.CREDIT_LINK_ENG));
+                    author_role_mm = cursor.getString(cursor.getColumnIndex(TableAndColumnsName.PostUtil.POST_CONTENT_AUTHOR_ROLE_MM));
+                    credit_name = cursor.getString(cursor.getColumnIndex(TableAndColumnsName.PostUtil.CREDIT_NAME));
+                    credit_logo_link = cursor.getString(cursor.getColumnIndex(TableAndColumnsName.PostUtil.CREDIT_LOGO_URL));
+                    credit_link_mm = cursor.getString(cursor.getColumnIndex(TableAndColumnsName.PostUtil.CREDIT_LINK_MM));
+                    credit_link_eng = cursor.getString(cursor.getColumnIndex(TableAndColumnsName.PostUtil.CREDIT_LINK_ENG));
                     post_comment_count = cursor.getInt(cursor.getColumnIndex(TableAndColumnsName.PostUtil.COMMENT_COUNT));
                     post_share_count = cursor.getInt(cursor.getColumnIndex(TableAndColumnsName.PostUtil.SHARE_COUNT));
 
@@ -1289,8 +1306,6 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                     item.setStatus(status);
                     item.setCreated_at(created_at);
                     item.setUpdated_at(updated_at);
-
-
 
 
                 } while (cursor.moveToNext());
@@ -1355,7 +1370,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
                                     if (e == null) {
                                         Log.e("Cloud Increment", "===>" + like_count);
-                                        txt_like_count.setText(like_count+" " );//+ " likes"
+                                        txt_like_count.setText(like_count + " ");//+ " likes"
                                         //TODO call updatePost
                                         updatePostLikeStatus(postId, like_count);
                                         like_status = "1";
@@ -1415,6 +1430,29 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
             case R.id.postdetail_share_button:
                 shareTextUrl();
+                if (Connection.isOnline(getApplicationContext())) {
+                    HashMap<String, String> _param = new HashMap<>();
+                    _param.put("objectId", postId);
+
+                    ParseCloud.callFunctionInBackground("IWomen_Share_increment", _param, new FunctionCallback<Integer>() {
+                        @Override
+                        public void done(Integer like_count, ParseException e) {
+
+                            if (e == null) {
+                                //Log.e("Cloud Increment", "===>" + like_count);
+                                txt_lbl_share_post.setText(like_count + getResources().getString(R.string.post_detail_share_post));//+ " likes"
+                                //TODO call updatePost
+                                updatePostShareStatus(postId, like_count);
+
+                            } else {
+
+                                // Log.e("Cloud Increment", "ERRr" + like_count + e.toString());
+                            }
+
+                        }
+                    });
+                }
+
                 break;
             case R.id.postdetail_submit_comment:
 
@@ -1438,19 +1476,16 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
                         commentParse.setcomment_contents(et_comment.getText().toString());
                         commentParse.setUserId(user_obj_id);
+
+                        if(userprofile_Image_path != null ) {
+                            commentParse.setUserImgPathName(userprofile_Image_path);
+                        }
                         commentParse.setUserName(user_name);
                         commentParse.setpostId(postId);
+
                         commentParse.setcomment_created_time(new Date());
                         /**Very Important */
                         ParseACL groupACL = new ParseACL();
-                        // userList is an Iterable<ParseUser> with the users we are sending this message to.
-                    /*for (ParseUser user : userList) {
-                    groupACL.setReadAccess(user, true);
-                    //groupACL.setWriteAccess(user, true);
-                    }*/
-                        //groupACL.setRoleReadAccess("");
-
-                        //groupACL.setRoleWriteAccess("");
 
 
                         groupACL.setPublicReadAccess(true);
@@ -1496,17 +1531,30 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                 }
                 break;
             case R.id.postdetail_content_img:
+                if (mstrPostType.equalsIgnoreCase("Video")) {
+                    Intent video_intent = new Intent(mContext, YouTubeWebviewActivity.class);
 
-                if (!isPlaying) {
+                    //intent.putExtra("post_id", feedItems.get(position).getPost_obj_id());
 
-                    mMedia = MediaPlayer.create(this, R.raw.wai_wai_audio);
-
-                    mMedia.start();
-
-                    isPlaying = true;
-                } else {
-                    Utils.doToastEng(getApplicationContext(), "Is playing ");
+                    //intent.putExtra("ImgUrl", mImgurl.get(getPosition()));
+                    video_intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    video_intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    mContext.startActivity(video_intent);
+                    break;
                 }
+                 /*else if (mstrPostType.equalsIgnoreCase("Audio")) {
+                    if (!isPlaying) {
+
+                        mMedia = MediaPlayer.create(this, R.raw.wai_wai_audio);
+
+                        mMedia.start();
+
+                        isPlaying = true;
+                    } else {
+                        //Utils.doToastEng(getApplicationContext(), "Is playing ");
+                    }
+                }*/
+
 
                 break;
 
@@ -1539,7 +1587,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
                         isPlaying = true;
                     } else {
-                        Utils.doToastEng(getApplicationContext(), "Is playing ");
+                        //Utils.doToastEng(getApplicationContext(), "Is playing ");
                     }
                     break;
                 }
@@ -1568,6 +1616,27 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
     }
 
+    private void updatePostCommentStatus(String postId, int like_count) {
+
+        ContentValues cv = new ContentValues();
+        cv.put(TableAndColumnsName.PostUtil.COMMENT_COUNT, like_count);
+        String selections = TableAndColumnsName.PostUtil.POST_OBJ_ID + "=?";
+        String[] selectionargs = {postId};
+        getContentResolver().update(IwomenProviderData.PostProvider.CONTETN_URI, cv, selections, selectionargs);
+
+
+    }
+
+    private void updatePostShareStatus(String postId, int like_count) {
+
+        ContentValues cv = new ContentValues();
+        cv.put(TableAndColumnsName.PostUtil.SHARE_COUNT, like_count);
+        String selections = TableAndColumnsName.PostUtil.POST_OBJ_ID + "=?";
+        String[] selectionargs = {postId};
+        getContentResolver().update(IwomenProviderData.PostProvider.CONTETN_URI, cv, selections, selectionargs);
+
+
+    }
 
     private void updatePostLikeStatus(String postId, int like_count) {
 
@@ -1805,7 +1874,6 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                         }
 
 
-
                         if (!each_object.isNull("comment_count")) {
                             cv.put(TableAndColumnsName.PostUtil.COMMENT_COUNT, each_object.getInt("comment_count"));
                         } else {
@@ -1869,7 +1937,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         } else {
 
             if (strLang.equals(Utils.ENG_LANG)) {
-                Utils.doToastEng(getApplicationContext(),getResources().getString(R.string.open_internet_warning_eng));
+                Utils.doToastEng(getApplicationContext(), getResources().getString(R.string.open_internet_warning_eng));
             } else {
 
                 Utils.doToastMM(getApplicationContext(), getResources().getString(R.string.open_internet_warning_mm));
@@ -1903,6 +1971,11 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                         cmd_count = whole_body.getString("count");
 
                         txt_cmd_count.setText(cmd_count + "Comments");
+                        //TODO update local db
+
+                        int c_count = Integer.parseInt(cmd_count);
+                        updatePostCommentStatus(postId, c_count);
+
 
                     } catch (JSONException ex) {
                         ex.printStackTrace();
@@ -1977,24 +2050,6 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         listView.requestLayout();
     }
 
-    /*private void setEmojiconFragment(boolean useSystemDefault) {
-
-
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.emojicons, EmojiconsFragment.newInstance(useSystemDefault))
-                .commit();
-    }*/
-
-    /*@Override
-    public void onEmojiconClicked(Emojicon emojicon) {
-        EmojiconsFragment.input(et_comment, emojicon);
-    }
-
-    @Override
-    public void onEmojiconBackspaceClicked(View v) {
-        EmojiconsFragment.backspace(et_comment);
-    }*/
 
     //Share URL
     // Method to share either text or URL.

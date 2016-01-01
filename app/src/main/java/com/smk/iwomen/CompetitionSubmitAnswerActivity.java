@@ -1,13 +1,10 @@
 package com.smk.iwomen;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,56 +13,57 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.smk.application.StoreUtil;
 import com.smk.clientapi.NetworkEngine;
+import com.smk.model.AnswerList;
 import com.smk.model.CompetitionQuestion;
-import com.smk.model.GroupUser;
 import com.smk.skalertmessage.SKToastMessage;
 
-import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class CompetitionSubmitAnswerActivity extends ActionBarActivity {
+public class CompetitionSubmitAnswerActivity extends BaseActionBarActivity {
 
 	private TextView txt_question;
 	private TextView txt_description;
 	private EditText edt_answer_1;
 	private EditText edt_answer_2;
 	private EditText edt_answer_3;
-	private GroupUser groupUser;
 	private CompetitionQuestion competitionQuestion;
 	private Button btn_save;
 	private Button btn_submit;
 	private Integer answer3Id;
 	private Integer answer2Id;
 	private Integer answer1Id;
-
-	private SharedPreferences mSharedPreferencesUserInfo;
-	private SharedPreferences.Editor mEditorUserInfo;
-	private String user_name, user_obj_id, user_ph;
+	private AnswerList AnswerList;
+	private int groupUserId;
+	private Button btn_go_back;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_competition_submit_answer);
-
-		mSharedPreferencesUserInfo = getSharedPreferences(CommonConfig.SHARE_PREFERENCE_USER_INFO, Context.MODE_PRIVATE);
-
-		user_obj_id = mSharedPreferencesUserInfo.getString(CommonConfig.USER_OBJ_ID, null);
 		
 		Bundle bundle = getIntent().getExtras();
 		if(bundle != null){
 			competitionQuestion = new Gson().fromJson(bundle.getString("competition_question"), CompetitionQuestion.class);
-			groupUser = new Gson().fromJson(bundle.getString("group_user"), GroupUser.class);
+			AnswerList = new Gson().fromJson(bundle.getString("user_answer"), AnswerList.class);
+			groupUserId = bundle.getInt("group_user_id");
 		}
 		
 		txt_question = (TextView) findViewById(R.id.txt_competition_question);
 		txt_description = (TextView) findViewById(R.id.txt_competition_description);
 		
-		txt_question.setText(competitionQuestion.getQuestion());
-		txt_description.setText(competitionQuestion.getDescription());
+		SharedPreferences langRef = getSharedPreferences("mLanguage", MODE_PRIVATE); 
+		if(langRef.getString("lang","").equals("mm")){
+			txt_question.setText(Html.fromHtml(competitionQuestion.getQuestionMm()));
+			txt_description.setText(Html.fromHtml(competitionQuestion.getAnswerSubmitDescriptionMm()));
+		}else{
+			txt_question.setText(Html.fromHtml(competitionQuestion.getQuestion()));
+			txt_description.setText(Html.fromHtml(competitionQuestion.getAnswerSubmitDescription()));
+		}
+		
 		
 		edt_answer_1 = (EditText) findViewById(R.id.edt_competition_answer_1);
 		edt_answer_2 = (EditText) findViewById(R.id.edt_competition_answer_2);
@@ -73,48 +71,46 @@ public class CompetitionSubmitAnswerActivity extends ActionBarActivity {
 		
 		btn_save = (Button) findViewById(R.id.btn_competition_answer_save);
 		btn_submit = (Button) findViewById(R.id.btn_competition_answer_submit);
+		btn_go_back = (Button) findViewById(R.id.btn_go_back);
 		
 		
-		String answer1 = StoreUtil.getInstance().selectFrom("answer1_" +user_obj_id);
+		String answer1 = StoreUtil.getInstance().selectFrom("answer1_XBUQ7yk8Ig");
 		if(answer1 != null){
 			edt_answer_1.setText(answer1);
 		}
-		String answer2 = StoreUtil.getInstance().selectFrom("answer2_" +user_obj_id);
+		String answer2 = StoreUtil.getInstance().selectFrom("answer2_XBUQ7yk8Ig");
 		if(answer2 != null){
 			edt_answer_2.setText(answer2);
 		}
-		String answer3 = StoreUtil.getInstance().selectFrom("answer3_" +user_obj_id);
+		String answer3 = StoreUtil.getInstance().selectFrom("answer3_XBUQ7yk8Ig");
 		if(answer3 != null){
 			edt_answer_3.setText(answer3);
 		}
 		
-		if(groupUser.getAnswer().size() >= 1){
-			answer1Id = groupUser.getAnswer().get(0).getId();
-			SharedPreferences langRef = getSharedPreferences("mLanguage", MODE_PRIVATE); 
+		if(AnswerList.getAnswers().size() >= 1){
+			answer1Id = AnswerList.getAnswers().get(0).getId();
 			if(langRef.getString("lang","").equals("mm")){
-				edt_answer_1.setText(groupUser.getAnswer().get(0).getAnswerMm());		
+				edt_answer_1.setText(AnswerList.getAnswers().get(0).getAnswerMm());		
 			}else{
-				edt_answer_1.setText(groupUser.getAnswer().get(0).getAnswer());
+				edt_answer_1.setText(AnswerList.getAnswers().get(0).getAnswer());
 			}
 			edt_answer_1.setEnabled(false);
 		}
-		if(groupUser.getAnswer().size() >= 2){
-			answer2Id = groupUser.getAnswer().get(1).getId();
-			SharedPreferences langRef = getSharedPreferences("mLanguage", MODE_PRIVATE); 
+		if(AnswerList.getAnswers().size() >= 2){
+			answer2Id = AnswerList.getAnswers().get(1).getId();
 			if(langRef.getString("lang","").equals("mm")){
-				edt_answer_2.setText(groupUser.getAnswer().get(1).getAnswerMm());		
+				edt_answer_2.setText(AnswerList.getAnswers().get(1).getAnswerMm());		
 			}else{
-				edt_answer_2.setText(groupUser.getAnswer().get(1).getAnswer());
+				edt_answer_2.setText(AnswerList.getAnswers().get(1).getAnswer());
 			}
 			edt_answer_2.setEnabled(false);
 		}
-		if(groupUser.getAnswer().size() >= 3){
-			answer3Id = groupUser.getAnswer().get(2).getId();
-			SharedPreferences langRef = getSharedPreferences("mLanguage", MODE_PRIVATE); 
+		if(AnswerList.getAnswers().size() >= 3){
+			answer3Id = AnswerList.getAnswers().get(2).getId();
 			if(langRef.getString("lang","").equals("mm")){
-				edt_answer_3.setText(groupUser.getAnswer().get(2).getAnswerMm());		
+				edt_answer_3.setText(AnswerList.getAnswers().get(2).getAnswerMm());		
 			}else{
-				edt_answer_3.setText(groupUser.getAnswer().get(2).getAnswer());
+				edt_answer_3.setText(AnswerList.getAnswers().get(2).getAnswer());
 			}
 			edt_answer_3.setEnabled(false);
 			btn_save.setEnabled(false);
@@ -123,6 +119,7 @@ public class CompetitionSubmitAnswerActivity extends ActionBarActivity {
 		
 		btn_save.setOnClickListener(clickListener);
 		btn_submit.setOnClickListener(clickListener);
+		btn_go_back.setOnClickListener(clickListener);
 	}
 	
 	private View.OnClickListener clickListener = new View.OnClickListener() {
@@ -132,19 +129,23 @@ public class CompetitionSubmitAnswerActivity extends ActionBarActivity {
 			// TODO Auto-generated method stub
 			if(arg0 == btn_save){
 				if(edt_answer_1.getText().toString().trim().length() > 0){
-					StoreUtil.getInstance().saveTo("answer1_" +user_obj_id, edt_answer_1.getText().toString());
+					StoreUtil.getInstance().saveTo("answer1_XBUQ7yk8Ig", edt_answer_1.getText().toString());
 				}
 				if(edt_answer_2.getText().toString().trim().length() > 0){
-					StoreUtil.getInstance().saveTo("answer2_" +user_obj_id, edt_answer_2.getText().toString());
+					StoreUtil.getInstance().saveTo("answer2_XBUQ7yk8Ig", edt_answer_2.getText().toString());
 				}
 				if(edt_answer_3.getText().toString().trim().length() > 0){
-					StoreUtil.getInstance().saveTo("answer3_" +user_obj_id, edt_answer_3.getText().toString());
+					StoreUtil.getInstance().saveTo("answer3_XBUQ7yk8Ig", edt_answer_3.getText().toString());
 				}
 				SKToastMessage.showMessage(CompetitionSubmitAnswerActivity.this, "Successfully saved", SKToastMessage.SUCCESS);
+
 			}
 			
 			if(arg0 == btn_submit){
 				postCompetitionAnswer();
+			}
+			if(arg0 == btn_go_back){
+				onBackPressed();
 			}
 		}
 	};
@@ -165,7 +166,7 @@ public class CompetitionSubmitAnswerActivity extends ActionBarActivity {
 				edt_answer_3.getText().toString(), 
 				edt_answer_3.getText().toString(), 
 				competitionQuestion.getId(), 
-				groupUser.getId(), 
+				groupUserId,
 				new Callback<String>() {
 					
 					@Override
@@ -208,23 +209,4 @@ public class CompetitionSubmitAnswerActivity extends ActionBarActivity {
 	}
 	
 	
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.competition_submit_answer, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
 }

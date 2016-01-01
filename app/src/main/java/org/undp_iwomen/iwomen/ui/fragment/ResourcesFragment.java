@@ -1,11 +1,14 @@
 package org.undp_iwomen.iwomen.ui.fragment;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.provider.BaseColumns;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,16 +17,23 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RatingBar;
+import android.widget.TextView;
+
+import com.smk.clientapi.NetworkEngine;
+import com.smk.iwomen.BaseActionBarActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.data.ResourceItem;
+import org.undp_iwomen.iwomen.database.TableAndColumnsName;
 import org.undp_iwomen.iwomen.model.retrofit_api.ResourceAPI;
+import org.undp_iwomen.iwomen.provider.IwomenProviderData;
 import org.undp_iwomen.iwomen.ui.activity.SubResourceListActivity;
 import org.undp_iwomen.iwomen.ui.adapter.ResourcesListViewAdapter;
 import org.undp_iwomen.iwomen.utils.Connection;
@@ -31,7 +41,6 @@ import org.undp_iwomen.iwomen.utils.StorageUtil;
 import org.undp_iwomen.iwomen.utils.Utils;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -40,7 +49,7 @@ import retrofit.client.Response;
 /**
  * Created by khinsandar on 7/29/15.
  */
-public class ResourcesFragment extends Fragment implements AbsListView.OnScrollListener {
+public class ResourcesFragment extends Fragment  {
     public static final String ARG_MENU_INDEX = "index";
 
     private Context mContext;
@@ -51,6 +60,7 @@ public class ResourcesFragment extends Fragment implements AbsListView.OnScrollL
     SharedPreferences sharePrefLanguageUtil;
     String mstr_lang;
     String name[];
+    public Integer avgRatings;
 
     int[] randomImgMain = new int[]{R.drawable.idea
             , R.drawable.donors, R.drawable.law};
@@ -60,13 +70,9 @@ public class ResourcesFragment extends Fragment implements AbsListView.OnScrollL
     private StorageUtil storageUtil;
 
 
-    /*public int index = 1;
-    public int skipcount = 5;//10 , 20
-    public int skipLimit = 0;
-    public int countlimit = -1;
-    private boolean isloading = false;
-    private int TOTAL_ITEMS = 0;//100
-    View footer;*/
+    private int offsetlimit = 3;
+    private int skipLimit = 0;
+    private Menu menu;
 
 
     public ResourcesFragment() {
@@ -77,6 +83,7 @@ public class ResourcesFragment extends Fragment implements AbsListView.OnScrollL
     public void onActivityCreated(final Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         //storageUtil = StorageUtil.getInstance(getActivity().getApplicationContext());
+
     }
 
     @Override
@@ -94,12 +101,12 @@ public class ResourcesFragment extends Fragment implements AbsListView.OnScrollL
         mContext = getActivity().getApplicationContext();
         storageUtil = StorageUtil.getInstance(mContext);
 
-        LayoutInflater footerinflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        //LayoutInflater footerinflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         //footer = (View) inflater.inflate(R.layout.loading_layout, null);
 
         init(rootView);
 
-
+        getReview();
         return rootView;
     }
 
@@ -112,18 +119,37 @@ public class ResourcesFragment extends Fragment implements AbsListView.OnScrollL
 
         mstr_lang = sharePrefLanguageUtil.getString(com.parse.utils.Utils.PREF_SETTING_LANG, com.parse.utils.Utils.ENG_LANG);
 
-        ResourceItems = (ArrayList<ResourceItem>) storageUtil.ReadArrayListFromSD("ResourceArrayList");
 
-        Log.e("ResourceItems size", "===>" + ResourceItems.size());
 
-        //lvResouces.addFooterView(footer);
-        lvResouces.setOnScrollListener(this);
-        if (ResourceItems.size() > 0) {
-            adapter = new ResourcesListViewAdapter(getActivity().getApplicationContext(), ResourceItems, mstr_lang);
-            lvResouces.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
+
+        //When very start this fragment open , need to check db data
+        String selections = TableAndColumnsName.ResourceUtil.STATUS + "=?";
+        String[] selectionargs = {"0"};
+        Cursor cursor = getActivity().getContentResolver().query(IwomenProviderData.ResourceProvider.CONTETN_URI, null, selections, selectionargs, BaseColumns._ID + " DESC");//DESC
+
+
+        if (cursor.getCount() > 0) {
+            Log.e("cursor.getCount()", "===>" + cursor.getCount());
+            setupAdapter();
+
+
         } else {
-            getResourceDataFromSever();
+
+            if (Connection.isOnline(getActivity())) {
+                //getPostDataOrderByLikesDate();
+                getResourceDataFromSever();
+            } else {
+
+                mProgressDialog.dismiss();
+
+
+                if (mstr_lang.equals(Utils.ENG_LANG)) {
+                    Utils.doToastEng(mContext, getResources().getString(R.string.open_internet_warning_eng));
+                } else {
+
+                    Utils.doToastMM(mContext, getActivity().getResources().getString(R.string.open_internet_warning_mm));
+                }
+            }
         }
 
 
@@ -131,11 +157,7 @@ public class ResourcesFragment extends Fragment implements AbsListView.OnScrollL
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                /*if (i == 0) {
 
-                } else {
-                    Utils.doToastEng(mContext, "Coming soon!");
-                }*/
                 Intent intent = new Intent(mContext, SubResourceListActivity.class);
 
                 intent.putExtra("ResourceId", ResourceItems.get(i).getResourceId());
@@ -151,118 +173,280 @@ public class ResourcesFragment extends Fragment implements AbsListView.OnScrollL
 
     }
 
+
+    private void setupAdapter() {
+
+        if (getActivity().getApplicationContext() != null) {
+
+
+            //TODO ADMIN ACCOUNT POST FILTER
+            String selections = TableAndColumnsName.ResourceUtil.STATUS + "=?";
+            String[] selectionargs = {"0"};
+            Cursor cursor = getActivity().getContentResolver().query(IwomenProviderData.ResourceProvider.CONTETN_URI, null, selections, selectionargs, BaseColumns._ID + " DESC");//DESC
+
+            //Log.e("Set Up adapter cursor.getCount()", "===>" + cursor.getCount());
+            String id;
+            String resouceEng;
+            String resouceMM;
+            String iconPath;
+            ResourceItems.clear();
+            try {
+
+                if (cursor != null && cursor.moveToFirst()) {
+                    int i = 0;
+                    do {
+                        //Log.e("Set Up adapter cursor.moveToFirst()", "===>" + cursor.getString(cursor.getColumnIndex(TableAndColumnsName.ResourceUtil.RESOURCE_OBJ_ID)));
+
+                        id = cursor.getString(cursor.getColumnIndex(TableAndColumnsName.ResourceUtil.RESOURCE_OBJ_ID));
+
+                        resouceEng = cursor.getString(cursor.getColumnIndex(TableAndColumnsName.ResourceUtil.RESOURCE_TITLE_ENG));
+                        resouceMM = cursor.getString(cursor.getColumnIndex(TableAndColumnsName.ResourceUtil.RESOURCE_TITLE_MM));
+                        iconPath = cursor.getString(cursor.getColumnIndex(TableAndColumnsName.ResourceUtil.RESOURCE_LOGO_IMG_PATH));
+
+
+                        ResourceItem rI = new ResourceItem(id, resouceEng, resouceMM, iconPath);
+                        ResourceItems.add(rI);
+                        i++;
+                    } while (cursor.moveToNext());
+                }
+                cursor.close();
+
+                if (ResourceItems.size() > 0) {
+                    try {
+                        //Log.e("Set Up adapter ResourceItems", "===>" + ResourceItems.size());
+
+                        //storageUtil.SaveArrayListToSD("ResourceArrayList", ResourceItems);
+                        adapter = new ResourcesListViewAdapter(getActivity().getApplicationContext(), ResourceItems, mstr_lang);
+                        lvResouces.setAdapter(adapter);
+
+
+
+                    } catch (NullPointerException ex) {
+                        ex.printStackTrace();
+                    }
+                } else {
+
+                    mProgressDialog.dismiss();
+                }
+
+            } catch (IllegalStateException ex) {
+                ex.printStackTrace();
+            }
+
+        } else {
+            Log.e("ResourceFragment", "Activity Null Case");
+        }
+    }
+
     private void getResourceDataFromSever() {
         if (Connection.isOnline(mContext)) {
 
-            //skipLimit = skipcount * (index - 1); // 5
+            Cursor cursorMain = getActivity().getContentResolver().query(IwomenProviderData.ResourceProvider.CONTETN_URI, null, null, null, BaseColumns._ID + " DESC");
 
-            //Log.e("getServerData","===>" + skipLimit + "/count/" + skipcount);
+            if (cursorMain.getCount() > 0) {
 
-            String sCondition = "{\"isAllow\": true}";
-            mProgressDialog.show();
-            ResourceAPI.getInstance().getService().getResourceList("createdAt", 10, 0, sCondition,  new Callback<String>() {
-                @Override
-                public void success(String s, Response response) {
+                Log.e("Resource Row Count", "==>" + cursorMain.getCount());
 
-                    try {
+                //skipLimit = skipLimit + 10; // OLd way
+                skipLimit = cursorMain.getCount();// my way
 
-                        JSONObject whole_body = new JSONObject(s);
-                        JSONArray result = whole_body.getJSONArray("results");
+                Log.e("Resource Offset  Count", "==>" + offsetlimit + "/" + skipLimit);
+                mProgressDialog.show();//{"isAllow": true}
+                String sCondition = "{\"isAllow\": true}";
+                mProgressDialog.show();
+                ResourceAPI.getInstance().getService().getResourceList("createdAt", offsetlimit, skipLimit, sCondition, new Callback<String>() {
+                    @Override
+                    public void success(String s, Response response) {
 
-                        String id;
-                        String resouceEng;
-                        String resouceMM;
-                        String iconPath;
-                        ResourceItems.clear();
-                        for (int i = 0; i < result.length(); i++) {
-                            JSONObject each_object = result.getJSONObject(i);
+                        try {
 
-                            if (!each_object.isNull("objectId")) {
+                            JSONObject whole_body = new JSONObject(s);
+                            JSONArray result = whole_body.getJSONArray("results");
 
-                                id = each_object.getString("objectId");
+                            String id;
+                            String resouceEng;
+                            String resouceMM;
+                            String iconPath;
+                            for (int i = 0; i < result.length(); i++) {
+                                JSONObject each_object = result.getJSONObject(i);
+                                final ContentValues cv = new ContentValues();
+                                if (!each_object.isNull("objectId")) {
 
-                            } else {
-                                id = "";
+                                    id = each_object.getString("objectId");
+
+
+                                } else {
+                                    id = "";
+                                }
+
+                                if (!each_object.isNull("resource_title_eng")) {
+
+                                    resouceEng = each_object.getString("resource_title_eng");
+
+                                } else {
+                                    resouceEng = "";
+                                }
+                                if (!each_object.isNull("resource_title_mm")) {
+
+                                    resouceMM = each_object.getString("resource_title_mm");
+
+                                } else {
+                                    resouceMM = "";
+                                }
+
+                                if (!each_object.isNull("resource_icon_img")) {
+
+                                    JSONObject imgjsonObject = each_object.getJSONObject("resource_icon_img");
+                                    if (!imgjsonObject.isNull("url")) {
+
+                                        iconPath = imgjsonObject.getString("url");
+                                    } else {
+                                        iconPath = "";
+                                    }
+
+
+                                } else {
+                                    iconPath = "";
+                                }
+
+                                cv.put(TableAndColumnsName.ResourceUtil.RESOURCE_OBJ_ID, id);
+                                cv.put(TableAndColumnsName.ResourceUtil.RESOURCE_TITLE_ENG, resouceEng);
+                                cv.put(TableAndColumnsName.ResourceUtil.RESOURCE_TITLE_MM, resouceMM);
+                                cv.put(TableAndColumnsName.ResourceUtil.RESOURCE_LOGO_IMG_PATH, iconPath);
+
+
+
+                                cv.put(TableAndColumnsName.ResourceUtil.STATUS, "0");
+                                cv.put(TableAndColumnsName.ResourceUtil.CREATED_DATE, each_object.get("createdAt").toString());// post.get("postUploadedDate").toString() //post.getCreatedAt().toString()
+                                cv.put(TableAndColumnsName.ResourceUtil.UPDATED_DATE, each_object.get("updatedAt").toString());
+
+
+                                Log.e("saveResourceLocal : ", "= = = = = = = : " + cv.toString());
+
+
+                                getActivity().getContentResolver().insert(IwomenProviderData.ResourceProvider.CONTETN_URI, cv);
+
                             }
 
-                            if (!each_object.isNull("resource_title_eng")) {
 
-                                resouceEng = each_object.getString("resource_title_eng");
+                            setupAdapter();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.e("JSON err", "==>" + e.toString());
+                        }
+                        mProgressDialog.dismiss();
 
-                            } else {
-                                resouceEng = "";
-                            }
-                            if (!each_object.isNull("resource_title_mm")) {
+                    }
 
-                                resouceMM = each_object.getString("resource_title_mm");
+                    @Override
+                    public void failure(RetrofitError error) {
+                        Log.e("error", "==" + error);
+                        mProgressDialog.dismiss();
+                    }
+                });
 
-                            } else {
-                                resouceMM = "";
-                            }
+            } else {
+                mProgressDialog.show();
+                Log.e("First Time Offset Range Count", "==>" + offsetlimit + "/" + skipLimit);//where={"isAllow": true}
 
-                            if (!each_object.isNull("resource_icon_img")) {
+                String sCondition = "{\"isAllow\": true}";
+                mProgressDialog.show();
+                ResourceAPI.getInstance().getService().getResourceList("createdAt", offsetlimit, skipLimit, sCondition, new Callback<String>() {
+                    @Override
+                    public void success(String s, Response response) {
 
-                                JSONObject imgjsonObject = each_object.getJSONObject("resource_icon_img");
-                                if (!imgjsonObject.isNull("url")) {
+                        try {
 
-                                    iconPath = imgjsonObject.getString("url");
+                            JSONObject whole_body = new JSONObject(s);
+                            JSONArray result = whole_body.getJSONArray("results");
+
+                            String id;
+                            String resouceEng;
+                            String resouceMM;
+                            String iconPath;
+
+
+                            for (int i = 0; i < result.length(); i++) {
+                                JSONObject each_object = result.getJSONObject(i);
+
+                                final ContentValues cv = new ContentValues();
+                                if (!each_object.isNull("objectId")) {
+
+                                    id = each_object.getString("objectId");
+
+                                } else {
+                                    id = "";
+                                }
+
+                                if (!each_object.isNull("resource_title_eng")) {
+
+                                    resouceEng = each_object.getString("resource_title_eng");
+
+                                } else {
+                                    resouceEng = "";
+                                }
+                                if (!each_object.isNull("resource_title_mm")) {
+
+                                    resouceMM = each_object.getString("resource_title_mm");
+
+                                } else {
+                                    resouceMM = "";
+                                }
+
+                                if (!each_object.isNull("resource_icon_img")) {
+
+                                    JSONObject imgjsonObject = each_object.getJSONObject("resource_icon_img");
+                                    if (!imgjsonObject.isNull("url")) {
+
+                                        iconPath = imgjsonObject.getString("url");
+                                    } else {
+                                        iconPath = "";
+                                    }
+
+
                                 } else {
                                     iconPath = "";
                                 }
 
 
-                            } else {
-                                iconPath = "";
+                                cv.put(TableAndColumnsName.ResourceUtil.RESOURCE_OBJ_ID, id);
+                                cv.put(TableAndColumnsName.ResourceUtil.RESOURCE_TITLE_ENG, resouceEng);
+                                cv.put(TableAndColumnsName.ResourceUtil.RESOURCE_TITLE_MM, resouceMM);
+                                cv.put(TableAndColumnsName.ResourceUtil.RESOURCE_LOGO_IMG_PATH, iconPath);
+
+
+
+                                cv.put(TableAndColumnsName.ResourceUtil.STATUS, "0");
+                                cv.put(TableAndColumnsName.ResourceUtil.CREATED_DATE, each_object.get("createdAt").toString());// post.get("postUploadedDate").toString() //post.getCreatedAt().toString()
+                                cv.put(TableAndColumnsName.ResourceUtil.UPDATED_DATE, each_object.get("updatedAt").toString());
+
+
+                                //Log.e("SaveResourceLocal : ", "= = = = = = = : " + cv.toString());
+
+
+                                getActivity().getContentResolver().insert(IwomenProviderData.ResourceProvider.CONTETN_URI, cv);
+
                             }
 
 
-                            ResourceItem rI = new ResourceItem(id, resouceEng, resouceMM, iconPath);
-                            ResourceItems.add(rI);
+                            setupAdapter();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.e("JSON err", "==>" + e.toString());
                         }
+                        mProgressDialog.dismiss();
 
-
-
-
-                        if (ResourceItems.size() > 0) {
-                            try {
-                                storageUtil.SaveArrayListToSD("ResourceArrayList", ResourceItems);
-                                adapter = new ResourcesListViewAdapter(getActivity().getApplicationContext(), ResourceItems, mstr_lang);
-                                lvResouces.setAdapter(adapter);
-
-                                /*if (adapter.getCount() == TOTAL_ITEMS || ResourceItems.size() == TOTAL_ITEMS) {
-                                    //header.setText("All " + adapter.getCount() + " Items are loaded.");
-                                    lvResouces.setOnScrollListener(null);
-                                    lvResouces.removeFooterView(footer);
-                                    isloading = true;
-
-                                    //For calling Menu item click
-                                    ((AppCompatActivity) getActivity()).supportInvalidateOptionsMenu();
-                                }else{
-                                    isloading = false;
-                                }
-                                index++;*/
-
-                            } catch (NullPointerException ex) {
-                                ex.printStackTrace();
-                            }
-                        } else {
-
-                            mProgressDialog.dismiss();
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        Log.e("JSON err", "==>" + e.toString());
                     }
-                    mProgressDialog.dismiss();
 
-                }
+                    @Override
+                    public void failure(RetrofitError error) {
+                        Log.e("error", "==" + error);
+                        mProgressDialog.dismiss();
+                    }
+                });
 
-                @Override
-                public void failure(RetrofitError error) {
-                    Log.e("error", "==" + error);
-                    mProgressDialog.dismiss();
-                }
-            });
+            }
+
 
         } else {
             //Utils.doToast(mContext, "Internet Connection need!");
@@ -281,9 +465,9 @@ public class ResourcesFragment extends Fragment implements AbsListView.OnScrollL
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
 
-
         inflater.inflate(R.menu.refresh_menu, menu);
-
+        this.menu = menu;
+        this.menu.findItem(R.id.action_rating).setVisible(false);
 
     }
 
@@ -296,143 +480,56 @@ public class ResourcesFragment extends Fragment implements AbsListView.OnScrollL
             case R.id.action_refresh:
                 getResourceDataFromSever();
                 return true;
+            case R.id.action_rating:
+                showReviewDetailDialog();
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    @Override
-    public void onScrollStateChanged(AbsListView absListView, int i) {
-
-    }
-
-    @Override
-    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-        int loadedItems = firstVisibleItem + visibleItemCount;
-        //Log.e("///ON Scroll//", "==>" + loadedItems + "/" + totalItemCount + isloading + index + "/" + countlimit);
-        /*if (!isloading) {
-            if ((loadedItems >= totalItemCount) && index <= countlimit && index != 1) {
-
-                Log.e("///ON Scroll Load Query//", "==>" + loadedItems + "/" + totalItemCount + isloading + index + "/" + countlimit);
-
-                isloading = true;
-                getResourceDataFromSever();
-                //Toast.makeText(getActivity().getApplicationContext(),"On Scroll" + index + "limit" + countlimit,Toast.LENGTH_SHORT).show();
-                //setQueryTripArrayList(strDate, FromLocationList, ToLocationList);
-
-            }
-        }*/
-    }
-
-    /**
-     * Background Async Task to Load all tracks under one album
-     */
-    class LoadData extends AsyncTask<String, String, String> {
-
-        ProgressDialog pDialog;
+    public void getReview(){
+        NetworkEngine.getInstance().getReview("Be Knowledgeable", new Callback<Integer>() {
 
 
-        int[] randomImg = new int[]{R.drawable.idea
-                , R.drawable.donors, R.drawable.law};
-
-        private Random randomGenerator;
-
-        //public  DatabaseManager dbmanager;
-        ArrayList<ResourceItem> arraylist_BuildingInfo = new ArrayList<ResourceItem>();
-
-        /**
-         * Before starting background thread Show Progress Dialog
-         */
-
-        protected void onPreExecute() {
-            super.onPreExecute();
-            pDialog = new ProgressDialog(getActivity());
-            pDialog.setMessage("Loading Data ...");
-            pDialog.setIndeterminate(false);
-            pDialog.setCancelable(false);
-            pDialog.show();
-        }
-
-        /**
-         * getting tracks json and parsing
-         */
-        protected String doInBackground(String... args) {
-            // Building Parameters
-
-
-            try {
-
-
-            } catch (Exception e) {
-                e.printStackTrace();
+            @Override
+            public void success(Integer arg0, Response response) {
+                menu.findItem(R.id.action_rating).setVisible(true);
+                menu.findItem(R.id.action_rating).setIcon(BaseActionBarActivity.getRatingIcon(arg0));
+                avgRatings = arg0;
             }
 
-            // Fiexed Data Categories
-            return null;
-        }
+            @Override
+            public void failure(RetrofitError error) {
 
-        /**
-         * After completing background task Dismiss the progress dialog
-         **/
-        protected void onPostExecute(String file_url) {
-            // dismiss the dialog after getting all tracks
-            pDialog.dismiss();
-            // updating UI from Background Thread
-            getActivity().runOnUiThread(new Runnable() {
-                public void run() {
-
-
-                    /**
-                     * Updating parsed JSON data into ListView
-                     * */
-
-                    //DatabaseManager dbmanager = new DatabaseManager(getApplicationContext());
-                    randomGenerator = new Random();
-                    try {
-
-                        String name[] = new String[]{
-                                "ေရေဘးအတ\u103Cက္\u1080ကိ\u1033တင္\u103Bပင္ဆင္\u103Bခင္း\n", "Important Flood Clean-Up Tips",
-                                "DIY Home Decoration Tip", " Building-D"};
-                        String text[] = new String[]{"ေရေဘးအတ\u103Cက္\u1080ကိ\u1033တင္\u103Bပင္ဆင္\u103Bခင္း\n" +
-                                "(၁)ေရမ\u1080ကီးမီ ေဆာင္ရ\u103Cက္ရမည့္အခ\u103Aက္မ\u103Aား။\n" +
-                                "    (က) မိုုးေလ၀သ သတင္းကိုုဂရုု\u103Bပ\u1033နားေထာင္ပ\u102B။\t\n" +
-                                "(ခ)ေရေဘးမ\u103D လ\u103Cတ္ကင္းနိုုင္သည့္အခိုုင္အမာအေဆာက္အအံုုမ\u103Aား၊ကုုန္း\u103Bမင့္မ\u103Aား \u1080ကိ\u1033တင္သတ္မ\u103Dတ္ထားပ\u102B၊\n" +
-                                "(ဂ)သတ္မ\u103Dတ္ေနရာမ\u103Aားသိုု\u1095 ေရာက္ရ\u103Dိမည့္ ေ\u103Bပးလမ္းေ\u1080ကာင္းမ\u103Aား \u1080ကိ\u1033တင္ေရ\u103Cးခ\u103Aယ္ထားပ\u102B။\n" +
-                                "(ဃ)ေရတ\u103Cင္ေပ\u105Aနိုုင္သည့္ င\u103Dက္ေပ\u103Aာပင္ကဲ့သိုု\u1095အပင္မ\u103Aား စိုုက္ပ\u103Aိ\u1034းထားပ\u102B၊\n" +
-                                "(င)အေရး\u1080ကီးစာရ\u103Cက္စာတမ္းမ\u103Aား ေရမစိုုနိုုင္ေအာင္ ပလက္စတစ္\u103Bဖင့္ ေသခ\u103Aာစ\u103Cာထုုပ္ပိုုးထားပ\u102B။\n" +
-                                "(စ)အ၀တ္အစား၊ အစားအေသာက္၊ ေဆး၀\u102Bး၊ ဓာတ္မီး၊ မီး\u103Bခစ္၊ ဖေယာင္းတိုုင္ စသည့္ ပစည္းမ\u103Aား အသင့္ေဆာင္ထားပ\u102B။\n" +
-                                "(ဆ)သယ္ယူပိုု\u1095ေဆာင္သ\u103Cားလာေရးအတ\u103Cက္ ေလ\u103D၊ ပဲ့ေထာင္၊ ေမာ္ေတာ္၊ စက္သံုုးဆီ စသည္မ\u103Aား \u1080ကိ\u1033တင္စီစဥ္ထားပ\u102B၊\n" +
-                                "(ဇ) ေဘးအ\u108Fရာယ္ \u1080ကိ\u1033တင္\u103Bပင္ဆင္မ\u1088မ\u103Aားတ\u103Cင္ ပူးေပ\u102Bင္းပ\u102B၀င္ ေဆာင္ရ\u103Cက္ပ\u102B။\n" +
-                                "\n" +
-                                "(၂)ေရ\u1080ကီး\u103Bခင္း သတိေပးခ\u103Aက္ ရရ\u103Dိပ\u102Bက ေဆာင္ရ\u103Cက္ရန္အခ\u103Aက္မ\u103Aား\n" +
-                                "\n" +
-                                "(က)အစားအစာ၊ ေဆး၀\u102Bး၊ ေသာက္ေရတိုု\u1095န\u103Dင့္အတူ လံုု\u103Bခံ\u1033စိတ္ခ\u103Aရေသာ အေဆာက္အအံုုန\u103Dင့္ ကုုန္းေ\u103Bမ\u103Bပင္ေပ\u105Aသိုု\u1095 အခ\u103Aိန္မီေရ\u103C\u1095ေ\u103Bပာင္းပ\u102B။\n" +
-                                "(ခ)သစ္တံုုး၊ ၀\u102Bးေဖာင္ငယ္၊ ကားတာယာက\u107D\u103Cတ္၊ ေဗာက\u103Cင္း၊ လုူတစ္ဦးဖက္တ\u103Cယ္နိုုင္သည့္ ၀\u102Bးပိုုး၊ ၀\u102Bးအဆစ္ပိတ္မ\u103Aား ေဆာင္ထားပ\u102B။\n" +
-                                "(ဂ) ကေလးငယ္မ\u103Aားအား ေရစီးတ\u103Cင္ေမ\u103Aာပ\u102Bမည္စိုုးသ\u103Bဖင့္ \u1080ကိ\u1033း\u103Bဖင့္ခ\u103Aည္ေ\u108F\u103Dာင္ထား\u103Bခင္းမ\u103Aိ\u1033း မိသားစုုလိုုက္ ခ\u103Aည္ေန\u103Dာင္ထား\u103Bခင္းမ\u103Aိ\u1033းေရ\u103Dာင္ရ\u103Dားပ\u102B။\n" +
-                                "( ဃ)ေရေဘးအ\u108Fရာယ္သတိေပးခ\u103Aက္ ရရ\u103Dိပ\u102Bက ပင္လယ္ကမ္းေ\u103Bခေဒသမ\u103Aား၊ အနိမ့္ပိုုင္းေဒသမ\u103Aား၊ လယ္က\u103Cင္း\u103Bပင္မ\u103Aားတ\u103Cင္ ေနထုုိင္\u103Bခင္းမ\u103D ေရ\u103Dာင္ရ\u103Dားပ\u102B။\n" +
-                                "(င)\u103Bမစ္ေခ\u103Aာင္း၊ ကမ္းပ\u102Bး ေ\u103Bမ\u103Bပိ\u1033နိုုင္သည့္ေဒသမ\u103Aားသိုု\u1095 သ\u103Cားလာ\u103Bခင္းမ\u103D ေရ\u103Dာင္ရ\u103Dားပ\u102B၊", " If you have experienced any water accumulation in your home, it is important to remember that not all water damage is visible. Since flood water may contain bacteria that can cause serious illnesses, it is vital to clean and disinfect everything that may have been contaminated."
-                                , "Address C", " Address D"
-                        };
-
-                        int index = randomGenerator.nextInt(randomImg.length);
-                        arraylist_BuildingInfo.clear();
-                        /*for(int i = 0 ; i < randomImg.length ; i ++){
-                            ResourceItem rI = new ResourceItem(name[i], text[i],  randomImg[i] );
-                            arraylist_BuildingInfo.add(rI);
-                        }
-                        adapter = new ResourcesListViewAdapter(getActivity().getApplicationContext(), arraylist_BuildingInfo);
-                        lvResouces.setAdapter(adapter);*/
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-
-                }
-            });
-
-        }
-
+            }
+        });
     }
+
+    public void showReviewDetailDialog(){
+        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+        View convertView = View.inflate(getActivity(),R.layout.dialog_reviews_detial,null);
+        TextView txt_avg_title = (TextView ) convertView.findViewById(R.id.txt_avg_title);
+        RatingBar avg_ratings = (RatingBar) convertView.findViewById(R.id.avg_ratings);
+        TextView txt_avg_ratings = (TextView) convertView.findViewById(R.id.txt_avg_ratings);
+        Button btn_ok = (Button)convertView.findViewById(R.id.btn_ok);
+        alertDialog.setView(convertView);
+
+        txt_avg_title.setText("Be Knowledgeable");
+        avg_ratings.setRating(avgRatings);
+        txt_avg_ratings.setText(BaseActionBarActivity.getRatingDesc(avgRatings) + ": " + avgRatings + "/5 Ratings");
+
+        final AlertDialog ad = alertDialog.show();
+
+        btn_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ad.dismiss();
+            }
+        });
+    }
+
+
+
 
 
 }

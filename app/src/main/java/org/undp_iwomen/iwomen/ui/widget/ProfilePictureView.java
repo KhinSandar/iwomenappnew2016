@@ -59,7 +59,7 @@ public class ProfilePictureView extends FrameLayout {
     private ImageView image;
     private int presetSizeType = -1;
     private ImageRequest lastRequest;
-    private ProfilePictureView.OnErrorListener onErrorListener;
+    private OnErrorListener onErrorListener;
     private Bitmap customizedDefaultProfilePicture = null;
 
     public ProfilePictureView(Context context) {
@@ -121,11 +121,11 @@ public class ProfilePictureView extends FrameLayout {
         this.refreshImage(force);
     }
 
-    public final ProfilePictureView.OnErrorListener getOnErrorListener() {
+    public final OnErrorListener getOnErrorListener() {
         return this.onErrorListener;
     }
 
-    public final void setOnErrorListener(ProfilePictureView.OnErrorListener onErrorListener) {
+    public final void setOnErrorListener(OnErrorListener onErrorListener) {
         this.onErrorListener = onErrorListener;
     }
 
@@ -206,7 +206,7 @@ public class ProfilePictureView extends FrameLayout {
     private void initialize(Context context) {
         this.removeAllViews();
         this.image = new ImageView(context);
-        android.widget.FrameLayout.LayoutParams imageLayout = new android.widget.FrameLayout.LayoutParams(-1, -1);
+        LayoutParams imageLayout = new LayoutParams(-1, -1);
         this.image.setLayoutParams(imageLayout);
         this.image.setScaleType(ScaleType.CENTER_INSIDE);
         this.addView(this.image);
@@ -276,7 +276,7 @@ public class ProfilePictureView extends FrameLayout {
             Bitmap responseImage = response.getBitmap();
             Exception error = response.getError();
             if(error != null) {
-                ProfilePictureView.OnErrorListener listener = this.onErrorListener;
+                OnErrorListener listener = this.onErrorListener;
                 if(listener != null) {
                     listener.onError(new FacebookException("Error in downloading profile picture for profileId: " + this.getProfileId(), error));
                 } else {

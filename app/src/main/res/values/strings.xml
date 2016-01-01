@@ -86,6 +86,9 @@
     <string name="post_detail_share_post_mm">ရွဲမွ်ေ၀ပါသည္။</string>
     <string name="post_detail_share_post_eng">Share This Post</string>
 
+
+    <string name="post_detail_share_post">Share This Post</string>
+
     <string name="post_detail_like_post_mm">ကိဳက္ႏွစ္သက္ပါသည္။ </string>
     <string name="post_detail_like_post_eng">Like This Post</string>
 
@@ -103,9 +106,10 @@
     <string name="i_agree_mm">မွတ္ပံုုတင္အခ်က္ အလက္မ်ားကိုုသေဘာတူပါသည္ <a href="https://www.facebook.com/UndpMyanmar"></a></string>
 
 
-    <string name="signup_tlg_member_exit_mm">TLG အဖြဲ ့၀င္ၿဖစ္လ်င္အမွန္ၿခစ္ လုုပ္ပါ</string>
-    <string name="signup_tlg_member_exit_eng">I am TLG member</string>
+    <string name="signup_tlg_member_exit_mm">TLG (သိုု့) SRG အဖြဲ ့၀င္ၿဖစ္လ်င္အမွန္ၿခစ္ လုုပ္ပါ</string>
+    <string name="signup_tlg_member_exit_eng">I am a TLG or SRG member</string>
 
+    <string name="signup_tlg_member_exit">I am a TLG or SRG member</string>
     <string name="success">Success</string>
     <string name="successfully_posted_post">Post ID: %1$s</string>
     <string name="error">Error</string>
@@ -198,7 +202,7 @@
     <string name="competition_congratulation">CONGRATULATIONS!!!</string>
     <string name="competition_winner">WINNER</string>
     <string name="competition_winning_answer">Winning Answers</string>
-    <string name="competition_answer_1">Answer 1</string>
+    <string name="competition_answer_1">Answer: </string>
     <string name="competition_answer_2">Answer 2</string>
     <string name="competition_answer_3">Answer 3</string>
     <string name="competition_save">Save</string>
@@ -210,8 +214,10 @@
     <string name="competition_answer_hit_1">Type your answer 1 here</string>
     <string name="competition_answer_hit_2">Type your answer 2 here</string>
     <string name="competition_answer_hit_3">Type your answer 3 here</string>
-    <string name="competition_go_to_answer">Go to My Answers</string>
-    <string name="competition_compelete">Congratulation, Have a good luck!</string>
+    <string name="competition_go_to_answer">GO TO MY ANSWERS</string>
+    <string name="competition_enter_the_answer">ENTER MY ANSWERS</string>
+    <string name="competition_go_to_group_answer">GO TO MY GROUP</string>
+    <string name="competition_compelete">CONGRATULATIONS! Good luck!</string>
     <string name="competition_day">Days</string>
     <string name="competition_hour">Hours</string>
     <string name="competition_minute">Minutes</string>
@@ -220,10 +226,24 @@
     <string name="competition_finished">Finished</string>
     <string name="competition_play_game">Ready To Play ?</string>
     <string name="competition_discover_winner">Discover Who is the WINNER</string>
+    <string name="competition_how_to_play_game">How to Play The Game</string>
     <string name="title_activity_competition_new_game">CompetitionNewGameActivity</string>
     <string name="title_activity_competition_winner_group">Competition Winner Group</string>
     <string name="title_activity_competition_submit_answer">Competition Submit Answer</string>
     <string name="title_activity_competition_group_user">CompetitionGroupUserActivity</string>
     <string name="title_activity_game_over">GameOverActivity</string>
+
+    <string name="edit_profile_btn_cancel">CANCEL</string>
+    <string name="edit_profile_btn_next_tlg_edit">To edit a TLG or SRG info!</string>
+
+    <string name="edit_profile_tlg_township">Township</string>
+    <string name="str_rating_reviews">Please rate the functions !</string>
+    <string name="str_be_inspired">Be Inspired</string>
+    <string name="str_be_knowledgeable">Be Knowledgeable</string>
+    <string name="str_be_together">Be Together</string>
+    <string name="str_talk_together">Talk Together</string>
+    <string name="str_ok">OK</string>
+    <string name="str_not_now">Not Now</string>
+    <string name="title_activity_audio_recording">Audio Recording</string>
 
 </resources>

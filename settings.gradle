@@ -1,2 +1,4 @@
-include ':app', ':ParseLoginUI', ':library', ':emojiicon'
+include ':app', ':ParseLoginUI', ':library', ':emojiicon', ':RecordingMediaFile'
 include ':sKAlertMessage'
+
+include ':shimmerTextView'

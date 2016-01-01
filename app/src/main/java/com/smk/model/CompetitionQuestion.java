@@ -3,6 +3,9 @@ package com.smk.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CompetitionQuestion {
 
 @SerializedName("id")
@@ -23,6 +26,21 @@ private String descriptionMm;
 @SerializedName("instruction_about_game")
 @Expose
 private String instructionAboutGame;
+@SerializedName("instruction_about_game_mm")
+@Expose
+private String instructionAboutGameMm;
+@SerializedName("group_description")
+@Expose
+private String groupDescription;
+@SerializedName("group_description_mm")
+@Expose
+private String groupDescriptionMm;
+@SerializedName("answer_submit_description")
+@Expose
+private String answerSubmitDescription;
+@SerializedName("answer_submit_description_mm")
+@Expose
+private String answerSubmitDescriptionMm;
 @SerializedName("start_date")
 @Expose
 private String startDate;
@@ -46,7 +64,7 @@ private String createdAt;
 private String updatedAt;
 @SerializedName("correct_answer")
 @Expose
-private CorrectAnswer correctAnswer;
+private List<CorrectAnswer> correctAnswer = new ArrayList<CorrectAnswer>();
 @SerializedName("group_user")
 @Expose
 private GroupUser groupUser;
@@ -163,6 +181,95 @@ public void setInstructionAboutGame(String instructionAboutGame) {
 this.instructionAboutGame = instructionAboutGame;
 }
 
+/**
+* 
+* @return
+* The instructionAboutGame
+*/
+public String getInstructionAboutGameMm() {
+return instructionAboutGameMm;
+}
+
+/**
+* 
+* @param instructionAboutGame
+* The instruction_about_game
+*/
+public void setInstructionAboutGameMm(String instructionAboutGameMm) {
+this.instructionAboutGameMm = instructionAboutGameMm;
+}
+
+/**
+ *
+ * @return
+ * The groupDescription
+ */
+public String getGroupDescription() {
+    return groupDescription;
+}
+
+/**
+ *
+ * @param groupDescription
+ * The group_description
+ */
+public void setGroupDescription(String groupDescription) {
+    this.groupDescription = groupDescription;
+}
+
+/**
+ *
+ * @return
+ * The groupDescriptionMm
+ */
+public String getGroupDescriptionMm() {
+    return groupDescriptionMm;
+}
+
+/**
+ *
+ * @param groupDescriptionMm
+ * The group_description_mm
+ */
+public void setGroupDescriptionMm(String groupDescriptionMm) {
+    this.groupDescriptionMm = groupDescriptionMm;
+}
+
+/**
+ *
+ * @return
+ * The answerSubmitDescription
+ */
+public String getAnswerSubmitDescription() {
+    return answerSubmitDescription;
+}
+
+/**
+ *
+ * @param answerSubmitDescription
+ * The answer_submit_description
+ */
+public void setAnswerSubmitDescription(String answerSubmitDescription) {
+    this.answerSubmitDescription = answerSubmitDescription;
+}
+
+/**
+ *
+ * @return
+ * The answerSubmitDescriptionMm
+ */
+public String getAnswerSubmitDescriptionMm() {
+    return answerSubmitDescriptionMm;
+}
+
+/**
+ *
+ * @param answerSubmitDescriptionMm
+ * The answer_submit_description_mm
+ */
+public void setAnswerSubmitDescriptionMm(String answerSubmitDescriptionMm) {
+    this.answerSubmitDescriptionMm = answerSubmitDescriptionMm;
+}
 /**
 * 
 * @return
@@ -290,21 +397,21 @@ this.updatedAt = updatedAt;
 }
 
 /**
-* 
-* @return
-* The correctAnswer
-*/
-public CorrectAnswer getCorrectAnswer() {
-return correctAnswer;
+ *
+ * @return
+ * The correctAnswer
+ */
+public List<CorrectAnswer> getCorrectAnswer() {
+    return correctAnswer;
 }
 
 /**
-* 
-* @param correctAnswer
-* The correct_answer
-*/
-public void setCorrectAnswer(CorrectAnswer correctAnswer) {
-this.correctAnswer = correctAnswer;
+ *
+ * @param correctAnswer
+ * The correct_answer
+ */
+public void setCorrectAnswer(List<CorrectAnswer> correctAnswer) {
+    this.correctAnswer = correctAnswer;
 }
 
 /**
@@ -342,5 +449,6 @@ return nextQuestion;
 public void setNextQuestion(NextQuestion nextQuestion) {
 this.nextQuestion = nextQuestion;
 }
+
 
 }

@@ -3,6 +3,7 @@ package org.undp_iwomen.iwomen.manager;
 import android.app.Application;
 import android.util.Log;
 
+import com.alexbbb.uploadservice.UploadService;
 import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseException;
@@ -53,7 +54,7 @@ public class MainApplication extends Application {
         ParseACL defaultACL = new ParseACL();
         ParseACL.setDefaultACL(defaultACL, true);
 
-
+        UploadService.NAMESPACE = "org.undp_iwomen.iwomen";
 
 
         // Associate the device with a user

@@ -1,8 +1,0 @@
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item android:state_pressed="true" android:drawable="@color/theme_primary"/>
-    <item android:state_focused="true" android:drawable="@color/theme_primary"/>
-    <item android:drawable="@color/theme_primary_light"/>
-
-</selector>
-<!-- From: file:/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/ParseLoginUI/res/drawable/com_parse_ui_parse_signup_button_background_selector.xml --><!-- From: file:/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/ParseLoginUI/build/intermediates/bundles/debug/res/drawable/com_parse_ui_parse_signup_button_background_selector.xml -->

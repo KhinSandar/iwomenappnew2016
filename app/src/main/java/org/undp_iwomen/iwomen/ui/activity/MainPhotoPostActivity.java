@@ -1,5 +1,6 @@
 package org.undp_iwomen.iwomen.ui.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,6 +9,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.model.MyTypeFace;
@@ -102,10 +104,20 @@ public class MainPhotoPostActivity extends ActionBarActivity {
             }
 
         }
-
-
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch(requestCode) {
+            case (100) : {
+                if (resultCode == Activity.RESULT_OK) {
+                    Toast.makeText(getApplicationContext(),data.getStringExtra("audio_file_name"), Toast.LENGTH_LONG ).show();
+                }
+                break;
+            }
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

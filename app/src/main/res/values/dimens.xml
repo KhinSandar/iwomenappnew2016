@@ -42,6 +42,7 @@
 
     <dimen name="vertical_margin_1">50dp</dimen>
     <dimen name="vertical_margin_2">30dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 
 
 </resources>

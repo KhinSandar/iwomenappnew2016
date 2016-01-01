@@ -75,6 +75,14 @@ public class Comment extends ParseObject {
         put("user_name", user_name);
     }
 
+    public String getUserImgPathName() {
+        return getString("user_img_path");
+    }
+
+    public void setUserImgPathName(String user_img) {
+        put("user_img_path", user_img);
+    }
+
     public void setUserId(String userId) {
         put("userId", ParseObject.createWithoutData("_User", userId));
     }

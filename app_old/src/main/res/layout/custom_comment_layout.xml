@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:layout_margin="8dp">
+
+    <org.undp_iwomen.iwomen.ui.widget.ProfilePictureView
+        android:id="@+id/custom_comment_profilepicture"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="8dp"/>
+
+    <TextView
+        android:id="@+id/custom_comment_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:text="Khin Khin"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_toRightOf="@id/custom_comment_profilepicture"/>
+
+    <com.algo.hha.emojiicon.EmojiconTextView
+        android:id="@+id/custom_comment_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Thanks for sharing"
+
+        android:layout_below="@id/custom_comment_name"
+        android:layout_toRightOf="@id/custom_comment_profilepicture" />
+
+    <TextView
+        android:id="@+id/custom_comment_timestamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="30 mins ago"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@id/custom_comment_message"/>
+
+</RelativeLayout>

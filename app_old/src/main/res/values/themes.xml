@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.Iwomen.Base" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="actionBarIconColor">#fff</item>
+        <item name="popupItemBackground">?android:selectableItemBackground</item>
+        <item name="photoItemForeground">?android:selectableItemBackground</item>
+
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="android:windowBackground">@color/theme_window_background</item>
+        <item name="windowActionBar">false</item>
+
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="windowNoTitle">true</item>
+
+        <item name="colorControlNormal">#e0e0e0</item>
+        <item name="colorControlActivated">#e5e5e5</item>
+        <!--<item name="colorControlHighlight">#ff0097</item> --><!-- for testing highlight -->
+    </style>
+
+    <style name="Theme.Iwomen" parent="Theme.Iwomen.Base"/>
+
+    <style name="Theme.Iwomen.TicketDetails" parent="Theme.Iwomen">
+        <item name="colorControlActivated">@color/primary</item>
+    </style>
+
+    <style name="Theme.Iwomen.SignUp" parent="Theme.Iwomen">
+        <item name="colorControlNormal">@color/body_text_3</item>
+        <item name="colorControlActivated">@color/primary</item>
+        <item name="android:textColorHint">#61000000</item>
+        <item name="android:textColor">@color/body_text_2</item>
+    </style>
+
+    <style name="ActionBar.TitleText" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">#fff</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+
+    <style name="ActionBarThemeOverlay" parent="">
+        <item name="android:textColorPrimary">#fff</item>
+        <item name="colorControlNormal">?actionBarIconColor</item>
+        <item name="colorControlHighlight">#3fff</item>
+    </style>
+
+    <style name="ActionBarThemeOverlay.Translucent" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:windowActionBarOverlay">true</item>
+
+        <!-- Support Library compatability -->
+        <item name="windowActionBarOverlay">true</item>
+    </style>
+
+    <style name="ActionBarPopupThemeOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+</resources>

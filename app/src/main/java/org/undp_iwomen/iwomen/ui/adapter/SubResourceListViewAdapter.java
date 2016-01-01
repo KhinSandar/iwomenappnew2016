@@ -111,7 +111,7 @@ public class SubResourceListViewAdapter extends BaseAdapter
 
         holder.txtTime.setText(listDate[position]);*/
 
-        if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+        if (mstr_lang.equals(Utils.ENG_LANG)) {
             holder.txtName.setText(SubResourceItems.get(position).getSub_resource_title_eng());
             //holder.txtBodyText.setText(ResourceItems.get(position).getResourceText());
 

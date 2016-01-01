@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,16 +18,18 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.parse.CommonConfig;
 import com.smk.adapter.GroupUserListAdapter;
 import com.smk.application.TimeSubtractionUtil;
 import com.smk.application.TimeSubtractionUtil.Callback;
 import com.smk.clientapi.NetworkEngine;
+import com.smk.model.Answer;
+import com.smk.model.AnswerList;
 import com.smk.model.CompetitionQuestion;
 import com.smk.model.GroupUser;
 import com.smk.model.GroupUserList;
 import com.smk.skalertmessage.SKToastMessage;
 
-import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 
 import java.util.List;
@@ -35,7 +37,7 @@ import java.util.List;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class CompetitionGroupUserActivity extends ActionBarActivity {
+public class CompetitionGroupUserActivity extends BaseActionBarActivity {
 
 	private ExpandableListView lst_group_user;
 	private CompetitionQuestion competitionQuestion;
@@ -51,12 +53,13 @@ public class CompetitionGroupUserActivity extends ActionBarActivity {
 	private TextView txt_count_second;
 	private Button btn_go_to_answer;
 	private GroupUserList competitionGroupUserListTemp;
-	private GroupUserListAdapter groupUserAdapter;
 	private RelativeLayout layout_progress_bar;
 	private TextView txt_complete;
+	private GroupUser groupUser = null;
 	private SharedPreferences mSharedPreferencesUserInfo;
 	private SharedPreferences.Editor mEditorUserInfo;
 	private String user_name, user_obj_id, user_ph;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -87,12 +90,12 @@ public class CompetitionGroupUserActivity extends ActionBarActivity {
 		lst_group_user.addHeaderView(groupHeader);
 		SharedPreferences langRef = getSharedPreferences("mLanguage", MODE_PRIVATE); 
 		if(langRef.getString("lang","").equals("mm")){
-			txt_question.setText(competitionQuestion.getQuestionMm());
-			txt_question_desc.setText(competitionQuestion.getDescriptionMm());
+			txt_question.setText(Html.fromHtml(competitionQuestion.getQuestionMm()));
+			txt_question_desc.setText(Html.fromHtml(competitionQuestion.getGroupDescriptionMm()));
 			txt_group_name.setText(competitionGroupUserList.getGroupUsers().get(0).getGroupName());
 		}else{
-			txt_question.setText(competitionQuestion.getQuestion());
-			txt_question_desc.setText(competitionQuestion.getDescription());
+			txt_question.setText(Html.fromHtml(competitionQuestion.getQuestion()));
+			txt_question_desc.setText(Html.fromHtml(competitionQuestion.getGroupDescription()));
 			txt_group_name.setText(competitionGroupUserList.getGroupUsers().get(0).getGroupName());
 		}
 		
@@ -120,6 +123,7 @@ public class CompetitionGroupUserActivity extends ActionBarActivity {
 					public void run() {
 						// TODO Auto-generated method stub
 						if(diffTime != null){
+							
 							String[] time = diffTime.split(":");
 							txt_count_day.setText(time[0]);
 							txt_count_hour.setText(time[1]);
@@ -138,17 +142,28 @@ public class CompetitionGroupUserActivity extends ActionBarActivity {
 				
 			}
 		});
+
 		timeUtil.setEndDate(null,competitionQuestion.getEndDate());
 		setAdapter();
 	}
 	
 	private void setAdapter(){
+		for(GroupUser user : competitionGroupUserListTemp.getGroupUsers()){
+			if(user.getUserId().equals(user_obj_id)){
+				if(user.getAnswer().size() >= 3)
+					btn_go_to_answer.setText(getResources().getString(R.string.competition_go_to_answer));
+				else
+					btn_go_to_answer.setText(getResources().getString(R.string.competition_enter_the_answer));
+				groupUser = user;
+			}
+		}
+		
 		for (int i = 0; i < competitionGroupUserList.getGroupUsers().size(); i++) {
 			if(competitionGroupUserList.getGroupUsers().get(i).getAnswer().size() > 0){
 				competitionGroupUserList.getGroupUsers().get(i).getAnswer().remove(0);
 			}
 		}
-		groupUserAdapter = new GroupUserListAdapter(this, competitionGroupUserList.getGroupUsers());
+		GroupUserListAdapter groupUserAdapter = new GroupUserListAdapter(this, competitionGroupUserList.getGroupUsers());
 		groupUserAdapter.setOnCallbackListener(new GroupUserListAdapter.Callbacks() {
 			
 			@Override
@@ -175,12 +190,14 @@ public class CompetitionGroupUserActivity extends ActionBarActivity {
 		        startActivity(callIntent);
 			}
 		});
+		
 		lst_group_user.setAdapter(groupUserAdapter);
-		groupUserAdapter.notifyDataSetChanged();
+		
 		if((int) calculatePercentage() > 99){
 			txt_complete.setVisibility(View.VISIBLE);
 			layout_progress_bar.setVisibility(View.GONE);
 		}
+		
 		txt_progress_label.setText(competitionGroupUserList.getGroupUsers().get(0).getCurrentHasAnswer()+"/"+competitionGroupUserList.getGroupUsers().get(0).getTotalHasAnswer()+" Answers to Complete the Game!");
 		progress_bar.setProgress((int) calculatePercentage());
 		
@@ -189,14 +206,7 @@ public class CompetitionGroupUserActivity extends ActionBarActivity {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				for(GroupUser groupUser: competitionGroupUserListTemp.getGroupUsers()){
-					if(groupUser.getUserId().equals(user_obj_id)){
-						Bundle bundle = new Bundle();
-						bundle.putString("competition_question", new Gson().toJson(competitionQuestion));
-						bundle.putString("group_user", new Gson().toJson(groupUser));
-						startActivityForResult(new Intent(getApplicationContext(), CompetitionSubmitAnswerActivity.class).putExtras(bundle), 100);
-					}
-				}
+				getCompetitionAnswer();
 			}
 		});
 	}
@@ -226,10 +236,40 @@ public class CompetitionGroupUserActivity extends ActionBarActivity {
 			@Override
 			public void success(List<GroupUser> arg0, Response arg1) {
 				// TODO Auto-generated method stub
-				competitionGroupUserList = new GroupUserList(arg0);
 				competitionGroupUserListTemp = new GroupUserList(arg0);
+				competitionGroupUserList = new GroupUserList(arg0);
 				setAdapter();
 				dialog.dismiss();
+			}
+		});
+	}
+	
+	private void getCompetitionAnswer(){
+		final ProgressDialog dialog = new ProgressDialog(this);
+		dialog.setMessage("Loading...");
+		dialog.show();
+		NetworkEngine.getInstance().getUserAnswer(groupUser.getId(), new retrofit.Callback<List<Answer>>() {
+			
+			@Override
+			public void success(List<Answer> arg0, Response arg1) {
+				// TODO Auto-generated method stub
+				
+				Bundle bundle = new Bundle();
+				bundle.putInt("group_user_id", groupUser.getId());
+				bundle.putString("competition_question", new Gson().toJson(competitionQuestion));
+				if(arg0 != null)
+					bundle.putString("user_answer", new Gson().toJson(new AnswerList(arg0)));
+				else
+					bundle.putString("user_answer", new Gson().toJson(new AnswerList(groupUser.getAnswer())));
+				startActivityForResult(new Intent(getApplicationContext(), CompetitionSubmitAnswerActivity.class).putExtras(bundle), 100);
+				
+				dialog.dismiss();
+			}
+			
+			@Override
+			public void failure(RetrofitError arg0) {
+				// TODO Auto-generated method stub
+				
 			}
 		});
 	}

@@ -42,6 +42,7 @@ public class CommonConfig {
     public static final String RESOURCE_URL = "/classes/Resources";
 
 
+    public static final String SISTERAPP_URL = "/classes/SisterDownloadApp";
 
     public static final String SUB_RESOURCE_URL = "/classes/SubResourceDetail";
 
@@ -51,7 +52,7 @@ public class CommonConfig {
     public static final String STICKERS_URL = "/classes/StickerStore";
 
 
-    public static final String SHARE_URL ="https://www.facebook.com/testingmobileapp";
+    public static final String SHARE_URL ="https://www.facebook.com/iwomenApp";
     public int getPostMaxCharacterCount () {
         int value = 140;
         return value;

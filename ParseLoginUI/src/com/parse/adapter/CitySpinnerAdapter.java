@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import com.parse.model.CityForShow;
 import com.parse.ui.R;
-import com.parse.widget.CustomTextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,12 +23,12 @@ public class CitySpinnerAdapter extends ArrayAdapter<CityForShow> {
 
 
     public static class ViewHolder {
-        public final CustomTextView enTextView;
-        public final CustomTextView mmTextView;
+        public final TextView enTextView;
+        public final TextView mmTextView;
 
         public ViewHolder(View view) {
-            enTextView = (CustomTextView) view.findViewById(R.id.city_in_en_textview);
-            mmTextView = (CustomTextView) view.findViewById(R.id.city_in_mm_textview);
+            enTextView = (TextView) view.findViewById(R.id.city_in_en_textview);
+            mmTextView = (TextView) view.findViewById(R.id.city_in_mm_textview);
         }
     }
 

@@ -27,21 +27,12 @@
                 android:id="@+id/register_ly"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:layout_below="@+id/facebook_login_container"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
                 android:layout_gravity="center">
-                <!--<org.undp_iwomen.iwomen.ui.widget.ResizableImageView
-                    android:id="@+id/register_profilePic_resizable"
-                    android:layout_width="@dimen/feed_item_profile_pic"
-                    android:layout_height="@dimen/feed_item_profile_pic"
-                    android:scaleType="fitCenter"
-                    android:layout_marginBottom="@dimen/abc_list_item_padding_horizontal_material"
-                    android:layout_marginTop="@dimen/abc_list_item_padding_horizontal_material"
-                    android:gravity="center"
-                    android:src="@drawable/camera_icon"
-                    android:visibility="visible"
-                    ></org.undp_iwomen.iwomen.ui.widget.ResizableImageView>-->
+
                 <com.makeramen.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/register_profilePic_rounded"
                     android:layout_width="@dimen/feed_item_profile_pic"
@@ -99,6 +90,7 @@
                     style="@style/ParseLoginUI.EditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textSize="15sp"
                      />
             </android.support.design.widget.TextInputLayout>
 
@@ -117,7 +109,8 @@
                     android:fontFamily="sans-serif"
                     android:inputType="textPassword"
                     android:nextFocusForward="@+id/signup_confirm_password_input"
-                    android:selectAllOnFocus="true" />
+                    android:selectAllOnFocus="true"
+                    android:textSize="15sp"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -135,7 +128,8 @@
                     android:layout_marginTop="@dimen/com_parse_ui_small_vertical_spacing"
                     android:fontFamily="sans-serif"
                     android:inputType="textPassword"
-                    android:selectAllOnFocus="true" />
+                    android:selectAllOnFocus="true"
+                    android:textSize="15sp"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -154,7 +148,8 @@
                     android:inputType="phone"
                     android:nextFocusDown="@+id/singup_tlg_checkbox"
                     android:nextFocusForward="@+id/singup_tlg_checkbox"
-                    android:selectAllOnFocus="true" />
+                    android:selectAllOnFocus="true"
+                    android:textSize="15sp"/>
 
             </android.support.design.widget.TextInputLayout>
             <!--<android.support.design.widget.TextInputLayout
@@ -194,7 +189,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clickable="true"
-                    android:textSize="18sp"
+                    android:textSize="15sp"
                     android:fontFamily="sans-serif"
                     android:text="@string/signup_tlg_member_exit_mm" />
 
@@ -211,7 +206,7 @@
                     android:paddingTop="@dimen/com_parse_ui_horizontal_margin"
                     android:paddingLeft="3dp"
                     android:fontFamily="sans-serif"
-                    android:textSize="18sp"
+                    android:textSize="15sp"
                     android:paddingBottom="@dimen/com_parse_ui_horizontal_margin"
                     android:text="Township"
                     android:textAppearance="@style/TextAppearance.AppCompat.Caption"
@@ -244,7 +239,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clickable="true"
-                    android:textSize="18sp"
+                    android:textSize="15sp"
                     android:fontFamily="sans-serif"
                     android:text="@string/i_agree_mm" />
 
@@ -270,7 +265,7 @@
                         android:layout_height="wrap_content"
                         android:enabled="false"
                         android:text="@string/com_parse_ui_create_account_button_label_mm"
-                        android:textSize="20dp" />
+                        android:textSize="15sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -287,11 +282,11 @@
                         android:layout_marginLeft="16dp"
                         android:enabled="false"
                         android:text="@string/com_parse_ui_edit_account_button_label_mm"
-                        android:textSize="20dp" />
+                        android:textSize="15sp"/>
                 </LinearLayout>
 
             </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
-</LinearLayout><!-- From: file:/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/ParseLoginUI/res/layout/com_parse_ui_parse_signup_form.xml -->
+</LinearLayout>

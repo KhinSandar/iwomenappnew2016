@@ -53,7 +53,7 @@ public class Utils {
         catch(Exception ex){}
     }
     public static void doToastEng(Context context, String toast){
-        Toast.makeText(context, toast, Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, toast, Toast.LENGTH_LONG).show();
     }
     public static void doToastMM(Context context, String toast){
         //Toast.makeText(context, toast, Toast.LENGTH_SHORT).show();

@@ -6,13 +6,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.algo.hha.emojiicon.EmojiconTextView;
+import com.makeramen.RoundedImageView;
+import com.squareup.picasso.Picasso;
 
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.data.CommentItem;
-import org.undp_iwomen.iwomen.ui.widget.ProfilePictureView;
 
 import java.util.List;
 
@@ -53,14 +55,33 @@ public class CommentAdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.custom_comment_layout, viewGroup, false);
 
             vh = new ViewHolder();
-            vh.pictureView = (ProfilePictureView) view.findViewById(R.id.custom_comment_profilepicture);
+            vh.pictureView = (RoundedImageView) view.findViewById(R.id.custom_comment_profilepicture);
             vh.tv_name = (TextView) view.findViewById(R.id.custom_comment_name);
             vh.tv_message = (EmojiconTextView) view.findViewById(R.id.custom_comment_message);
             vh.tv_timestamp = (TextView) view.findViewById(R.id.custom_comment_timestamp);
+            //vh.progressBar = (ProgressBar)view.findViewById(R.id.custom_comment_progress);
             view.setTag(vh);
 
         }else{
             vh = (ViewHolder) view.getTag();
+        }
+        //Log.e("adapter==","==>"+ datalist.get(i).get_profile_picture());
+        if (datalist.get(i).get_profile_picture() != null && !datalist.get(i).get_profile_picture().isEmpty() && datalist.get(i).get_profile_picture() != "" && datalist.get(i).get_profile_picture() != "null") {
+
+            //Log.e("adapter==","=if=>"+ datalist.get(i).get_profile_picture());
+            try {
+
+                Picasso.with(mActivity)
+                        .load(datalist.get(i).get_profile_picture()) //"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
+                        .placeholder(R.drawable.blank_profile)
+                        .error(R.drawable.blank_profile)
+                        .into(vh.pictureView);
+            } catch (OutOfMemoryError outOfMemoryError) {
+                outOfMemoryError.printStackTrace();
+            }
+        } else {
+            //Log.e("adapter==","=else=>"+ datalist.get(i).get_profile_picture());
+            //vh.progressBar.setVisibility(View.GONE);
         }
 
         vh.tv_name.setText(datalist.get(i).get_user_name());
@@ -71,9 +92,28 @@ public class CommentAdapter extends BaseAdapter {
     }
 
     public class ViewHolder{
-        ProfilePictureView pictureView;
+        RoundedImageView pictureView;
         TextView tv_name , tv_timestamp;
         EmojiconTextView tv_message;
+        //ProgressBar progressBar;
+    }
+
+    private class ImageLoadedCallback implements com.squareup.picasso.Callback {
+        ProgressBar progressBar;
+
+        public ImageLoadedCallback(ProgressBar progBar) {
+            progressBar = progBar;
+        }
+
+        @Override
+        public void onSuccess() {
+
+        }
+
+        @Override
+        public void onError() {
+
+        }
     }
 
 }

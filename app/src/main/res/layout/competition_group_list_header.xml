@@ -10,6 +10,7 @@
     android:paddingTop="@dimen/activity_vertical_margin" >
 
     <RelativeLayout
+        android:id="@+id/layout_question"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
@@ -27,17 +28,13 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@color/competition_text" />
 
-            <org.undp_iwomen.iwomen.ui.widget.CustomTextView
-                android:id="@+id/txt_competition_description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/competition_vertical_margin"
-                android:text="name of the game description here"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@color/competition_text" />
+
         </LinearLayout>
 
+
+
         <LinearLayout
+            android:id="@+id/layout_group_name"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_alignParentRight="true"
@@ -56,6 +53,15 @@
 
         </LinearLayout>
     </RelativeLayout>
+
+    <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+        android:id="@+id/txt_competition_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/competition_vertical_margin"
+        android:text="name of the game description here"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/competition_text" />
 
     <LinearLayout
         android:layout_width="match_parent"

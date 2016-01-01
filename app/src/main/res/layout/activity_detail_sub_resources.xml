@@ -63,16 +63,43 @@
                     android:visibility="visible" />
             </FrameLayout>
 
-            <TextView
-                android:id="@+id/tipdetail_content_username"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="8dp"
-                android:paddingTop="16dp"
-                android:text="Author Name about"
+            <LinearLayout
+                android:id="@+id/postdetail_content_role_more_ly"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/tipdetail_content_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:paddingTop="16dp"
+                    android:text="Author Name about"
+
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tipdetail_content_user_role"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:visibility="gone"
+                    android:text="Role" />
+
+                <TextView
+                    android:id="@+id/tipdetail_content_user_role_more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:background="@color/grey_500"
+                    android:padding="10dp"
+                    android:text="more >> "
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -156,7 +183,7 @@
 
 
             <Button
-                android:id="@+id/postStatusUpdateButton"
+                android:id="@+id/tipdetail_fb_share_btn"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

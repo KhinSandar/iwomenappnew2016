@@ -200,12 +200,12 @@ public class MainMaterialTab extends Fragment {
 
 
         mstr_lang = sharePrefLanguageUtil.getString(com.parse.utils.Utils.PREF_SETTING_LANG, com.parse.utils.Utils.ENG_LANG);
-        if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+        if (mstr_lang.equals(Utils.ENG_LANG)) {
 
             adapter = new MyPagerAdapter(getChildFragmentManager(), fragments,mstr_lang);
             tabs.setTypeface(MyTypeFace.get(ctx,MyTypeFace.NORMAL),0);
 
-        } else if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.MM_LANG)) {
+        } else if (mstr_lang.equals(Utils.MM_LANG)) {
 
             adapter = new MyPagerAdapter(getChildFragmentManager(), fragments,mstr_lang);
             tabs.setTypeface(MyTypeFace.get(ctx,MyTypeFace.ZAWGYI),0);
@@ -294,6 +294,7 @@ public class MainMaterialTab extends Fragment {
     }
 
 
+
     public class MyPagerAdapter extends FragmentPagerAdapter {
         private List<Fragment> fragments;
         // Declare Variables
@@ -323,10 +324,10 @@ public class MainMaterialTab extends Fragment {
         @Override
         public CharSequence getPageTitle(int position) {
 
-            if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+            if (mstr_lang.equals(Utils.ENG_LANG)) {
                 return TITLES[position];
 
-            } else if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.MM_LANG)) {
+            } else if (mstr_lang.equals(Utils.MM_LANG)) {
                 return TITLES_MM[position];
 
             }else if (mstr_lang.equals(Utils.MM_LANG_UNI)) {

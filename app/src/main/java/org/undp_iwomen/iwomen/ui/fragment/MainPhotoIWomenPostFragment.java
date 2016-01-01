@@ -41,6 +41,7 @@ import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.SaveCallback;
 import com.pnikosis.materialishprogress.ProgressWheel;
+import com.smk.iwomen.AudioRecordingActivity;
 
 import org.json.JSONObject;
 import org.undp_iwomen.iwomen.CommonConfig;
@@ -85,7 +86,7 @@ public class MainPhotoIWomenPostFragment extends Fragment implements ImageChoose
     String crop_absolute_path;
     String str_report_type;
 
-    private int maxCharacterCount = 400;
+    private int maxCharacterCount = 1000;
     private TextView characterCountTextView;
     private Button postButton;
 
@@ -101,6 +102,7 @@ public class MainPhotoIWomenPostFragment extends Fragment implements ImageChoose
 
     CallbackManager callbackManager;
     private PendingAction pendingAction = PendingAction.NONE;
+    private final int UPLOAD_AUDIO = 100;
 
 
     private enum PendingAction {
@@ -333,12 +335,12 @@ public class MainPhotoIWomenPostFragment extends Fragment implements ImageChoose
         txt_audio_upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mstr_lang.equals(Utils.ENG_LANG)) {
+                /*if (mstr_lang.equals(Utils.ENG_LANG)) {
                     Utils.doToastEng(mContext, getResources().getString(R.string.resource_coming_soon_eng));
                 } else {
-
                     Utils.doToastMM(mContext, getResources().getString(R.string.resource_coming_soon_mm));
-                }
+                }*/
+                startActivityForResult(new Intent(getActivity(), AudioRecordingActivity.class), UPLOAD_AUDIO);
             }
         });
 
@@ -491,7 +493,9 @@ public class MainPhotoIWomenPostFragment extends Fragment implements ImageChoose
             postParse.setLikes(0);
             postParse.setCommentCount(0);
             postParse.setShareCount(0);
-            postParse.setPostUploadUserImgPath(userprofile_Image_path);
+            if(userprofile_Image_path != null) {
+                postParse.setPostUploadUserImgPath(userprofile_Image_path);
+            }
             postParse.setContentTypes("Story");
             postParse.setPostUploadedDate(new Date());
 
@@ -521,9 +525,9 @@ public class MainPhotoIWomenPostFragment extends Fragment implements ImageChoose
             postParse.saveInBackground(new SaveCallback() {
                 @Override
                 public void done(ParseException e) {
-                    if (getActivity().isFinishing()) {
+                    /*if (getActivity().isFinishing()) {
                         return;
-                    }
+                    }*/
                     if (e == null) {
                         progress_wheel.setVisibility(View.INVISIBLE);
                         progressbackground.setVisibility(View.INVISIBLE);
@@ -587,7 +591,10 @@ public class MainPhotoIWomenPostFragment extends Fragment implements ImageChoose
             postParse.setCommentCount(0);
             postParse.setShareCount(0);
             postParse.setContentTypes("Story");
-            postParse.setPostUploadUserImgPath(userprofile_Image_path);
+
+            if(userprofile_Image_path != null) {
+                postParse.setPostUploadUserImgPath(userprofile_Image_path);
+            }
             postParse.setPostUploadedDate(new Date());
 
             postParse.setPostUploadAuthorName(user_name);

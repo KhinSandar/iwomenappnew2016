@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,7 +28,7 @@ import java.util.List;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class CompetitionNewGameActivity extends ActionBarActivity {
+public class CompetitionNewGameActivity extends BaseActionBarActivity {
 
 	private TextView txt_question;
 	private TextView txt_question_desc;
@@ -70,13 +70,13 @@ public class CompetitionNewGameActivity extends ActionBarActivity {
 		}
 		SharedPreferences langRef = getSharedPreferences("mLanguage", MODE_PRIVATE); 
 		if(langRef.getString("lang","").equals("mm")){
-			txt_question.setText(competitionQuestion.getQuestionMm());
-			txt_question_desc.setText(competitionQuestion.getDescriptionMm());
-			txt_instruction_desc.setText(competitionQuestion.getInstructionAboutGame());
+			txt_question.setText(Html.fromHtml(competitionQuestion.getQuestionMm()));
+			txt_question_desc.setText(Html.fromHtml(competitionQuestion.getDescriptionMm()));
+			txt_instruction_desc.setText(Html.fromHtml(competitionQuestion.getInstructionAboutGameMm()));
 		}else{
-			txt_question.setText(competitionQuestion.getQuestion());
-			txt_question_desc.setText(competitionQuestion.getDescription());
-			txt_instruction_desc.setText(competitionQuestion.getInstructionAboutGame());
+			txt_question.setText(Html.fromHtml(competitionQuestion.getQuestion()));
+			txt_question_desc.setText(Html.fromHtml(competitionQuestion.getDescription()));
+			txt_instruction_desc.setText(Html.fromHtml(competitionQuestion.getInstructionAboutGame()));
 		}
 			
 		
@@ -117,10 +117,10 @@ public class CompetitionNewGameActivity extends ActionBarActivity {
 				
 			}
 		});
-		timeUtil.setEndDate(null,competitionQuestion.getEndDate());
+		timeUtil.setEndDate(null, competitionQuestion.getEndDate());
 		
 		btn_take_challenge.setOnClickListener(new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub

@@ -241,11 +241,11 @@ public class AuthorDetailActivity extends BaseActionBarActivity {
 
         } else {
 
-            if (strLang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
-                org.undp_iwomen.iwomen.utils.Utils.doToastEng(mContext, getResources().getString(R.string.open_internet_warning_eng));
+            if (strLang.equals(Utils.ENG_LANG)) {
+                Utils.doToastEng(mContext, getResources().getString(R.string.open_internet_warning_eng));
             } else {
 
-                org.undp_iwomen.iwomen.utils.Utils.doToastMM(mContext, getResources().getString(R.string.open_internet_warning_mm));
+                Utils.doToastMM(mContext, getResources().getString(R.string.open_internet_warning_mm));
             }
         }
     }

@@ -13,7 +13,7 @@ public interface ResourceService {
 
 
     @GET(CommonConfig.RESOURCE_URL)
-    public void getResourceList( @Query("order") String s,@Query("limit") int limit,@Query("skip") int skiplimit,@Query("where") String sWhere, Callback<String> callback);
+    public void getResourceList(@Query("order") String s, @Query("limit") int limit, @Query("skip") int skiplimit, @Query("where") String sWhere, Callback<String> callback);
 
 
 

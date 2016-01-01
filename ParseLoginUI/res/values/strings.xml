@@ -147,11 +147,11 @@
     <string name="i_agree">I agree to all the <a href="https://www.facebook.com/UndpMyanmar">Terms and Conditions</a></string>
     <string name="i_agree_mm">မွတ္ပံုုတင္အခ်က္ အလက္မ်ားကိုုသေဘာတူပါသည္ <a href="https://www.facebook.com/UndpMyanmar"></a></string>
 
-    <string name="signup_tlg_member_exit_mm">TLG အဖြဲ ့၀င္ၿဖစ္လ်င္အမွန္ၿခစ္ လုုပ္ပါ</string>
-    <string name="signup_tlg_member_exit_eng">I am TLG member</string>
+    <string name="signup_tlg_member_exit_mm">TLG (သိုု့) SRG အဖြဲ ့၀င္ၿဖစ္လ်င္အမွန္ၿခစ္ လုုပ္ပါ</string>
+    <string name="signup_tlg_member_exit_eng">I am a TLG or SRG member</string>
 
-    <string name="signup_tlg_township_choose_mm">TLG ၿမိဳ့နယ္တည္ေနရာေရြးခ်ယ္ပါ</string>
-    <string name="signup_tlg_township_choose_eng">Choose TLG Township</string>
+    <string name="signup_tlg_township_choose_mm"> ၿမိဳ့နယ္တည္ေနရာေရြးခ်ယ္ပါ</string>
+    <string name="signup_tlg_township_choose_eng">Choose Your Township</string>
 
     <string name="action_photo_camera">Take Photo</string>
     <string name="action_photo_gallery">Choose Existing</string>

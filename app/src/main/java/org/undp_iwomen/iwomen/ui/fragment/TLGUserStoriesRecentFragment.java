@@ -1,6 +1,7 @@
 package org.undp_iwomen.iwomen.ui.fragment;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
@@ -27,12 +28,17 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
+import android.widget.TextView;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.pnikosis.materialishprogress.ProgressWheel;
+import com.smk.clientapi.NetworkEngine;
+import com.smk.iwomen.BaseActionBarActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -79,6 +85,8 @@ public class TLGUserStoriesRecentFragment extends Fragment implements View.OnCli
 
     private int offsetlimit = 10;
     private int skipLimit = 0;
+    private Menu menu;
+    private Integer  avgRatings;
 
     public TLGUserStoriesRecentFragment() {
         // Empty constructor required for fragment subclasses
@@ -107,6 +115,7 @@ public class TLGUserStoriesRecentFragment extends Fragment implements View.OnCli
         //SetUserData();
         //SetPostData();
         init(rootView);
+        getReview();
 
         return rootView;
     }
@@ -305,30 +314,21 @@ public class TLGUserStoriesRecentFragment extends Fragment implements View.OnCli
 
                 cursor.close();
 
-                //lost_data_list, lost_data_id_list, lost_data_obj_id_list ,lost_data_img_url_list
-                //storageUtil.SaveArrayListToSD("lost_data_list", lost_data_list);
+
+                mPostListRecyclerViewAdapter = new TLGUserPostListRecyclerViewAdapter(getActivity().getApplicationContext(), feedItems, mstr_lang);
+                mRecyclerView.setAdapter(mPostListRecyclerViewAdapter);
+                mProgressDialog.dismiss();
+                progress.setVisibility(View.INVISIBLE);
 
 
-                if (mstr_lang.equals(com.parse.utils.Utils.ENG_LANG)) {
-                    mPostListRecyclerViewAdapter = new TLGUserPostListRecyclerViewAdapter(getActivity().getApplicationContext(), feedItems, mstr_lang);
-                    mRecyclerView.setAdapter(mPostListRecyclerViewAdapter);
-                    mProgressDialog.dismiss();
-                    progress.setVisibility(View.INVISIBLE);
-                } else {
-                    mPostListRecyclerViewAdapter = new TLGUserPostListRecyclerViewAdapter(getActivity().getApplicationContext(), feedItems, mstr_lang);
-                    mRecyclerView.setAdapter(mPostListRecyclerViewAdapter);
-                    mProgressDialog.dismiss();
-                    progress.setVisibility(View.INVISIBLE);
-                }
 
             } catch (IllegalStateException ex) {
                 ex.printStackTrace();
             }
 
 
-            //Utils.doToast(getActivity(), String.valueOf(feedItems.size()));
         } else {
-            Log.e("LostListFragment", "Activity Null Case");
+            Log.e("TLGuserFragment", "Activity Null Case");
         }
 
     }
@@ -340,6 +340,9 @@ public class TLGUserStoriesRecentFragment extends Fragment implements View.OnCli
 
 
         inflater.inflate(R.menu.refresh_menu, menu);
+
+        this.menu = menu;
+        this.menu.findItem(R.id.action_rating).setVisible(false);
 
         final MenuItem item = menu.add(0, 12, 0, "Search");
         //menu.removeItem(12);
@@ -425,9 +428,53 @@ public class TLGUserStoriesRecentFragment extends Fragment implements View.OnCli
                 //getPostDataOrderByLikesDate();
                 getTLGUserPostByLimit();
                 return true;
+            case R.id.action_rating:
+                showReviewDetailDialog();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void getReview(){
+        NetworkEngine.getInstance().getReview("Talk Together", new Callback<Integer>() {
+
+
+            @Override
+            public void success(Integer arg0, Response response) {
+                menu.findItem(R.id.action_rating).setVisible(true);
+                menu.findItem(R.id.action_rating).setIcon(BaseActionBarActivity.getRatingIcon(arg0));
+                avgRatings = arg0;
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
+    }
+
+    public void showReviewDetailDialog(){
+        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+        View convertView = View.inflate(getActivity(),R.layout.dialog_reviews_detial,null);
+        TextView txt_avg_title = (TextView ) convertView.findViewById(R.id.txt_avg_title);
+        RatingBar avg_ratings = (RatingBar) convertView.findViewById(R.id.avg_ratings);
+        TextView txt_avg_ratings = (TextView) convertView.findViewById(R.id.txt_avg_ratings);
+        Button btn_ok = (Button)convertView.findViewById(R.id.btn_ok);
+        alertDialog.setView(convertView);
+
+        txt_avg_title.setText("Talk Together");
+        avg_ratings.setRating(avgRatings);
+        txt_avg_ratings.setText(BaseActionBarActivity.getRatingDesc(avgRatings) + ": " + avgRatings + "/5 Ratings");
+
+        final AlertDialog ad = alertDialog.show();
+
+        btn_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ad.dismiss();
+            }
+        });
     }
 
 
@@ -604,16 +651,11 @@ public class TLGUserStoriesRecentFragment extends Fragment implements View.OnCli
                                 cv.put(TableAndColumnsName.UserPostUtil.LIKE_STATUS, "0");
 
                                 cv.put(TableAndColumnsName.UserPostUtil.STATUS, "0");
-
-                                /*"postUploadedDate": {
-                "__type": "Date",
-                "iso": "2014-03-14T12:01:00.000Z"
-            },*/
                                 cv.put(TableAndColumnsName.UserPostUtil.CREATED_DATE, each_object.get("createdAt").toString());// post.get("postUploadedDate").toString() //post.getCreatedAt().toString()
                                 cv.put(TableAndColumnsName.UserPostUtil.UPDATED_DATE, each_object.get("updatedAt").toString());
 
 
-                                Log.e("saveUserPostLocal : ", "= = = = = = = : " + cv.toString());
+                                //Log.e("saveUserPostLocal : ", "= = = = = = = : " + cv.toString());
 
 
                                 getActivity().getContentResolver().insert(IwomenProviderData.UserPostProvider.CONTETN_URI, cv);
@@ -639,7 +681,6 @@ public class TLGUserStoriesRecentFragment extends Fragment implements View.OnCli
 
             } else {
                 mProgressDialog.show();
-                Log.e("First Time Offset Range Count", "==>" + offsetlimit + "/" + skipLimit);//where={"isAllow": true}
 
                 String sCondition = "{\"isAllow\": true}";
 
@@ -804,7 +845,7 @@ public class TLGUserStoriesRecentFragment extends Fragment implements View.OnCli
                                 cv.put(TableAndColumnsName.UserPostUtil.UPDATED_DATE, each_object.get("updatedAt").toString());
 
 
-                                Log.e("saveUserPostLocal : ", "= = = = = = = : " + cv.toString());
+                                //Log.e("saveUserPostLocal : ", "= = = = = = = : " + cv.toString());
 
 
                                 getActivity().getContentResolver().insert(IwomenProviderData.UserPostProvider.CONTETN_URI, cv);

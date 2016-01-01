@@ -12,7 +12,6 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.BaseColumns;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.util.Log;
@@ -116,7 +115,7 @@ public class TLGUserPostDetailActivity extends BaseActionBarActivity implements 
     private ProgressBar profile_item_progressBar;
     //private org.undp_iwomen.iwomen.ui.widget.ProfilePictureView profilePictureView;
     private RoundedImageView profile;
-    private org.undp_iwomen.iwomen.ui.widget.ResizableImageView postIMg;
+    private ResizableImageView postIMg;
     private SharedPreferences mSharedPreferencesUserInfo;
     private String user_name, user_obj_id, user_ph;
     SharedPreferences sharePrefLanguageUtil;
@@ -191,6 +190,7 @@ public class TLGUserPostDetailActivity extends BaseActionBarActivity implements 
     private String mstr_lang;
     private ImageView video_icon;
     String cmd_count = "0";
+    private String userprofile_Image_path;
     private FacebookCallback<Sharer.Result> shareCallback = new FacebookCallback<Sharer.Result>() {
         @Override
         public void onCancel() {
@@ -281,6 +281,7 @@ public class TLGUserPostDetailActivity extends BaseActionBarActivity implements 
             user_obj_id = mSharedPreferencesUserInfo.getString(CommonConfig.USER_OBJ_ID, null);
 
         }
+        userprofile_Image_path = mSharedPreferencesUserInfo.getString(CommonConfig.USER_IMAGE_PATH, null);
 
 
         profile = (RoundedImageView) findViewById(R.id.postdetail_profilePic_rounded);
@@ -296,7 +297,7 @@ public class TLGUserPostDetailActivity extends BaseActionBarActivity implements 
         post_suggest_text = (TextView) findViewById(R.id.postdetail_suggest_title);
 
         //profilePictureView = (org.undp_iwomen.iwomen.ui.widget.ProfilePictureView) findViewById(R.id.postdetail_profilePic);
-        postIMg = (org.undp_iwomen.iwomen.ui.widget.ResizableImageView) findViewById(R.id.postdetail_content_img);
+        postIMg = (ResizableImageView) findViewById(R.id.postdetail_content_img);
         feed_item_progressBar = (ProgressBar) findViewById(R.id.postdetail_feed_item_progressBar);
         profile_item_progressBar = (ProgressBar) findViewById(R.id.postdetail_progressBar_profile_item);
 
@@ -549,6 +550,7 @@ public class TLGUserPostDetailActivity extends BaseActionBarActivity implements 
                     String comment;
                     String comment_created_time;
                     String comment_user_name;
+                    String comment_img_path;
 
                     try {
                         JSONObject whole_body = new JSONObject(s);
@@ -562,13 +564,13 @@ public class TLGUserPostDetailActivity extends BaseActionBarActivity implements 
                             } else {
                                 comment = each_object.getString("comment_contents");
                             }
-                            //Log.e("Comments>>>", ">>>>" + comment);
 
-                       /* if (each_object.isNull("comment_created_time")) {
-                            comment_created_time = "null";
-                        } else {
-                            comment_created_time = each_object.getString("comment_created_time");
-                        }*/
+                            if (each_object.isNull("user_img_path")) {
+                                comment_img_path = "null";
+                            } else {
+                                comment_img_path = each_object.getString("user_img_path");
+                            }
+
                             if (each_object.isNull("user_name")) {
                                 comment_user_name = "null";
                             } else {
@@ -577,11 +579,7 @@ public class TLGUserPostDetailActivity extends BaseActionBarActivity implements 
 
                             //Calculate Date Difference
                             Date d1 = new Date();
-                        /*try {
-                            Thread.sleep(750);
-                        } catch (InterruptedException e) {
-                            //Ingnore
-                        }*/
+
                             //Date d0 = null; // About 3 days ago
                             try {
                                 ParsePosition pp = new ParsePosition(0);
@@ -641,7 +639,7 @@ public class TLGUserPostDetailActivity extends BaseActionBarActivity implements 
                                 TimeDiff.getTimeDifference(d0, d1, TimeDiff.TimeField.DAY));*/
 
 
-                            listComment.add(new CommentItem("", comment_user_name, comment, str_comment_time_long));
+                            listComment.add(new CommentItem(comment_img_path, comment_user_name, comment, str_comment_time_long));
                             str_comment_time_long = "";
                         }
 
@@ -1216,6 +1214,7 @@ public class TLGUserPostDetailActivity extends BaseActionBarActivity implements 
 
                         commentParse.setcomment_contents(et_comment.getText().toString());
                         commentParse.setUserId(user_obj_id);
+                        commentParse.setUserImgPathName(userprofile_Image_path);
                         commentParse.setUserName(user_name);
                         commentParse.setpostId(postId);
                         commentParse.setcomment_created_time(new Date());
@@ -1274,18 +1273,29 @@ public class TLGUserPostDetailActivity extends BaseActionBarActivity implements 
                 }
                 break;
             case R.id.postdetail_content_img:
+                if (mstrPostType.equalsIgnoreCase("Video")) {
+                    Intent video_intent = new Intent(mContext, YouTubeWebviewActivity.class);
 
-                if (!isPlaying) {
+                    //intent.putExtra("post_id", feedItems.get(position).getPost_obj_id());
 
-                    mMedia = MediaPlayer.create(this, R.raw.wai_wai_audio);
-
-                    mMedia.start();
-
-                    isPlaying = true;
-                } else {
-                    Utils.doToastEng(getApplicationContext(), "Is playing ");
+                    //intent.putExtra("ImgUrl", mImgurl.get(getPosition()));
+                    video_intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    video_intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    mContext.startActivity(video_intent);
+                    break;
                 }
+                /*else if (mstrPostType.equalsIgnoreCase("Audio")) {
+                    if (!isPlaying) {
 
+                        mMedia = MediaPlayer.create(this, R.raw.wai_wai_audio);
+
+                        mMedia.start();
+
+                        isPlaying = true;
+                    } else {
+                        //Utils.doToastEng(getApplicationContext(), "Is playing ");
+                    }
+                }*/
                 break;
 
             case R.id.detail_ly_listen_now:
@@ -1317,7 +1327,7 @@ public class TLGUserPostDetailActivity extends BaseActionBarActivity implements 
 
                         isPlaying = true;
                     } else {
-                        Utils.doToastEng(getApplicationContext(), "Is playing ");
+                        //Utils.doToastEng(getApplicationContext(), "Is playing ");
                     }
                     break;
                 }

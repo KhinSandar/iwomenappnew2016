@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ import com.makeramen.RoundedImageView;
 import com.smk.iwomen.BaseActionBarActivity;
 import com.squareup.picasso.Picasso;
 
+import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.model.MyTypeFace;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
@@ -31,6 +33,8 @@ public class ResourceDetailActivity extends BaseActionBarActivity {
     private RoundedImageView profileImg;
     private ProgressBar profileProgressbar;
     private TextView profileName;
+    private TextView txtMore;
+    private Button btnShare;
 
 
     private Context mContext;
@@ -76,6 +80,10 @@ public class ResourceDetailActivity extends BaseActionBarActivity {
         profileImg = (RoundedImageView)findViewById(R.id.tipdetail_profilePic_rounded);
         profileName = (TextView)findViewById(R.id.tipdetail_content_username);
         profileProgressbar = (ProgressBar)findViewById(R.id.tipdetail_progressBar_profile_item);
+        txtMore = (TextView)findViewById(R.id.tipdetail_content_user_role_more);
+        btnShare = (Button)findViewById(R.id.tipdetail_fb_share_btn);
+
+
 
 
 
@@ -83,7 +91,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity {
         strLang = sharePrefLanguageUtil.getString(com.parse.utils.Utils.PREF_SETTING_LANG, com.parse.utils.Utils.ENG_LANG);
         if(strLang.equals(Utils.ENG_LANG)){
 
-            textViewTitle.setText(R.string.leadership_eng);
+            textViewTitle.setText(mstrTitleEng);
             txtBody.setText(mstrContentEng);
             txtName.setText(mstrTitleEng);
 
@@ -94,7 +102,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity {
             txtBody.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
         }else //FOR ALl MM FONT
         {
-            textViewTitle.setText(R.string.leadership_mm);
+            textViewTitle.setText(mstrTitleMm);
             txtBody.setText(mstrContentMm);
             txtName.setText(mstrTitleEng);
 
@@ -115,7 +123,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity {
         profileImg.setAdjustViewBounds(true);
         profileImg.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
-        if(mstrAuthorImgPath != null && mstrAuthorImgPath != "") {
+        if(mstrAuthorImgPath != null && mstrAuthorImgPath != "" && !mstrAuthorImgPath.isEmpty() && mstrAuthorImgPath != "null") {
 
             try {
 
@@ -144,7 +152,50 @@ public class ResourceDetailActivity extends BaseActionBarActivity {
         //profileImg.setImageResource(R.drawable.astrid);
         profileName.setText(mstrAuthorName);
 
+        txtMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, AuthorDetailActivity.class);
 
+                intent.putExtra("AuthorId", mstrAuthorId);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(intent);
+            }
+        });
+
+        btnShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                shareTextUrl();
+            }
+        });
+
+
+    }
+
+    private void shareTextUrl() {
+        Intent share = new Intent(Intent.ACTION_SEND);
+        share.setType("text/plain");
+        share.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+
+
+        // Add data to the intent, the receiving app will decide
+        // what to do with it.
+        String share_data;
+        share.putExtra(Intent.EXTRA_SUBJECT, txtBody.getText().toString());//Title Of The Post
+        if (txtBody.getText().length() > 20) {
+            share_data = txtBody.getText().toString().substring(0, 12) + " ...";
+        } else {
+            share_data = txtBody.getText().toString();
+        }
+
+        share.putExtra(Intent.EXTRA_TEXT, CommonConfig.SHARE_URL);
+
+        share.putExtra(Intent.EXTRA_HTML_TEXT, share_data);
+
+
+        startActivity(Intent.createChooser(share, "I Women Share link!"));
     }
 
     @Override

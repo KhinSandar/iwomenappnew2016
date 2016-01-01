@@ -22,8 +22,8 @@ public class StorageUtils {
 
     public static boolean isSdCardWrittenable() {
 
-        if (android.os.Environment.getExternalStorageState().equals(
-                android.os.Environment.MEDIA_MOUNTED)) {
+        if (Environment.getExternalStorageState().equals(
+                Environment.MEDIA_MOUNTED)) {
             return true;
         }
         return false;

@@ -13,17 +13,17 @@ import retrofit.http.Query;
 public interface UserPostService {
 
     @GET(CommonConfig.USER_POST_URL)
-    public void getUserPost(@Query("order") String s,@Query("limit") int limit,@Query("skip") int skiplimit,@Query("where") String sWhere, Callback<String> callback);
+    public void getUserPost(@Query("order") String s, @Query("limit") int limit, @Query("skip") int skiplimit, @Query("where") String sWhere, Callback<String> callback);
 
     @GET(CommonConfig.IWOMEN_POST_URL)
-    public void getIWomenPost(@Query("order") String s,@Query("limit") int limit,@Query("skip") int skiplimit,@Query("where") String sWhere, Callback<String> callback);
+    public void getIWomenPost(@Query("order") String s, @Query("limit") int limit, @Query("skip") int skiplimit, @Query("where") String sWhere, Callback<String> callback);
 
 
     @GET(CommonConfig.USER_POST_URL)
-    public void getPostCount(@Query("limit") int limit,@Query("count") int skiplimit,@Query("where") String sWhere, Callback<String> callback);
+    public void getPostCount(@Query("limit") int limit, @Query("count") int skiplimit, @Query("where") String sWhere, Callback<String> callback);
 
     @GET(CommonConfig.COMMENT_URL)
-    public void getCommentCount(@Query("limit") int limit,@Query("count") int skiplimit,@Query("where") String sWhere, Callback<String> callback);
+    public void getCommentCount(@Query("limit") int limit, @Query("count") int skiplimit, @Query("where") String sWhere, Callback<String> callback);
 
 
     @GET(CommonConfig.USER_POST_DETAIL_BYID_URL)
@@ -37,5 +37,10 @@ public interface UserPostService {
 
 
     @GET(CommonConfig.STICKERS_URL)
-    public void getAllStickers( Callback<String> callback);
+    public void getAllStickers(Callback<String> callback);
+
+    @GET(CommonConfig.SISTERAPP_URL)
+    public void getSisterAppList(@Query("order") String s, @Query("where") String sWhere, Callback<String> callback);
+
+
 }

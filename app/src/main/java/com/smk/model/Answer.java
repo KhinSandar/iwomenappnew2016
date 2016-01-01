@@ -33,6 +33,7 @@ private String createdAt;
 @Expose
 private String updatedAt;
 
+
 /**
 * 
 * @return
@@ -194,5 +195,6 @@ return updatedAt;
 public void setUpdatedAt(String updatedAt) {
 this.updatedAt = updatedAt;
 }
+
 
 }

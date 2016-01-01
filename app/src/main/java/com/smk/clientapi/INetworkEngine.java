@@ -1,8 +1,10 @@
 package com.smk.clientapi;
 
 import com.smk.model.APKVersion;
+import com.smk.model.Answer;
 import com.smk.model.CompetitionQuestion;
 import com.smk.model.GroupUser;
+import com.smk.model.Review;
 
 import java.util.List;
 
@@ -11,6 +13,7 @@ import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
 import retrofit.http.POST;
+import retrofit.http.Path;
 import retrofit.http.Query;
 
 public interface INetworkEngine {
@@ -49,6 +52,24 @@ public interface INetworkEngine {
 	void getAPKVersion(
 			@Query("access_token") String access_token,
 			Callback<APKVersion> callback);
+
+	@GET("/api-v1/competitionanswer/{id}")
+	void getUserAnswer(
+			@Path("id") Integer id,
+			Callback<List<Answer>> callback);
+
+	@GET("/api-v1/review")
+	void getReview(
+			@Query("function") String function,
+			Callback<Integer> callback);
+
+	@FormUrlEncoded
+	@POST("/api-v1/review")
+	void postReview(
+			@Field("user_id") String user_id,
+			@Field("ratings") Double ratings,
+			@Field("function") String function,
+			Callback<Review> callback);
 	
 	
 	

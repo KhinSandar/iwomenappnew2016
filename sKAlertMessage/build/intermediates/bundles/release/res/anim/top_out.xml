@@ -5,4 +5,4 @@
     android:fromXDelta="0"
     android:fromYDelta="0"
     android:toXDelta="0"
-    android:toYDelta="-100%p" /><!-- From: file:/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/sKAlertMessage/src/main/res/anim/top_out.xml -->
+    android:toYDelta="-100%p" />

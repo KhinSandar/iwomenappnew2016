@@ -1,8 +1,0 @@
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item android:state_pressed="true" android:color="@color/theme_accent_1_dark"/>
-    <item android:state_focused="true" android:color="@color/theme_accent_1_dark"/>
-    <item android:color="@color/theme_accent_1_light"/>
-
-</selector>
-<!-- From: file:/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/ParseLoginUI/res/color/com_parse_ui_parse_login_help_button_label_selector.xml --><!-- From: file:/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/ParseLoginUI/build/intermediates/bundles/debug/res/color/com_parse_ui_parse_login_help_button_label_selector.xml -->

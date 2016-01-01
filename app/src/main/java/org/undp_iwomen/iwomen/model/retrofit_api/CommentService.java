@@ -13,7 +13,7 @@ public interface CommentService {
 
 
     @GET(CommonConfig.COMMENT_URL)
-    public void getCommentByPostId(@Query("where") String s,@Query("order") String orderby, Callback<String> callback);
+    public void getCommentByPostId(@Query("where") String s, @Query("order") String orderby, Callback<String> callback);
 
 
 

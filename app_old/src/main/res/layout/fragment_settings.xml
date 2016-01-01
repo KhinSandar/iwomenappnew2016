@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+            android:id="@+id/settings_language_setting_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:title="Change Language" />
+
+        <RadioGroup
+            android:id="@+id/settings_language"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/settings_english_language"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="ENGLISH" />
+
+            <RadioButton
+                android:id="@+id/settings_mm_zawgyi_language"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MYANMAR ZAWGYI" />
+            <RadioButton
+                android:id="@+id/settings_mm_unicode_language"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="MYANMAR UNICODE" />
+
+            <RadioButton
+                android:id="@+id/settings_mm_default_language"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DEFAULT" />
+
+        </RadioGroup>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_margin="16dp"
+            android:background="#c3c3c3" />
+
+        <CheckBox
+            android:id="@+id/settings_getnotification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="Get Notification" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_margin="16dp"
+            android:background="#c3c3c3" />
+
+        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+            android:id="@+id/settings_changeTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_marginLeft="18dp"
+            android:text="Change Theme"
+            android:textColor="@color/black" />
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <!--<TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=""/>-->
+
+            <RadioButton
+                android:id="@+id/setting_color_blue"
+                android:layout_width="@dimen/theme_color_icon_size_small"
+                android:layout_height="@dimen/theme_color_icon_size_small"
+                android:layout_margin="8dp"
+                android:background="@drawable/theme_blue_rb_background"
+                android:button="@android:color/transparent" />
+
+            <RadioButton
+                android:id="@+id/setting_color_yellow"
+                android:layout_width="@dimen/theme_color_icon_size_small"
+                android:layout_height="@dimen/theme_color_icon_size_small"
+                android:layout_margin="8dp"
+                android:background="@drawable/theme_yellow_rb_background"
+                android:button="@android:color/transparent" />
+
+            <RadioButton
+                android:id="@+id/setting_color_pink"
+                android:layout_width="@dimen/theme_color_icon_size_small"
+                android:layout_height="@dimen/theme_color_icon_size_small"
+                android:layout_margin="8dp"
+                android:background="@drawable/theme_pink_rb_background"
+                android:button="@android:color/transparent"/>
+
+        </RadioGroup>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_margin="16dp"
+            android:background="#c3c3c3" />
+
+
+    </LinearLayout>
+
+</ScrollView>

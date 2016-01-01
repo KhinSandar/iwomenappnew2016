@@ -23,4 +23,4 @@
         android:textColor="@color/body_text_1"
         android:visibility="gone"/><!--         android:text="@string/login_moto" -->
 
-</LinearLayout><!-- From: file:/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/ParseLoginUI/res/layout/com_parse_ui_parse_login_app_logo.xml -->
+</LinearLayout>

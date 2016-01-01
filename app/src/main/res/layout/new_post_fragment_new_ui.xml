@@ -242,7 +242,6 @@
                 android:layout_height="240dp"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
-                android:src="@drawable/snackbar_background"
                 android:visibility="gone" />
 
             <!--<ImageView
