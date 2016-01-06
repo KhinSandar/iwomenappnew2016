@@ -106,18 +106,7 @@ public class MainPhotoPostActivity extends ActionBarActivity {
         }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch(requestCode) {
-            case (100) : {
-                if (resultCode == Activity.RESULT_OK) {
-                    Toast.makeText(getApplicationContext(),data.getStringExtra("audio_file_name"), Toast.LENGTH_LONG ).show();
-                }
-                break;
-            }
-        }
-    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
