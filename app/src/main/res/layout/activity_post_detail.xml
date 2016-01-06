@@ -252,22 +252,6 @@
             android:visibility="visible">
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingLeft="@dimen/activity_vertical_margin">
-
-                <ImageView
-                    android:id="@+id/toggleEmojiIcon"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/ic_smiley"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginRight="8dp"/>
-
-            </LinearLayout>
-
-            <LinearLayout
                 android:layout_width="220dp"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -300,15 +284,74 @@
             </LinearLayout>
 
 
-
         </LinearLayout>
 
-        <!--<FrameLayout
-            android:id="@+id/emojicons"
-            android:visibility="gone"
-            android:layout_below="@+id/bottom_bar"
+        <LinearLayout
+            android:id="@+id/postdetail_ly_icons_holder"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="250dp"/>-->
+            android:layout_height="match_parent"
+            android:background="@color/light_blue_500">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/activity_vertical_margin">
+
+                <ImageView
+                    android:id="@+id/toggleEmojiIcon"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_smiley"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="8dp"/>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/activity_vertical_margin" >
+
+                <ImageView
+                    android:id="@+id/postdetail_img_sticker"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_launcher"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="8dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    <LinearLayout
+        android:id="@+id/postdetail_ly_sticker_holder"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:visibility="gone"
+        android:background="@color/light_blue_500">
+        <FrameLayout
+
+            android:id="@+id/content_frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+            <ScrollView
+                android:layout_width="fill_parent"
+                android:background="@color/line_color"
+                android:layout_height="fill_parent">
+
+                <include
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    layout="@layout/activity_talk_together_sticker_grid"></include>
+            </ScrollView>
+        </FrameLayout>
+        </LinearLayout>
+
+
     </LinearLayout>
 
 

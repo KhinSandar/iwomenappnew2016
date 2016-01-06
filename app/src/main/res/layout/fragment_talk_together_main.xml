@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/content_frame"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+<ScrollView
+    android:layout_width="fill_parent"
+    android:background="@color/line_color"
+    android:layout_height="fill_parent">
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        layout="@layout/fragment_talk_together_grid"></include>
+</ScrollView>
+</FrameLayout>

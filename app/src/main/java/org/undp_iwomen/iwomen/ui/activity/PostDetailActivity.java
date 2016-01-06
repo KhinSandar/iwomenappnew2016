@@ -1,5 +1,6 @@
 package org.undp_iwomen.iwomen.ui.activity;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
@@ -23,6 +24,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
@@ -64,6 +66,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
+import org.undp_iwomen.iwomen.data.CategoriesDataModel;
 import org.undp_iwomen.iwomen.data.CommentItem;
 import org.undp_iwomen.iwomen.data.FeedItem;
 import org.undp_iwomen.iwomen.database.TableAndColumnsName;
@@ -78,10 +81,13 @@ import org.undp_iwomen.iwomen.model.retrofit_api.CommentAPI;
 import org.undp_iwomen.iwomen.model.retrofit_api.UserPostAPI;
 import org.undp_iwomen.iwomen.provider.IwomenProviderData;
 import org.undp_iwomen.iwomen.ui.adapter.CommentAdapter;
+import org.undp_iwomen.iwomen.ui.adapter.StickerGridViewAdapter;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.ui.widget.ProgressWheel;
 import org.undp_iwomen.iwomen.ui.widget.ResizableImageView;
+import org.undp_iwomen.iwomen.ui.widget.WrappedGridView;
 import org.undp_iwomen.iwomen.utils.Connection;
+import org.undp_iwomen.iwomen.utils.StorageUtil;
 import org.undp_iwomen.iwomen.utils.Utils;
 
 import java.text.ParsePosition;
@@ -176,6 +182,21 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     //Emoji Keyboard
     public ImageView emojiIconToggle;
 
+    //Sticker
+    public ImageView stickerImg;
+    //Sticker LinearLayout
+    private LinearLayout ly_sticker_holder;
+
+    private StickerGridViewAdapter mAdapter;
+
+
+    //TODO for sticker grid show up
+    private WrappedGridView gridView;
+
+    private ArrayList<CategoriesDataModel> CategoriesModelList;
+    com.pnikosis.materialishprogress.ProgressWheel progress_wheel;
+    private StorageUtil storageUtil;
+
 
     private ShareDialog shareDialog;
     private static final String PERMISSION = "publish_actions";
@@ -260,6 +281,19 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         init();
         initEmojiIcon();
 
+        //Sticker Load
+        progress_wheel = (com.pnikosis.materialishprogress.ProgressWheel)findViewById(R.id.progress_wheel);
+        gridView = (WrappedGridView) findViewById(R.id.grid_view_cate); // Implement On Item click listener
+
+        //gridView.setLoadingView(progressBar);
+        progress_wheel.spin();
+        progress_wheel.setRimColor(Color.LTGRAY);
+        gridView.setLoadingView(progress_wheel);
+
+        storageUtil =StorageUtil.getInstance(getApplicationContext());
+        LoadData();
+
+
 
     }
 
@@ -324,10 +358,12 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         ly_postdetail_download = (LinearLayout) findViewById(R.id.detail_ly_download);
         ly_postdetail_audio = (LinearLayout) findViewById(R.id.detail_ly_listen_now);
         ly_media_main = (LinearLayout) findViewById(R.id.detail_ly_media_main);
+        ly_sticker_holder = (LinearLayout)findViewById(R.id.postdetail_ly_sticker_holder);
 
         img_player = (ImageView) findViewById(R.id.postdetail_img_player);
         txt_player = (TextView) findViewById(R.id.postdetail_player_text);
         emojiIconToggle = (ImageView) findViewById(R.id.toggleEmojiIcon);
+        stickerImg = (ImageView)findViewById(R.id.postdetail_img_sticker);
 
 
         shareButton = (ShareButton) findViewById(R.id.postdetail_fb_share_button);
@@ -423,6 +459,89 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
 
     }
+    public void LoadData(){
+        if(Connection.isOnline(getApplicationContext())){
+
+            //Parameter
+
+
+            CategoriesModelList = new ArrayList<CategoriesDataModel>();
+
+
+            CategoriesDataModel cat_model0 = new CategoriesDataModel("0","Calendar","http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-06f18fed-199e-4aa8-8e56-74475674cf84-applause-to-the-woman.png");
+            CategoriesModelList.add(cat_model0);
+
+
+            CategoriesDataModel cat_model = new CategoriesDataModel("1","Activities","http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-b06f0901-87c3-4f89-b52e-39eecf7f4fa5-unity-is-strength.png");
+            CategoriesModelList.add(cat_model);
+            CategoriesDataModel cat_model2 = new CategoriesDataModel("2","Livelihood","http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-b0069850-941d-460c-85f6-5c8631abca4f-lets-go.png");
+            CategoriesModelList.add(cat_model2);
+
+            CategoriesDataModel cat_model3 = new CategoriesDataModel("3","Q&A","http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-760c37e9-f739-4222-992c-d0f2232a61fa-dun-believe-the-rumour.png");
+            CategoriesModelList.add(cat_model3);
+
+            CategoriesDataModel cat_model4 = new CategoriesDataModel("4","Sample","http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-06f18fed-199e-4aa8-8e56-74475674cf84-applause-to-the-woman.png");
+            CategoriesModelList.add(cat_model4);
+
+            CategoriesDataModel cat_model5 = new CategoriesDataModel("4","Sample","http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-06f18fed-199e-4aa8-8e56-74475674cf84-applause-to-the-woman.png");
+            CategoriesModelList.add(cat_model5);
+
+
+
+            if(mAdapter == null){
+                mAdapter = new StickerGridViewAdapter(this,mContext, CategoriesModelList);
+
+            }
+            storageUtil.SaveArrayListToSD("Categories",CategoriesModelList);
+
+            //mAdapter.notifyDataSetChanged();
+            //progressBar.setVisibility(View.GONE);
+            progress_wheel.setVisibility(View.GONE);
+            gridView.setAdapter(mAdapter);
+
+
+
+
+        }else{
+
+            //Log.e("Categories API data", "Network failure case case");
+            Toast.makeText(mContext, "Check your network connection", Toast.LENGTH_SHORT).show();
+
+            CategoriesModelList = (ArrayList<CategoriesDataModel>)storageUtil.ReadArrayListFromSD("Categories");
+
+            if(CategoriesModelList.size() > 0){
+                mAdapter = new StickerGridViewAdapter(this,mContext, CategoriesModelList);
+                //mAdapter = new CategoryGridViewAdapter(getActivity(),ctx, (ArrayList<CategoriesDataModel>) createItems(0) );//CategoriesModelList
+                gridView.setAdapter(mAdapter);
+            }
+
+            //mAdapter.notifyDataSetChanged();
+        }
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+                                    long arg3) {
+                Toast.makeText(mContext, mAdapter.getItem(position), Toast.LENGTH_SHORT).show();
+
+                //popup.dismiss();
+                ly_sticker_holder.setVisibility(View.GONE);
+                InputMethodManager inputMethodManager = (InputMethodManager)  getSystemService(Activity.INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+
+                et_comment.setFocusableInTouchMode(false);
+                /*Intent i = new Intent(ctx, TLGUserStoriesRecentFragment.class);
+
+
+                i.putExtra("limit" , 20);
+                i.putExtra("catId", CategoriesModelList.get(position).category_id);
+                i.putExtra("catName",CategoriesModelList.get(position).category);
+
+                startActivity(i);*/
+
+            }
+        });
+
+    }
 
     public void initEmojiIcon() {
         boolean isLargerLollipop = (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP);
@@ -509,6 +628,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
             public void onClick(View v) {
                 //If popup is not showing => emoji keyboard is not visible, we need to show it
                 if (!popup.isShowing()) {
+                    ly_sticker_holder.setVisibility(View.GONE);
 
                     //If keyboard is visible, simply show the emoji popup
                     if (popup.isKeyBoardOpen()) {
@@ -532,6 +652,26 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                     popup.dismiss();
 
                 }
+            }
+        });
+        //Sticker icon onClickListern
+        stickerImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                popup.dismiss();
+
+                InputMethodManager inputMethodManager = (InputMethodManager)  getSystemService(Activity.INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+
+                et_comment.setFocusableInTouchMode(false);
+
+                KeyEvent event = new KeyEvent(
+                        0, 0, 0, KeyEvent.KEYCODE_DEL, 0, 0, 0, 0, KeyEvent.KEYCODE_ENDCALL);
+                et_comment.dispatchKeyEvent(event);
+
+                ly_sticker_holder.setVisibility(View.VISIBLE);
+
             }
         });
     }

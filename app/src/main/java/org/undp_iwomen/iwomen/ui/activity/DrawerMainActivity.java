@@ -53,6 +53,7 @@ import org.undp_iwomen.iwomen.ui.fragment.ResourcesFragment;
 import org.undp_iwomen.iwomen.ui.fragment.SettingsFragment;
 import org.undp_iwomen.iwomen.ui.fragment.SisterAppFragment;
 import org.undp_iwomen.iwomen.ui.fragment.TLGUserStoriesRecentFragment;
+import org.undp_iwomen.iwomen.ui.fragment.TalkTogetherCategoryFragment;
 import org.undp_iwomen.iwomen.ui.widget.AnimateCustomTextView;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.ui.widget.ProfilePictureView;
@@ -832,6 +833,8 @@ public class DrawerMainActivity extends BaseActionBarActivity {
         SisterAppFragment sisterAppFragment = new SisterAppFragment();
 
         TLGUserStoriesRecentFragment tlgUserStoriesRecentFragment = new TLGUserStoriesRecentFragment();
+
+        TalkTogetherCategoryFragment talkTogetherCategoryFragment = new TalkTogetherCategoryFragment();
         switch (position) {
             case 0://Categories 1
                 fragmentManager.beginTransaction().replace(R.id.content_frame, mainMaterialTab).commit();
@@ -847,7 +850,8 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                 break;
 
             case 3:
-                fragmentManager.beginTransaction().replace(R.id.content_frame, tlgUserStoriesRecentFragment).commit();
+                //tlgUserStoriesRecentFragment
+                fragmentManager.beginTransaction().replace(R.id.content_frame, talkTogetherCategoryFragment).commit();
                 setTitle(DrawerListName[position]);
                 break;
             case 4:
