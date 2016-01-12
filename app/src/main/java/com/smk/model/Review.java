@@ -3,7 +3,9 @@ package com.smk.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Review {
+import java.io.Serializable;
+
+public class Review implements Serializable{
 
     @SerializedName("user_id")
     @Expose
@@ -14,6 +16,9 @@ public class Review {
     @SerializedName("function")
     @Expose
     private String function;
+    @SerializedName("review")
+    @Expose
+    private String review;
     @SerializedName("updated_at")
     @Expose
     private String updatedAt;
@@ -76,6 +81,14 @@ public class Review {
      */
     public void setFunction(String function) {
         this.function = function;
+    }
+
+    public String getReview() {
+        return review;
+    }
+
+    public void setReview(String review) {
+        this.review = review;
     }
 
     /**

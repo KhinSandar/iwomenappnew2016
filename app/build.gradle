@@ -97,6 +97,9 @@ dependencies {
     //compile 'com.google.android.gms:play-services:8.1.0'
     compile 'com.android.support:multidex:1.0.0'
 
+    compile 'com.mikepenz:iconics-core:2.5.4@aar'
+    compile 'com.mikepenz:fontawesome-typeface:4.5.0.1@aar'
+
 
 
 }

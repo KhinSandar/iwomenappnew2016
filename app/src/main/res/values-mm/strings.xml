@@ -244,6 +244,9 @@
     <string name="str_talk_together">Talk Together</string>
     <string name="str_ok">OK</string>
     <string name="str_not_now">Not Now</string>
+    <string name="str_write_reviews">Please Write Your Reviews !</string>
+    <string name="str_your_review">Your Review</string>
+    <string name="str_submit">Submit</string>
 
 
 </resources>

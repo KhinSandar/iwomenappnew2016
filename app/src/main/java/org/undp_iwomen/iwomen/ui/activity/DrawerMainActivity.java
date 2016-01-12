@@ -31,11 +31,13 @@ import com.makeramen.RoundedImageView;
 import com.parse.ParseUser;
 import com.parse.ui.ParseLoginBuilder;
 import com.parse.utils.Utils;
+import com.smk.application.StoreUtil;
 import com.smk.clientapi.NetworkEngine;
 import com.smk.iwomen.BaseActionBarActivity;
 import com.smk.iwomen.CompetitionNewGameActivity;
 import com.smk.iwomen.CompetitionWinnerGroupActivity;
 import com.smk.model.CompetitionQuestion;
+import com.smk.model.Review;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -131,6 +133,17 @@ public class DrawerMainActivity extends BaseActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // For checking rating & reviews control;
+        UsageCount = StoreUtil.getInstance().selectFrom("usage"+versionCode);
+        if(UsageCount != null && UsageCount > 0){
+            UsageCount = StoreUtil.getInstance().saveTo("usage"+versionCode, UsageCount + 1);
+            Log.i("Usage Count:","Usage : "+ UsageCount);
+        }
+        else
+            UsageCount = StoreUtil.getInstance().saveTo("usage"+versionCode, 1);
+
+
         FacebookSdk.sdkInitialize(getApplicationContext());
         // Initialize the SDK before executing any other operations,
         // especially, if you're using Facebook UI elements.
@@ -248,10 +261,13 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                         mEditorUserInfo.putString(CommonConfig.USER_PH, userPH);
 
                         mEditorUserInfo.commit();
+
+
                     }
 
                     user_name = mSharedPreferencesUserInfo.getString(CommonConfig.USER_NAME, null);
                     user_obj_id = mSharedPreferencesUserInfo.getString(CommonConfig.USER_OBJ_ID, null);
+
 
                     //TODO 1
                     getCompetitionQuestion();
@@ -1073,7 +1089,15 @@ public class DrawerMainActivity extends BaseActionBarActivity {
 
     @Override
     public void onBackPressed() {
-
-        showReviewDialog(user_obj_id);
+        Log.i("Reviews", "Reviews : here");
+        if(user_obj_id != null){
+            Review review = StoreUtil.getInstance().selectFrom(user_obj_id+versionCode);
+            Log.i("Reviews", "Reviews :"+ review);
+            if(review == null && UsageCount > 3){
+                showReviewDialog(user_obj_id);
+            }else{
+                finish();
+            }
+        }
     }
 }

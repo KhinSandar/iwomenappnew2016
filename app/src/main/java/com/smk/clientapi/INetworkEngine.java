@@ -4,6 +4,7 @@ import com.smk.model.APKVersion;
 import com.smk.model.Answer;
 import com.smk.model.CompetitionQuestion;
 import com.smk.model.GroupUser;
+import com.smk.model.Rating;
 import com.smk.model.Review;
 
 import java.util.List;
@@ -60,7 +61,7 @@ public interface INetworkEngine {
 	@GET("/api-v1/review")
 	void getReview(
 			@Query("function") String function,
-			Callback<Integer> callback);
+			Callback<Rating> callback);
 
 	@FormUrlEncoded
 	@POST("/api-v1/review")
@@ -68,6 +69,7 @@ public interface INetworkEngine {
 			@Field("user_id") String user_id,
 			@Field("ratings") Double ratings,
 			@Field("function") String function,
+			@Field("review") String review,
 			Callback<Review> callback);
 
 	

@@ -39,6 +39,7 @@ import com.parse.ParseQuery;
 import com.pnikosis.materialishprogress.ProgressWheel;
 import com.smk.clientapi.NetworkEngine;
 import com.smk.iwomen.BaseActionBarActivity;
+import com.smk.model.Rating;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -86,7 +87,7 @@ public class TLGUserStoriesRecentFragment extends Fragment implements View.OnCli
     private int offsetlimit = 10;
     private int skipLimit = 0;
     private Menu menu;
-    private Integer  avgRatings;
+    private Rating avgRatings;
 
     public TLGUserStoriesRecentFragment() {
         // Empty constructor required for fragment subclasses
@@ -437,13 +438,13 @@ public class TLGUserStoriesRecentFragment extends Fragment implements View.OnCli
     }
 
     public void getReview(){
-        NetworkEngine.getInstance().getReview("Talk Together", new Callback<Integer>() {
+        NetworkEngine.getInstance().getReview("Talk Together", new Callback<Rating>() {
 
 
             @Override
-            public void success(Integer arg0, Response response) {
+            public void success(Rating arg0, Response response) {
                 menu.findItem(R.id.action_rating).setVisible(true);
-                menu.findItem(R.id.action_rating).setIcon(BaseActionBarActivity.getRatingIcon(arg0));
+                menu.findItem(R.id.action_rating).setIcon(BaseActionBarActivity.getRatingIcon(arg0.getTotalRatings()));
                 avgRatings = arg0;
             }
 
@@ -458,14 +459,18 @@ public class TLGUserStoriesRecentFragment extends Fragment implements View.OnCli
         final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
         View convertView = View.inflate(getActivity(),R.layout.dialog_reviews_detial,null);
         TextView txt_avg_title = (TextView ) convertView.findViewById(R.id.txt_avg_title);
+        TextView txt_total_rating = (TextView ) convertView.findViewById(R.id.txt_total_rating);
         RatingBar avg_ratings = (RatingBar) convertView.findViewById(R.id.avg_ratings);
         TextView txt_avg_ratings = (TextView) convertView.findViewById(R.id.txt_avg_ratings);
+        TextView txt_rating_desc = (TextView) convertView.findViewById(R.id.txt_rating_desc);
         Button btn_ok = (Button)convertView.findViewById(R.id.btn_ok);
         alertDialog.setView(convertView);
 
         txt_avg_title.setText("Talk Together");
-        avg_ratings.setRating(avgRatings);
-        txt_avg_ratings.setText(BaseActionBarActivity.getRatingDesc(avgRatings) + ": " + avgRatings + "/5 Ratings");
+        txt_total_rating.setText(avgRatings.getTotalRatings()+"");
+        avg_ratings.setRating(avgRatings.getTotalRatings().floatValue());
+        txt_rating_desc.setText(BaseActionBarActivity.getRatingDesc(avgRatings.getTotalRatings()));
+        txt_avg_ratings.setText(avgRatings.getTotalUsers() + " Total");
 
         final AlertDialog ad = alertDialog.show();
 

@@ -783,7 +783,6 @@ public class MainPhotoIWomenPostFragment extends Fragment implements ImageChoose
         }
     }
 
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK && requestCode == UPLOAD_AUDIO) {

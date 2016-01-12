@@ -39,6 +39,7 @@ import com.parse.ParseQuery;
 import com.pnikosis.materialishprogress.ProgressWheel;
 import com.smk.clientapi.NetworkEngine;
 import com.smk.iwomen.BaseActionBarActivity;
+import com.smk.model.Rating;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -86,7 +87,7 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
     private int offsetlimit = 3;
     private int skipLimit = 0;
     private Menu menu;
-    private static Integer avgRatings;
+    private static Rating avgRatings;
 
     public StoriesMostLikesFragment() {
         // Empty constructor required for fragment subclasses
@@ -362,8 +363,12 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
         inflater.inflate(R.menu.refresh_menu, menu);
 
         this.menu = menu;
-        //if(avgRatings == null)
-            //this.menu.findItem(R.id.action_rating).setVisible(false);
+        if(StoriesRecentFragment.avgRatings != null){
+            this.menu.findItem(R.id.action_rating).setVisible(true);
+            this.menu.findItem(R.id.action_rating).setIcon(BaseActionBarActivity.getRatingIcon(StoriesRecentFragment.avgRatings.getTotalRatings()));
+
+        }
+
 
         final MenuItem item = menu.add(0, 12, 0, "Search");
         //menu.removeItem(12);
@@ -459,14 +464,14 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
 
     public void getReview(){
 
-        NetworkEngine.getInstance().getReview("Be Inspired", new Callback<Integer>() {
+        NetworkEngine.getInstance().getReview("Be Inspired", new Callback<Rating>() {
 
 
             @Override
-            public void success(Integer arg0, Response response) {
+            public void success(Rating arg0, Response response) {
                 Log.i("","Hello : "+ arg0);
                 //menu.findItem(R.id.action_rating).setVisible(true);
-                //menu.findItem(R.id.action_rating).setIcon(BaseActionBarActivity.getRatingIcon(arg0));
+                //menu.findItem(R.id.action_rating).setIcon(BaseActionBarActivity.getRatingIcon(arg0.getTotalRatings()));
                 avgRatings = arg0;
             }
 
@@ -481,14 +486,18 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
         final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
         View convertView = View.inflate(getActivity(),R.layout.dialog_reviews_detial,null);
         TextView txt_avg_title = (TextView ) convertView.findViewById(R.id.txt_avg_title);
+        TextView txt_total_rating = (TextView ) convertView.findViewById(R.id.txt_total_rating);
         RatingBar avg_ratings = (RatingBar) convertView.findViewById(R.id.avg_ratings);
         TextView txt_avg_ratings = (TextView) convertView.findViewById(R.id.txt_avg_ratings);
+        TextView txt_rating_desc = (TextView) convertView.findViewById(R.id.txt_rating_desc);
         Button btn_ok = (Button)convertView.findViewById(R.id.btn_ok);
         alertDialog.setView(convertView);
 
-        txt_avg_title.setText("Be Inspired");
-        avg_ratings.setRating(avgRatings);
-        txt_avg_ratings.setText(BaseActionBarActivity.getRatingDesc(avgRatings) + ": " + avgRatings + "/5 Ratings");
+        txt_avg_title.setText("Overall Rating Be Inspired");
+        txt_total_rating.setText(avgRatings.getTotalRatings()+"");
+        avg_ratings.setRating(avgRatings.getTotalRatings().floatValue());
+        txt_rating_desc.setText(BaseActionBarActivity.getRatingDesc(avgRatings.getTotalRatings()));
+        txt_avg_ratings.setText(avgRatings.getTotalUsers() + " Total");
 
         final AlertDialog ad = alertDialog.show();
 

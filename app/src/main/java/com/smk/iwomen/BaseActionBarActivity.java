@@ -14,10 +14,13 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RatingBar;
+
 import com.nullwire.trace.ExceptionHandler;
 import com.path.android.jobqueue.JobManager;
 import com.smk.application.DownloadManager;
+import com.smk.application.StoreUtil;
 import com.smk.clientapi.NetworkEngine;
 import com.smk.model.APKVersion;
 import com.smk.model.Download;
@@ -37,6 +40,8 @@ public class BaseActionBarActivity extends AppCompatActivity{
 	private NotificationManager mNotifyManager;
 	private Builder mBuilder;
 	private static boolean isCheckedVersion = false;
+	public Integer  UsageCount = 0;
+	public int versionCode = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +49,17 @@ public class BaseActionBarActivity extends AppCompatActivity{
 		super.onCreate(savedInstanceState);
 		ExceptionHandler.register(this, "http://128.199.70.154/api-v1/error_report");
 		// TODO it is for non application market.
+		try {
+			versionCode = getPackageManager().getPackageInfo(getPackageName(), 0).versionCode;
+		}catch (NameNotFoundException e){
+
+		}
 
 		checkAPKVersion();
 
+
 	}
-	
+
 	private void checkAPKVersion(){
 		
 		NetworkEngine.getInstance().getAPKVersion("", new Callback<APKVersion>() {
@@ -58,7 +69,7 @@ public class BaseActionBarActivity extends AppCompatActivity{
 				// TODO Auto-generated method stub
 				try {
 					isCheckedVersion = true;
-					int versionCode = getPackageManager().getPackageInfo(getPackageName(), 0).versionCode;
+
 
 					if(arg0 != null) {
 
@@ -105,9 +116,7 @@ public class BaseActionBarActivity extends AppCompatActivity{
 
 						}
 					}
-				} catch (NameNotFoundException e) {
-
-				}catch (NullPointerException ex){
+				} catch (NullPointerException ex){
 					//ex.printStackTrace();
 				}
 				
@@ -145,10 +154,28 @@ public class BaseActionBarActivity extends AppCompatActivity{
 			@Override
 			public void onClick(View v) {
 
-				postReview(userId, Double.valueOf(be_inspired.getRating()), "Be Inspired");
-				postReview(userId, Double.valueOf(be_knowledgeable.getRating()), "Be Knowledgeable");
-				postReview(userId, Double.valueOf(be_together.getRating()), "Be Together");
-				postReview(userId, Double.valueOf(talk_together.getRating()), "Talk Together");
+				showFeedbackDialog(userId, Double.valueOf(be_inspired.getRating()), Double.valueOf(be_knowledgeable.getRating()), Double.valueOf(be_together.getRating()), Double.valueOf(talk_together.getRating()));
+
+			}
+		});
+	}
+
+	public void showFeedbackDialog(final String userId, final Double be_inspired_rate, final Double be_knowledgeable, final Double be_together, final Double talk_together){
+		final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+		View convertView = View.inflate(this,R.layout.dialog_feedback,null);
+		final EditText feedback = (EditText) convertView.findViewById(R.id.edt_review);
+		Button btn_ok = (Button)convertView.findViewById(R.id.btn_ok);
+		alertDialog.setView(convertView);
+		alertDialog.show();
+
+		btn_ok.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+
+				postReview(userId, be_inspired_rate, "Be Inspired", feedback.getText().toString());
+				postReview(userId, be_knowledgeable, "Be Knowledgeable", feedback.getText().toString());
+				postReview(userId, be_together, "Be Together", feedback.getText().toString());
+				postReview(userId, talk_together, "Talk Together", feedback.getText().toString());
 
 				finish();
 
@@ -156,59 +183,51 @@ public class BaseActionBarActivity extends AppCompatActivity{
 		});
 	}
 
-	public static int getRatingIcon(Integer ratings){
+	public static int getRatingIcon(Double ratings){
 		int ratingOf = 0;
-		switch (ratings){
-			case 1:
-				ratingOf = R.drawable.ic_stars_1;
-				break;
-			case 2:
-				ratingOf = R.drawable.ic_stars_2;
-				break;
-			case 3:
-				ratingOf = R.drawable.ic_stars_3;
-				break;
-			case 4:
-				ratingOf = R.drawable.ic_stars_4;
-				break;
-			case 5:
-				ratingOf = R.drawable.ic_stars_5;
-				break;
-			default:
-				break;
+		if(ratings >0 && ratings <= 1.5){
+			ratingOf = R.drawable.ic_stars_1;
+		}
+		if(ratings >1.5 && ratings <= 2.5){
+			ratingOf = R.drawable.ic_stars_2;
+		}
+		if(ratings >2.5 && ratings <= 3.5){
+			ratingOf = R.drawable.ic_stars_3;
+		}
+		if(ratings >3.5 && ratings <= 4.5){
+			ratingOf = R.drawable.ic_stars_4;
+		}
+		if(ratings >4.5) {
+			ratingOf = R.drawable.ic_stars_5;
 		}
 		return ratingOf;
 	}
 
-	public static String getRatingDesc(Integer ratings){
-		String ratingOfDesc = null;
-		switch (ratings){
-			case 1:
-				ratingOfDesc = "Poor";
-				break;
-			case 2:
-				ratingOfDesc = "Fair";
-				break;
-			case 3:
-				ratingOfDesc = "Good";
-				break;
-			case 4:
-				ratingOfDesc = "Very Good";
-				break;
-			case 5:
-				ratingOfDesc = "Excellent";
-				break;
-			default:
-				break;
+	public static String getRatingDesc(Double ratings){
+		String ratingOfDesc = "";
+		if(ratings >0 && ratings <= 1.5){
+			ratingOfDesc = "Poor";
+		}
+		if(ratings >1.5 && ratings <= 2.5){
+			ratingOfDesc = "Fair";
+		}
+		if(ratings >2.5 && ratings <= 3.5){
+			ratingOfDesc = "Good";
+		}
+		if(ratings >3.5 && ratings <= 4.5){
+			ratingOfDesc = "Very Good";
+		}
+		if(ratings >4.5) {
+			ratingOfDesc = "Excellent";
 		}
 		return ratingOfDesc;
 	}
 
-	public void postReview(String userId, Double ratings, String function){
-		NetworkEngine.getInstance().postReview(userId, ratings, function, new Callback<Review>() {
+	public void postReview(final String userId, Double ratings, String function, String review){
+		NetworkEngine.getInstance().postReview(userId, ratings, function, review, new Callback<Review>() {
 			@Override
 			public void success(Review review, Response response) {
-
+				StoreUtil.getInstance().saveTo(userId+versionCode, review);
 			}
 
 			@Override
