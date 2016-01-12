@@ -16,6 +16,13 @@
 
 package com.skd.androidrecording.audio;
 
+import android.media.AudioFormat;
+import android.media.AudioRecord;
+import android.media.MediaRecorder.AudioSource;
+
+import com.skd.androidrecording.fft.Complex;
+import com.skd.androidrecording.fft.FFT;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -23,12 +30,6 @@ import java.io.IOException;
 
 import simplesound.pcm.PcmAudioHelper;
 import simplesound.pcm.WavAudioFormat;
-import android.media.AudioFormat;
-import android.media.AudioRecord;
-import android.media.MediaRecorder.AudioSource;
-
-import com.skd.androidrecording.fft.Complex;
-import com.skd.androidrecording.fft.FFT;
 
 /*
  * Takes a portion of PCM encoded audio signal (from microphone while recording),

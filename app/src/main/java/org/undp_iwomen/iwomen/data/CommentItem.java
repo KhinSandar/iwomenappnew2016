@@ -9,12 +9,14 @@ public class CommentItem {
     private String _user_name;
     private String _comment_message;
     private String _timestamp;
+    private String _sticker_picture;
 
-    public CommentItem(String profile_picture, String _user_name, String comment_message, String timestamp){
+    public CommentItem(String profile_picture, String _user_name, String comment_message, String timestamp,String sticker_path){
         this._profile_picture = profile_picture;
         this._user_name = _user_name;
         this._comment_message = comment_message;
         this._timestamp = timestamp;
+        this._sticker_picture = sticker_path;
     }
 
     public String get_profile_picture() {
@@ -39,6 +41,14 @@ public class CommentItem {
 
     public void set_comment_message(String _comment_message) {
         this._comment_message = _comment_message;
+    }
+
+    public String get_sticker_picture() {
+        return _sticker_picture;
+    }
+
+    public void set_sticker_picture(String _sticker_picture) {
+        this._sticker_picture = _sticker_picture;
     }
 
     public String get_timestamp() {

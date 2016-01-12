@@ -78,5 +78,45 @@
         android:text="30 mins ago"
         android:layout_alignParentRight="true"
         android:layout_alignBottom="@id/custom_comment_message"/>
+    <FrameLayout
+        android:id="@+id/custom_comment_sticker_ly"
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/custom_comment_timestamp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_toRightOf="@id/custom_comment_profilepicture_ly"
+        android:layout_width="@dimen/feed_item_sticker_pic"
+        android:layout_height="@dimen/feed_item_sticker_pic">
+
+
+        <com.makeramen.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/custom_comment_sticker_img"
+            android:layout_width="@dimen/feed_item_sticker_pic"
+            android:layout_height="@dimen/feed_item_sticker_pic"
+
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/blank_profile"
+            android:visibility="visible"
+            app:riv_border_color="#333333"
+            app:riv_border_width="0dip"
+            app:riv_corner_radius="30dip"
+            app:riv_mutate_background="true"
+            app:riv_oval="true"></com.makeramen.RoundedImageView>
+
+        <ProgressBar
+            android:id="@+id/custom_comment_sticker_progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="@dimen/feed_item_sticker_pic"
+            android:layout_height="@dimen/feed_item_sticker_pic"
+
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="left"
+            android:visibility="visible" />
+    </FrameLayout>
 
 </RelativeLayout>

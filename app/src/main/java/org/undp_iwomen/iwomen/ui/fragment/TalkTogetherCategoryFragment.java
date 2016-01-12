@@ -2,6 +2,7 @@ package org.undp_iwomen.iwomen.ui.fragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.data.CategoriesDataModel;
+import org.undp_iwomen.iwomen.ui.activity.TalkTogetherMainActivity;
 import org.undp_iwomen.iwomen.ui.adapter.TalkTogetherGridViewAdapter;
 import org.undp_iwomen.iwomen.ui.widget.WrappedGridView;
 import org.undp_iwomen.iwomen.utils.Connection;
@@ -174,17 +176,18 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
             public void onItemClick(AdapterView<?> arg0, View arg1, int position,
                                     long arg3) {
                 //Toast.makeText(ctx, mAdapter.getItem(position), Toast.LENGTH_SHORT).show();
-                TLGUserStoriesRecentFragment tlgUserStoriesRecentFragment = new TLGUserStoriesRecentFragment();
+                /*TLGUserStoriesRecentFragment tlgUserStoriesRecentFragment = new TLGUserStoriesRecentFragment();
                 android.support.v4.app.FragmentManager fragmentManager = getChildFragmentManager();// getSupportFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.content_frame, tlgUserStoriesRecentFragment).commit();
-                /*Intent i = new Intent(ctx, TLGUserStoriesRecentFragment.class);
+                */
+
+                Intent i = new Intent(ctx, TalkTogetherMainActivity.class);
 
 
-                i.putExtra("limit" , 20);
-                i.putExtra("catId", CategoriesModelList.get(position).category_id);
-                i.putExtra("catName",CategoriesModelList.get(position).category);
 
-                startActivity(i);*/
+                i.putExtra("CategoryName", CategoriesModelList.get(position).category);//CategoryName
+
+                startActivity(i);
 
             }
         });

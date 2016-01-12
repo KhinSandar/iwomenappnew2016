@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -60,6 +61,10 @@ public class CommentAdapter extends BaseAdapter {
             vh.tv_message = (EmojiconTextView) view.findViewById(R.id.custom_comment_message);
             vh.tv_timestamp = (TextView) view.findViewById(R.id.custom_comment_timestamp);
             vh.progressBar = (ProgressBar)view.findViewById(R.id.custom_comment_progressBar);
+
+            vh.ly_sticker = (FrameLayout)view.findViewById(R.id.custom_comment_sticker_ly);
+            vh.stickerView = (RoundedImageView)view.findViewById(R.id.custom_comment_sticker_img);
+            vh.stickerProgressBar = (ProgressBar)view.findViewById(R.id.custom_comment_sticker_progressBar);
             view.setTag(vh);
 
         }else{
@@ -94,6 +99,38 @@ public class CommentAdapter extends BaseAdapter {
             vh.progressBar.setVisibility(View.GONE);
         }
 
+
+        //Log.e("adapter==","==>"+ datalist.get(i).get_profile_picture());
+        if (datalist.get(i).get_sticker_picture() != null && !datalist.get(i).get_sticker_picture().isEmpty() && datalist.get(i).get_sticker_picture() != "" && datalist.get(i).get_sticker_picture() != "null") {
+
+            //Log.e("adapter==","=if=>"+ datalist.get(i).get_profile_picture());
+            try {
+
+                Picasso.with(mActivity)
+                        .load(datalist.get(i).get_sticker_picture()) //"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
+                        .placeholder(R.drawable.blank_profile)
+                        .error(R.drawable.blank_profile)
+                        .into(vh.stickerView, new ImageLoadedCallback(vh.stickerProgressBar) {
+                            @Override
+                            public void onSuccess() {
+                                if (this.progressBar != null) {
+                                    this.progressBar.setVisibility(View.GONE);
+                                } else {
+                                    this.progressBar.setVisibility(View.VISIBLE);
+                                }
+                            }
+
+                        });
+            } catch (OutOfMemoryError outOfMemoryError) {
+                outOfMemoryError.printStackTrace();
+            }
+        } else {
+            //Log.e("adapter==","=else=>"+ datalist.get(i).get_profile_picture());
+            vh.stickerProgressBar.setVisibility(View.GONE);
+            vh.ly_sticker.setVisibility(View.GONE);
+
+        }
+
         vh.tv_name.setText(datalist.get(i).get_user_name());
         vh.tv_message.setText(datalist.get(i).get_comment_message());
         vh.tv_timestamp.setText(datalist.get(i).get_timestamp());
@@ -102,11 +139,12 @@ public class CommentAdapter extends BaseAdapter {
     }
 
     public class ViewHolder{
-        RoundedImageView pictureView;
+        RoundedImageView pictureView,stickerView;
         TextView tv_name , tv_timestamp;
         EmojiconTextView tv_message;
 
-        ProgressBar progressBar;
+        ProgressBar progressBar,stickerProgressBar;
+        FrameLayout ly_sticker;
     }
 
     private class ImageLoadedCallback implements com.squareup.picasso.Callback {
