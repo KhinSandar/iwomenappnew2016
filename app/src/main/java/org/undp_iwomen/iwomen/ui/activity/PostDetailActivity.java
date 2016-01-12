@@ -282,7 +282,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         initEmojiIcon();
 
         //Sticker Load
-        progress_wheel = (com.pnikosis.materialishprogress.ProgressWheel)findViewById(R.id.progress_wheel);
+        progress_wheel = (com.pnikosis.materialishprogress.ProgressWheel) findViewById(R.id.progress_wheel);
         gridView = (WrappedGridView) findViewById(R.id.grid_view_cate); // Implement On Item click listener
 
         //gridView.setLoadingView(progressBar);
@@ -290,9 +290,8 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         progress_wheel.setRimColor(Color.LTGRAY);
         gridView.setLoadingView(progress_wheel);
 
-        storageUtil =StorageUtil.getInstance(getApplicationContext());
+        storageUtil = StorageUtil.getInstance(getApplicationContext());
         LoadData();
-
 
 
     }
@@ -358,12 +357,12 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         ly_postdetail_download = (LinearLayout) findViewById(R.id.detail_ly_download);
         ly_postdetail_audio = (LinearLayout) findViewById(R.id.detail_ly_listen_now);
         ly_media_main = (LinearLayout) findViewById(R.id.detail_ly_media_main);
-        ly_sticker_holder = (LinearLayout)findViewById(R.id.postdetail_ly_sticker_holder);
+        ly_sticker_holder = (LinearLayout) findViewById(R.id.postdetail_ly_sticker_holder);
 
         img_player = (ImageView) findViewById(R.id.postdetail_img_player);
         txt_player = (TextView) findViewById(R.id.postdetail_player_text);
         emojiIconToggle = (ImageView) findViewById(R.id.toggleEmojiIcon);
-        stickerImg = (ImageView)findViewById(R.id.postdetail_img_sticker);
+        stickerImg = (ImageView) findViewById(R.id.postdetail_img_sticker);
 
 
         shareButton = (ShareButton) findViewById(R.id.postdetail_fb_share_button);
@@ -459,8 +458,9 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
 
     }
-    public void LoadData(){
-        if(Connection.isOnline(getApplicationContext())){
+
+    public void LoadData() {
+        if (Connection.isOnline(getApplicationContext())) {
 
             //Parameter
 
@@ -468,31 +468,30 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
             CategoriesModelList = new ArrayList<CategoriesDataModel>();
 
 
-            CategoriesDataModel cat_model0 = new CategoriesDataModel("0","Calendar","http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-06f18fed-199e-4aa8-8e56-74475674cf84-applause-to-the-woman.png");
+            CategoriesDataModel cat_model0 = new CategoriesDataModel("0", "Calendar", "http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-06f18fed-199e-4aa8-8e56-74475674cf84-applause-to-the-woman.png");
             CategoriesModelList.add(cat_model0);
 
 
-            CategoriesDataModel cat_model = new CategoriesDataModel("1","Activities","http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-b06f0901-87c3-4f89-b52e-39eecf7f4fa5-unity-is-strength.png");
+            CategoriesDataModel cat_model = new CategoriesDataModel("1", "Activities", "http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-b06f0901-87c3-4f89-b52e-39eecf7f4fa5-unity-is-strength.png");
             CategoriesModelList.add(cat_model);
-            CategoriesDataModel cat_model2 = new CategoriesDataModel("2","Livelihood","http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-b0069850-941d-460c-85f6-5c8631abca4f-lets-go.png");
+            CategoriesDataModel cat_model2 = new CategoriesDataModel("2", "Livelihood", "http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-b0069850-941d-460c-85f6-5c8631abca4f-lets-go.png");
             CategoriesModelList.add(cat_model2);
 
-            CategoriesDataModel cat_model3 = new CategoriesDataModel("3","Q&A","http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-760c37e9-f739-4222-992c-d0f2232a61fa-dun-believe-the-rumour.png");
+            CategoriesDataModel cat_model3 = new CategoriesDataModel("3", "Q&A", "http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-760c37e9-f739-4222-992c-d0f2232a61fa-dun-believe-the-rumour.png");
             CategoriesModelList.add(cat_model3);
 
-            CategoriesDataModel cat_model4 = new CategoriesDataModel("4","Sample","http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-06f18fed-199e-4aa8-8e56-74475674cf84-applause-to-the-woman.png");
+            CategoriesDataModel cat_model4 = new CategoriesDataModel("4", "Sample", "http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-06f18fed-199e-4aa8-8e56-74475674cf84-applause-to-the-woman.png");
             CategoriesModelList.add(cat_model4);
 
-            CategoriesDataModel cat_model5 = new CategoriesDataModel("4","Sample","http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-06f18fed-199e-4aa8-8e56-74475674cf84-applause-to-the-woman.png");
+            CategoriesDataModel cat_model5 = new CategoriesDataModel("4", "Sample", "http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-06f18fed-199e-4aa8-8e56-74475674cf84-applause-to-the-woman.png");
             CategoriesModelList.add(cat_model5);
 
 
-
-            if(mAdapter == null){
-                mAdapter = new StickerGridViewAdapter(this,mContext, CategoriesModelList);
+            if (mAdapter == null) {
+                mAdapter = new StickerGridViewAdapter(this, mContext, CategoriesModelList);
 
             }
-            storageUtil.SaveArrayListToSD("Categories",CategoriesModelList);
+            storageUtil.SaveArrayListToSD("Categories", CategoriesModelList);
 
             //mAdapter.notifyDataSetChanged();
             //progressBar.setVisibility(View.GONE);
@@ -500,17 +499,15 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
             gridView.setAdapter(mAdapter);
 
 
-
-
-        }else{
+        } else {
 
             //Log.e("Categories API data", "Network failure case case");
             Toast.makeText(mContext, "Check your network connection", Toast.LENGTH_SHORT).show();
 
-            CategoriesModelList = (ArrayList<CategoriesDataModel>)storageUtil.ReadArrayListFromSD("Categories");
+            CategoriesModelList = (ArrayList<CategoriesDataModel>) storageUtil.ReadArrayListFromSD("Categories");
 
-            if(CategoriesModelList.size() > 0){
-                mAdapter = new StickerGridViewAdapter(this,mContext, CategoriesModelList);
+            if (CategoriesModelList.size() > 0) {
+                mAdapter = new StickerGridViewAdapter(this, mContext, CategoriesModelList);
                 //mAdapter = new CategoryGridViewAdapter(getActivity(),ctx, (ArrayList<CategoriesDataModel>) createItems(0) );//CategoriesModelList
                 gridView.setAdapter(mAdapter);
             }
@@ -525,11 +522,13 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
                 //popup.dismiss();
                 ly_sticker_holder.setVisibility(View.GONE);
-                InputMethodManager inputMethodManager = (InputMethodManager)  getSystemService(Activity.INPUT_METHOD_SERVICE);
+                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
                 inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
 
                 et_comment.setFocusableInTouchMode(false);
                 /*Intent i = new Intent(ctx, TLGUserStoriesRecentFragment.class);
+
+
 
 
                 i.putExtra("limit" , 20);
@@ -537,6 +536,63 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                 i.putExtra("catName",CategoriesModelList.get(position).category);
 
                 startActivity(i);*/
+
+
+                mProgressDialog.show();
+                Utils.doToastEng(getApplicationContext(), "Comment");
+                commentParse = new Comment();
+                if (et_comment.length() != 0) {
+                    commentParse.setcomment_contents(et_comment.getText().toString());
+                }
+
+                commentParse.setUserId(user_obj_id);
+
+                if (userprofile_Image_path != null) {
+                    commentParse.setUserImgPathName(userprofile_Image_path);
+                }
+
+                commentParse.setStickerImgPathName(CategoriesModelList.get(position).getImage_path());
+
+                commentParse.setUserName(user_name);
+                commentParse.setpostId(postId);
+
+                commentParse.setcomment_created_time(new Date());
+                /**Very Important */
+                ParseACL groupACL = new ParseACL();
+
+
+                groupACL.setPublicReadAccess(true);
+
+                commentParse.setACL(groupACL);
+                commentParse.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        if (e == null) {
+
+                            et_comment.setText("");
+
+                            mProgressDialog.dismiss();
+
+
+                            getTestCommentList();
+                            //TODO comment adapter notrifieddatasetchange
+
+
+                        } else {
+
+                            mProgressDialog.dismiss();
+
+
+                            Utils.doToastEng(getApplicationContext(), "Error saving: \" + e.getMessage()");
+                            //progressbackground.setVisibility(View.INVISIBLE);
+                            Toast.makeText(getApplicationContext(),
+                                    "Error saving: " + e.getMessage(),
+                                    Toast.LENGTH_LONG).show();
+
+                        }
+                    }
+                });
+
 
             }
         });
@@ -661,7 +717,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
                 popup.dismiss();
 
-                InputMethodManager inputMethodManager = (InputMethodManager)  getSystemService(Activity.INPUT_METHOD_SERVICE);
+                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
                 inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
 
                 et_comment.setFocusableInTouchMode(false);
@@ -701,6 +757,8 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
                     String comment_img_path;
 
+                    String comment_sticker_img_path;
+
                     try {
                         JSONObject whole_body = new JSONObject(s);
                         JSONArray result = whole_body.getJSONArray("results");
@@ -719,7 +777,13 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                             } else {
                                 comment_img_path = each_object.getString("user_img_path");
                             }
-                             if (each_object.isNull("user_name")) {
+                            if (each_object.isNull("sticker_img_path")) {
+                                comment_sticker_img_path = "null";
+                            } else {
+                                comment_sticker_img_path = each_object.getString("sticker_img_path");
+                            }
+
+                            if (each_object.isNull("user_name")) {
                                 comment_user_name = "null";
                             } else {
                                 comment_user_name = each_object.getString("user_name");
@@ -787,7 +851,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                                 TimeDiff.getTimeDifference(d0, d1, TimeDiff.TimeField.DAY));*/
 
 
-                            listComment.add(new CommentItem(comment_img_path, comment_user_name, comment, str_comment_time_long));
+                            listComment.add(new CommentItem(comment_img_path, comment_user_name, comment, str_comment_time_long,comment_sticker_img_path));
                             str_comment_time_long = "";
                         }
 
@@ -1617,7 +1681,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                         commentParse.setcomment_contents(et_comment.getText().toString());
                         commentParse.setUserId(user_obj_id);
 
-                        if(userprofile_Image_path != null ) {
+                        if (userprofile_Image_path != null) {
                             commentParse.setUserImgPathName(userprofile_Image_path);
                         }
                         commentParse.setUserName(user_name);

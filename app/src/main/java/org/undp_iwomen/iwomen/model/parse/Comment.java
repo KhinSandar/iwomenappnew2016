@@ -75,6 +75,14 @@ public class Comment extends ParseObject {
         put("user_name", user_name);
     }
 
+    public String getStickerImgPathName() {
+        return getString("sticker_img_path");
+    }
+
+    public void setStickerImgPathName(String sticker_img_path) {
+        put("sticker_img_path", sticker_img_path);
+    }
+
     public String getUserImgPathName() {
         return getString("user_img_path");
     }

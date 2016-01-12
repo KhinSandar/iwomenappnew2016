@@ -341,6 +341,7 @@
     <item format="float" name="disabled_alpha_material_dark" type="dimen">0.30</item>
     <item format="float" name="disabled_alpha_material_light" type="dimen">0.26</item>
     <dimen name="feed_item_profile_pic">50dp</dimen>
+    <dimen name="feed_item_sticker_pic">150dp</dimen>
     <dimen name="floating_action_button_elevation">4dp</dimen>
     <dimen name="floating_action_button_margin_mini">26dp</dimen>
     <dimen name="floating_action_button_margin_mini_minus">-26dp</dimen>

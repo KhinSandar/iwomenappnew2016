@@ -9,5 +9,7 @@
     <dimen name="com_parse_ui_small_horizontal_spacing">8dp</dimen>
     <dimen name="feed_item_profile_pic">50dp</dimen>
 
+    <dimen name="feed_item_sticker_pic">150dp</dimen>
+
 </resources>
 

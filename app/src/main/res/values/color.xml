@@ -38,6 +38,9 @@
     <color name="btn_bg_colorPrimary">#3F51B5</color>
     <color name="btn_bg_tranprimary">#B39BBD</color>
 
+    <color name="bg_category_text">#4a4a4a</color>
+    <color name="bg_category_item">#fafafa</color>
+
     <color name="line_color">#c3c3c3</color>
 
     <color name="video_button_bg">#E1E1E1</color>

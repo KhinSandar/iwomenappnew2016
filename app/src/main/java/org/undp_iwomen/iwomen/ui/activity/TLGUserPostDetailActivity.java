@@ -551,6 +551,7 @@ public class TLGUserPostDetailActivity extends BaseActionBarActivity implements 
                     String comment_created_time;
                     String comment_user_name;
                     String comment_img_path;
+                    String comment_sticker_img_path;
 
                     try {
                         JSONObject whole_body = new JSONObject(s);
@@ -575,6 +576,12 @@ public class TLGUserPostDetailActivity extends BaseActionBarActivity implements 
                                 comment_user_name = "null";
                             } else {
                                 comment_user_name = each_object.getString("user_name");
+                            }
+
+                            if (each_object.isNull("sticker_img_path")) {
+                                comment_sticker_img_path = "null";
+                            } else {
+                                comment_sticker_img_path = each_object.getString("sticker_img_path");
                             }
 
                             //Calculate Date Difference
@@ -639,7 +646,7 @@ public class TLGUserPostDetailActivity extends BaseActionBarActivity implements 
                                 TimeDiff.getTimeDifference(d0, d1, TimeDiff.TimeField.DAY));*/
 
 
-                            listComment.add(new CommentItem(comment_img_path, comment_user_name, comment, str_comment_time_long));
+                            listComment.add(new CommentItem(comment_img_path, comment_user_name, comment, str_comment_time_long,comment_sticker_img_path));
                             str_comment_time_long = "";
                         }
 

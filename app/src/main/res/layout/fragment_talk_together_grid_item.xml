@@ -1,14 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="vertical"
+
+        card_view:cardCornerRadius="4dp">
 
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" >
+        android:layout_centerHorizontal="true"
+        android:paddingBottom="5dp">
 
         <org.undp_iwomen.iwomen.ui.widget.SquareImageView
             android:id="@+id/img_cate"
@@ -40,9 +55,9 @@
             android:id="@+id/txt_cate_name"
             android:layout_gravity="center|bottom"
             android:textSize="21dp"
-            android:textColor="@color/primary_text"
+            android:textColor="@color/bg_category_text"
             android:textAlignment="center"
-            android:background="@color/white"
+            android:background="@color/bg_category_item"
             android:textStyle="bold"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
@@ -52,5 +67,5 @@
 
     </RelativeLayout>
 
-
-</RelativeLayout>
+</android.support.v7.widget.CardView>
+</LinearLayout>
