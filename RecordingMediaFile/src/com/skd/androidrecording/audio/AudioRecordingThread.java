@@ -63,51 +63,19 @@ public class AudioRecordingThread extends Thread {
 								    			  AudioFormat.ENCODING_PCM_16BIT);
     	audioBuffer = new byte[bufferSize];
     }
-
-    private static int[] mSampleRates = new int[] { 8000, 11025, 22050, 44100 ,4466 };
-    public AudioRecord findAudioRecord() {
-        for (int rate : mSampleRates) {
-            for (short audioFormat : new short[] { AudioFormat.ENCODING_PCM_8BIT, AudioFormat.ENCODING_PCM_16BIT }) {
-                for (short channelConfig : new short[] { AudioFormat.CHANNEL_IN_MONO, AudioFormat.CHANNEL_IN_STEREO }) {
-                    try {
-                            /*Log.d(C.TAG, "Attempting rate " + rate + "Hz, bits: " + audioFormat + ", channel: "
-                                    + channelConfig);*/
-                        int bufferSize = AudioRecord.getMinBufferSize(rate, channelConfig, audioFormat);
-
-                        if (bufferSize != AudioRecord.ERROR_BAD_VALUE) {
-                            // check if we can instantiate and have a success
-                            AudioRecord recorder = new AudioRecord(AudioSource.DEFAULT, rate, channelConfig, audioFormat, bufferSize);
-
-                            if (recorder.getState() == AudioRecord.STATE_INITIALIZED)
-                                return recorder;
-                        }
-                    } catch (Exception e) {
-                        //Log.e(C.TAG, rate + "Exception, keep trying.",e);
-                    }
-                }
-            }
-        }
-        return null;
-
-    }
     
     @Override
     public void run() {
     	FileOutputStream out = prepareWriting();
     	if (out == null) { return; }
     	
-    	/*AudioRecord record = new AudioRecord(AudioSource.VOICE_RECOGNITION, *//*AudioSource.MIC*//*
+    	AudioRecord record = new AudioRecord(AudioSource.VOICE_RECOGNITION, /*AudioSource.MIC*/
 							    			 SAMPLING_RATE,
 							    			 AudioFormat.CHANNEL_IN_MONO,
 							    			 AudioFormat.ENCODING_PCM_16BIT,
-
-							 					    			 bufferSize);*/
-
-
-        AudioRecord record = findAudioRecord();
-        //record.release();
-
-
+							    			 bufferSize);
+	    record.startRecording();
+	
 	    int read = 0;
 	    while (isRecording) {
     	    read = record.read(audioBuffer, 0, bufferSize);
@@ -121,10 +89,8 @@ public class AudioRecordingThread extends Thread {
         	proceed();
     	    write(out);
 	    }
-
-        record.startRecording();
-
-        record.stop();
+	      
+	    record.stop();
 	    record.release();
 	      
 	    finishWriting(out);

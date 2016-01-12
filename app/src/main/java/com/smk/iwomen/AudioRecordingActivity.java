@@ -96,6 +96,7 @@ public class AudioRecordingActivity extends AppCompatActivity {
         Intent intent = new Intent();
         intent.putExtra("audio_file_name", data);
         setResult(RESULT_OK, intent);
+        finish();
     }
 
     @Override
@@ -125,7 +126,7 @@ public class AudioRecordingActivity extends AppCompatActivity {
     }
 
     private UploadNotificationConfig getNotificationConfig() {
-       return new UploadNotificationConfig()
+        return new UploadNotificationConfig()
                 .setIcon(R.mipmap.ic_launcher)
                 .setTitle(getString(R.string.app_name))
                 .setInProgressMessage("Your recording audio is uploading.")

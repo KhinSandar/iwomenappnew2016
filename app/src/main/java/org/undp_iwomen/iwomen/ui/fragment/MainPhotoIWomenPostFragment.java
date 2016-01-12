@@ -1,5 +1,6 @@
 package org.undp_iwomen.iwomen.ui.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -422,6 +423,7 @@ public class MainPhotoIWomenPostFragment extends Fragment implements ImageChoose
     }
 
 
+
     private void uploadReportToParse() {
 
 
@@ -784,6 +786,9 @@ public class MainPhotoIWomenPostFragment extends Fragment implements ImageChoose
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == Activity.RESULT_OK && requestCode == UPLOAD_AUDIO) {
+            Toast.makeText(getActivity(), data.getStringExtra("audio_file_name").toString(), Toast.LENGTH_LONG ).show();
+        }
 
         if (resultCode == getActivity().RESULT_OK && (requestCode == ChooserType.REQUEST_PICK_PICTURE || requestCode == ChooserType.REQUEST_CAPTURE_PICTURE)) {
             if (imageChooserManager == null) {
