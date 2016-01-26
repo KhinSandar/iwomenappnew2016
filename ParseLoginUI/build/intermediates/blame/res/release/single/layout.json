@@ -1,259 +1,123 @@
 [
     {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_alert_dialog_material.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_alert_dialog_material.xml"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\design_navigation_item_header.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\layout\\design_navigation_item_header.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\notification_template_big_media.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\notification_template_big_media.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\custom_city_spinner_item.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\res\\layout\\custom_city_spinner_item.xml"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\cropimage.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\me.villani.lorenzo.android\\android-cropimage\\1.0.2\\res\\layout\\cropimage.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_search_dropdown_item_icons_2line.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_search_dropdown_item_icons_2line.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_popup_menu_item_layout.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_popup_menu_item_layout.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\design_layout_snackbar_include.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\layout\\design_layout_snackbar_include.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_select_dialog_material.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_select_dialog_material.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\design_layout_snackbar_include.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\layout\\design_layout_snackbar_include.xml"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\design_menu_item_action_area.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\layout\\design_menu_item_action_area.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\design_layout_snackbar.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\layout\\design_layout_snackbar.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_menu_layout.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_action_menu_layout.xml"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\com_parse_ui_parse_login_help_form.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\res\\layout\\com_parse_ui_parse_login_help_form.xml"
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_menu_layout.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_action_menu_layout.xml"
     },
     {
         "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\notification_template_part_chronometer.xml",
         "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\notification_template_part_chronometer.xml"
     },
     {
-        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_select_dialog_material.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_select_dialog_material.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\select_dialog_multichoice_material.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\select_dialog_multichoice_material.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\design_navigation_item_subheader.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\layout\\design_navigation_item_subheader.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\com_parse_ui_parse_login_help_fragment.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\res\\layout\\com_parse_ui_parse_login_help_fragment.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\com_parse_ui_parse_login_help_form.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\res\\layout\\com_parse_ui_parse_login_help_form.xml"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\notification_template_media.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\notification_template_media.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_dialog_title_material.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_dialog_title_material.xml"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\design_layout_tab_text.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\layout\\design_layout_tab_text.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\messenger_button_send_white_large.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.facebook.android\\facebook-android-sdk\\4.0.0\\res\\layout\\messenger_button_send_white_large.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_bar_up_container.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_action_bar_up_container.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\notification_template_part_time.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\notification_template_part_time.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\toolbar_actionbar.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\res\\layout\\toolbar_actionbar.xml"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_menu_layout.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_action_menu_layout.xml"
-    },
-    {
         "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_list_menu_item_radio.xml",
         "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_list_menu_item_radio.xml"
+    },
+    {
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\design_navigation_item_header.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\layout\\design_navigation_item_header.xml"
+    },
+    {
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\cropimage.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\me.villani.lorenzo.android\\android-cropimage\\1.0.2\\res\\layout\\cropimage.xml"
+    },
+    {
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_select_dialog_material.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_select_dialog_material.xml"
     },
     {
         "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\support_simple_spinner_dropdown_item.xml",
         "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\support_simple_spinner_dropdown_item.xml"
     },
     {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\messenger_button_send_blue_large.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.facebook.android\\facebook-android-sdk\\4.0.0\\res\\layout\\messenger_button_send_blue_large.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_bar_title_item.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_action_bar_title_item.xml"
-    },
-    {
         "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_alert_dialog_material.xml",
         "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_alert_dialog_material.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_activity_chooser_view_list_item.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_activity_chooser_view_list_item.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\cropimage.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\me.villani.lorenzo.android\\android-cropimage\\1.0.2\\res\\layout\\cropimage.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\notification_media_cancel_action.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\notification_media_cancel_action.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\select_dialog_item_material.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\select_dialog_item_material.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_screen_content_include.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_screen_content_include.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\design_navigation_item.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\layout\\design_navigation_item.xml"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_alert_dialog_button_bar_material.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_alert_dialog_button_bar_material.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_mode_bar.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_action_mode_bar.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\messenger_button_send_white_round.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.facebook.android\\facebook-android-sdk\\4.0.0\\res\\layout\\messenger_button_send_white_round.xml"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\com_parse_ui_parse_login_app_logo.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\res\\layout\\com_parse_ui_parse_login_app_logo.xml"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\select_dialog_multichoice_material.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\select_dialog_multichoice_material.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\messenger_button_send_blue_large.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.facebook.android\\facebook-android-sdk\\4.0.0\\res\\layout\\messenger_button_send_blue_large.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\com_facebook_login_fragment.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.facebook.android\\facebook-android-sdk\\4.0.0\\res\\layout\\com_facebook_login_fragment.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\com_parse_ui_parse_login_app_logo.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\res\\layout\\com_parse_ui_parse_login_app_logo.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\com_facebook_tooltip_bubble.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.facebook.android\\facebook-android-sdk\\4.0.0\\res\\layout\\com_facebook_tooltip_bubble.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\com_parse_ui_parse_login_third_party_section.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\res\\layout\\com_parse_ui_parse_login_third_party_section.xml"
     },
     {
         "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\design_layout_snackbar_include.xml",
         "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\layout\\design_layout_snackbar_include.xml"
     },
     {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_list_menu_item_layout.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_list_menu_item_layout.xml"
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\notification_template_media.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\notification_template_media.xml"
     },
     {
         "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\com_parse_ui_parse_signup_fragment.xml",
         "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\res\\layout\\com_parse_ui_parse_signup_fragment.xml"
     },
     {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\select_dialog_singlechoice_material.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\select_dialog_singlechoice_material.xml"
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_alert_dialog_button_bar_material.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_alert_dialog_button_bar_material.xml"
     },
     {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\design_layout_tab_text.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\layout\\design_layout_tab_text.xml"
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\design_menu_item_action_area.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\layout\\design_menu_item_action_area.xml"
     },
     {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\notification_template_part_time.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\notification_template_part_time.xml"
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\design_layout_tab_text.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\layout\\design_layout_tab_text.xml"
     },
     {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\messenger_button_send_blue_small.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.facebook.android\\facebook-android-sdk\\4.0.0\\res\\layout\\messenger_button_send_blue_small.xml"
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\com_parse_ui_parse_login_help_form.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\res\\layout\\com_parse_ui_parse_login_help_form.xml"
     },
     {
         "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\notification_media_action.xml",
         "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\notification_media_action.xml"
     },
     {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\com_parse_ui_parse_login_help_fragment.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\res\\layout\\com_parse_ui_parse_login_help_fragment.xml"
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\select_dialog_multichoice_material.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\select_dialog_multichoice_material.xml"
+    },
+    {
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\com_parse_ui_parse_login_app_logo.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\res\\layout\\com_parse_ui_parse_login_app_logo.xml"
+    },
+    {
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\custom_city_spinner_dropdown_item.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\res\\layout\\custom_city_spinner_dropdown_item.xml"
+    },
+    {
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\design_navigation_item.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\layout\\design_navigation_item.xml"
     },
     {
         "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\design_navigation_item_subheader.xml",
         "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\layout\\design_navigation_item_subheader.xml"
     },
     {
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\custom_city_spinner_item.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\res\\layout\\custom_city_spinner_item.xml"
+    },
+    {
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\design_navigation_menu.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\layout\\design_navigation_menu.xml"
+    },
+    {
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\com_parse_ui_parse_login_form.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\res\\layout\\com_parse_ui_parse_login_form.xml"
+    },
+    {
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\design_navigation_menu_item.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\layout\\design_navigation_menu_item.xml"
+    },
+    {
         "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\com_parse_ui_parse_login_fragment.xml",
         "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\res\\layout\\com_parse_ui_parse_login_fragment.xml"
     },
     {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_list_menu_item_checkbox.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_list_menu_item_checkbox.xml"
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\com_parse_ui_parse_signup_form.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\res\\layout\\com_parse_ui_parse_signup_form.xml"
+    },
+    {
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\design_layout_tab_icon.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\layout\\design_layout_tab_icon.xml"
     },
     {
         "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_bar_title_item.xml",
         "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_action_bar_title_item.xml"
     },
     {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_search_dropdown_item_icons_2line.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_search_dropdown_item_icons_2line.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\design_navigation_menu_item.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\layout\\design_navigation_menu_item.xml"
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_expanded_menu_layout.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_expanded_menu_layout.xml"
     },
     {
         "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_screen_simple.xml",
@@ -264,516 +128,100 @@
         "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_action_mode_close_item_material.xml"
     },
     {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_screen_simple.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_screen_simple.xml"
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\notification_media_cancel_action.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\notification_media_cancel_action.xml"
     },
     {
         "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_bar_up_container.xml",
         "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_action_bar_up_container.xml"
     },
     {
-        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_mode_bar.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_action_mode_bar.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\toolbar_actionbar.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\res\\layout\\toolbar_actionbar.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\com_parse_ui_parse_signup_fragment.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\res\\layout\\com_parse_ui_parse_signup_fragment.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\design_navigation_item_header.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\layout\\design_navigation_item_header.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\messenger_button_send_white_large.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.facebook.android\\facebook-android-sdk\\4.0.0\\res\\layout\\messenger_button_send_white_large.xml"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\design_navigation_menu_item.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\layout\\design_navigation_menu_item.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_activity_chooser_view.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_activity_chooser_view.xml"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\com_parse_ui_parse_signup_form.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\res\\layout\\com_parse_ui_parse_signup_form.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_mode_bar.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_action_mode_bar.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_expanded_menu_layout.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_expanded_menu_layout.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\custom_city_spinner_item.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\res\\layout\\custom_city_spinner_item.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_search_view.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_search_view.xml"
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_screen_simple_overlay_action_mode.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_screen_simple_overlay_action_mode.xml"
     },
     {
         "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\com_parse_ui_parse_login_third_party_section.xml",
         "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\res\\layout\\com_parse_ui_parse_login_third_party_section.xml"
     },
     {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\com_parse_ui_parse_login_app_logo.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\res\\layout\\com_parse_ui_parse_login_app_logo.xml"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\design_navigation_item.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\layout\\design_navigation_item.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\detailsview.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\me.villani.lorenzo.android\\android-cropimage\\1.0.2\\res\\layout\\detailsview.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_expanded_menu_layout.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_expanded_menu_layout.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\notification_template_media.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\notification_template_media.xml"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\custom_city_spinner_item.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\res\\layout\\custom_city_spinner_item.xml"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\com_parse_ui_parse_login_form.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\res\\layout\\com_parse_ui_parse_login_form.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\design_layout_tab_text.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\layout\\design_layout_tab_text.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_screen_content_include.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_screen_content_include.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\messenger_button_send_blue_round.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.facebook.android\\facebook-android-sdk\\4.0.0\\res\\layout\\messenger_button_send_blue_round.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\notification_template_part_chronometer.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\notification_template_part_chronometer.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_menu_layout.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_action_menu_layout.xml"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\custom_city_spinner_dropdown_item.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\res\\layout\\custom_city_spinner_dropdown_item.xml"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\design_navigation_menu.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\layout\\design_navigation_menu.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_list_menu_item_layout.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_list_menu_item_layout.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_select_dialog_material.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_select_dialog_material.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\com_parse_ui_parse_login_fragment.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\res\\layout\\com_parse_ui_parse_login_fragment.xml"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\design_layout_tab_icon.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\layout\\design_layout_tab_icon.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\design_navigation_menu_item.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\layout\\design_navigation_menu_item.xml"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_expanded_menu_layout.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_expanded_menu_layout.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\design_layout_snackbar.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\layout\\design_layout_snackbar.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\com_facebook_activity_layout.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.facebook.android\\facebook-android-sdk\\4.0.0\\res\\layout\\com_facebook_activity_layout.xml"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\notification_media_cancel_action.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\notification_media_cancel_action.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\com_parse_ui_parse_login_help_form.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\res\\layout\\com_parse_ui_parse_login_help_form.xml"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_screen_simple_overlay_action_mode.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_screen_simple_overlay_action_mode.xml"
-    },
-    {
         "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\messenger_button_send_white_large.xml",
         "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.facebook.android\\facebook-android-sdk\\4.0.0\\res\\layout\\messenger_button_send_white_large.xml"
     },
     {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_screen_toolbar.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_screen_toolbar.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_bar_view_list_nav_layout.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_action_bar_view_list_nav_layout.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\messenger_button_send_white_small.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.facebook.android\\facebook-android-sdk\\4.0.0\\res\\layout\\messenger_button_send_white_small.xml"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_search_dropdown_item_icons_2line.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_search_dropdown_item_icons_2line.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\com_facebook_activity_layout.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.facebook.android\\facebook-android-sdk\\4.0.0\\res\\layout\\com_facebook_activity_layout.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\select_dialog_singlechoice_material.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\select_dialog_singlechoice_material.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\com_facebook_login_fragment.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.facebook.android\\facebook-android-sdk\\4.0.0\\res\\layout\\com_facebook_login_fragment.xml"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\design_navigation_item_separator.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\layout\\design_navigation_item_separator.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\notification_template_big_media_narrow.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\notification_template_big_media_narrow.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\notification_template_lines.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\notification_template_lines.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\notification_media_action.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\notification_media_action.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\com_parse_ui_parse_login_third_party_section.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\res\\layout\\com_parse_ui_parse_login_third_party_section.xml"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_list_menu_item_checkbox.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_list_menu_item_checkbox.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\design_navigation_item_separator.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\layout\\design_navigation_item_separator.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_screen_simple_overlay_action_mode.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_screen_simple_overlay_action_mode.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\custom_city_spinner_dropdown_item.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\res\\layout\\custom_city_spinner_dropdown_item.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_list_menu_item_icon.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_list_menu_item_icon.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_list_menu_item_radio.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_list_menu_item_radio.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\com_facebook_tooltip_bubble.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.facebook.android\\facebook-android-sdk\\4.0.0\\res\\layout\\com_facebook_tooltip_bubble.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_menu_item_layout.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_action_menu_item_layout.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\support_simple_spinner_dropdown_item.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\support_simple_spinner_dropdown_item.xml"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_popup_menu_item_layout.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_popup_menu_item_layout.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\design_navigation_item_separator.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\layout\\design_navigation_item_separator.xml"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\messenger_button_send_blue_small.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.facebook.android\\facebook-android-sdk\\4.0.0\\res\\layout\\messenger_button_send_blue_small.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\notification_media_cancel_action.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\notification_media_cancel_action.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\design_navigation_menu.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\layout\\design_navigation_menu.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_bar_up_container.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_action_bar_up_container.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\notification_template_part_chronometer.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\notification_template_part_chronometer.xml"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_list_menu_item_icon.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_list_menu_item_icon.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\notification_template_lines.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\notification_template_lines.xml"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_dialog_title_material.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_dialog_title_material.xml"
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_mode_bar.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_action_mode_bar.xml"
     },
     {
         "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\com_facebook_activity_layout.xml",
         "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.facebook.android\\facebook-android-sdk\\4.0.0\\res\\layout\\com_facebook_activity_layout.xml"
     },
     {
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_dialog_title_material.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_dialog_title_material.xml"
+    },
+    {
         "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\select_dialog_singlechoice_material.xml",
         "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\select_dialog_singlechoice_material.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_mode_close_item_material.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_action_mode_close_item_material.xml"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_menu_item_layout.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_action_menu_item_layout.xml"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\select_dialog_item_material.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\select_dialog_item_material.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_alert_dialog_material.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_alert_dialog_material.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_alert_dialog_button_bar_material.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_alert_dialog_button_bar_material.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_popup_menu_item_layout.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_popup_menu_item_layout.xml"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\design_layout_snackbar.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\layout\\design_layout_snackbar.xml"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\messenger_button_send_blue_large.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.facebook.android\\facebook-android-sdk\\4.0.0\\res\\layout\\messenger_button_send_blue_large.xml"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\com_facebook_tooltip_bubble.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.facebook.android\\facebook-android-sdk\\4.0.0\\res\\layout\\com_facebook_tooltip_bubble.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_screen_simple_overlay_action_mode.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_screen_simple_overlay_action_mode.xml"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\toolbar_actionbar.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\res\\layout\\toolbar_actionbar.xml"
     },
     {
         "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_activity_chooser_view_list_item.xml",
         "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_activity_chooser_view_list_item.xml"
     },
     {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\notification_template_media.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\notification_template_media.xml"
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\toolbar_actionbar.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\res\\layout\\toolbar_actionbar.xml"
     },
     {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_search_view.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_search_view.xml"
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_menu_item_layout.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_action_menu_item_layout.xml"
     },
     {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\select_dialog_item_material.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\select_dialog_item_material.xml"
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_popup_menu_item_layout.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_popup_menu_item_layout.xml"
+    },
+    {
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_search_dropdown_item_icons_2line.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_search_dropdown_item_icons_2line.xml"
+    },
+    {
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\select_dialog_item_material.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\select_dialog_item_material.xml"
+    },
+    {
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\messenger_button_send_blue_small.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.facebook.android\\facebook-android-sdk\\4.0.0\\res\\layout\\messenger_button_send_blue_small.xml"
     },
     {
         "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\notification_template_big_media_narrow.xml",
         "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\notification_template_big_media_narrow.xml"
     },
     {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_bar_title_item.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_action_bar_title_item.xml"
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\design_navigation_item_separator.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\layout\\design_navigation_item_separator.xml"
     },
     {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\com_parse_ui_parse_login_form.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\res\\layout\\com_parse_ui_parse_login_form.xml"
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\design_layout_snackbar.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\layout\\design_layout_snackbar.xml"
     },
     {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_list_menu_item_radio.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_list_menu_item_radio.xml"
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_list_menu_item_checkbox.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_list_menu_item_checkbox.xml"
+    },
+    {
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\messenger_button_send_blue_large.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.facebook.android\\facebook-android-sdk\\4.0.0\\res\\layout\\messenger_button_send_blue_large.xml"
+    },
+    {
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_list_menu_item_icon.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_list_menu_item_icon.xml"
+    },
+    {
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\com_facebook_tooltip_bubble.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.facebook.android\\facebook-android-sdk\\4.0.0\\res\\layout\\com_facebook_tooltip_bubble.xml"
     },
     {
         "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_activity_chooser_view.xml",
         "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_activity_chooser_view.xml"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_screen_content_include.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_screen_content_include.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_menu_item_layout.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_action_menu_item_layout.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_screen_toolbar.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_screen_toolbar.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\messenger_button_send_white_small.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.facebook.android\\facebook-android-sdk\\4.0.0\\res\\layout\\messenger_button_send_white_small.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\notification_template_big_media.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\notification_template_big_media.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\design_navigation_item_subheader.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\layout\\design_navigation_item_subheader.xml"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_screen_toolbar.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_screen_toolbar.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\com_parse_ui_parse_login_fragment.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\res\\layout\\com_parse_ui_parse_login_fragment.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\cropimage.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\me.villani.lorenzo.android\\android-cropimage\\1.0.2\\res\\layout\\cropimage.xml"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\notification_template_lines.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\notification_template_lines.xml"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_list_menu_item_layout.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_list_menu_item_layout.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\design_navigation_item_header.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\layout\\design_navigation_item_header.xml"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_bar_view_list_nav_layout.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_action_bar_view_list_nav_layout.xml"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\com_parse_ui_parse_login_help_fragment.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\res\\layout\\com_parse_ui_parse_login_help_fragment.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_dialog_title_material.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_dialog_title_material.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\messenger_button_send_blue_round.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.facebook.android\\facebook-android-sdk\\4.0.0\\res\\layout\\messenger_button_send_blue_round.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_bar_view_list_nav_layout.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_action_bar_view_list_nav_layout.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\com_parse_ui_parse_signup_form.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\res\\layout\\com_parse_ui_parse_signup_form.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\design_menu_item_action_area.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\layout\\design_menu_item_action_area.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_list_menu_item_icon.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_list_menu_item_icon.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\com_parse_ui_parse_login_form.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\res\\layout\\com_parse_ui_parse_login_form.xml"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\messenger_button_send_white_small.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.facebook.android\\facebook-android-sdk\\4.0.0\\res\\layout\\messenger_button_send_white_small.xml"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\detailsview.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\me.villani.lorenzo.android\\android-cropimage\\1.0.2\\res\\layout\\detailsview.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\com_parse_ui_parse_signup_form.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\res\\layout\\com_parse_ui_parse_signup_form.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\design_layout_tab_icon.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\layout\\design_layout_tab_icon.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\messenger_button_send_blue_small.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.facebook.android\\facebook-android-sdk\\4.0.0\\res\\layout\\messenger_button_send_blue_small.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\design_layout_tab_icon.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\layout\\design_layout_tab_icon.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\design_navigation_menu.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\layout\\design_navigation_menu.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\support_simple_spinner_dropdown_item.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\support_simple_spinner_dropdown_item.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_screen_simple.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_screen_simple.xml"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\messenger_button_send_blue_round.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.facebook.android\\facebook-android-sdk\\4.0.0\\res\\layout\\messenger_button_send_blue_round.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_activity_chooser_view.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_activity_chooser_view.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\design_menu_item_action_area.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\layout\\design_menu_item_action_area.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_list_menu_item_checkbox.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_list_menu_item_checkbox.xml"
     },
     {
         "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\com_facebook_login_fragment.xml",
@@ -788,55 +236,47 @@
         "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.facebook.android\\facebook-android-sdk\\4.0.0\\res\\layout\\messenger_button_send_white_round.xml"
     },
     {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\design_navigation_item.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\layout\\design_navigation_item.xml"
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_screen_content_include.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_screen_content_include.xml"
     },
     {
         "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_search_view.xml",
         "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_search_view.xml"
     },
     {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\select_dialog_multichoice_material.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\select_dialog_multichoice_material.xml"
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_screen_toolbar.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_screen_toolbar.xml"
     },
     {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\messenger_button_send_white_round.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.facebook.android\\facebook-android-sdk\\4.0.0\\res\\layout\\messenger_button_send_white_round.xml"
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\messenger_button_send_blue_round.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.facebook.android\\facebook-android-sdk\\4.0.0\\res\\layout\\messenger_button_send_blue_round.xml"
     },
     {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\notification_template_big_media_narrow.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\notification_template_big_media_narrow.xml"
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\notification_template_lines.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\notification_template_lines.xml"
     },
     {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\custom_city_spinner_dropdown_item.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\res\\layout\\custom_city_spinner_dropdown_item.xml"
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_list_menu_item_layout.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_list_menu_item_layout.xml"
     },
     {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\com_parse_ui_parse_signup_fragment.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\res\\layout\\com_parse_ui_parse_signup_fragment.xml"
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_bar_view_list_nav_layout.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_action_bar_view_list_nav_layout.xml"
     },
     {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_mode_close_item_material.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_action_mode_close_item_material.xml"
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\messenger_button_send_white_small.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.facebook.android\\facebook-android-sdk\\4.0.0\\res\\layout\\messenger_button_send_white_small.xml"
     },
     {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_activity_chooser_view_list_item.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_activity_chooser_view_list_item.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\detailsview.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\me.villani.lorenzo.android\\android-cropimage\\1.0.2\\res\\layout\\detailsview.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\abc_alert_dialog_button_bar_material.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_alert_dialog_button_bar_material.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\notification_media_action.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\notification_media_action.xml"
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\com_parse_ui_parse_login_help_fragment.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\res\\layout\\com_parse_ui_parse_login_help_fragment.xml"
     },
     {
         "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\notification_template_part_time.xml",
         "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\notification_template_part_time.xml"
+    },
+    {
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\layout\\detailsview.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\me.villani.lorenzo.android\\android-cropimage\\1.0.2\\res\\layout\\detailsview.xml"
     }
 ]

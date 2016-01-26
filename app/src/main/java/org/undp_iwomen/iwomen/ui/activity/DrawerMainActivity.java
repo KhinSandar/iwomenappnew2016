@@ -279,7 +279,6 @@ public class DrawerMainActivity extends BaseActionBarActivity {
 
                         userProfilePicture.setProfileId(mstrUserfbId);
                     }
-                    Log.e("1st userprofile_Image_path", "==>" + currentUser.get("user_profile_img"));
 
                     //TODO 1st priority if update image case
                     if (currentUser.get("userImgPath") != null && currentUser.get("userImgPath") != "null") {
@@ -338,7 +337,6 @@ public class DrawerMainActivity extends BaseActionBarActivity {
 
                             Uri uri = Uri.parse(currentUser.getParseFile("user_profile_img").getUrl());
                             userprofile_Image_path = currentUser.getParseFile("user_profile_img").getUrl();
-                            Log.e("1st userprofile_Image_path", "==>" + userprofile_Image_path);
                             //userProfilePicture.setD
 
 
@@ -686,7 +684,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
         //TODO FONT DRAWERMAIN
         if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
             DrawerListName = new String[]
-                    {"Be Inspired", "Be Knowledgeable", "Be Together", "Talk Together", "Setting", "AboutUs", "Sister Apps"};
+                    {"Be Inspired", "Be Knowledgeable", "Be Together", "Talk Together", "Settings", "AboutUs", "Sister Apps"};
 
             DrawerListIcon = new int[]
                     {R.drawable.ic_stories,

@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:background="@color/primary">
 
-    <TextView
+    <org.undp_iwomen.iwomen.ui.widget.CustomTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -23,7 +23,7 @@
         android:layout_marginTop="22dp"
         android:gravity="center_vertical">
 
-        <TextView
+        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -32,14 +32,32 @@
             android:textColor="@color/white"
             android:textSize="22dp" />
 
-        <RatingBar
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            style="@style/customRatingBar"
-            android:id="@+id/rating_be_inspired"
-            android:isIndicator="false"
-            android:numStars="5"
-            android:rating="3" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical">
+
+            <RatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                style="@style/customRatingBar"
+                android:id="@+id/rating_be_inspired"
+                android:isIndicator="false"
+                android:numStars="5"
+                android:rating="3" />
+
+            <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Good"
+                android:id="@+id/txt_rating_desc_be_inspired"
+                android:textColor="@color/white"
+                android:gravity="right"
+                android:textSize="18dp" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
@@ -49,7 +67,7 @@
         android:layout_marginTop="10dp"
         android:gravity="center_vertical">
 
-        <TextView
+        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -58,14 +76,33 @@
             android:textColor="@color/white"
             android:textSize="22dp" />
 
-        <RatingBar
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            style="@style/customRatingBar"
-            android:id="@+id/rating_be_knowledgeable"
-            android:isIndicator="false"
-            android:numStars="5"
-            android:rating="3" />
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical">
+
+            <RatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                style="@style/customRatingBar"
+                android:id="@+id/rating_be_knowledgeable"
+                android:isIndicator="false"
+                android:numStars="5"
+                android:rating="3" />
+
+            <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Good"
+                android:id="@+id/txt_rating_desc_be_knowledgeable"
+                android:textColor="@color/white"
+                android:gravity="right"
+                android:textSize="18dp" />
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -75,7 +112,7 @@
         android:layout_marginTop="10dp"
         android:gravity="center_vertical">
 
-        <TextView
+        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -84,14 +121,32 @@
             android:textColor="@color/white"
             android:textSize="22dp" />
 
-        <RatingBar
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            style="@style/customRatingBar"
-            android:id="@+id/rating_be_together"
-            android:isIndicator="false"
-            android:numStars="5"
-            android:rating="3" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical">
+
+            <RatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                style="@style/customRatingBar"
+                android:id="@+id/rating_be_together"
+                android:isIndicator="false"
+                android:numStars="5"
+                android:rating="3" />
+
+            <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Good"
+                android:id="@+id/txt_rating_desc_be_together"
+                android:textColor="@color/white"
+                android:gravity="right"
+                android:textSize="18dp" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
@@ -101,7 +156,7 @@
         android:layout_marginTop="10dp"
         android:gravity="center_vertical">
 
-        <TextView
+        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -110,14 +165,31 @@
             android:textColor="@color/white"
             android:textSize="22dp" />
 
-        <RatingBar
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            style="@style/customRatingBar"
-            android:id="@+id/rating_talk_together"
-            android:isIndicator="false"
-            android:numStars="5"
-            android:rating="3" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical">
+
+            <RatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                style="@style/customRatingBar"
+                android:id="@+id/rating_talk_together"
+                android:isIndicator="false"
+                android:numStars="5"
+                android:rating="3" />
+
+            <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Good"
+                android:id="@+id/txt_rating_desc_talk_together"
+                android:textColor="@color/white"
+                android:gravity="right"
+                android:textSize="18dp" />
+        </LinearLayout>
     </LinearLayout>
 
     <RelativeLayout

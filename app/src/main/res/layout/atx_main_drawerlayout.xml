@@ -134,7 +134,7 @@
                          />-->
 
 
-                    <TextView
+                    <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                         android:id="@+id/txt_user_name"
                         style="?attr/spinnerDropDownItemStyle"
                         android:layout_width="wrap_content"
@@ -163,7 +163,7 @@
                         android:layout_gravity="left"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                             android:id="@+id/menu_user_post_count"
                             style="?attr/spinnerDropDownItemStyle"
                             android:layout_width="wrap_content"
@@ -292,7 +292,7 @@
                          android:layout_alignParentBottom="true"
                          android:orientation="vertical">
 
-                         <TextView
+                         <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                              android:layout_width="match_parent"
                              android:layout_height="wrap_content"
                              android:text="Rate our app"
@@ -304,14 +304,14 @@
                              android:padding="7dp"
                              android:layout_marginBottom="10dp"/>
 
-                         <TextView
+                         <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                              android:id="@+id/ratedescription"
                              android:layout_width="match_parent"
                              android:layout_height="wrap_content"
                              android:text="If you like our app, please give us a good rating to take part in a monthly lucky draw."
                              android:layout_margin="5dp"/>
 
-                         <TextView
+                         <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                              android:id="@+id/txt_cp_main"
                              android:layout_width="match_parent"
                              android:layout_height="wrap_content"

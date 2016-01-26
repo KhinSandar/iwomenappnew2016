@@ -1,8 +1,6 @@
 package com.smk.adapter;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -104,18 +102,19 @@ public class GroupUserListAdapter extends BaseExpandableListAdapter {
 	    TextView userAnswer = (TextView) v.findViewById(R.id.txt_competition_answer);
 	    ImageView userPhone = (ImageView) v.findViewById(R.id.img_competition_user_phone);
 	    ImageView userViber = (ImageView) v.findViewById(R.id.img_competition_user_viber);
-	    
-	    Picasso.with(ctx).load(getGroup(groupPosition).getImageUrl()).transform(new CircleTransform()).into(userPhoto);
+	    if(getGroup(groupPosition).getImageUrl() != null && getGroup(groupPosition).getImageUrl().length() > 0)
+	    	Picasso.with(ctx).load(getGroup(groupPosition).getImageUrl()).placeholder(R.drawable.blank_profile).transform(new CircleTransform()).into(userPhoto);
 	    userName.setText(getGroup(groupPosition).getUsername());
 	    
 	    if(getGroup(groupPosition).getInitAnswer() != null){
-	    	SharedPreferences langRef = ctx.getSharedPreferences("mLanguage", Activity.MODE_PRIVATE); 
+	    	/*SharedPreferences langRef = ctx.getSharedPreferences("mLanguage", Activity.MODE_PRIVATE);
 			if(langRef.getString("lang","").equals("mm")){
 				userAnswer.setText(getGroup(groupPosition).getInitAnswer().getAnswerMm());
 			}else{
 				userAnswer.setText(getGroup(groupPosition).getInitAnswer().getAnswer());
-			}
-	    	
+			}*/
+
+			userAnswer.setText(getStringResource(R.string.competition_answer));
 	    }else{
 	    	userAnswer.setText(getStringResource(R.string.competition_not_answer));
 	    }

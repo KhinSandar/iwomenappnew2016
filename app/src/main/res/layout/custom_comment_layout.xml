@@ -51,7 +51,7 @@
             android:visibility="visible" />
     </FrameLayout>
 
-    <TextView
+    <org.undp_iwomen.iwomen.ui.widget.CustomTextView
         android:id="@+id/custom_comment_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -71,7 +71,7 @@
         android:layout_below="@id/custom_comment_name"
         android:layout_toRightOf="@id/custom_comment_profilepicture_ly" />
 
-    <TextView
+    <org.undp_iwomen.iwomen.ui.widget.CustomTextView
         android:id="@+id/custom_comment_timestamp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

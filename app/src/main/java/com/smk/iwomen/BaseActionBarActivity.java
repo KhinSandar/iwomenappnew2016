@@ -16,6 +16,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
+import android.widget.TextView;
 
 import com.nullwire.trace.ExceptionHandler;
 import com.path.android.jobqueue.JobManager;
@@ -138,10 +139,43 @@ public class BaseActionBarActivity extends AppCompatActivity{
 		final RatingBar be_knowledgeable = (RatingBar) convertView.findViewById(R.id.rating_be_knowledgeable);
 		final RatingBar be_together = (RatingBar) convertView.findViewById(R.id.rating_be_together);
 		final RatingBar talk_together = (RatingBar) convertView.findViewById(R.id.rating_talk_together);
+
+		final TextView rating_desc_be_inspired = (TextView) convertView.findViewById(R.id.txt_rating_desc_be_inspired);
+		final TextView rating_desc_be_knowledgeable = (TextView) convertView.findViewById(R.id.txt_rating_desc_be_knowledgeable);
+		final TextView rating_desc_be_together = (TextView) convertView.findViewById(R.id.txt_rating_desc_be_together);
+		final TextView rating_desc_talk_together = (TextView) convertView.findViewById(R.id.txt_rating_desc_talk_together);
 		Button btn_now_know = (Button)convertView.findViewById(R.id.btn_not_now);
 		Button btn_ok = (Button)convertView.findViewById(R.id.btn_ok);
 		alertDialog.setView(convertView);
 		alertDialog.show();
+
+		be_inspired.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+			@Override
+			public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+				rating_desc_be_inspired.setText(getRatingDesc(Double.valueOf(rating)));
+			}
+		});
+
+		be_knowledgeable.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+			@Override
+			public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+				rating_desc_be_knowledgeable.setText(getRatingDesc(Double.valueOf(rating)));
+			}
+		});
+
+		be_together.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+			@Override
+			public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+				rating_desc_be_together.setText(getRatingDesc(Double.valueOf(rating)));
+			}
+		});
+
+		talk_together.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+			@Override
+			public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+				rating_desc_talk_together.setText(getRatingDesc(Double.valueOf(rating)));
+			}
+		});
 
 		btn_now_know.setOnClickListener(new View.OnClickListener() {
 			@Override

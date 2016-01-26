@@ -26,8 +26,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:singleLine="true"
             android:text="Su Su"
+            android:textSize="16dp"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <org.undp_iwomen.iwomen.ui.widget.CustomTextView
@@ -73,6 +73,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minLines="5"
+                android:textSize="18dp"
                 android:text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 

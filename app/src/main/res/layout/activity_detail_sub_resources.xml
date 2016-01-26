@@ -69,7 +69,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
+                <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                     android:id="@+id/tipdetail_content_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -80,7 +80,7 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
-                <TextView
+                <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                     android:id="@+id/tipdetail_content_user_role"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
                     android:visibility="gone"
                     android:text="Role" />
 
-                <TextView
+                <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                     android:id="@+id/tipdetail_content_user_role_more"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -163,7 +163,7 @@
             android:textColor="#333"
             android:textSize="18sp" />
 
-        <TextView
+        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
             android:id="@+id/tipdetail_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -198,7 +198,7 @@
         </com.andexert.library.RippleView>
 
 
-        <TextView
+        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
             android:id="@+id/txt_cp_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

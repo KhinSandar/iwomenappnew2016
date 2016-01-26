@@ -22,53 +22,5 @@
                 }
             }
         ]
-    },
-    {
-        "outputFile": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\values-es-rES\\values-es-rES.xml",
-        "map": [
-            {
-                "to": {
-                    "startLine": 2,
-                    "startColumn": 4,
-                    "startOffset": 55,
-                    "endColumn": 61,
-                    "endOffset": 112
-                },
-                "from": {
-                    "file": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.facebook.android\\facebook-android-sdk\\4.0.0\\res\\values-es-rES\\values.xml",
-                    "position": {
-                        "startLine": 4,
-                        "startColumn": 4,
-                        "startOffset": 185,
-                        "endColumn": 61,
-                        "endOffset": 242
-                    }
-                }
-            }
-        ]
-    },
-    {
-        "outputFile": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\values-es-rES\\values-es-rES.xml",
-        "map": [
-            {
-                "to": {
-                    "startLine": 2,
-                    "startColumn": 4,
-                    "startOffset": 55,
-                    "endColumn": 61,
-                    "endOffset": 112
-                },
-                "from": {
-                    "file": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.facebook.android\\facebook-android-sdk\\4.0.0\\res\\values-es-rES\\values.xml",
-                    "position": {
-                        "startLine": 4,
-                        "startColumn": 4,
-                        "startOffset": 185,
-                        "endColumn": 61,
-                        "endOffset": 242
-                    }
-                }
-            }
-        ]
     }
 ]

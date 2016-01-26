@@ -70,7 +70,7 @@
                         android:visibility="visible" />
                 </FrameLayout>
 
-                <TextView
+                <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                     android:id="@+id/tipdetail_content_username"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -109,7 +109,7 @@
             </FrameLayout>
 
 
-            <TextView
+            <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                 android:id="@+id/tipdetail_title_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -121,7 +121,7 @@
                 android:textColor="#333"
                 android:textSize="18sp" />
 
-            <TextView
+            <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                 android:id="@+id/tipdetail_body"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -157,7 +157,7 @@
             </com.andexert.library.RippleView>
 
 
-            <TextView
+            <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                 android:id="@+id/txt_cp_main"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -37,7 +37,7 @@
             android:visibility="visible" />
     </FrameLayout>
 
-    <!--<TextView
+    <!--<org.undp_iwomen.iwomen.ui.widget.CustomTextView
         android:id="@+id/custom_comment_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -47,7 +47,7 @@
         android:textStyle="bold"
         android:layout_toRightOf="@id/sister_app_logo_img"/>-->
 
-    <TextView
+    <org.undp_iwomen.iwomen.ui.widget.CustomTextView
         android:id="@+id/sister_app_txt_app_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
 
         android:textStyle="bold" />
 
-    <TextView
+    <org.undp_iwomen.iwomen.ui.widget.CustomTextView
         android:id="@+id/sister_app_txt_download"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

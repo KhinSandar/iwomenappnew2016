@@ -43,7 +43,7 @@
             android:paddingLeft="@dimen/feed_item_padding_left_right"
             android:paddingTop="@dimen/feed_item_padding_top_bottom">
 
-            <TextView
+            <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                 android:id="@+id/txtStatusMsg"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
                 android:textSize="@dimen/feed_item_profile_name"
                 android:textStyle="bold" />
 
-            <TextView
+            <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                 android:id="@+id/txtUrl"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -101,7 +101,7 @@
                     android:orientation="horizontal"
                     android:paddingLeft="@dimen/feed_item_profile_info_padd">
 
-                    <TextView
+                    <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                         android:id="@+id/name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -110,7 +110,7 @@
                         android:textSize="@dimen/feed_item_profile_name"
                         android:textStyle="bold" />
 
-                    <TextView
+                    <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                         android:id="@+id/timestamp"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"

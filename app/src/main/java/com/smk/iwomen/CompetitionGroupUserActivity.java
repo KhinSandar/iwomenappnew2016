@@ -158,11 +158,11 @@ public class CompetitionGroupUserActivity extends BaseActionBarActivity {
 			}
 		}
 		
-		for (int i = 0; i < competitionGroupUserList.getGroupUsers().size(); i++) {
+		/*for (int i = 0; i < competitionGroupUserList.getGroupUsers().size(); i++) {
 			if(competitionGroupUserList.getGroupUsers().get(i).getAnswer().size() > 0){
 				competitionGroupUserList.getGroupUsers().get(i).getAnswer().remove(0);
 			}
-		}
+		}*/
 		GroupUserListAdapter groupUserAdapter = new GroupUserListAdapter(this, competitionGroupUserList.getGroupUsers());
 		groupUserAdapter.setOnCallbackListener(new GroupUserListAdapter.Callbacks() {
 			

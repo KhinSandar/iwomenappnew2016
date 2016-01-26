@@ -9,7 +9,7 @@
         android:orientation="vertical"
         android:layout_margin="16dp">
 
-        <TextView
+        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -82,7 +82,7 @@
             android:layout_height="wrap_content"
             android:text="Sun Aug 02 18:07:00 GMT+06:30 2015"/>
 
-        <TextView
+        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
             android:id="@+id/post_news_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

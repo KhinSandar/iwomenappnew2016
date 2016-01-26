@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:background="@color/primary">
 
-    <TextView
+    <org.undp_iwomen.iwomen.ui.widget.CustomTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="22dp">
 
-        <TextView
+        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
@@ -33,7 +33,7 @@
             android:layout_gravity="bottom"
             android:textColor="@color/white" />
 
-        <TextView
+        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/activity_vertical_margin"
@@ -77,7 +77,7 @@
                 app:iiv_icon="faw_user"
                 app:iiv_size="20dp"/>
 
-            <TextView
+            <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"

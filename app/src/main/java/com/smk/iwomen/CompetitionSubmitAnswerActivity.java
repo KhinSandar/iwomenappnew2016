@@ -74,15 +74,15 @@ public class CompetitionSubmitAnswerActivity extends BaseActionBarActivity {
 		btn_go_back = (Button) findViewById(R.id.btn_go_back);
 		
 		
-		String answer1 = StoreUtil.getInstance().selectFrom("answer1_XBUQ7yk8Ig");
+		String answer1 = StoreUtil.getInstance().selectFrom("answer1_"+groupUserId);
 		if(answer1 != null){
 			edt_answer_1.setText(answer1);
 		}
-		String answer2 = StoreUtil.getInstance().selectFrom("answer2_XBUQ7yk8Ig");
+		String answer2 = StoreUtil.getInstance().selectFrom("answer2_"+groupUserId);
 		if(answer2 != null){
 			edt_answer_2.setText(answer2);
 		}
-		String answer3 = StoreUtil.getInstance().selectFrom("answer3_XBUQ7yk8Ig");
+		String answer3 = StoreUtil.getInstance().selectFrom("answer3_"+groupUserId);
 		if(answer3 != null){
 			edt_answer_3.setText(answer3);
 		}
@@ -129,13 +129,13 @@ public class CompetitionSubmitAnswerActivity extends BaseActionBarActivity {
 			// TODO Auto-generated method stub
 			if(arg0 == btn_save){
 				if(edt_answer_1.getText().toString().trim().length() > 0){
-					StoreUtil.getInstance().saveTo("answer1_XBUQ7yk8Ig", edt_answer_1.getText().toString());
+					StoreUtil.getInstance().saveTo("answer1_"+groupUserId, edt_answer_1.getText().toString());
 				}
 				if(edt_answer_2.getText().toString().trim().length() > 0){
-					StoreUtil.getInstance().saveTo("answer2_XBUQ7yk8Ig", edt_answer_2.getText().toString());
+					StoreUtil.getInstance().saveTo("answer2_"+groupUserId, edt_answer_2.getText().toString());
 				}
 				if(edt_answer_3.getText().toString().trim().length() > 0){
-					StoreUtil.getInstance().saveTo("answer3_XBUQ7yk8Ig", edt_answer_3.getText().toString());
+					StoreUtil.getInstance().saveTo("answer3_"+groupUserId, edt_answer_3.getText().toString());
 				}
 				SKToastMessage.showMessage(CompetitionSubmitAnswerActivity.this, "Successfully saved", SKToastMessage.SUCCESS);
 

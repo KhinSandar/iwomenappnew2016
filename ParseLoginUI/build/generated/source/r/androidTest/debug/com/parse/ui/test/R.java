@@ -2418,21 +2418,22 @@ containing a value of this type.
         public static final int disabled_alpha_material_dark=0x7f07007d;
         public static final int disabled_alpha_material_light=0x7f07007e;
         public static final int feed_item_profile_pic=0x7f07007f;
-        public static final int floating_action_button_elevation=0x7f070080;
+        public static final int feed_item_sticker_pic=0x7f070080;
+        public static final int floating_action_button_elevation=0x7f070081;
         public static final int floating_action_button_margin_mini=0x7f070019;
         public static final int floating_action_button_margin_mini_minus=0x7f07001a;
         public static final int floating_action_button_margin_normal=0x7f07001b;
         public static final int floating_action_button_margin_normal_minus=0x7f07001c;
-        public static final int floating_action_button_shadow_radius=0x7f070081;
-        public static final int floating_action_button_size_mini=0x7f070082;
-        public static final int floating_action_button_size_normal=0x7f070083;
-        public static final int highlight_alpha_material_colored=0x7f070084;
-        public static final int highlight_alpha_material_dark=0x7f070085;
-        public static final int highlight_alpha_material_light=0x7f070086;
-        public static final int item_touch_helper_max_drag_scroll_per_frame=0x7f070087;
-        public static final int notification_large_icon_height=0x7f070088;
-        public static final int notification_large_icon_width=0x7f070089;
-        public static final int notification_subtext_size=0x7f07008a;
+        public static final int floating_action_button_shadow_radius=0x7f070082;
+        public static final int floating_action_button_size_mini=0x7f070083;
+        public static final int floating_action_button_size_normal=0x7f070084;
+        public static final int highlight_alpha_material_colored=0x7f070085;
+        public static final int highlight_alpha_material_dark=0x7f070086;
+        public static final int highlight_alpha_material_light=0x7f070087;
+        public static final int item_touch_helper_max_drag_scroll_per_frame=0x7f070088;
+        public static final int notification_large_icon_height=0x7f070089;
+        public static final int notification_large_icon_width=0x7f07008a;
+        public static final int notification_subtext_size=0x7f07008b;
     }
     public static final class drawable {
         public static final int abc_ab_share_pack_mtrl_alpha=0x7f020000;

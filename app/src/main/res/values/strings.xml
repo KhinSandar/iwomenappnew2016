@@ -222,7 +222,7 @@
     <string name="competition_hour">Hours</string>
     <string name="competition_minute">Minutes</string>
     <string name="competition_second">Seconds</string>
-    <string name="competition_not_answer">This group member is not answer yet.</string>
+    <string name="competition_not_answer">This user has not yet submitted her answers.</string>
     <string name="competition_finished">Finished</string>
     <string name="competition_play_game">Ready To Play ?</string>
     <string name="competition_discover_winner">Discover Who is the WINNER</string>
@@ -248,5 +248,6 @@
     <string name="str_write_reviews">Please Write Your Reviews !</string>
     <string name="str_your_review">Your Review</string>
     <string name="str_submit">Submit</string>
+    <string name="competition_answer">This user has already submitted her answers.</string>
 
 </resources>
