@@ -70,7 +70,7 @@
                     android:layout_height="20dp"
                     android:src="@drawable/ic_file_download_grey600_48dp" />
 
-                <TextView
+                <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                     android:id="@+id/postdetail_download_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -98,7 +98,7 @@
                     android:layout_height="20dp"
                     android:src="@drawable/ic_headset_grey600_48dp" />
 
-                <TextView
+                <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                     android:id="@+id/postdetail_player_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -118,7 +118,7 @@
             android:textStyle="bold" />
 
 
-        <TextView
+        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
             android:id="@+id/postdetail_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -182,7 +182,7 @@
                 android:layout_marginLeft="16dp"
                 android:orientation="horizontal">
 
-                <!-- <TextView
+                <!-- <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                      android:id="@+id/postdetail_credit_name"
                      android:layout_width="wrap_content"
                      android:layout_height="match_parent"
@@ -223,7 +223,7 @@
                         android:visibility="gone" />
                 </FrameLayout>
 
-                <TextView
+                <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                     android:id="@+id/postdetail_credit_link"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -284,7 +284,7 @@
                 android:layout_margin="8dp"
                 android:orientation="vertical">
 
-                <TextView
+                <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                     android:id="@+id/postdetail_content_username"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -300,14 +300,14 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <TextView
+                    <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                         android:id="@+id/postdetail_content_user_role"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
                         android:text="Role" />
 
-                    <TextView
+                    <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                         android:id="@+id/postdetail_content_user_role_more"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -320,7 +320,7 @@
                         android:textStyle="bold" />
                 </LinearLayout>
 
-                <TextView
+                <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                     android:id="@+id/postdetail_content_posted_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -341,7 +341,7 @@
             android:layout_margin="8dp"
             android:orientation="horizontal">
 
-            <TextView
+            <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                 android:id="@+id/postdetail_like_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -373,7 +373,7 @@
                 android:layout_height="20dp"
                 android:src="@drawable/like_stroke" />
 
-            <TextView
+            <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
@@ -453,7 +453,7 @@
                     android:layout_height="20dp"
                     android:src="@drawable/share" />
 
-                <TextView
+                <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="6dp"
@@ -471,7 +471,7 @@
 
 
 
-            <TextView
+            <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                 android:id="@+id/postdetail_cmd_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -481,7 +481,7 @@
 
         </LinearLayout>
 
-        <TextView
+        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
             android:id="@+id/postdetail_suggest_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

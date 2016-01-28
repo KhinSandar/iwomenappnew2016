@@ -16,11 +16,11 @@
 
 package com.skd.androidrecording.video;
 
-import java.io.IOException;
-
 import android.hardware.Camera;
 import android.hardware.Camera.Size;
 import android.media.MediaRecorder;
+
+import java.io.IOException;
 
 /*
  * Manages media recorder recording 

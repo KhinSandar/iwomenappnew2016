@@ -42,7 +42,6 @@ import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.SaveCallback;
 import com.pnikosis.materialishprogress.ProgressWheel;
-import com.smk.iwomen.AudioRecordingActivity;
 
 import org.json.JSONObject;
 import org.undp_iwomen.iwomen.CommonConfig;
@@ -336,12 +335,12 @@ public class MainPhotoIWomenPostFragment extends Fragment implements ImageChoose
         txt_audio_upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*if (mstr_lang.equals(Utils.ENG_LANG)) {
+                if (mstr_lang.equals(Utils.ENG_LANG)) {
                     Utils.doToastEng(mContext, getResources().getString(R.string.resource_coming_soon_eng));
                 } else {
                     Utils.doToastMM(mContext, getResources().getString(R.string.resource_coming_soon_mm));
-                }*/
-                startActivityForResult(new Intent(getActivity(), AudioRecordingActivity.class), UPLOAD_AUDIO);
+                }
+                //startActivityForResult(new Intent(getActivity(), AudioRecordingActivity.class), UPLOAD_AUDIO);
             }
         });
 
@@ -351,9 +350,9 @@ public class MainPhotoIWomenPostFragment extends Fragment implements ImageChoose
                 if (mstr_lang.equals(Utils.ENG_LANG)) {
                     Utils.doToastEng(mContext, getResources().getString(R.string.resource_coming_soon_eng));
                 } else {
-
                     Utils.doToastMM(mContext, getResources().getString(R.string.resource_coming_soon_mm));
                 }
+                //startActivityForResult(new Intent(getActivity(), VideoRecordingActivity.class), UPLOAD_AUDIO);
             }
         });
 
@@ -782,7 +781,6 @@ public class MainPhotoIWomenPostFragment extends Fragment implements ImageChoose
             e.printStackTrace();
         }
     }
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

@@ -244,6 +244,13 @@
     <string name="str_talk_together">Talk Together</string>
     <string name="str_ok">OK</string>
     <string name="str_not_now">Not Now</string>
+    <string name="str_write_reviews">Please Write Your Reviews !</string>
+    <string name="str_your_review">Your Review</string>
+    <string name="str_submit">Submit</string>
+    <string name="competition_answer">အေျဖမ်ားကို ေျဖၿပီးၿပီ။</string>
+    <string name="not_enough_storage">သင္၏ဖုန္းတြင္ ျပင္ပ သိမ္းႏိုင္မႈ မရရိွႏိုင္ပါ!</string>
+    <string name="videoRecordingError">Recording video failed</string>
+    <string name="title_activity_video_recording">Recording Video</string>
 
     <!-- Register Login Hint-->
     <string name="register_name_hint">အမည္</string>

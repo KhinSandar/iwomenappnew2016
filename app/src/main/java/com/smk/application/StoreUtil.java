@@ -12,7 +12,7 @@ import java.util.List;
 
 public class StoreUtil {
 	
-	private String filePath = Environment.getExternalStorageDirectory()+"/CityTaxi/SKStorage/Users";
+	private String filePath = Environment.getExternalStorageDirectory()+"/iwomen/SKStorage/Users/";
 	
 	private static StoreUtil instance;
 

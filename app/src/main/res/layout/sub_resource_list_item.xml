@@ -47,7 +47,7 @@
         android:layout_alignTop="@+id/sub_resource_icon"
         android:layout_toRightOf="@+id/sub_resource_icon">
 
-        <!--<TextView
+        <!--<org.undp_iwomen.iwomen.ui.widget.CustomTextView
             android:id="@+id/title"
             style="?attr/spinnerDropDownItemStyle"
             android:layout_width="wrap_content"
@@ -55,7 +55,7 @@
             android:ellipsize="end"
             android:singleLine="true"
             android:text="Feature Shop" />-->
-        <TextView
+        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
             android:id="@+id/txt_sub_resource_item_name"
 
             android:layout_width="wrap_content"
@@ -69,7 +69,7 @@
             android:textColor="@drawable/list_text_selector"
             android:background="@drawable/list_selector"
             android:minHeight="?android:attr/listPreferredItemHeightSmall" />
-        <TextView
+        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
             android:id="@+id/txt_sub_resource_item_time"
 
             android:layout_width="match_parent"
@@ -94,7 +94,7 @@
         android:layout_marginTop="50dp" />
 </RelativeLayout>
 <!--
-<TextView
+<org.undp_iwomen.iwomen.ui.widget.CustomTextView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/txt_item_name"
     android:layout_width="match_parent"

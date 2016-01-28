@@ -45,7 +45,7 @@
             android:layout_centerVertical="true"/>
 
 
-        <TextView
+        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/img_cate"

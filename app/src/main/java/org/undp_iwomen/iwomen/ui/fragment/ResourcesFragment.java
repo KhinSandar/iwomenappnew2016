@@ -25,6 +25,7 @@ import android.widget.TextView;
 
 import com.smk.clientapi.NetworkEngine;
 import com.smk.iwomen.BaseActionBarActivity;
+import com.smk.model.Rating;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -60,7 +61,7 @@ public class ResourcesFragment extends Fragment  {
     SharedPreferences sharePrefLanguageUtil;
     String mstr_lang;
     String name[];
-    public Integer avgRatings;
+    public Rating avgRatings;
 
     int[] randomImgMain = new int[]{R.drawable.idea
             , R.drawable.donors, R.drawable.law};
@@ -488,13 +489,13 @@ public class ResourcesFragment extends Fragment  {
     }
 
     public void getReview(){
-        NetworkEngine.getInstance().getReview("Be Knowledgeable", new Callback<Integer>() {
+        NetworkEngine.getInstance().getReview("Be Knowledgeable", new Callback<Rating>() {
 
 
             @Override
-            public void success(Integer arg0, Response response) {
+            public void success(Rating arg0, Response response) {
                 menu.findItem(R.id.action_rating).setVisible(true);
-                menu.findItem(R.id.action_rating).setIcon(BaseActionBarActivity.getRatingIcon(arg0));
+                menu.findItem(R.id.action_rating).setIcon(BaseActionBarActivity.getRatingIcon(arg0.getTotalRatings()));
                 avgRatings = arg0;
             }
 
@@ -509,14 +510,18 @@ public class ResourcesFragment extends Fragment  {
         final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
         View convertView = View.inflate(getActivity(),R.layout.dialog_reviews_detial,null);
         TextView txt_avg_title = (TextView ) convertView.findViewById(R.id.txt_avg_title);
+        TextView txt_total_rating = (TextView ) convertView.findViewById(R.id.txt_total_rating);
         RatingBar avg_ratings = (RatingBar) convertView.findViewById(R.id.avg_ratings);
         TextView txt_avg_ratings = (TextView) convertView.findViewById(R.id.txt_avg_ratings);
+        TextView txt_rating_desc = (TextView) convertView.findViewById(R.id.txt_rating_desc);
         Button btn_ok = (Button)convertView.findViewById(R.id.btn_ok);
         alertDialog.setView(convertView);
 
-        txt_avg_title.setText("Be Knowledgeable");
-        avg_ratings.setRating(avgRatings);
-        txt_avg_ratings.setText(BaseActionBarActivity.getRatingDesc(avgRatings) + ": " + avgRatings + "/5 Ratings");
+        txt_avg_title.setText("Overall Rating Be Knowledgeable");
+        txt_total_rating.setText(avgRatings.getTotalRatings()+"");
+        avg_ratings.setRating(avgRatings.getTotalRatings().floatValue());
+        txt_rating_desc.setText(BaseActionBarActivity.getRatingDesc(avgRatings.getTotalRatings()));
+        txt_avg_ratings.setText(avgRatings.getTotalUsers()+" Total");
 
         final AlertDialog ad = alertDialog.show();
 

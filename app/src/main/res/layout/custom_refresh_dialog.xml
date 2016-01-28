@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <TextView
+        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
             android:id="@+id/dialog_refresh_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

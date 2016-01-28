@@ -42,7 +42,7 @@
             wheel:matProg_barColor="@color/theme_primary_light"
             wheel:matProg_progressIndeterminate="true"/>
 
-        <TextView
+        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
             android:id="@+id/no_internet_error_loading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

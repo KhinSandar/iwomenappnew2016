@@ -22,7 +22,7 @@
         android:layout_alignParentTop="true"
         android:layout_gravity="center"
         android:visibility="visible" />
-    <TextView
+    <org.undp_iwomen.iwomen.ui.widget.CustomTextView
         android:id="@+id/edit_profile_text_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -72,7 +72,7 @@
                     android:visibility="visible" />
             </FrameLayout>
 
-            <TextView
+            <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                 android:id="@+id/author_profile_content_username"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -89,7 +89,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
+            <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

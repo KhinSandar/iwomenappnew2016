@@ -8,7 +8,11 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/dialogplus/dialogplus.iml" filepath="$PROJECT_DIR$/dialogplus/dialogplus.iml" />
       <module fileurl="file://$PROJECT_DIR$/emojiicon/emojiicon.iml" filepath="$PROJECT_DIR$/emojiicon/emojiicon.iml" />
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/iwomen.iml" filepath="$PROJECT_DIR$/iwomen.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/iwomen new.iml" filepath="$PROJECT_DIR$/iwomen new.iml" />
+>>>>>>> 5bd26bbc7d1d16ebd2d606c18380b0c6a4bb1c3a
       <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
       <module fileurl="file://$PROJECT_DIR$/sKAlertMessage/sKAlertMessage.iml" filepath="$PROJECT_DIR$/sKAlertMessage/sKAlertMessage.iml" />
       <module fileurl="file://$PROJECT_DIR$/shimmerTextView/shimmerTextView.iml" filepath="$PROJECT_DIR$/shimmerTextView/shimmerTextView.iml" />

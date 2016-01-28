@@ -31,11 +31,13 @@ import com.makeramen.RoundedImageView;
 import com.parse.ParseUser;
 import com.parse.ui.ParseLoginBuilder;
 import com.parse.utils.Utils;
+import com.smk.application.StoreUtil;
 import com.smk.clientapi.NetworkEngine;
 import com.smk.iwomen.BaseActionBarActivity;
 import com.smk.iwomen.CompetitionNewGameActivity;
 import com.smk.iwomen.CompetitionWinnerGroupActivity;
 import com.smk.model.CompetitionQuestion;
+import com.smk.model.Review;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -131,6 +133,17 @@ public class DrawerMainActivity extends BaseActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // For checking rating & reviews control;
+        UsageCount = StoreUtil.getInstance().selectFrom("usage"+versionCode);
+        if(UsageCount != null && UsageCount > 0){
+            UsageCount = StoreUtil.getInstance().saveTo("usage"+versionCode, UsageCount + 1);
+            Log.i("Usage Count:","Usage : "+ UsageCount);
+        }
+        else
+            UsageCount = StoreUtil.getInstance().saveTo("usage"+versionCode, 1);
+
+
         FacebookSdk.sdkInitialize(getApplicationContext());
         // Initialize the SDK before executing any other operations,
         // especially, if you're using Facebook UI elements.
@@ -248,10 +261,13 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                         mEditorUserInfo.putString(CommonConfig.USER_PH, userPH);
 
                         mEditorUserInfo.commit();
+
+
                     }
 
                     user_name = mSharedPreferencesUserInfo.getString(CommonConfig.USER_NAME, null);
                     user_obj_id = mSharedPreferencesUserInfo.getString(CommonConfig.USER_OBJ_ID, null);
+
 
                     //TODO 1
                     getCompetitionQuestion();
@@ -263,7 +279,6 @@ public class DrawerMainActivity extends BaseActionBarActivity {
 
                         userProfilePicture.setProfileId(mstrUserfbId);
                     }
-                    Log.e("1st userprofile_Image_path", "==>" + currentUser.get("user_profile_img"));
 
                     //TODO 1st priority if update image case
                     if (currentUser.get("userImgPath") != null && currentUser.get("userImgPath") != "null") {
@@ -322,7 +337,6 @@ public class DrawerMainActivity extends BaseActionBarActivity {
 
                             Uri uri = Uri.parse(currentUser.getParseFile("user_profile_img").getUrl());
                             userprofile_Image_path = currentUser.getParseFile("user_profile_img").getUrl();
-                            Log.e("1st userprofile_Image_path", "==>" + userprofile_Image_path);
                             //userProfilePicture.setD
 
 
@@ -670,7 +684,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
         //TODO FONT DRAWERMAIN
         if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
             DrawerListName = new String[]
-                    {"Be Inspired", "Be Knowledgeable", "Be Together", "Talk Together", "Setting", "AboutUs", "Sister Apps"};
+                    {"Be Inspired", "Be Knowledgeable", "Be Together", "Talk Together", "Settings", "AboutUs", "Sister Apps"};
 
             DrawerListIcon = new int[]
                     {R.drawable.ic_stories,
@@ -1073,7 +1087,17 @@ public class DrawerMainActivity extends BaseActionBarActivity {
 
     @Override
     public void onBackPressed() {
-
-        showReviewDialog(user_obj_id);
+        Log.i("Reviews", "Reviews : here");
+        if(user_obj_id != null){
+            Review review = StoreUtil.getInstance().selectFrom(user_obj_id+versionCode);
+            Log.i("Reviews", "Reviews :"+ review);
+            if(review == null && UsageCount > 3){
+                showReviewDialog(user_obj_id);
+            }else{
+                finish();
+            }
+        }else{
+            finish();
+        }
     }
 }
