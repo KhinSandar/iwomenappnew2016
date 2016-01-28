@@ -125,7 +125,7 @@ public class GroupUserListAdapter extends BaseExpandableListAdapter {
 	    }else{
 	    	if(getGroup(groupPosition).getInitAnswer() != null){
 	    		userPhoto.setBackgroundResource(R.drawable.competition_user_status_2);
-	    		userStatus.setText((getGroup(groupPosition).getAnswer().size() + 1) +"/"+getStringResource(R.string.competition_finished));
+	    		userStatus.setText(getGroup(groupPosition).getAnswer().size() +"/"+getStringResource(R.string.competition_finished));
 	    	}
 	    	else{
 	    		userPhoto.setBackgroundResource(R.drawable.competition_user_status_1);

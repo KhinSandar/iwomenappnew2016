@@ -249,5 +249,8 @@
     <string name="str_your_review">Your Review</string>
     <string name="str_submit">Submit</string>
     <string name="competition_answer">This user has already submitted her answers.</string>
+    <string name="not_enough_storage">External storage is unavailable!</string>
+    <string name="videoRecordingError">Recording video failed</string>
+    <string name="title_activity_video_recording">Recording Video</string>
 
 </resources>

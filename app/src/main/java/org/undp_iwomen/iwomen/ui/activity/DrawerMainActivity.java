@@ -1096,6 +1096,8 @@ public class DrawerMainActivity extends BaseActionBarActivity {
             }else{
                 finish();
             }
+        }else{
+            finish();
         }
     }
 }
