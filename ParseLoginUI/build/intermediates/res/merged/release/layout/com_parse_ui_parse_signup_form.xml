@@ -27,11 +27,11 @@
                 android:id="@+id/register_ly"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:layout_below="@+id/facebook_login_container"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
                 android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:layout_gravity="center">
+                android:orientation="vertical">
 
                 <com.makeramen.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/register_profilePic_rounded"
@@ -54,6 +54,7 @@
                     app:riv_corner_radius="30dip"
                     app:riv_mutate_background="true"
                     app:riv_oval="true"></com.makeramen.RoundedImageView>
+
                 <ProgressBar
                     android:id="@+id/register_profilePic_progressBar"
                     style="?android:attr/progressBarStyle"
@@ -77,8 +78,8 @@
                 android:gravity="center"
 
                 android:textColor="@color/body_text_3"
-                android:visibility="visible"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:visibility="visible" />
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/til_signup_user_name"
@@ -90,8 +91,7 @@
                     style="@style/ParseLoginUI.EditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="15sp"
-                     />
+                    android:textSize="15sp" />
             </android.support.design.widget.TextInputLayout>
 
 
@@ -110,7 +110,7 @@
                     android:inputType="textPassword"
                     android:nextFocusForward="@+id/signup_confirm_password_input"
                     android:selectAllOnFocus="true"
-                    android:textSize="15sp"/>
+                    android:textSize="15sp" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -129,7 +129,7 @@
                     android:fontFamily="sans-serif"
                     android:inputType="textPassword"
                     android:selectAllOnFocus="true"
-                    android:textSize="15sp"/>
+                    android:textSize="15sp" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -149,7 +149,7 @@
                     android:nextFocusDown="@+id/singup_tlg_checkbox"
                     android:nextFocusForward="@+id/singup_tlg_checkbox"
                     android:selectAllOnFocus="true"
-                    android:textSize="15sp"/>
+                    android:textSize="15sp" />
 
             </android.support.design.widget.TextInputLayout>
             <!--<android.support.design.widget.TextInputLayout
@@ -175,9 +175,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="8dp"
+                android:orientation="horizontal"
 
-                android:orientation="horizontal">
+                android:paddingTop="8dp">
 
                 <CheckBox
                     android:id="@+id/singup_tlg_checkbox"
@@ -189,28 +189,29 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clickable="true"
-                    android:textSize="15sp"
                     android:fontFamily="sans-serif"
-                    android:text="@string/signup_tlg_member_exit_mm" />
+                    android:text="@string/signup_tlg_member_exit_mm"
+                    android:textSize="15sp" />
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
                 android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/signup_lbl_township"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/com_parse_ui_horizontal_margin"
-                    android:paddingLeft="3dp"
                     android:fontFamily="sans-serif"
-                    android:textSize="15sp"
                     android:paddingBottom="@dimen/com_parse_ui_horizontal_margin"
+                    android:paddingLeft="3dp"
+                    android:paddingTop="@dimen/com_parse_ui_horizontal_margin"
                     android:text="Township"
                     android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                    />
+                    android:textSize="15sp" />
 
                 <Spinner
                     android:id="@+id/signup_spn_township"
@@ -219,15 +220,15 @@
                     android:layout_height="56dp"
                     android:enabled="false"
                     android:fontFamily="sans-serif"
-                    android:text="@string/com_parse_ui_signup_township_lbl_eng"/>
+                    android:text="@string/com_parse_ui_signup_township_lbl_eng" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="8dp"
+                android:orientation="horizontal"
                 android:paddingBottom="8dp"
-                android:orientation="horizontal">
+                android:paddingTop="8dp">
 
                 <CheckBox
                     android:id="@+id/i_agree_checkbox"
@@ -239,9 +240,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clickable="true"
-                    android:textSize="15sp"
                     android:fontFamily="sans-serif"
-                    android:text="@string/i_agree_mm" />
+                    android:text="@string/i_agree_mm"
+                    android:textSize="15sp" />
 
             </LinearLayout>
 
@@ -282,7 +283,7 @@
                         android:layout_marginLeft="16dp"
                         android:enabled="false"
                         android:text="@string/com_parse_ui_edit_account_button_label_mm"
-                        android:textSize="15sp"/>
+                        android:textSize="15sp" />
                 </LinearLayout>
 
             </LinearLayout>

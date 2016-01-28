@@ -1,14 +1,6 @@
 [
     {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\color-v23\\abc_color_highlight_material.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\color-v23\\abc_color_highlight_material.xml"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\color-v23\\abc_color_highlight_material.xml",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\color-v23\\abc_color_highlight_material.xml"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\color-v23\\abc_color_highlight_material.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\color-v23\\abc_color_highlight_material.xml"
+        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/ParseLoginUI/build/intermediates/res/merged/release/color-v23/abc_color_highlight_material.xml",
+        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/ParseLoginUI/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/color-v23/abc_color_highlight_material.xml"
     }
 ]

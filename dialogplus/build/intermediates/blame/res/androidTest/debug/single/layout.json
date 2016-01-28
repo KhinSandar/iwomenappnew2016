@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/dialogplus/build/intermediates/res/merged/androidTest/debug/layout/dialog_view.xml",
+        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/dialogplus/build/intermediates/bundles/debug/res/layout/dialog_view.xml"
+    },
+    {
+        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/dialogplus/build/intermediates/res/merged/androidTest/debug/layout/dialog_list.xml",
+        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/dialogplus/build/intermediates/bundles/debug/res/layout/dialog_list.xml"
+    },
+    {
+        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/dialogplus/build/intermediates/res/merged/androidTest/debug/layout/base_container.xml",
+        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/dialogplus/build/intermediates/bundles/debug/res/layout/base_container.xml"
+    },
+    {
+        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/dialogplus/build/intermediates/res/merged/androidTest/debug/layout/dialog_grid.xml",
+        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/dialogplus/build/intermediates/bundles/debug/res/layout/dialog_grid.xml"
+    }
+]

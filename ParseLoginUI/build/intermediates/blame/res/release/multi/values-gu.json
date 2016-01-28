@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\values-gu\\values-gu.xml",
+        "outputFile": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/ParseLoginUI/build/intermediates/res/merged/release/values-gu/values-gu.xml",
         "map": [
             {
                 "to": {
@@ -11,55 +11,7 @@
                     "endOffset": 111
                 },
                 "from": {
-                    "file": "D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.facebook.android\\facebook-android-sdk\\4.0.0\\res\\values-gu\\values.xml",
-                    "position": {
-                        "startLine": 4,
-                        "startColumn": 4,
-                        "startOffset": 181,
-                        "endColumn": 60,
-                        "endOffset": 237
-                    }
-                }
-            }
-        ]
-    },
-    {
-        "outputFile": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\values-gu\\values-gu.xml",
-        "map": [
-            {
-                "to": {
-                    "startLine": 2,
-                    "startColumn": 4,
-                    "startOffset": 55,
-                    "endColumn": 60,
-                    "endOffset": 111
-                },
-                "from": {
-                    "file": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.facebook.android\\facebook-android-sdk\\4.0.0\\res\\values-gu\\values.xml",
-                    "position": {
-                        "startLine": 4,
-                        "startColumn": 4,
-                        "startOffset": 181,
-                        "endColumn": 60,
-                        "endOffset": 237
-                    }
-                }
-            }
-        ]
-    },
-    {
-        "outputFile": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\res\\merged\\release\\values-gu\\values-gu.xml",
-        "map": [
-            {
-                "to": {
-                    "startLine": 2,
-                    "startColumn": 4,
-                    "startOffset": 55,
-                    "endColumn": 60,
-                    "endOffset": 111
-                },
-                "from": {
-                    "file": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomen new\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.facebook.android\\facebook-android-sdk\\4.0.0\\res\\values-gu\\values.xml",
+                    "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/ParseLoginUI/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.0.0/res/values-gu/values.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,

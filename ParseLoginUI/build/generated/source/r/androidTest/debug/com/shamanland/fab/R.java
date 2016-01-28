@@ -19,14 +19,14 @@ public final class R {
 		public static final int floatingActionButtonStyle = 0x7f010001;
 	}
 	public static final class dimen {
-		public static final int floating_action_button_elevation = 0x7f070080;
+		public static final int floating_action_button_elevation = 0x7f070081;
 		public static final int floating_action_button_margin_mini = 0x7f070019;
 		public static final int floating_action_button_margin_mini_minus = 0x7f07001a;
 		public static final int floating_action_button_margin_normal = 0x7f07001b;
 		public static final int floating_action_button_margin_normal_minus = 0x7f07001c;
-		public static final int floating_action_button_shadow_radius = 0x7f070081;
-		public static final int floating_action_button_size_mini = 0x7f070082;
-		public static final int floating_action_button_size_normal = 0x7f070083;
+		public static final int floating_action_button_shadow_radius = 0x7f070082;
+		public static final int floating_action_button_size_mini = 0x7f070083;
+		public static final int floating_action_button_size_normal = 0x7f070084;
 	}
 	public static final class drawable {
 		public static final int com_shamanland_fab_circle_mini = 0x7f020061;

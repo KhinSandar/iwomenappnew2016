@@ -1,0 +1,117 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:id="@+id/parse_login"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/com_parse_ui_vertical_margin"
+    android:paddingLeft="@dimen/com_parse_ui_horizontal_margin"
+    android:paddingRight="@dimen/com_parse_ui_horizontal_margin"
+    android:paddingTop="@dimen/com_parse_ui_vertical_margin">
+
+
+
+
+
+
+    <FrameLayout
+        android:id="@+id/register_ly"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/facebook_login_container"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <com.makeramen.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/register_photo_profilePic"
+            android:layout_width="@dimen/feed_item_profile_pic"
+            android:layout_height="@dimen/feed_item_profile_pic"
+            android:layout_alignParentLeft="true"
+
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+
+            android:layout_gravity="center"
+
+            android:scaleType="fitXY"
+            android:src="@drawable/camera_icon"
+            android:visibility="visible"
+            app:riv_border_color="#333333"
+            app:riv_border_width="0dip"
+            app:riv_corner_radius="30dip"
+            app:riv_mutate_background="true"
+            app:riv_oval="true"></com.makeramen.RoundedImageView>
+
+        <ProgressBar
+            android:id="@+id/register_photo_profilePic_pgbar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+
+            android:layout_gravity="center"
+            android:visibility="visible" />
+    </FrameLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+
+        android:orientation="vertical">
+
+
+        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+            android:id="@+id/register_country_greet1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="@string/register_photo_upload_greet1"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+
+
+
+    <LinearLayout
+        android:id="@+id/register_state_ly"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+        <org.undp_iwomen.iwomen.ui.widget.CustomButton
+            android:id="@+id/Next"
+            style="@style/ParseLoginUI.Button.SignUp"
+            android:text="@string/register_next"
+            android:transitionName="@string/register_next"
+            android:textSize="15sp" />
+
+
+
+    </LinearLayout>
+
+   <!-- <org.undp_iwomen.iwomen.ui.widget.CustomButton
+        android:id="@+id/parse_signup_button"
+
+        android:layout_marginTop="20dp"
+        style="@style/ParseLoginUI.Button.ThirdPartyLogin"
+        android:text="@string/register_tlg_btn_wrong" />-->
+
+
+</LinearLayout>
+

@@ -1,0 +1,137 @@
+<LinearLayout
+    android:id="@+id/parse_login"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:focusableInTouchMode="true"
+    android:focusable="true"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <org.undp_iwomen.iwomen.ui.widget.CustomEditText
+            android:id="@+id/login_username_input"
+            style="@style/ParseLoginUI.EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusDown="@+id/login_password_input"
+            android:nextFocusForward="@+id/login_password_input"
+            android:textColor="@color/body_text_1"
+            android:textSize="15sp"/>
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/com_parse_ui_small_vertical_spacing">
+
+        <org.undp_iwomen.iwomen.ui.widget.CustomEditText
+            android:id="@+id/login_password_input"
+            style="@style/ParseLoginUI.EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:inputType="textPassword"
+            android:nextFocusDown="@+id/parse_login_button"
+            android:nextFocusForward="@+id/parse_login_button"
+            android:selectAllOnFocus="true"
+            android:textColor="@color/body_text_1"
+            android:textSize="15sp"/>
+    </android.support.design.widget.TextInputLayout>
+    <org.undp_iwomen.iwomen.ui.widget.CustomCheckBox
+        android:id="@+id/login_showpwd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/login_password_input"
+
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:textSize="15sp"
+        android:text="Show Password"
+        android:textColor="@color/theme_primary"
+        android:visibility="visible" />
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp">
+
+        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+            android:id="@+id/login_change_lan_eng"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:gravity="left"
+            android:text="@string/login_language_eng"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+            android:id="@+id/login_change_lan_mm"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:gravity="left"
+            android:text="@string/login_language_mm"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/parse_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/com_parse_ui_large_vertical_spacing">
+
+        <org.undp_iwomen.iwomen.ui.widget.CustomButton
+            android:id="@+id/parse_login_button"
+            style="@style/ParseLoginUI.Button.SignUp"
+            android:textSize="15sp"
+            android:text="@string/com_parse_ui_parse_login_button_label_mm"/>
+
+    </LinearLayout>
+
+    <!--<Button
+        android:id="@+id/parse_login_help"
+        style="@style/ParseLoginUI.Button.SignUp"
+        android:background="@drawable/login_signup_button_background_selector"
+        android:visibility="gone"
+        android:layout_marginBottom="@dimen/com_parse_ui_small_vertical_spacing"
+        android:layout_marginTop="@dimen/com_parse_ui_small_vertical_spacing"
+
+        android:text="@string/com_parse_ui_forgot_password_button_label"/>-->
+    <!--<RadioGroup
+        android:id="@+id/settings_language"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/settings_english_language"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:text="English"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/settings_myanmar_language"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+
+            android:text="Myanmar"/>
+
+    </RadioGroup>-->
+
+</LinearLayout>

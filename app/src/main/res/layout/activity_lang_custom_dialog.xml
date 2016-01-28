@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary"
+    android:orientation="vertical"
+    android:paddingLeft="16dp"
+
+
+    android:paddingRight="16dp">
+
+    <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+        android:id="@+id/dialog_language_setting_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="Change Language"
+
+        android:textColor="@android:color/white" />
+
+    <RadioGroup
+        android:id="@+id/dialog_language"
+
+        android:theme="@style/Theme.Iwomen.Radio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:checkedButton="@+id/dialog_english_language"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/dialog_english_language"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ENGLISH"
+
+            android:textColor="@android:color/white" />
+
+        <RadioButton
+            android:id="@+id/dialog_mm_zawgyi_language"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MYANMAR ZAWGYI"
+            android:textColor="@android:color/white" />
+
+        <RadioButton
+            android:id="@+id/dialog_mm_unicode_language"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="MYANMAR UNICODE"
+
+            android:textColor="@android:color/white" />
+
+        <RadioButton
+            android:id="@+id/dialog_mm_default_language"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DEFAULT"
+            android:textColor="@android:color/white" />
+
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/dialog_ok_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_gravity="right"
+        android:background="@android:color/transparent"
+        android:gravity="right"
+        android:text="OK"
+        android:textColor="@android:color/white" />
+</LinearLayout>

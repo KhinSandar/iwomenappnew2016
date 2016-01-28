@@ -341,6 +341,7 @@
     <item format="float" name="disabled_alpha_material_dark" type="dimen">0.30</item>
     <item format="float" name="disabled_alpha_material_light" type="dimen">0.26</item>
     <dimen name="feed_item_profile_pic">50dp</dimen>
+    <dimen name="feed_item_sticker_pic">150dp</dimen>
     <dimen name="floating_action_button_elevation">4dp</dimen>
     <dimen name="floating_action_button_margin_mini">26dp</dimen>
     <dimen name="floating_action_button_margin_mini_minus">-26dp</dimen>
@@ -1734,6 +1735,13 @@
         <item name="android:background">@android:color/transparent</item>
         <item name="android:textColor">@color/com_parse_ui_parse_login_help_button_label_selector</item>
         <item name="android:textSize">16sp</item>
+    </style>
+    <style name="ParseLoginUI.Register.Terms" parent="@android:style/Widget.Button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:background">
+            @drawable/com_parse_ui_parse_signup_button_background_selector
+        </item>
     </style>
     <style name="ParseLoginUI.TextView" parent="@android:style/Widget.TextView">
         <item name="android:textColor">@color/com_parse_ui_parse_login_display_text</item>

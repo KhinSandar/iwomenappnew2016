@@ -29,8 +29,18 @@
     <style name="Theme.Iwomen.SignUp" parent="Theme.Iwomen">
         <item name="colorControlNormal">@color/body_text_3</item>
         <item name="colorControlActivated">@color/primary</item>
+
+
         <item name="android:textColorHint">#61000000</item>
         <item name="android:textColor">@color/body_text_2</item>
+    </style>
+    <style name="Theme.Iwomen.Radio" parent="Theme.Iwomen">
+
+        //the color of the radio pressed state and activated state
+        <item name="colorControlActivated">@android:color/white</item>
+        // the color of the radio button normal state
+        <item name="colorControlNormal">@android:color/white</item>
+
     </style>
 
     <style name="ActionBar.TitleText" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">

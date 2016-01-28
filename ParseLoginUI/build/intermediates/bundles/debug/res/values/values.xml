@@ -36,6 +36,7 @@
     <dimen name="com_parse_ui_vertical_spacing">16dp</dimen>
     <dimen name="com_parse_ui_xlarge_vertical_spacing">36dp</dimen>
     <dimen name="feed_item_profile_pic">50dp</dimen>
+    <dimen name="feed_item_sticker_pic">150dp</dimen>
     <plurals name="com_parse_ui_password_too_short_toast">
         <item quantity="one">Password must be at least %d character long</item>
         <item quantity="other">Password must be at least %d characters long</item>
@@ -201,6 +202,13 @@
         <item name="android:background">@android:color/transparent</item>
         <item name="android:textColor">@color/com_parse_ui_parse_login_help_button_label_selector</item>
         <item name="android:textSize">16sp</item>
+    </style>
+    <style name="ParseLoginUI.Register.Terms" parent="@android:style/Widget.Button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:background">
+            @drawable/com_parse_ui_parse_signup_button_background_selector
+        </item>
     </style>
     <style name="ParseLoginUI.TextView" parent="@android:style/Widget.TextView">
         <item name="android:textColor">@color/com_parse_ui_parse_login_display_text</item>

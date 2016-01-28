@@ -22,6 +22,8 @@ repositories {
 }
 
 apply plugin: 'com.android.application'
+apply plugin: 'com.android.databinding'
+
 
 android {
     compileSdkVersion 23
@@ -96,6 +98,12 @@ dependencies {
 
     //compile 'com.google.android.gms:play-services:8.1.0'
     compile 'com.android.support:multidex:1.0.0'
+
+    //https://github.com/orhanobut/dialogplus
+    compile project(':dialogplus')
+    compile project(':GifImageViewlibrary')
+
+
 
 
 
