@@ -89,6 +89,7 @@ dependencies {
     compile project(':sKAlertMessage')
     compile project(':shimmerTextView')
     compile project(':RecordingMediaFile')
+    compile project(':ZProgressHUD')
     //compile 'com.google.android.gms:play-services:6.5.87'
     compile 'com.google.android.gms:play-services-maps:8.1.0'
     compile 'com.google.android.gms:play-services-analytics:8.1.0'

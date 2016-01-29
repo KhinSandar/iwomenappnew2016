@@ -1,5 +1,5 @@
 
-include ':app', ':ParseLoginUI', ':library', ':emojiicon', ':RecordingMediaFile'
+include ':app', ':ParseLoginUI', ':library', ':emojiicon', ':RecordingMediaFile', ':ZProgressHUD'
 
 include ':sKAlertMessage'
 

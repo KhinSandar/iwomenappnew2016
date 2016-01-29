@@ -194,6 +194,7 @@ public class BaseActionBarActivity extends AppCompatActivity{
 		});
 	}
 
+	
 	public void showFeedbackDialog(final String userId, final Double be_inspired_rate, final Double be_knowledgeable, final Double be_together, final Double talk_together){
 		final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
 		View convertView = View.inflate(this,R.layout.dialog_feedback,null);
