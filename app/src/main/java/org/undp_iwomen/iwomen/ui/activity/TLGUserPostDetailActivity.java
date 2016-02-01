@@ -170,7 +170,7 @@ public class TLGUserPostDetailActivity extends BaseActionBarActivity implements 
     //Emoji Keyboard
     public ImageView emojiIconToggle;
 
-    private CustomTextView txt_lbl_like_post,txt_lbl_share_post;
+    private CustomTextView txt_lbl_like_post, txt_lbl_share_post;
 
 
     private ShareDialog shareDialog;
@@ -330,13 +330,13 @@ public class TLGUserPostDetailActivity extends BaseActionBarActivity implements 
         video_icon = (ImageView) findViewById(R.id.postdeail_video_icon);
 
 
-        txt_lbl_like_post = (CustomTextView)findViewById(R.id.postdetail_like_post_lbl);
-        txt_lbl_share_post =(CustomTextView)findViewById(R.id.postdetail_share_post_lbl);
+        txt_lbl_like_post = (CustomTextView) findViewById(R.id.postdetail_like_post_lbl);
+        txt_lbl_share_post = (CustomTextView) findViewById(R.id.postdetail_share_post_lbl);
 
-        img_credit_logo = (ResizableImageView)findViewById(R.id.postdetail_credit_img);
-        txt_credit_link = (TextView)findViewById(R.id.postdetail_credit_link);
-        progressBar_credit = (ProgressBar)findViewById(R.id.postdetail_credit_progress);
-        ly_credit = (LinearLayout)findViewById(R.id.postdetail_ly_credit);
+        img_credit_logo = (ResizableImageView) findViewById(R.id.postdetail_credit_img);
+        txt_credit_link = (TextView) findViewById(R.id.postdetail_credit_link);
+        progressBar_credit = (ProgressBar) findViewById(R.id.postdetail_credit_progress);
+        ly_credit = (LinearLayout) findViewById(R.id.postdetail_ly_credit);
 
         ly_credit.setVisibility(View.GONE);
 
@@ -646,7 +646,7 @@ public class TLGUserPostDetailActivity extends BaseActionBarActivity implements 
                                 TimeDiff.getTimeDifference(d0, d1, TimeDiff.TimeField.DAY));*/
 
 
-                            listComment.add(new CommentItem(comment_img_path, comment_user_name, comment, str_comment_time_long,comment_sticker_img_path));
+                            listComment.add(new CommentItem(comment_img_path, comment_user_name, comment, str_comment_time_long, comment_sticker_img_path));
                             str_comment_time_long = "";
                         }
 
@@ -937,7 +937,7 @@ public class TLGUserPostDetailActivity extends BaseActionBarActivity implements 
 
             img_like.setImageResource(R.drawable.like_fill);
         }
-        txt_like_count.setText(item.getPost_like() +" " );
+        txt_like_count.setText(item.getPost_like() + " ");
 
         //viewHolder.mCatNameTextView.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
         //viewHolder.profilePictureView.setProfileId(item.get());
@@ -1137,7 +1137,7 @@ public class TLGUserPostDetailActivity extends BaseActionBarActivity implements 
 
                                     if (e == null) {
                                         //Log.e("Cloud Increment", "===>" + like_count);
-                                        txt_like_count.setText(like_count + " "  );
+                                        txt_like_count.setText(like_count + " ");
                                         //TODO call updatePost
                                         updatePostLikeStatus(postId, like_count);
                                         like_status = "1";
@@ -1563,7 +1563,7 @@ public class TLGUserPostDetailActivity extends BaseActionBarActivity implements 
         } else {
 
             if (strLang.equals(Utils.ENG_LANG)) {
-                Utils.doToastEng(getApplicationContext(),getResources().getString(R.string.open_internet_warning_eng));
+                Utils.doToastEng(getApplicationContext(), getResources().getString(R.string.open_internet_warning_eng));
             } else {
 
                 Utils.doToastMM(getApplicationContext(), getResources().getString(R.string.open_internet_warning_mm));
@@ -1585,20 +1585,19 @@ public class TLGUserPostDetailActivity extends BaseActionBarActivity implements 
     private void getCommentCount(String strpostId) {
 
 
-
         if (Connection.isOnline(getApplicationContext())) {
 
             UserPostAPI.getInstance().getService().getCommentCount(0, 1, "{\"postId\":{\"__type\":\"Pointer\",\"className\":\"Post\",\"objectId\":\"" + postId + "\"}}", new Callback<String>() {
                 @Override
                 public void success(String s, Response response) {
-                    try{
+                    try {
                         JSONObject whole_body = new JSONObject(s);
                         JSONArray result = whole_body.getJSONArray("results");
 
                         cmd_count = whole_body.getString("count");
-                        txt_cmd_count.setText( cmd_count + "Comments") ;
+                        txt_cmd_count.setText(cmd_count + "Comments");
 
-                    }catch (JSONException ex){
+                    } catch (JSONException ex) {
                         ex.printStackTrace();
                     }
 
@@ -1606,7 +1605,7 @@ public class TLGUserPostDetailActivity extends BaseActionBarActivity implements 
 
                 @Override
                 public void failure(RetrofitError error) {
-                    Log.e("///Count Error//","==>" +error.toString());
+                    Log.e("///Count Error//", "==>" + error.toString());
 
                 }
             });
@@ -1620,7 +1619,6 @@ public class TLGUserPostDetailActivity extends BaseActionBarActivity implements 
                 Utils.doToastMM(getApplicationContext(), getResources().getString(R.string.open_internet_warning_mm));
             }
         }
-
 
 
     }

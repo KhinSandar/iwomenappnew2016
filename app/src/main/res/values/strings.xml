@@ -253,4 +253,74 @@
     <string name="videoRecordingError">Recording video failed</string>
     <string name="title_activity_video_recording">Recording Video</string>
 
+    <string name="login_language_eng">Change Language</string>
+    <string name="login_language_mm">ၿမန္မာစာ ေၿပာင္းရန္</string>
+
+
+
+    <!-- Register Activity Action Bar Title  Eng-->
+    <string name="register_title">Name</string>
+    <string name="register_title_profile">Profile</string>
+    <string name="register_title_pwd">Password</string>
+    <string name="register_country_title">Country</string>
+    <string name="register_township_title">TLG/SRG Township</string>
+    <string name="register_state_title">State</string>
+    <string name="register_photo_title">Upload Photo</string>
+    <string name="register_terms_title">Terms and Condition</string>
+    <string name="register_congrat_title">Congratulations</string>
+
+    <!-- Register Activity Action Bar Title MM-->
+    <string name="register_title_mm">အမည္</string>
+    <string name="register_title_profile_mm">ကိုုယ္ေရးအခ်က္အလက္</string>
+    <string name="register_title_pwd_mm">လွ်ိဳ ့၀ွက္ စာလံုုး</string>
+    <string name="register_country_title_mm">နိုုင္ငံ</string>
+    <string name="register_township_title_mm">TLG/SRG Township</string>
+    <string name="register_state_title_mm">State</string>
+    <string name="register_photo_title_mm">Upload Photo</string>
+    <string name="register_terms_title_mm">Terms and Condition</string>
+    <string name="register_congrat_title_mm">Congratulations</string>
+
+
+
+    <!-- Register Login Hint-->
+    <string name="register_name_hint">Your Name</string>
+    <string name="register_ph_hint">Your Phone Number</string>
+
+
+    <string name="register_congrat_eng1">CONGRATULATIONS</string>
+    <string name="register_congrat_eng2">You are Now Officially</string>
+    <string name="register_congrat_eng3">an I-Women- Inspiring Woman</string>
+
+    <string name="register_enjoy">ENJOY THE APP</string>
+    <string name="register_tour">Take a Tour</string>
+
+    <string name="register_fb_login_greet1">Register with Your Facebook Account</string>
+    <string name="register_fb_login_greet2">Or Your Name and Phone Number</string>
+
+    <string name="register_next">Next</string>
+
+    <string name="register_pwd_greet1">Please Set Your Password</string>
+    <string name="register_pwd_greet2">Password Must be at Least 6 Character</string>
+
+    <string name="register_pro_greet1">Are you From Myanmar ?</string>
+    <string name="register_pro_greet2">Are you a TLG/SRG member ?</string>
+
+    <string name="register_pro_yes">Yes</string>
+    <string name="register_pro_no">No</string>
+
+    <string name="register_tlg_greet1">Please Select Your TLG/SRG Township.</string>
+    <string name="register_tlg_btn_wrong">If You are not TLG/SRG.Click Here</string>
+
+    <string name="register_state_greet1">Please Select Your State.</string>
+
+    <string name="register_country_greet1">Please Type Your Country Origin.</string>
+    <string name="register_photo_upload_greet1">Please Upload Your Profile Photo or Avator.</string>
+
+
+    <string name="register_terms_greet1">Do You Agree With The Following </string>
+    <string name="register_terms_greet2">Terms And Conditions?</string>
+
+    <string name="register_terms_body">Text body </string>
+    <string name="register_terms_link">www.iwomen.com</string>
+
 </resources>

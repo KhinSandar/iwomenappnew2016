@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/GifImageViewlibrary/GifImageViewlibrary.iml" filepath="$PROJECT_DIR$/GifImageViewlibrary/GifImageViewlibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/ParseLoginUI/ParseLoginUI.iml" filepath="$PROJECT_DIR$/ParseLoginUI/ParseLoginUI.iml" />
       <module fileurl="file://$PROJECT_DIR$/RecordingMediaFile/RecordingMediaFile.iml" filepath="$PROJECT_DIR$/RecordingMediaFile/RecordingMediaFile.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ZProgressHUD/ZProgressHUD.iml" filepath="$PROJECT_DIR$/ZProgressHUD/ZProgressHUD.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dialogplus/dialogplus.iml" filepath="$PROJECT_DIR$/dialogplus/dialogplus.iml" />
       <module fileurl="file://$PROJECT_DIR$/emojiicon/emojiicon.iml" filepath="$PROJECT_DIR$/emojiicon/emojiicon.iml" />
       <module fileurl="file://$PROJECT_DIR$/iwomen new.iml" filepath="$PROJECT_DIR$/iwomen new.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />

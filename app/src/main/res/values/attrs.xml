@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <declare-styleable name="CustomShape">
+    <declare-styleable name="CustomShape">
     <attr name="shape" format="enum">
       <enum name="circle" value="0" />
       <enum name="rectangle" value="1" />
@@ -52,5 +52,6 @@
         <attr name="matProg_barWidth" format="dimension" />
         <attr name="matProg_linearProgress" format="boolean" />
     </declare-styleable>
+
 
 </resources>

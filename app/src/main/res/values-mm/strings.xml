@@ -252,5 +252,15 @@
     <string name="videoRecordingError">Recording video failed</string>
     <string name="title_activity_video_recording">Recording Video</string>
 
+    <!-- Register Login Hint-->
+    <string name="register_name_hint">အမည္</string>
+    <string name="register_ph_hint">ဖုုန္း နံပါတ္</string>
+
+
+    <string name="register_next">ေနာက္သိုု ့</string>
+
+    <string name="register_fb_login_greet1">သင့္၏ ေဖ့ဘုုတ္စ္ အေကာင့္ၿဖင့္ မွတ္ပံုုတင္ႏိုုင္သည္</string>
+    <string name="register_fb_login_greet2">(သိုု ့) အမည္ႏွင္ ့ ဖုုန္းနံပါတ္ရိုုက္ထည့္ပါ။</string>
+
 
 </resources>
