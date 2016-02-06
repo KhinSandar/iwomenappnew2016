@@ -110,8 +110,8 @@
     <orderEntry type="library" exported="" name="play-services-base-8.1.0" level="project" />
     <orderEntry type="library" exported="" name="kotlin-runtime-0.12.613" level="project" />
     <orderEntry type="library" exported="" name="design-23.1.1" level="project" />
-    <orderEntry type="library" exported="" name="android-priority-jobqueue-1.1.2" level="project" />
     <orderEntry type="library" exported="" name="okio-1.2.0" level="project" />
+    <orderEntry type="library" exported="" name="android-priority-jobqueue-1.1.2" level="project" />
     <orderEntry type="library" exported="" name="android-cropimage-1.0.2" level="project" />
     <orderEntry type="library" exported="" name="picasso-2.5.2" level="project" />
     <orderEntry type="library" exported="" name="materialish-progress-1.2" level="project" />

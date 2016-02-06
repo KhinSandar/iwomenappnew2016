@@ -11,7 +11,6 @@ import android.support.design.widget.TextInputLayout;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -178,7 +177,7 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
         NetworkEngine.getInstance().postLogin(username, pwd, new Callback<User>() {
             @Override
             public void success(User user, Response response) {
-                Log.e("<<< >>> ", "===>" + user.getEmail());
+                //Log.e("<<< >>> ", "===>" + user.getEmail());
                 dialog.dismiss();
 
                 mEditorUserInfo = mSharedPreferencesUserInfo.edit();
@@ -198,7 +197,15 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
 
             @Override
             public void failure(RetrofitError error) {
-                Log.e("<<< Login Err >>> ", "===>" + error.toString());
+                //Log.e("<<< Login Err >>> ", "===>" + error.toString());
+                if (lang.equals(com.parse.utils.Utils.ENG_LANG)) {
+                    //doToast(getResources().getString(com.parse.ui.R.string.confirm_password_error));
+                    Utils.doToastEng(getApplicationContext(), error.toString());
+                } else if (lang.equals(com.parse.utils.Utils.MM_LANG)) {
+
+                    Utils.doToastMM(getApplicationContext(), error.toString());
+                }
+
                 dialog.dismiss();
 
             }
