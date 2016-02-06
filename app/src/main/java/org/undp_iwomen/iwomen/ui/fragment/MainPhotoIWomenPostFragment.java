@@ -1,9 +1,10 @@
 package org.undp_iwomen.iwomen.ui.fragment;
 
-import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -11,6 +12,8 @@ import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -25,6 +28,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alexbbb.uploadservice.MultipartUploadRequest;
+import com.alexbbb.uploadservice.UploadNotificationConfig;
+import com.alexbbb.uploadservice.UploadServiceBroadcastReceiver;
 import com.android.camera.CropImageIntentBuilder;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -44,11 +50,13 @@ import com.parse.SaveCallback;
 import com.pnikosis.materialishprogress.ProgressWheel;
 
 import org.json.JSONObject;
+import org.undp_iwomen.iwomen.BuildConfig;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.model.MyTypeFace;
 import org.undp_iwomen.iwomen.model.parse.IwomenPost;
 import org.undp_iwomen.iwomen.ui.activity.DrawerMainActivity;
+import org.undp_iwomen.iwomen.ui.activity.MainActivity;
 import org.undp_iwomen.iwomen.ui.widget.ResizableImageView;
 import org.undp_iwomen.iwomen.utils.Connection;
 import org.undp_iwomen.iwomen.utils.ShowKeyboardListener;
@@ -56,13 +64,19 @@ import org.undp_iwomen.iwomen.utils.Utils;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.net.MalformedURLException;
 import java.util.Date;
+import java.util.UUID;
 
 
 /**
  * Created by khinsandar on 4/12/15.
  */
 public class MainPhotoIWomenPostFragment extends Fragment implements ImageChooserListener {
+    private static final int AUDIO_CAPTURE = 101;
+    private static final int VIDEO_CAPTURE = 102;
+    private static final String TAG = "IWOMEN";
 
 
     /*LostReport lostReport;
@@ -103,6 +117,7 @@ public class MainPhotoIWomenPostFragment extends Fragment implements ImageChoose
     CallbackManager callbackManager;
     private PendingAction pendingAction = PendingAction.NONE;
     private final int UPLOAD_AUDIO = 100;
+    private ProgressDialog pgDialog;
 
 
     private enum PendingAction {
@@ -335,24 +350,34 @@ public class MainPhotoIWomenPostFragment extends Fragment implements ImageChoose
         txt_audio_upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mstr_lang.equals(Utils.ENG_LANG)) {
+                /*if (mstr_lang.equals(Utils.ENG_LANG)) {
                     Utils.doToastEng(mContext, getResources().getString(R.string.resource_coming_soon_eng));
                 } else {
                     Utils.doToastMM(mContext, getResources().getString(R.string.resource_coming_soon_mm));
-                }
+                }*/
+                Intent intent = new Intent(MediaStore.Audio.Media.RECORD_SOUND_ACTION);
+                File mediaFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/iwomen_audio_recording.mp3");
+                videoUri = Uri.fromFile(mediaFile);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, videoUri);
+                startActivityForResult(intent, AUDIO_CAPTURE);
                 //startActivityForResult(new Intent(getActivity(), AudioRecordingActivity.class), UPLOAD_AUDIO);
+
+
+
             }
         });
 
         txt_video_upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mstr_lang.equals(Utils.ENG_LANG)) {
+               /* if (mstr_lang.equals(Utils.ENG_LANG)) {
                     Utils.doToastEng(mContext, getResources().getString(R.string.resource_coming_soon_eng));
                 } else {
                     Utils.doToastMM(mContext, getResources().getString(R.string.resource_coming_soon_mm));
-                }
-                //startActivityForResult(new Intent(getActivity(), VideoRecordingActivity.class), UPLOAD_AUDIO);
+                }*/
+                //Video Recording
+                startRecordingVideo();
+
             }
         });
 
@@ -418,6 +443,20 @@ public class MainPhotoIWomenPostFragment extends Fragment implements ImageChoose
             }
         });
 
+
+    }
+
+    Uri videoUri;
+    public void startRecordingVideo() {
+        if (getActivity().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT)) {
+            Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+            File mediaFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/iwomen_video_recording.mp4");
+            videoUri = Uri.fromFile(mediaFile);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, videoUri);
+            startActivityForResult(intent, VIDEO_CAPTURE);
+        } else {
+            Toast.makeText(getActivity(), "No camera on device", Toast.LENGTH_LONG).show();
+        }
 
     }
 
@@ -669,6 +708,8 @@ public class MainPhotoIWomenPostFragment extends Fragment implements ImageChoose
 
         updateUI();
 
+        uploadReceiver.register(getActivity());
+
     }
 
 
@@ -679,6 +720,7 @@ public class MainPhotoIWomenPostFragment extends Fragment implements ImageChoose
 
         AppEventsLogger.deactivateApp(getActivity());
 
+        uploadReceiver.unregister(getActivity());
     }
 
     @Override
@@ -782,10 +824,98 @@ public class MainPhotoIWomenPostFragment extends Fragment implements ImageChoose
         }
     }
 
+    private UploadNotificationConfig getNotificationConfig() {
+        return new UploadNotificationConfig()
+                .setIcon(R.mipmap.ic_launcher)
+                .setTitle(getString(R.string.app_name))
+                .setInProgressMessage("Your recording audio is uploading.")
+                .setCompletedMessage("Your recording audio was successfully uploaded.")
+                .setErrorMessage("Your recording audio is error.")
+                .setAutoClearOnSuccess(false)
+                .setClickIntent(new Intent(getActivity(), MainActivity.class))
+                .setClearOnAction(true)
+                .setRingToneEnabled(true);
+    }
+
+    private void uploadingAudioFile(String url, String filePath){
+        final String serverUrlString = url;
+        final String fileToUploadPath = filePath;
+        final String uploadID = UUID.randomUUID().toString();
+        pgDialog = new ProgressDialog(getActivity());
+        pgDialog.setTitle("Your recording file is uploading");
+        pgDialog.setCancelable(false);
+        pgDialog.setProgress(0);
+        pgDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        pgDialog.show();
+        try {
+            new MultipartUploadRequest(getActivity(), uploadID, serverUrlString)
+                    .addFileToUpload(fileToUploadPath, "uploaded_file")
+                    .setNotificationConfig(getNotificationConfig())
+                    .setCustomUserAgent("UploadService/" + BuildConfig.VERSION_NAME)
+                    .setMaxRetries(2)
+                    .startUpload();
+
+            // these are the different exceptions that may be thrown
+        } catch (FileNotFoundException exc) {
+
+        } catch (IllegalArgumentException exc) {
+
+        } catch (MalformedURLException exc) {
+
+        }
+    }
+
+    private final UploadServiceBroadcastReceiver uploadReceiver =
+            new UploadServiceBroadcastReceiver() {
+
+                @Override
+                public void onProgress(String uploadId, int progress) {
+                    if(pgDialog != null)
+                        pgDialog.setProgress(progress);
+                    Log.i(TAG, "The progress of the upload with ID " + uploadId + " is: " + progress);
+                }
+                @Override
+                public void onError(String uploadId, Exception exception) {
+                    if(pgDialog != null)
+                        pgDialog.dismiss();
+                    Log.e(TAG, "Error in upload with ID: " + uploadId + ". "
+                            + exception.getLocalizedMessage(), exception);
+                }
+
+                @Override
+                public void onCompleted(String uploadId, int serverResponseCode, String serverResponseMessage) {
+                    if(pgDialog != null)
+                        pgDialog.dismiss();
+                    Log.i(TAG, "Upload with ID " + uploadId + " is completed: " + serverResponseCode + ", "
+                            + serverResponseMessage);
+                    Toast.makeText(getActivity(),serverResponseMessage, Toast.LENGTH_LONG).show();
+                    // To Upload Video Post
+
+                }
+            };
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == Activity.RESULT_OK && requestCode == UPLOAD_AUDIO) {
-            Toast.makeText(getActivity(), data.getStringExtra("audio_file_name").toString(), Toast.LENGTH_LONG ).show();
+        if (requestCode == VIDEO_CAPTURE) {
+            if (resultCode == getActivity().RESULT_OK) {
+                Toast.makeText(getActivity(), "Video has been saved to:\n" + data.getData(), Toast.LENGTH_LONG).show();
+                uploadingAudioFile("http://api.shopyface.com/api-v1/post/video", data.getData().getPath());
+            } else if (resultCode == getActivity().RESULT_CANCELED) {
+                Toast.makeText(getActivity(), "Video recording cancelled.",  Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(getActivity(), "Failed to record video",  Toast.LENGTH_LONG).show();
+            }
+        }
+
+        if (requestCode == AUDIO_CAPTURE) {
+            if (resultCode == getActivity().RESULT_OK) {
+                Toast.makeText(getActivity(), "Audio has been saved to:\n" + data.getData(), Toast.LENGTH_LONG).show();
+                uploadingAudioFile("http://api.shopyface.com/api-v1/post/audio", data.getData().getPath());
+            } else if (resultCode == getActivity().RESULT_CANCELED) {
+                Toast.makeText(getActivity(), "Audio recording cancelled.",  Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(getActivity(), "Failed to record audio",  Toast.LENGTH_LONG).show();
+            }
         }
 
         if (resultCode == getActivity().RESULT_OK && (requestCode == ChooserType.REQUEST_PICK_PICTURE || requestCode == ChooserType.REQUEST_CAPTURE_PICTURE)) {

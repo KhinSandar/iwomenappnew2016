@@ -7,8 +7,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -23,8 +21,6 @@ import com.smk.application.StorageUtils;
 import com.smk.skalertmessage.SKToastMessage;
 
 import org.undp_iwomen.iwomen.R;
-
-import java.util.List;
 
 public class VideoRecordingActivity extends Activity {
 	private static String fileName = null;
@@ -111,7 +107,7 @@ public class VideoRecordingActivity extends Activity {
 	
 	@SuppressLint("NewApi")
 	private void initVideoSizeSpinner() {
-		videoSizeSpinner = (Spinner) findViewById(R.id.videoSizeSpinner);
+		/*videoSizeSpinner = (Spinner) findViewById(R.id.videoSizeSpinner);
 		if (Build.VERSION.SDK_INT >= 11) {
 			List<Size> sizes = CameraHelper.getCameraSupportedVideoSizes(recordingManager.getCameraManager().getCamera());
 			if(sizes != null && sizes.size() > 0){
@@ -133,7 +129,9 @@ public class VideoRecordingActivity extends Activity {
 		}
 		else {
 			videoSizeSpinner.setVisibility(View.GONE);
-		}
+		}*/
+
+		videoSize = null;
 	}
 	
 	@SuppressLint("NewApi")
