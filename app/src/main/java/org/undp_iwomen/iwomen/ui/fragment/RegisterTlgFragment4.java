@@ -1,5 +1,7 @@
 package org.undp_iwomen.iwomen.ui.fragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.data.Sample;
 import org.undp_iwomen.iwomen.ui.activity.RegisterMainActivity;
@@ -21,7 +24,11 @@ import org.undp_iwomen.iwomen.ui.activity.RegisterMainActivity;
 public class RegisterTlgFragment4 extends Fragment implements  View.OnClickListener{
 
     private static final String EXTRA_SAMPLE = "sample";
-
+    SharedPreferences sharePrefLanguageUtil;
+    private String lang;
+    private Context mContext;
+    private SharedPreferences mSharedPreferencesUserInfo;
+    private SharedPreferences.Editor mEditorUserInfo;
     private Button btn_next;
 
     public static RegisterTlgFragment4 newInstance(Sample sample) {
@@ -55,6 +62,11 @@ public class RegisterTlgFragment4 extends Fragment implements  View.OnClickListe
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_register_4_tlg, container, false);
         //final Sample sample = (Sample) getArguments().getSerializable(EXTRA_SAMPLE);
+        mContext = getActivity().getApplicationContext();
+        sharePrefLanguageUtil = getActivity().getSharedPreferences(org.undp_iwomen.iwomen.utils.Utils.PREF_SETTING, Context.MODE_PRIVATE);
+        lang = sharePrefLanguageUtil.getString(org.undp_iwomen.iwomen.utils.Utils.PREF_SETTING_LANG, org.undp_iwomen.iwomen.utils.Utils.ENG_LANG);
+
+        mSharedPreferencesUserInfo = getActivity().getSharedPreferences(CommonConfig.SHARE_PREFERENCE_USER_INFO, Context.MODE_PRIVATE);
 
         btn_next = (Button)view.findViewById(R.id.Next);
 
@@ -87,7 +99,16 @@ public class RegisterTlgFragment4 extends Fragment implements  View.OnClickListe
     }*/
 
     private void addNextFragment( Button squareBlue, boolean overlap) {
-        RegisterStateFragment5 registerStateFragment5 = RegisterStateFragment5.newInstance();
+
+
+        mEditorUserInfo = mSharedPreferencesUserInfo.edit();
+
+        //mEditorUserInfo.putString(CommonConfig.USER_PWD, password);
+        //mEditorUserInfo.commit();
+
+
+
+        RegisterPhotoFragment7 registerPhotoFragment7 = RegisterPhotoFragment7.newInstance();
 
         Slide slideTransition = null;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -103,13 +124,13 @@ public class RegisterTlgFragment4 extends Fragment implements  View.OnClickListe
 
         }
 
-        registerStateFragment5.setEnterTransition(slideTransition);
-        registerStateFragment5.setAllowEnterTransitionOverlap(overlap);
-        registerStateFragment5.setAllowReturnTransitionOverlap(overlap);
-        registerStateFragment5.setSharedElementEnterTransition(changeBoundsTransition);
+        registerPhotoFragment7.setEnterTransition(slideTransition);
+        registerPhotoFragment7.setAllowEnterTransitionOverlap(overlap);
+        registerPhotoFragment7.setAllowReturnTransitionOverlap(overlap);
+        registerPhotoFragment7.setSharedElementEnterTransition(changeBoundsTransition);
 
         getFragmentManager().beginTransaction()
-                .replace(R.id.container, registerStateFragment5)
+                .replace(R.id.container, registerPhotoFragment7)
                 .addToBackStack(null)
                 .addSharedElement(squareBlue, getString(R.string.register_next))
                 .commit();

@@ -1,130 +1,147 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
-    android:id="@+id/parse_login"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:whatever="http://schemas.android.com/apk/res-auto"
+    xmlns:wheel="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/scroll_view_login"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
     android:focusable="true"
-    android:focusableInTouchMode="true"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/com_parse_ui_vertical_margin"
-    android:paddingLeft="@dimen/com_parse_ui_horizontal_margin"
-    android:paddingRight="@dimen/com_parse_ui_horizontal_margin"
-    android:paddingTop="@dimen/com_parse_ui_vertical_margin">
+    android:focusableInTouchMode="true">
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="50dp"
-        android:orientation="vertical">
-
-
-        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
-            android:id="@+id/register_fb_greet1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:text="@string/register_fb_login_greet1"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
-            android:id="@+id/register_fb_greet2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="8dp"
-            android:gravity="center"
-            android:text="@string/register_fb_login_greet2"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-    </LinearLayout>
-
-    <!--<FrameLayout
-        android:id="@+id/facebook_login_container"
-        android:layout_width="match_parent"
+    <FrameLayout
+        android:id="@+id/fy_login"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="30dp">
+        android:layout_gravity="center_vertical">
 
-        <com.facebook.login.widget.LoginButton
-            android:id="@+id/register_facebook_login"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_gravity="center_horizontal"
-            android:textColor="#fff"
-            android:textSize="12sp"
-            android:textStyle="bold" />
-
-
-    </FrameLayout>-->
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/register_fb_user_name"
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp">
-
-        <org.undp_iwomen.iwomen.ui.widget.CustomEditText
-            android:id="@+id/register_fb_username_input"
-            style="@style/ParseLoginUI.EditText"
-            android:hint="@string/register_name_hint"
-            android:inputType="text"
+        <LinearLayout
+            android:id="@+id/parse_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:nextFocusDown="@+id/register_fb_phone_number"
-            android:nextFocusForward="@+id/register_fb_phone_number"
-            android:textColor="@color/body_text_1"
-            android:textSize="15sp" />
-    </android.support.design.widget.TextInputLayout>
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/com_parse_ui_vertical_margin"
+            android:paddingLeft="@dimen/com_parse_ui_horizontal_margin"
+            android:paddingRight="@dimen/com_parse_ui_horizontal_margin"
+            android:paddingTop="@dimen/com_parse_ui_vertical_margin">
 
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/register_fb_phone_number"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/com_parse_ui_small_vertical_spacing">
-
-        <org.undp_iwomen.iwomen.ui.widget.CustomEditText
-            android:id="@+id/register_fb_phone_number_input"
-            style="@style/ParseLoginUI.EditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-
-            android:hint="@string/register_ph_hint"
-
-            android:inputType="phone"
-            android:maxLength="15"
-            android:nextFocusDown="@+id/register_fb_next_button"
-            android:nextFocusForward="@+id/register_fb_next_button"
-            android:selectAllOnFocus="true"
-            android:textColor="@color/body_text_1"
-            android:textSize="15sp" />
-    </android.support.design.widget.TextInputLayout>
-
-    <LinearLayout
-        android:id="@+id/register_fb_ly"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp">
-
-        <org.undp_iwomen.iwomen.ui.widget.CustomButton
-            android:id="@+id/Next"
-            style="@style/ParseLoginUI.Button.SignUp"
-            android:text="@string/register_next"
-            android:transitionName="@string/register_next"
-            android:textSize="15sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="50dp"
+                android:orientation="vertical">
 
 
-    </LinearLayout>
+                <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                    android:id="@+id/register_fb_greet1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:text="@string/register_fb_login_greet1"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                    android:id="@+id/register_fb_greet2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="8dp"
+                    android:gravity="center"
+                    android:text="@string/register_fb_login_greet2"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <FrameLayout
+                android:id="@+id/facebook_login_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="30dp">
+
+                <com.facebook.login.widget.LoginButton
+                    android:id="@+id/login_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="30dp"
+                    android:layout_marginTop="30dp" />
 
 
-</LinearLayout>
+            </FrameLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/register_fb_user_name"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
+
+                <org.undp_iwomen.iwomen.ui.widget.CustomEditText
+                    android:id="@+id/register_fb_username_input"
+                    style="@style/ParseLoginUI.EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/register_name_hint"
+                    android:inputType="text"
+                    android:nextFocusDown="@+id/register_fb_phone_number"
+                    android:nextFocusForward="@+id/register_fb_phone_number"
+                    android:textColor="@color/body_text_1"
+                    android:textSize="15sp" />
+            </android.support.design.widget.TextInputLayout>
+
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/register_fb_phone_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/com_parse_ui_small_vertical_spacing">
+
+                <org.undp_iwomen.iwomen.ui.widget.CustomEditText
+                    android:id="@+id/register_fb_phone_number_input"
+                    style="@style/ParseLoginUI.EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
+
+                    android:hint="@string/register_ph_hint"
+
+                    android:inputType="phone"
+                    android:maxLength="15"
+                    android:nextFocusDown="@+id/register_fb_next_button"
+                    android:nextFocusForward="@+id/register_fb_next_button"
+                    android:selectAllOnFocus="true"
+                    android:textColor="@color/body_text_1"
+                    android:textSize="15sp" />
+            </android.support.design.widget.TextInputLayout>
+
+            <LinearLayout
+                android:id="@+id/register_fb_ly"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp">
+
+                <org.undp_iwomen.iwomen.ui.widget.CustomButton
+                    android:id="@+id/Next"
+                    style="@style/ParseLoginUI.Button.SignUp"
+                    android:text="@string/register_next"
+                    android:textSize="15sp"
+                    android:transitionName="@string/register_next" />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </FrameLayout>
+</ScrollView>
 

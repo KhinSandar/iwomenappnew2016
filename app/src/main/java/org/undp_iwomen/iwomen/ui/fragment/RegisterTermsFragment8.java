@@ -1,5 +1,8 @@
 package org.undp_iwomen.iwomen.ui.fragment;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.data.Sample;
 import org.undp_iwomen.iwomen.ui.activity.RegisterMainActivity;
@@ -21,6 +25,12 @@ import org.undp_iwomen.iwomen.ui.activity.RegisterMainActivity;
 public class RegisterTermsFragment8 extends Fragment implements  View.OnClickListener{
 
     private static final String EXTRA_SAMPLE = "sample";
+    SharedPreferences sharePrefLanguageUtil;
+    private String lang;
+    private Context mContext;
+    private SharedPreferences mSharedPreferencesUserInfo;
+    private SharedPreferences.Editor mEditorUserInfo;
+    private ProgressDialog mProgressDialog;
 
     private Button btn_next;
 
@@ -48,6 +58,8 @@ public class RegisterTermsFragment8 extends Fragment implements  View.OnClickLis
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        mProgressDialog = new ProgressDialog(getActivity());
+        mProgressDialog.setCancelable(false);
 
     }
 
@@ -55,6 +67,11 @@ public class RegisterTermsFragment8 extends Fragment implements  View.OnClickLis
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_register_8_terms, container, false);
         //final Sample sample = (Sample) getArguments().getSerializable(EXTRA_SAMPLE);
+        mContext = getActivity().getApplicationContext();
+        sharePrefLanguageUtil = getActivity().getSharedPreferences(org.undp_iwomen.iwomen.utils.Utils.PREF_SETTING, Context.MODE_PRIVATE);
+        lang = sharePrefLanguageUtil.getString(org.undp_iwomen.iwomen.utils.Utils.PREF_SETTING_LANG, org.undp_iwomen.iwomen.utils.Utils.ENG_LANG);
+
+        mSharedPreferencesUserInfo = getActivity().getSharedPreferences(CommonConfig.SHARE_PREFERENCE_USER_INFO, Context.MODE_PRIVATE);
 
         btn_next = (Button)view.findViewById(R.id.Next);
 
@@ -87,6 +104,41 @@ public class RegisterTermsFragment8 extends Fragment implements  View.OnClickLis
     }*/
 
     private void addNextFragment( Button squareBlue, boolean overlap) {
+
+
+        String user_name = mSharedPreferencesUserInfo.getString(CommonConfig.USER_NAME, null);
+        String  phone = mSharedPreferencesUserInfo.getString(CommonConfig.USER_PH, null);
+
+
+        String email = mSharedPreferencesUserInfo.getString(CommonConfig.USER_PH, null);
+
+
+        String pwd = mSharedPreferencesUserInfo.getString(CommonConfig.USER_PH, null);
+
+        String address_tlg_township_name = mSharedPreferencesUserInfo.getString(CommonConfig.USER_PH, null);
+
+        //TODO city field
+        //String address_sate_name = mSharedPreferencesUserInfo.getString(CommonConfig.USER_PH, null);
+
+        //TODO coutnry
+        //String address_country_name = mSharedPreferencesUserInfo.getString(CommonConfig.USER_PH, null);
+
+
+        //String user_first_name = mSharedPreferencesUserInfo.getString(CommonConfig.USER_PH, null);
+        //String user_last_name = mSharedPreferencesUserInfo.getString(CommonConfig.USER_PH, null);
+
+
+        String user_photo = mSharedPreferencesUserInfo.getString(CommonConfig.USER_PH, null);
+
+        String user_role = "User";
+        //String groud_id = "1";
+
+
+
+
+
+
+
         Register_Congrat_Fragment register_congrat_fragment = Register_Congrat_Fragment.newInstance();
 
         Slide slideTransition = null;

@@ -1,8 +1,12 @@
 package org.undp_iwomen.iwomen.ui.fragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.transition.ChangeBounds;
 import android.transition.Slide;
 import android.view.Gravity;
@@ -10,7 +14,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
+import com.parse.utils.Utils;
+
+import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.data.Sample;
 import org.undp_iwomen.iwomen.ui.activity.RegisterMainActivity;
@@ -21,8 +29,15 @@ import org.undp_iwomen.iwomen.ui.activity.RegisterMainActivity;
 public class RegisterCountryFragment6 extends Fragment implements  View.OnClickListener{
 
     private static final String EXTRA_SAMPLE = "sample";
-
+    SharedPreferences sharePrefLanguageUtil;
+    private String lang;
+    private Context mContext;
+    private SharedPreferences mSharedPreferencesUserInfo;
+    private SharedPreferences.Editor mEditorUserInfo;
     private Button btn_next;
+    private TextInputLayout mCountryTextInputLayout;
+
+    private EditText countryField;
 
     public static RegisterCountryFragment6 newInstance(Sample sample) {
 
@@ -55,9 +70,15 @@ public class RegisterCountryFragment6 extends Fragment implements  View.OnClickL
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_register_6_country, container, false);
         //final Sample sample = (Sample) getArguments().getSerializable(EXTRA_SAMPLE);
+        mContext = getActivity().getApplicationContext();
+        sharePrefLanguageUtil = getActivity().getSharedPreferences(org.undp_iwomen.iwomen.utils.Utils.PREF_SETTING, Context.MODE_PRIVATE);
+        lang = sharePrefLanguageUtil.getString(org.undp_iwomen.iwomen.utils.Utils.PREF_SETTING_LANG, org.undp_iwomen.iwomen.utils.Utils.ENG_LANG);
+
+        mSharedPreferencesUserInfo = getActivity().getSharedPreferences(CommonConfig.SHARE_PREFERENCE_USER_INFO, Context.MODE_PRIVATE);
 
         btn_next = (Button)view.findViewById(R.id.Next);
-
+        mCountryTextInputLayout = (TextInputLayout) view.findViewById(R.id.register_country_type_input_ly);
+        countryField = (EditText) view.findViewById(R.id.register_country_input);
         btn_next.setOnClickListener(this);
 
         setEnglishFont();
@@ -87,6 +108,27 @@ public class RegisterCountryFragment6 extends Fragment implements  View.OnClickL
     }*/
 
     private void addNextFragment( Button squareBlue, boolean overlap) {
+
+        final String countryName = countryField.getText().toString().trim();
+        if (TextUtils.isEmpty(countryName)) {
+            countryField.setError(getResources().getString(R.string.register_country_error));
+
+            if (lang.equals(Utils.ENG_LANG)) {
+                Utils.doToastEng(mContext, getResources().getString(R.string.register_country_error));
+            } else if (lang.equals(Utils.MM_LANG)) {
+
+                Utils.doToastMM(mContext, getResources().getString(R.string.register_country_error));
+            }
+
+            return;
+        } else {
+            mCountryTextInputLayout.setErrorEnabled(false);
+        }
+        mEditorUserInfo = mSharedPreferencesUserInfo.edit();
+
+        mEditorUserInfo.putString(CommonConfig.USER_COUNTRY, countryName);
+        mEditorUserInfo.commit();
+
         RegisterPhotoFragment7 registerPhotoFragment7 = RegisterPhotoFragment7.newInstance();
 
         Slide slideTransition = null;

@@ -39,6 +39,7 @@
 
 
     <android.support.design.widget.TextInputLayout
+        android:id="@+id/register_country_type_input_ly"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -49,6 +50,7 @@
             android:layout_height="wrap_content"
             android:nextFocusDown="@+id/login_password_input"
             android:nextFocusForward="@+id/login_password_input"
+            android:hint="@string/register_country_hint"
             android:textColor="@color/body_text_1"
             android:textSize="15sp"/>
     </android.support.design.widget.TextInputLayout>
