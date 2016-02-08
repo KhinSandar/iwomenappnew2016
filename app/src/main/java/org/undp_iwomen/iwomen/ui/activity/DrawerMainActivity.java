@@ -27,7 +27,6 @@ import android.widget.TextView;
 import com.facebook.FacebookSdk;
 import com.google.gson.Gson;
 import com.makeramen.RoundedImageView;
-import com.parse.ParseUser;
 import com.parse.utils.Utils;
 import com.smk.application.StoreUtil;
 import com.smk.clientapi.NetworkEngine;
@@ -87,7 +86,6 @@ public class DrawerMainActivity extends BaseActionBarActivity {
 
     private static final int LOGIN_REQUEST = 0;
 
-    //private ParseUser currentUser;
 
     private SharedPreferences mSharedPreferencesUserInfo;
     private SharedPreferences.Editor mEditorUserInfo;
@@ -196,6 +194,8 @@ public class DrawerMainActivity extends BaseActionBarActivity {
 
 
 
+        txt_user_name.setText(user_name);
+
 
 
         //TODO WHEN DRAWER ACTIVITY START CALLING for check
@@ -207,7 +207,9 @@ public class DrawerMainActivity extends BaseActionBarActivity {
         }
 
 
-        getUserPostCount();
+        //getUserPostCount();
+        getCompetitionQuestion();
+
 
         ly_menu_profile_area.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -230,15 +232,14 @@ public class DrawerMainActivity extends BaseActionBarActivity {
         txt_sing_out.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (user_obj_id != null) {
-                    ParseUser.logOut();
-                    sessionManager.ClearLogOut();
-                    // User clicked to log in.
-                    /*ParseLoginBuilder loginBuilder = new ParseLoginBuilder(
-                            DrawerMainActivity.this);
-                    startActivityForResult(loginBuilder.build(), LOGIN_REQUEST);*/
 
-                }
+                sessionManager.ClearLogOut();
+                Intent intent = new Intent(getApplicationContext(), MainLoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+
             }
         });
 
@@ -675,61 +676,71 @@ public class DrawerMainActivity extends BaseActionBarActivity {
 
     private void getCompetitionQuestion() {
         Log.e("Drawing Game calling===>", "===>");
-        final ProgressDialog dialog = new ProgressDialog(this);
-        dialog.setMessage("Loading...");
-        dialog.show();
-        NetworkEngine.getInstance().getCompetitionQuestion("", user_obj_id, new Callback<CompetitionQuestion>() {
+        if (Connection.isOnline(getApplicationContext())) {
+            final ProgressDialog dialog = new ProgressDialog(this);
+            dialog.setMessage("Loading...");
+            dialog.show();
+            NetworkEngine.getInstance().getCompetitionQuestion("", user_obj_id, new Callback<CompetitionQuestion>() {
 
-            @Override
-            public void failure(RetrofitError arg0) {
-                // TODO Auto-generated method stub
-                dialog.dismiss();
-                if (arg0.getResponse() != null) {
-                    switch (arg0.getResponse().getStatus()) {
-                        case 403:
-                            //startActivity(new Intent(getApplicationContext(), GameOverActivity.class));
-                            break;
-                        case 400:
-                            //String error = (String) arg0.getBodyAs(String.class);
-                            //SKToastMessage.showMessage(DrawerMainActivity.this, error ,SKToastMessage.ERROR);
-                            layout_play_game.setVisibility(View.GONE);
-                            break;
-                        default:
-                            break;
+                @Override
+                public void failure(RetrofitError arg0) {
+                    // TODO Auto-generated method stub
+                    dialog.dismiss();
+                    if (arg0.getResponse() != null) {
+                        switch (arg0.getResponse().getStatus()) {
+                            case 403:
+                                //startActivity(new Intent(getApplicationContext(), GameOverActivity.class));
+                                break;
+                            case 400:
+                                //String error = (String) arg0.getBodyAs(String.class);
+                                //SKToastMessage.showMessage(DrawerMainActivity.this, error ,SKToastMessage.ERROR);
+                                layout_play_game.setVisibility(View.GONE);
+                                break;
+                            default:
+                                break;
+                        }
                     }
                 }
-            }
 
-            @Override
-            public void success(final CompetitionQuestion arg0, Response arg1) {
-                // TODO Auto-generated method stub
-                layout_play_game.setVisibility(View.VISIBLE);
-                if (arg0.getCorrectAnswer().size() == 0) {
-                    btn_play_game.setText(getResources().getString(R.string.competition_play_game));
-                    btn_play_game.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void success(final CompetitionQuestion arg0, Response arg1) {
+                    // TODO Auto-generated method stub
+                    layout_play_game.setVisibility(View.VISIBLE);
+                    if (arg0.getCorrectAnswer().size() == 0) {
+                        btn_play_game.setText(getResources().getString(R.string.competition_play_game));
+                        btn_play_game.setOnClickListener(new View.OnClickListener() {
 
-                        @Override
-                        public void onClick(View v) {
-                            // TODO Auto-generated method stub
-                            startActivity(new Intent(getApplicationContext(), CompetitionNewGameActivity.class).putExtra("competition_question", new Gson().toJson(arg0)));
-                        }
-                    });
+                            @Override
+                            public void onClick(View v) {
+                                // TODO Auto-generated method stub
+                                startActivity(new Intent(getApplicationContext(), CompetitionNewGameActivity.class).putExtra("competition_question", new Gson().toJson(arg0)));
+                            }
+                        });
 
-                } else {
-                    btn_play_game.setText(getResources().getString(R.string.competition_discover_winner));
-                    btn_play_game.setOnClickListener(new View.OnClickListener() {
+                    } else {
+                        btn_play_game.setText(getResources().getString(R.string.competition_discover_winner));
+                        btn_play_game.setOnClickListener(new View.OnClickListener() {
 
-                        @Override
-                        public void onClick(View v) {
-                            // TODO Auto-generated method stub
-                            startActivity(new Intent(getApplicationContext(), CompetitionWinnerGroupActivity.class).putExtra("competition_question", new Gson().toJson(arg0)));
-                        }
-                    });
+                            @Override
+                            public void onClick(View v) {
+                                // TODO Auto-generated method stub
+                                startActivity(new Intent(getApplicationContext(), CompetitionWinnerGroupActivity.class).putExtra("competition_question", new Gson().toJson(arg0)));
+                            }
+                        });
 
+                    }
+                    dialog.dismiss();
                 }
-                dialog.dismiss();
+            });
+        } else {
+
+            if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+                org.undp_iwomen.iwomen.utils.Utils.doToastEng(getApplicationContext(), getResources().getString(R.string.open_internet_warning_eng));
+            } else {
+
+                org.undp_iwomen.iwomen.utils.Utils.doToastMM(getApplicationContext(), getResources().getString(R.string.open_internet_warning_mm));
             }
-        });
+        }
     }
 
     @Override

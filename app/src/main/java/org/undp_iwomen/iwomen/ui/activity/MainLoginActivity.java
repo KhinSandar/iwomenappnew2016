@@ -11,6 +11,7 @@ import android.support.design.widget.TextInputLayout;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,6 +33,7 @@ import com.orhanobut.dialogplus.OnItemClickListener;
 import com.orhanobut.dialogplus.ViewHolder;
 import com.smk.clientapi.NetworkEngine;
 import com.smk.iwomen.BaseActionBarActivity;
+import com.smk.model.Role;
 import com.smk.model.User;
 
 import org.undp_iwomen.iwomen.CommonConfig;
@@ -41,6 +43,8 @@ import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.utils.StoreUtil;
 import org.undp_iwomen.iwomen.utils.Utils;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import retrofit.Callback;
@@ -186,7 +190,25 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
                 mEditorUserInfo.putString(CommonConfig.USER_NAME, user.getFirstName()+ " " +user.getLastName());
                 mEditorUserInfo.putString(CommonConfig.USER_OBJ_ID, user.getFirstName()+ " " +user.getId());
 
+                Role role ;
 
+
+                List<Role> roleArrayList;
+
+                roleArrayList = new ArrayList<Role>();
+                roleArrayList = user.getRoles();
+
+                Log.e("<<<< Login Name >>> ","==>" +roleArrayList.get(0).getName());
+
+                //mEditorUserInfo.putString(CommonConfig.USER_UPLOAD_IMG_NAME,  );
+                mEditorUserInfo.putString(CommonConfig.USER_PH, user.getPhone());
+
+
+
+
+
+
+                mEditorUserInfo.putString(CommonConfig.USER_ROLE, roleArrayList.get(0).getName());
 
                 mEditorUserInfo.commit();
                 Intent i = new Intent(MainLoginActivity.this, DrawerMainActivity.class);//DrawerMainActivity

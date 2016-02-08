@@ -23,6 +23,8 @@ public class CommonConfig {
 
     public static final String USER_UPLOAD_IMG_NAME = "img_name";
 
+    public static final String USER_ROLE = "user_role";
+
 
     public static final String USER_IMAGE_PATH = "ImagePath";
 
