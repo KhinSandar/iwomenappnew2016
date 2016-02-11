@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/ParseLoginUI/build/intermediates/res/merged/androidTest/debug/values-ta/values-ta.xml",
+        "outputFile": "C:\\Users\\Toe Lie\\sat_last\\iwomenappnew2016\\ParseLoginUI\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-ta\\values-ta.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,7 @@
                     "endOffset": 113
                 },
                 "from": {
-                    "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/ParseLoginUI/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.0.0/res/values-ta/values.xml",
+                    "file": "C:\\Users\\Toe Lie\\sat_last\\iwomenappnew2016\\ParseLoginUI\\build\\intermediates\\exploded-aar\\com.facebook.android\\facebook-android-sdk\\4.0.0\\res\\values-ta\\values.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,

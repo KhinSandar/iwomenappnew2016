@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/sKAlertMessage/src/main/jniLibs"/></dataSet><dataSet config="debug"><source path="/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/sKAlertMessage/src/debug/jniLibs"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="C:\Users\Toe Lie\sat_last\iwomenappnew2016\sKAlertMessage\src\main\jniLibs"/></dataSet><dataSet config="debug"><source path="C:\Users\Toe Lie\sat_last\iwomenappnew2016\sKAlertMessage\src\debug\jniLibs"/></dataSet></merger>
