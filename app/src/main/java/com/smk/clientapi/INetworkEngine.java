@@ -6,6 +6,7 @@ import com.smk.model.CompetitionQuestion;
 import com.smk.model.GroupUser;
 import com.smk.model.Rating;
 import com.smk.model.Review;
+import com.smk.model.TLGTownship;
 import com.smk.model.User;
 
 import org.undp_iwomen.iwomen.CommonConfig;
@@ -88,29 +89,29 @@ public interface INetworkEngine {
             Callback<String> callback);
 
     @FormUrlEncoded
-    @POST("/api-v1/auth/register")
+    @POST("/api/v1/users")
     void postCreateUser(
-
             @Field("username") String name,
             @Field("password") String pwd,
-            @Field("phone") String ph,
-            @Field("address") String add,
-            @Field("photo") String photo,
-            @Field("role") String role,
+            @Field("phoneNo") String ph,
+            @Field("profileimage") String add,
+            @Field("isTlgTownshipExit") String photo,
+            @Field("tlg_city_address") String role,// Role ?
 
-            Callback<String> callback);
+            Callback<User> callback);
 
 
     ///api-v1/auth/login
     @FormUrlEncoded
-    @POST("/api-v1/auth/login")
+    @POST("/api/v1/login")
     void postLogin(
-
-            @Field("email") String email,
+            @Field("username") String email,
             @Field("password") String pwd,
-
-
             Callback<User> callback);
 
+    @GET("/api/v1/tlgProfiles")
+    void getTLGTownship(
+
+            Callback<List<TLGTownship>> callback);
 
 }

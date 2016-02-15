@@ -11,7 +11,6 @@ import android.support.design.widget.TextInputLayout;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,18 +32,16 @@ import com.orhanobut.dialogplus.OnItemClickListener;
 import com.orhanobut.dialogplus.ViewHolder;
 import com.smk.clientapi.NetworkEngine;
 import com.smk.iwomen.BaseActionBarActivity;
-import com.smk.model.Role;
 import com.smk.model.User;
 
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.model.MyTypeFace;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
+import org.undp_iwomen.iwomen.utils.Connection;
 import org.undp_iwomen.iwomen.utils.StoreUtil;
 import org.undp_iwomen.iwomen.utils.Utils;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 import retrofit.Callback;
@@ -95,7 +92,7 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
         txtChangLanEng = (CustomTextView) findViewById(R.id.login_change_lan_eng);
         txtChangLanMM = (CustomTextView) findViewById(R.id.login_change_lan_mm);
 
-        if (mSharedPreferencesUserInfo.getString(CommonConfig.USER_NAME, null) != null ) {
+        if (mSharedPreferencesUserInfo.getString(CommonConfig.USER_NAME, null) != null) {
             finish();
             startActivity(new Intent(this, DrawerMainActivity.class));
         }
@@ -138,102 +135,99 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
         }
     }
 
-    public void postLogin(){
+    public void postLogin() {
 
+        if (Connection.isOnline(getApplicationContext())) {
+            final String username = usernameField.getText().toString().trim();
+            final String pwd = passwordField.getText().toString().trim();
+            if (TextUtils.isEmpty(username)) {
+                mUserNameTextInputLayout.setError(getResources().getString(com.parse.ui.R.string.your_name_error));
 
-        final String username = usernameField.getText().toString().trim();
-        final String pwd = passwordField.getText().toString().trim();
-        if (TextUtils.isEmpty(username)) {
-            mUserNameTextInputLayout.setError(getResources().getString(com.parse.ui.R.string.your_name_error));
-
-            if (lang.equals(com.parse.utils.Utils.ENG_LANG)) {
-                com.parse.utils.Utils.doToastEng(getApplicationContext(), getResources().getString(com.parse.ui.R.string.your_name_error));
-            } else if (lang.equals(com.parse.utils.Utils.MM_LANG)) {
-
-                com.parse.utils.Utils.doToastMM(getApplicationContext(), getResources().getString(com.parse.ui.R.string.your_name_error_mm));
-            }
-
-            return;
-        } else {
-            mUserNameTextInputLayout.setErrorEnabled(false);
-        }
-
-        if (TextUtils.isEmpty(pwd)) {
-            mPwdTextInputLayout.setError(getResources().getString(com.parse.ui.R.string.confirm_password_error));
-
-            if (lang.equals(com.parse.utils.Utils.ENG_LANG)) {
-                //doToast(getResources().getString(com.parse.ui.R.string.confirm_password_error));
-                Utils.doToastEng(getApplicationContext(), getResources().getString(R.string.password_error));
-            } else if (lang.equals(com.parse.utils.Utils.MM_LANG)) {
-
-                Utils.doToastMM(getApplicationContext(), getResources().getString(R.string.password_error));
-            }
-            return;
-        } else {
-            mPwdTextInputLayout.setErrorEnabled(false);
-        }
-
-
-
-        final ProgressDialog dialog = new ProgressDialog(this);
-        dialog.setMessage("Loading...");
-        dialog.show();
-        NetworkEngine.getInstance().postLogin(username, pwd, new Callback<User>() {
-            @Override
-            public void success(User user, Response response) {
-                //Log.e("<<< >>> ", "===>" + user.getEmail());
-                dialog.dismiss();
-
-                mEditorUserInfo = mSharedPreferencesUserInfo.edit();
-
-                mEditorUserInfo.putString(CommonConfig.USER_EMAIL, user.getEmail());
-                mEditorUserInfo.putString(CommonConfig.USER_NAME, user.getFirstName()+ " " +user.getLastName());
-                mEditorUserInfo.putString(CommonConfig.USER_OBJ_ID, user.getFirstName()+ " " +user.getId());
-
-                Role role ;
-
-
-                List<Role> roleArrayList;
-
-                roleArrayList = new ArrayList<Role>();
-                roleArrayList = user.getRoles();
-
-                Log.e("<<<< Login Name >>> ","==>" +roleArrayList.get(0).getName());
-
-                //mEditorUserInfo.putString(CommonConfig.USER_UPLOAD_IMG_NAME,  );
-                mEditorUserInfo.putString(CommonConfig.USER_PH, user.getPhone());
-
-
-
-
-
-
-                mEditorUserInfo.putString(CommonConfig.USER_ROLE, roleArrayList.get(0).getName());
-
-                mEditorUserInfo.commit();
-                Intent i = new Intent(MainLoginActivity.this, DrawerMainActivity.class);//DrawerMainActivity
-                startActivity(i);
-                finish();
-
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-                //Log.e("<<< Login Err >>> ", "===>" + error.toString());
                 if (lang.equals(com.parse.utils.Utils.ENG_LANG)) {
-                    //doToast(getResources().getString(com.parse.ui.R.string.confirm_password_error));
-                    Utils.doToastEng(getApplicationContext(), error.toString());
+                    com.parse.utils.Utils.doToastEng(getApplicationContext(), getResources().getString(com.parse.ui.R.string.your_name_error));
                 } else if (lang.equals(com.parse.utils.Utils.MM_LANG)) {
 
-                    Utils.doToastMM(getApplicationContext(), error.toString());
+                    com.parse.utils.Utils.doToastMM(getApplicationContext(), getResources().getString(com.parse.ui.R.string.your_name_error_mm));
                 }
 
-                dialog.dismiss();
-
+                return;
+            } else {
+                mUserNameTextInputLayout.setErrorEnabled(false);
             }
-        });
-    }
 
+            if (TextUtils.isEmpty(pwd)) {
+                mPwdTextInputLayout.setError(getResources().getString(com.parse.ui.R.string.confirm_password_error));
+
+                if (lang.equals(com.parse.utils.Utils.ENG_LANG)) {
+                    //doToast(getResources().getString(com.parse.ui.R.string.confirm_password_error));
+                    Utils.doToastEng(getApplicationContext(), getResources().getString(R.string.password_error));
+                } else if (lang.equals(com.parse.utils.Utils.MM_LANG)) {
+
+                    Utils.doToastMM(getApplicationContext(), getResources().getString(R.string.password_error));
+                }
+                return;
+            } else {
+                mPwdTextInputLayout.setErrorEnabled(false);
+            }
+
+
+            final ProgressDialog dialog = new ProgressDialog(this);
+            dialog.setMessage("Loading...");
+            dialog.show();
+            NetworkEngine.getInstance().postLogin(username, pwd, new Callback<User>() {
+                @Override
+                public void success(User user, Response response) {
+                    //Log.e("<<< >>> ", "===>" + user.getEmail());
+                    dialog.dismiss();
+
+                    mEditorUserInfo = mSharedPreferencesUserInfo.edit();
+
+                    mEditorUserInfo.putString(CommonConfig.USER_EMAIL, user.getEmail());
+                    mEditorUserInfo.putString(CommonConfig.USER_NAME, user.getUsername());
+                    mEditorUserInfo.putString(CommonConfig.USER_OBJ_ID, user.getId());
+
+                    /*Role role;
+                    List<Role> roleArrayList;
+                    roleArrayList = new ArrayList<Role>();
+                    roleArrayList = user.getRoles();
+                    Log.e("<<<< Login Name >>> ", "==>" + roleArrayList.get(0).getName());*/
+
+                    mEditorUserInfo.putString(CommonConfig.USER_PH, user.getPhone());
+                    mEditorUserInfo.putString(CommonConfig.USER_ROLE,user.getRole() );
+
+                    mEditorUserInfo.commit();
+                    Intent i = new Intent(MainLoginActivity.this, DrawerMainActivity.class);//DrawerMainActivity
+                    startActivity(i);
+                    finish();
+
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    //Log.e("<<< Login Err >>> ", "===>" + error.toString());
+                    if (lang.equals(com.parse.utils.Utils.ENG_LANG)) {
+                        //doToast(getResources().getString(com.parse.ui.R.string.confirm_password_error));
+                        Utils.doToastEng(getApplicationContext(), error.toString());
+                    } else if (lang.equals(com.parse.utils.Utils.MM_LANG)) {
+
+                        Utils.doToastMM(getApplicationContext(), error.toString());
+                    }
+
+                    dialog.dismiss();
+
+                }
+            });
+
+        } else {
+
+            if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+                org.undp_iwomen.iwomen.utils.Utils.doToastEng(getApplicationContext(), getResources().getString(R.string.open_internet_warning_eng));
+            } else {
+
+                org.undp_iwomen.iwomen.utils.Utils.doToastMM(getApplicationContext(), getResources().getString(R.string.open_internet_warning_mm));
+            }
+        }
+    }
 
 
     @Override

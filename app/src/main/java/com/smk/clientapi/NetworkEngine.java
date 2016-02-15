@@ -1,6 +1,8 @@
 package com.smk.clientapi;
 
 
+import android.util.Log;
+
 import com.squareup.okhttp.OkHttpClient;
 
 import retrofit.RequestInterceptor;
@@ -22,10 +24,16 @@ public class NetworkEngine {
 		
 		if (instance==null) {
 			RestAdapter adapter = new RestAdapter.Builder()
-			.setEndpoint("http://128.199.70.154")
+			.setEndpoint("http://shopyface.com")
 			.setLogLevel(RestAdapter.LogLevel.FULL)
 			.setRequestInterceptor(requestInterceptor)
 			.setClient(new GzippedClient(new OkClient(new OkHttpClient())))
+			.setLog(new RestAdapter.Log() {
+				@Override
+				public void log(String msg) {
+					Log.e("<<<<<<<<ShopyFACE API>>>>>>>", "==>"+ msg);
+				}
+			})
 			.setErrorHandler(new MyErrorHandler()).build();
 			instance = adapter.create(INetworkEngine.class);
 		}

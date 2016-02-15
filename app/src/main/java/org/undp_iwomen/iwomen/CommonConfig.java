@@ -20,6 +20,9 @@ public class CommonConfig {
     public static final String USER_CON_PWD = "confirmpwd";
     public static final String USER_STATE = "state";
     public static final String USER_COUNTRY = "country";
+    public static final String USER_TLG_ID = "tlg_id";
+    public static final String USER_TLG_NAME = "tlg_name";
+
 
     public static final String USER_UPLOAD_IMG_NAME = "img_name";
 
@@ -70,7 +73,7 @@ public class CommonConfig {
     }
 
     //http://api.shopyface.com/api-v1/auth/photo
-    public static final String CREATE_USER_PHOTO_URL ="/api-v1/auth/photo";
+    public static final String CREATE_USER_PHOTO_URL ="/api/v1/usersUpload";
 
 
 }

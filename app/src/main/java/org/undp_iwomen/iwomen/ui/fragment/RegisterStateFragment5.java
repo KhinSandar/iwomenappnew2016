@@ -13,6 +13,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
 
@@ -40,6 +41,7 @@ public class RegisterStateFragment5 extends Fragment implements  View.OnClickLis
     private Button btn_next;
 
     private Spinner spn_state;
+    private String stateName;
     public static RegisterStateFragment5 newInstance(Sample sample) {
 
         Bundle args = new Bundle();
@@ -111,13 +113,26 @@ public class RegisterStateFragment5 extends Fragment implements  View.OnClickLis
         str_item_type[2] = "Refrigerated Goods (+ S$2.00)";
         StateSpinnerAdapter adapter = new StateSpinnerAdapter((AppCompatActivity)getActivity(), cities);
         spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                stateName = cities.get(position).getNameInEnglish();
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     private void addNextFragment( Button squareBlue, boolean overlap) {
         mEditorUserInfo = mSharedPreferencesUserInfo.edit();
 
-        Log.e("<<Spn data>>", "====>" + spn_state.getSelectedItem().toString() + "/" + spn_state.getSelectedItem().toString());
-        mEditorUserInfo.putString(CommonConfig.USER_STATE, spn_state.getSelectedItem().toString());
+        Log.e("<<Spn data>>", "====>" +stateName);
+        mEditorUserInfo.putString(CommonConfig.USER_STATE, stateName);
         mEditorUserInfo.commit();
 
         RegisterPhotoFragment7 registerPhotoFragment7 = RegisterPhotoFragment7.newInstance();

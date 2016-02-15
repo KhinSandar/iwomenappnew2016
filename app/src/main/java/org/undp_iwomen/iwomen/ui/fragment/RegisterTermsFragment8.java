@@ -14,15 +14,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.smk.clientapi.NetworkEngine;
+import com.smk.model.User;
+
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.data.Sample;
 import org.undp_iwomen.iwomen.ui.activity.RegisterMainActivity;
+import org.undp_iwomen.iwomen.utils.Connection;
+
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 /**
  * Created by lgvalle on 05/09/15.
  */
-public class RegisterTermsFragment8 extends Fragment implements  View.OnClickListener{
+public class RegisterTermsFragment8 extends Fragment implements View.OnClickListener {
 
     private static final String EXTRA_SAMPLE = "sample";
     SharedPreferences sharePrefLanguageUtil;
@@ -44,7 +52,7 @@ public class RegisterTermsFragment8 extends Fragment implements  View.OnClickLis
         return fragment;
     }
 
-    public static RegisterTermsFragment8 newInstance( ) {
+    public static RegisterTermsFragment8 newInstance() {
 
         Bundle args = new Bundle();
 
@@ -73,7 +81,7 @@ public class RegisterTermsFragment8 extends Fragment implements  View.OnClickLis
 
         mSharedPreferencesUserInfo = getActivity().getSharedPreferences(CommonConfig.SHARE_PREFERENCE_USER_INFO, Context.MODE_PRIVATE);
 
-        btn_next = (Button)view.findViewById(R.id.Next);
+        btn_next = (Button) view.findViewById(R.id.Next);
 
         btn_next.setOnClickListener(this);
 
@@ -103,68 +111,104 @@ public class RegisterTermsFragment8 extends Fragment implements  View.OnClickLis
                 .commit();
     }*/
 
-    private void addNextFragment( Button squareBlue, boolean overlap) {
+    private void addNextFragment(final Button squareBlue, final boolean overlap) {
 
 
-        String user_name = mSharedPreferencesUserInfo.getString(CommonConfig.USER_NAME, null);
-        String  phone = mSharedPreferencesUserInfo.getString(CommonConfig.USER_PH, null);
+        if (Connection.isOnline(mContext)) {
+            String user_name = mSharedPreferencesUserInfo.getString(CommonConfig.USER_NAME, null);
+            String phone = mSharedPreferencesUserInfo.getString(CommonConfig.USER_PH, null);
+
+            String email = mSharedPreferencesUserInfo.getString(CommonConfig.USER_PH, null);
+            String pwd = mSharedPreferencesUserInfo.getString(CommonConfig.USER_PH, null);
+
+            String address_tlg_township_name = mSharedPreferencesUserInfo.getString(CommonConfig.USER_PH, null);
+
+            //TODO city field
+            //String address_sate_name = mSharedPreferencesUserInfo.getString(CommonConfig.USER_PH, null);
+            //TODO country
+            //String address_country_name = mSharedPreferencesUserInfo.getString(CommonConfig.USER_PH, null);
 
 
-        String email = mSharedPreferencesUserInfo.getString(CommonConfig.USER_PH, null);
+            String user_photo = mSharedPreferencesUserInfo.getString(CommonConfig.USER_PH, null);
+
+            String user_role = "User";
+            //TODO remark group_id
+            //String groud_id = "1";
+
+            //TODO tlg user (istlgexit true and tlg address0
+            String isTlgExit = "true";
+            String tlgName = "Kanpetlet, Chin State";
 
 
-        String pwd = mSharedPreferencesUserInfo.getString(CommonConfig.USER_PH, null);
+            NetworkEngine.getInstance().postCreateUser(user_name, pwd, phone, user_photo, isTlgExit, tlgName, new Callback<User>() {
+                        @Override
+                        public void success(User user, Response response) {
+                            mEditorUserInfo = mSharedPreferencesUserInfo.edit();
 
-        String address_tlg_township_name = mSharedPreferencesUserInfo.getString(CommonConfig.USER_PH, null);
+                            mEditorUserInfo.putString(CommonConfig.USER_ROLE, user.getRole());
+                            mEditorUserInfo.putString(CommonConfig.USER_NAME, user.getUsername());
+                            mEditorUserInfo.putString(CommonConfig.USER_PH, user.getPhone());
 
-        //TODO city field
-        //String address_sate_name = mSharedPreferencesUserInfo.getString(CommonConfig.USER_PH, null);
-
-        //TODO coutnry
-        //String address_country_name = mSharedPreferencesUserInfo.getString(CommonConfig.USER_PH, null);
-
-
-        //String user_first_name = mSharedPreferencesUserInfo.getString(CommonConfig.USER_PH, null);
-        //String user_last_name = mSharedPreferencesUserInfo.getString(CommonConfig.USER_PH, null);
-
-
-        String user_photo = mSharedPreferencesUserInfo.getString(CommonConfig.USER_PH, null);
-
-        String user_role = "User";
-        //String groud_id = "1";
-
-
-
-
+                            if(user.getEmail()!= null || user.getEmail() != ""){
+                                mEditorUserInfo.putString(CommonConfig.USER_EMAIL, user.getEmail());
+                            }
 
 
 
-        Register_Congrat_Fragment register_congrat_fragment = Register_Congrat_Fragment.newInstance();
+                            mEditorUserInfo.commit();
 
-        Slide slideTransition = null;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            slideTransition = new Slide(Gravity.LEFT);
-            slideTransition.setDuration(getResources().getInteger(R.integer.anim_duration_long));
+                            Register_Congrat_Fragment register_congrat_fragment = Register_Congrat_Fragment.newInstance();
 
+                            Slide slideTransition = null;
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                slideTransition = new Slide(Gravity.LEFT);
+                                slideTransition.setDuration(getResources().getInteger(R.integer.anim_duration_long));
+
+                            }
+
+                            ChangeBounds changeBoundsTransition = null;
+                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
+                                changeBoundsTransition = new ChangeBounds();
+                                changeBoundsTransition.setDuration(getResources().getInteger(R.integer.anim_duration_medium));
+
+                            }
+
+                            register_congrat_fragment.setEnterTransition(slideTransition);
+                            register_congrat_fragment.setAllowEnterTransitionOverlap(overlap);
+                            register_congrat_fragment.setAllowReturnTransitionOverlap(overlap);
+                            register_congrat_fragment.setSharedElementEnterTransition(changeBoundsTransition);
+
+                            getFragmentManager().beginTransaction()
+                                    .replace(R.id.container, register_congrat_fragment)
+                                    .addToBackStack(null)
+                                    .addSharedElement(squareBlue, getString(R.string.register_next))
+                                    .commit();
+                        }
+
+                        @Override
+                        public void failure(RetrofitError error) {
+                            if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+                                org.undp_iwomen.iwomen.utils.Utils.doToastEng(mContext, getResources().getString(R.string.open_internet_warning_eng));
+                            } else {
+
+                                org.undp_iwomen.iwomen.utils.Utils.doToastMM(mContext, getResources().getString(R.string.open_internet_warning_mm));
+                            }
+                        }
+                    }
+            );
+
+
+
+
+        } else {
+
+            if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+                org.undp_iwomen.iwomen.utils.Utils.doToastEng(mContext, getResources().getString(R.string.open_internet_warning_eng));
+            } else {
+
+                org.undp_iwomen.iwomen.utils.Utils.doToastMM(mContext, getResources().getString(R.string.open_internet_warning_mm));
+            }
         }
-
-        ChangeBounds changeBoundsTransition = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-            changeBoundsTransition = new ChangeBounds();
-            changeBoundsTransition.setDuration(getResources().getInteger(R.integer.anim_duration_medium));
-
-        }
-
-        register_congrat_fragment.setEnterTransition(slideTransition);
-        register_congrat_fragment.setAllowEnterTransitionOverlap(overlap);
-        register_congrat_fragment.setAllowReturnTransitionOverlap(overlap);
-        register_congrat_fragment.setSharedElementEnterTransition(changeBoundsTransition);
-
-        getFragmentManager().beginTransaction()
-                .replace(R.id.container, register_congrat_fragment)
-                .addToBackStack(null)
-                .addSharedElement(squareBlue, getString(R.string.register_next))
-                .commit();
     }
 
     @Override
@@ -177,11 +221,13 @@ public class RegisterTermsFragment8 extends Fragment implements  View.OnClickLis
         }
 
     }
+
     public void setEnglishFont() {
 
         // Set title bar
         ((RegisterMainActivity) getActivity()).textViewTitle.setText(R.string.register_terms_title);
     }
+
     public void setMyanmarFont() {
 
         // Set title bar

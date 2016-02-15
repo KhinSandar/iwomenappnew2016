@@ -3,9 +3,6 @@ package com.smk.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class User {
 
 @SerializedName("id")
@@ -41,11 +38,13 @@ private String createdAt;
 @SerializedName("updated_at")
 @Expose
 private String updatedAt;
-@SerializedName("roles")
+@SerializedName("role")
 @Expose
-private List<Role> roles = new ArrayList<Role>();
+private String role;
 
-/**
+
+
+    /**
 * 
 * @return
 * The id
@@ -246,19 +245,18 @@ this.updatedAt = updatedAt;
 /**
 * 
 * @return
-* The roles
+* The role
 */
-public List<Role> getRoles() {
-return roles;
-}
+  public void setRole(String role) {
+        this.role = role;
+    }
 
 /**
-* 
-* @param roles
-* The roles
-*/
-public void setRoles(List<Role> roles) {
-this.roles = roles;
+*
+ */
+public String getRole() {
+    return this.role;
 }
+
 
 }
