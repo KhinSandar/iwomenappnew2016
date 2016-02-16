@@ -87,4 +87,13 @@
         <item name="android:colorAccent">@color/theme_blue_accent</item>
     </style>
 
+    <style name="NewEvent.EditText" parent="">
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="NewEvent.EditText.ButtonStyle" parent="NewEvent.EditText">
+        <item name="android:focusable">false</item>
+        <item name="android:longClickable">false</item>
+    </style>
+
 </resources>
