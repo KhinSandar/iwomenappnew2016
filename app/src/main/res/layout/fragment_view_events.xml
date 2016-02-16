@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingBottom="8dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:paddingTop="8dp">
+
+    <TextView
+        android:id="@+id/view_events_date_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="11 January 2016"
+        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/view_events_special_card"
+        android:layout_below="@+id/view_events_date_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/primary">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="Remember Day of a Woman"
+            android:textColor="@color/white"/>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_above="@+id/view_events_create_event_button"
+        android:layout_below="@+id/view_events_special_card"
+        android:id="@+id/view_events_list"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutManager="LinearLayoutManager"/>
+
+    <TextView
+        android:layout_above="@+id/view_events_create_event_button"
+        android:layout_below="@+id/view_events_special_card"
+        android:id="@+id/empty_events_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="No Event"/>
+
+    <Button
+        android:id="@+id/view_events_create_event_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/iwomen_primary_btn_borderless_material"
+        android:text="Create New Event"
+        android:textColor="@color/white"/>
+</RelativeLayout>

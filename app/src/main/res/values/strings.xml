@@ -334,4 +334,13 @@
     <string name="register_terms_body">Text body </string>
     <string name="register_terms_link">www.iwomen.com</string>
 
+    <!-- string resources used in Event Detail -->
+    <string name="large_sample_text">"A material metaphor is the unifying theory of a rationalized space and a system of motion."
+        "The material is grounded in tactile reality, inspired by the study of paper and ink, yet "
+        "technologically advanced and open to imagination and magic."</string>
+
+    <string name="title_view_events">View Events</string>
+    <string name="title_event_detail">Event Detail</string>
+    <string name="title_new_event">Create Event</string>
+
 </resources>
