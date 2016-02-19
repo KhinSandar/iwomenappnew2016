@@ -36,6 +36,7 @@ import android.widget.TextView;
 import com.pnikosis.materialishprogress.ProgressWheel;
 import com.smk.clientapi.NetworkEngine;
 import com.smk.iwomen.BaseActionBarActivity;
+import com.smk.model.IWomenPost;
 import com.smk.model.Rating;
 
 import org.json.JSONArray;
@@ -48,7 +49,7 @@ import org.undp_iwomen.iwomen.model.retrofit_api.UserPostAPI;
 import org.undp_iwomen.iwomen.provider.IwomenProviderData;
 import org.undp_iwomen.iwomen.ui.activity.MainPhotoPostActivity;
 import org.undp_iwomen.iwomen.ui.activity.PostDetailActivity;
-import org.undp_iwomen.iwomen.ui.adapter.PostListRecyclerViewAdapter;
+import org.undp_iwomen.iwomen.ui.adapter.IWomenPostListByDateRecyclerViewAdapter;
 import org.undp_iwomen.iwomen.ui.widget.RecyclerOnItemClickListener;
 import org.undp_iwomen.iwomen.utils.Connection;
 import org.undp_iwomen.iwomen.utils.Utils;
@@ -70,9 +71,12 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
     private Context mContext;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
-    private PostListRecyclerViewAdapter mPostListRecyclerViewAdapter;
+    //private PostListRecyclerViewAdapter mPostListRecyclerViewAdapter;
+    private IWomenPostListByDateRecyclerViewAdapter mIWomonePostListAdapter;
+    private List<IWomenPost> iWomenPostList;
     ProgressWheel progress;
     private List<FeedItem> feedItems;
+
 
     private ProgressDialog mProgressDialog;
 
@@ -121,6 +125,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
         sharePrefLanguageUtil = getActivity().getSharedPreferences(Utils.PREF_SETTING, Context.MODE_PRIVATE);
 
         feedItems = new ArrayList<FeedItem>();
+        iWomenPostList = new ArrayList<>();
         mSwipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.activity_main_swipe_refresh_layout);
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.activity_main_recyclerview);
         final Activity parentActivity = getActivity();
@@ -137,7 +142,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
         mstr_lang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
 
         //When very start this fragment open , need to check db data
-        Cursor cursorMain = getActivity().getContentResolver().query(IwomenProviderData.PostProvider.CONTETN_URI, null, null, null, BaseColumns._ID + " DESC");
+        /*Cursor cursorMain = getActivity().getContentResolver().query(IwomenProviderData.PostProvider.CONTETN_URI, null, null, null, BaseColumns._ID + " DESC");
 
         if (cursorMain.getCount() > 0) {
             setupAdapter();
@@ -154,9 +159,9 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
                 //            product_arrayList = (ArrayList<ProductsModel>) storageUtil.ReadArrayListFromSD("HomeProductsList");
 
                 progress.setVisibility(View.INVISIBLE);
-                    /* Toast.makeText(getActivity().getApplicationContext(),
+                    *//* Toast.makeText(getActivity().getApplicationContext(),
                     "Please Open Internet Connection!",
-                    Toast.LENGTH_LONG).show();*/
+                    Toast.LENGTH_LONG).show();*//*
                 if (mstr_lang.equals(Utils.ENG_LANG)) {
                     Utils.doToastEng(mContext, "Internet Connection need!");
                 } else {
@@ -166,7 +171,8 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
 
 
             }
-        }
+        }*/
+        getIWomenPostByPagination();
 
 
         //setupAdapter();
@@ -177,7 +183,8 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(mContext, PostDetailActivity.class);
 
-                intent.putExtra("post_id", feedItems.get(position).getPost_obj_id());
+                //intent.putExtra("post_id", feedItems.get(position).getPost_obj_id());
+                intent.putExtra("post_id", iWomenPostList.get(position).getId());
 
                 //intent.putExtra("ImgUrl", mImgurl.get(getPosition()));
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -223,7 +230,6 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
     private void setupAdapter() {
 
         if (getActivity().getApplicationContext() != null) {
-
 
 
             //TODO ADMIN ACCOUNT POST FILTER
@@ -287,16 +293,16 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
                         post_content_title_mm = cursor.getString(cursor.getColumnIndex(TableAndColumnsName.PostUtil.POST_CONTENT_TITLE_MM));
 
                         //TODO TableColumnUpdate 6
-                        author_id =cursor.getString(cursor.getColumnIndex(TableAndColumnsName.PostUtil.POST_CONTENT_AUTHOR_ID));
+                        author_id = cursor.getString(cursor.getColumnIndex(TableAndColumnsName.PostUtil.POST_CONTENT_AUTHOR_ID));
                         author_role = cursor.getString(cursor.getColumnIndex(TableAndColumnsName.PostUtil.POST_CONTENT_AUTHOR_ROLE));
 
-                        author_role_mm =cursor.getString(cursor.getColumnIndex(TableAndColumnsName.PostUtil.POST_CONTENT_AUTHOR_ROLE_MM));
+                        author_role_mm = cursor.getString(cursor.getColumnIndex(TableAndColumnsName.PostUtil.POST_CONTENT_AUTHOR_ROLE_MM));
                         credit_name = cursor.getString(cursor.getColumnIndex(TableAndColumnsName.PostUtil.CREDIT_NAME));
-                        credit_logo_link =cursor.getString(cursor.getColumnIndex(TableAndColumnsName.PostUtil.CREDIT_LOGO_URL));
+                        credit_logo_link = cursor.getString(cursor.getColumnIndex(TableAndColumnsName.PostUtil.CREDIT_LOGO_URL));
                         credit_link_mm = cursor.getString(cursor.getColumnIndex(TableAndColumnsName.PostUtil.CREDIT_LINK_MM));
-                        credit_link_eng =cursor.getString(cursor.getColumnIndex(TableAndColumnsName.PostUtil.CREDIT_LINK_ENG));
+                        credit_link_eng = cursor.getString(cursor.getColumnIndex(TableAndColumnsName.PostUtil.CREDIT_LINK_ENG));
                         post_comment_count = cursor.getInt(cursor.getColumnIndex(TableAndColumnsName.PostUtil.COMMENT_COUNT));
-                        post_share_count =cursor.getInt(cursor.getColumnIndex(TableAndColumnsName.PostUtil.SHARE_COUNT));
+                        post_share_count = cursor.getInt(cursor.getColumnIndex(TableAndColumnsName.PostUtil.SHARE_COUNT));
 
                         like_status = cursor.getString(cursor.getColumnIndex(TableAndColumnsName.PostUtil.LIKE_STATUS));
                         status = cursor.getString(cursor.getColumnIndex(TableAndColumnsName.PostUtil.STATUS));
@@ -361,14 +367,14 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
 
 
                 if (mstr_lang.equals(Utils.ENG_LANG)) {
-                    mPostListRecyclerViewAdapter = new PostListRecyclerViewAdapter(getActivity().getApplicationContext(), feedItems, mstr_lang);
+                    /*mPostListRecyclerViewAdapter = new PostListRecyclerViewAdapter(getActivity().getApplicationContext(), feedItems, mstr_lang);
                     mRecyclerView.setAdapter(mPostListRecyclerViewAdapter);
-                    mProgressDialog.dismiss();
+                    mProgressDialog.dismiss();*/
                     progress.setVisibility(View.INVISIBLE);
                 } else {
-                    mPostListRecyclerViewAdapter = new PostListRecyclerViewAdapter(getActivity().getApplicationContext(), feedItems, mstr_lang);
+                    /*mPostListRecyclerViewAdapter = new PostListRecyclerViewAdapter(getActivity().getApplicationContext(), feedItems, mstr_lang);
                     mRecyclerView.setAdapter(mPostListRecyclerViewAdapter);
-                    mProgressDialog.dismiss();
+                    mProgressDialog.dismiss();*/
                     progress.setVisibility(View.INVISIBLE);
                 }
 
@@ -394,7 +400,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
 
         this.menu = menu;
 
-        if(StoriesRecentFragment.avgRatings != null){
+        if (StoriesRecentFragment.avgRatings != null) {
             this.menu.findItem(R.id.action_rating).setVisible(true);
             this.menu.findItem(R.id.action_rating).setIcon(BaseActionBarActivity.getRatingIcon(StoriesRecentFragment.avgRatings.getTotalRatings()));
 
@@ -477,11 +483,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
         switch (id) {
 
             case R.id.action_refresh:
-                //Utils.doToast(getActivity(), "do refresh");
-                //mProgressDialog.show();
 
-                //SetPostData();
-                //getPostDataOrderByLikesDate();
                 getIWomenPostByLimit();
                 return true;
             case R.id.action_rating:
@@ -492,13 +494,13 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
         }
     }
 
-    public void getReview(){
+    public void getReview() {
         NetworkEngine.getInstance().getReview("Be Inspired", new Callback<Rating>() {
 
 
             @Override
             public void success(Rating arg0, Response response) {
-                if(menu != null && arg0.getTotalRatings() > 0){
+                if (menu != null && arg0.getTotalRatings() > 0) {
                     menu.findItem(R.id.action_rating).setVisible(true);
                     menu.findItem(R.id.action_rating).setIcon(BaseActionBarActivity.getRatingIcon(arg0.getTotalRatings()));
                     avgRatings = arg0;
@@ -512,19 +514,19 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
         });
     }
 
-    public void showReviewDetailDialog(){
+    public void showReviewDetailDialog() {
         final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
-        View convertView = View.inflate(getActivity(),R.layout.dialog_reviews_detial,null);
-        TextView txt_avg_title = (TextView ) convertView.findViewById(R.id.txt_avg_title);
-        TextView txt_total_rating = (TextView ) convertView.findViewById(R.id.txt_total_rating);
+        View convertView = View.inflate(getActivity(), R.layout.dialog_reviews_detial, null);
+        TextView txt_avg_title = (TextView) convertView.findViewById(R.id.txt_avg_title);
+        TextView txt_total_rating = (TextView) convertView.findViewById(R.id.txt_total_rating);
         RatingBar avg_ratings = (RatingBar) convertView.findViewById(R.id.avg_ratings);
         TextView txt_avg_ratings = (TextView) convertView.findViewById(R.id.txt_avg_ratings);
         TextView txt_rating_desc = (TextView) convertView.findViewById(R.id.txt_rating_desc);
-        Button btn_ok = (Button)convertView.findViewById(R.id.btn_ok);
+        Button btn_ok = (Button) convertView.findViewById(R.id.btn_ok);
         alertDialog.setView(convertView);
 
         txt_avg_title.setText("Overall Rating Be Inspired");
-        txt_total_rating.setText(avgRatings.getTotalRatings()+"");
+        txt_total_rating.setText(avgRatings.getTotalRatings() + "");
         avg_ratings.setRating(avgRatings.getTotalRatings().floatValue());
         txt_rating_desc.setText(BaseActionBarActivity.getRatingDesc(avgRatings.getTotalRatings()));
         txt_avg_ratings.setText(avgRatings.getTotalUsers() + " Total");
@@ -601,7 +603,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
                 Log.e("Offset Range Count", "==>" + offsetlimit + "/" + skipLimit);
                 mProgressDialog.show();//{"isAllow": true}
                 String sCondition = "{\"isAllow\": true}";
-                UserPostAPI.getInstance().getService().getIWomenPost("createdAt",offsetlimit, skipLimit, sCondition, new Callback<String>() {
+                UserPostAPI.getInstance().getService().getIWomenPost("createdAt", offsetlimit, skipLimit, sCondition, new Callback<String>() {
                     @Override
                     public void success(String s, Response response) {
                         Log.e("success", "==" + s);
@@ -820,7 +822,6 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
                                 }
 
 
-
                                 if (!each_object.isNull("comment_count")) {
                                     cv.put(TableAndColumnsName.PostUtil.COMMENT_COUNT, each_object.getInt("comment_count"));
                                 } else {
@@ -833,7 +834,6 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
                                     cv.put(TableAndColumnsName.PostUtil.SHARE_COUNT, 0);
 
                                 }
-
 
 
                                 if (!each_object.isNull("postUploadedDate")) {
@@ -885,7 +885,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
 
                 String sCondition = "{\"isAllow\": true}";
 
-                UserPostAPI.getInstance().getService().getIWomenPost("createdAt",offsetlimit, skipLimit, sCondition, new Callback<String>() {
+                UserPostAPI.getInstance().getService().getIWomenPost("createdAt", offsetlimit, skipLimit, sCondition, new Callback<String>() {
                     @Override
                     public void success(String s, Response response) {
                         Log.e("success", "==" + s);
@@ -1102,7 +1102,6 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
                                     cv.put(TableAndColumnsName.PostUtil.CREDIT_NAME, "");
 
                                 }
-
 
 
                                 if (!each_object.isNull("comment_count")) {
@@ -1467,6 +1466,45 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
         }
     }
 
+    //TODO SMK API
+    private void getIWomenPostByPagination() {
+        if (Connection.isOnline(mContext)) {
+
+            mProgressDialog.show();
+            iWomenPostList.clear();
+
+            NetworkEngine.getInstance().getIWomenPostByDateByPagination(1, new Callback<List<IWomenPost>>() {
+                @Override
+                public void success(List<IWomenPost> iWomenPosts, Response response) {
+
+                    iWomenPostList.addAll(iWomenPosts);
+
+                    mIWomonePostListAdapter = new IWomenPostListByDateRecyclerViewAdapter(getActivity().getApplicationContext(), iWomenPostList, mstr_lang);
+                    mRecyclerView.setAdapter(mIWomonePostListAdapter);
+                    progress.setVisibility(View.INVISIBLE);
+                    mProgressDialog.dismiss();
+
+
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+
+                }
+            });
+
+        } else {
+            //Utils.doToast(mContext, "Internet Connection need!");
+
+            if (mstr_lang.equals(Utils.ENG_LANG)) {
+                Utils.doToastEng(mContext, "Internet Connection need!");
+            } else {
+
+                Utils.doToastMM(mContext, getActivity().getResources().getString(R.string.open_internet_warning_mm));
+            }
+        }
+    }
+
     @Override
     public void onClick(View v) {
 
@@ -1487,7 +1525,8 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
     @Override
     public boolean onQueryTextSubmit(String query) {
 
-        mPostListRecyclerViewAdapter.filter(query);
+        //mPostListRecyclerViewAdapter.filter(query);
+        mIWomonePostListAdapter.filter(query);
         return false;
     }
 

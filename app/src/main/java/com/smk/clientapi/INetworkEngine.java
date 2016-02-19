@@ -4,6 +4,7 @@ import com.smk.model.APKVersion;
 import com.smk.model.Answer;
 import com.smk.model.CompetitionQuestion;
 import com.smk.model.GroupUser;
+import com.smk.model.IWomenPost;
 import com.smk.model.Rating;
 import com.smk.model.Review;
 import com.smk.model.TLGTownship;
@@ -119,5 +120,10 @@ public interface INetworkEngine {
     void postiWomenPostPhoto(
             @Part("image") TypedFile image,
             Callback<String> callback);
+
+    @GET(CommonConfig.CREATE_IWOMEN_POST_BY_DATE_URL)
+    void getIWomenPostByDateByPagination( @Query("page") int page,
+
+            Callback<List<IWomenPost>> callback);
 
 }
