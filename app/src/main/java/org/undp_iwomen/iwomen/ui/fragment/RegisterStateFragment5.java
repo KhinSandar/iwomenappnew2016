@@ -17,10 +17,9 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
 
-import com.parse.model.CityForShow;
-
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
+import org.undp_iwomen.iwomen.data.CityForShow;
 import org.undp_iwomen.iwomen.data.Sample;
 import org.undp_iwomen.iwomen.ui.activity.RegisterMainActivity;
 import org.undp_iwomen.iwomen.ui.adapter.StateSpinnerAdapter;
@@ -99,9 +98,9 @@ public class RegisterStateFragment5 extends Fragment implements  View.OnClickLis
         final ArrayList<CityForShow> cities = new ArrayList<CityForShow>();
 
 
-        CityForShow ygnCity = new CityForShow("Klsa0sQrMw", "Yangon", getResources().getString(R.string.ygn));
-        CityForShow mdyCity = new CityForShow("A471gH1HNh", "Mandalay", getResources().getString(R.string.mdy));
-        CityForShow nptCity = new CityForShow("EGDFFZrIM7", "Nay Pyi Taw", getResources().getString(R.string.npt));
+        CityForShow ygnCity = new CityForShow("Klsa0sQrMw", "Yangon", getResources().getString(R.string.register_state_ygn));
+        CityForShow mdyCity = new CityForShow("A471gH1HNh", "Mandalay", getResources().getString(R.string.register_state_mdy));
+        CityForShow nptCity = new CityForShow("EGDFFZrIM7", "Nay Pyi Taw", getResources().getString(R.string.register_state_npt));
 
         cities.add(ygnCity);
         cities.add(mdyCity);

@@ -501,7 +501,7 @@
             android:layout_height="48dp"
             android:layout_gravity="center"
             android:gravity="center"
-            wheel:matProg_barColor="@color/theme_primary"
+            wheel:matProg_barColor="@color/primary"
             wheel:matProg_progressIndeterminate="true" />
 
         <ListView

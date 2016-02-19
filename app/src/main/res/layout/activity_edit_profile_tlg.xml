@@ -58,20 +58,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
-                android:paddingBottom="@dimen/com_parse_ui_horizontal_margin"
+                android:paddingBottom="@dimen/activity_vertical_margin"
                 android:paddingLeft="3dp"
-                android:paddingTop="@dimen/com_parse_ui_horizontal_margin"
+                android:paddingTop="@dimen/activity_horizontal_margin"
                 android:text="@string/edit_profile_tlg_township"
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                 android:textSize="18sp" />
 
             <Spinner
                 android:id="@+id/edit_profile_tlg_spn_township"
-                style="@style/Spinner.TownshipInfo"
+                style="@style/Base.Widget.AppCompat.DropDownItem.Spinner"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:enabled="false"
-                android:text="@string/com_parse_ui_signup_township_lbl_eng" />
+                android:text="@string/register_township_title" />
         </LinearLayout>
 
 

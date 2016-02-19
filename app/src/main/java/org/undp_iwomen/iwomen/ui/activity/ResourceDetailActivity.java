@@ -88,7 +88,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity {
 
 
 
-        strLang = sharePrefLanguageUtil.getString(com.parse.utils.Utils.PREF_SETTING_LANG, com.parse.utils.Utils.ENG_LANG);
+        strLang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
         if(strLang.equals(Utils.ENG_LANG)){
 
             textViewTitle.setText(mstrTitleEng);

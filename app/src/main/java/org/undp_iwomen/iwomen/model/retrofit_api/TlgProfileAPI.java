@@ -63,7 +63,7 @@ public class TlgProfileAPI {
                 .setLog(new RestAdapter.Log() {
                     @Override
                     public void log(String msg) {
-                        Log.e("//////////////TLG  Profile API////////////////////////", msg);
+                       // Log.e("//////////////TLG  Profile API////////////////////////", msg);
                     }
                 })
                 .setConverter(new StringConverter()) //Reply String result

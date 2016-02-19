@@ -141,13 +141,13 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
             final String username = usernameField.getText().toString().trim();
             final String pwd = passwordField.getText().toString().trim();
             if (TextUtils.isEmpty(username)) {
-                mUserNameTextInputLayout.setError(getResources().getString(com.parse.ui.R.string.your_name_error));
+                mUserNameTextInputLayout.setError(getResources().getString(R.string.your_name_error));
 
-                if (lang.equals(com.parse.utils.Utils.ENG_LANG)) {
-                    com.parse.utils.Utils.doToastEng(getApplicationContext(), getResources().getString(com.parse.ui.R.string.your_name_error));
-                } else if (lang.equals(com.parse.utils.Utils.MM_LANG)) {
+                if (lang.equals(Utils.ENG_LANG)) {
+                    Utils.doToastEng(getApplicationContext(), getResources().getString(R.string.your_name_error));
+                } else if (lang.equals(Utils.MM_LANG)) {
 
-                    com.parse.utils.Utils.doToastMM(getApplicationContext(), getResources().getString(com.parse.ui.R.string.your_name_error_mm));
+                    Utils.doToastMM(getApplicationContext(), getResources().getString(R.string.your_name_error_mm));
                 }
 
                 return;
@@ -156,12 +156,12 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
             }
 
             if (TextUtils.isEmpty(pwd)) {
-                mPwdTextInputLayout.setError(getResources().getString(com.parse.ui.R.string.confirm_password_error));
+                mPwdTextInputLayout.setError(getResources().getString(R.string.confirm_password_error));
 
-                if (lang.equals(com.parse.utils.Utils.ENG_LANG)) {
-                    //doToast(getResources().getString(com.parse.ui.R.string.confirm_password_error));
+                if (lang.equals(Utils.ENG_LANG)) {
+                    //doToast(getResources().getString(R.string.confirm_password_error));
                     Utils.doToastEng(getApplicationContext(), getResources().getString(R.string.password_error));
-                } else if (lang.equals(com.parse.utils.Utils.MM_LANG)) {
+                } else if (lang.equals(Utils.MM_LANG)) {
 
                     Utils.doToastMM(getApplicationContext(), getResources().getString(R.string.password_error));
                 }
@@ -205,10 +205,10 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
                 @Override
                 public void failure(RetrofitError error) {
                     //Log.e("<<< Login Err >>> ", "===>" + error.toString());
-                    if (lang.equals(com.parse.utils.Utils.ENG_LANG)) {
-                        //doToast(getResources().getString(com.parse.ui.R.string.confirm_password_error));
+                    if (lang.equals(Utils.ENG_LANG)) {
+                        //doToast(getResources().getString(R.string.confirm_password_error));
                         Utils.doToastEng(getApplicationContext(), error.toString());
-                    } else if (lang.equals(com.parse.utils.Utils.MM_LANG)) {
+                    } else if (lang.equals(Utils.MM_LANG)) {
 
                         Utils.doToastMM(getApplicationContext(), error.toString());
                     }
@@ -265,9 +265,7 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
 
 
                 switch (view.getId()) {
-                    case R.id.header_container:
-                        //Toast.makeText(MainLoginActivity.this, "Header clicked", Toast.LENGTH_LONG).show();
-                        break;
+
                     case R.id.dialog_english_language:
 
                         StoreUtil.getInstance().saveTo("fonts", "english");
@@ -426,14 +424,14 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
     }
 
     public void setEnglishFont() {
-        appLogo.setImageResource(com.parse.ui.R.drawable.logo_eng);
-        usernameField.setHint(getResources().getString(com.parse.ui.R.string.com_parse_ui_name_input_hint));
-        passwordField.setHint(getResources().getString(com.parse.ui.R.string.com_parse_ui_password_input_hint));
+        appLogo.setImageResource(R.drawable.logo_eng);
+        usernameField.setHint(getResources().getString(R.string.com_parse_ui_name_input_hint));
+        passwordField.setHint(getResources().getString(R.string.com_parse_ui_password_input_hint));
 
-        parseLoginButton.setText(getResources().getString(com.parse.ui.R.string.com_parse_ui_parse_login_button_label));
-        parseSignupButton.setText(getResources().getString(com.parse.ui.R.string.com_parse_ui_create_account_button_label));
+        parseLoginButton.setText(getResources().getString(R.string.com_parse_ui_parse_login_button_label));
+        parseSignupButton.setText(getResources().getString(R.string.com_parse_ui_create_account_button_label));
 
-        chkShowPwd.setText(getResources().getString(com.parse.ui.R.string.com_parse_ui_show_pwd_eng));
+        chkShowPwd.setText(getResources().getString(R.string.com_parse_ui_show_pwd_eng));
         chkShowPwd.setTypeface(MyTypeFace.get(getApplicationContext(), MyTypeFace.NORMAL));
 
 
@@ -443,14 +441,14 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
     }
 
     public void setMyanmarFontUni() {
-        appLogo.setImageResource(com.parse.ui.R.drawable.logo_mm);
-        usernameField.setHint(getResources().getString(com.parse.ui.R.string.com_parse_ui_username_input_hint_mm));
-        passwordField.setHint(getResources().getString(com.parse.ui.R.string.com_parse_ui_password_input_hint_mm));
-        parseLoginButton.setText(getResources().getString(com.parse.ui.R.string.com_parse_ui_parse_login_button_label_mm));
+        appLogo.setImageResource(R.drawable.logo_mm);
+        usernameField.setHint(getResources().getString(R.string.com_parse_ui_username_input_hint_mm));
+        passwordField.setHint(getResources().getString(R.string.com_parse_ui_password_input_hint_mm));
+        parseLoginButton.setText(getResources().getString(R.string.com_parse_ui_parse_login_button_label_mm));
 
-        parseSignupButton.setText(getResources().getString(com.parse.ui.R.string.com_parse_ui_parse_signup_button_label_mm));
+        parseSignupButton.setText(getResources().getString(R.string.com_parse_ui_parse_signup_button_label_mm));
 
-        chkShowPwd.setText(getResources().getString(com.parse.ui.R.string.com_parse_ui_show_pwd_mm));
+        chkShowPwd.setText(getResources().getString(R.string.com_parse_ui_show_pwd_mm));
         chkShowPwd.setTypeface(MyTypeFace.get(getApplicationContext(), MyTypeFace.UNI));
 
         txtChangLanEng.setText(getResources().getString(R.string.login_language_eng));
@@ -465,13 +463,13 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
     }
 
     public void setMyanmarFontZawgyi() {
-        appLogo.setImageResource(com.parse.ui.R.drawable.logo_mm);
-        usernameField.setHint(getResources().getString(com.parse.ui.R.string.com_parse_ui_username_input_hint_mm));
-        passwordField.setHint(getResources().getString(com.parse.ui.R.string.com_parse_ui_password_input_hint_mm));
-        parseLoginButton.setText(getResources().getString(com.parse.ui.R.string.com_parse_ui_parse_login_button_label_mm));
+        appLogo.setImageResource(R.drawable.logo_mm);
+        usernameField.setHint(getResources().getString(R.string.com_parse_ui_username_input_hint_mm));
+        passwordField.setHint(getResources().getString(R.string.com_parse_ui_password_input_hint_mm));
+        parseLoginButton.setText(getResources().getString(R.string.com_parse_ui_parse_login_button_label_mm));
 
-        parseSignupButton.setText(getResources().getString(com.parse.ui.R.string.com_parse_ui_parse_signup_button_label_mm));
-        chkShowPwd.setText(getResources().getString(com.parse.ui.R.string.com_parse_ui_show_pwd_mm));
+        parseSignupButton.setText(getResources().getString(R.string.com_parse_ui_parse_signup_button_label_mm));
+        chkShowPwd.setText(getResources().getString(R.string.com_parse_ui_show_pwd_mm));
 
 
         txtChangLanEng.setText(getResources().getString(R.string.login_language_eng));
@@ -490,13 +488,13 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
     public void setMyanmarFontDefault() {
 
         /******In the Default we don't need to give TypeFace ********/
-        appLogo.setImageResource(com.parse.ui.R.drawable.logo_mm);
-        usernameField.setHint(getResources().getString(com.parse.ui.R.string.com_parse_ui_username_input_hint_mm));
-        passwordField.setHint(getResources().getString(com.parse.ui.R.string.com_parse_ui_password_input_hint_mm));
-        parseLoginButton.setText(getResources().getString(com.parse.ui.R.string.com_parse_ui_parse_login_button_label_mm));
+        appLogo.setImageResource(R.drawable.logo_mm);
+        usernameField.setHint(getResources().getString(R.string.com_parse_ui_username_input_hint_mm));
+        passwordField.setHint(getResources().getString(R.string.com_parse_ui_password_input_hint_mm));
+        parseLoginButton.setText(getResources().getString(R.string.com_parse_ui_parse_login_button_label_mm));
 
-        parseSignupButton.setText(getResources().getString(com.parse.ui.R.string.com_parse_ui_parse_signup_button_label_mm));
-        chkShowPwd.setText(getResources().getString(com.parse.ui.R.string.com_parse_ui_show_pwd_mm));
+        parseSignupButton.setText(getResources().getString(R.string.com_parse_ui_parse_signup_button_label_mm));
+        chkShowPwd.setText(getResources().getString(R.string.com_parse_ui_show_pwd_mm));
 
 
         txtChangLanEng.setText(getResources().getString(R.string.login_language_eng));

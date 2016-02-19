@@ -28,7 +28,6 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.algo.hha.emojiicon.EmojiconEditText;
 import com.algo.hha.emojiicon.EmojiconGridView;
@@ -49,11 +48,7 @@ import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareButton;
 import com.facebook.share.widget.ShareDialog;
 import com.makeramen.RoundedImageView;
-import com.parse.FunctionCallback;
-import com.parse.ParseACL;
-import com.parse.ParseCloud;
-import com.parse.ParseException;
-import com.parse.SaveCallback;
+
 import com.smk.iwomen.BaseActionBarActivity;
 import com.squareup.picasso.Picasso;
 
@@ -70,7 +65,6 @@ import org.undp_iwomen.iwomen.model.ISO8601Utils;
 import org.undp_iwomen.iwomen.model.MyTypeFace;
 import org.undp_iwomen.iwomen.model.TextWatcherAdapter;
 import org.undp_iwomen.iwomen.model.TimeDiff;
-import org.undp_iwomen.iwomen.model.parse.Comment;
 import org.undp_iwomen.iwomen.model.retrofit_api.CommentAPI;
 import org.undp_iwomen.iwomen.model.retrofit_api.UserPostAPI;
 import org.undp_iwomen.iwomen.provider.IwomenProviderData;
@@ -148,7 +142,6 @@ public class TLGUserPostDetailActivity extends BaseActionBarActivity implements 
     ListView listView_Comment;
     List<CommentItem> listComment;
 
-    Comment commentParse;
     String share_data;
     String share_img_url_data;
 
@@ -246,9 +239,9 @@ public class TLGUserPostDetailActivity extends BaseActionBarActivity implements 
         }
         //FB SHARE
         setContentView(R.layout.activity_post_detail);
-        sharePrefLanguageUtil = getSharedPreferences(com.parse.utils.Utils.PREF_SETTING, Context.MODE_PRIVATE);
+        sharePrefLanguageUtil = getSharedPreferences(Utils.PREF_SETTING, Context.MODE_PRIVATE);
 
-        mstr_lang = sharePrefLanguageUtil.getString(com.parse.utils.Utils.PREF_SETTING_LANG, com.parse.utils.Utils.ENG_LANG);
+        mstr_lang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
 
         Bundle bundle = getIntent().getExtras();
         postId = bundle.getString("post_id");
@@ -806,7 +799,7 @@ public class TLGUserPostDetailActivity extends BaseActionBarActivity implements 
         profile.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
 
-        strLang = sharePrefLanguageUtil.getString(com.parse.utils.Utils.PREF_SETTING_LANG, com.parse.utils.Utils.ENG_LANG);
+        strLang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
 
 
         if (item.getPost_content_suggest_text() != null && !item.getPost_content_suggest_text().isEmpty()) {
@@ -827,7 +820,7 @@ public class TLGUserPostDetailActivity extends BaseActionBarActivity implements 
         }
 
         mstrPostType = item.getPost_content_type();
-        if (strLang.equals(com.parse.utils.Utils.ENG_LANG)) {
+        if (strLang.equals(Utils.ENG_LANG)) {
             postdetail_username.setTypeface(MyTypeFace.get(getApplicationContext(), MyTypeFace.NORMAL));
 
 
@@ -1131,25 +1124,11 @@ public class TLGUserPostDetailActivity extends BaseActionBarActivity implements 
                             HashMap<String, String> _param = new HashMap<>();
                             _param.put("objectId", postId);
 
-                            ParseCloud.callFunctionInBackground("Likes_increment", _param, new FunctionCallback<Integer>() {
-                                @Override
-                                public void done(Integer like_count, ParseException e) {
+                            //TODO Post Like Update
+                            /*txt_like_count.setText(like_count + " ");
+                            like_status = "1";
 
-                                    if (e == null) {
-                                        //Log.e("Cloud Increment", "===>" + like_count);
-                                        txt_like_count.setText(like_count + " ");
-                                        //TODO call updatePost
-                                        updatePostLikeStatus(postId, like_count);
-                                        like_status = "1";
-
-                                    } else {
-
-                                        Log.e("Cloud Increment", "ERRr" + like_count + e.toString());
-                                    }
-
-                                }
-                            });
-                            img_like.setImageResource(R.drawable.like_fill);
+                            img_like.setImageResource(R.drawable.like_fill);*/
                         } else {
                             //Utils.doToastEng(getApplicationContext(), "unLike click");
                         }
@@ -1217,7 +1196,7 @@ public class TLGUserPostDetailActivity extends BaseActionBarActivity implements 
 
                         mProgressDialog.show();
                         Utils.doToastEng(getApplicationContext(), "Comment");
-                        commentParse = new Comment();
+                        /*commentParse = new Comment();
 
                         commentParse.setcomment_contents(et_comment.getText().toString());
                         commentParse.setUserId(user_obj_id);
@@ -1225,16 +1204,8 @@ public class TLGUserPostDetailActivity extends BaseActionBarActivity implements 
                         commentParse.setUserName(user_name);
                         commentParse.setpostId(postId);
                         commentParse.setcomment_created_time(new Date());
-                        /**Very Important */
+                        *//**Very Important *//*
                         ParseACL groupACL = new ParseACL();
-                        // userList is an Iterable<ParseUser> with the users we are sending this message to.
-                    /*for (ParseUser user : userList) {
-                    groupACL.setReadAccess(user, true);
-                    //groupACL.setWriteAccess(user, true);
-                    }*/
-                        //groupACL.setRoleReadAccess("");
-
-                        //groupACL.setRoleWriteAccess("");
 
 
                         groupACL.setPublicReadAccess(true);
@@ -1267,7 +1238,7 @@ public class TLGUserPostDetailActivity extends BaseActionBarActivity implements 
 
                                 }
                             }
-                        });
+                        });*/
                     }
                 } else {
 

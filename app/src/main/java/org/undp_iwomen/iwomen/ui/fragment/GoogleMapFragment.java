@@ -87,9 +87,9 @@ public class GoogleMapFragment extends Fragment {//
         View rootView = inflater.inflate(R.layout.fragment_tlg_map, container, false);
         mContext = getActivity().getApplicationContext();
         storageUtil = StorageUtil.getInstance(mContext);
-        sharePrefLanguageUtil = getActivity().getSharedPreferences(com.parse.utils.Utils.PREF_SETTING, Context.MODE_PRIVATE);
+        sharePrefLanguageUtil = getActivity().getSharedPreferences(Utils.PREF_SETTING, Context.MODE_PRIVATE);
 
-        mstr_lang = sharePrefLanguageUtil.getString(com.parse.utils.Utils.PREF_SETTING_LANG, com.parse.utils.Utils.ENG_LANG);
+        mstr_lang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
 
         init(rootView);
         getReview();

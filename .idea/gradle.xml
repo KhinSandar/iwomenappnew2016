@@ -10,10 +10,9 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/GifImageViewlibrary" />
-            <option value="$PROJECT_DIR$/ParseLoginUI" />
             <option value="$PROJECT_DIR$/RecordingMediaFile" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/dialogplus" />
+            <option value="$PROJECT_DIR$/caldroid" />
             <option value="$PROJECT_DIR$/emojiicon" />
             <option value="$PROJECT_DIR$/library" />
             <option value="$PROJECT_DIR$/sKAlertMessage" />
@@ -24,10 +23,9 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/GifImageViewlibrary" />
-            <option value="$PROJECT_DIR$/ParseLoginUI" />
             <option value="$PROJECT_DIR$/RecordingMediaFile" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/dialogplus" />
+            <option value="$PROJECT_DIR$/caldroid" />
             <option value="$PROJECT_DIR$/emojiicon" />
             <option value="$PROJECT_DIR$/library" />
             <option value="$PROJECT_DIR$/sKAlertMessage" />

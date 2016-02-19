@@ -84,7 +84,7 @@ public class SisterAppFragment extends Fragment {
         mContext = getActivity().getApplicationContext();
         storageUtil = StorageUtil.getInstance(mContext);
         sharePrefLanguageUtil = getActivity().getSharedPreferences(Utils.PREF_SETTING, Context.MODE_PRIVATE);
-        mstr_lang = sharePrefLanguageUtil.getString(com.parse.utils.Utils.PREF_SETTING_LANG, com.parse.utils.Utils.ENG_LANG);
+        mstr_lang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
 
         lv_sister = (ListView) rootView.findViewById(R.id.sister_app_listview);
 

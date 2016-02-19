@@ -17,8 +17,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
 
-import com.parse.utils.Connection;
-import com.parse.utils.Utils;
 import com.smk.clientapi.NetworkEngine;
 import com.smk.model.TLGTownship;
 
@@ -27,6 +25,8 @@ import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.data.Sample;
 import org.undp_iwomen.iwomen.ui.activity.RegisterMainActivity;
 import org.undp_iwomen.iwomen.ui.adapter.TLGTownshipSpinnerAdapter;
+import org.undp_iwomen.iwomen.utils.Connection;
+import org.undp_iwomen.iwomen.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -143,10 +143,10 @@ public class RegisterTlgFragment4 extends Fragment implements View.OnClickListen
             mProgressDialog.dismiss();
 
             if (lang.equals(Utils.ENG_LANG)) {
-                Utils.doToastEng(mContext, getResources().getString(com.parse.ui.R.string.open_internet_warning_eng));
+                Utils.doToastEng(mContext, getResources().getString(R.string.open_internet_warning_eng));
             } else if (lang.equals(Utils.MM_LANG)) {
 
-                Utils.doToastMM(mContext, getResources().getString(com.parse.ui.R.string.open_internet_warning_mm));
+                Utils.doToastMM(mContext, getResources().getString(R.string.open_internet_warning_mm));
             } else {
 
 

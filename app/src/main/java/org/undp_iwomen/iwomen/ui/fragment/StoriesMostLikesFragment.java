@@ -33,9 +33,6 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.parse.FindCallback;
-import com.parse.ParseException;
-import com.parse.ParseQuery;
 import com.pnikosis.materialishprogress.ProgressWheel;
 import com.smk.clientapi.NetworkEngine;
 import com.smk.iwomen.BaseActionBarActivity;
@@ -47,7 +44,6 @@ import org.json.JSONObject;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.data.FeedItem;
 import org.undp_iwomen.iwomen.database.TableAndColumnsName;
-import org.undp_iwomen.iwomen.model.parse.Post;
 import org.undp_iwomen.iwomen.model.retrofit_api.UserPostAPI;
 import org.undp_iwomen.iwomen.provider.IwomenProviderData;
 import org.undp_iwomen.iwomen.ui.activity.MainPhotoPostActivity;
@@ -138,7 +134,7 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
 
         progress.setVisibility(View.VISIBLE);
 
-        mstr_lang = sharePrefLanguageUtil.getString(com.parse.utils.Utils.PREF_SETTING_LANG, com.parse.utils.Utils.ENG_LANG);
+        mstr_lang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
 
         //When very start this fragment open , need to check db data
         Cursor cursorMain = getActivity().getContentResolver().query(IwomenProviderData.PostProvider.CONTETN_URI, null, null, null, BaseColumns._ID + " DESC");
@@ -330,7 +326,7 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
                 //storageUtil.SaveArrayListToSD("lost_data_list", lost_data_list);
 
 
-                if (mstr_lang.equals(com.parse.utils.Utils.ENG_LANG)) {
+                if (mstr_lang.equals(Utils.ENG_LANG)) {
                     mPostListRecyclerViewAdapter = new PostListRecyclerViewAdapter(getActivity().getApplicationContext(), feedItems, mstr_lang);
                     mRecyclerView.setAdapter(mPostListRecyclerViewAdapter);
                     mProgressDialog.dismiss();
@@ -1055,7 +1051,7 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
                 Cursor cursor = getActivity().getContentResolver().query(IwomenProviderData.PostProvider.CONTETN_URI, null, null, null, BaseColumns._ID + " DESC LIMIT 1");
 
 
-                if (cursor.getCount() > 0) {
+                if (cursor.getCount() > 0) { //TODO GET POST VERY INITIAL TIME
 
 
                     Date date = null;
@@ -1072,9 +1068,10 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
 
                         mProgressDialog.show();
 
-                        ParseQuery<Post> query = Post.getQuery();
+                        //TODO GET POST BY DATE From POST TABlE
 
 
+                        /*ParseQuery<Post> query = Post.getQuery();
                         query.whereGreaterThan("postUploadedDate", date);
                         //query.whereLessThan("likes",)
                         query.whereEqualTo("isAllow", true);
@@ -1185,7 +1182,7 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
 
                                 }
                             }
-                        });
+                        });*/
 
 
                     }
@@ -1196,7 +1193,9 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
                 mProgressDialog.show();
 
 
-                ParseQuery<Post> query = Post.getQuery();
+                //TODO GET POST SECOND TIME
+
+                /*ParseQuery<Post> query = Post.getQuery();
                 //query.orderByDescending("createdAt"); //Latest date is first
                 //query.orderByAscending("postUploadedDate");//Very first row Date is first
                 query.whereEqualTo("isAllow", true);
@@ -1311,7 +1310,7 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
                             Log.e("Post Get Err", "===>" + e.toString());
                         }
                     }
-                });
+                });*/
             }
 
         } else {

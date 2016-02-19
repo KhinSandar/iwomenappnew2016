@@ -1,4 +1,4 @@
-include ':app', ':ParseLoginUI', ':library', ':emojiicon', ':RecordingMediaFile', ':dialogplus', ':GifImageViewlibrary'
+include ':app', ':library', ':emojiicon', ':RecordingMediaFile', ':GifImageViewlibrary', ':caldroid'
 
 include ':sKAlertMessage'
 

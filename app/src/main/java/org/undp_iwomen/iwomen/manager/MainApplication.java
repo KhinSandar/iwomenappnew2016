@@ -5,23 +5,9 @@ import android.util.Log;
 
 import com.alexbbb.uploadservice.UploadService;
 import com.facebook.FacebookSdk;
-import com.parse.Parse;
-import com.parse.ParseACL;
-import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParsePush;
-import com.parse.PushService;
-import com.parse.SaveCallback;
 import com.path.android.jobqueue.JobManager;
 import com.path.android.jobqueue.config.Configuration;
 import com.path.android.jobqueue.log.CustomLogger;
-
-import org.undp_iwomen.iwomen.R;
-import org.undp_iwomen.iwomen.model.parse.AppVersion;
-import org.undp_iwomen.iwomen.model.parse.Comment;
-import org.undp_iwomen.iwomen.model.parse.IwomenPost;
-import org.undp_iwomen.iwomen.model.parse.Post;
-import org.undp_iwomen.iwomen.ui.activity.DrawerMainActivity;
 
 
 /**
@@ -39,7 +25,7 @@ public class MainApplication extends Application {
 
         FacebookSdk.sdkInitialize(getApplicationContext());
 
-        // Required - Initialize the Parse SDK
+        /*// Required - Initialize the Parse SDK
         Parse.enableLocalDatastore(this);
         Parse.initialize(this, getString(R.string.parse_app_id),
                 getString(R.string.parse_client_key));
@@ -56,18 +42,15 @@ public class MainApplication extends Application {
 
         
         ParseACL defaultACL = new ParseACL();
-        ParseACL.setDefaultACL(defaultACL, true);
+        ParseACL.setDefaultACL(defaultACL, true);*/
 
         UploadService.NAMESPACE = "org.undp_iwomen.iwomen";
 
 
-        // Associate the device with a user
-        /*ParseInstallation installation = ParseInstallation.getCurrentInstallation();
-        installation.put("user", ParseUser.getCurrentUser());
-        installation.saveInBackground();*/
 
 
-        ParsePush.subscribeInBackground("", new SaveCallback() {
+
+        /*ParsePush.subscribeInBackground("", new SaveCallback() {
             @Override
             public void done(ParseException e) {
                 if (e == null) {
@@ -77,6 +60,7 @@ public class MainApplication extends Application {
                 }
             }
         });
+        */
 
         configureJobManager();
     }

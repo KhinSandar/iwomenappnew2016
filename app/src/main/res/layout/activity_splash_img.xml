@@ -39,7 +39,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:visibility="gone"
-            wheel:matProg_barColor="@color/theme_primary_light"
+            wheel:matProg_barColor="@color/primary_light"
             wheel:matProg_progressIndeterminate="true"/>
 
         <org.undp_iwomen.iwomen.ui.widget.CustomTextView

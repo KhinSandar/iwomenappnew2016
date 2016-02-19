@@ -34,20 +34,16 @@ import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.widget.LoginButton;
 import com.kbeanie.imagechooser.api.ChooserType;
 import com.kbeanie.imagechooser.api.ChosenImage;
+import com.kbeanie.imagechooser.api.ChosenImages;
 import com.kbeanie.imagechooser.api.ImageChooserListener;
 import com.kbeanie.imagechooser.api.ImageChooserManager;
-import com.parse.ParseACL;
-import com.parse.ParseException;
-import com.parse.ParseFile;
-import com.parse.SaveCallback;
 import com.pnikosis.materialishprogress.ProgressWheel;
+import com.smk.clientapi.NetworkEngine;
 
 import org.json.JSONObject;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.model.MyTypeFace;
-import org.undp_iwomen.iwomen.model.parse.Post;
-import org.undp_iwomen.iwomen.ui.activity.DrawerMainActivity;
 import org.undp_iwomen.iwomen.ui.widget.ResizableImageView;
 import org.undp_iwomen.iwomen.utils.Connection;
 import org.undp_iwomen.iwomen.utils.ShowKeyboardListener;
@@ -55,7 +51,11 @@ import org.undp_iwomen.iwomen.utils.Utils;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.util.Date;
+
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+import retrofit.mime.TypedFile;
 
 
 /**
@@ -67,7 +67,7 @@ public class MainPhotoPostFragment extends Fragment implements ImageChooserListe
     /*LostReport lostReport;
     FoundReport foundReport;*/
 
-    Post postParse;
+    //TODO Upload to PostTable
     View progressbackground;
 
     ProgressWheel progress_wheel;
@@ -202,7 +202,7 @@ public class MainPhotoPostFragment extends Fragment implements ImageChooserListe
     private void init(View rootView) {
         mContext = getActivity().getApplicationContext();
         sharePrefLanguageUtil = getActivity().getSharedPreferences(Utils.PREF_SETTING, Context.MODE_PRIVATE);
-        mstr_lang = sharePrefLanguageUtil.getString(com.parse.utils.Utils.PREF_SETTING_LANG, com.parse.utils.Utils.ENG_LANG);
+        mstr_lang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
 
         img_photo = (ResizableImageView) rootView.findViewById(R.id.new_post_img);
         new_post_et_title = (EditText) rootView.findViewById(R.id.new_post_et_title);
@@ -295,7 +295,7 @@ public class MainPhotoPostFragment extends Fragment implements ImageChooserListe
         progress_wheel.setVisibility(View.GONE);
 
         //Set Type Face and Chnage text
-        if (mstr_lang.equals(com.parse.utils.Utils.ENG_LANG)) {
+        if (mstr_lang.equals(Utils.ENG_LANG)) {
 
             //new_post_et_title.setHint(R.string.new_post_hint_title_eng);
             postEditText.setHint(R.string.new_post_hint_title_eng);//new_post_hint_body_eng
@@ -382,7 +382,7 @@ public class MainPhotoPostFragment extends Fragment implements ImageChooserListe
 
                             progress_wheel.setVisibility(View.GONE);
 
-                            if (mstr_lang.equals(com.parse.utils.Utils.ENG_LANG)) {
+                            if (mstr_lang.equals(Utils.ENG_LANG)) {
                                 Utils.doToastEng(mContext, getResources().getString(R.string.upload_post_warning_eng));
                             } else {
                                 Utils.doToastMM(mContext, getResources().getString(R.string.upload_post_warning_mm));
@@ -425,44 +425,42 @@ public class MainPhotoPostFragment extends Fragment implements ImageChooserListe
         //File photo = new File(chosenImage.getFilePathOriginal());
         if (crop_file_path != null) {
 
+            //TODO photo upload MainPhotoIWomenPost
             File photo = new File(crop_file_path);
+            TypedFile typedFile = new TypedFile("multipart/form-data", photo);
 
-            FileInputStream fileInputStream = null;
+            NetworkEngine.getInstance().postiWomenPostPhoto(typedFile, new Callback<String>() {
+                @Override
+                public void success(String s, Response response) {
+                    Log.e("<<<<Success>>>","===>" +s);
 
-
-            byte[] bFile = new byte[(int) photo.length()];
-
-            try {
-                //convert file into array of bytes
-                fileInputStream = new FileInputStream(photo);
-                fileInputStream.read(bFile);
-                fileInputStream.close();
-
-                for (int i = 0; i < bFile.length; i++) {
-                    //System.out.print((char)bFile[i]);
                 }
 
-                //System.out.println("Done");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+                @Override
+                public void failure(RetrofitError error) {
 
+                }
+            });
 
-            //TypedFile typedFile = new TypedFile("multipart/form-data", photo);//croppedImageFile
-            /*Log.e("///File//",""+chosenImage.getFilePathOriginal());
-            byte[] data = crop_file_path.getBytes();*/
-
-
-            ParseFile photoFile = new ParseFile("photo.jpg", bFile);
-
-
-            postParse = new Post();
-
-
+            //TODO Param for post
+            //user_obj_id ,
             //postParse.setContentTypes("Story");
-
-            postParse.setUserId(user_obj_id);
-            if (mstr_lang.equals(com.parse.utils.Utils.ENG_LANG)) {
+            //TODO set allow true
+            //postParse.setIsAllow(true);
+            //postParse.setLikes(0);
+            //postParse.setCommentCount(0);
+            //postParse.setShareCount(0);
+            /*if (userprofile_Image_path != null) {
+                postParse.setPostUploadUserImgPath(userprofile_Image_path);
+            }
+            postParse.setContentTypes("Story");
+            postParse.setPostUploadedDate(new Date());
+            postParse.setPostUploadAuthorName(user_name);
+            //postParse.setPostUploadAuthorImgFile(ParseUser.getCurrentUser().getParseFile("profileimage"));
+            //TODO images
+            postParse.setImageFile(photoFile);*/
+            //TODO FROM SERVER SIDE FOR REVIEW 2
+            /*if (mstr_lang.equals(Utils.ENG_LANG)) {
 
                 if (postEditText.length() != 0) {
                     postParse.setContent(postEditText.getText().toString());
@@ -482,83 +480,51 @@ public class MainPhotoPostFragment extends Fragment implements ImageChooserListe
                 }
 
             }
+            */
 
-            postParse.setIsAllow(true);
-
-            postParse.setLikes(0);
-            postParse.setCommentCount(0);
-            postParse.setShareCount(0);
-            if(userprofile_Image_path != null) {
-                postParse.setPostUploadUserImgPath(userprofile_Image_path);
-            }
-            //postParse.setPostUploadUserImgPath(userprofile_Image_path);
-            postParse.setContentTypes("Story");
-            postParse.setPostUploadedDate(new Date());
-
-            postParse.setPostUploadAuthorName(user_name);
-            //postParse.setPostUploadAuthorImgFile(ParseUser.getCurrentUser().getParseFile("profileimage"));
-
-            //TODO images
-            postParse.setImageFile(photoFile);
-            //postParse.setPhotoFile(photoFile);
-
-
-            /**Very Important */
-            ParseACL groupACL = new ParseACL();
-            // userList is an Iterable<ParseUser> with the users we are sending this message to.
-                /*for (ParseUser user : userList) {
-                    groupACL.setReadAccess(user, true);
-                    //groupACL.setWriteAccess(user, true);
-                }*/
-            //groupACL.setRoleReadAccess("");
-
-            //groupACL.setRoleWriteAccess("");
-
-
-            groupACL.setPublicReadAccess(true);
-
-            postParse.setACL(groupACL);
-            postParse.saveInBackground(new SaveCallback() {
-                @Override
-                public void done(ParseException e) {
-                    if (getActivity().isFinishing()) {
-                        return;
-                    }
-                    if (e == null) {
-                        progress_wheel.setVisibility(View.INVISIBLE);
+            //TODO If post success
+            /*progress_wheel.setVisibility(View.INVISIBLE);
                         progressbackground.setVisibility(View.INVISIBLE);
 
 
-                        if (mstr_lang.equals(com.parse.utils.Utils.ENG_LANG)) {
+                        if (mstr_lang.equals(Utils.ENG_LANG)) {
                             Utils.doToastEng(mContext, getResources().getString(R.string.upload_success_toast_eng));
                         } else {
                             Utils.doToastMM(mContext, getResources().getString(R.string.upload_success_toast_mm));
 
                         }
                         Intent intent = new Intent(getActivity(), DrawerMainActivity.class);
-
-
-                        startActivity(intent);
-
-                    } else {
-                        progress_wheel.setVisibility(View.INVISIBLE);
+                        startActivity(intent);*/
+            //TODO if post fail
+            /*progress_wheel.setVisibility(View.INVISIBLE);
                         progressbackground.setVisibility(View.INVISIBLE);
                         Toast.makeText(getActivity().getApplicationContext(),
                                 "Error saving: " + e.getMessage(),
-                                Toast.LENGTH_LONG).show();
+                                Toast.LENGTH_LONG).show();*/
 
-                    }
-                }
-            });
 
         } else { //If didn't chose Photo
 
 
-            postParse = new Post();
-
-
-            postParse.setUserId(user_obj_id);
-            if (mstr_lang.equals(com.parse.utils.Utils.ENG_LANG)) {
+            //TODO Param for post
+            //user_obj_id ,
+            //postParse.setContentTypes("Story");
+            //TODO set allow true
+            //postParse.setIsAllow(true);
+            //postParse.setLikes(0);
+            //postParse.setCommentCount(0);
+            //postParse.setShareCount(0);
+            /*if (userprofile_Image_path != null) {
+                postParse.setPostUploadUserImgPath(userprofile_Image_path);
+            }
+            postParse.setContentTypes("Story");
+            postParse.setPostUploadedDate(new Date());
+            postParse.setPostUploadAuthorName(user_name);
+            //postParse.setPostUploadAuthorImgFile(ParseUser.getCurrentUser().getParseFile("profileimage"));
+            //TODO images
+            postParse.setImageFile(photoFile);*/
+            //TODO FROM SERVER SIDE FOR REVIEW 2
+            /*if (mstr_lang.equals(Utils.ENG_LANG)) {
 
                 if (postEditText.length() != 0) {
                     postParse.setContent(postEditText.getText().toString());
@@ -566,6 +532,7 @@ public class MainPhotoPostFragment extends Fragment implements ImageChooserListe
                 if (new_post_et_title.length() != 0) {
                     postParse.setTitle(new_post_et_title.getText().toString());
                 }
+
 
             } else {
 
@@ -577,75 +544,28 @@ public class MainPhotoPostFragment extends Fragment implements ImageChooserListe
                 }
 
             }
+            */
 
-
-            postParse.setIsAllow(true);
-
-            postParse.setLikes(0);
-            postParse.setCommentCount(0);
-            postParse.setShareCount(0);
-            if(userprofile_Image_path != null) {
-                postParse.setPostUploadUserImgPath(userprofile_Image_path);
-            }
-            //postParse.setPostUploadUserImgPath(userprofile_Image_path);
-            postParse.setContentTypes("Story");
-            postParse.setPostUploadedDate(new Date());
-
-            postParse.setPostUploadAuthorName(user_name);
-            //postParse.setPostUploadAuthorImgFile(ParseUser.getCurrentUser().getParseFile("profileimage"));
-
-            //TODO images null case allow post
-            //postParse.setImageFile(photoFile);
-
-
-            //postUploadImgPath
-            /**Very Important */
-            ParseACL groupACL = new ParseACL();
-            // userList is an Iterable<ParseUser> with the users we are sending this message to.
-                /*for (ParseUser user : userList) {
-                    groupACL.setReadAccess(user, true);
-                    //groupACL.setWriteAccess(user, true);
-                }*/
-            //groupACL.setRoleReadAccess("");
-
-            //groupACL.setRoleWriteAccess("");
-
-
-            groupACL.setPublicReadAccess(true);
-
-            postParse.setACL(groupACL);
-            postParse.saveInBackground(new SaveCallback() {
-                @Override
-                public void done(ParseException e) {
-                    if (getActivity().isFinishing()) {
-                        return;
-                    }
-                    if (e == null) {
-                        progress_wheel.setVisibility(View.INVISIBLE);
+            //TODO If post success
+            /*progress_wheel.setVisibility(View.INVISIBLE);
                         progressbackground.setVisibility(View.INVISIBLE);
 
 
-                        if (mstr_lang.equals(com.parse.utils.Utils.ENG_LANG)) {
+                        if (mstr_lang.equals(Utils.ENG_LANG)) {
                             Utils.doToastEng(mContext, getResources().getString(R.string.upload_success_toast_eng));
                         } else {
                             Utils.doToastMM(mContext, getResources().getString(R.string.upload_success_toast_mm));
 
                         }
                         Intent intent = new Intent(getActivity(), DrawerMainActivity.class);
-
-
-                        startActivity(intent);
-
-                    } else {
-                        progress_wheel.setVisibility(View.INVISIBLE);
+                        startActivity(intent);*/
+            //TODO if post fail
+            /*progress_wheel.setVisibility(View.INVISIBLE);
                         progressbackground.setVisibility(View.INVISIBLE);
                         Toast.makeText(getActivity().getApplicationContext(),
                                 "Error saving: " + e.getMessage(),
-                                Toast.LENGTH_LONG).show();
+                                Toast.LENGTH_LONG).show();*/
 
-                    }
-                }
-            });
 
 
         }
@@ -873,6 +793,11 @@ public class MainPhotoPostFragment extends Fragment implements ImageChooserListe
                         Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    @Override
+    public void onImagesChosen(ChosenImages images) {
+
     }
 
 

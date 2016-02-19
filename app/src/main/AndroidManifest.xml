@@ -94,7 +94,7 @@
             android:windowSoftInputMode="adjustResize|stateHidden">
         </activity>
         <!-- PARSE LOGIN AND MAIN ACTIVITY -->
-        <activity
+        <!--<activity
             android:name="com.parse.ui.ParseLoginActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop"
@@ -113,7 +113,7 @@
             <meta-data
                 android:name="com.parse.ui.ParseLoginActivity.TWITTER_LOGIN_ENABLED"
                 android:value="false" />
-        </activity>
+        </activity>-->
         <!-- PARSE LOGIN END -->
 
 
@@ -154,7 +154,7 @@
             android:enabled="true"
             android:exported="false" />
         <!-- PARSE PUSH NOTRIFICATION -->
-        <service android:name="com.parse.PushService" />
+        <!--<service android:name="com.parse.PushService" />
 
         <receiver android:name="com.parse.ParseBroadcastReceiver">
             <intent-filter>
@@ -178,10 +178,12 @@
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
 
-                <!-- IMPORTANT: Change "com.parse.tutorials.pushnotifications" to match your app's package name. -->
+                &lt;!&ndash; IMPORTANT: Change "com.parse.tutorials.pushnotifications" to match your app's package name. &ndash;&gt;
                 <category android:name="org.undp_iwomen.iwomen" />
             </intent-filter>
-        </receiver>
+        </receiver>-->
+
+        <!-- PARSE PUSH NOTRIFICATION -->
         <!--
         <receiver
             android:name="com.parse.ParsePushBroadcastReceiver"
@@ -347,6 +349,15 @@
                 android:value=".ui.activity.DrawerMainActivity" />
         </activity>
         <activity
+            android:name=".ui.activity.CalendarActivity"
+            android:label="@string/title_activity_post_detail"
+            android:parentActivityName=".ui.activity.DrawerMainActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.activity.DrawerMainActivity" />
+        </activity>
+        <activity
             android:name=".ui.activity.PostNewsActivity"
             android:label="@string/title_activity_post_news" >
         </activity>
@@ -379,6 +390,16 @@
             android:name="com.smk.iwomen.VideoRecordingActivity"
             android:label="@string/title_activity_video_recording"
             android:theme="@style/AppTheme"></activity>
+
+        <activity android:name=".ui.activity.ViewEventsActivity"
+            android:label="@string/title_view_events">
+
+        </activity>
+        <activity android:name=".ui.activity.EventDetailActivity"
+            android:label="@string/title_event_detail"/>
+        <activity android:name=".ui.activity.NewEventActivity"
+            android:label="@string/title_new_event"/>
+
     </application>
 
 </manifest>

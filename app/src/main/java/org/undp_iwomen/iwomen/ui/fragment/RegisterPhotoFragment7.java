@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.android.camera.CropImageIntentBuilder;
 import com.kbeanie.imagechooser.api.ChooserType;
 import com.kbeanie.imagechooser.api.ChosenImage;
+import com.kbeanie.imagechooser.api.ChosenImages;
 import com.kbeanie.imagechooser.api.ImageChooserListener;
 import com.kbeanie.imagechooser.api.ImageChooserManager;
 import com.makeramen.RoundedImageView;
@@ -395,6 +396,11 @@ public class RegisterPhotoFragment7 extends Fragment implements  View.OnClickLis
                         Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    @Override
+    public void onImagesChosen(ChosenImages images) {
+
     }
 
 

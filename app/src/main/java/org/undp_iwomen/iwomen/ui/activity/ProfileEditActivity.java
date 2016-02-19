@@ -22,16 +22,11 @@ import android.widget.Toast;
 import com.android.camera.CropImageIntentBuilder;
 import com.kbeanie.imagechooser.api.ChooserType;
 import com.kbeanie.imagechooser.api.ChosenImage;
+import com.kbeanie.imagechooser.api.ChosenImages;
 import com.kbeanie.imagechooser.api.ImageChooserListener;
 import com.kbeanie.imagechooser.api.ImageChooserManager;
 import com.makeramen.RoundedImageView;
-import com.parse.GetCallback;
-import com.parse.ParseException;
-import com.parse.ParseFile;
-import com.parse.ParseQuery;
-import com.parse.ParseUser;
-import com.parse.ProgressCallback;
-import com.parse.SaveCallback;
+
 import com.smk.iwomen.BaseActionBarActivity;
 import com.squareup.picasso.Picasso;
 
@@ -97,7 +92,6 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
     private static int REQUEST_CROP_PICTURE = 2;
 
     //After imagchose
-    private ParseUser currentUser;
     private TextView txt_edit_next;
     private Button btn_edit;
     private Button btn_cancel;
@@ -143,7 +137,7 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
         img_camera = (ImageView)findViewById(R.id.edit_profile_camera_icon);
 
 
-        strLang = sharePrefLanguageUtil.getString(com.parse.utils.Utils.PREF_SETTING_LANG, com.parse.utils.Utils.ENG_LANG);
+        strLang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
 
 
 
@@ -361,7 +355,7 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
             //Utils.doToast(mContext, "Internet Connection need!");
 
             if (strLang.equals(Utils.ENG_LANG)) {
-                Utils.doToastEng(mContext, getResources().getString(R.string.open_internet_warning_eng));
+                Utils.doToastEng(mContext, getResources().getString(R.string.open_internet_warning));
             } else {
 
                 Utils.doToastMM(mContext, getResources().getString(R.string.open_internet_warning_mm));
@@ -407,109 +401,29 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
                             e.printStackTrace();
                             Log.e("Image Upload Sing up", "==>" + e.toString());
                         }
+                        //TODO Parse api User profile image upload and
+                        /*mProgressDialog.dismiss();
 
+                        Log.e("User Img Sticker", "==>" + userprofile_Image_path);
+                        mEditorUserInfo = mSharedPreferencesUserInfo.edit();
+                        mEditorUserInfo.putString(CommonConfig.USER_IMAGE_PATH, userprofile_Image_path);
+                        mEditorUserInfo.commit();
+                        startDrawerMainActivity();
+                        */
 
-                        final ParseFile ParsephotoFile = new ParseFile("photo.jpg", bFile);
-                        ParsephotoFile.saveInBackground(new SaveCallback() {
-                            @Override
-                            public void done(ParseException e) {
-                                if (e != null) {
-                                    //btSignup.setText(e.getMessage());
-                                }
-                            }
-                        }, new ProgressCallback() {
-                            @Override
-                            public void done(Integer integer) {
-                                ParseQuery<ParseUser> userQuery = ParseUser.getQuery();
-                                userQuery.getInBackground(mstrUserId, new GetCallback<ParseUser>() {
-                                    @Override
-                                    public void done(ParseUser parseUser, ParseException e) {
-                                        if (e == null) {
-
-                                            parseUser.put("user_profile_img", ParsephotoFile);
-                                            parseUser.saveInBackground(new SaveCallback() {
-                                                @Override
-                                                public void done(ParseException e) {
-                                                    if (e == null) {
-                                                        mProgressDialog.dismiss();
-
-                                                        currentUser = ParseUser.getCurrentUser();
-                                                        if (currentUser != null) {
-                                                            if (currentUser.get("user_profile_img") != null && currentUser.get("user_profile_img") != "null") {
-                                                                userprofile_Image_path = currentUser.getParseFile("user_profile_img").getUrl();
-
-                                                                Log.e("User Img Camera", "==>" + userprofile_Image_path);
-                                                                if (userprofile_Image_path != null && !userprofile_Image_path.isEmpty()) {
-                                                                    ParseQuery<ParseUser> userQuery = ParseUser.getQuery();
-                                                                    userQuery.getInBackground(mstrUserId, new GetCallback<ParseUser>() {
-                                                                        @Override
-                                                                        public void done(ParseUser parseUser, ParseException e) {
-                                                                            if (e == null) {
-                                                                                parseUser.put("userImgPath", userprofile_Image_path);
-
-                                                                                parseUser.saveInBackground(new SaveCallback() {
-                                                                                    @Override
-                                                                                    public void done(ParseException e) {
-                                                                                        if (e == null) {
-                                                                                            mProgressDialog.dismiss();
-
-                                                                                            Log.e("User Img Sticker", "==>" + userprofile_Image_path);
-                                                                                            mEditorUserInfo = mSharedPreferencesUserInfo.edit();
-                                                                                            mEditorUserInfo.putString(CommonConfig.USER_IMAGE_PATH, userprofile_Image_path);
-                                                                                            mEditorUserInfo.commit();
-                                                                                            startDrawerMainActivity();
-                                                                                        }
-                                                                                    }
-                                                                                });
-                                                                            }
-                                                                        }
-                                                                    });
-                                                                } else {
-                                                                    mProgressDialog.dismiss();
-                                                                    startDrawerMainActivity();
-                                                                }
-                                                            }
-                                                        }
-
-                                                    } else {
-                                                        mProgressDialog.dismiss();
-                                                    }
-                                                }
-                                            });
-                                        }
-                                    }
-                                });
-                            }
-                        });
                     } else { //TODO When user choose sticker case
                         mProgressDialog.show();
                         Log.e("User Img Sticker", "==>" + userprofile_Image_path);
 
+                        /*mProgressDialog.dismiss();
+
+                        Log.e("User Img Sticker", "==>" + userprofile_Image_path);
+                        mEditorUserInfo = mSharedPreferencesUserInfo.edit();
+                        mEditorUserInfo.putString(CommonConfig.USER_IMAGE_PATH, userprofile_Image_path);
+                        mEditorUserInfo.commit();
+                        startDrawerMainActivity();*/
                         if (userprofile_Image_path != null && !userprofile_Image_path.isEmpty()) {
-                            ParseQuery<ParseUser> userQuery = ParseUser.getQuery();
-                            userQuery.getInBackground(mstrUserId, new GetCallback<ParseUser>() {
-                                @Override
-                                public void done(ParseUser parseUser, ParseException e) {
-                                    if (e == null) {
-                                        parseUser.put("userImgPath", userprofile_Image_path);
-
-                                        parseUser.saveInBackground(new SaveCallback() {
-                                            @Override
-                                            public void done(ParseException e) {
-                                                if (e == null) {
-                                                    mProgressDialog.dismiss();
-
-                                                    Log.e("User Img Sticker", "==>" + userprofile_Image_path);
-                                                    mEditorUserInfo = mSharedPreferencesUserInfo.edit();
-                                                    mEditorUserInfo.putString(CommonConfig.USER_IMAGE_PATH, userprofile_Image_path);
-                                                    mEditorUserInfo.commit();
-                                                    startDrawerMainActivity();
-                                                }
-                                            }
-                                        });
-                                    }
-                                }
-                            });
+                            //TODO UPDATE PROFILE IMG PATH
                         } else {
                             mProgressDialog.dismiss();
                             startDrawerMainActivity();
@@ -544,6 +458,7 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
 
             if(arg0 == img_camera || arg0 == profileImg){
 
+                //TODO Material Dialog
                 /*if (strLang.equals(Utils.ENG_LANG)) {
                     new MaterialDialog.Builder(ProfileEditActivity.this)
                             .title(R.string.choose_photo_eng)
@@ -712,6 +627,11 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
                         Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    @Override
+    public void onImagesChosen(ChosenImages images) {
+
     }
 
 

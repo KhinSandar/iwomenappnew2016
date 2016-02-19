@@ -33,9 +33,6 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.parse.FindCallback;
-import com.parse.ParseException;
-import com.parse.ParseQuery;
 import com.pnikosis.materialishprogress.ProgressWheel;
 import com.smk.clientapi.NetworkEngine;
 import com.smk.iwomen.BaseActionBarActivity;
@@ -47,7 +44,6 @@ import org.json.JSONObject;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.data.FeedItem;
 import org.undp_iwomen.iwomen.database.TableAndColumnsName;
-import org.undp_iwomen.iwomen.model.parse.Post;
 import org.undp_iwomen.iwomen.model.retrofit_api.UserPostAPI;
 import org.undp_iwomen.iwomen.provider.IwomenProviderData;
 import org.undp_iwomen.iwomen.ui.activity.MainPhotoPostActivity;
@@ -920,8 +916,9 @@ public class TLGUserStoriesRecentFragment extends Fragment implements View.OnCli
 
 
                         mProgressDialog.show();
+                        //TODO Get post and save in db very fist time (initial time)
 
-                        ParseQuery<Post> query = Post.getQuery();
+                        /*ParseQuery<Post> query = Post.getQuery();
 
 
                         query.whereGreaterThan("postUploadedDate", date);
@@ -971,7 +968,7 @@ public class TLGUserStoriesRecentFragment extends Fragment implements View.OnCli
                                         cv.put(TableAndColumnsName.UserPostUtil.POST_CONTENT_TYPES, post.getString("contentType"));//
 
 
-                                        /*if (!post.isN("userId")) {
+                                        *//*if (!post.isN("userId")) {
 
                                             JSONObject userjsonObject = post.getJSONObject("userId");
                                             if (!userjsonObject.isNull("objectId")) {
@@ -985,13 +982,13 @@ public class TLGUserStoriesRecentFragment extends Fragment implements View.OnCli
                                         } else {
                                             cv.put(TableAndColumnsName.PostUtil.POST_CONTENT_USER_ID, "");
 
-                                        }*/
+                                        }*//*
 
-                                        /*if (post.get("image") != null) {
+                                        *//*if (post.get("image") != null) {
                                             cv.put(TableAndColumnsName.UserPostUtil.POST_CONTENT_USER_ID, post.getParseObject("userId").getObjectId());
                                         } else {
                                             cv.put(TableAndColumnsName.UserPostUtil.POST_CONTENT_USER_ID, "");
-                                        }*/
+                                        }*//*
 
                                         cv.put(TableAndColumnsName.UserPostUtil.POST_CONTENT_USER_NAME, post.getString("postUploadName"));
 
@@ -1053,7 +1050,7 @@ public class TLGUserStoriesRecentFragment extends Fragment implements View.OnCli
                                 }
                             }
                         });
-
+*/
 
                     }
                 }
@@ -1063,7 +1060,8 @@ public class TLGUserStoriesRecentFragment extends Fragment implements View.OnCli
                 mProgressDialog.show();
 
 
-                ParseQuery<Post> query = Post.getQuery();
+                //TODO GET POST Aad Save in Local
+                /*ParseQuery<Post> query = Post.getQuery();
                 //query.orderByDescending("createdAt"); //Latest date is first
                 //query.orderByAscending("postUploadedDate");//Very first row Date is first
                 //query.orderByDescending("postUploadedDate");
@@ -1190,7 +1188,7 @@ public class TLGUserStoriesRecentFragment extends Fragment implements View.OnCli
                             Log.e("Post Get Err", "===>" + e.toString());
                         }
                     }
-                });
+                });*/
             }
 
         } else {

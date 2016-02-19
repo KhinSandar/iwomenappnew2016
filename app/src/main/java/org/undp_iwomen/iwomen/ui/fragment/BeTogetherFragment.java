@@ -48,7 +48,7 @@ public class BeTogetherFragment extends Fragment {
         mContext = getActivity().getApplicationContext();
         imgMap = (ResizableImageView)rootView.findViewById(R.id.betogether_map_img);
         sharePrefLanguageUtil = getActivity().getSharedPreferences(Utils.PREF_SETTING, Context.MODE_PRIVATE);
-        mstr_lang = sharePrefLanguageUtil.getString(com.parse.utils.Utils.PREF_SETTING_LANG, com.parse.utils.Utils.ENG_LANG);
+        mstr_lang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
 
         imgMap.setOnClickListener(new View.OnClickListener() {
             @Override

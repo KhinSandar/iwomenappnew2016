@@ -53,5 +53,9 @@
         <attr name="matProg_linearProgress" format="boolean" />
     </declare-styleable>
 
-
+    <declare-styleable name="EventsRecycler">
+        <attr name="android:choiceMode" />
+        <attr name="autoSelectView" format="boolean" />
+        <attr name="sharedElementTransitions" format="boolean" />
+    </declare-styleable>
 </resources>

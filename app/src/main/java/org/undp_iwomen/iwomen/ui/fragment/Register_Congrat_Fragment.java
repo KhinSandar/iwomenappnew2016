@@ -69,7 +69,7 @@ public class Register_Congrat_Fragment extends Fragment implements View.OnClickL
         mContext = getActivity().getApplicationContext();
 
         sharePrefLanguageUtil = getActivity().getSharedPreferences(Utils.PREF_SETTING, Context.MODE_PRIVATE);
-        mstr_lang = sharePrefLanguageUtil.getString(com.parse.utils.Utils.PREF_SETTING_LANG, com.parse.utils.Utils.ENG_LANG);
+        mstr_lang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
 
         gifImageView = (GifImageView) rootView.findViewById(R.id.register_gifImageView);
 

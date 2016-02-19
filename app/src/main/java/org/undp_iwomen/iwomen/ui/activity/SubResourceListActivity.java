@@ -86,7 +86,7 @@ public class SubResourceListActivity extends BaseActionBarActivity {
 
         lv = (ListView) findViewById(R.id.sub_resource_list);
 
-        mstr_lang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, com.parse.utils.Utils.ENG_LANG);
+        mstr_lang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
 
 
         SubResourceItems = (ArrayList<SubResourceItem>) storageUtil.ReadArrayListFromSD("SubResourceArrayList" + mResourceId);

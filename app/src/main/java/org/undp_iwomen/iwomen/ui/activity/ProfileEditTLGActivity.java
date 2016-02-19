@@ -15,26 +15,20 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.Spinner;
 
-import com.parse.GetCallback;
-import com.parse.ParseException;
-import com.parse.ParseQuery;
-import com.parse.ParseUser;
-import com.parse.SaveCallback;
-import com.parse.adapter.CitySpinnerAdapter;
-import com.parse.model.CityForShow;
-import com.parse.retrofit_api.TlgProfileAPI;
+import com.smk.clientapi.NetworkEngine;
 import com.smk.iwomen.BaseActionBarActivity;
+import com.smk.model.TLGTownship;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
+import org.undp_iwomen.iwomen.data.CityForShow;
+import org.undp_iwomen.iwomen.ui.adapter.TLGTownshipSpinnerAdapter;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.utils.Connection;
 import org.undp_iwomen.iwomen.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -63,12 +57,13 @@ public class ProfileEditTLGActivity extends BaseActionBarActivity {
 
     private static boolean isTlgmember= false;
     String mFromCityName;
-    private Spinner spnFrom;
+    private Spinner spnTLG;
     String FromCityID;
+    private String tlgCityID, tlgCityName;
+
 
 
     //After imagchose
-    private ParseUser currentUser;
     //private TextView txt_edit_next;
     private Button btn_edit;
     private Button btn_cancel;
@@ -105,18 +100,18 @@ public class ProfileEditTLGActivity extends BaseActionBarActivity {
         //txt_edit_next = (TextView) findViewById(R.id.edit_profile_txt_edit_next);
         btn_edit = (Button) findViewById(R.id.edit_profile_tlg_btn_save);
         btn_cancel = (Button) findViewById(R.id.edit_profile_tlg_btn_cancel);
-        spnFrom = (Spinner) findViewById(R.id.edit_profile_tlg_spn_township);
+        spnTLG = (Spinner) findViewById(R.id.edit_profile_tlg_spn_township);
 
-        spnFrom.setEnabled(false);
+        spnTLG.setEnabled(false);
         mIamTLGCheckBox = (CheckBox)findViewById(R.id.edit_profile_tlg_checkbox);
         mIamTLGCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    spnFrom.setEnabled(true);
+                    spnTLG.setEnabled(true);
                     isTlgmember = true;
                 } else {
-                    spnFrom.setEnabled(false);
+                    spnTLG.setEnabled(false);
                     isTlgmember = false;
                 }
             }
@@ -129,7 +124,7 @@ public class ProfileEditTLGActivity extends BaseActionBarActivity {
 
 
 
-        strLang = sharePrefLanguageUtil.getString(com.parse.utils.Utils.PREF_SETTING_LANG, com.parse.utils.Utils.ENG_LANG);
+        strLang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
 
         getTLGList();
 
@@ -187,97 +182,37 @@ public class ProfileEditTLGActivity extends BaseActionBarActivity {
         if (Connection.isOnline(mContext)) {
             final ArrayList<CityForShow> cities = new ArrayList<CityForShow>();
             mProgressDialog.show();
-            TlgProfileAPI.getInstance().getService().getTlgProfileList(new Callback<String>() {
+            NetworkEngine.getInstance().getTLGTownship(new Callback<List<TLGTownship>>() {
                 @Override
-                public void success(String s, Response response) {
+                public void success(List<TLGTownship> tlgTownships, Response response) {
 
-                    try{
-                        JSONObject whole_body = new JSONObject(s);
-                        JSONArray result = whole_body.getJSONArray("results");
+                    mProgressDialog.dismiss();
 
-                        for (int i = 0; i < result.length(); i++) {
-                            JSONObject each_object = result.getJSONObject(i);
+                    final ArrayList<TLGTownship> tlgTownshipArrayList = new ArrayList<TLGTownship>();
+                    tlgTownshipArrayList.addAll(tlgTownships);
 
+                    TLGTownshipSpinnerAdapter adapter = new TLGTownshipSpinnerAdapter(ProfileEditTLGActivity.this, tlgTownshipArrayList);
+                    spnTLG.setAdapter(adapter);
 
-                            String _objectId;
-                            String _tlg_group_name;
-                            String _tlg_group_address;
-                            String _tlg_group_address_mm;
-                            String _tlg_group_lat_address;
-                            String _tlg_group_lng_address;
-                            if (each_object.isNull("objectId")) {
-                                _objectId = "null";
-                            } else {
-                                _objectId = each_object.getString("objectId");
-                            }
+                    spnTLG.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            tlgCityID = tlgTownshipArrayList.get(position).getId().toString();
+                            tlgCityName = tlgTownshipArrayList.get(position).getTlgGroupAddress();
 
-                            if (each_object.isNull("tlg_group_name")) {
-                                _tlg_group_name = "null";
-                            } else {
-                                _tlg_group_name = each_object.getString("tlg_group_name");
-                            }
-
-                            if (each_object.isNull("tlg_group_address")) {
-                                _tlg_group_address = "null";
-                            } else {
-                                _tlg_group_address = each_object.getString("tlg_group_address");
-                            }
-                            if (each_object.isNull("tlg_group_address_mm")) {
-                                _tlg_group_address_mm = "null";
-                            } else {
-                                _tlg_group_address_mm = each_object.getString("tlg_group_address_mm");
-                            }
-
-                            if (each_object.isNull("tlg_group_lat_address")) {
-                                _tlg_group_lat_address = "null";
-                            } else {
-                                _tlg_group_lat_address = each_object.getString("tlg_group_lat_address");
-                            }
-
-                            if (each_object.isNull("tlg_group_lng_address")) {
-                                _tlg_group_lng_address = "null";
-                            } else {
-                                _tlg_group_lng_address = each_object.getString("tlg_group_lng_address");
-                            }
-
-                            cities.add( new CityForShow(_objectId, _tlg_group_address, _tlg_group_address_mm));
                         }
-                        mProgressDialog.dismiss();
 
-                        CitySpinnerAdapter adapter = new CitySpinnerAdapter(ProfileEditTLGActivity.this, cities);
-                        spnFrom.setAdapter(adapter);
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
 
-                        /*
-                        ArrayAdapter<String> adapterFrom = new ArrayAdapter<String>(getActivity(), R.layout.simple_spinner_item, listName);
-                        adapterFrom.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        spnFrom.setAdapter(adapterFrom);
-                        */
-                        spnFrom.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                            @Override
-                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                FromCityID = cities.get(position).getId();
-                                mFromCityName = cities.get(position).getNameInEnglish();
+                        }
+                    });
 
-                                //TODO for query in local db
-                                //Log.e("Search From", "==" + list_id.get(position));
-                                //queryToCity(FromCityID);
-                            }
-
-                            @Override
-                            public void onNothingSelected(AdapterView<?> parent) {
-
-                            }
-                        });
-
-
-                    }catch (JSONException e){
-                        e.printStackTrace();
-                    }
                 }
 
                 @Override
                 public void failure(RetrofitError error) {
-                    mProgressDialog.dismiss();
+
                 }
             });
         }else {
@@ -303,33 +238,9 @@ public class ProfileEditTLGActivity extends BaseActionBarActivity {
                 if (Connection.isOnline(mContext)) {
 
                     mProgressDialog.show();
-
-                    ParseQuery<ParseUser> userQuery = ParseUser.getQuery();
-                    userQuery.getInBackground(mstrUserId, new GetCallback<ParseUser>() {
-                        @Override
-                        public void done(ParseUser parseUser, ParseException e) {
-                            if (e == null) {
-                                //parseUser.put("userImgPath", userprofile_Image_path);
-                                parseUser.put("isTlgTownshipExit",isTlgmember);
-
-                                if(isTlgmember){
-                                    parseUser.put("tlg_city_address",mFromCityName);
-
-                                }
-                                parseUser.saveInBackground(new SaveCallback() {
-                                    @Override
-                                    public void done(ParseException e) {
-                                        if (e == null) {
-                                            mProgressDialog.dismiss();
+                    //TODO Profile Update with TLG exit and township address
 
 
-                                            startDrawerMainActivity();
-                                        }
-                                    }
-                                });
-                            }
-                        }
-                    });
 
 
                 } else { //TODO When user choose sticker case
