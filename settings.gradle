@@ -1,4 +1,4 @@
-include ':app', ':library', ':emojiicon', ':RecordingMediaFile', ':dialogplus', ':GifImageViewlibrary', ':image-chooser-library'
+include ':app', ':library', ':emojiicon', ':RecordingMediaFile', ':dialogplus', ':GifImageViewlibrary', ':image-chooser-library', ':caldroid'
 
 include ':sKAlertMessage'
 

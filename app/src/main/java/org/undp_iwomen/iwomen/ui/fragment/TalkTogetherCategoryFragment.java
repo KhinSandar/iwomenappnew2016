@@ -21,7 +21,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.data.CategoriesDataModel;
-import org.undp_iwomen.iwomen.ui.activity.NewEventActivity;
+import org.undp_iwomen.iwomen.ui.activity.CalendarActivity;
 import org.undp_iwomen.iwomen.ui.activity.TalkTogetherMainActivity;
 import org.undp_iwomen.iwomen.ui.adapter.TalkTogetherGridViewAdapter;
 import org.undp_iwomen.iwomen.ui.widget.WrappedGridView;
@@ -183,7 +183,7 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
                 */
 
                 if ( position == 0){
-                    Intent i = new Intent(ctx, NewEventActivity.class);
+                    Intent i = new Intent(ctx, CalendarActivity.class);
                     i.putExtra("CategoryName", CategoriesModelList.get(position).category);//CategoryName
                     startActivity(i);
                 }else{

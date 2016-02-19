@@ -107,6 +107,7 @@ dependencies {
     //https://github.com/orhanobut/dialogplus
     compile project(':dialogplus')
     compile project(':GifImageViewlibrary')
+    compile project(':caldroid')
 
 
     compile 'com.mikepenz:iconics-core:2.5.4@aar'
@@ -114,4 +115,5 @@ dependencies {
 
     compile 'com.wdullaer:materialdatetimepicker:2.1.1'
     compile project(':image-chooser-library')
+    //compile 'com.roomorama:caldroid:3.0.0'
 }
