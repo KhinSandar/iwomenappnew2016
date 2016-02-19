@@ -1,6 +1,7 @@
 package org.undp_iwomen.iwomen.ui.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,9 +16,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.parse.utils.Utils;
 
+import org.json.JSONObject;
+import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.data.Sample;
 import org.undp_iwomen.iwomen.model.MyTypeFace;
@@ -40,6 +52,13 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
 
     private EditText usernameField;
     private EditText mobileNoForNrcField;
+    private LoginButton loginButton;
+    private CallbackManager callbackManager;
+    private JSONObject user;
+    private String user_fb_id, user_fb_email;
+    private SharedPreferences mSharedPreferencesUserInfo;
+    private SharedPreferences.Editor mEditorUserInfo;
+
 
 
     public static RegisterLoginFragment1 newInstance(Sample sample) {
@@ -76,6 +95,9 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
         mContext = getActivity().getApplicationContext();
         sharePrefLanguageUtil = getActivity().getSharedPreferences(org.undp_iwomen.iwomen.utils.Utils.PREF_SETTING, Context.MODE_PRIVATE);
         lang = sharePrefLanguageUtil.getString(org.undp_iwomen.iwomen.utils.Utils.PREF_SETTING_LANG, org.undp_iwomen.iwomen.utils.Utils.ENG_LANG);
+        callbackManager = CallbackManager.Factory.create();
+
+        mSharedPreferencesUserInfo = getActivity().getSharedPreferences(CommonConfig.SHARE_PREFERENCE_USER_INFO, Context.MODE_PRIVATE);
 
 
         btn_next = (Button) view.findViewById(R.id.Next);
@@ -83,11 +105,32 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
         mMobileNoForNrcTextInputLayout = (TextInputLayout) view.findViewById(R.id.register_fb_phone_number);
         usernameField = (EditText) view.findViewById(R.id.register_fb_username_input);
         mobileNoForNrcField = (EditText) view.findViewById(R.id.register_fb_phone_number_input);
+        loginButton = (LoginButton) view.findViewById(R.id.login_button);
+        loginButton.setReadPermissions("public_profile", "email", "user_friends");
+        loginButton.setFragment(this);
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                Toast.makeText(getActivity(), "Login successful", Toast.LENGTH_SHORT).show();
+                updateUI();
+            }
 
+            @Override
+            public void onCancel() {
+                Toast.makeText(getActivity(), "Login canceled", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError(FacebookException exception) {
+                Toast.makeText(getActivity(), "Login error", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         btn_next.setOnClickListener(this);
 
-        if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+
+        setEnglishFont();
+        /*if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
             setEnglishFont();
         } else if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.MM_LANG)) {
             setMyanmarFont();
@@ -96,7 +139,7 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
         } else if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.MM_LANG_DEFAULT)) {
             setMyanmarFontDefault();
         }
-
+*/
 
         return view;
     }
@@ -153,6 +196,20 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
         }
 
 
+        mEditorUserInfo = mSharedPreferencesUserInfo.edit();
+
+        mEditorUserInfo.putString(CommonConfig.USER_NAME, username);
+        mEditorUserInfo.putString(CommonConfig.USER_PH, mobileNoForNrc);
+
+        if (user_fb_email != null && user_fb_email != "") {
+            mEditorUserInfo.putString(CommonConfig.USER_EMAIL, user_fb_email);
+        }
+        if (user_fb_id != null && user_fb_id != "") {
+            mEditorUserInfo.putString(CommonConfig.USER_FBID, user_fb_id);
+        }
+        mEditorUserInfo.commit();
+
+
         RegisterPwdFragment2 registerPwdFragment2 = RegisterPwdFragment2.newInstance();
 
         Slide slideTransition = null;
@@ -197,7 +254,7 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
         // Set title bar
         ((RegisterMainActivity) getActivity()).textViewTitle.setText(R.string.register_title);
 
-        ((RegisterMainActivity) getActivity()).textViewTitle.setTypeface(MyTypeFace.get(getActivity().getApplicationContext(), MyTypeFace.NORMAL));
+        //((RegisterMainActivity) getActivity()).textViewTitle.setTypeface(MyTypeFace.get(getActivity().getApplicationContext(), MyTypeFace.NORMAL));
         /*usernameField.setHint(getResources().getString(com.parse.ui.R.string.register_name_hint));
         mobileNoForNrcField.setHint(getResources().getString(com.parse.ui.R.string.register_ph_hint));
 
@@ -234,6 +291,84 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
     public void setMyanmarFontDefault() {
         // Set title bar
         ((RegisterMainActivity) getActivity()).textViewTitle.setText(R.string.register_title);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void updateUI() {
+        boolean enableButtons = AccessToken.getCurrentAccessToken() != null;
+
+        //postStatusUpdateButton.setEnabled(enableButtons || canPresentShareDialog);
+        //postPhotoButton.setEnabled(enableButtons || canPresentShareDialogWithPhotos);
+        final AccessToken accessToken = AccessToken.getCurrentAccessToken();
+        if (accessToken != null) {
+            GraphRequest request = GraphRequest.newMeRequest(
+                    accessToken, new GraphRequest.GraphJSONObjectCallback() {
+                        @Override
+                        public void onCompleted(JSONObject me, GraphResponse response) {
+                            user = me;
+                            //updateUI();
+
+
+                            //Toast.makeText(getApplicationContext(), "ID" + user.optString("id") + "Name" + user.optString("name") + "Email " +user.optString("email"), Toast.LENGTH_LONG).show();
+
+                            if (user.optString("id") != null) {
+
+                                usernameField.setText(user.optString("name"));
+                                //emailField.setText(user.optString("email").toString());
+
+                                user_fb_email = user.optString("email").toString();
+                                user_fb_id = user.optString("id");
+
+                                //Toast.makeText(getActivity().getApplicationContext(), "Log In Successful." + user.optString("name") + user.optString("email").toString() + user.optString("id"), Toast.LENGTH_LONG).show();
+
+                                /*Uri uri =  Uri.parse(fb_path  );
+                                profile_rounded.setImageURI(uri);*/
+
+                                /*
+                                String fb_path = "https://graph.facebook.com/" + user_fb_id + "/picture";
+                                try {
+                                    register_profilePic_progressBar.setVisibility(View.VISIBLE);
+                                    Picasso.with(mContext)
+                                            .load(fb_path) //"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
+                                            .placeholder(com.parse.ui.R.drawable.camera_icon)
+                                            .error(com.parse.ui.R.drawable.camera_icon)
+                                            .into(profile_rounded, new ImageLoadedCallback(register_profilePic_progressBar) {
+                                                @Override
+                                                public void onSuccess() {
+                                                    if (this.progressBar != null) {
+                                                        this.progressBar.setVisibility(View.GONE);
+                                                    } else {
+                                                        this.progressBar.setVisibility(View.VISIBLE);
+                                                    }
+                                                }
+
+                                            });
+                                } catch (OutOfMemoryError outOfMemoryError) {
+                                    outOfMemoryError.printStackTrace();
+                                }*/
+
+
+                            } else {
+                                Toast.makeText(getActivity().getApplicationContext(), "Please Log In", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
+            Bundle parameters = new Bundle();
+            //parameters.putString(FIELDS, REQUEST_FIELDS);
+            parameters.putString("fields", "id,name,email,gender, birthday");
+
+            request.setParameters(parameters);
+            GraphRequest.executeBatchAsync(request);
+        } else {
+            Toast.makeText(getActivity().getApplicationContext(), "accessToken Null Case ", Toast.LENGTH_LONG).show();
+
+            user = null;
+        }
     }
 
 

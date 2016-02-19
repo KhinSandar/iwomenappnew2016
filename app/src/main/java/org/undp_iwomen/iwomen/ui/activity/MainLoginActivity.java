@@ -1,11 +1,16 @@
 package org.undp_iwomen.iwomen.ui.activity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
+import android.text.InputType;
+import android.text.TextUtils;
+import android.text.method.PasswordTransformationMethod;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -24,25 +30,38 @@ import com.orhanobut.dialogplus.DialogPlus;
 import com.orhanobut.dialogplus.OnClickListener;
 import com.orhanobut.dialogplus.OnItemClickListener;
 import com.orhanobut.dialogplus.ViewHolder;
+import com.smk.clientapi.NetworkEngine;
 import com.smk.iwomen.BaseActionBarActivity;
+import com.smk.model.User;
 
+import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.model.MyTypeFace;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
+import org.undp_iwomen.iwomen.utils.Connection;
 import org.undp_iwomen.iwomen.utils.StoreUtil;
 import org.undp_iwomen.iwomen.utils.Utils;
 
 import java.util.Locale;
 
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+
 
 public class MainLoginActivity extends BaseActionBarActivity implements View.OnClickListener {
 
     private RadioGroup radioGroup;
-    SharedPreferences sharePrefLanguageUtil;
+    private SharedPreferences mSharedPreferencesUserInfo;
+    private SharedPreferences.Editor mEditorUserInfo;
+    private SharedPreferences sharePrefLanguageUtil;
 
     private ImageView appLogo;
     private EditText usernameField;
     private EditText passwordField;
+    private TextInputLayout mUserNameTextInputLayout;
+    private TextInputLayout mPwdTextInputLayout;
+
     private Button parseLoginButton;
     private Button parseSignupButton;
     private CheckBox chkShowPwd;
@@ -58,10 +77,13 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_fragment);
         sharePrefLanguageUtil = getSharedPreferences(Utils.PREF_SETTING, Context.MODE_PRIVATE);
+        mSharedPreferencesUserInfo = getSharedPreferences(CommonConfig.SHARE_PREFERENCE_USER_INFO, Context.MODE_PRIVATE);
 
         appLogo = (ImageView) findViewById(R.id.app_logo);
         usernameField = (EditText) findViewById(R.id.login_username_input);
         passwordField = (EditText) findViewById(R.id.login_password_input);
+        mUserNameTextInputLayout = (TextInputLayout) findViewById(R.id.login_user_name_input_ly);
+        mPwdTextInputLayout = (TextInputLayout) findViewById(R.id.login_user_pwd_input_ly);
         chkShowPwd = (CheckBox) findViewById(R.id.login_showpwd);
 
         parseLoginButton = (Button) findViewById(R.id.parse_login_button);
@@ -70,11 +92,23 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
         txtChangLanEng = (CustomTextView) findViewById(R.id.login_change_lan_eng);
         txtChangLanMM = (CustomTextView) findViewById(R.id.login_change_lan_mm);
 
+        if (mSharedPreferencesUserInfo.getString(CommonConfig.USER_NAME, null) != null) {
+            finish();
+            startActivity(new Intent(this, DrawerMainActivity.class));
+        }
 
         ShowLangDialog();
+        ((CheckBox) findViewById(R.id.login_showpwd)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                passwordField.setInputType(!isChecked ? InputType.TYPE_TEXT_VARIATION_PASSWORD : InputType.TYPE_CLASS_TEXT);
+                passwordField.setTransformationMethod(!isChecked ? PasswordTransformationMethod.getInstance() : null);
+            }
+        });
 
         txtChangLanEng.setOnClickListener(this);
         txtChangLanMM.setOnClickListener(this);
+        parseLoginButton.setOnClickListener(this);
         parseSignupButton.setOnClickListener(this);
     }
 
@@ -82,6 +116,10 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
     public void onClick(View view) {
 
         switch (view.getId()) {
+
+            case R.id.parse_login_button:
+                postLogin();
+                break;
             case R.id.login_change_lan_eng:
                 ShowLangDialog();
                 break;
@@ -94,6 +132,100 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
                 startActivity(i);
                 //finish();
                 break;
+        }
+    }
+
+    public void postLogin() {
+
+        if (Connection.isOnline(getApplicationContext())) {
+            final String username = usernameField.getText().toString().trim();
+            final String pwd = passwordField.getText().toString().trim();
+            if (TextUtils.isEmpty(username)) {
+                mUserNameTextInputLayout.setError(getResources().getString(com.parse.ui.R.string.your_name_error));
+
+                if (lang.equals(com.parse.utils.Utils.ENG_LANG)) {
+                    com.parse.utils.Utils.doToastEng(getApplicationContext(), getResources().getString(com.parse.ui.R.string.your_name_error));
+                } else if (lang.equals(com.parse.utils.Utils.MM_LANG)) {
+
+                    com.parse.utils.Utils.doToastMM(getApplicationContext(), getResources().getString(com.parse.ui.R.string.your_name_error_mm));
+                }
+
+                return;
+            } else {
+                mUserNameTextInputLayout.setErrorEnabled(false);
+            }
+
+            if (TextUtils.isEmpty(pwd)) {
+                mPwdTextInputLayout.setError(getResources().getString(com.parse.ui.R.string.confirm_password_error));
+
+                if (lang.equals(com.parse.utils.Utils.ENG_LANG)) {
+                    //doToast(getResources().getString(com.parse.ui.R.string.confirm_password_error));
+                    Utils.doToastEng(getApplicationContext(), getResources().getString(R.string.password_error));
+                } else if (lang.equals(com.parse.utils.Utils.MM_LANG)) {
+
+                    Utils.doToastMM(getApplicationContext(), getResources().getString(R.string.password_error));
+                }
+                return;
+            } else {
+                mPwdTextInputLayout.setErrorEnabled(false);
+            }
+
+
+            final ProgressDialog dialog = new ProgressDialog(this);
+            dialog.setMessage("Loading...");
+            dialog.show();
+            NetworkEngine.getInstance().postLogin(username, pwd, new Callback<User>() {
+                @Override
+                public void success(User user, Response response) {
+                    //Log.e("<<< >>> ", "===>" + user.getEmail());
+                    dialog.dismiss();
+
+                    mEditorUserInfo = mSharedPreferencesUserInfo.edit();
+
+                    mEditorUserInfo.putString(CommonConfig.USER_EMAIL, user.getEmail());
+                    mEditorUserInfo.putString(CommonConfig.USER_NAME, user.getUsername());
+                    mEditorUserInfo.putString(CommonConfig.USER_OBJ_ID, user.getId());
+
+                    /*Role role;
+                    List<Role> roleArrayList;
+                    roleArrayList = new ArrayList<Role>();
+                    roleArrayList = user.getRoles();
+                    Log.e("<<<< Login Name >>> ", "==>" + roleArrayList.get(0).getName());*/
+
+                    mEditorUserInfo.putString(CommonConfig.USER_PH, user.getPhone());
+                    mEditorUserInfo.putString(CommonConfig.USER_ROLE,user.getRole() );
+
+                    mEditorUserInfo.commit();
+                    Intent i = new Intent(MainLoginActivity.this, DrawerMainActivity.class);//DrawerMainActivity
+                    startActivity(i);
+                    finish();
+
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    //Log.e("<<< Login Err >>> ", "===>" + error.toString());
+                    if (lang.equals(com.parse.utils.Utils.ENG_LANG)) {
+                        //doToast(getResources().getString(com.parse.ui.R.string.confirm_password_error));
+                        Utils.doToastEng(getApplicationContext(), error.toString());
+                    } else if (lang.equals(com.parse.utils.Utils.MM_LANG)) {
+
+                        Utils.doToastMM(getApplicationContext(), error.toString());
+                    }
+
+                    dialog.dismiss();
+
+                }
+            });
+
+        } else {
+
+            if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+                org.undp_iwomen.iwomen.utils.Utils.doToastEng(getApplicationContext(), getResources().getString(R.string.open_internet_warning_eng));
+            } else {
+
+                org.undp_iwomen.iwomen.utils.Utils.doToastMM(getApplicationContext(), getResources().getString(R.string.open_internet_warning_mm));
+            }
         }
     }
 
@@ -139,7 +271,6 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
                     case R.id.dialog_english_language:
 
                         StoreUtil.getInstance().saveTo("fonts", "english");
-
                         editor.putString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
                         editor.commit();
 

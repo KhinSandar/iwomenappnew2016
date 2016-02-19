@@ -15,6 +15,20 @@ public class CommonConfig {
     public static final String USER_FBID_INCLUDE = "FbId_Include";
     public static final String USER_FBID = "FbId";
 
+
+    public static final String USER_PWD = "password";
+    public static final String USER_CON_PWD = "confirmpwd";
+    public static final String USER_STATE = "state";
+    public static final String USER_COUNTRY = "country";
+    public static final String USER_TLG_ID = "tlg_id";
+    public static final String USER_TLG_NAME = "tlg_name";
+
+
+    public static final String USER_UPLOAD_IMG_NAME = "img_name";
+
+    public static final String USER_ROLE = "user_role";
+
+
     public static final String USER_IMAGE_PATH = "ImagePath";
 
 
@@ -57,6 +71,9 @@ public class CommonConfig {
         int value = 140;
         return value;
     }
+
+    //http://api.shopyface.com/api-v1/auth/photo
+    public static final String CREATE_USER_PHOTO_URL ="/api/v1/usersUpload";
 
 
 }

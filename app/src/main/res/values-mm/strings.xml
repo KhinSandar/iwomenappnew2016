@@ -262,5 +262,15 @@
     <string name="register_fb_login_greet1">သင့္၏ ေဖ့ဘုုတ္စ္ အေကာင့္ၿဖင့္ မွတ္ပံုုတင္ႏိုုင္သည္</string>
     <string name="register_fb_login_greet2">(သိုု ့) အမည္ႏွင္ ့ ဖုုန္းနံပါတ္ရိုုက္ထည့္ပါ။</string>
 
+    <string name="register_title">အမည္</string>
+
+
+    <string name="register_ph_hint_password_input_hint">လွ်ိဳ ့၀ွက္ စာလံုုး</string>
+    <string name="register_title_profile">ကိုုယ္ေရး အခ်က္ အလက္</string>
+
+    <string name="register_township_title">TLG/SRG ၿမိဳ ့နယ္ေရြးမည္</string>
+
+
+
 
 </resources>

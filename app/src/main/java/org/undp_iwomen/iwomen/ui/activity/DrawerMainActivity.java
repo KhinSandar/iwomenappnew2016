@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -28,8 +27,6 @@ import android.widget.TextView;
 import com.facebook.FacebookSdk;
 import com.google.gson.Gson;
 import com.makeramen.RoundedImageView;
-import com.parse.ParseUser;
-import com.parse.ui.ParseLoginBuilder;
 import com.parse.utils.Utils;
 import com.smk.application.StoreUtil;
 import com.smk.clientapi.NetworkEngine;
@@ -38,14 +35,12 @@ import com.smk.iwomen.CompetitionNewGameActivity;
 import com.smk.iwomen.CompetitionWinnerGroupActivity;
 import com.smk.model.CompetitionQuestion;
 import com.smk.model.Review;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
-import org.undp_iwomen.iwomen.model.MyTypeFace;
 import org.undp_iwomen.iwomen.model.retrofit_api.UserPostAPI;
 import org.undp_iwomen.iwomen.ui.adapter.DrawerListViewAdapter;
 import org.undp_iwomen.iwomen.ui.fragment.BeTogetherFragment;
@@ -64,7 +59,6 @@ import org.undp_iwomen.iwomen.utils.SharePrefUtils;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Locale;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -91,7 +85,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
     private CustomTextView txt_sing_out;
 
     private static final int LOGIN_REQUEST = 0;
-    private ParseUser currentUser;
+
 
     private SharedPreferences mSharedPreferencesUserInfo;
     private SharedPreferences.Editor mEditorUserInfo;
@@ -122,7 +116,6 @@ public class DrawerMainActivity extends BaseActionBarActivity {
     protected void onStart() {
         super.onStart();
 
-        currentUser = ParseUser.getCurrentUser();
         /*if (currentUser != null) {
             showProfileLoggedIn();
         } else {
@@ -135,19 +128,17 @@ public class DrawerMainActivity extends BaseActionBarActivity {
         super.onCreate(savedInstanceState);
 
         // For checking rating & reviews control;
-        UsageCount = StoreUtil.getInstance().selectFrom("usage"+versionCode);
-        if(UsageCount != null && UsageCount > 0){
-            UsageCount = StoreUtil.getInstance().saveTo("usage"+versionCode, UsageCount + 1);
-            Log.i("Usage Count:","Usage : "+ UsageCount);
-        }
-        else
-            UsageCount = StoreUtil.getInstance().saveTo("usage"+versionCode, 1);
+        UsageCount = StoreUtil.getInstance().selectFrom("usage" + versionCode);
+        if (UsageCount != null && UsageCount > 0) {
+            UsageCount = StoreUtil.getInstance().saveTo("usage" + versionCode, UsageCount + 1);
+            Log.i("Usage Count:", "Usage : " + UsageCount);
+        } else
+            UsageCount = StoreUtil.getInstance().saveTo("usage" + versionCode, 1);
 
 
         FacebookSdk.sdkInitialize(getApplicationContext());
         // Initialize the SDK before executing any other operations,
         // especially, if you're using Facebook UI elements.
-
 
 
         org.undp_iwomen.iwomen.utils.Utils.onActivityCreateSetTheme(this);
@@ -156,7 +147,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
         //Back from LoginActivity Control
         if (getIntent().getBooleanExtra("Exit me", false)) {
             finish();
-            return; // add this to prevent from doing unnecessary stuffs
+            return;// add this to prevent from doing unnecessary stuffs
         }
 
         //getFacebookHashKey();
@@ -166,10 +157,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
         setSupportActionBar(toolbar);
         //toolbar.setLogo(R.drawable.ic_action_myanmadeals_app_icon);
         textViewTitle = (CustomTextView) toolbar.findViewById(R.id.title_action2);
-        //textViewTitle.setTypeface(MyTypeFace.get(getApplicationContext(), MyTypeFace.ZAWGYI));
-        //textViewTitle.setText("Myanma\u0020Deals");//"MYANMARDEALS"
         textViewTitle.setText(R.string.app_name);
-        //textViewTitle.setTypeface(faceBold);
 
 
         drawerLayoutt = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -179,18 +167,14 @@ public class DrawerMainActivity extends BaseActionBarActivity {
         txt_user_name = (TextView) findViewById(R.id.txt_user_name);
         txt_sing_out = (CustomTextView) findViewById(R.id.menu_sing_out);
         menu_user_post_count = (TextView) findViewById(R.id.menu_user_post_count);
-
         ly_menu_profile_area = (LinearLayout) findViewById(R.id.menu_profile_area_ly);
-
         drawer_profilePic_rounded = (RoundedImageView) findViewById(R.id.drawer_profilePic_rounded);
         drawer_progressBar_profile_item = (ProgressBar) findViewById(R.id.drawer_progressBar_profile_item);
-
         layout_play_game = (LinearLayout) findViewById(R.id.ly2);
-        btn_play_game = (AnimateCustomTextView)findViewById(R.id.drawer_btn_take_challenge);
+        btn_play_game = (AnimateCustomTextView) findViewById(R.id.drawer_btn_take_challenge);
+
         // set a custom shadow that overlays the main content when the drawer opens
         drawerLayoutt.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
-
-
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayoutt, toolbar, R.string.app_name, R.string.app_name);
         drawerLayoutt.setDrawerListener(actionBarDrawerToggle);
 
@@ -201,398 +185,61 @@ public class DrawerMainActivity extends BaseActionBarActivity {
 
         // set up the drawer's list view with items and click listener
         mSharedPreferencesUserInfo = getSharedPreferences(CommonConfig.SHARE_PREFERENCE_USER_INFO, Context.MODE_PRIVATE);
-
         sharePrefLanguageUtil = getSharedPreferences(Utils.PREF_SETTING, Context.MODE_PRIVATE);
 
         sessionManager = new SharePrefUtils(getApplicationContext());
-       /* if (user_obj_id == null) {
 
-            if (savedInstanceState == null) {
-                selectItem(0);
-            }
-        } else {
-            // User clicked to log in.
-            ParseLoginBuilder loginBuilder = new ParseLoginBuilder(
-                    DrawerMainActivity.this);
-            startActivityForResult(loginBuilder.build(), LOGIN_REQUEST);
+        user_name= mSharedPreferencesUserInfo.getString(CommonConfig.USER_NAME, null);
+        user_obj_id = mSharedPreferencesUserInfo.getString(CommonConfig.USER_OBJ_ID, null);
 
-        }*/
-        Bundle bundle = getIntent().getExtras();
 
-        currentUser = ParseUser.getCurrentUser();
+
+        txt_user_name.setText(user_name);
+
+
 
         //TODO WHEN DRAWER ACTIVITY START CALLING for check
         LoadDrawerCustomData();
 
-        if (currentUser != null) {
-            // User clicked to log out.
-            //showProfileLoggedOut();
-            if (savedInstanceState == null) {
+        if (savedInstanceState == null) {
+            selectItem(0);
+            drawerLayoutt.openDrawer(mDrawerLinearLayout);
+        }
 
 
-                if (!mSharedPreferencesUserInfo.getBoolean(CommonConfig.IS_LOGIN, false)) {
+        //getUserPostCount();
+        getCompetitionQuestion();
 
 
-                    String objectId = bundle.getString(CommonConfig.USER_OBJ_ID);
-                    String userName = bundle.getString(CommonConfig.USER_NAME);
-                    String userPH = bundle.getString(CommonConfig.USER_PH);
-                    String lang = bundle.getString(Utils.PREF_SETTING_LANG);
-                    Boolean isFbInclude = bundle.getBoolean(CommonConfig.USER_FBID_INCLUDE);
+        ly_menu_profile_area.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //org.undp_iwomen.iwomen.utils.Utils.doToastEng(getApplicationContext(), "On CLick" + user_obj_id);
 
+                Intent intent = new Intent(getApplicationContext(), ProfileEditActivity.class);
 
-                    if (objectId.length() != 0) {
-                        mEditorUserInfo = mSharedPreferencesUserInfo.edit();
-                        mEditorUserInfo.putBoolean(CommonConfig.IS_LOGIN, true);
-                        mEditorUserInfo.putString(CommonConfig.USER_OBJ_ID, objectId);
-                        mEditorUserInfo.putString(CommonConfig.USER_NAME, userName);
-                        if (isFbInclude) {
-                            mstrUserfbId = bundle.getString(CommonConfig.USER_FBID);
-                            mEditorUserInfo.putString(CommonConfig.USER_FBID, mstrUserfbId);
-                        }
-
-                        SharedPreferences.Editor editor = sharePrefLanguageUtil.edit();
-                        editor.putString(Utils.PREF_SETTING_LANG, lang);
-
-                        /*if(userNrc != null) {
-                            mEditorUserInfo.putString(CommonConfig.USER_NRC, userNrc);
-                        }else if(passport != null){
-                            mEditorUserInfo.putString(CommonConfig.USER_NRC, passport); // For rare register with Passport case
-                        }*/
-                        mEditorUserInfo.putString(CommonConfig.USER_PH, userPH);
-
-                        mEditorUserInfo.commit();
-
-
-                    }
-
-                    user_name = mSharedPreferencesUserInfo.getString(CommonConfig.USER_NAME, null);
-                    user_obj_id = mSharedPreferencesUserInfo.getString(CommonConfig.USER_OBJ_ID, null);
-
-
-                    //TODO 1
-                    getCompetitionQuestion();
-
-
-                    txt_user_name.setText(user_name);
-
-                    if (mstrUserfbId != null) {
-
-                        userProfilePicture.setProfileId(mstrUserfbId);
-                    }
-
-                    //TODO 1st priority if update image case
-                    if (currentUser.get("userImgPath") != null && currentUser.get("userImgPath") != "null") {
-                        userprofile_Image_path = currentUser.get("userImgPath").toString();
-
-                        if (userprofile_Image_path != null) {
-
-                            mEditorUserInfo = mSharedPreferencesUserInfo.edit();
-                            mEditorUserInfo.putString(CommonConfig.USER_IMAGE_PATH, userprofile_Image_path);
-
-                            mEditorUserInfo.commit();
-                            drawer_progressBar_profile_item.setVisibility(View.VISIBLE);
-                            try {
-                                drawer_profilePic_rounded.setVisibility(View.VISIBLE);
-                                userProfilePicture.setVisibility(View.GONE);
-                                Picasso.with(getApplicationContext())
-                                        .load(userprofile_Image_path) //"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
-                                        .placeholder(R.drawable.blank_profile)
-                                        .error(R.drawable.blank_profile)
-                                        .into(drawer_profilePic_rounded, new ImageLoadedCallback(drawer_progressBar_profile_item) {
-                                            @Override
-                                            public void onSuccess() {
-                                                if (this.progressBar != null) {
-                                                    this.progressBar.setVisibility(View.GONE);
-                                                } else {
-                                                    this.progressBar.setVisibility(View.VISIBLE);
-                                                }
-                                            }
-
-                                        });
-                            } catch (OutOfMemoryError outOfMemoryError) {
-                                outOfMemoryError.printStackTrace();
-                            }
-                        } else {
-                            drawer_progressBar_profile_item.setVisibility(View.GONE);
-                            drawer_profilePic_rounded.setVisibility(View.GONE);
-                            userProfilePicture.setVisibility(View.VISIBLE);
-
-                            //TODO IF user no upload imagess and Fb login
-                            if (mstrUserfbId != null) {
-
-
-                                userProfilePicture.setProfileId(mstrUserfbId);
-                                drawer_progressBar_profile_item.setVisibility(View.GONE);
-
-                            } else {
-                                drawer_progressBar_profile_item.setVisibility(View.GONE);
-                                drawer_profilePic_rounded.setVisibility(View.VISIBLE);
-                                userProfilePicture.setVisibility(View.GONE);
-                            }
-
-                        }
-                    } else {//TODO very first time upload image case
-                        if (currentUser.get("user_profile_img") != null && currentUser.get("user_profile_img") != "null") {
-
-
-                            Uri uri = Uri.parse(currentUser.getParseFile("user_profile_img").getUrl());
-                            userprofile_Image_path = currentUser.getParseFile("user_profile_img").getUrl();
-                            //userProfilePicture.setD
-
-
-                            if (userprofile_Image_path != null) {
-
-                                mEditorUserInfo = mSharedPreferencesUserInfo.edit();
-                                mEditorUserInfo.putString(CommonConfig.USER_IMAGE_PATH, userprofile_Image_path);
-
-                                mEditorUserInfo.commit();
-                                drawer_progressBar_profile_item.setVisibility(View.VISIBLE);
-                                try {
-                                    drawer_profilePic_rounded.setVisibility(View.VISIBLE);
-                                    userProfilePicture.setVisibility(View.GONE);
-                                    Picasso.with(getApplicationContext())
-                                            .load(userprofile_Image_path) //"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
-                                            .placeholder(R.drawable.blank_profile)
-                                            .error(R.drawable.blank_profile)
-                                            .into(drawer_profilePic_rounded, new ImageLoadedCallback(drawer_progressBar_profile_item) {
-                                                @Override
-                                                public void onSuccess() {
-                                                    if (this.progressBar != null) {
-                                                        this.progressBar.setVisibility(View.GONE);
-                                                    } else {
-                                                        this.progressBar.setVisibility(View.VISIBLE);
-                                                    }
-                                                }
-
-                                            });
-                                } catch (OutOfMemoryError outOfMemoryError) {
-                                    outOfMemoryError.printStackTrace();
-                                }
-                            } else {
-                                drawer_progressBar_profile_item.setVisibility(View.GONE);
-                                drawer_profilePic_rounded.setVisibility(View.GONE);
-                                userProfilePicture.setVisibility(View.VISIBLE);
-
-                                //TODO IF user no upload imagess and Fb login
-                                if (mstrUserfbId != null) {
-
-
-                                    userProfilePicture.setProfileId(mstrUserfbId);
-                                    drawer_progressBar_profile_item.setVisibility(View.GONE);
-
-                                } else {
-                                    drawer_progressBar_profile_item.setVisibility(View.GONE);
-                                    drawer_profilePic_rounded.setVisibility(View.VISIBLE);
-                                    userProfilePicture.setVisibility(View.GONE);
-                                }
-
-                            }
-
-                        } else {//TODO very first time not upload image case , But Login with Fb case
-                            drawer_progressBar_profile_item.setVisibility(View.GONE);
-                            drawer_profilePic_rounded.setVisibility(View.GONE);
-                            userProfilePicture.setVisibility(View.VISIBLE);
-
-                            //TODO IF user no upload imagess and Fb login
-                            if (mstrUserfbId != null) {
-
-
-                                userProfilePicture.setProfileId(mstrUserfbId);
-                                drawer_progressBar_profile_item.setVisibility(View.GONE);
-
-                            } else {
-                                drawer_progressBar_profile_item.setVisibility(View.GONE);
-                                drawer_profilePic_rounded.setVisibility(View.VISIBLE);
-                                userProfilePicture.setVisibility(View.GONE);
-                            }
-
-                        }
-                    }
-
-                    Log.e("1st Login==== > user Info parse", objectId + "Parse :" + userName + ":mstrUserfbId >>" + mstrUserfbId);
-
-                    //TODO FONT DRAWERMAIN
-                    mstr_lang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
-
-
-
-                    getUserPostCount();
-
-                    LoadDrawerCustomData();
-                    showRefreshInfoDialog();
-
-
-                } else {
-                    user_name = mSharedPreferencesUserInfo.getString(CommonConfig.USER_NAME, null);
-                    user_obj_id = mSharedPreferencesUserInfo.getString(CommonConfig.USER_OBJ_ID, null);
-                    //Toast.makeText(this, "2ndTime(PaymentActivity) You are login as \n " + mSharedPreferencesUserInfo.getString(CommonConfig.USER_NAME, null) + "\n" + sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG), Toast.LENGTH_LONG).show();
-
-                    //TODO 2
-                    getCompetitionQuestion();
-
-                    mstrUserfbId = mSharedPreferencesUserInfo.getString(CommonConfig.USER_FBID, null);
-                    //2nd Login==== > user Info parse﹕ GuzTg3T1aWParse :Su:mstrUserfbId >>null
-                    Log.e("2nd Login==== > user Info parse", user_obj_id + "Parse :" + user_name + ":mstrUserfbId >>" + mstrUserfbId);
-
-
-                    //TODO FONT DRAWERMAIN
-                    mstr_lang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
-                    getUserPostCount();
-
-                    //LoadDrawerCustomData();
-
-
-                    userprofile_Image_path = mSharedPreferencesUserInfo.getString(CommonConfig.USER_IMAGE_PATH, null);
-
-
-                    if (userprofile_Image_path != null) {
-
-                        try {
-                            drawer_profilePic_rounded.setVisibility(View.VISIBLE);
-                            userProfilePicture.setVisibility(View.GONE);
-                            Picasso.with(getApplicationContext())
-                                    .load(userprofile_Image_path) //"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
-                                    .placeholder(R.drawable.blank_profile)
-                                    .error(R.drawable.blank_profile)
-                                    .into(drawer_profilePic_rounded, new ImageLoadedCallback(drawer_progressBar_profile_item) {
-                                        @Override
-                                        public void onSuccess() {
-                                            if (this.progressBar != null) {
-                                                this.progressBar.setVisibility(View.GONE);
-                                            } else {
-                                                this.progressBar.setVisibility(View.VISIBLE);
-                                            }
-                                        }
-
-                                    });
-                        } catch (OutOfMemoryError outOfMemoryError) {
-                            outOfMemoryError.printStackTrace();
-                        }
-                    } else {
-                        drawer_progressBar_profile_item.setVisibility(View.GONE);
-                        drawer_profilePic_rounded.setVisibility(View.GONE);
-                        userProfilePicture.setVisibility(View.VISIBLE);
-                        //TODO IF user no upload imagess and Fb login
-                        if (mstrUserfbId != null) {
-
-
-                            userProfilePicture.setProfileId(mstrUserfbId);
-                            drawer_progressBar_profile_item.setVisibility(View.GONE);
-
-                        } else {
-                            drawer_progressBar_profile_item.setVisibility(View.GONE);
-                            drawer_profilePic_rounded.setVisibility(View.VISIBLE);
-                            userProfilePicture.setVisibility(View.GONE);
-                        }
-                    }
-
-
-                    txt_user_name.setText(user_name);
-
-                }
-
-
-                if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
-
-                    txt_sing_out.setText("Sign Out");
-                    txt_sing_out.setTypeface(MyTypeFace.get(getApplicationContext(), MyTypeFace.NORMAL));
-
-                    String languageToLoad  = "eng"; // your language
-                    Locale locale = new Locale(languageToLoad);
-                    Locale.setDefault(locale);
-                    Configuration config = new Configuration();
-                    config.locale = locale;
-                    getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
-
-                    SharedPreferences.Editor editor = getSharedPreferences("mLanguage", MODE_PRIVATE).edit();
-                    editor.putString("lang", "eng");
-                    editor.commit();
-
-                } else if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.MM_LANG)) {
-                    txt_sing_out.setText("ထ\u103Cက္ရန္");
-                    txt_sing_out.setTypeface(MyTypeFace.get(getApplicationContext(), MyTypeFace.ZAWGYI));
-                    String languageToLoad  = "mm"; // your language
-                    Locale locale = new Locale(languageToLoad);
-                    Locale.setDefault(locale);
-                    Configuration config = new Configuration();
-                    config.locale = locale;
-                    getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
-
-                    SharedPreferences.Editor editor = getSharedPreferences("mLanguage", MODE_PRIVATE).edit();
-                    editor.putString("lang", "mm");
-                    editor.commit();
-                } else if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.MM_LANG_UNI)) {
-                    txt_sing_out.setText("ထ\u103Cက္ရန္");
-                    //txt_sing_out.setTypeface(MyTypeFace.get(getApplicationContext(), MyTypeFace.ZAWGYI));
-                    String languageToLoad  = "mm"; // your language
-                    Locale locale = new Locale(languageToLoad);
-                    Locale.setDefault(locale);
-                    Configuration config = new Configuration();
-                    config.locale = locale;
-                    getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
-
-                    SharedPreferences.Editor editor = getSharedPreferences("mLanguage", MODE_PRIVATE).edit();
-                    editor.putString("lang", "mm");
-                    editor.commit();
-                } else if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.MM_LANG_DEFAULT)) {
-                    txt_sing_out.setText("ထ\u103Cက္ရန္");
-                    //txt_sing_out.setTypeface(MyTypeFace.get(getApplicationContext(), MyTypeFace.ZAWGYI));
-                    String languageToLoad  = "mm"; // your language
-                    Locale locale = new Locale(languageToLoad);
-                    Locale.setDefault(locale);
-                    Configuration config = new Configuration();
-                    config.locale = locale;
-                    getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
-
-                    SharedPreferences.Editor editor = getSharedPreferences("mLanguage", MODE_PRIVATE).edit();
-                    editor.putString("lang", "mm");
-                    editor.commit();
-                }
-
-
-                selectItem(0);
-                drawerLayoutt.openDrawer(mDrawerLinearLayout);
+                intent.putExtra("UserId", user_obj_id);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
 
             }
-
-            ly_menu_profile_area.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    //org.undp_iwomen.iwomen.utils.Utils.doToastEng(getApplicationContext(), "On CLick" + user_obj_id);
-
-                    Intent intent = new Intent(getApplicationContext(), ProfileEditActivity.class);
-
-                    intent.putExtra("UserId", user_obj_id);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
-
-                }
-            });
+        });
 
 
-        } else {
 
-            // User clicked to log in.
-            ParseLoginBuilder loginBuilder = new ParseLoginBuilder(
-                    DrawerMainActivity.this);
-            startActivityForResult(loginBuilder.build(), LOGIN_REQUEST);
-
-
-        }
 
         txt_sing_out.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (currentUser != null) {
-                    ParseUser.logOut();
-                    sessionManager.ClearLogOut();
-                    // User clicked to log in.
-                    ParseLoginBuilder loginBuilder = new ParseLoginBuilder(
-                            DrawerMainActivity.this);
-                    startActivityForResult(loginBuilder.build(), LOGIN_REQUEST);
 
-                }
+                sessionManager.ClearLogOut();
+                Intent intent = new Intent(getApplicationContext(), MainLoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+
             }
         });
 
@@ -879,16 +526,16 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                 break;
             case 5:
 
-                if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)){
+                if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
 
                     Intent intent2 = new Intent(this, AboutUsWebActivity.class);
-                    intent2.putExtra("ActivityName","DrawerMainActivity");
-                    intent2.putExtra("URL","file:///android_asset/tos/About-Us-Eng.html");
+                    intent2.putExtra("ActivityName", "DrawerMainActivity");
+                    intent2.putExtra("URL", "file:///android_asset/tos/About-Us-Eng.html");
                     startActivity(intent2);
-                }else{
+                } else {
                     Intent intent2 = new Intent(this, AboutUsWebActivity.class);
-                    intent2.putExtra("ActivityName","DrawerMainActivity");
-                    intent2.putExtra("URL","file:///android_asset/tos/About-Us-MM.html");
+                    intent2.putExtra("ActivityName", "DrawerMainActivity");
+                    intent2.putExtra("URL", "file:///android_asset/tos/About-Us-MM.html");
                     startActivity(intent2);
                 }
 
@@ -1026,77 +673,88 @@ public class DrawerMainActivity extends BaseActionBarActivity {
 
         }
     }
-    private void getCompetitionQuestion(){
-        Log.e("Drawing Game calling===>","===>");
-        final ProgressDialog dialog = new ProgressDialog(this);
-        dialog.setMessage("Loading...");
-        dialog.show();
-        NetworkEngine.getInstance().getCompetitionQuestion("", user_obj_id, new Callback<CompetitionQuestion>() {
 
-            @Override
-            public void failure(RetrofitError arg0) {
-                // TODO Auto-generated method stub
-                dialog.dismiss();
-                if(arg0.getResponse() != null){
-                    switch (arg0.getResponse().getStatus()) {
-                        case 403:
-                            //startActivity(new Intent(getApplicationContext(), GameOverActivity.class));
-                            break;
-                        case 400:
-                            //String error = (String) arg0.getBodyAs(String.class);
-                            //SKToastMessage.showMessage(DrawerMainActivity.this, error ,SKToastMessage.ERROR);
-                            layout_play_game.setVisibility(View.GONE);
-                            break;
-                        default:
-                            break;
+    private void getCompetitionQuestion() {
+        Log.e("Drawing Game calling===>", "===>");
+        if (Connection.isOnline(getApplicationContext())) {
+            final ProgressDialog dialog = new ProgressDialog(this);
+            dialog.setMessage("Loading...");
+            dialog.show();
+            NetworkEngine.getInstance().getCompetitionQuestion("", user_obj_id, new Callback<CompetitionQuestion>() {
+
+                @Override
+                public void failure(RetrofitError arg0) {
+                    // TODO Auto-generated method stub
+                    dialog.dismiss();
+                    if (arg0.getResponse() != null) {
+                        switch (arg0.getResponse().getStatus()) {
+                            case 403:
+                                //startActivity(new Intent(getApplicationContext(), GameOverActivity.class));
+                                break;
+                            case 400:
+                                //String error = (String) arg0.getBodyAs(String.class);
+                                //SKToastMessage.showMessage(DrawerMainActivity.this, error ,SKToastMessage.ERROR);
+                                layout_play_game.setVisibility(View.GONE);
+                                break;
+                            default:
+                                break;
+                        }
                     }
                 }
-            }
 
-            @Override
-            public void success(final CompetitionQuestion arg0, Response arg1) {
-                // TODO Auto-generated method stub
-                layout_play_game.setVisibility(View.VISIBLE);
-                if(arg0.getCorrectAnswer().size() == 0){
-                    btn_play_game.setText(getResources().getString(R.string.competition_play_game));
-                    btn_play_game.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void success(final CompetitionQuestion arg0, Response arg1) {
+                    // TODO Auto-generated method stub
+                    layout_play_game.setVisibility(View.VISIBLE);
+                    if (arg0.getCorrectAnswer().size() == 0) {
+                        btn_play_game.setText(getResources().getString(R.string.competition_play_game));
+                        btn_play_game.setOnClickListener(new View.OnClickListener() {
 
-                        @Override
-                        public void onClick(View v) {
-                            // TODO Auto-generated method stub
-                            startActivity(new Intent(getApplicationContext(), CompetitionNewGameActivity.class).putExtra("competition_question", new Gson().toJson(arg0)));
-                        }
-                    });
+                            @Override
+                            public void onClick(View v) {
+                                // TODO Auto-generated method stub
+                                startActivity(new Intent(getApplicationContext(), CompetitionNewGameActivity.class).putExtra("competition_question", new Gson().toJson(arg0)));
+                            }
+                        });
 
-                }else{
-                    btn_play_game.setText(getResources().getString(R.string.competition_discover_winner));
-                    btn_play_game.setOnClickListener(new View.OnClickListener() {
+                    } else {
+                        btn_play_game.setText(getResources().getString(R.string.competition_discover_winner));
+                        btn_play_game.setOnClickListener(new View.OnClickListener() {
 
-                        @Override
-                        public void onClick(View v) {
-                            // TODO Auto-generated method stub
-                            startActivity(new Intent(getApplicationContext(), CompetitionWinnerGroupActivity.class).putExtra("competition_question", new Gson().toJson(arg0)));
-                        }
-                    });
+                            @Override
+                            public void onClick(View v) {
+                                // TODO Auto-generated method stub
+                                startActivity(new Intent(getApplicationContext(), CompetitionWinnerGroupActivity.class).putExtra("competition_question", new Gson().toJson(arg0)));
+                            }
+                        });
 
+                    }
+                    dialog.dismiss();
                 }
-                dialog.dismiss();
+            });
+        } else {
+
+            if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+                org.undp_iwomen.iwomen.utils.Utils.doToastEng(getApplicationContext(), getResources().getString(R.string.open_internet_warning_eng));
+            } else {
+
+                org.undp_iwomen.iwomen.utils.Utils.doToastMM(getApplicationContext(), getResources().getString(R.string.open_internet_warning_mm));
             }
-        });
+        }
     }
 
     @Override
     public void onBackPressed() {
         Log.i("Reviews", "Reviews : here");
-        if(user_obj_id != null){
-            Review review = StoreUtil.getInstance().selectFrom(user_obj_id+versionCode);
-            Log.i("Reviews", "Reviews :"+ review);
-            if(review == null && UsageCount > 3){
+        if (user_obj_id != null) {
+            Review review = StoreUtil.getInstance().selectFrom(user_obj_id + versionCode);
+            Log.i("Reviews", "Reviews :" + review);
+            if (review == null && UsageCount > 3) {
                 showReviewDialog(user_obj_id);
-            }else{
+            } else {
                 finish();
             }
-        }else{
+        } else {
             finish();
         }
     }

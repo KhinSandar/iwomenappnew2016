@@ -55,7 +55,7 @@ dependencies {
     // Google Play Services
     //compile 'com.google.android.gms:play-services-analytics:7.5.0'
     //Camera and Crop Image
-    compile 'com.kbeanie:image-chooser-library:+@aar'
+    compile 'com.kbeanie:image-chooser-library:1.5.7@aar'
     compile 'com.shamanland:fab:0.0.8'
     compile 'me.villani.lorenzo.android:android-cropimage:1.0.2'
 

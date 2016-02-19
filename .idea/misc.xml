@@ -3,6 +3,16 @@
   <component name="EntryPointsManager">
     <entry_points version="2.0" />
   </component>
+<<<<<<< HEAD
+=======
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Bundled (Maven 3)" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+>>>>>>> 5058fe584ff4874e4c726c7ba5e37f3408d2510a
   <component name="NullableNotNullManager">
     <option name="myDefaultNullable" value="android.support.annotation.Nullable" />
     <option name="myDefaultNotNull" value="android.support.annotation.NonNull" />
@@ -38,16 +48,13 @@
             <id>Android Lint</id>
           </State>
           <State>
-            <id>General</id>
+            <id>Java</id>
           </State>
           <State>
-            <id>Gradle</id>
+            <id>Probable bugsJava</id>
           </State>
           <State>
-            <id>Maven</id>
-          </State>
-          <State>
-            <id>Probable bugsGradle</id>
+            <id>RELAX NG</id>
           </State>
         </expanded-state>
         <selected-state>
@@ -79,6 +86,17 @@
       <state key="ProjectJDKs.UI">
         <settings>
           <last-edited>1.7</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
           <splitter-proportions>
             <option name="proportions">
               <list>

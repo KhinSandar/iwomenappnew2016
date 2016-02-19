@@ -4,6 +4,7 @@ import android.app.Application;
 import android.util.Log;
 
 import com.alexbbb.uploadservice.UploadService;
+import com.facebook.FacebookSdk;
 import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseException;
@@ -35,6 +36,9 @@ public class MainApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        FacebookSdk.sdkInitialize(getApplicationContext());
+
         // Required - Initialize the Parse SDK
         Parse.enableLocalDatastore(this);
         Parse.initialize(this, getString(R.string.parse_app_id),
