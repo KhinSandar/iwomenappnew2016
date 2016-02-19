@@ -50,7 +50,6 @@ public class IWomenPostListByDateRecyclerViewAdapter extends RecyclerView.Adapte
 
     public class NamesViewHolder extends RecyclerView.ViewHolder {
         CustomTextView mPostTile;
-
         CustomTextView post_content;
         TextView post_like;
         TextView post_img_path;

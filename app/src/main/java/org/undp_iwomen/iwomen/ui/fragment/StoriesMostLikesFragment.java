@@ -1,6 +1,5 @@
 package org.undp_iwomen.iwomen.ui.fragment;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
@@ -15,8 +14,6 @@ import android.provider.BaseColumns;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -28,6 +25,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -36,7 +34,10 @@ import android.widget.TextView;
 import com.pnikosis.materialishprogress.ProgressWheel;
 import com.smk.clientapi.NetworkEngine;
 import com.smk.iwomen.BaseActionBarActivity;
+import com.smk.model.IWomenPost;
 import com.smk.model.Rating;
+import com.smk.skconnectiondetector.SKConnectionDetector;
+import com.smk.sklistview.SKListView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -48,8 +49,7 @@ import org.undp_iwomen.iwomen.model.retrofit_api.UserPostAPI;
 import org.undp_iwomen.iwomen.provider.IwomenProviderData;
 import org.undp_iwomen.iwomen.ui.activity.MainPhotoPostActivity;
 import org.undp_iwomen.iwomen.ui.activity.PostDetailActivity;
-import org.undp_iwomen.iwomen.ui.adapter.PostListRecyclerViewAdapter;
-import org.undp_iwomen.iwomen.ui.widget.RecyclerOnItemClickListener;
+import org.undp_iwomen.iwomen.ui.adapter.StoriesRecentListAdapter;
 import org.undp_iwomen.iwomen.utils.Connection;
 import org.undp_iwomen.iwomen.utils.Utils;
 
@@ -69,8 +69,7 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
 
     private Context mContext;
     private SwipeRefreshLayout mSwipeRefreshLayout;
-    private RecyclerView mRecyclerView;
-    private PostListRecyclerViewAdapter mPostListRecyclerViewAdapter;
+    private SKListView skListView;
     ProgressWheel progress;
     private List<FeedItem> feedItems;
 
@@ -84,6 +83,9 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
     private int skipLimit = 0;
     private Menu menu;
     private static Rating avgRatings;
+    private int paginater = 1;
+    private List<IWomenPost> iWomenPostList;
+    private StoriesRecentListAdapter stories;
 
     public StoriesMostLikesFragment() {
         // Empty constructor required for fragment subclasses
@@ -105,7 +107,7 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_stories, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_stories_list, container, false);
         mContext = getActivity().getApplicationContext();
 
         //int index = getArguments().getInt(ARG_MENU_INDEX);
@@ -119,22 +121,23 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
 
     private void init(View rootView) {
         sharePrefLanguageUtil = getActivity().getSharedPreferences(Utils.PREF_SETTING, Context.MODE_PRIVATE);
-
+        mstr_lang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
         feedItems = new ArrayList<FeedItem>();
-        mSwipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.activity_main_swipe_refresh_layout);
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.activity_main_recyclerview);
-        final Activity parentActivity = getActivity();
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(parentActivity));
-        mRecyclerView.setHasFixedSize(false);
-        //final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        //mRecyclerView.setLayoutManager(layoutManager);
+        skListView = (SKListView) rootView.findViewById(R.id.lst_stories);
+
+        iWomenPostList = new ArrayList<>();
+        stories = new StoriesRecentListAdapter(getActivity(), iWomenPostList, mstr_lang);
+        skListView.setAdapter(stories);
+        skListView.setCallbacks(skCallbacks);
+        skListView.setNextPage(true);
+        stories.notifyDataSetChanged();
+
         progress = (ProgressWheel) rootView.findViewById(R.id.progress_wheel);
         fab = (FloatingActionButton) rootView.findViewById(R.id.post_news);
         fab.setOnClickListener(this);
 
+        getIWomenPostByPagination();
         progress.setVisibility(View.VISIBLE);
-
-        mstr_lang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
 
         //When very start this fragment open , need to check db data
         Cursor cursorMain = getActivity().getContentResolver().query(IwomenProviderData.PostProvider.CONTETN_URI, null, null, null, BaseColumns._ID + " DESC");
@@ -142,33 +145,27 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
         if (cursorMain.getCount() > 0) {
             setupAdapter();
 
-
         } else {
 
             if (Connection.isOnline(getActivity())) {
                 //getPostDataOrderByLikesDate();
-                getIWomenPostByLimit();
+                //getIWomenPostByLimit();
+
             } else {
 
-                progress.setVisibility(View.INVISIBLE);
-
-
-                if (mstr_lang.equals(Utils.ENG_LANG)) {
+                SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
+                /*if (mstr_lang.equals(Utils.ENG_LANG)) {
                     Utils.doToastEng(mContext, getResources().getString(R.string.open_internet_warning_eng));
                 } else {
 
                     Utils.doToastMM(mContext, getActivity().getResources().getString(R.string.open_internet_warning_mm));
-                }
+                }*/
             }
         }
 
-
-
-
-
-        mRecyclerView.addOnItemTouchListener(new RecyclerOnItemClickListener(getActivity(), new RecyclerOnItemClickListener.OnItemClickListener() {
+        skListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(View view, int position) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(mContext, PostDetailActivity.class);
 
                 intent.putExtra("post_id", feedItems.get(position).getPost_obj_id());
@@ -178,39 +175,7 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(intent);
             }
-        }));
-
-        //Avoid SwipeReresh Loading when it is not at the top item
-        mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-            }
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-
-                int topRowVerticalPosition =
-                        (mRecyclerView == null || mRecyclerView.getChildCount() == 0) ?
-                                0 : mRecyclerView.getChildAt(0).getTop();
-                mSwipeRefreshLayout.setEnabled(dx == 0 && topRowVerticalPosition >= 0);
-
-
-            }
         });
-
-
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.primary, R.color.primary_dark, R.color.accent);
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                setupAdapter();
-                mSwipeRefreshLayout.setRefreshing(false);
-
-            }
-        });
-
 
     }
 
@@ -326,17 +291,17 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
                 //storageUtil.SaveArrayListToSD("lost_data_list", lost_data_list);
 
 
-                if (mstr_lang.equals(Utils.ENG_LANG)) {
+                /*if (mstr_lang.equals(Utils.ENG_LANG)) {
                     mPostListRecyclerViewAdapter = new PostListRecyclerViewAdapter(getActivity().getApplicationContext(), feedItems, mstr_lang);
-                    mRecyclerView.setAdapter(mPostListRecyclerViewAdapter);
+                    skListView.setAdapter(mPostListRecyclerViewAdapter);
                     mProgressDialog.dismiss();
                     progress.setVisibility(View.INVISIBLE);
                 } else {
                     mPostListRecyclerViewAdapter = new PostListRecyclerViewAdapter(getActivity().getApplicationContext(), feedItems, mstr_lang);
-                    mRecyclerView.setAdapter(mPostListRecyclerViewAdapter);
+                    skListView.setAdapter(mPostListRecyclerViewAdapter);
                     mProgressDialog.dismiss();
                     progress.setVisibility(View.INVISIBLE);
-                }
+                }*/
 
             } catch (IllegalStateException ex) {
                 ex.printStackTrace();
@@ -1324,6 +1289,66 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
         }
     }
 
+    //TODO SMK API
+    private void getIWomenPostByPagination() {
+        progress.setVisibility(View.VISIBLE);
+        if (Connection.isOnline(mContext)) {
+
+            isLoading = true;
+            NetworkEngine.getInstance().getIWomenPostByDateByPagination(paginater, new Callback<List<IWomenPost>>() {
+                @Override
+                public void success(List<IWomenPost> iWomenPosts, Response response) {
+
+                    iWomenPostList.addAll(iWomenPosts);
+                    stories.notifyDataSetChanged();
+                    progress.setVisibility(View.INVISIBLE);
+                    isLoading = false;
+                    if(iWomenPosts.size() == 12){
+                        skListView.setNextPage(true);
+                        paginater++;
+                    }else{
+                        // If no more item
+                        skListView.setNextPage(false);
+                    }
+
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+
+                }
+            });
+
+        } else {
+            SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
+            /*if (mstr_lang.equals(Utils.ENG_LANG)) {
+                Utils.doToastEng(mContext, "Internet Connection need!");
+            } else {
+                Utils.doToastMM(mContext, getActivity().getResources().getString(R.string.open_internet_warning_mm));
+            }*/
+        }
+    }
+
+    private boolean isLoading = true;
+    private SKListView.Callbacks skCallbacks = new SKListView.Callbacks() {
+        @Override
+        public void onScrollState(int scrollSate) {
+
+        }
+
+        @Override
+        public void onScrollChanged(int scrollY) {
+
+        }
+
+        @Override
+        public void onNextPageRequest() {
+            if(!isLoading){
+                getIWomenPostByPagination();
+            }
+        }
+    };
+
     @Override
     public void onClick(View v) {
 
@@ -1345,7 +1370,7 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
     @Override
     public boolean onQueryTextSubmit(String query) {
 
-        mPostListRecyclerViewAdapter.filter(query);
+        stories.filter(query);
         return false;
     }
 

@@ -2,6 +2,7 @@ package com.smk.clientapi;
 
 import com.smk.model.APKVersion;
 import com.smk.model.Answer;
+import com.smk.model.CalendarEvent;
 import com.smk.model.CompetitionQuestion;
 import com.smk.model.GroupUser;
 import com.smk.model.IWomenPost;
@@ -122,8 +123,13 @@ public interface INetworkEngine {
             Callback<String> callback);
 
     @GET(CommonConfig.CREATE_IWOMEN_POST_BY_DATE_URL)
-    void getIWomenPostByDateByPagination( @Query("page") int page,
-
+    void getIWomenPostByDateByPagination(
+            @Query("page") int page,
             Callback<List<IWomenPost>> callback);
+
+    @GET(CommonConfig.GET_CALENDAR_EVENT)
+    void getCalendarEvent(
+            @Query("page") int page,
+            Callback<List<CalendarEvent>> callback);
 
 }

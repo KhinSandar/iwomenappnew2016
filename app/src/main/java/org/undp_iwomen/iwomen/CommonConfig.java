@@ -67,6 +67,9 @@ public class CommonConfig {
 
 
     public static final String SHARE_URL ="https://www.facebook.com/iwomenApp";
+
+    public static final String GET_CALENDAR_EVENT = "/api/v1/calendars";
+
     public int getPostMaxCharacterCount () {
         int value = 140;
         return value;
