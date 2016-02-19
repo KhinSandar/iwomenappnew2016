@@ -89,7 +89,7 @@ public interface INetworkEngine {
             Callback<String> callback);
 
     @FormUrlEncoded
-    @POST("/api/v1/users")
+    @POST(CommonConfig.CREATE_REGISTER_URL)
     void postCreateUser(
             @Field("username") String name,
             @Field("password") String pwd,
@@ -103,15 +103,21 @@ public interface INetworkEngine {
 
     ///api-v1/auth/login
     @FormUrlEncoded
-    @POST("/api/v1/login")
+    @POST(CommonConfig.CREATE_LOGIN_URL)
     void postLogin(
             @Field("username") String email,
             @Field("password") String pwd,
             Callback<User> callback);
 
-    @GET("/api/v1/tlgProfiles")
+    @GET(CommonConfig.CREATE_TLG_PROFILE_URL)
     void getTLGTownship(
 
             Callback<List<TLGTownship>> callback);
+
+    @Multipart
+    @POST(CommonConfig.CREATE_IWOMEN_POST_PHOTO_URL)
+    void postiWomenPostPhoto(
+            @Part("image") TypedFile image,
+            Callback<String> callback);
 
 }

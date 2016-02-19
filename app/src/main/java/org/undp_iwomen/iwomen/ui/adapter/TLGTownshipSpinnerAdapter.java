@@ -6,8 +6,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.parse.ui.R;
 import com.smk.model.TLGTownship;
+
+import org.undp_iwomen.iwomen.R;
 
 import java.util.ArrayList;
 import java.util.List;

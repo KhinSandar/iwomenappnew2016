@@ -53,11 +53,7 @@ import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareButton;
 import com.facebook.share.widget.ShareDialog;
 import com.makeramen.RoundedImageView;
-import com.parse.FunctionCallback;
-import com.parse.ParseACL;
-import com.parse.ParseCloud;
-import com.parse.ParseException;
-import com.parse.SaveCallback;
+
 import com.smk.iwomen.BaseActionBarActivity;
 import com.squareup.picasso.Picasso;
 
@@ -76,7 +72,6 @@ import org.undp_iwomen.iwomen.model.MyTypeFace;
 import org.undp_iwomen.iwomen.model.TextWatcherAdapter;
 import org.undp_iwomen.iwomen.model.TimeDiff;
 import org.undp_iwomen.iwomen.model.URLSpanNoUnderline;
-import org.undp_iwomen.iwomen.model.parse.Comment;
 import org.undp_iwomen.iwomen.model.retrofit_api.CommentAPI;
 import org.undp_iwomen.iwomen.model.retrofit_api.UserPostAPI;
 import org.undp_iwomen.iwomen.provider.IwomenProviderData;
@@ -160,7 +155,6 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     ListView listView_Comment;
     List<CommentItem> listComment;
 
-    Comment commentParse;
     String share_data;
     String share_img_url_data;
 
@@ -272,9 +266,9 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         }
         //FB SHARE
         setContentView(R.layout.activity_post_detail);
-        sharePrefLanguageUtil = getSharedPreferences(com.parse.utils.Utils.PREF_SETTING, Context.MODE_PRIVATE);
+        sharePrefLanguageUtil = getSharedPreferences(Utils.PREF_SETTING, Context.MODE_PRIVATE);
 
-        mstr_lang = sharePrefLanguageUtil.getString(com.parse.utils.Utils.PREF_SETTING_LANG, com.parse.utils.Utils.ENG_LANG);
+        mstr_lang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
 
         Bundle bundle = getIntent().getExtras();
         postId = bundle.getString("post_id");
@@ -540,7 +534,8 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
                 mProgressDialog.show();
                 Utils.doToastEng(getApplicationContext(), "Comment");
-                commentParse = new Comment();
+                //TODO COMMENT PSOT
+                /*commentParse = new Comment();
                 if (et_comment.length() != 0) {
                     commentParse.setcomment_contents(et_comment.getText().toString());
                 }
@@ -557,7 +552,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                 commentParse.setpostId(postId);
 
                 commentParse.setcomment_created_time(new Date());
-                /**Very Important */
+                *//**Very Important *//*
                 ParseACL groupACL = new ParseACL();
 
 
@@ -591,7 +586,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
                         }
                     }
-                });
+                });*/
 
 
             }
@@ -739,7 +734,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     public void getTestCommentList() {
 
 
-        listComment = new ArrayList<>();
+       // listComment = new ArrayList<>();
 
         if (Connection.isOnline(mContext)) {
 
@@ -1080,7 +1075,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         profile.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
 
-        strLang = sharePrefLanguageUtil.getString(com.parse.utils.Utils.PREF_SETTING_LANG, com.parse.utils.Utils.ENG_LANG);
+        strLang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
 
 
         if (item.getPost_content_suggest_text() != null && !item.getPost_content_suggest_text().isEmpty()) {
@@ -1124,7 +1119,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
         mstrPostType = item.getPost_content_type();
         //TODO TableColumnUpdate 10 data set show in UI
-        if (strLang.equals(com.parse.utils.Utils.ENG_LANG)) {
+        if (strLang.equals(Utils.ENG_LANG)) {
             postdetail_username.setTypeface(MyTypeFace.get(getApplicationContext(), MyTypeFace.NORMAL));
 
 
@@ -1568,7 +1563,8 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                             HashMap<String, String> _param = new HashMap<>();
                             _param.put("objectId", postId);
 
-                            ParseCloud.callFunctionInBackground("IWomen_Likes_increment", _param, new FunctionCallback<Integer>() {
+                            //TODO Google Anaytics Like count
+                            /*ParseCloud.callFunctionInBackground("IWomen_Likes_increment", _param, new FunctionCallback<Integer>() {
                                 @Override
                                 public void done(Integer like_count, ParseException e) {
 
@@ -1586,14 +1582,14 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
                                 }
                             });
-                            img_like.setImageResource(R.drawable.like_fill);
+*/                            img_like.setImageResource(R.drawable.like_fill);
                         } else {
                             //Utils.doToastEng(getApplicationContext(), "unLike click");
                         }
                     }
                 } else {
                     if (strLang.equals(Utils.ENG_LANG)) {
-                        Utils.doToastEng(getApplicationContext(), getResources().getString(R.string.open_internet_warning_eng));
+                        Utils.doToastEng(getApplicationContext(), getResources().getString(R.string.open_internet_warning));
                     } else {
 
                         Utils.doToastMM(getApplicationContext(), getResources().getString(R.string.open_internet_warning_mm));
@@ -1638,6 +1634,8 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                     HashMap<String, String> _param = new HashMap<>();
                     _param.put("objectId", postId);
 
+                    //TODO Google Analytics
+/*
                     ParseCloud.callFunctionInBackground("IWomen_Share_increment", _param, new FunctionCallback<Integer>() {
                         @Override
                         public void done(Integer like_count, ParseException e) {
@@ -1655,6 +1653,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
                         }
                     });
+*/
                 }
 
                 break;
@@ -1676,7 +1675,8 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
                         mProgressDialog.show();
                         Utils.doToastEng(getApplicationContext(), "Comment");
-                        commentParse = new Comment();
+                        //TODO Comment Post
+                        /*commentParse = new Comment();
 
                         commentParse.setcomment_contents(et_comment.getText().toString());
                         commentParse.setUserId(user_obj_id);
@@ -1688,7 +1688,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                         commentParse.setpostId(postId);
 
                         commentParse.setcomment_created_time(new Date());
-                        /**Very Important */
+                        *//**Very Important *//*
                         ParseACL groupACL = new ParseACL();
 
 
@@ -1722,7 +1722,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
                                 }
                             }
-                        });
+                        });*/
                     }
                 } else {
 

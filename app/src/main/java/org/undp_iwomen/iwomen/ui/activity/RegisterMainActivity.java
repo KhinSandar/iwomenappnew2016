@@ -37,7 +37,7 @@ public class RegisterMainActivity extends BaseDetailTransitionActivity {
         strBookId = i.getStringExtra(CommonConfig.BOOKING_ID);
         strPaymentStatus = i.getStringExtra(CommonConfig.TICKET_PAYMENT_STATUS);*/
         sharePrefLanguageUtil = getSharedPreferences(Utils.PREF_SETTING, Context.MODE_PRIVATE);
-        strLang = sharePrefLanguageUtil.getString(com.parse.utils.Utils.PREF_SETTING_LANG, com.parse.utils.Utils.ENG_LANG);
+        strLang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
 
         mContext = getApplicationContext();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

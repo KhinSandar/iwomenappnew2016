@@ -91,7 +91,7 @@ public class AuthorDetailActivity extends BaseActionBarActivity {
 
         authorItemArrayList = (ArrayList<AuthorItem>) storageUtil.ReadArrayListFromSD("AuthorArrayList" + mstrAuthorId);
 
-        strLang = sharePrefLanguageUtil.getString(com.parse.utils.Utils.PREF_SETTING_LANG, com.parse.utils.Utils.ENG_LANG);
+        strLang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
 
 
         if (strLang.equals(Utils.ENG_LANG)) {
@@ -253,7 +253,7 @@ public class AuthorDetailActivity extends BaseActionBarActivity {
     private void setAuthorItem(ArrayList<AuthorItem> arrayList) {
 
         AuthorItem item = arrayList.get(0);
-        if (strLang.equals(com.parse.utils.Utils.ENG_LANG)) {
+        if (strLang.equals(Utils.ENG_LANG)) {
 
             txtAuthorTitle.setText(item.getAuthorTitleEng());
             txtBody.setText(item.getAuthorInfoEng());

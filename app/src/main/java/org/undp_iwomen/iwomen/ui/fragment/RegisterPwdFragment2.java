@@ -16,12 +16,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.parse.utils.Utils;
-
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.data.Sample;
 import org.undp_iwomen.iwomen.ui.activity.RegisterMainActivity;
+import org.undp_iwomen.iwomen.utils.Utils;
 
 public class RegisterPwdFragment2 extends Fragment implements View.OnClickListener{
     private static final String EXTRA_SAMPLE = "sample";
@@ -105,7 +104,7 @@ public class RegisterPwdFragment2 extends Fragment implements View.OnClickListen
             mPasswordTextInputLayout.setError(getResources().getString(R.string.password_error));
 
             if (lang.equals(Utils.ENG_LANG)) {
-                //doToast(getResources().getString(com.parse.ui.R.string.confirm_password_error));
+                //doToast(getResources().getString(R.string.confirm_password_error));
                 Utils.doToastEng(mContext, getResources().getString(R.string.password_error));
             } else if (lang.equals(Utils.MM_LANG)) {
 
@@ -116,14 +115,14 @@ public class RegisterPwdFragment2 extends Fragment implements View.OnClickListen
             mPasswordTextInputLayout.setErrorEnabled(false);
         }
         if (TextUtils.isEmpty(passwordAgain)) {
-            mConfirmPasswordTextInputLayout.setError(getResources().getString(com.parse.ui.R.string.confirm_password_error));
+            mConfirmPasswordTextInputLayout.setError(getResources().getString(R.string.confirm_password_error));
 
             if (lang.equals(Utils.ENG_LANG)) {
-                //doToast(getResources().getString(com.parse.ui.R.string.confirm_password_error));
-                Utils.doToastEng(mContext, getResources().getString(com.parse.ui.R.string.confirm_password_error));
+                //doToast(getResources().getString(R.string.confirm_password_error));
+                Utils.doToastEng(mContext, getResources().getString(R.string.confirm_password_error));
             } else if (lang.equals(Utils.MM_LANG)) {
 
-                Utils.doToastMM(mContext, getResources().getString(com.parse.ui.R.string.confirm_password_error_mm));
+                Utils.doToastMM(mContext, getResources().getString(R.string.confirm_password_error_mm));
             }
             return;
         } else {
@@ -136,12 +135,12 @@ public class RegisterPwdFragment2 extends Fragment implements View.OnClickListen
 
 
                 Utils.doToastEng(mContext, getResources().getQuantityString(
-                        com.parse.ui.R.plurals.com_parse_ui_password_too_short_toast,
+                        R.plurals.com_parse_ui_password_too_short_toast,
                         minPasswordLength, minPasswordLength));
             } else if (lang.equals(Utils.MM_LANG)) {
 
                 Utils.doToastMM(mContext, getResources().getQuantityString(
-                        com.parse.ui.R.plurals.com_parse_ui_password_too_short_toast_mm,
+                        R.plurals.com_parse_ui_password_too_short_toast_mm,
                         minPasswordLength, minPasswordLength));
             }
             return;
@@ -150,11 +149,11 @@ public class RegisterPwdFragment2 extends Fragment implements View.OnClickListen
         if (!password.equals(passwordAgain)) {
             //showToast(R.string.com_parse_ui_mismatch_confirm_password_toast);
             if (lang.equals(Utils.ENG_LANG)) {
-                //doToast(getResources().getString(com.parse.ui.R.string.com_parse_ui_mismatch_confirm_password_toast));
-                Utils.doToastEng(mContext, getResources().getString(com.parse.ui.R.string.com_parse_ui_mismatch_confirm_password_toast));
+                //doToast(getResources().getString(R.string.com_parse_ui_mismatch_confirm_password_toast));
+                Utils.doToastEng(mContext, getResources().getString(R.string.com_parse_ui_mismatch_confirm_password_toast));
             } else if (lang.equals(Utils.MM_LANG)) {
 
-                Utils.doToastMM(mContext, getResources().getString(com.parse.ui.R.string.com_parse_ui_mismatch_confirm_password_toast_mm));
+                Utils.doToastMM(mContext, getResources().getString(R.string.com_parse_ui_mismatch_confirm_password_toast_mm));
             }
             confirmPasswordField.selectAll();
             confirmPasswordField.requestFocus();

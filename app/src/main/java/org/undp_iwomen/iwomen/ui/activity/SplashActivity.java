@@ -8,9 +8,9 @@ import android.os.Handler;
 import android.view.MotionEvent;
 import android.widget.TextView;
 
-import com.parse.CommonConfig;
 import com.smk.iwomen.BaseActionBarActivity;
 
+import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.ui.widget.ProgressWheel;
 import org.undp_iwomen.iwomen.utils.SharePrefUtils;

@@ -18,7 +18,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.parse.CommonConfig;
 import com.smk.adapter.GroupUserListAdapter;
 import com.smk.application.TimeSubtractionUtil;
 import com.smk.application.TimeSubtractionUtil.Callback;
@@ -30,6 +29,7 @@ import com.smk.model.GroupUser;
 import com.smk.model.GroupUserList;
 import com.smk.skalertmessage.SKToastMessage;
 
+import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 
 import java.util.List;

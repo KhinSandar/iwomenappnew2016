@@ -72,8 +72,17 @@ public class CommonConfig {
         return value;
     }
 
-    //http://api.shopyface.com/api-v1/auth/photo
+    //http://shopyface.com/api/v1/usersUpload
     public static final String CREATE_USER_PHOTO_URL ="/api/v1/usersUpload";
+
+    //http://shopyface.com/api/v1/file/imageUpload
+    public static final String CREATE_IWOMEN_POST_PHOTO_URL ="api/v1/file/imageUpload";
+
+    public static final String CREATE_TLG_PROFILE_URL ="/api/v1/tlgProfiles";
+
+    public static final String CREATE_LOGIN_URL ="/api/v1/login";
+
+    public static final String CREATE_REGISTER_URL = "/api/v1/users";
 
 
 }

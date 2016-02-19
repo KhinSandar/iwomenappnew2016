@@ -199,7 +199,7 @@ public class MainMaterialTab extends Fragment {
         List<Fragment> fragments = getFragments();
 
 
-        mstr_lang = sharePrefLanguageUtil.getString(com.parse.utils.Utils.PREF_SETTING_LANG, com.parse.utils.Utils.ENG_LANG);
+        mstr_lang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
         if (mstr_lang.equals(Utils.ENG_LANG)) {
 
             adapter = new MyPagerAdapter(getChildFragmentManager(), fragments,mstr_lang);

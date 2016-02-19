@@ -118,7 +118,7 @@ public class ResourcesFragment extends Fragment  {
         lvResouces = (ListView) rootView.findViewById(R.id.resource_list);
 
 
-        mstr_lang = sharePrefLanguageUtil.getString(com.parse.utils.Utils.PREF_SETTING_LANG, com.parse.utils.Utils.ENG_LANG);
+        mstr_lang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
 
 
 

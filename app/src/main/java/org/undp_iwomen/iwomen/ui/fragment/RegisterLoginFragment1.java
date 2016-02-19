@@ -26,7 +26,6 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-import com.parse.utils.Utils;
 
 import org.json.JSONObject;
 import org.undp_iwomen.iwomen.CommonConfig;
@@ -34,6 +33,7 @@ import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.data.Sample;
 import org.undp_iwomen.iwomen.model.MyTypeFace;
 import org.undp_iwomen.iwomen.ui.activity.RegisterMainActivity;
+import org.undp_iwomen.iwomen.utils.Utils;
 
 /**
  * Created by lgvalle on 05/09/15.
@@ -151,13 +151,13 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
         final String username = usernameField.getText().toString().trim();
         final String mobileNoForNrc = mobileNoForNrcField.getText().toString().trim();
         if (TextUtils.isEmpty(username)) {
-            mUserNameTextInputLayout.setError(getResources().getString(com.parse.ui.R.string.your_name_error));
+            mUserNameTextInputLayout.setError(getResources().getString(R.string.your_name_error));
 
             if (lang.equals(Utils.ENG_LANG)) {
-                Utils.doToastEng(mContext, getResources().getString(com.parse.ui.R.string.your_name_error));
+                Utils.doToastEng(mContext, getResources().getString(R.string.your_name_error));
             } else if (lang.equals(Utils.MM_LANG)) {
 
-                Utils.doToastMM(mContext, getResources().getString(com.parse.ui.R.string.your_name_error_mm));
+                Utils.doToastMM(mContext, getResources().getString(R.string.your_name_error_mm));
             }
 
             return;
@@ -168,25 +168,25 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
         boolean inputMobileOk = true;
 
         if (TextUtils.isEmpty(mobileNoForNrc)) {
-            mMobileNoForNrcTextInputLayout.setError(getResources().getString(com.parse.ui.R.string.mobile_number_error));
+            mMobileNoForNrcTextInputLayout.setError(getResources().getString(R.string.mobile_number_error));
             //doToast(getResources().getString(R.string.mobile_number_error));
             if (lang.equals(Utils.ENG_LANG)) {
-                Utils.doToastEng(mContext, getResources().getString(com.parse.ui.R.string.mobile_number_error));
+                Utils.doToastEng(mContext, getResources().getString(R.string.mobile_number_error));
             } else if (lang.equals(Utils.MM_LANG)) {
 
-                Utils.doToastMM(mContext, getResources().getString(com.parse.ui.R.string.mobile_number_error_mm));
+                Utils.doToastMM(mContext, getResources().getString(R.string.mobile_number_error_mm));
             }
             inputMobileOk = false;
             return;
         }
         /*else if (!ValidatorUtils.isValidMobileNo(mobileNoForNrc)) {
-            mMobileNoForNrcTextInputLayout.setError(getResources().getString(com.parse.ui.R.string.invalid_mobile_number));
+            mMobileNoForNrcTextInputLayout.setError(getResources().getString(R.string.invalid_mobile_number));
             //doToast(getResources().getString(R.string.invalid_mobile_number));
             if (lang.equals(Utils.ENG_LANG)) {
-                Utils.doToastEng(mContext, getResources().getString(com.parse.ui.R.string.invalid_mobile_number));
+                Utils.doToastEng(mContext, getResources().getString(R.string.invalid_mobile_number));
             } else if (lang.equals(Utils.MM_LANG)) {
 
-                Utils.doToastMM(mContext, getResources().getString(com.parse.ui.R.string.invalid_mobile_number_mm));
+                Utils.doToastMM(mContext, getResources().getString(R.string.invalid_mobile_number_mm));
             }
             inputMobileOk = false;
             return;
@@ -255,8 +255,8 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
         ((RegisterMainActivity) getActivity()).textViewTitle.setText(R.string.register_title);
 
         //((RegisterMainActivity) getActivity()).textViewTitle.setTypeface(MyTypeFace.get(getActivity().getApplicationContext(), MyTypeFace.NORMAL));
-        /*usernameField.setHint(getResources().getString(com.parse.ui.R.string.register_name_hint));
-        mobileNoForNrcField.setHint(getResources().getString(com.parse.ui.R.string.register_ph_hint));
+        /*usernameField.setHint(getResources().getString(R.string.register_name_hint));
+        mobileNoForNrcField.setHint(getResources().getString(R.string.register_ph_hint));
 
 
         //Set Type Face
@@ -273,8 +273,8 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
         ((RegisterMainActivity) getActivity()).textViewTitle.setText(R.string.register_title_mm);
         ((RegisterMainActivity) getActivity()).textViewTitle.setTypeface(MyTypeFace.get(getActivity().getApplicationContext(), MyTypeFace.ZAWGYI));
 
-       /* usernameField.setHint(getResources().getString(com.parse.ui.R.string.register_name_hint));
-        mobileNoForNrcField.setHint(getResources().getString(com.parse.ui.R.string.register_ph_hint));
+       /* usernameField.setHint(getResources().getString(R.string.register_name_hint));
+        mobileNoForNrcField.setHint(getResources().getString(R.string.register_ph_hint));
 
         //Set Type Face
         usernameField.setTypeface(MyTypeFace.get(getActivity().getApplicationContext(), MyTypeFace.ZAWGYI));
@@ -335,8 +335,8 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
                                     register_profilePic_progressBar.setVisibility(View.VISIBLE);
                                     Picasso.with(mContext)
                                             .load(fb_path) //"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
-                                            .placeholder(com.parse.ui.R.drawable.camera_icon)
-                                            .error(com.parse.ui.R.drawable.camera_icon)
+                                            .placeholder(R.drawable.camera_icon)
+                                            .error(R.drawable.camera_icon)
                                             .into(profile_rounded, new ImageLoadedCallback(register_profilePic_progressBar) {
                                                 @Override
                                                 public void onSuccess() {

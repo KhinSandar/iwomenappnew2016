@@ -14,7 +14,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.makeramen.RoundedImageView;
-import com.parse.utils.Utils;
 import com.smk.iwomen.BaseActionBarActivity;
 import com.squareup.picasso.Picasso;
 
@@ -26,6 +25,7 @@ import org.undp_iwomen.iwomen.model.MyTypeFace;
 import org.undp_iwomen.iwomen.model.retrofit_api.TlgProfileAPI;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.utils.Connection;
+import org.undp_iwomen.iwomen.utils.Utils;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;

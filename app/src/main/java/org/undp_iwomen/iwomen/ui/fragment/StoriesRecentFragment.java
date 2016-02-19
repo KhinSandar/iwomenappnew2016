@@ -33,9 +33,6 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.parse.FindCallback;
-import com.parse.ParseException;
-import com.parse.ParseQuery;
 import com.pnikosis.materialishprogress.ProgressWheel;
 import com.smk.clientapi.NetworkEngine;
 import com.smk.iwomen.BaseActionBarActivity;
@@ -47,7 +44,6 @@ import org.json.JSONObject;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.data.FeedItem;
 import org.undp_iwomen.iwomen.database.TableAndColumnsName;
-import org.undp_iwomen.iwomen.model.parse.Post;
 import org.undp_iwomen.iwomen.model.retrofit_api.UserPostAPI;
 import org.undp_iwomen.iwomen.provider.IwomenProviderData;
 import org.undp_iwomen.iwomen.ui.activity.MainPhotoPostActivity;
@@ -138,7 +134,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
 
         progress.setVisibility(View.VISIBLE);
 
-        mstr_lang = sharePrefLanguageUtil.getString(com.parse.utils.Utils.PREF_SETTING_LANG, com.parse.utils.Utils.ENG_LANG);
+        mstr_lang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
 
         //When very start this fragment open , need to check db data
         Cursor cursorMain = getActivity().getContentResolver().query(IwomenProviderData.PostProvider.CONTETN_URI, null, null, null, BaseColumns._ID + " DESC");
@@ -364,7 +360,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
                 //storageUtil.SaveArrayListToSD("lost_data_list", lost_data_list);
 
 
-                if (mstr_lang.equals(com.parse.utils.Utils.ENG_LANG)) {
+                if (mstr_lang.equals(Utils.ENG_LANG)) {
                     mPostListRecyclerViewAdapter = new PostListRecyclerViewAdapter(getActivity().getApplicationContext(), feedItems, mstr_lang);
                     mRecyclerView.setAdapter(mPostListRecyclerViewAdapter);
                     mProgressDialog.dismiss();
@@ -885,7 +881,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
 
             } else {
                 mProgressDialog.show();
-                Log.e("First Time Offset Range Count", "==>" + offsetlimit + "/" + skipLimit);//where={"isAllow": true}
+                //Log.e("First Time Offset Range Count", "==>" + offsetlimit + "/" + skipLimit);//where={"isAllow": true}
 
                 String sCondition = "{\"isAllow\": true}";
 
@@ -1214,7 +1210,9 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
 
                         mProgressDialog.show();
 
-                        ParseQuery<Post> query = Post.getQuery();
+                        //TODO GET POST And Save in DB
+
+                        /*ParseQuery<Post> query = Post.getQuery();
 
 
                         query.whereGreaterThan("postUploadedDate", date);
@@ -1328,7 +1326,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
 
                                 }
                             }
-                        });
+                        });*/
 
 
                     }
@@ -1339,7 +1337,8 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
                 mProgressDialog.show();
 
 
-                ParseQuery<Post> query = Post.getQuery();
+                //GET POST and save  AFTER INITIAL SAVE TIME
+                /*ParseQuery<Post> query = Post.getQuery();
                 //query.orderByDescending("createdAt"); //Latest date is first
                 query.orderByAscending("postUploadedDate");//Very first row Date is first
                 //query.orderByDescending("likes");//Most likes is first
@@ -1453,7 +1452,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
                             Log.e("Post Get Err", "===>" + e.toString());
                         }
                     }
-                });
+                });*/
             }
 
         } else {

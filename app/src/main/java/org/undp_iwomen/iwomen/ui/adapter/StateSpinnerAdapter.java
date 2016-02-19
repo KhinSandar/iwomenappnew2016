@@ -6,8 +6,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.parse.model.CityForShow;
-import com.parse.ui.R;
+import org.undp_iwomen.iwomen.R;
+import org.undp_iwomen.iwomen.data.CityForShow;
 
 import java.util.ArrayList;
 import java.util.List;

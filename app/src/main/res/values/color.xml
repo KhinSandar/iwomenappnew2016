@@ -135,4 +135,14 @@
     <color name="red">#ff5252</color>
     <color name="light_grey">#E0E0E0</color>
 
+    <color name="body_text_2">#8a000000</color> <!-- 54% -->
+    <color name="body_text_3">#60000000</color>
+
+    <color name="body_text_1">#de000000</color> <!-- 87% -->
+    <color name="body_text_1_inverse">#deffffff</color>
+    <color name="body_text_2_inverse">#8affffff</color>
+    <color name="body_text_3_inverse">#60ffffff</color>
+    <color name="theme_window_background">#fff</color>
+
+
 </resources>

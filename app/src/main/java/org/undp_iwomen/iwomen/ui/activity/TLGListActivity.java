@@ -85,9 +85,9 @@ public class TLGListActivity extends BaseActionBarActivity {
 
         lv = (ListView) findViewById(R.id.sub_resource_list);
 
-        mstr_lang = sharePrefLanguageUtil.getString(com.parse.utils.Utils.PREF_SETTING_LANG, com.parse.utils.Utils.ENG_LANG);
+        mstr_lang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
 
-        if (mstr_lang.equals(com.parse.utils.Utils.ENG_LANG)) {
+        if (mstr_lang.equals(Utils.ENG_LANG)) {
             textViewTitle.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
             textViewTitle.setText(R.string.betogether_title_eng);
 
