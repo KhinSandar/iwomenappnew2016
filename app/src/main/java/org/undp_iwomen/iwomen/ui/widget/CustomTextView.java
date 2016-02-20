@@ -22,10 +22,10 @@ public class CustomTextView extends TextView{
 				}else if( selected_font.equals("myanmar3")){
 					setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/mm3-multi-os.ttf"));
 				}else if( selected_font.equals("english")){
-					setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/roboto-medium.ttf"));
+					setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/robotomedium.ttf"));
 				}
 			}else{
-				setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/roboto-medium.ttf"));
+				setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/robotomedium.ttf"));
 			}
 		}
 			
@@ -42,7 +42,7 @@ public class CustomTextView extends TextView{
 				}else if( selected_font.equals("myanmar3")){
 					setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/mm3-multi-os.ttf"));
 				}else if( selected_font.equals("english")){
-					setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/roboto-medium.ttf"));
+					setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/robotomedium.ttf"));
 				}
 			}else{
 				setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/roboto-medium.ttf"));

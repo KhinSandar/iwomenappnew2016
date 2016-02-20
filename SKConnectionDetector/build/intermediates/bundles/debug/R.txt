@@ -1,0 +1,7 @@
+int drawable delete 0x7f020000
+int drawable no_internet 0x7f020001
+int drawable toast_border 0x7f020002
+int drawable toast_vertical_border 0x7f020003
+int id textView1 0x7f040000
+int layout horizontal_toast 0x7f030000
+int layout vertical_toast 0x7f030001

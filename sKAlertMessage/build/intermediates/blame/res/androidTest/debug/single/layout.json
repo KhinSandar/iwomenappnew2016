@@ -1,0 +1,34 @@
+[
+    {
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\sKAlertMessage\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\sk_message_error.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\sKAlertMessage\\build\\intermediates\\bundles\\debug\\res\\layout\\sk_message_error.xml"
+    },
+    {
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\sKAlertMessage\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\sk_message_success.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\sKAlertMessage\\build\\intermediates\\bundles\\debug\\res\\layout\\sk_message_success.xml"
+    },
+    {
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\sKAlertMessage\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\sk_toast_message_info.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\sKAlertMessage\\build\\intermediates\\bundles\\debug\\res\\layout\\sk_toast_message_info.xml"
+    },
+    {
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\sKAlertMessage\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\sk_message_warning.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\sKAlertMessage\\build\\intermediates\\bundles\\debug\\res\\layout\\sk_message_warning.xml"
+    },
+    {
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\sKAlertMessage\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\sk_toast_message_error.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\sKAlertMessage\\build\\intermediates\\bundles\\debug\\res\\layout\\sk_toast_message_error.xml"
+    },
+    {
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\sKAlertMessage\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\sk_toast_message_warning.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\sKAlertMessage\\build\\intermediates\\bundles\\debug\\res\\layout\\sk_toast_message_warning.xml"
+    },
+    {
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\sKAlertMessage\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\sk_toast_message_success.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\sKAlertMessage\\build\\intermediates\\bundles\\debug\\res\\layout\\sk_toast_message_success.xml"
+    },
+    {
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\sKAlertMessage\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\sk_message_info.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\sKAlertMessage\\build\\intermediates\\bundles\\debug\\res\\layout\\sk_message_info.xml"
+    }
+]

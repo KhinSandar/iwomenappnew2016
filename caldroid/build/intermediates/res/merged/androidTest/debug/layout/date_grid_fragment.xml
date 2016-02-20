@@ -6,4 +6,3 @@
     android:numColumns="7"
     android:stretchMode="columnWidth"
     style="?styleCaldroidGridView" />
-<!-- From: file:/Users/khinsandar/Documents/VipPro/Download%20Projects/Caldroid/caldroid/src/main/res/layout/date_grid_fragment.xml --><!-- From: file:/Users/khinsandar/Documents/VipPro/Download%20Projects/Caldroid/caldroid/build/intermediates/bundles/debug/res/layout/date_grid_fragment.xml -->

@@ -4,4 +4,4 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    style="?styleCaldroidWeekdayView"/><!-- From: file:/Users/khinsandar/Documents/VipPro/Download%20Projects/Caldroid/caldroid/src/main/res/layout/weekday_textview.xml -->
+    style="?styleCaldroidWeekdayView"/>

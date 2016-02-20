@@ -18,14 +18,14 @@ public class CustomButton extends Button{
 				if(selected_font.equals("default")){
 
 				}else if( selected_font.equals("zawgyione")){
-					setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/zawgyione.ttf"));
-				}else if( selected_font.equals("ayarwagaung")){
-					setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/ayarwagaung.ttf"));
-				}else if(selected_font.equals("robotocondensedlight")){
-					setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/robotocondensedlight.ttf"));
+					setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/zawgyi.ttf"));
+				}else if( selected_font.equals("myanmar3")){
+					setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/mm3-multi-os.ttf"));
+				}else if( selected_font.equals("english")){
+					setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/robotomedium.ttf"));
 				}
 			}else{
-				setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/robotocondensedlight.ttf"));
+				setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/robotomedium.ttf"));
 			}
 		}
 
@@ -42,10 +42,10 @@ public class CustomButton extends Button{
 				}else if( selected_font.equals("myanmar3")){
 					setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/mm3-multi-os.ttf"));
 				}else if( selected_font.equals("english")){
-					setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/roboto-medium.ttf"));
+					setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/robotomedium.ttf"));
 				}
 			}else{
-				setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/roboto-medium.ttf"));
+				setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/robotomedium.ttf"));
 			}
 		}
 	}
