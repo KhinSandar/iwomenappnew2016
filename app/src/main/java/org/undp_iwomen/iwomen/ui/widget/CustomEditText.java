@@ -2,7 +2,6 @@ package org.undp_iwomen.iwomen.ui.widget;
 
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.widget.EditText;
 
@@ -18,14 +17,14 @@ public class CustomEditText extends EditText{
 				if(selected_font.equals("default")){
 
 				}else if( selected_font.equals("zawgyione")){
-					setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/zawgyione.ttf"));
+					//setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/zawgyione.ttf"));
 				}else if( selected_font.equals("ayarwagaung")){
-					setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/ayarwagaung.ttf"));
+					//setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/ayarwagaung.ttf"));
 				}else if(selected_font.equals("robotocondensedlight")){
-					setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/robotocondensedlight.ttf"));
+					//setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/robotocondensedlight.ttf"));
 				}
 			}else{
-				setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/robotocondensedlight.ttf"));
+				//setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/robotocondensedlight.ttf"));
 			}
 		}
 
@@ -38,14 +37,14 @@ public class CustomEditText extends EditText{
 				if(selected_font.equals("default")){
 					
 				}else if( selected_font.equals("zawgyione")){
-					setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/zawgyi.ttf"));
+					//setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/zawgyi.ttf"));
 				}else if( selected_font.equals("myanmar3")){
-					setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/mm3-multi-os.ttf"));
+					//setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/mm3-multi-os.ttf"));
 				}else if( selected_font.equals("english")){
-					setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/roboto-medium.ttf"));
+					//setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/roboto-medium.ttf"));
 				}
 			}else{
-				setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/roboto-medium.ttf"));
+				//setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/roboto-medium.ttf"));
 			}
 		}
 	}

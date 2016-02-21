@@ -448,5 +448,20 @@
     <string name="com_parse_ui_create_account_button_label">Create Account</string>
 
 
+    <!--Women Remember Day  -->
+    <string-array name="women_remember_day_array">
+        <item>Jan Women Remember Day</item>
+        <item>Feb Women Remember Day</item>
+        <item>March Women Remember Day</item>
+        <item>April Women Remember Day</item>
+        <item>May Women Remember Day</item>
+        <item>June Women Remember Day</item>
+        <item>July Women Remember Day</item>
+        <item>August Women Remember Day</item>
+        <item>September Women Remember Day</item>
+        <item>October Women Remember Day</item>
+        <item>November Women Remember Day</item>
+        <item>December Women Remember Day</item>
+    </string-array>
 
 </resources>

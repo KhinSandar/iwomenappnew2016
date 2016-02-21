@@ -3,4 +3,3 @@
     android:src="@drawable/calendar_next_arrow"
     android:tileMode="disabled" android:gravity="center" >
 </bitmap>
-<!-- From: file:/Users/khinsandar/Documents/VipPro/Download%20Projects/Caldroid/caldroid/src/main/res/drawable/right_arrow.xml -->

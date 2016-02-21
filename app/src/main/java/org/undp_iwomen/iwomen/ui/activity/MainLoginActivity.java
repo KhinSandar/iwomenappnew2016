@@ -66,7 +66,7 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
     private Button parseSignupButton;
     private CheckBox chkShowPwd;
 
-    private CustomTextView txtChangLanEng, txtChangLanMM;
+    private TextView txtChangLanEng, txtChangLanMM;
     private Button btnOk;
     private RadioButton rd_lang_en, rd_lang_mm_zawgyi, rd_lang_mm_uni, rd_lang_mm_default;
     private String lang;
@@ -79,6 +79,11 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
         sharePrefLanguageUtil = getSharedPreferences(Utils.PREF_SETTING, Context.MODE_PRIVATE);
         mSharedPreferencesUserInfo = getSharedPreferences(CommonConfig.SHARE_PREFERENCE_USER_INFO, Context.MODE_PRIVATE);
 
+        CustomTextView textView1 = new CustomTextView(this);
+
+        EditText editText = new EditText(this);
+
+
         appLogo = (ImageView) findViewById(R.id.app_logo);
         usernameField = (EditText) findViewById(R.id.login_username_input);
         passwordField = (EditText) findViewById(R.id.login_password_input);
@@ -89,8 +94,8 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
         parseLoginButton = (Button) findViewById(R.id.parse_login_button);
         parseSignupButton = (Button) findViewById(R.id.parse_signup_button);
 
-        txtChangLanEng = (CustomTextView) findViewById(R.id.login_change_lan_eng);
-        txtChangLanMM = (CustomTextView) findViewById(R.id.login_change_lan_mm);
+        txtChangLanEng = (TextView) findViewById(R.id.login_change_lan_eng);
+        txtChangLanMM = (TextView) findViewById(R.id.login_change_lan_mm);
 
         if (mSharedPreferencesUserInfo.getString(CommonConfig.USER_NAME, null) != null) {
             finish();

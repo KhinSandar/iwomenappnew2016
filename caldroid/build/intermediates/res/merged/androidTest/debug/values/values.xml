@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/Users/khinsandar/Documents/VipPro/Download%20Projects/Caldroid/caldroid/build/intermediates/bundles/debug/res/values/values.xml -->
-    <eat-comment/>
     <attr format="reference" name="styleCaldroidGridView"/>
     <attr format="reference" name="styleCaldroidLeftArrow"/>
     <attr format="reference" name="styleCaldroidMonthName"/>

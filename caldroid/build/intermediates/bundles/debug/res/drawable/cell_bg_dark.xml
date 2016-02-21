@@ -10,4 +10,4 @@
     <item android:drawable="@color/caldroid_lighter_gray" android:state_pressed="true"/>
     <item android:drawable="@color/caldroid_black" android:state_pressed="false"/>
 
-</selector><!-- From: file:/Users/khinsandar/Documents/VipPro/Download%20Projects/Caldroid/caldroid/src/main/res/drawable/cell_bg_dark.xml -->
+</selector>

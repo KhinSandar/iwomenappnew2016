@@ -21,6 +21,7 @@ import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.ui.activity.EventDetailActivity;
 import org.undp_iwomen.iwomen.ui.activity.NewEventActivity;
 import org.undp_iwomen.iwomen.ui.adapter.EventAdapter;
+import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,11 +45,21 @@ public class ViewEventsFragment extends Fragment {
 
     private Button mCreateEventButton;
 
+    private CustomTextView txt_women_remember_day;
+    private CustomTextView txt_date_title;
+
+    private static final String STR_DATE = "Date";
+    private static final String STR_MONTH = "Month";
+    String str_date;
+    int imonth;
+
+
     public ViewEventsFragment(){
         // Required empty public constructor
     }
 
     public static ViewEventsFragment newInstance(){
+
         return new ViewEventsFragment();
     }
 
@@ -72,6 +83,12 @@ public class ViewEventsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_view_events, container, false);
+        Bundle bundleArgs = getArguments();
+        if (bundleArgs != null) {
+            str_date = bundleArgs.getString("Date");
+            imonth = bundleArgs.getInt("Month");
+            //Toast.makeText(getActivity().getApplicationContext(), "Trip ID>>" + strTripId, Toast.LENGTH_SHORT).show();
+        }
         initViews(rootView);
         initViewsListeners();
         return rootView;
@@ -83,6 +100,15 @@ public class ViewEventsFragment extends Fragment {
         mEmptyView = rootView.findViewById(R.id.empty_events_view);
         setupEventRecyclerView();
         mCreateEventButton = (Button) rootView.findViewById(R.id.view_events_create_event_button);
+        txt_women_remember_day = (CustomTextView) rootView.findViewById(R.id.view_events_women_day_txt);
+        txt_date_title = (CustomTextView)rootView.findViewById(R.id.view_events_date_title);
+
+        Bundle bundle = getArguments();
+        str_date = bundle.getString(STR_DATE);
+        imonth = bundle.getInt(STR_MONTH);
+        txt_women_remember_day.setText(getResources().getStringArray(R.array.women_remember_day_array)[imonth]);
+        txt_date_title.setText(str_date);
+
     }
 
     private void initViewsListeners(){

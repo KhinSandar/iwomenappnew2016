@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/ZProgressHUD/build/intermediates/res/merged/androidTest/debug/anim/round_spinner.xml",
+        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/ZProgressHUD/build/intermediates/bundles/debug/res/anim/round_spinner.xml"
+    },
+    {
+        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/ZProgressHUD/build/intermediates/res/merged/androidTest/debug/anim/gear_spinner.xml",
+        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/ZProgressHUD/build/intermediates/bundles/debug/res/anim/gear_spinner.xml"
+    },
+    {
+        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/ZProgressHUD/build/intermediates/res/merged/androidTest/debug/anim/round_spinner_fade.xml",
+        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/ZProgressHUD/build/intermediates/bundles/debug/res/anim/round_spinner_fade.xml"
+    },
+    {
+        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/ZProgressHUD/build/intermediates/res/merged/androidTest/debug/anim/round_spinner_apple.xml",
+        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/ZProgressHUD/build/intermediates/bundles/debug/res/anim/round_spinner_apple.xml"
+    }
+]
