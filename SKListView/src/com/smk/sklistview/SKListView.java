@@ -16,15 +16,14 @@
 
 package com.smk.sklistview;
 
-import java.util.Dictionary;
-import java.util.Hashtable;
-
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ListView;
+
+import java.util.Dictionary;
+import java.util.Hashtable;
 
 /**
  * A custom ScrollView that can accept a scroll listener.
@@ -37,9 +36,9 @@ public class SKListView extends ListView {
 	private Dictionary<Integer, Integer> listViewItemHeights = new Hashtable<Integer, Integer>();
 	private int scrolledValue;
 	private int minDataScroll = 2;
-	private boolean nextPage = false;
+	private boolean nextPage = true;
 	private View footerView;
-	
+
 	public SKListView(Context context){
 		super(context);
 		setOnScrollListener(scrollListener);
@@ -69,7 +68,7 @@ public class SKListView extends ListView {
     	// TODO Auto-generated method stub
     	super.onLayout(changed, l, t, r, b);
     }
-    
+
     private OnScrollListener scrollListener = new OnScrollListener() {
 		
 		public void onScrollStateChanged(AbsListView view, int scrollState) {
@@ -98,7 +97,8 @@ public class SKListView extends ListView {
 						
 					} else {
 						try{
-							removeFooterView(footerView);
+							if(!nextPage)
+								removeFooterView(footerView);
 						}catch(Exception e){
 							
 						}
@@ -119,20 +119,6 @@ public class SKListView extends ListView {
 	    }
 	    return scrollY;
 	}
-	
-    @Override
-    public boolean onTouchEvent(MotionEvent ev) {
-        if (mCallbacks != null) {
-            switch (ev.getActionMasked()) {
-                case MotionEvent.ACTION_DOWN:
-                    break;
-                case MotionEvent.ACTION_UP:
-                case MotionEvent.ACTION_CANCEL:
-                    break;
-            }
-        }
-        return super.onTouchEvent(ev);
-    }
 
     @Override
     public int computeVerticalScrollRange() {

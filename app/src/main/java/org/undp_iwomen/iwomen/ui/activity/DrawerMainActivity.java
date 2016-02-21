@@ -1,6 +1,5 @@
 package org.undp_iwomen.iwomen.ui.activity;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -27,17 +26,18 @@ import android.widget.TextView;
 import com.facebook.FacebookSdk;
 import com.google.gson.Gson;
 import com.makeramen.RoundedImageView;
-import com.smk.application.StoreUtil;
-import com.smk.clientapi.NetworkEngine;
-import com.smk.iwomen.BaseActionBarActivity;
-import com.smk.iwomen.CompetitionNewGameActivity;
-import com.smk.iwomen.CompetitionWinnerGroupActivity;
-import com.smk.model.CompetitionQuestion;
-import com.smk.model.Review;
+import com.smk.skconnectiondetector.SKConnectionDetector;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.smk.application.StoreUtil;
+import org.smk.clientapi.NetworkEngine;
+import org.smk.iwomen.BaseActionBarActivity;
+import org.smk.iwomen.CompetitionNewGameActivity;
+import org.smk.iwomen.CompetitionWinnerGroupActivity;
+import org.smk.model.CompetitionQuestion;
+import org.smk.model.Review;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.model.retrofit_api.UserPostAPI;
@@ -675,17 +675,13 @@ public class DrawerMainActivity extends BaseActionBarActivity {
     }
 
     private void getCompetitionQuestion() {
-        Log.e("Drawing Game calling===>", "===>");
-        if (Connection.isOnline(getApplicationContext())) {
-            final ProgressDialog dialog = new ProgressDialog(this);
-            dialog.setMessage("Loading...");
-            dialog.show();
+        if (Connection.isOnline(this)) {
+
             NetworkEngine.getInstance().getCompetitionQuestion("", user_obj_id, new Callback<CompetitionQuestion>() {
 
                 @Override
                 public void failure(RetrofitError arg0) {
                     // TODO Auto-generated method stub
-                    dialog.dismiss();
                     if (arg0.getResponse() != null) {
                         switch (arg0.getResponse().getStatus()) {
                             case 403:
@@ -729,17 +725,11 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                         });
 
                     }
-                    dialog.dismiss();
                 }
             });
         } else {
 
-            if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
-                org.undp_iwomen.iwomen.utils.Utils.doToastEng(getApplicationContext(), getResources().getString(R.string.open_internet_warning_eng));
-            } else {
-
-                org.undp_iwomen.iwomen.utils.Utils.doToastMM(getApplicationContext(), getResources().getString(R.string.open_internet_warning_mm));
-            }
+            SKConnectionDetector.getInstance(this).showErrorMessage();
         }
     }
 

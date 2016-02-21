@@ -29,7 +29,7 @@ public class MyTypeFace {
 
                     if(assetPath.equals(NORMAL)) {
                         Typeface tf = Typeface.createFromAsset(c.getAssets(),
-                                "fonts/roboto-medium.ttf");
+                                "fonts/robotomedium.ttf");
 
                         cache.put(assetPath, tf);
                     }else if(assetPath.equals(BOLD)) {

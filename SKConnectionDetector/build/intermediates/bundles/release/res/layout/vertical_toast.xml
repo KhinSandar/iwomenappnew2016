@@ -5,7 +5,15 @@
     android:background="@drawable/toast_vertical_border"
     android:gravity="center"
     android:orientation="vertical" >
-
+
+
+
+
+
+
+
+
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,18 +23,30 @@
         android:drawableTop="@drawable/no_internet"
         android:gravity="center_vertical|center_horizontal"
         android:paddingLeft="10dp"
-        android:text="Network Error"
+        android:text="@string/sk_connection_internet_problem"
         android:textColor="#ffffff"
         android:textSize="18dp"
         android:textStyle="bold"
         android:typeface="sans" />
-
+
+
+
+
+
+
+
+
+
+
+
+
+
     <TextView
         android:id="@+id/textView1"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="&quot;Please check your connectivity settings and try again&quot;"
+        android:text="@string/sk_connection_no_internet_desc"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="#FFFFFF"
         android:textStyle="bold"

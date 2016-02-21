@@ -27,7 +27,7 @@ import com.kbeanie.imagechooser.api.ImageChooserListener;
 import com.kbeanie.imagechooser.api.ImageChooserManager;
 import com.makeramen.RoundedImageView;
 
-import com.smk.iwomen.BaseActionBarActivity;
+import org.smk.iwomen.BaseActionBarActivity;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;

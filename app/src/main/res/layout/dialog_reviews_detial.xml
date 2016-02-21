@@ -16,6 +16,7 @@
         android:textColor="@color/white"
         android:textStyle="bold"
         android:singleLine="true"
+        android:ellipsize="marquee"
         android:textSize="24dp" />
 
     <LinearLayout
@@ -98,7 +99,7 @@
         android:layout_height="match_parent"
         android:layout_marginTop="22dp">
 
-        <Button
+        <org.undp_iwomen.iwomen.ui.widget.CustomButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/str_ok"

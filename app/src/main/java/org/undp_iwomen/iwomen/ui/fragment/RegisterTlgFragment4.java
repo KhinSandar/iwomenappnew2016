@@ -17,8 +17,8 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
 
-import com.smk.clientapi.NetworkEngine;
-import com.smk.model.TLGTownship;
+import org.smk.clientapi.NetworkEngine;
+import org.smk.model.TLGTownship;
 
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;

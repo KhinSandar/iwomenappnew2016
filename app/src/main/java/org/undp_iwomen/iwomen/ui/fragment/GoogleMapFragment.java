@@ -32,9 +32,9 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.smk.clientapi.NetworkEngine;
-import com.smk.iwomen.BaseActionBarActivity;
-import com.smk.model.Rating;
+import org.smk.clientapi.NetworkEngine;
+import org.smk.iwomen.BaseActionBarActivity;
+import org.smk.model.Rating;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -437,11 +437,11 @@ public class GoogleMapFragment extends Fragment {//
         Button btn_ok = (Button)convertView.findViewById(R.id.btn_ok);
         alertDialog.setView(convertView);
 
-        txt_avg_title.setText("Overall Rating Be Together");
+        txt_avg_title.setText(getResources().getString(R.string.str_overall_rating_be_together));
         txt_total_rating.setText(avgRatings.getTotalRatings()+"");
         avg_ratings.setRating(avgRatings.getTotalRatings().floatValue());
-        txt_rating_desc.setText(BaseActionBarActivity.getRatingDesc(avgRatings.getTotalRatings()));
-        txt_avg_ratings.setText(avgRatings.getTotalUsers()+" Total");
+        txt_rating_desc.setText(getRatingDesc(avgRatings.getTotalRatings()));
+        txt_avg_ratings.setText(avgRatings.getTotalUsers()+" "+getResources().getString(R.string.str_total));
 
         final AlertDialog ad = alertDialog.show();
 
@@ -451,6 +451,26 @@ public class GoogleMapFragment extends Fragment {//
                 ad.dismiss();
             }
         });
+    }
+
+    public String getRatingDesc(Double ratings){
+        String ratingOfDesc = "";
+        if(ratings >0 && ratings <= 1.5){
+            ratingOfDesc = getResources().getString(R.string.str_poor);
+        }
+        if(ratings >1.5 && ratings <= 2.5){
+            ratingOfDesc = getResources().getString(R.string.str_fair);
+        }
+        if(ratings >2.5 && ratings <= 3.5){
+            ratingOfDesc = getResources().getString(R.string.str_good);
+        }
+        if(ratings >3.5 && ratings <= 4.5){
+            ratingOfDesc = getString(R.string.str_very_good);
+        }
+        if(ratings >4.5) {
+            ratingOfDesc = getResources().getString(R.string.str_excellent);
+        }
+        return ratingOfDesc;
     }
 
 

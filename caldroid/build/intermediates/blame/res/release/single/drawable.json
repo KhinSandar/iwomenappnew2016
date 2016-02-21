@@ -4,28 +4,64 @@
         "source": "D:\\Android\\@Android Studio\\iwomen new\\caldroid\\src\\main\\res\\drawable\\red_border_gray_bg.xml"
     },
     {
+        "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\build\\intermediates\\res\\merged\\release\\drawable\\right_arrow.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\drawable\\right_arrow.xml"
+    },
+    {
         "merged": "D:\\Android\\@Android Studio\\iwomen new\\caldroid\\build\\intermediates\\res\\merged\\release\\drawable\\left_arrow.xml",
         "source": "D:\\Android\\@Android Studio\\iwomen new\\caldroid\\src\\main\\res\\drawable\\left_arrow.xml"
     },
     {
-        "merged": "D:\\Android\\@Android Studio\\iwomen new\\caldroid\\build\\intermediates\\res\\merged\\release\\drawable\\disable_cell.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomen new\\caldroid\\src\\main\\res\\drawable\\disable_cell.xml"
+        "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\build\\intermediates\\res\\merged\\release\\drawable\\red_border_dark.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\drawable\\red_border_dark.xml"
     },
     {
         "merged": "D:\\Android\\@Android Studio\\iwomen new\\caldroid\\build\\intermediates\\res\\merged\\release\\drawable\\cell_bg.xml",
         "source": "D:\\Android\\@Android Studio\\iwomen new\\caldroid\\src\\main\\res\\drawable\\cell_bg.xml"
     },
     {
+        "merged": "D:\\Android\\@Android Studio\\iwomen new\\caldroid\\build\\intermediates\\res\\merged\\release\\drawable\\disable_cell.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomen new\\caldroid\\src\\main\\res\\drawable\\disable_cell.xml"
+    },
+    {
         "merged": "D:\\Android\\@Android Studio\\iwomen new\\caldroid\\build\\intermediates\\res\\merged\\release\\drawable\\disabled_cell_dark.xml",
         "source": "D:\\Android\\@Android Studio\\iwomen new\\caldroid\\src\\main\\res\\drawable\\disabled_cell_dark.xml"
+    },
+    {
+        "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\build\\intermediates\\res\\merged\\release\\drawable\\left_arrow.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\drawable\\left_arrow.xml"
+    },
+    {
+        "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\build\\intermediates\\res\\merged\\release\\drawable\\cell_bg_dark.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\drawable\\cell_bg_dark.xml"
     },
     {
         "merged": "D:\\Android\\@Android Studio\\iwomen new\\caldroid\\build\\intermediates\\res\\merged\\release\\drawable\\red_border_dark.xml",
         "source": "D:\\Android\\@Android Studio\\iwomen new\\caldroid\\src\\main\\res\\drawable\\red_border_dark.xml"
     },
     {
+        "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\build\\intermediates\\res\\merged\\release\\drawable\\red_border.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\drawable\\red_border.xml"
+    },
+    {
+        "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\build\\intermediates\\res\\merged\\release\\drawable\\red_border_gray_bg.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\drawable\\red_border_gray_bg.xml"
+    },
+    {
+        "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\build\\intermediates\\res\\merged\\release\\drawable\\cell_bg.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\drawable\\cell_bg.xml"
+    },
+    {
         "merged": "D:\\Android\\@Android Studio\\iwomen new\\caldroid\\build\\intermediates\\res\\merged\\release\\drawable\\right_arrow.xml",
         "source": "D:\\Android\\@Android Studio\\iwomen new\\caldroid\\src\\main\\res\\drawable\\right_arrow.xml"
+    },
+    {
+        "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\build\\intermediates\\res\\merged\\release\\drawable\\disabled_cell_dark.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\drawable\\disabled_cell_dark.xml"
+    },
+    {
+        "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\build\\intermediates\\res\\merged\\release\\drawable\\disable_cell.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\drawable\\disable_cell.xml"
     },
     {
         "merged": "D:\\Android\\@Android Studio\\iwomen new\\caldroid\\build\\intermediates\\res\\merged\\release\\drawable\\cell_bg_dark.xml",

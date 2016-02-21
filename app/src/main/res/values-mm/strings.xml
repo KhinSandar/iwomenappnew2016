@@ -237,16 +237,16 @@
 
 
     <string name="edit_profile_tlg_township">မိဳ ့နယ္ေရြးမည္</string>
-    <string name="str_rating_reviews">Please rate the functions !</string>
-    <string name="str_be_inspired">Be Inspired</string>
-    <string name="str_be_knowledgeable">Be Knowledgeable</string>
-    <string name="str_be_together">Be Together</string>
-    <string name="str_talk_together">Talk Together</string>
-    <string name="str_ok">OK</string>
-    <string name="str_not_now">Not Now</string>
-    <string name="str_write_reviews">Please Write Your Reviews !</string>
-    <string name="str_your_review">Your Review</string>
-    <string name="str_submit">Submit</string>
+    <string name="str_rating_reviews">ေက်းဇူးျပဳၿပီး Rate သတ္မွတ္ေပးပါ။</string>
+    <string name="str_be_inspired">စိတ္ဓာတ္ခြန္္အားျဖည့္ရန္</string>
+    <string name="str_be_knowledgeable">ဗဟုသုတရရန္</string>
+    <string name="str_be_together">ေပါင္းစည္းေဆာင္ရြတ္ရန္</string>
+    <string name="str_talk_together">ေမးျမန္းေဆြးေႏြးရန္</string>
+    <string name="str_ok">ရၿပီး</string>
+    <string name="str_not_now">မလုပ္ေသးပါ</string>
+    <string name="str_write_reviews">သင့္၏ အႀကံျပဳစာ ေရးပါ</string>
+    <string name="str_your_review">သင့္၏ အႀကံျပဳ</string>
+    <string name="str_submit">ေပးပို႕မည္</string>
     <string name="competition_answer">အေျဖမ်ားကို ေျဖၿပီးၿပီ။</string>
     <string name="not_enough_storage">သင္၏ဖုန္းတြင္ ျပင္ပ သိမ္းႏိုင္မႈ မရရိွႏိုင္ပါ!</string>
     <string name="videoRecordingError">Recording video failed</string>
@@ -269,8 +269,16 @@
     <string name="register_title_profile">ကိုုယ္ေရး အခ်က္ အလက္</string>
 
     <string name="register_township_title">TLG/SRG ၿမိဳ ့နယ္ေရြးမည္</string>
-
-
+    <string name="str_poor">ညံ</string>
+    <string name="str_fair">မဆိုးပါ</string>
+    <string name="str_good">ေကာင္း</string>
+    <string name="str_very_good">အရမ္းေကာင္း</string>
+    <string name="str_excellent">အလြန္ေကာင္း</string>
+    <string name="str_total">Total</string>
+    <string name="str_overall_rating_be_inspired">စိတ္ဓာတ္ခြန္္အားျဖည့္ရန္ စုစုေပါင္း Rating</string>
+    <string name="str_overall_rating_be_knowledgeable">ဗဟုသုတရရန္ စုစုေပါင္း Rating</string>
+    <string name="str_overall_rating_be_together">ေပါင္းစည္းေဆာင္ရြတ္ရန္ စုစုေပါင္း Rating</string>
+    <string name="str_overall_rating_talk_together">ေမးျမန္းေဆြးေႏြးရန္ စုစုေပါင္း Rating</string>
 
 
 </resources>

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/competition_primary"
     android:orientation="vertical"
-    tools:context="com.smk.iwomen.CompetitionSubmitAnswerActivity" >
+    tools:context="org.smk.iwomen.CompetitionSubmitAnswerActivity" >
 
     <ScrollView
         android:id="@+id/scrollView1"

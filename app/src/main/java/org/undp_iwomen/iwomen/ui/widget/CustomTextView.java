@@ -27,6 +27,7 @@ public class CustomTextView extends TextView{
 			}else{
 				setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/robotomedium.ttf"));
 			}
+			this.setSelected(true);
 		}
 			
 	}
@@ -45,8 +46,9 @@ public class CustomTextView extends TextView{
 					setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/robotomedium.ttf"));
 				}
 			}else{
-				setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/roboto-medium.ttf"));
+				setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/robotomedium.ttf"));
 			}
+			this.setSelected(true);
 		}
 	}
 	
