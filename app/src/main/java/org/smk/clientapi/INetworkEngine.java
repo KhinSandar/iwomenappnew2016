@@ -145,7 +145,7 @@ public interface INetworkEngine {
             @Query("page") int page,
             Callback<List<SisterAppItem>> callback);
 
-    @GET(CommonConfig.GET_SISTER_APP_LIST_URL)
+    @GET(CommonConfig.GET_COMMENT_LIST_BY_POST_ID_URL)
     void getCommentlistByPostIDByPagination(
             @Query("page") int page,@Query("post_id") String postId,
             Callback<List<CommentItem>> callback);

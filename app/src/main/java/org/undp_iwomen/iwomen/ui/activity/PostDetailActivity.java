@@ -54,6 +54,7 @@ import com.facebook.share.widget.ShareButton;
 import com.facebook.share.widget.ShareDialog;
 import com.makeramen.RoundedImageView;
 import com.smk.skconnectiondetector.SKConnectionDetector;
+import com.smk.sklistview.SKListView;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -65,7 +66,6 @@ import org.smk.model.IWomenPost;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.data.CategoriesDataModel;
-import org.undp_iwomen.iwomen.data.CommentItem;
 import org.undp_iwomen.iwomen.data.FeedItem;
 import org.undp_iwomen.iwomen.database.TableAndColumnsName;
 import org.undp_iwomen.iwomen.model.Helper;
@@ -156,8 +156,14 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     private LinearLayout ly_postdetail_download;
     private LinearLayout ly_postdetail_audio;
     private LinearLayout ly_media_main;
-    ListView listView_Comment;
-    List<CommentItem> listComment;
+
+    //TODO Comment
+    SKListView listView_Comment;
+    private int paginater = 1;
+    private List<com.smk.model.CommentItem> listComment;
+    private CommentAdapter adapter;
+    private ProgressWheel progressWheel_comment;
+
 
     String share_data;
     String share_img_url_data;
@@ -209,7 +215,6 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     private Context mContext;
 
     private ProgressDialog mProgressDialog;
-    private ProgressWheel progressWheel;
     private String mstr_lang;
     private ImageView video_icon;
     String cmd_count = "0";
@@ -248,6 +253,27 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                     .show();
         }
     };
+
+    private boolean isLoading = true;
+    private SKListView.Callbacks skCallbacks = new SKListView.Callbacks() {
+        @Override
+        public void onScrollState(int scrollSate) {
+
+        }
+
+        @Override
+        public void onScrollChanged(int scrollY) {
+
+        }
+
+        @Override
+        public void onNextPageRequest() {
+            if(!isLoading){
+                getCommentByPagination();
+            }
+        }
+    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -344,7 +370,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         feed_item_progressBar = (ProgressBar) findViewById(R.id.postdetail_feed_item_progressBar);
         profile_item_progressBar = (ProgressBar) findViewById(R.id.postdetail_progressBar_profile_item);
 
-        listView_Comment = (ListView) findViewById(R.id.postdetail_comment_listview);
+        listView_Comment = (SKListView) findViewById(R.id.postdetail_comment_listview);
         ly_likes_button = (LinearLayout) findViewById(R.id.postdetail_like_button);
         img_like = (ImageView) findViewById(R.id.postdetail_like_img);
         txt_like_count = (TextView) findViewById(R.id.postdetail_like_count);
@@ -370,7 +396,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
 
         shareButton = (ShareButton) findViewById(R.id.postdetail_fb_share_button);
-        progressWheel = (ProgressWheel) findViewById(R.id.postdetail_progress_wheel_comment);
+        progressWheel_comment = (ProgressWheel) findViewById(R.id.postdetail_progress_wheel_comment);
         video_icon = (ImageView) findViewById(R.id.postdeail_video_icon);
 
         txt_lbl_like_post = (CustomTextView) findViewById(R.id.postdetail_like_post_lbl);
@@ -386,12 +412,22 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         postId = "73";// i.getStringExtra("post_id");
         //Log.e("<<<<PostID 22 at Detail>>>>","===>" + postId);
 
+        //TODO for Comment
+        listComment = new ArrayList<>();
+        adapter = new CommentAdapter(PostDetailActivity.this, listComment);
+        listView_Comment.setAdapter(adapter);
+        listView_Comment.setCallbacks(skCallbacks);
+        listView_Comment.setNextPage(true);
+        adapter.notifyDataSetChanged();
+        getCommentByPagination();
+
 
         if (postId != null) {
 
             if (Connection.isOnline(getApplicationContext())) {
 
                 getIWomenPostByPostID();
+
             }else{
                 //TODO  showing Local data , before update from server by Id
                 //getLocalPostDetail(postId);
@@ -455,11 +491,11 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
             }
         });
 
-        progressWheel.bringToFront();
-        progressWheel.spin();
+        progressWheel_comment.bringToFront();
+        progressWheel_comment.spin();
         //progress_wheel.setBarColor(Color.RED);
-        progressWheel.setRimColor(Color.LTGRAY);
-        progressWheel.setVisibility(View.VISIBLE);
+        progressWheel_comment.setRimColor(Color.LTGRAY);
+        progressWheel_comment.setVisibility(View.VISIBLE);
         //setEmojiconFragment(false);
 
 
@@ -1097,6 +1133,38 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         iconToBeChanged.setImageResource(drawableResourceId);
     }
 
+    public void getCommentByPagination(){
+        if (Connection.isOnline(mContext)) {
+            progressWheel_comment.setVisibility(View.VISIBLE);
+            //TODO BY POST ID
+
+            NetworkEngine.getInstance().getCommentlistByPostIDByPagination(paginater, "tJG4qymeU8", new Callback<List<com.smk.model.CommentItem>>() {
+                @Override
+                public void success(List<com.smk.model.CommentItem> commentItems, Response response) {
+
+                    listComment.addAll(commentItems);
+                    adapter.notifyDataSetChanged();
+                    progressWheel_comment.setVisibility(View.INVISIBLE);
+                    isLoading = false;
+                    if(listComment.size() == 12){
+                        listView_Comment.setNextPage(true);
+                        paginater++;
+                    }else{
+                        // If no more item
+                        listView_Comment.setNextPage(false);
+                    }
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    progressWheel_comment.setVisibility(View.INVISIBLE);
+                }
+            });
+        }else {
+            SKConnectionDetector.getInstance(this).showErrorMessage();
+        }
+    }
+
     public void getTestCommentList() {
 
 
@@ -1104,7 +1172,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
         if (Connection.isOnline(mContext)) {
 
-            progressWheel.setVisibility(View.VISIBLE);
+            //progressWheel.setVisibility(View.VISIBLE);
 
             //TODO data from server
             CommentAPI.getInstance().getService().getCommentByPostId("{\"postId\":{\"__type\":\"Pointer\",\"className\":\"Post\",\"objectId\":\"" + postId + "\"}}", "-createdAt", new Callback<String>() {
@@ -1212,16 +1280,16 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                                 TimeDiff.getTimeDifference(d0, d1, TimeDiff.TimeField.DAY));*/
 
 
-                            listComment.add(new CommentItem(comment_img_path, comment_user_name, comment, str_comment_time_long,comment_sticker_img_path));
+                           // listComment.add(new CommentItem(comment_img_path, comment_user_name, comment, str_comment_time_long,comment_sticker_img_path));
                             str_comment_time_long = "";
                         }
 
 
-                        CommentAdapter adapter = new CommentAdapter(PostDetailActivity.this, listComment);
-                        listView_Comment.setAdapter(adapter);
+                        //CommentAdapter adapter = new CommentAdapter(PostDetailActivity.this, listComment);
+                        //listView_Comment.setAdapter(adapter);
 
                         mProgressDialog.dismiss();
-                        progressWheel.setVisibility(View.INVISIBLE);
+                        progressWheel_comment.setVisibility(View.INVISIBLE);
                         View padding = new View(PostDetailActivity.this);
                         padding.setMinimumHeight(20);
                         listView_Comment.addFooterView(padding);
@@ -1231,7 +1299,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
                     } catch (JSONException e) {
 
-                        progressWheel.setVisibility(View.INVISIBLE);
+                        progressWheel_comment.setVisibility(View.INVISIBLE);
                         mProgressDialog.dismiss();
                         e.printStackTrace();
                         Log.e("Comments>>>", ">>>>JSONERR" + e.toString());
@@ -1242,7 +1310,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                 @Override
                 public void failure(RetrofitError error) {
                     Log.e("Comments>>>", ">>>>ERR" + error);
-                    progressWheel.setVisibility(View.INVISIBLE);
+                    progressWheel_comment.setVisibility(View.INVISIBLE);
                 }
             });
         } else {

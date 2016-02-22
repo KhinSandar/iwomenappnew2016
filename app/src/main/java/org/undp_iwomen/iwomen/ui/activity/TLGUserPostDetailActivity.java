@@ -48,16 +48,15 @@ import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareButton;
 import com.facebook.share.widget.ShareDialog;
 import com.makeramen.RoundedImageView;
-
-import org.smk.iwomen.BaseActionBarActivity;
+import com.smk.model.CommentItem;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.smk.iwomen.BaseActionBarActivity;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
-import org.undp_iwomen.iwomen.data.CommentItem;
 import org.undp_iwomen.iwomen.data.FeedItem;
 import org.undp_iwomen.iwomen.database.TableAndColumnsName;
 import org.undp_iwomen.iwomen.model.Helper;
@@ -68,7 +67,6 @@ import org.undp_iwomen.iwomen.model.TimeDiff;
 import org.undp_iwomen.iwomen.model.retrofit_api.CommentAPI;
 import org.undp_iwomen.iwomen.model.retrofit_api.UserPostAPI;
 import org.undp_iwomen.iwomen.provider.IwomenProviderData;
-import org.undp_iwomen.iwomen.ui.adapter.CommentAdapter;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.ui.widget.ProgressWheel;
 import org.undp_iwomen.iwomen.ui.widget.ResizableImageView;
@@ -639,13 +637,13 @@ public class TLGUserPostDetailActivity extends BaseActionBarActivity implements 
                                 TimeDiff.getTimeDifference(d0, d1, TimeDiff.TimeField.DAY));*/
 
 
-                            listComment.add(new CommentItem(comment_img_path, comment_user_name, comment, str_comment_time_long, comment_sticker_img_path));
+                            //listComment.add(new CommentItem(comment_img_path, comment_user_name, comment, str_comment_time_long, comment_sticker_img_path));
                             str_comment_time_long = "";
                         }
 
 
-                        CommentAdapter adapter = new CommentAdapter(TLGUserPostDetailActivity.this, listComment);
-                        listView_Comment.setAdapter(adapter);
+                        //CommentAdapter adapter = new CommentAdapter(TLGUserPostDetailActivity.this, listComment);
+                        //listView_Comment.setAdapter(adapter);
 
                         mProgressDialog.dismiss();
                         progressWheel.setVisibility(View.INVISIBLE);
