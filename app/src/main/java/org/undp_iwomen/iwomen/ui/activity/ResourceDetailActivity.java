@@ -14,7 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.makeramen.RoundedImageView;
-import com.smk.iwomen.BaseActionBarActivity;
+import org.smk.iwomen.BaseActionBarActivity;
 import com.squareup.picasso.Picasso;
 
 import org.undp_iwomen.iwomen.CommonConfig;

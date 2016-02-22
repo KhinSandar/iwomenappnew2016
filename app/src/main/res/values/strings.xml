@@ -446,7 +446,16 @@
     <string name="com_parse_ui_edit_account_button_label_eng">EDIT INFORMATION</string>
 
     <string name="com_parse_ui_create_account_button_label">Create Account</string>
-
+    <string name="str_poor">Poor</string>
+    <string name="str_fair">Fair</string>
+    <string name="str_good">Good</string>
+    <string name="str_very_good">Very Good</string>
+    <string name="str_excellent">Excellent</string>
+    <string name="str_total">Total</string>
+    <string name="str_overall_rating_be_inspired">Overall Rating Be Inspired</string>
+    <string name="str_overall_rating_be_together">Overall Rating Be Together</string>
+    <string name="str_overall_rating_be_knowledgeable">Overall Rating Be Knowledgeable</string>
+    <string name="str_overall_rating_talk_together">Overall Rating Talk Together</string>
 
     <!--Women Remember Day  -->
     <string-array name="women_remember_day_array">

@@ -13,12 +13,12 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.pnikosis.materialishprogress.ProgressWheel;
-import com.smk.clientapi.NetworkEngine;
 import com.smk.model.Categories;
 import com.smk.skconnectiondetector.SKConnectionDetector;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.smk.clientapi.NetworkEngine;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.ui.activity.CalendarActivity;
 import org.undp_iwomen.iwomen.ui.activity.TalkTogetherMainActivity;

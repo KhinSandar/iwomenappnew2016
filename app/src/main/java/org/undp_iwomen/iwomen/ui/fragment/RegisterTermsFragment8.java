@@ -14,8 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.smk.clientapi.NetworkEngine;
-import com.smk.model.User;
+import org.smk.clientapi.NetworkEngine;
+import org.smk.model.User;
 
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;

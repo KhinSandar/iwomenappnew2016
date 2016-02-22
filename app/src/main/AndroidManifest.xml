@@ -365,29 +365,29 @@
             android:name=".ui.activity.PostNewsActivity"
             android:label="@string/title_activity_post_news"></activity>
         <activity
-            android:name="com.smk.iwomen.CompetitionNewGameActivity"
+            android:name="org.smk.iwomen.CompetitionNewGameActivity"
             android:label="@string/title_activity_competition_new_game"></activity>
         <activity
-            android:name="com.smk.iwomen.CompetitionWinnerGroupActivity"
+            android:name="org.smk.iwomen.CompetitionWinnerGroupActivity"
             android:label="@string/title_activity_competition_winner_group"></activity>
         <activity
-            android:name="com.smk.iwomen.CompetitionSubmitAnswerActivity"
+            android:name="org.smk.iwomen.CompetitionSubmitAnswerActivity"
             android:label="@string/title_activity_competition_submit_answer"></activity>
         <activity
-            android:name="com.smk.iwomen.CompetitionGroupUserActivity"
+            android:name="org.smk.iwomen.CompetitionGroupUserActivity"
             android:label="@string/title_activity_competition_group_user"></activity>
         <activity
-            android:name="com.smk.iwomen.GameOverActivity"
+            android:name="org.smk.iwomen.GameOverActivity"
             android:label="@string/title_activity_game_over"></activity>
         <!-- Declare the bundled CropImage Activity -->
         <activity android:name="com.android.camera.CropImage" />
         <activity
-            android:name="com.smk.iwomen.AudioRecordingActivity"
+            android:name="org.smk.iwomen.AudioRecordingActivity"
             android:label="@string/title_activity_audio_recording"
             android:theme="@style/AppTheme"></activity>
 
         <activity
-            android:name="com.smk.iwomen.VideoRecordingActivity"
+            android:name="org.smk.iwomen.VideoRecordingActivity"
             android:label="@string/title_activity_video_recording"
             android:theme="@style/AppTheme"></activity>
 

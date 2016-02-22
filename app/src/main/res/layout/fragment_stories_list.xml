@@ -13,15 +13,6 @@
         android:layout_height="match_parent"
         android:divider="@android:color/transparent" />
 
-    <com.pnikosis.materialishprogress.ProgressWheel
-        android:id="@+id/progress_wheel"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_centerHorizontal="true"
-        android:visibility="invisible"
-        app:barColor="@color/primary"
-        app:progressIndeterminate="true" />
-
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

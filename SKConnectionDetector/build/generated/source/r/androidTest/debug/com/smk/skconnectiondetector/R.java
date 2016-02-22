@@ -14,10 +14,15 @@ public final class R {
 		public static final int toast_vertical_border = 0x7f020003;
 	}
 	public static final class id {
-		public static final int textView1 = 0x7f040000;
+		public static final int textView1 = 0x7f050000;
 	}
 	public static final class layout {
 		public static final int horizontal_toast = 0x7f030000;
 		public static final int vertical_toast = 0x7f030001;
+	}
+	public static final class string {
+		public static final int sk_connection_internet_problem = 0x7f040000;
+		public static final int sk_connection_no_internet = 0x7f040001;
+		public static final int sk_connection_no_internet_desc = 0x7f040002;
 	}
 }

@@ -53,16 +53,15 @@ import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareButton;
 import com.facebook.share.widget.ShareDialog;
 import com.makeramen.RoundedImageView;
-
-import com.smk.clientapi.NetworkEngine;
-import com.smk.iwomen.BaseActionBarActivity;
-import com.smk.model.IWomenPost;
 import com.smk.skconnectiondetector.SKConnectionDetector;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.smk.clientapi.NetworkEngine;
+import org.smk.iwomen.BaseActionBarActivity;
+import org.smk.model.IWomenPost;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.data.CategoriesDataModel;
@@ -382,9 +381,10 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         progressBar_credit = (ProgressBar) findViewById(R.id.postdetail_credit_progress);
         ly_credit = (LinearLayout) findViewById(R.id.postdetail_ly_credit);
 
+        //TODO id
         Intent i  = getIntent();
         postId = "73";// i.getStringExtra("post_id");
-        Log.e("<<<<PostID 22 at Detail>>>>","===>" + postId);
+        //Log.e("<<<<PostID 22 at Detail>>>>","===>" + postId);
 
 
         if (postId != null) {

@@ -30,9 +30,11 @@ import com.orhanobut.dialogplus.DialogPlus;
 import com.orhanobut.dialogplus.OnClickListener;
 import com.orhanobut.dialogplus.OnItemClickListener;
 import com.orhanobut.dialogplus.ViewHolder;
-import com.smk.clientapi.NetworkEngine;
-import com.smk.iwomen.BaseActionBarActivity;
-import com.smk.model.User;
+import com.smk.skconnectiondetector.SKConnectionDetector;
+
+import org.smk.clientapi.NetworkEngine;
+import org.smk.iwomen.BaseActionBarActivity;
+import org.smk.model.User;
 
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
@@ -98,8 +100,8 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
         txtChangLanMM = (TextView) findViewById(R.id.login_change_lan_mm);
 
         if (mSharedPreferencesUserInfo.getString(CommonConfig.USER_NAME, null) != null) {
-            finish();
             startActivity(new Intent(this, DrawerMainActivity.class));
+            finish();
         }
 
         ShowLangDialog();
@@ -224,13 +226,7 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
             });
 
         } else {
-
-            if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
-                org.undp_iwomen.iwomen.utils.Utils.doToastEng(getApplicationContext(), getResources().getString(R.string.open_internet_warning_eng));
-            } else {
-
-                org.undp_iwomen.iwomen.utils.Utils.doToastMM(getApplicationContext(), getResources().getString(R.string.open_internet_warning_mm));
-            }
+            SKConnectionDetector.getInstance(this).showErrorMessage();
         }
     }
 

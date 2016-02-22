@@ -10,7 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.makeramen.RoundedImageView;
-import com.smk.model.IWomenPost;
+import org.smk.model.IWomenPost;
 import com.squareup.picasso.Picasso;
 
 import org.undp_iwomen.iwomen.R;

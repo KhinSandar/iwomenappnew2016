@@ -36,12 +36,12 @@
         "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/ZProgressHUD/build/intermediates/bundles/debug/res/drawable-hdpi-v4/apple_round_spinner_11.png"
     },
     {
-        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/ZProgressHUD/build/intermediates/res/merged/androidTest/debug/drawable-hdpi-v4/apple_round_spinner_05.png",
-        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/ZProgressHUD/build/intermediates/bundles/debug/res/drawable-hdpi-v4/apple_round_spinner_05.png"
-    },
-    {
         "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/ZProgressHUD/build/intermediates/res/merged/androidTest/debug/drawable-hdpi-v4/gear_spinner_02.png",
         "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/ZProgressHUD/build/intermediates/bundles/debug/res/drawable-hdpi-v4/gear_spinner_02.png"
+    },
+    {
+        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/ZProgressHUD/build/intermediates/res/merged/androidTest/debug/drawable-hdpi-v4/apple_round_spinner_05.png",
+        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/ZProgressHUD/build/intermediates/bundles/debug/res/drawable-hdpi-v4/apple_round_spinner_05.png"
     },
     {
         "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/ZProgressHUD/build/intermediates/res/merged/androidTest/debug/drawable-hdpi-v4/apple_round_spinner_08.png",

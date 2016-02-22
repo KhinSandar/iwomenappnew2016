@@ -9,13 +9,18 @@
     android:layout_height="wrap_content"
     android:minHeight="?attr/actionBarSize"
     android:background="?attr/colorPrimary">
+
     <org.undp_iwomen.iwomen.ui.widget.CustomTextView
         android:id="@+id/title_action2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
-
-        android:textSize="20dp"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:fadingEdge="horizontal"
+        android:marqueeRepeatLimit="1"
+        android:scrollHorizontally="true"
+        android:textSize="@dimen/ab_size_title"
         android:textColor="@color/icons" />
 
 

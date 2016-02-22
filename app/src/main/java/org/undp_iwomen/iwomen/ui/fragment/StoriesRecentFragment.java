@@ -2,7 +2,6 @@ package org.undp_iwomen.iwomen.ui.fragment;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -32,11 +31,6 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.pnikosis.materialishprogress.ProgressWheel;
-import com.smk.clientapi.NetworkEngine;
-import com.smk.iwomen.BaseActionBarActivity;
-import com.smk.model.IWomenPost;
-import com.smk.model.Rating;
 import com.smk.skconnectiondetector.SKConnectionDetector;
 import com.smk.sklistview.SKListView;
 import com.thuongnh.zprogresshud.ZProgressHUD;
@@ -44,6 +38,10 @@ import com.thuongnh.zprogresshud.ZProgressHUD;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.smk.clientapi.NetworkEngine;
+import org.smk.iwomen.BaseActionBarActivity;
+import org.smk.model.IWomenPost;
+import org.smk.model.Rating;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.data.FeedItem;
 import org.undp_iwomen.iwomen.database.TableAndColumnsName;
@@ -76,12 +74,9 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
     private IWomenPostListByDateRecyclerViewAdapter mIWomonePostListAdapter;
     private List<IWomenPost> iWomenPostList;
     private List<FeedItem> feedItems;
-
-    private ProgressDialog mProgressDialog;
-    FloatingActionButton fab;
-    SharedPreferences sharePrefLanguageUtil;
-    String mstr_lang;
-
+    private FloatingActionButton fab;
+    private SharedPreferences sharePrefLanguageUtil;
+    private String mstr_lang;
     private int offsetlimit = 10;
     private int skipLimit = 0;
     private Menu menu;
@@ -90,7 +85,6 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
     private LinearLayoutManager linearLayoutManager;
     private int paginater = 1;
     private StoriesRecentListAdapter stories;
-    private ProgressWheel progress;
 
     public StoriesRecentFragment() {
         // Empty constructor required for fragment subclasses
@@ -100,8 +94,6 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        mProgressDialog = new ProgressDialog(getActivity());
-        mProgressDialog.setCancelable(false);
     }
 
     @Override
@@ -134,8 +126,6 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
         skListView.setCallbacks(skCallbacks);
         skListView.setNextPage(true);
         final Activity parentActivity = getActivity();
-        progress = (ProgressWheel) rootView.findViewById(R.id.progress_wheel);
-        progress.setVisibility(View.VISIBLE);
 
         fab = (FloatingActionButton) rootView.findViewById(R.id.post_news);
         fab.setOnClickListener(this);
@@ -190,6 +180,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(intent);
+
             }
         });
 
@@ -491,11 +482,11 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
         Button btn_ok = (Button) convertView.findViewById(R.id.btn_ok);
         alertDialog.setView(convertView);
 
-        txt_avg_title.setText("Overall Rating Be Inspired");
+        txt_avg_title.setText(getResources().getString(R.string.str_overall_rating_be_inspired));
         txt_total_rating.setText(avgRatings.getTotalRatings() + "");
         avg_ratings.setRating(avgRatings.getTotalRatings().floatValue());
-        txt_rating_desc.setText(BaseActionBarActivity.getRatingDesc(avgRatings.getTotalRatings()));
-        txt_avg_ratings.setText(avgRatings.getTotalUsers() + " Total");
+        txt_rating_desc.setText(getRatingDesc(avgRatings.getTotalRatings()));
+        txt_avg_ratings.setText(avgRatings.getTotalUsers() +" "+ getResources().getString(R.string.str_total));
 
         final AlertDialog ad = alertDialog.show();
 
@@ -505,6 +496,26 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
                 ad.dismiss();
             }
         });
+    }
+
+    public String getRatingDesc(Double ratings){
+        String ratingOfDesc = "";
+        if(ratings >0 && ratings <= 1.5){
+            ratingOfDesc = getResources().getString(R.string.str_poor);
+        }
+        if(ratings >1.5 && ratings <= 2.5){
+            ratingOfDesc = getResources().getString(R.string.str_fair);
+        }
+        if(ratings >2.5 && ratings <= 3.5){
+            ratingOfDesc = getResources().getString(R.string.str_good);
+        }
+        if(ratings >3.5 && ratings <= 4.5){
+            ratingOfDesc = getString(R.string.str_very_good);
+        }
+        if(ratings >4.5) {
+            ratingOfDesc = getResources().getString(R.string.str_excellent);
+        }
+        return ratingOfDesc;
     }
 
 
@@ -567,7 +578,6 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
                 //skipLimit = skipLimit + 10;
                 skipLimit = cursorMain.getCount();
                 Log.e("Offset Range Count", "==>" + offsetlimit + "/" + skipLimit);
-                mProgressDialog.show();//{"isAllow": true}
                 String sCondition = "{\"isAllow\": true}";
                 UserPostAPI.getInstance().getService().getIWomenPost("createdAt", offsetlimit, skipLimit, sCondition, new Callback<String>() {
                     @Override
@@ -834,19 +844,17 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
                             e.printStackTrace();
                             Log.e("JSON err", "==>" + e.toString());
                         }
-                        mProgressDialog.dismiss();
                     }
 
                     @Override
                     public void failure(RetrofitError error) {
                         Log.e("error", "==" + error);
-                        mProgressDialog.dismiss();
                     }
                 });
 
 
             } else {
-                mProgressDialog.show();
+                
                 //Log.e("First Time Offset Range Count", "==>" + offsetlimit + "/" + skipLimit);//where={"isAllow": true}
 
                 String sCondition = "{\"isAllow\": true}";
@@ -1117,13 +1125,13 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
                             Log.e("JSON err", "==>" + e.toString());
                         }
 
-                        mProgressDialog.dismiss();
+                        
                     }
 
                     @Override
                     public void failure(RetrofitError error) {
                         Log.e("error", "==" + error);
-                        mProgressDialog.dismiss();
+                        
                     }
                 });
 
@@ -1171,9 +1179,6 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
                         Log.e("First Row Id", "==>" + cursor.getString(cursor.getColumnIndex("_id")));
                         Log.e("Date", "==>" + date.toString());
                         Log.e("First Row Data", "==>" + cursor.getString(cursor.getColumnIndex(TableAndColumnsName.PostUtil.CREATED_DATE)));
-
-
-                        mProgressDialog.show();
 
                         //TODO GET POST And Save in DB
 
@@ -1299,8 +1304,6 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
 
 
             } else {
-                mProgressDialog.show();
-
 
                 //GET POST and save  AFTER INITIAL SAVE TIME
                 /*ParseQuery<Post> query = Post.getQuery();
@@ -1435,7 +1438,6 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
     //TODO SMK API
     private void getIWomenPostByPagination() {
         if (Connection.isOnline(mContext)) {
-            progress.setVisibility(View.VISIBLE);
             isLoading = true;
             NetworkEngine.getInstance().getIWomenPostByDateByPagination(paginater, new Callback<List<IWomenPost>>() {
                 @Override
@@ -1443,7 +1445,6 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
 
                     iWomenPostList.addAll(iWomenPosts);
                     stories.notifyDataSetChanged();
-                    progress.setVisibility(View.INVISIBLE);
                     isLoading = false;
                     if(iWomenPosts.size() == 12){
                         skListView.setNextPage(true);
@@ -1472,6 +1473,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
     }
 
     private boolean isLoading = true;
+
     private SKListView.Callbacks skCallbacks = new SKListView.Callbacks() {
         @Override
         public void onScrollState(int scrollSate) {

@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.wifi.WifiManager;
 import android.provider.Settings;
 import android.view.Gravity;
 import android.view.View;
@@ -64,7 +63,7 @@ public class SKConnectionDetector {
 			mView = View.inflate(_context, R.layout.vertical_toast, null);
 			break;
 		default:
-			mView = View.inflate(_context, R.layout.horizontal_toast, null);
+			mView = View.inflate(_context, R.layout.vertical_toast, null);
 			break;
 		}
 

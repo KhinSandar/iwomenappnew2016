@@ -9,7 +9,7 @@ import android.view.WindowManager;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
 
-import com.smk.iwomen.BaseActionBarActivity;
+import org.smk.iwomen.BaseActionBarActivity;
 
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.ui.widget.VideoEnabledWebChromeClient;

@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.smk.model.TLGTownship;
+import org.smk.model.TLGTownship;
 
 import org.undp_iwomen.iwomen.R;
 

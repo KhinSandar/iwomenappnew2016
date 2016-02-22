@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
 
-import com.smk.iwomen.BaseActionBarActivity;
+import org.smk.iwomen.BaseActionBarActivity;
 
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
