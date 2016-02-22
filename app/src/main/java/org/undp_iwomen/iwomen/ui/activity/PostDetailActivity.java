@@ -54,7 +54,10 @@ import com.facebook.share.widget.ShareButton;
 import com.facebook.share.widget.ShareDialog;
 import com.makeramen.RoundedImageView;
 
+import com.smk.clientapi.NetworkEngine;
 import com.smk.iwomen.BaseActionBarActivity;
+import com.smk.model.IWomenPost;
+import com.smk.skconnectiondetector.SKConnectionDetector;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -85,6 +88,7 @@ import org.undp_iwomen.iwomen.utils.Connection;
 import org.undp_iwomen.iwomen.utils.StorageUtil;
 import org.undp_iwomen.iwomen.utils.Utils;
 
+import java.text.ParseException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -92,6 +96,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -250,6 +255,9 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         super.onCreate(savedInstanceState);
 
         mContext = getApplicationContext();
+
+
+
         mProgressDialog = new ProgressDialog(PostDetailActivity.this);
         mProgressDialog.setCancelable(false);
         //FB SHARE
@@ -270,8 +278,9 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
         mstr_lang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
 
-        Bundle bundle = getIntent().getExtras();
-        postId = bundle.getString("post_id");
+
+        //Log.e("<<<<PostID at Detail>>>>","===>" + postId);
+
         init();
         initEmojiIcon();
 
@@ -284,8 +293,10 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         progress_wheel.setRimColor(Color.LTGRAY);
         gridView.setLoadingView(progress_wheel);
 
-        storageUtil = StorageUtil.getInstance(getApplicationContext());
-        LoadData();
+        /*storageUtil = StorageUtil.getInstance(getApplicationContext());
+        LoadStickerData();*/
+
+
 
 
     }
@@ -371,10 +382,20 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         progressBar_credit = (ProgressBar) findViewById(R.id.postdetail_credit_progress);
         ly_credit = (LinearLayout) findViewById(R.id.postdetail_ly_credit);
 
+        Intent i  = getIntent();
+        postId = "73";// i.getStringExtra("post_id");
+        Log.e("<<<<PostID 22 at Detail>>>>","===>" + postId);
+
 
         if (postId != null) {
-            //TODO  showing Local data , before update from server by Id
-            getLocalPostDetail(postId);
+
+            if (Connection.isOnline(getApplicationContext())) {
+
+                getIWomenPostByPostID();
+            }else{
+                //TODO  showing Local data , before update from server by Id
+                //getLocalPostDetail(postId);
+            }
 
         } else {
             Utils.doToastEng(this, "Nothing to show!");
@@ -442,18 +463,363 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         //setEmojiconFragment(false);
 
 
-        getTestCommentList();
+        //getTestCommentList();
 
 
         //TODO after showing Local data , update from server by Id
-        updatePostDetailServerStatus();
+        //updatePostDetailServerStatus();
 
         //getCommentCount(postId);// + " comments";
 
 
     }
 
-    public void LoadData() {
+
+    private void getIWomenPostByPostID(){
+        if (Connection.isOnline(getApplicationContext())) {
+            NetworkEngine.getInstance().getIwomenPostByPostID(postId, new Callback<IWomenPost>() {
+                @Override
+                public void success(IWomenPost iWomenPost, Response response) {
+
+                    setPostItem(iWomenPost);
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+
+                }
+            });
+
+        }else {
+            SKConnectionDetector.getInstance(this).showErrorMessage();
+        }
+    }
+
+    private void setPostItem(final IWomenPost item) {
+        profile.setAdjustViewBounds(true);
+        profile.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
+
+        strLang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
+
+
+
+        post_content_user_name.setText(item.getPostUploadName());
+
+        post_content_user_role.setText(item.getPostAuthorRole());
+
+        authorID = item.getAuthorId();
+
+        if (authorID != null) {
+
+
+            post_content_user_more_id.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+
+                    Intent intent = new Intent(mContext, AuthorDetailActivity.class);
+
+                    intent.putExtra("AuthorId", authorID);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    mContext.startActivity(intent);
+                }
+            });
+        }
+
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.US);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy");
+
+        try {
+            Date timedate = format.parse(item.getPostUploadedDate());
+            post_content_posted_date.setText("Posted on " + sdf.format(timedate));
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        txt_lbl_share_post.setText(getResources().getString(R.string.post_detail_share_post));
+
+        mstrPostType = item.getContentType();
+        //TODO TableColumnUpdate 10 data set show in UI
+        if (strLang.equals(Utils.ENG_LANG)) {
+            postdetail_username.setTypeface(MyTypeFace.get(getApplicationContext(), MyTypeFace.NORMAL));
+
+
+            if (item.getContentType().equalsIgnoreCase("Letter")) {
+                postdetail_username.setText("Dear " + user_name);
+
+                video_icon.setVisibility(View.GONE);
+                ly_media_main.setVisibility(View.GONE);
+                isPlaying = true;
+                postIMg.setClickable(false);
+            } else if (item.getContentType().equalsIgnoreCase("Audio")) {
+                postdetail_username.setText("");
+                video_icon.setVisibility(View.GONE);
+                ly_media_main.setVisibility(View.VISIBLE);
+                isPlaying = false;
+                img_player.setImageResource(R.drawable.ic_headset_grey600_48dp);
+                txt_player.setText(R.string.detail_listen_text_eng);
+
+            } else if (item.getContentType().equalsIgnoreCase("Video")) {
+                postdetail_username.setText("");
+                video_icon.setVisibility(View.VISIBLE);
+                ly_media_main.setVisibility(View.VISIBLE);
+
+                img_player.setImageResource(R.drawable.ic_watch_now);
+                txt_player.setText(R.string.detail_play_text_eng);
+
+                isPlaying = true;
+            } else if (item.getContentType().equalsIgnoreCase("Story")) {
+                postdetail_username.setText("");
+                video_icon.setVisibility(View.GONE);
+                ly_media_main.setVisibility(View.GONE);
+                isPlaying = true;
+            } else {
+                postdetail_username.setText("");
+                video_icon.setVisibility(View.GONE);
+                ly_media_main.setVisibility(View.GONE);
+                isPlaying = true;
+            }
+
+
+            //post_timestamp.setText(item.getCreated_at());
+            mPostTile.setText(item.getTitle());
+            post_content.setText(item.getContent());
+            et_comment.setHint(R.string.post_detail_comment_eng);
+            txt_like_count.setText(item.getLikes() + "");
+
+
+            txt_cmd_count.setText(item.getCommentCount() + "Comments");
+            txt_lbl_share_post.setText(item.getShareCount() + R.string.post_detail_share_post_eng);
+
+            et_comment.setTypeface(MyTypeFace.get(this, MyTypeFace.NORMAL));
+            mPostTile.setTypeface(MyTypeFace.get(this, MyTypeFace.NORMAL));
+            post_content.setTypeface(MyTypeFace.get(this, MyTypeFace.NORMAL));
+            post_suggest_text.setTypeface(MyTypeFace.get(this, MyTypeFace.NORMAL));
+
+            txt_credit_link.setText("Credit to " + item.getCreditName());
+            //Log.e("Link===", "==>" + item.getCreditLink());
+            if (item.getCreditName() != null && !item.getCreditName().isEmpty()) {
+                txt_credit_link.setVisibility(View.VISIBLE);
+
+
+                txt_credit_link.setText("Credit to " + item.getCreditName());
+                if (item.getCreditLink() != null && !item.getCreditLink().isEmpty()) {
+                    txt_credit_link.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent2 = new Intent(getApplicationContext(), AboutUsWebActivity.class);
+                            intent2.putExtra("ActivityName", "PostDetailActivity");
+                            intent2.putExtra("URL", item.getCreditLink());
+                            startActivity(intent2);
+                        }
+                    });
+                } else {
+                    //Utils.doToastEng(getApplicationContext(),"there is no link");
+                }
+
+
+            } else {
+                txt_credit_link.setVisibility(View.GONE);
+            }
+
+        } else {
+            postdetail_username.setTypeface(MyTypeFace.get(getApplicationContext(), MyTypeFace.ZAWGYI));
+
+            if (item.getContentType().equalsIgnoreCase("Letter")) {
+                postdetail_username.setText(" ခ်စ္လွစြာေသာ " + user_name);
+                ly_media_main.setVisibility(View.GONE);
+                video_icon.setVisibility(View.GONE);
+                isPlaying = true;
+                postIMg.setClickable(false);
+            } else if (item.getContentType().equalsIgnoreCase("Audio")) {
+                postdetail_username.setText("");
+                ly_media_main.setVisibility(View.VISIBLE);
+                video_icon.setVisibility(View.GONE);
+                isPlaying = false;
+                img_player.setImageResource(R.drawable.ic_headset_grey600_48dp);
+                txt_player.setText(R.string.detail_listen_text_mm);
+
+            } else if (item.getContentType().equalsIgnoreCase("Video")) {
+                postdetail_username.setText("");
+                ly_media_main.setVisibility(View.VISIBLE);
+                video_icon.setVisibility(View.VISIBLE);
+                img_player.setImageResource(R.drawable.ic_watch_now);
+                txt_player.setText(R.string.detail_play_text_mm);
+
+                isPlaying = true;
+            } else if (item.getContentType().equalsIgnoreCase("Story")) {
+                postdetail_username.setText("");
+                ly_media_main.setVisibility(View.GONE);
+                video_icon.setVisibility(View.GONE);
+                isPlaying = true;
+            } else {
+                postdetail_username.setText("");
+                ly_media_main.setVisibility(View.GONE);
+                video_icon.setVisibility(View.GONE);
+                isPlaying = true;
+            }
+
+            //post_timestamp.setText(item.getCreated_at());
+            mPostTile.setText(item.getTitleMm());
+            post_content.setText(item.getContentMm());
+            et_comment.setHint(R.string.post_detail_comment_mm);
+
+            et_comment.setTypeface(MyTypeFace.get(this, MyTypeFace.ZAWGYI));
+
+            txt_lbl_like_post.setText(R.string.post_detail_like_post_mm);
+            txt_lbl_share_post.setText(item.getShareCount() + R.string.post_detail_share_post_mm);
+
+            txt_credit_link.setText("Credit to " + item.getCreditName());
+            if (item.getCreditName() != null && !item.getCreditName().isEmpty()) {
+                txt_credit_link.setVisibility(View.VISIBLE);
+                /*Pattern pattern = Pattern.compile("[a-zA-Z]+");
+                Linkify.addLinks(txt_credit_link,pattern, item.getCredit_link_eng());*/
+
+
+                /*txt_credit_link.setText(
+                        Html.fromHtml(
+                                "<a href=" + item.getCredit_link_mm() + ">" + "Credit to " + item.getCredit_name()+" < / a > "));
+                txt_credit_link.setMovementMethod(LinkMovementMethod.getInstance());
+                stripUnderlines(txt_credit_link);*/
+                /*String value = "<html> Credit to " + item.getCredit_name() + "<font color=#9e9e9e><b><a href=\""+ item.getCredit_link_mm() +"\"></a></b></font> </html>";
+                Spannable spannedText = (Spannable)
+                        Html.fromHtml(value);
+                txt_credit_link.setMovementMethod(LinkMovementMethod.getInstance());
+
+                Spannable processedText = removeUnderlines(spannedText);
+                txt_credit_link.setText(processedText);*/
+
+                txt_credit_link.setText("Credit to " + item.getCreditName());
+                if (item.getCreditLinkMm() != null && !item.getCreditLinkMm().isEmpty()) {
+                    txt_credit_link.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent2 = new Intent(getApplicationContext(), AboutUsWebActivity.class);
+                            intent2.putExtra("ActivityName", "PostDetailActivity");
+                            intent2.putExtra("URL", item.getCreditLinkMm());
+                            startActivity(intent2);
+
+                        }
+                    });
+                } else {
+                    // Utils.doToastEng(getApplicationContext(), "there is no link");
+                }
+            } else {
+                txt_credit_link.setVisibility(View.GONE);
+            }
+            /*et_comment.setTypeface(MyTypeFace.get(this, MyTypeFace.ZAWGYI));
+            mPostTile.setTypeface(MyTypeFace.get(this, MyTypeFace.ZAWGYI));
+            post_content.setTypeface(MyTypeFace.get(this, MyTypeFace.ZAWGYI));
+            post_suggest_text.setTypeface(MyTypeFace.get(this, MyTypeFace.ZAWGYI));*/
+        }
+
+
+        //TODO check Like Local Value
+        /*if (like_status.equalsIgnoreCase("0")) {
+            img_like.setImageResource(R.drawable.like_stroke);
+        } else {
+
+            img_like.setImageResource(R.drawable.like_fill);
+        }*/
+        txt_like_count.setText(item.getLikes() + " ");
+
+
+        txt_cmd_count.setText(item.getCommentCount() + "Comments");
+        if (item.getCreditLogoUrl() != null && !item.getCreditLogoUrl().isEmpty()) {
+            try {
+                img_credit_logo.setVisibility(View.VISIBLE);
+                Picasso.with(this)
+                        .load(item.getCreditLogoUrl()) //"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
+                        .placeholder(R.drawable.place_holder)
+                        .error(R.drawable.place_holder)
+                        .into(img_credit_logo, new ImageLoadedCallback(progressBar_credit) {
+                            @Override
+                            public void onSuccess() {
+                                if (this.progressBar != null) {
+                                    this.progressBar.setVisibility(View.GONE);
+                                } else {
+                                    this.progressBar.setVisibility(View.VISIBLE);
+                                }
+                            }
+
+                        });
+            } catch (OutOfMemoryError outOfMemoryError) {
+                outOfMemoryError.printStackTrace();
+            }
+        } else {
+            img_credit_logo.setVisibility(View.GONE);
+            profile.setImageResource(R.drawable.blank_profile);
+
+            profile_item_progressBar.setVisibility(View.GONE);
+        }
+
+        //viewHolder.mCatNameTextView.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
+        //viewHolder.profilePictureView.setProfileId(item.get());
+        if (item.getPostUploadUserImgPath() != null && !item.getPostUploadUserImgPath().isEmpty()) {
+            try {
+                //profilePictureView.setVisibility(View.GONE);
+                profile.setVisibility(View.VISIBLE);
+                Picasso.with(this)
+                        .load(item.getPostUploadUserImgPath()) //"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
+                        .placeholder(R.drawable.blank_profile)
+                        .error(R.drawable.blank_profile)
+                        .into(profile, new ImageLoadedCallback(profile_item_progressBar) {
+                            @Override
+                            public void onSuccess() {
+                                if (this.progressBar != null) {
+                                    this.progressBar.setVisibility(View.GONE);
+                                } else {
+                                    this.progressBar.setVisibility(View.VISIBLE);
+                                }
+                            }
+
+                        });
+            } catch (OutOfMemoryError outOfMemoryError) {
+                outOfMemoryError.printStackTrace();
+            }
+        } else {
+
+            profile.setImageResource(R.drawable.blank_profile);
+
+            profile_item_progressBar.setVisibility(View.GONE);
+        }
+
+        // Feed image
+        if (item.getImage() != null && !item.getImage().isEmpty()) {
+            try {
+                postIMg.setVisibility(View.VISIBLE);
+                feed_item_progressBar.setVisibility(View.VISIBLE);
+                share_img_url_data = item.getImage();
+                Picasso.with(this)
+                        .load(item.getImage()) //"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
+                        .placeholder(R.drawable.place_holder)
+                        .error(R.drawable.place_holder)
+                        .into(postIMg, new ImageLoadedCallback(feed_item_progressBar) {
+                            @Override
+                            public void onSuccess() {
+                                if (this.progressBar != null) {
+                                    this.progressBar.setVisibility(View.GONE);
+                                } else {
+                                    this.progressBar.setVisibility(View.VISIBLE);
+                                }
+                            }
+
+                        });
+            } catch (OutOfMemoryError outOfMemoryError) {
+                outOfMemoryError.printStackTrace();
+            }
+        } else {
+            postIMg.setVisibility(View.GONE);
+            feed_item_progressBar.setVisibility(View.GONE);
+        }
+    }
+
+    public void LoadStickerData() {
         if (Connection.isOnline(getApplicationContext())) {
 
             //Parameter
@@ -1806,9 +2172,8 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                 if (mstrPostType.equalsIgnoreCase("Video")) {
                     Intent video_intent = new Intent(mContext, YouTubeWebviewActivity.class);
 
-                    //intent.putExtra("post_id", feedItems.get(position).getPost_obj_id());
+                    //video_intent.putExtra("you_tube_id", ));
 
-                    //intent.putExtra("ImgUrl", mImgurl.get(getPosition()));
                     video_intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     video_intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     mContext.startActivity(video_intent);

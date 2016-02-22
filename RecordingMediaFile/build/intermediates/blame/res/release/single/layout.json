@@ -56,12 +56,12 @@
         "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/RecordingMediaFile/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/abc_screen_toolbar.xml"
     },
     {
-        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/RecordingMediaFile/build/intermediates/res/merged/release/layout/abc_activity_chooser_view_list_item.xml",
-        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/RecordingMediaFile/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/abc_activity_chooser_view_list_item.xml"
-    },
-    {
         "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/RecordingMediaFile/build/intermediates/res/merged/release/layout/abc_screen_simple.xml",
         "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/RecordingMediaFile/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/abc_screen_simple.xml"
+    },
+    {
+        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/RecordingMediaFile/build/intermediates/res/merged/release/layout/abc_activity_chooser_view_list_item.xml",
+        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/RecordingMediaFile/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/abc_activity_chooser_view_list_item.xml"
     },
     {
         "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/RecordingMediaFile/build/intermediates/res/merged/release/layout/abc_search_dropdown_item_icons_2line.xml",
@@ -124,12 +124,12 @@
         "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/RecordingMediaFile/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/notification_template_lines.xml"
     },
     {
-        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/RecordingMediaFile/build/intermediates/res/merged/release/layout/abc_search_view.xml",
-        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/RecordingMediaFile/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/abc_search_view.xml"
-    },
-    {
         "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/RecordingMediaFile/build/intermediates/res/merged/release/layout/notification_template_part_chronometer.xml",
         "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/RecordingMediaFile/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/notification_template_part_chronometer.xml"
+    },
+    {
+        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/RecordingMediaFile/build/intermediates/res/merged/release/layout/abc_search_view.xml",
+        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/RecordingMediaFile/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/abc_search_view.xml"
     },
     {
         "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/RecordingMediaFile/build/intermediates/res/merged/release/layout/abc_screen_simple_overlay_action_mode.xml",

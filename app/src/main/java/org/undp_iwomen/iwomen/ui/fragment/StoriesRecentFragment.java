@@ -128,7 +128,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
         feedItems = new ArrayList<FeedItem>();
         iWomenPostList = new ArrayList<>();
         skListView = (SKListView) rootView.findViewById(R.id.lst_stories);
-        iWomenPostList = new ArrayList<>();
+        //iWomenPostList = new ArrayList<>();
         stories = new StoriesRecentListAdapter(getActivity(), iWomenPostList, mstr_lang);
         skListView.setAdapter(stories);
         skListView.setCallbacks(skCallbacks);
@@ -185,6 +185,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
                 //intent.putExtra("post_id", feedItems.get(position).getPost_obj_id());
                 intent.putExtra("post_id", iWomenPostList.get(position).getId());
 
+                Log.e("<<<<PostID>>>>","===>" + iWomenPostList.get(position).getId() +"/==>" + iWomenPostList.size());
                 //intent.putExtra("ImgUrl", mImgurl.get(getPosition()));
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -1511,7 +1512,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
     public boolean onQueryTextSubmit(String query) {
 
         //mPostListRecyclerViewAdapter.filter(query);
-        mIWomonePostListAdapter.filter(query);
+        stories.filter(query);
         return false;
     }
 

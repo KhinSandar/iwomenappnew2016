@@ -315,7 +315,7 @@
                         android:layout_marginTop="20dp"
                         android:background="@color/grey_500"
                         android:padding="10dp"
-                        android:text="more >> "
+                        android:text="@string/post_detail_more"
                         android:textColor="@color/white"
                         android:textStyle="bold" />
                 </LinearLayout>

@@ -8,10 +8,10 @@ import android.widget.BaseAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.smk.model.SisterAppItem;
 import com.squareup.picasso.Picasso;
 
 import org.undp_iwomen.iwomen.R;
-import org.undp_iwomen.iwomen.data.SisterAppItem;
 import org.undp_iwomen.iwomen.ui.widget.ResizableImageView;
 
 import java.util.List;
@@ -67,15 +67,15 @@ public class SisterAppListAdapter extends BaseAdapter {
             vh = (ViewHolder) view.getTag();
         }
 
-        vh.tv_name.setText(datalist.get(i).get_app_name());//
+        vh.tv_name.setText(datalist.get(i).getAppName());//
 
 
         // Feed image
-        if (datalist.get(i).get_app_img() != null && !datalist.get(i).get_app_img().isEmpty()) {
+        if (datalist.get(i).getAppImg() != null && !datalist.get(i).getAppImg().isEmpty()) {
             try {
 
                 Picasso.with(mContext)
-                        .load(datalist.get(i).get_app_img()) //"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
+                        .load(datalist.get(i).getAppImg()) //"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
                         .placeholder(R.drawable.place_holder)
                         .error(R.drawable.place_holder)
                         .into(vh.imgApp, new ImageLoadedCallback(vh.progressBar) {

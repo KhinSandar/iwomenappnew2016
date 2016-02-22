@@ -3,11 +3,15 @@ package com.smk.clientapi;
 import com.smk.model.APKVersion;
 import com.smk.model.Answer;
 import com.smk.model.CalendarEvent;
+import com.smk.model.Categories;
+import com.smk.model.CommentItem;
 import com.smk.model.CompetitionQuestion;
 import com.smk.model.GroupUser;
 import com.smk.model.IWomenPost;
 import com.smk.model.Rating;
+import com.smk.model.ResourceItem;
 import com.smk.model.Review;
+import com.smk.model.SisterAppItem;
 import com.smk.model.TLGTownship;
 import com.smk.model.User;
 
@@ -122,7 +126,7 @@ public interface INetworkEngine {
             @Part("image") TypedFile image,
             Callback<String> callback);
 
-    @GET(CommonConfig.CREATE_IWOMEN_POST_BY_DATE_URL)
+    @GET(CommonConfig.GET_IWOMEN_POST_BY_DATE_URL)
     void getIWomenPostByDateByPagination(
             @Query("page") int page,
             Callback<List<IWomenPost>> callback);
@@ -131,5 +135,31 @@ public interface INetworkEngine {
     void getCalendarEvent(
             @Query("page") int page,
             Callback<List<CalendarEvent>> callback);
+
+    @GET(CommonConfig.GET_RESOURCE_URL)
+    void getResourceByPagination(
+            @Query("page") int page,
+            Callback<List<ResourceItem>> callback);
+    @GET(CommonConfig.GET_SISTER_APP_LIST_URL)
+    void getSisterAppByPagination(
+            @Query("page") int page,
+            Callback<List<SisterAppItem>> callback);
+
+    @GET(CommonConfig.GET_SISTER_APP_LIST_URL)
+    void getCommentlistByPostIDByPagination(
+            @Query("page") int page,@Query("post_id") String postId,
+            Callback<List<CommentItem>> callback);
+
+    @GET(CommonConfig.GET_IWOMEN_POST_BY_POST_ID_URL)
+    void getIwomenPostByPostID(
+            @Path("id") String id,
+            Callback<IWomenPost> callback);
+
+    @GET(CommonConfig.GET_CATEGORIES_LIST__URL)
+    void getCategoriesByPagination(
+            @Query("page") int page,
+            Callback<List<Categories>> callback);
+
+
 
 }

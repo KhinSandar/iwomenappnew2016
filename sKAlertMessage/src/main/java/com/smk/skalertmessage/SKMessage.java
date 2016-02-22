@@ -2,14 +2,17 @@ package com.smk.skalertmessage;
 
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
+import android.view.Window;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
-public class SKMessage {
+public class SKMessage extends Dialog{
 	private static SKMessage instance;
 	private String Message;
 	public static final int SUCCESS = 0;
@@ -26,10 +29,11 @@ public class SKMessage {
 	private View btn_delete;
 	private LayoutParams params;
 	public SKMessage(Activity activity) {
+		super(activity);
 		this.activity = activity;
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public static SKMessage getInstance(Activity activity) {
     	if(instance == null){
     		instance = new SKMessage(activity);
@@ -37,7 +41,7 @@ public class SKMessage {
     	instance.init();
 		return instance;
 	}
-	
+
 	public static void showMessage(Activity activity, String message, int messageType){
 		if(instance == null){
 			instance = new SKMessage(activity);
@@ -45,9 +49,9 @@ public class SKMessage {
 		instance.init();
 		instance.setMessage(message);
 		instance.setMessageType(messageType);
-		instance.show();
+		instance.showDialog();
 	}
-	
+
 	public String getMessage() {
 		return Message;
 	}
@@ -60,8 +64,8 @@ public class SKMessage {
 	public void setMessageType(int messageType) {
 		MessageType = messageType;
 	}
-	
-	public void show(){
+
+	public void showDialog(){
 		switch (getMessageType()) {
 		case SUCCESS:
 			showSuccess();
@@ -82,146 +86,137 @@ public class SKMessage {
 		if(getMessage() == null){
 			throw new RuntimeException("Message may not empty, Please use setMessage(...).");
 		}
-		
+
 	}
-	
+
 	private void init(){
-		
+
 		SuccessView = View.inflate(activity, R.layout.sk_message_success, null);
 		ErrorView = View.inflate(activity, R.layout.sk_message_error, null);
 		InfoView = View.inflate(activity, R.layout.sk_message_info, null);
 		WarningView = View.inflate(activity, R.layout.sk_message_warning, null);
-		
+
 		params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-		
-		activity.addContentView(SuccessView, params);
-		activity.addContentView(ErrorView, params);
-		activity.addContentView(InfoView, params);
-		activity.addContentView(WarningView, params);
-		
-		SuccessView.setVisibility(View.GONE);
-		ErrorView.setVisibility(View.GONE);
-		InfoView.setVisibility(View.GONE);
-		WarningView.setVisibility(View.GONE);
-		
+
+
+		params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+		getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+
 	}
-	
+
 	private void showSuccess(){
-		getSuccessView().setVisibility(View.VISIBLE);
-		getErrorView().setVisibility(View.GONE);
-		getInfoView().setVisibility(View.GONE);
-		getWarningView().setVisibility(View.GONE);	
-		
+
+		addContentView(SuccessView, params);
+
 		getSuccessView().startAnimation(AnimationUtils.loadAnimation(activity, R.anim.top_in));
-		
+
 		txt_message = (TextView) getSuccessView().findViewById(R.id.sk_txt_message);
 		txt_message.setText(getMessage());
-		
+
 		btn_delete = getSuccessView().findViewById(R.id.sk_btn_delete);
-		btn_delete.setOnClickListener(new OnClickListener() {
-			
+		btn_delete.setOnClickListener(new View.OnClickListener() {
+
 			public void onClick(final View v) {
 				// TODO Auto-generated method stub
 				Log.v("SKMessage","SKMessage is close.");
 				getSuccessView().startAnimation(AnimationUtils.loadAnimation(activity, R.anim.top_out));
 				getSuccessView().postDelayed(new Runnable() {
-					
+
 					public void run() {
 						// TODO Auto-generated method stub
-						getSuccessView().setVisibility(View.GONE);
+						dismiss();
 					}
 				}, 1000);
 			}
 		});
+		show();
 	}
-	
+
 	private void showError(){
-		getSuccessView().setVisibility(View.GONE);
-		getErrorView().setVisibility(View.VISIBLE);
-		getInfoView().setVisibility(View.GONE);
-		getWarningView().setVisibility(View.GONE);	
-		
+
+		addContentView(ErrorView, params);
+
 		getErrorView().startAnimation(AnimationUtils.loadAnimation(activity, R.anim.top_in));
-		
+
 		txt_message = (TextView) getErrorView().findViewById(R.id.sk_txt_message);
 		txt_message.setText(getMessage());
-		
+
 		btn_delete = getErrorView().findViewById(R.id.sk_btn_delete);
-		btn_delete.setOnClickListener(new OnClickListener() {
-			
+		btn_delete.setOnClickListener(new View.OnClickListener() {
+
 			public void onClick(final View v) {
 				// TODO Auto-generated method stub
 				Log.v("SKMessage","SKMessage is close.");
 				getErrorView().startAnimation(AnimationUtils.loadAnimation(activity, R.anim.top_out));
 				getErrorView().postDelayed(new Runnable() {
-					
+
 					public void run() {
 						// TODO Auto-generated method stub
-						getErrorView().setVisibility(View.GONE);
+						dismiss();
 					}
 				}, 1000);
 			}
 		});
+		show();
 	}
-	
+
 	private void showInfo(){
-		getSuccessView().setVisibility(View.GONE);
-		getErrorView().setVisibility(View.GONE);
-		getInfoView().setVisibility(View.VISIBLE);
-		getWarningView().setVisibility(View.GONE);	
-		
+
+		activity.addContentView(InfoView, params);
+
 		getInfoView().startAnimation(AnimationUtils.loadAnimation(activity, R.anim.top_in));
-		
+
 		txt_message = (TextView) getInfoView().findViewById(R.id.sk_txt_message);
 		txt_message.setText(getMessage());
-		
+
 		btn_delete = getInfoView().findViewById(R.id.sk_btn_delete);
-		btn_delete.setOnClickListener(new OnClickListener() {
-			
+		btn_delete.setOnClickListener(new View.OnClickListener() {
+
 			public void onClick(final View v) {
 				// TODO Auto-generated method stub
 				Log.v("SKMessage","SKMessage is close.");
 				getInfoView().startAnimation(AnimationUtils.loadAnimation(activity, R.anim.top_out));
 				getInfoView().postDelayed(new Runnable() {
-					
+
 					public void run() {
 						// TODO Auto-generated method stub
-						getInfoView().setVisibility(View.GONE);
+						dismiss();
 					}
 				}, 1000);
 			}
 		});
+		show();
 	}
-	
+
 	private void showWarning(){
-		getSuccessView().setVisibility(View.GONE);
-		getErrorView().setVisibility(View.GONE);
-		getInfoView().setVisibility(View.GONE);
-		getWarningView().setVisibility(View.VISIBLE);
-		
+
+		addContentView(WarningView, params);
+
 		getWarningView().startAnimation(AnimationUtils.loadAnimation(activity, R.anim.top_in));
-		
+
 		txt_message = (TextView) getWarningView().findViewById(R.id.sk_txt_message);
 		txt_message.setText(getMessage());
-		
+
 		btn_delete = getWarningView().findViewById(R.id.sk_btn_delete);
-		btn_delete.setOnClickListener(new OnClickListener() {
-			
+		btn_delete.setOnClickListener(new View.OnClickListener() {
+
 			public void onClick(final View v) {
 				// TODO Auto-generated method stub
 				Log.v("SKMessage","SKMessage is close.");
 				getWarningView().startAnimation(AnimationUtils.loadAnimation(activity, R.anim.top_out));
 				getWarningView().postDelayed(new Runnable() {
-					
+
 					public void run() {
 						// TODO Auto-generated method stub
-						getWarningView().setVisibility(View.GONE);
+						dismiss();
 					}
 				}, 1000);
 			}
 		});
+		show();
 	}
-	
+
 	public View getSuccessView() {
 		return SuccessView;
 	}
@@ -254,5 +249,5 @@ public class SKMessage {
 		WarningView = warningView;
 	}
 
-	
+
 }

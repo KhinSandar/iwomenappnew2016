@@ -19,13 +19,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.pnikosis.materialishprogress.ProgressWheel;
 import com.smk.clientapi.NetworkEngine;
 import com.smk.iwomen.BaseActionBarActivity;
 import com.smk.model.Rating;
+import com.smk.skconnectiondetector.SKConnectionDetector;
+import com.smk.sklistview.SKListView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,6 +44,7 @@ import org.undp_iwomen.iwomen.utils.StorageUtil;
 import org.undp_iwomen.iwomen.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -50,24 +53,27 @@ import retrofit.client.Response;
 /**
  * Created by khinsandar on 7/29/15.
  */
-public class ResourcesFragment extends Fragment  {
+public class ResourcesFragment extends Fragment {
     public static final String ARG_MENU_INDEX = "index";
 
     private Context mContext;
-    private ListView lvResouces;
-    private ArrayList<ResourceItem> ResourceItems;
+
+    private SKListView lvResouces;
+    private ProgressWheel progress;
+    private int paginater = 1;
+    private ArrayList<com.smk.model.ResourceItem> ResourceItems;
+
+
 
     private ResourcesListViewAdapter adapter;
     SharedPreferences sharePrefLanguageUtil;
     String mstr_lang;
-    String name[];
+
     public Rating avgRatings;
 
-    int[] randomImgMain = new int[]{R.drawable.idea
-            , R.drawable.donors, R.drawable.law};
+
 
     private ProgressDialog mProgressDialog;
-
     private StorageUtil storageUtil;
 
 
@@ -111,18 +117,42 @@ public class ResourcesFragment extends Fragment  {
         return rootView;
     }
 
+    private boolean isLoading = true;
+    private SKListView.Callbacks skCallbacks = new SKListView.Callbacks() {
+        @Override
+        public void onScrollState(int scrollSate) {
+
+        }
+
+        @Override
+        public void onScrollChanged(int scrollY) {
+
+        }
+
+        @Override
+        public void onNextPageRequest() {
+            if(!isLoading){
+                getResourceDataPaginationFromSever();
+            }
+        }
+    };
+
     private void init(View rootView) {
         sharePrefLanguageUtil = getActivity().getSharedPreferences(Utils.PREF_SETTING, Context.MODE_PRIVATE);
 
-        ResourceItems = new ArrayList<ResourceItem>();
-        lvResouces = (ListView) rootView.findViewById(R.id.resource_list);
-
+        ResourceItems = new ArrayList<>();
+        lvResouces = (SKListView) rootView.findViewById(R.id.resource_lv);
+        progress = (ProgressWheel) rootView.findViewById(R.id.resource_progress_wheel);
 
         mstr_lang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
+        adapter = new ResourcesListViewAdapter(getActivity(),ResourceItems, mstr_lang);
+        lvResouces.setAdapter(adapter);
+        lvResouces.setCallbacks(skCallbacks);
+        lvResouces.setNextPage(true);
+        adapter.notifyDataSetChanged();
 
-
-
-
+        getResourceDataPaginationFromSever();
+        progress.setVisibility(View.VISIBLE);
         //When very start this fragment open , need to check db data
         String selections = TableAndColumnsName.ResourceUtil.STATUS + "=?";
         String[] selectionargs = {"0"};
@@ -142,14 +172,14 @@ public class ResourcesFragment extends Fragment  {
             } else {
 
                 mProgressDialog.dismiss();
+                SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
 
-
-                if (mstr_lang.equals(Utils.ENG_LANG)) {
+                /*if (mstr_lang.equals(Utils.ENG_LANG)) {
                     Utils.doToastEng(mContext, getResources().getString(R.string.open_internet_warning_eng));
                 } else {
 
                     Utils.doToastMM(mContext, getActivity().getResources().getString(R.string.open_internet_warning_mm));
-                }
+                }*/
             }
         }
 
@@ -161,9 +191,9 @@ public class ResourcesFragment extends Fragment  {
 
                 Intent intent = new Intent(mContext, SubResourceListActivity.class);
 
-                intent.putExtra("ResourceId", ResourceItems.get(i).getResourceId());
-                intent.putExtra("TitleEng", ResourceItems.get(i).getResourceName());
-                intent.putExtra("TitleMM", ResourceItems.get(i).getResourceNameMM());
+                intent.putExtra("ResourceId", ResourceItems.get(i).getId());
+                intent.putExtra("TitleEng", ResourceItems.get(i).getResourceTitleEng());
+                intent.putExtra("TitleMM", ResourceItems.get(i).getResourceTitleMm());
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(intent);
@@ -174,6 +204,37 @@ public class ResourcesFragment extends Fragment  {
 
     }
 
+
+    private void getResourceDataPaginationFromSever() {
+        if (Connection.isOnline(mContext)) {
+            progress.setVisibility(View.VISIBLE);
+            isLoading = true;
+            NetworkEngine.getInstance().getResourceByPagination(paginater, new Callback<List<com.smk.model.ResourceItem>>() {
+                @Override
+                public void success(List<com.smk.model.ResourceItem> resourceItems, Response response) {
+                    ResourceItems.addAll(resourceItems);
+                    adapter.notifyDataSetChanged();
+                    progress.setVisibility(View.INVISIBLE);
+                    isLoading = false;
+                    if(ResourceItems.size() == 12){
+                        lvResouces.setNextPage(true);
+                        paginater++;
+                    }else{
+                        // If no more item
+                        lvResouces.setNextPage(false);
+                    }
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+
+                }
+            });
+
+        }else {
+            SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
+        }
+    }
 
     private void setupAdapter() {
 
@@ -206,7 +267,7 @@ public class ResourcesFragment extends Fragment  {
 
 
                         ResourceItem rI = new ResourceItem(id, resouceEng, resouceMM, iconPath);
-                        ResourceItems.add(rI);
+                        //ResourceItems.add(rI);
                         i++;
                     } while (cursor.moveToNext());
                 }
@@ -217,9 +278,8 @@ public class ResourcesFragment extends Fragment  {
                         //Log.e("Set Up adapter ResourceItems", "===>" + ResourceItems.size());
 
                         //storageUtil.SaveArrayListToSD("ResourceArrayList", ResourceItems);
-                        adapter = new ResourcesListViewAdapter(getActivity().getApplicationContext(), ResourceItems, mstr_lang);
+                        //adapter = new ResourcesListViewAdapter(getActivity().getApplicationContext(), ResourceItems, mstr_lang);
                         lvResouces.setAdapter(adapter);
-
 
 
                     } catch (NullPointerException ex) {
@@ -314,7 +374,6 @@ public class ResourcesFragment extends Fragment  {
                                 cv.put(TableAndColumnsName.ResourceUtil.RESOURCE_TITLE_ENG, resouceEng);
                                 cv.put(TableAndColumnsName.ResourceUtil.RESOURCE_TITLE_MM, resouceMM);
                                 cv.put(TableAndColumnsName.ResourceUtil.RESOURCE_LOGO_IMG_PATH, iconPath);
-
 
 
                                 cv.put(TableAndColumnsName.ResourceUtil.STATUS, "0");
@@ -416,7 +475,6 @@ public class ResourcesFragment extends Fragment  {
                                 cv.put(TableAndColumnsName.ResourceUtil.RESOURCE_LOGO_IMG_PATH, iconPath);
 
 
-
                                 cv.put(TableAndColumnsName.ResourceUtil.STATUS, "0");
                                 cv.put(TableAndColumnsName.ResourceUtil.CREATED_DATE, each_object.get("createdAt").toString());// post.get("postUploadedDate").toString() //post.getCreatedAt().toString()
                                 cv.put(TableAndColumnsName.ResourceUtil.UPDATED_DATE, each_object.get("updatedAt").toString());
@@ -488,7 +546,7 @@ public class ResourcesFragment extends Fragment  {
         }
     }
 
-    public void getReview(){
+    public void getReview() {
         NetworkEngine.getInstance().getReview("Be Knowledgeable", new Callback<Rating>() {
 
 
@@ -506,22 +564,22 @@ public class ResourcesFragment extends Fragment  {
         });
     }
 
-    public void showReviewDetailDialog(){
+    public void showReviewDetailDialog() {
         final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
-        View convertView = View.inflate(getActivity(),R.layout.dialog_reviews_detial,null);
-        TextView txt_avg_title = (TextView ) convertView.findViewById(R.id.txt_avg_title);
-        TextView txt_total_rating = (TextView ) convertView.findViewById(R.id.txt_total_rating);
+        View convertView = View.inflate(getActivity(), R.layout.dialog_reviews_detial, null);
+        TextView txt_avg_title = (TextView) convertView.findViewById(R.id.txt_avg_title);
+        TextView txt_total_rating = (TextView) convertView.findViewById(R.id.txt_total_rating);
         RatingBar avg_ratings = (RatingBar) convertView.findViewById(R.id.avg_ratings);
         TextView txt_avg_ratings = (TextView) convertView.findViewById(R.id.txt_avg_ratings);
         TextView txt_rating_desc = (TextView) convertView.findViewById(R.id.txt_rating_desc);
-        Button btn_ok = (Button)convertView.findViewById(R.id.btn_ok);
+        Button btn_ok = (Button) convertView.findViewById(R.id.btn_ok);
         alertDialog.setView(convertView);
 
         txt_avg_title.setText("Overall Rating Be Knowledgeable");
-        txt_total_rating.setText(avgRatings.getTotalRatings()+"");
+        txt_total_rating.setText(avgRatings.getTotalRatings() + "");
         avg_ratings.setRating(avgRatings.getTotalRatings().floatValue());
         txt_rating_desc.setText(BaseActionBarActivity.getRatingDesc(avgRatings.getTotalRatings()));
-        txt_avg_ratings.setText(avgRatings.getTotalUsers()+" Total");
+        txt_avg_ratings.setText(avgRatings.getTotalUsers() + " Total");
 
         final AlertDialog ad = alertDialog.show();
 
@@ -532,9 +590,6 @@ public class ResourcesFragment extends Fragment  {
             }
         });
     }
-
-
-
 
 
 }

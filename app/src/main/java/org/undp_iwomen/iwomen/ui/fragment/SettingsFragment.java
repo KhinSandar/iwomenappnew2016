@@ -252,7 +252,6 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
         ((SettingActivity) getActivity()).textViewTitle.setText(R.string.action_settings);
         settings_language_setting_title.setText(R.string.title_action_settings_eng);
         chk_settings_getnotification.setText(R.string.title_notrification_eng);
-        settings_changeTheme.setText(R.string.title_change_theme_eng);
 
         //((SettingActivity) getActivity()).textViewTitle.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
         settings_language_setting_title.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
@@ -265,7 +264,6 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
         ((SettingActivity) getActivity()).textViewTitle.setText(R.string.action_settings_mm);
         settings_language_setting_title.setText(R.string.title_action_settings_mm);
         chk_settings_getnotification.setText(R.string.title_notrification_mm);
-        settings_changeTheme.setText(R.string.title_change_theme_mm);
 
         //((SettingActivity) getActivity()).textViewTitle.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
         chk_settings_getnotification.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
@@ -283,7 +281,6 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
         chk_settings_getnotification.setText(FontConverter.zg12uni51(getResources().getString(R.string.title_notrification_mm)));
 
         settings_language_setting_title.setText(R.string.title_action_settings_mm);
-        settings_changeTheme.setText(R.string.title_change_theme_mm);
 
 
         //((SettingActivity) getActivity()).textViewTitle.setTypeface(MyTypeFace.get(mContext, MyTypeFace.UNI));
@@ -299,7 +296,6 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
         ((SettingActivity) getActivity()).textViewTitle.setText(R.string.action_settings_mm);
         settings_language_setting_title.setText(R.string.title_action_settings_mm);
         chk_settings_getnotification.setText(R.string.title_notrification_mm);
-        settings_changeTheme.setText(R.string.title_change_theme_mm);
 
         /*((SettingActivity) getActivity()).textViewTitle.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
         settings_language_setting_title.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));

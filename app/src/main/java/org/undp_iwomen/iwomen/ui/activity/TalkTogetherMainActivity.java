@@ -23,7 +23,8 @@ public class TalkTogetherMainActivity extends BaseActionBarActivity {
     private CustomTextView textViewTitle;
     private Context mContext;
     SharedPreferences sharePrefLanguageUtil;
-    String strLang, mstrTitle;
+    String strLang, mstrTitle , mCatID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +50,7 @@ public class TalkTogetherMainActivity extends BaseActionBarActivity {
         Intent i = getIntent();
 
         mstrTitle = i.getStringExtra("CategoryName");
+        mCatID = i.getStringExtra("CategoryID");
         textViewTitle.setText(mstrTitle);
         /*if (strLang.equals(Utils.ENG_LANG)) {
 

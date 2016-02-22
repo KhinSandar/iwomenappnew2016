@@ -87,7 +87,17 @@ public class CommonConfig {
 
     public static final String CREATE_REGISTER_URL = "/api/v1/users";
 
-    public static final String CREATE_IWOMEN_POST_BY_DATE_URL = "/api/v1/iwomenPosts";
+    public static final String GET_IWOMEN_POST_BY_DATE_URL = "/api/v1/iwomenPosts";
+
+    public static final String GET_RESOURCE_URL = "/api/v1/resources";
+
+    public static final String GET_SISTER_APP_LIST_URL = "/api/v1/sisterDownloadApps";
+
+    public static final String GET_COMMENT_LIST_BY_POST_ID_URL = "/api/v1/comments";
+
+    public static final String GET_IWOMEN_POST_BY_POST_ID_URL = "/api/v1/iwomenPosts/{id}";
+
+    public static final String GET_CATEGORIES_LIST__URL = "/api/v1/categories";
 
 
 }

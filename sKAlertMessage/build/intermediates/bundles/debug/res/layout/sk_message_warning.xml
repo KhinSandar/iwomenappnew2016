@@ -1,17 +1,32 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/sk_toast_message_selector_warning"
-    android:orientation="vertical" >
-
+    android:orientation="vertical">
+
+
+
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="10dp" >
-
+
+
+
+
+
+
+
+
+
+
+
+
+
         <TextView
             android:id="@+id/sk_txt_message"
             style="@style/sk_toast_message"
@@ -21,7 +36,10 @@
             android:textColor="@color/txt_warning" />
 
     </LinearLayout>
-
+
+
+
+
     <ImageView
         android:id="@+id/sk_btn_delete"
         android:layout_width="wrap_content"

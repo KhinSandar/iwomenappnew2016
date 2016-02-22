@@ -168,7 +168,7 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(mContext, PostDetailActivity.class);
 
-                intent.putExtra("post_id", feedItems.get(position).getPost_obj_id());
+                intent.putExtra("post_id", iWomenPostList.get(position).getId());
 
                 //intent.putExtra("ImgUrl", mImgurl.get(getPosition()));
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -385,7 +385,8 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
             @Override
             public void onClick(View v) {
                 //index = 1;
-                setupAdapter();
+                //setupAdapter();
+                getIWomenPostByPagination();
                 sv.setIconified(true);
                 sv.setQuery("", false);
             }
@@ -1378,7 +1379,8 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
     public boolean onQueryTextChange(String s) {
         if (s.equals("")) {
             //index = 1;
-            setupAdapter();
+            //setupAdapter();
+            getIWomenPostByPagination();
 
         }
         return false;

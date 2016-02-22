@@ -8,7 +8,8 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.GridView;
 
-import org.undp_iwomen.iwomen.data.CategoriesDataModel;
+import com.smk.model.Categories;
+
 import org.undp_iwomen.iwomen.ui.adapter.TalkTogetherGridViewAdapter;
 
 import java.util.List;
@@ -93,7 +94,7 @@ public class WrappedGridView extends GridView implements AbsListView.OnScrollLis
         this.removeFooterView(footer);
     }
 
-    public void addNewData(List<CategoriesDataModel> data) {
+    public void addNewData(List<Categories> data) {
         this.removeFooterView(footer);
         Log.i("Data", data.toString());
         adapter.Addall(data);
