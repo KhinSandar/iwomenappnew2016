@@ -1,22 +1,42 @@
 [
     {
-        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/build/intermediates/res/merged/release/layout/square_date_cell.xml",
-        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/layout/square_date_cell.xml"
+        "merged": "C:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\caldroid\\build\\intermediates\\res\\merged\\release\\layout\\date_grid_fragment.xml",
+        "source": "C:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\caldroid\\src\\main\\res\\layout\\date_grid_fragment.xml"
     },
     {
-        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/build/intermediates/res/merged/release/layout/calendar_view.xml",
-        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/layout/calendar_view.xml"
+        "merged": "C:\\Users\\Toe Lie\\iwomenappnew2016\\caldroid\\build\\intermediates\\res\\merged\\release\\layout\\date_grid_fragment.xml",
+        "source": "C:\\Users\\Toe Lie\\iwomenappnew2016\\caldroid\\src\\main\\res\\layout\\date_grid_fragment.xml"
     },
     {
-        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/build/intermediates/res/merged/release/layout/date_grid_fragment.xml",
-        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/layout/date_grid_fragment.xml"
+        "merged": "C:\\Users\\Toe Lie\\iwomenappnew2016\\caldroid\\build\\intermediates\\res\\merged\\release\\layout\\calendar_view.xml",
+        "source": "C:\\Users\\Toe Lie\\iwomenappnew2016\\caldroid\\src\\main\\res\\layout\\calendar_view.xml"
     },
     {
-        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/build/intermediates/res/merged/release/layout/weekday_textview.xml",
-        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/layout/weekday_textview.xml"
+        "merged": "C:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\caldroid\\build\\intermediates\\res\\merged\\release\\layout\\weekday_textview.xml",
+        "source": "C:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\caldroid\\src\\main\\res\\layout\\weekday_textview.xml"
     },
     {
-        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/build/intermediates/res/merged/release/layout/normal_date_cell.xml",
-        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/layout/normal_date_cell.xml"
+        "merged": "C:\\Users\\Toe Lie\\iwomenappnew2016\\caldroid\\build\\intermediates\\res\\merged\\release\\layout\\square_date_cell.xml",
+        "source": "C:\\Users\\Toe Lie\\iwomenappnew2016\\caldroid\\src\\main\\res\\layout\\square_date_cell.xml"
+    },
+    {
+        "merged": "C:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\caldroid\\build\\intermediates\\res\\merged\\release\\layout\\calendar_view.xml",
+        "source": "C:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\caldroid\\src\\main\\res\\layout\\calendar_view.xml"
+    },
+    {
+        "merged": "C:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\caldroid\\build\\intermediates\\res\\merged\\release\\layout\\normal_date_cell.xml",
+        "source": "C:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\caldroid\\src\\main\\res\\layout\\normal_date_cell.xml"
+    },
+    {
+        "merged": "C:\\Users\\Toe Lie\\iwomenappnew2016\\caldroid\\build\\intermediates\\res\\merged\\release\\layout\\normal_date_cell.xml",
+        "source": "C:\\Users\\Toe Lie\\iwomenappnew2016\\caldroid\\src\\main\\res\\layout\\normal_date_cell.xml"
+    },
+    {
+        "merged": "C:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\caldroid\\build\\intermediates\\res\\merged\\release\\layout\\square_date_cell.xml",
+        "source": "C:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\caldroid\\src\\main\\res\\layout\\square_date_cell.xml"
+    },
+    {
+        "merged": "C:\\Users\\Toe Lie\\iwomenappnew2016\\caldroid\\build\\intermediates\\res\\merged\\release\\layout\\weekday_textview.xml",
+        "source": "C:\\Users\\Toe Lie\\iwomenappnew2016\\caldroid\\src\\main\\res\\layout\\weekday_textview.xml"
     }
 ]

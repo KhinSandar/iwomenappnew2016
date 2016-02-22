@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    tools:context="org.undp_iwomen.iwomen.ui.activity.PostDetailV2Activity">
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/feed_item_post_pic_height"
+            android:fitsSystemWindows="true"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/toolbar_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                app:contentScrim="?attr/colorPrimary"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                <FrameLayout
+                    android:id="@+id/head_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/postdetail_content_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/feed_item_post_pic_height"
+                        android:background="@drawable/bg_sample"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/bg_sample"
+                        android:visibility="visible"
+                        app:layout_collapseMode="parallax"
+                        app:layout_collapseParallaxMultiplier="0.7" />
+
+                    <ProgressBar
+                        android:id="@+id/postdetail_feed_item_progressBar"
+                        style="?android:attr/progressBarStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+
+                        android:layout_gravity="center"
+                        android:visibility="visible" />
+
+                    <ImageView
+                        android:id="@+id/postdeail_video_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:src="@drawable/videoplay"
+                        android:visibility="visible" />
+
+                </FrameLayout>
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:layout_collapseMode="pin"
+                    app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+            </android.support.design.widget.CollapsingToolbarLayout>
+        </android.support.design.widget.AppBarLayout>
+
+        <include layout="@layout/content_post_detail_v2" />
+
+    </android.support.design.widget.CoordinatorLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:layout_gravity="bottom"
+        android:background="@color/primary"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/ic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_mood_white" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:layout_toLeftOf="@+id/iic"
+            android:layout_toRightOf="@+id/ic"
+            android:hint="Tell iWomen How You Feel"
+            android:textColor="#fff"
+            android:textColorHint="#8fff" />
+
+        <ImageView
+            android:id="@+id/iic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_send_white" />
+
+    </RelativeLayout>
+
+</FrameLayout>
