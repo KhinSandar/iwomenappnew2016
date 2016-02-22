@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
-import android.widget.TextView;
 
 import org.smk.iwomen.BaseActionBarActivity;
 
@@ -25,7 +24,7 @@ public class SplashActivity extends BaseActionBarActivity {
     private static int SPLASH_TIME_OUT = 1000;
     private SharedPreferences mSharedPreferences;
     private ProgressWheel mLoadingProgress;
-    private TextView mNoInternetErrorTextView;
+    //private CustomTextView mNoInternetErrorTextView;
     private boolean isFetching = false;
 
     @Override
@@ -37,7 +36,7 @@ public class SplashActivity extends BaseActionBarActivity {
 
         mSharedPreferences = getSharedPreferences(CommonConfig.SHARE_PREFERENCE_USER_INFO, Context.MODE_PRIVATE);
         mLoadingProgress = (ProgressWheel) findViewById(R.id.splash_loading);
-        mNoInternetErrorTextView = (TextView) findViewById(R.id.no_internet_error_loading);
+        //mNoInternetErrorTextView = (CustomTextView) findViewById(R.id.no_internet_error_loading);
 
         doFetching();
     }

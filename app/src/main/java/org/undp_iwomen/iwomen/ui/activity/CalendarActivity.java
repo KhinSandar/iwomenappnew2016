@@ -150,8 +150,15 @@ public class CalendarActivity extends AppCompatActivity {
             public void onSelectDate(Date date, View view) {
                 Toast.makeText(getApplicationContext(), formatter.format(date),
                         Toast.LENGTH_SHORT).show();
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(date);
+                int month = cal.get(Calendar.MONTH);
+
                 Intent i = new Intent(getApplicationContext(), ViewEventsActivity.class);
-                //i.putExtra("CategoryName", CategoriesModelList.get(position).category);//CategoryName
+
+                i.putExtra("Date", formatter.format(date).toString());
+                i.putExtra("Month", month);
+
                 startActivity(i);
 
             }

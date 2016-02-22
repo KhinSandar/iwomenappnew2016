@@ -11,10 +11,10 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.smk.model.Categories;
 import com.squareup.picasso.Picasso;
 
 import org.undp_iwomen.iwomen.R;
-import org.undp_iwomen.iwomen.data.CategoriesDataModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,13 +22,12 @@ import java.util.List;
 /**
  * Created by dharmaone on 29/05/2014.
  */
-public class TalkTogetherGridViewAdapter extends BaseAdapter
-{
+public class TalkTogetherGridViewAdapter extends BaseAdapter {
     /*private ArrayList<String> listName = null;
     private ArrayList<String> listImg = null ;
     private ArrayList<String>  listID = null;
 */
-    ArrayList<CategoriesDataModel> cat_data_list = null;
+    ArrayList<Categories> cat_data_list = null;
 
     protected Activity mActivity;
 
@@ -47,7 +46,8 @@ public class TalkTogetherGridViewAdapter extends BaseAdapter
     // Declare Variables
     Context mContext;
     LayoutInflater inflater;
-    public TalkTogetherGridViewAdapter(Activity atx, Context context, ArrayList<CategoriesDataModel> catlist) { //
+
+    public TalkTogetherGridViewAdapter(Activity atx, Context context, ArrayList<Categories> catlist) { //
         super();
         mActivity = atx;
         mContext = context;
@@ -58,9 +58,11 @@ public class TalkTogetherGridViewAdapter extends BaseAdapter
         //Log.e("BrowseGridviewAdapter Constructor", "" + listShopName.size() +listShopName.toString());
         //this.activity = activity;
     }
-    public void setServerListSize(int serverListSize){
+
+    public void setServerListSize(int serverListSize) {
         this.serverListSize = serverListSize;
     }
+
     /**
      * disable click events on indicating rows
      */
@@ -74,8 +76,8 @@ public class TalkTogetherGridViewAdapter extends BaseAdapter
      * Custom Add all
      */
 
-    public void Addall(List<CategoriesDataModel> list){
-     this.cat_data_list.addAll(list);
+    public void Addall(List<Categories> list) {
+        this.cat_data_list.addAll(list);
     }
 
     /**
@@ -92,7 +94,7 @@ public class TalkTogetherGridViewAdapter extends BaseAdapter
      */
     @Override
     public int getCount() {
-        return cat_data_list.size() ;
+        return cat_data_list.size();
     }
 
     /**
@@ -109,7 +111,7 @@ public class TalkTogetherGridViewAdapter extends BaseAdapter
     @Override
     public String getItem(int position) {
         // TODO Auto-generated method stub
-        return  cat_data_list.get(position).category_id;
+        return cat_data_list.get(position).getId().toString();
          /*return (getItemViewType(position) == VIEW_TYPE_ACTIVITY) ? listID
                 .get(position) : null;*/
     }
@@ -118,7 +120,7 @@ public class TalkTogetherGridViewAdapter extends BaseAdapter
     @Override
     public long getItemId(int position) {
         // TODO Auto-generated method stub
-       return 0;
+        return 0;
         /*return  (getItemViewType(position) == VIEW_TYPE_ACTIVITY) ? position
                 : -1;*/
     }
@@ -144,8 +146,7 @@ public class TalkTogetherGridViewAdapter extends BaseAdapter
     }
 */
 
-    public static class ViewHolder
-    {
+    public static class ViewHolder {
         public ImageView imgViewCate;
         public TextView txtCateName;
         public ProgressBar progressBar;
@@ -159,45 +160,45 @@ public class TalkTogetherGridViewAdapter extends BaseAdapter
 
         //LayoutInflater inflator = activity.getLayoutInflater();
 
-        if(view ==null)
-        {
+        if (view == null) {
             holder = new ViewHolder();
             view = inflater.inflate(R.layout.fragment_talk_together_grid_item, null);//gridview_row //fra_browse_gridview_item
 
             //holder.txtViewTitle = (TextView) view.findViewById(R.id.textView1);
             holder.imgViewCate = (ImageView) view.findViewById(R.id.img_cate);//imageView1
-            holder.txtCateName= (TextView)view.findViewById(R.id.txt_cate_name);
-            holder.progressBar = (ProgressBar)view.findViewById(R.id.progressBar_grid);
+            holder.txtCateName = (TextView) view.findViewById(R.id.txt_cate_name);
+            holder.progressBar = (ProgressBar) view.findViewById(R.id.progressBar_grid);
 
 
             view.setTag(holder);
-        }
-        else
-        {
+        } else {
             //holder = (ViewHolder) view.getTag();
             holder = (ViewHolder) view.getTag();
         }
 
-        holder.txtCateName.setText(cat_data_list.get(position).category);
+        holder.txtCateName.setText(cat_data_list.get(position).getName());
 
         //holder.txtCateName.setTypeface(DrawerMainActivity.faceNormal);
 
-
-        try {
-            Picasso.with(mContext)
-                    .load(cat_data_list.get(position).image_path )//"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
-                    .placeholder(R.drawable.place_holder)
-                    .error(R.drawable.place_holder)
-                    .into(holder.imgViewCate, new ImageLoadedCallback(holder.progressBar) {
-                        @Override
-                        public void onSuccess() {
-                            if (this.progressBar != null) {
-                                this.progressBar.setVisibility(View.GONE);
+        if (cat_data_list.get(position).getImage() != null && !cat_data_list.get(position).getImage().isEmpty()) {
+            try {
+                Picasso.with(mContext)
+                        .load(cat_data_list.get(position).getImage())//"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
+                        .placeholder(R.drawable.place_holder)
+                        .error(R.drawable.place_holder)
+                        .into(holder.imgViewCate, new ImageLoadedCallback(holder.progressBar) {
+                            @Override
+                            public void onSuccess() {
+                                if (this.progressBar != null) {
+                                    this.progressBar.setVisibility(View.GONE);
+                                }
                             }
-                        }
-                    });
-        } catch (OutOfMemoryError outOfMemoryError) {
-            outOfMemoryError.printStackTrace();
+                        });
+            } catch (OutOfMemoryError outOfMemoryError) {
+                outOfMemoryError.printStackTrace();
+            }
+        } else {
+            holder.progressBar.setVisibility(View.GONE);
         }
 
         /*if (getItemViewType(position) == VIEW_TYPE_LOADING) {
@@ -207,8 +208,10 @@ public class TalkTogetherGridViewAdapter extends BaseAdapter
 
         return view;
     }
+
     /**
      * returns a View to be displayed in the last row.
+     *
      * @param position
      * @param convertView
      * @param parent
@@ -232,7 +235,6 @@ public class TalkTogetherGridViewAdapter extends BaseAdapter
 
         return row;
     }
-
 
 
     private class ImageLoadedCallback implements com.squareup.picasso.Callback {

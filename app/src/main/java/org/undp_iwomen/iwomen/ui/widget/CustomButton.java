@@ -9,6 +9,8 @@ import android.widget.Button;
 import org.undp_iwomen.iwomen.model.FontConverter;
 import org.undp_iwomen.iwomen.utils.StoreUtil;
 
+import retrofit.http.HEAD;
+
 public class CustomButton extends Button{
 	public CustomButton(Context context){
 		super(context);
@@ -36,7 +38,7 @@ public class CustomButton extends Button{
 			String selected_font = StoreUtil.getInstance().selectFrom("fonts");
 			if(selected_font != null){
 				if(selected_font.equals("default")){
-					
+
 				}else if( selected_font.equals("zawgyione")){
 					setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/zawgyi.ttf"));
 				}else if( selected_font.equals("myanmar3")){

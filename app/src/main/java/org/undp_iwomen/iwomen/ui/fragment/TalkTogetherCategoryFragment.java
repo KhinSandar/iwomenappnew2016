@@ -1,10 +1,8 @@
 package org.undp_iwomen.iwomen.ui.fragment;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -13,14 +11,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.Toast;
 
 import com.pnikosis.materialishprogress.ProgressWheel;
+import com.smk.model.Categories;
+import com.smk.skconnectiondetector.SKConnectionDetector;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.smk.clientapi.NetworkEngine;
 import org.undp_iwomen.iwomen.R;
-import org.undp_iwomen.iwomen.data.CategoriesDataModel;
 import org.undp_iwomen.iwomen.ui.activity.CalendarActivity;
 import org.undp_iwomen.iwomen.ui.activity.TalkTogetherMainActivity;
 import org.undp_iwomen.iwomen.ui.adapter.TalkTogetherGridViewAdapter;
@@ -31,6 +30,10 @@ import org.undp_iwomen.iwomen.utils.StorageUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 /*
 import com.etsy.android.sample.CategoryGridViewAdapter;
@@ -54,13 +57,14 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
     private WrappedGridView gridView;
     private String[] mTestCategoriesNames;
     private String[] mTestCategoriesID;
-    private ArrayList<CategoriesDataModel> CategoriesModelList;
+    private ArrayList<Categories> CategoriesModelList;
 
     private StorageUtil storageUtil;
     private SharePrefUtils sharePrefUtils;
 
 
     ProgressWheel progress_wheel;
+    private boolean isLoading = true;
     JSONObject json_each_Object;
     JSONArray json_whole_Array;
     JSONObject detailed;
@@ -117,78 +121,85 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
     public void LoadData(){
         if(Connection.isOnline(getActivity().getApplicationContext())){
 
-            //Parameter
+            progress_wheel.setVisibility(View.VISIBLE);
+            isLoading = true;
+
+            NetworkEngine.getInstance().getCategoriesByPagination(1, new Callback<List<Categories>>() {
+                @Override
+                public void success(List<Categories> categories, Response response) {
+                    CategoriesModelList = new ArrayList<Categories>();
+                    CategoriesModelList.addAll(categories);
 
 
-            CategoriesModelList = new ArrayList<CategoriesDataModel>();
+                    if (mAdapter == null) {
+                        mAdapter = new TalkTogetherGridViewAdapter(getActivity(), ctx, CategoriesModelList);
+
+                    }
+                    storageUtil.SaveArrayListToSD("Categories", CategoriesModelList);
 
 
-            CategoriesDataModel cat_model0 = new CategoriesDataModel("0","Calendar","http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-06f18fed-199e-4aa8-8e56-74475674cf84-applause-to-the-woman.png");
+                    progress_wheel.setVisibility(View.GONE);
+                    gridView.setAdapter(mAdapter);
+
+
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+
+                }
+            });
+
+
+
+
+            /*CategoriesDataModel cat_model0 = new CategoriesDataModel("0","Calendar","http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-06f18fed-199e-4aa8-8e56-74475674cf84-applause-to-the-woman.png");
             CategoriesModelList.add(cat_model0);
 
 
             CategoriesDataModel cat_model = new CategoriesDataModel("1","Activities","http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-b06f0901-87c3-4f89-b52e-39eecf7f4fa5-unity-is-strength.png");
             CategoriesModelList.add(cat_model);
-            CategoriesDataModel cat_model2 = new CategoriesDataModel("2","Livelihood","http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-b0069850-941d-460c-85f6-5c8631abca4f-lets-go.png");
-            CategoriesModelList.add(cat_model2);
-
-            CategoriesDataModel cat_model3 = new CategoriesDataModel("3","Q&A","http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-760c37e9-f739-4222-992c-d0f2232a61fa-dun-believe-the-rumour.png");
-            CategoriesModelList.add(cat_model3);
-
-            CategoriesDataModel cat_model4 = new CategoriesDataModel("4","Sample","http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-06f18fed-199e-4aa8-8e56-74475674cf84-applause-to-the-woman.png");
-            CategoriesModelList.add(cat_model4);
-
-            CategoriesDataModel cat_model5 = new CategoriesDataModel("4","Sample","http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-06f18fed-199e-4aa8-8e56-74475674cf84-applause-to-the-woman.png");
-            CategoriesModelList.add(cat_model5);
+            */
 
 
 
-            if(mAdapter == null){
-                mAdapter = new TalkTogetherGridViewAdapter(getActivity(),ctx, CategoriesModelList);
 
-            }
-            storageUtil.SaveArrayListToSD("Categories",CategoriesModelList);
-
-            //mAdapter.notifyDataSetChanged();
-            //progressBar.setVisibility(View.GONE);
-            progress_wheel.setVisibility(View.GONE);
-            gridView.setAdapter(mAdapter);
 
 
 
 
             }else{
 
-                    //Log.e("Categories API data", "Network failure case case");
-                    Toast.makeText(ctx, "Check your network connection", Toast.LENGTH_SHORT).show();
+            SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
+            CategoriesModelList = (ArrayList<Categories>)storageUtil.ReadArrayListFromSD("Categories");
 
-                    CategoriesModelList = (ArrayList<CategoriesDataModel>)storageUtil.ReadArrayListFromSD("Categories");
+            if(CategoriesModelList.size() > 0){
+                mAdapter = new TalkTogetherGridViewAdapter(getActivity(),ctx, CategoriesModelList);
+                gridView.setAdapter(mAdapter);
+            }
+            //Log.e("Categories API data", "Network failure case case");
+                    /*Toast.makeText(ctx, "Check your network connection", Toast.LENGTH_SHORT).show();
 
-                    if(CategoriesModelList.size() > 0){
-                        mAdapter = new TalkTogetherGridViewAdapter(getActivity(),ctx, CategoriesModelList);
-                        //mAdapter = new CategoryGridViewAdapter(getActivity(),ctx, (ArrayList<CategoriesDataModel>) createItems(0) );//CategoriesModelList
-                        gridView.setAdapter(mAdapter);
-                     }
 
-                //mAdapter.notifyDataSetChanged();
+                    */
+
+
              }
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             public void onItemClick(AdapterView<?> arg0, View arg1, int position,
                                     long arg3) {
-                //Toast.makeText(ctx, mAdapter.getItem(position), Toast.LENGTH_SHORT).show();
-                /*TLGUserStoriesRecentFragment tlgUserStoriesRecentFragment = new TLGUserStoriesRecentFragment();
-                android.support.v4.app.FragmentManager fragmentManager = getChildFragmentManager();// getSupportFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.content_frame, tlgUserStoriesRecentFragment).commit();
-                */
+
 
                 if ( position == 0){
                     Intent i = new Intent(ctx, CalendarActivity.class);
-                    i.putExtra("CategoryName", CategoriesModelList.get(position).category);//CategoryName
+                    i.putExtra("CategoryName", CategoriesModelList.get(position).getName());//CategoryName
                     startActivity(i);
                 }else{
                     Intent i = new Intent(ctx, TalkTogetherMainActivity.class);
-                    i.putExtra("CategoryName", CategoriesModelList.get(position).category);//CategoryName
+                    i.putExtra("CategoryName", CategoriesModelList.get(position).getName());//CategoryName
+
+                    i.putExtra("CategoryID", CategoriesModelList.get(position).getId());//CategoryName
                     startActivity(i);
                 }
 
@@ -217,14 +228,12 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
         if(menu!=null){
             menu.close();
             menu.removeItem(12);
-            /*SearchView searchView = (SearchView) menu.findItem(12).getActionView();
-            searchView.setIconified(false);
-            searchView.setVisibility(View.INVISIBLE);*/
+
         }
     }
 
-    private List<CategoriesDataModel> createItems(int os) {
-        List<CategoriesDataModel> result = new ArrayList<CategoriesDataModel>();
+    private List<Categories> createItems(int os) {
+        List<Categories> result = new ArrayList<Categories>();
 
         if(os+10 > CategoriesModelList.size()){ //10 > 85 90    //
             ITEM_PER_REQUEST = CategoriesModelList.size() - os; //5
@@ -295,77 +304,6 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
     }*/
 
 
-    public class BackgroundAsyncTask extends AsyncTask<Void, Integer, Void> {
-
-        //int myProgressCount;
-
-
-        Activity mContext;
-
-        public BackgroundAsyncTask(Activity atx){
-            this.mContext = atx;
-        }
-        @Override
-        protected void onPreExecute() {
-            /*Toast.makeText(DrawerMainActivity.this,
-                    "onPreExecute Start Progress Bar", Toast.LENGTH_LONG)
-                    .show();*/
-            //main_spinner.setProgress(0);
-            //myProgressCount = 0;
-            /*pDialog = new ProgressDialog(this.mContext);
-            pDialog.setMessage("Loading  information. Please wait...");
-            pDialog.setIndeterminate(false);
-            pDialog.setCancelable(true);
-            pDialog.show();*/
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            // TODO Auto-generated method stub
-
-            /*while (myProgressCount < 50) {
-                myProgressCount++;
-                *//**
-             * Runs on the UI thread after publishProgress(Progress...) is
-             * invoked. The specified values are the values passed to
-             * publishProgress(Progress...).
-             *
-             * Parameters values The values indicating progress.
-             *//*
-
-                publishProgress(myProgressCount);
-                SystemClock.sleep(50);
-            }*/
-            try {
-
-                LoadData();
-            } catch (NullPointerException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-
-
-            //pDialog.dismiss();
-            return null;
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... values) {
-            // TODO Auto-generated method stub
-            //main_spinner.setProgress(values[0]);
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-            /*Toast.makeText(DrawerMainActivity.this, "onPostExecute End Progress Bar",
-                    Toast.LENGTH_LONG).show();*/
-            //main_spinner.setVisibility(View.GONE);
-           // pDialog.dismiss();
-
-        }
-
-
-    }
 
 
 

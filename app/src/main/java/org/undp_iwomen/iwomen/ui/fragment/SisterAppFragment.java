@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.util.Linkify;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,11 +22,16 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.pnikosis.materialishprogress.ProgressWheel;
+import com.smk.model.SisterAppItem;
+import com.smk.skconnectiondetector.SKConnectionDetector;
+import com.smk.sklistview.SKListView;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.smk.clientapi.NetworkEngine;
 import org.undp_iwomen.iwomen.R;
-import org.undp_iwomen.iwomen.data.SisterAppItem;
 import org.undp_iwomen.iwomen.model.Helper;
 import org.undp_iwomen.iwomen.model.retrofit_api.UserPostAPI;
 import org.undp_iwomen.iwomen.ui.activity.AboutUsWebActivity;
@@ -37,6 +41,7 @@ import org.undp_iwomen.iwomen.utils.StorageUtil;
 import org.undp_iwomen.iwomen.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -51,8 +56,11 @@ public class SisterAppFragment extends Fragment {
     String mstr_lang;
     private Context mContext;
 
-    private ListView lv_sister;
+    private SKListView lv_sister;
+    private ProgressWheel progress;
+    private int paginater = 1;
     private ArrayList<SisterAppItem> sisterAppItemList;
+
     private SisterAppListAdapter sisterAppListAdapter;
     private TextView txt_gen_link;
     private TextView txt_undp_link;
@@ -78,6 +86,26 @@ public class SisterAppFragment extends Fragment {
         return view;
     }
 
+    private boolean isLoading = true;
+    private SKListView.Callbacks skCallbacks = new SKListView.Callbacks() {
+        @Override
+        public void onScrollState(int scrollSate) {
+
+        }
+
+        @Override
+        public void onScrollChanged(int scrollY) {
+
+        }
+
+        @Override
+        public void onNextPageRequest() {
+            if(!isLoading){
+                getSisterListPaginationFromSever();
+            }
+        }
+    };
+
     private void init(View rootView) {
 
 
@@ -86,21 +114,34 @@ public class SisterAppFragment extends Fragment {
         sharePrefLanguageUtil = getActivity().getSharedPreferences(Utils.PREF_SETTING, Context.MODE_PRIVATE);
         mstr_lang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
 
-        lv_sister = (ListView) rootView.findViewById(R.id.sister_app_listview);
+        lv_sister = (SKListView) rootView.findViewById(R.id.sister_app_listview);
+        progress = (ProgressWheel) rootView.findViewById(R.id.sister_progress_wheel);
+        sisterAppItemList = new ArrayList<>();
+
+        sisterAppListAdapter = new SisterAppListAdapter(getActivity(), sisterAppItemList);
+
+        lv_sister.setAdapter(sisterAppListAdapter);
+        lv_sister.setCallbacks(skCallbacks);
+        lv_sister.setNextPage(true);
+        sisterAppListAdapter.notifyDataSetChanged();
+
+        getSisterListPaginationFromSever();
+        progress.setVisibility(View.VISIBLE);
+
 
 
         txt_gen_link = (TextView) rootView.findViewById(R.id.sister_app_gen_txt);
         txt_undp_link = (TextView) rootView.findViewById(R.id.sister_app_undp_link_txt);
 
 
-        txt_gen_link.setText("www.gen.org");
+        txt_gen_link.setText("www.iwomenapp.org");
         Linkify.addLinks(txt_gen_link, Linkify.WEB_URLS);
 
         txt_undp_link.setText("www.undpmyanmar.org");
         Linkify.addLinks(txt_undp_link, Linkify.WEB_URLS);
 
 
-        sisterAppItemList = (ArrayList<SisterAppItem>) storageUtil.ReadArrayListFromSD("SisterAppArrayList");
+        /*sisterAppItemList = (ArrayList<SisterAppItem>) storageUtil.ReadArrayListFromSD("SisterAppArrayList");
         Log.e("sisterAppItemList size", "===>" + sisterAppItemList.size());
         if (sisterAppItemList.size() > 0) {
             sisterAppListAdapter = new SisterAppListAdapter(mContext, sisterAppItemList);
@@ -111,20 +152,20 @@ public class SisterAppFragment extends Fragment {
             Helper.getListViewSize(lv_sister);
         } else {
             getSisterAppListFromServer();
-        }
+        }*/
         lv_sister.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 try {
-                    if (sisterAppItemList.get(i).get_app_package_name() != null && !sisterAppItemList.get(i).get_app_package_name().isEmpty()) {
+                    if (sisterAppItemList.get(i).getAppPackageName() != null && !sisterAppItemList.get(i).getAppPackageName().isEmpty()) {
 
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + sisterAppItemList.get(i).get_app_package_name())));
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + sisterAppItemList.get(i).getAppPackageName())));
                     } else {
 
                         Intent intent2 = new Intent(getActivity().getApplicationContext(), AboutUsWebActivity.class);
                         intent2.putExtra("ActivityName", "PostDetailActivity");
-                        intent2.putExtra("URL", sisterAppItemList.get(i).get_app_down_link());
+                        intent2.putExtra("URL", sisterAppItemList.get(i).getAppLink());
                         startActivity(intent2);
 
                     }
@@ -135,6 +176,48 @@ public class SisterAppFragment extends Fragment {
         });
 
 
+    }
+
+    private void getSisterListPaginationFromSever() {
+        if (Connection.isOnline(mContext)) {
+            progress.setVisibility(View.VISIBLE);
+            isLoading = true;
+            NetworkEngine.getInstance().getSisterAppByPagination(paginater, new Callback<List<SisterAppItem>>() {
+                @Override
+                public void success(List<com.smk.model.SisterAppItem> sisterAppItems, Response response) {
+                    sisterAppItemList.addAll(sisterAppItems);
+                    sisterAppListAdapter.notifyDataSetChanged();
+                    progress.setVisibility(View.INVISIBLE);
+                    isLoading = false;
+                    if (sisterAppItems.size() == 12) {
+                        lv_sister.setNextPage(true);
+                        paginater++;
+
+                    } else {
+                        // If no more item
+                        lv_sister.setNextPage(false);
+                    }
+
+                    if (sisterAppItems.size() > 0) {
+
+                        View padding = new View(getActivity().getApplicationContext());
+                        padding.setMinimumHeight(20);
+                        lv_sister.addFooterView(padding);
+                        Helper.getListViewSize(lv_sister);
+                    }
+
+
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+
+                }
+            });
+
+        }else {
+            SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
+        }
     }
 
 
@@ -208,7 +291,8 @@ public class SisterAppFragment extends Fragment {
                             }
 
 
-                            sisterAppItemList.add(new SisterAppItem(_object_id, _app_name, _app_package_name, _app_down_link, _app_img));
+                            //TODO
+                            //sisterAppItemList.add(new SisterAppItem(_object_id, _app_name, _app_package_name, _app_down_link, _app_img));
 
                         }
 

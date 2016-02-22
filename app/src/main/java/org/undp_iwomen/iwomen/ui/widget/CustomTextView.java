@@ -37,7 +37,7 @@ public class CustomTextView extends TextView{
 			String selected_font = StoreUtil.getInstance().selectFrom("fonts");
 			if(selected_font != null){
 				if(selected_font.equals("default")){
-					
+
 				}else if( selected_font.equals("zawgyione")){
 					setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/zawgyi.ttf"));
 				}else if( selected_font.equals("myanmar3")){

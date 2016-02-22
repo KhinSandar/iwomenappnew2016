@@ -25,10 +25,9 @@ public class CustomCheckBox extends CheckBox{
 					setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/robotomedium.ttf"));
 				}
 			}else{
-				setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/robotocondensedlight.ttf"));
+				setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/robotomedium.ttf"));
 			}
 		}
-
 	}
 	public CustomCheckBox(Context context, AttributeSet attrs) {
 		super(context, attrs);

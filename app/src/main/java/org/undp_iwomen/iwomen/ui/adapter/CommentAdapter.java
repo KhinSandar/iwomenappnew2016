@@ -15,7 +15,6 @@ import com.makeramen.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
 import org.undp_iwomen.iwomen.R;
-import org.undp_iwomen.iwomen.data.CommentItem;
 
 import java.util.List;
 
@@ -24,10 +23,10 @@ import java.util.List;
  */
 public class CommentAdapter extends BaseAdapter {
 
-    List<CommentItem> datalist;
+    List<com.smk.model.CommentItem> datalist;
     Activity mActivity;
 
-    public CommentAdapter(Context context, List<CommentItem> dl){
+    public CommentAdapter(Context context, List<com.smk.model.CommentItem> dl){
         this.datalist = dl;
         mActivity = (Activity) context;
     }
@@ -71,13 +70,13 @@ public class CommentAdapter extends BaseAdapter {
             vh = (ViewHolder) view.getTag();
         }
         //Log.e("adapter==","==>"+ datalist.get(i).get_profile_picture());
-        if (datalist.get(i).get_profile_picture() != null && !datalist.get(i).get_profile_picture().isEmpty() && datalist.get(i).get_profile_picture() != "" && datalist.get(i).get_profile_picture() != "null") {
+        if (datalist.get(i).getUserImgPath() != null && !datalist.get(i).getUserImgPath().isEmpty() && datalist.get(i).getUserImgPath() != "" && datalist.get(i).getUserImgPath() != "null") {
 
             //Log.e("adapter==","=if=>"+ datalist.get(i).get_profile_picture());
             try {
 
                 Picasso.with(mActivity)
-                        .load(datalist.get(i).get_profile_picture()) //"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
+                        .load(datalist.get(i).getUserImgPath()) //"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
                         .placeholder(R.drawable.blank_profile)
                         .error(R.drawable.blank_profile)
                         .into(vh.pictureView, new ImageLoadedCallback(vh.progressBar) {
@@ -101,13 +100,13 @@ public class CommentAdapter extends BaseAdapter {
 
 
         //Log.e("adapter==","==>"+ datalist.get(i).get_profile_picture());
-        if (datalist.get(i).get_sticker_picture() != null && !datalist.get(i).get_sticker_picture().isEmpty() && datalist.get(i).get_sticker_picture() != "" && datalist.get(i).get_sticker_picture() != "null") {
+        if (datalist.get(i).getStickerImgPath() != null && !datalist.get(i).getStickerImgPath().isEmpty() && datalist.get(i).getStickerImgPath() != "" && datalist.get(i).getStickerImgPath() != "null") {
 
             //Log.e("adapter==","=if=>"+ datalist.get(i).get_profile_picture());
             try {
 
                 Picasso.with(mActivity)
-                        .load(datalist.get(i).get_sticker_picture()) //"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
+                        .load(datalist.get(i).getStickerImgPath()) //"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
                         .placeholder(R.drawable.blank_profile)
                         .error(R.drawable.blank_profile)
                         .into(vh.stickerView, new ImageLoadedCallback(vh.stickerProgressBar) {
@@ -131,9 +130,9 @@ public class CommentAdapter extends BaseAdapter {
 
         }
 
-        vh.tv_name.setText(datalist.get(i).get_user_name());
-        vh.tv_message.setText(datalist.get(i).get_comment_message());
-        vh.tv_timestamp.setText(datalist.get(i).get_timestamp());
+        vh.tv_name.setText(datalist.get(i).getUserName());
+        vh.tv_message.setText(datalist.get(i).getCommentContents());
+        vh.tv_timestamp.setText(datalist.get(i).getCommentCreatedTime());
 
         return view;
     }

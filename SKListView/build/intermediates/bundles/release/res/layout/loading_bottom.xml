@@ -8,7 +8,6 @@
     android:padding="10dp">
 
     <com.pnikosis.materialishprogress.ProgressWheel
-        android:id="@+id/progress_wheel"
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_centerHorizontal="true"

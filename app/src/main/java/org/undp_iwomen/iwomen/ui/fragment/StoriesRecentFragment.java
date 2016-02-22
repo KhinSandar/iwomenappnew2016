@@ -38,6 +38,7 @@ import com.thuongnh.zprogresshud.ZProgressHUD;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.smk.application.StoreUtil;
 import org.smk.clientapi.NetworkEngine;
 import org.smk.iwomen.BaseActionBarActivity;
 import org.smk.model.IWomenPost;
@@ -118,8 +119,8 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
         mstr_lang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
 
         feedItems = new ArrayList<FeedItem>();
-        iWomenPostList = new ArrayList<>();
         skListView = (SKListView) rootView.findViewById(R.id.lst_stories);
+
         iWomenPostList = new ArrayList<>();
         stories = new StoriesRecentListAdapter(getActivity(), iWomenPostList, mstr_lang);
         skListView.setAdapter(stories);
@@ -161,7 +162,31 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
 
             }
         }*/
-        getIWomenPostByPagination();
+
+        /*
+         * This is load data from local or server when connection is connected or not connected
+         */
+        //Load data from local storage for no connection
+        List<IWomenPost> iWomenPosts = StoreUtil.getInstance().selectFrom("stories_recent");
+        if (Connection.isOnline(mContext)){
+            // Showing local data while loading from internet
+            if(iWomenPosts != null && iWomenPosts.size() > 0){
+                iWomenPostList.addAll(iWomenPosts);
+                stories.notifyDataSetChanged();
+                zPDialog = new ZProgressHUD(getActivity());
+                zPDialog.show();
+            }
+            // Clear local data when connected to internet
+            // iWomenPostList.clear();
+            getIWomenPostByPagination();
+        }else{
+            SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
+            if(iWomenPosts != null){
+                iWomenPostList.clear();
+                iWomenPostList.addAll(iWomenPosts);
+                stories.notifyDataSetChanged();
+            }
+        }
 
 
         //setupAdapter();
@@ -170,15 +195,17 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
         skListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(mContext, PostDetailActivity.class);
+                try {
+                    Intent intent = new Intent(mContext, PostDetailActivity.class);
 
-                //intent.putExtra("post_id", feedItems.get(position).getPost_obj_id());
-                intent.putExtra("post_id", iWomenPostList.get(position).getId());
+                    //intent.putExtra("post_id", feedItems.get(position).getPost_obj_id());
+                    intent.putExtra("post_id", iWomenPostList.get(position).getId());
 
-                //intent.putExtra("ImgUrl", mImgurl.get(getPosition()));
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                mContext.startActivity(intent);
+                    //intent.putExtra("ImgUrl", mImgurl.get(getPosition()));
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    mContext.startActivity(intent);
+                } catch (ArrayIndexOutOfBoundsException e){}
 
             }
         });
@@ -1438,12 +1465,16 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
     private void getIWomenPostByPagination() {
         if (Connection.isOnline(mContext)) {
             isLoading = true;
-            NetworkEngine.getInstance().getIWomenPostByDateByPagination(paginater, new Callback<List<IWomenPost>>() {
+            NetworkEngine.getInstance().getIWomenPostByDateByPagination(paginater,"Recent", true, new Callback<List<IWomenPost>>() {
                 @Override
                 public void success(List<IWomenPost> iWomenPosts, Response response) {
-
+                    if(zPDialog != null && zPDialog.isShowing()){
+                        iWomenPostList.clear();
+                        zPDialog.dismissWithSuccess();
+                    }
                     iWomenPostList.addAll(iWomenPosts);
                     stories.notifyDataSetChanged();
+                    StoreUtil.getInstance().saveTo("stories_recent", iWomenPostList);
                     isLoading = false;
                     if(iWomenPosts.size() == 12){
                         skListView.setNextPage(true);
@@ -1463,11 +1494,12 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
 
         } else {
             SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
-            /*if (mstr_lang.equals(Utils.ENG_LANG)) {
-                Utils.doToastEng(mContext, "Internet Connection need!");
-            } else {
-                Utils.doToastMM(mContext, getActivity().getResources().getString(R.string.open_internet_warning_mm));
-            }*/
+            List<IWomenPost> iWomenPosts = StoreUtil.getInstance().selectFrom("stories_recent");
+            if(iWomenPosts != null){
+                iWomenPostList.clear();
+                iWomenPostList.addAll(iWomenPosts);
+                stories.notifyDataSetChanged();
+            }
         }
     }
 
@@ -1511,19 +1543,23 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-
-        //mPostListRecyclerViewAdapter.filter(query);
-        mIWomonePostListAdapter.filter(query);
+        Log.d("iWomen", query);
+        stories.filter(query);
         return false;
     }
 
     @Override
     public boolean onQueryTextChange(String s) {
-        if (s.equals("")) {
+        /*if (s.equals("")) {
             //index = 1;
             setupAdapter();
 
-        }
+        }*/
+        Log.d("iWomen", s);
+        if(s != null && s.length() > 0)
+            stories.filter(s);
+        else
+            stories.notifyDataSetChanged();
         return false;
     }
 }

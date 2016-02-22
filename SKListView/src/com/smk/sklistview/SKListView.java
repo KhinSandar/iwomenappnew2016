@@ -17,6 +17,8 @@
 package com.smk.sklistview;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.AbsListView;
@@ -38,23 +40,29 @@ public class SKListView extends ListView {
 	private int minDataScroll = 2;
 	private boolean nextPage = true;
 	private View footerView;
+    private Context mContext;
 
 	public SKListView(Context context){
 		super(context);
+        mContext = context;
 		setOnScrollListener(scrollListener);
         footerView = View.inflate(context, R.layout.loading_bottom, null);
-		addFooterView(footerView);
+        if(isConnectingToInternet())
+		    addFooterView(footerView);
 	}
 	
     public SKListView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        mContext = context;
         setOnScrollListener(scrollListener);
         footerView = View.inflate(context, R.layout.loading_bottom, null);
-		addFooterView(footerView);
+        if(isConnectingToInternet())
+            addFooterView(footerView);
     }
     
     public SKListView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        mContext = context;
     }
     
     @Override
@@ -68,6 +76,23 @@ public class SKListView extends ListView {
     	// TODO Auto-generated method stub
     	super.onLayout(changed, l, t, r, b);
     }
+
+	public boolean isConnectingToInternet(){
+		boolean status = false;
+		ConnectivityManager connectivity = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+		if (connectivity != null)
+		{
+			NetworkInfo[] info = connectivity.getAllNetworkInfo();
+			if (info != null)
+				for (int i = 0; i < info.length; i++)
+					if (info[i].getState() == NetworkInfo.State.CONNECTED)
+					{
+						status = true;
+					}
+
+		}
+		return status;
+	}
 
     private OnScrollListener scrollListener = new OnScrollListener() {
 		
@@ -91,13 +116,13 @@ public class SKListView extends ListView {
 		            }
 					if (totalItemCount - (visibleItemCount + firstVisibleItem) <= getMinDataScroll() && getScroll() > 0 && isNextPage()) {
 						mCallbacks.onNextPageRequest();
-						if(getFooterViewsCount() == 0){
+						if(getFooterViewsCount() == 0 && isConnectingToInternet()){
 							addFooterView(footerView);
 						}	
 						
 					} else {
 						try{
-							if(!nextPage)
+							if(!nextPage && isConnectingToInternet())
 								removeFooterView(footerView);
 						}catch(Exception e){
 							

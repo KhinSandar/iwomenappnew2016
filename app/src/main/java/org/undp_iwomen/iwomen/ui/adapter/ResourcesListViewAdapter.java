@@ -1,7 +1,6 @@
 package org.undp_iwomen.iwomen.ui.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,10 +9,10 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.makeramen.RoundedImageView;
+import com.smk.model.ResourceItem;
 import com.squareup.picasso.Picasso;
 
 import org.undp_iwomen.iwomen.R;
-import org.undp_iwomen.iwomen.data.ResourceItem;
 import org.undp_iwomen.iwomen.model.MyTypeFace;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 
@@ -93,12 +92,12 @@ public class ResourcesListViewAdapter extends BaseAdapter
         }
 
         if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
-            holder.txtName.setText(ResourceItems.get(position).getResourceName());
+            holder.txtName.setText(ResourceItems.get(position).getResourceTitleEng());
             //holder.txtBodyText.setText(ResourceItems.get(position).getResourceText());
 
             holder.txtName.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
         }else{//FOR ALL MM FONT
-            holder.txtName.setText(ResourceItems.get(position).getResourceNameMM());
+            holder.txtName.setText(ResourceItems.get(position).getResourceTitleMm());
             //holder.txtBodyText.setText(ResourceItems.get(position).getResourceText());
 
             //holder.txtName.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
@@ -107,12 +106,12 @@ public class ResourcesListViewAdapter extends BaseAdapter
 
         holder.imgIcon.setAdjustViewBounds(true);
         holder.imgIcon.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        if(ResourceItems.get(position).getResourceImgPath() != null && !ResourceItems.get(position).getResourceImgPath().isEmpty()) {
+        if(ResourceItems.get(position).getResourceIconImg() != null && !ResourceItems.get(position).getResourceIconImg().isEmpty()) {
 
             try {
 
                 Picasso.with(mContext)
-                        .load(ResourceItems.get(position).getResourceImgPath()) //"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
+                        .load(ResourceItems.get(position).getResourceIconImg()) //"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
                         .placeholder(R.drawable.blank_profile)
                         .error(R.drawable.blank_profile)
                         .into(holder.imgIcon, new ImageLoadedCallback(holder.progressBar) {

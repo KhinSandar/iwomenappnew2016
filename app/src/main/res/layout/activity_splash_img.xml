@@ -29,7 +29,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/footer"
+
         android:layout_below="@+id/gobus_text">
 
         <org.undp_iwomen.iwomen.ui.widget.ProgressWheel
@@ -42,39 +42,30 @@
             wheel:matProg_barColor="@color/primary_light"
             wheel:matProg_progressIndeterminate="true"/>
 
-        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+
+       <!-- <org.undp_iwomen.iwomen.ui.widget.CustomTextView
             android:id="@+id/no_internet_error_loading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
+            android:text="@string/open_internet_warning"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="@color/body_text_2_inverse"
             tools:text=""/>
-
+-->
     </FrameLayout>
 
-    <LinearLayout
+    <!--android:layout_above="@+id/footer"
+        <LinearLayout
         android:id="@+id/footer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true">
 
-       <!-- <com.questmyanmar.gobus.ui.widget.SourceSansProRegularTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/powered_by"
-            android:textColor="@color/body_text_3_inverse"/>
 
-        <com.questmyanmar.gobus.ui.widget.SourceSansProRegularTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:text="@string/company_name"
-            android:textColor="@color/body_text_3_inverse"
-            android:textSize="20sp"/>-->
 
-    </LinearLayout>
+    </LinearLayout>-->
 
 </RelativeLayout>

@@ -1,5 +1,10 @@
 package org.smk.clientapi;
 
+import com.smk.model.Categories;
+import com.smk.model.CommentItem;
+import com.smk.model.ResourceItem;
+import com.smk.model.SisterAppItem;
+
 import org.smk.model.APKVersion;
 import org.smk.model.Answer;
 import org.smk.model.CalendarEvent;
@@ -10,7 +15,6 @@ import org.smk.model.Rating;
 import org.smk.model.Review;
 import org.smk.model.TLGTownship;
 import org.smk.model.User;
-
 import org.undp_iwomen.iwomen.CommonConfig;
 
 import java.util.List;
@@ -103,7 +107,7 @@ public interface INetworkEngine {
             Callback<User> callback);
 
 
-    ///api/v1/auth/login
+    ///api-v1/auth/login
     @FormUrlEncoded
     @POST(CommonConfig.CREATE_LOGIN_URL)
     void postLogin(
@@ -122,9 +126,11 @@ public interface INetworkEngine {
             @Part("image") TypedFile image,
             Callback<String> callback);
 
-    @GET(CommonConfig.CREATE_IWOMEN_POST_BY_DATE_URL)
+    @GET(CommonConfig.GET_IWOMEN_POST_BY_DATE_URL)
     void getIWomenPostByDateByPagination(
             @Query("page") int page,
+            @Query("sorting") String sorting,
+            @Query("isAllow") Boolean isAllow,
             Callback<List<IWomenPost>> callback);
 
     @GET(CommonConfig.GET_CALENDAR_EVENT)
@@ -132,4 +138,31 @@ public interface INetworkEngine {
             @Query("page") int page,
             Callback<List<CalendarEvent>> callback);
 
+    @GET(CommonConfig.GET_RESOURCE_URL)
+    void getResourceByPagination(
+            @Query("page") int page,
+            Callback<List<ResourceItem>> callback);
+    @GET(CommonConfig.GET_SISTER_APP_LIST_URL)
+    void getSisterAppByPagination(
+            @Query("page") int page,
+            Callback<List<SisterAppItem>> callback);
+
+    @GET(CommonConfig.GET_COMMENT_LIST_BY_POST_ID_URL)
+    void getCommentlistByPostIDByPagination(
+            @Query("page") int page,@Query("post_id") String postId,
+            Callback<List<CommentItem>> callback);
+
+    @GET(CommonConfig.GET_IWOMEN_POST_BY_POST_ID_URL)
+    void getIwomenPostByPostID(
+            @Path("id") String id,
+            Callback<IWomenPost> callback);
+
+    @GET(CommonConfig.GET_CATEGORIES_LIST__URL)
+    void getCategoriesByPagination(
+            @Query("page") int page,
+            Callback<List<Categories>> callback);
+
+
+
 }
+

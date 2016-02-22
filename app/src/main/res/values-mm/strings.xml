@@ -28,7 +28,7 @@
     <string name="title_activity_about_us_mm">ကြ်ႏုုပ္တိုု ့အေၾကာင္း</string>
     <string name="title_activity_post_news">News</string>
 
-    <string name="open_internet_warning">Internet Connection needed.</string>
+    <string name="open_internet_warning">အင္တာနက္ ခ်ိတ္ဆက္မွုုဖြင္ ့ရန္လိုုအပ္ပါသည္။</string>
     <string name="open_internet_warning_mm">အင္တာနက္ ခ်ိတ္ဆက္မွုုဖြင္ ့ရန္လိုုအပ္ပါသည္။</string>
 
     <string name="loading_mm">ခဏေစာင့္ပါ ….</string>
@@ -269,6 +269,25 @@
     <string name="register_title_profile">ကိုုယ္ေရး အခ်က္ အလက္</string>
 
     <string name="register_township_title">TLG/SRG ၿမိဳ ့နယ္ေရြးမည္</string>
+    <!--Women Remember Day  -->
+    <string-array name="women_remember_day_array">
+        <item>ဇန္န၀ါရီ လ</item>
+        <item>ဇန္န၀ါရီ လ</item>
+        <item>ဇန္န၀ါရီ လ</item>
+        <item>ဇန္န၀ါရီ လ</item>
+        <item>ဇန္န၀ါရီ လ</item>
+        <item>ဇန္န၀ါရီ လ</item>
+        <item>ဇန္န၀ါရီ လ</item>
+        <item>ဇန္န၀ါရီ လ</item>
+        <item>ဇန္န၀ါရီ လ</item>
+        <item>ဇန္န၀ါရီ လ</item>
+        <item>ဇန္န၀ါရီ လ</item>
+        <item>ဇန္န၀ါရီ လ</item>
+
+    </string-array>
+    <string name="post_detail_more"> ပိုုိမိုုဖတ္ရွဳရန္ &gt;&gt; </string>
+
+
     <string name="str_poor">ညံ</string>
     <string name="str_fair">မဆိုးပါ</string>
     <string name="str_good">ေကာင္း</string>

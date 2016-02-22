@@ -9,23 +9,25 @@ import android.widget.EditText;
 import org.undp_iwomen.iwomen.model.FontConverter;
 import org.undp_iwomen.iwomen.utils.StoreUtil;
 
+import retrofit.http.HEAD;
+
 public class CustomEditText extends EditText{
 	public CustomEditText(Context context){
 		super(context);
 		if(!isInEditMode()){
 			String selected_font = StoreUtil.getInstance().selectFrom("fonts");
 			if(selected_font != null){
-                if(selected_font.equals("default")){
+				if(selected_font.equals("default")){
 
-                }else if( selected_font.equals("zawgyione")){
-                    setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/zawgyi.ttf"));
-                }else if( selected_font.equals("myanmar3")){
-                    setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/mm3-multi-os.ttf"));
-                }else if( selected_font.equals("english")){
-                    setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/robotomedium.ttf"));
-                }
+				}else if( selected_font.equals("zawgyione")){
+					setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/zawgyi.ttf"));
+				}else if( selected_font.equals("myanmar3")){
+					setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/mm3-multi-os.ttf"));
+				}else if( selected_font.equals("english")){
+					setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/robotomedium.ttf"));
+				}
 			}else{
-                setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/robotomedium.ttf"));
+				setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/robotomedium.ttf"));
 			}
 		}
 
@@ -35,17 +37,17 @@ public class CustomEditText extends EditText{
 		if(!isInEditMode()){
 			String selected_font = StoreUtil.getInstance().selectFrom("fonts");
 			if(selected_font != null){
-                if(selected_font.equals("default")){
+				if(selected_font.equals("default")){
 
-                }else if( selected_font.equals("zawgyione")){
-                    setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/zawgyi.ttf"));
-                }else if( selected_font.equals("myanmar3")){
-                    setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/mm3-multi-os.ttf"));
-                }else if( selected_font.equals("english")){
-                    setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/robotomedium.ttf"));
-                }
+				}else if( selected_font.equals("zawgyione")){
+					setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/zawgyi.ttf"));
+				}else if( selected_font.equals("myanmar3")){
+					setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/mm3-multi-os.ttf"));
+				}else if( selected_font.equals("english")){
+					setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/robotomedium.ttf"));
+				}
 			}else{
-                setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/robotomedium.ttf"));
+				setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/robotomedium.ttf"));
 			}
 		}
 	}
