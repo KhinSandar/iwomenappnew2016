@@ -1427,7 +1427,6 @@ containing a value of this type.
         public static final int normal=0x7f0b000a;
         public static final int progress_circular=0x7f0b0005;
         public static final int progress_horizontal=0x7f0b0006;
-        public static final int progress_wheel=0x7f0b003f;
         public static final int radio=0x7f0b002b;
         public static final int search_badge=0x7f0b0035;
         public static final int search_bar=0x7f0b0034;

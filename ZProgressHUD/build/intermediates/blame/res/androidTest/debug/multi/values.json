@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\res\\merged\\androidTest\\debug\\values\\values.xml",
+        "outputFile": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/ZProgressHUD/build/intermediates/res/merged/androidTest/debug/values/values.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,7 @@
                     "endOffset": 100
                 },
                 "from": {
-                    "file": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/ZProgressHUD/build/intermediates/bundles/debug/res/values/values.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,

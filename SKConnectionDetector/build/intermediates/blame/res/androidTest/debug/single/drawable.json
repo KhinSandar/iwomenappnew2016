@@ -1,18 +1,18 @@
 [
     {
-        "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKConnectionDetector\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\delete.png",
-        "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKConnectionDetector\\build\\intermediates\\bundles\\debug\\res\\drawable\\delete.png"
+        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKConnectionDetector/build/intermediates/res/merged/androidTest/debug/drawable/no_internet.png",
+        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKConnectionDetector/build/intermediates/bundles/debug/res/drawable/no_internet.png"
     },
     {
-        "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKConnectionDetector\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\no_internet.png",
-        "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKConnectionDetector\\build\\intermediates\\bundles\\debug\\res\\drawable\\no_internet.png"
+        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKConnectionDetector/build/intermediates/res/merged/androidTest/debug/drawable/toast_border.xml",
+        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKConnectionDetector/build/intermediates/bundles/debug/res/drawable/toast_border.xml"
     },
     {
-        "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKConnectionDetector\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\toast_vertical_border.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKConnectionDetector\\build\\intermediates\\bundles\\debug\\res\\drawable\\toast_vertical_border.xml"
+        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKConnectionDetector/build/intermediates/res/merged/androidTest/debug/drawable/delete.png",
+        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKConnectionDetector/build/intermediates/bundles/debug/res/drawable/delete.png"
     },
     {
-        "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKConnectionDetector\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\toast_border.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKConnectionDetector\\build\\intermediates\\bundles\\debug\\res\\drawable\\toast_border.xml"
+        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKConnectionDetector/build/intermediates/res/merged/androidTest/debug/drawable/toast_vertical_border.xml",
+        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKConnectionDetector/build/intermediates/bundles/debug/res/drawable/toast_vertical_border.xml"
     }
 ]
