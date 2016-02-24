@@ -1,7 +1,6 @@
 package org.undp_iwomen.iwomen.ui.fragment;
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -22,7 +21,6 @@ import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.pnikosis.materialishprogress.ProgressWheel;
 import com.smk.skconnectiondetector.SKConnectionDetector;
 import com.smk.sklistview.SKListView;
 
@@ -56,28 +54,15 @@ import retrofit.client.Response;
  */
 public class ResourcesFragment extends Fragment {
     public static final String ARG_MENU_INDEX = "index";
-
     private Context mContext;
-
     private SKListView lvResouces;
-    private ProgressWheel progress;
     private int paginater = 1;
     private ArrayList<com.smk.model.ResourceItem> ResourceItems;
-
-
-
     private ResourcesListViewAdapter adapter;
     SharedPreferences sharePrefLanguageUtil;
     String mstr_lang;
-
     public Rating avgRatings;
-
-
-
-    private ProgressDialog mProgressDialog;
     private StorageUtil storageUtil;
-
-
     private int offsetlimit = 3;
     private int skipLimit = 0;
     private Menu menu;
@@ -98,9 +83,6 @@ public class ResourcesFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        mProgressDialog = new ProgressDialog(getActivity());
-        mProgressDialog.setCancelable(false);
-
     }
 
     @Override
@@ -143,8 +125,6 @@ public class ResourcesFragment extends Fragment {
 
         ResourceItems = new ArrayList<>();
         lvResouces = (SKListView) rootView.findViewById(R.id.resource_lv);
-        progress = (ProgressWheel) rootView.findViewById(R.id.resource_progress_wheel);
-
         mstr_lang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
         adapter = new ResourcesListViewAdapter(getActivity(),ResourceItems, mstr_lang);
         lvResouces.setAdapter(adapter);
@@ -153,7 +133,6 @@ public class ResourcesFragment extends Fragment {
         adapter.notifyDataSetChanged();
 
         getResourceDataPaginationFromSever();
-        progress.setVisibility(View.VISIBLE);
         //When very start this fragment open , need to check db data
         String selections = TableAndColumnsName.ResourceUtil.STATUS + "=?";
         String[] selectionargs = {"0"};
@@ -172,7 +151,6 @@ public class ResourcesFragment extends Fragment {
                 getResourceDataFromSever();
             } else {
 
-                mProgressDialog.dismiss();
                 SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
 
                 /*if (mstr_lang.equals(Utils.ENG_LANG)) {
@@ -208,14 +186,13 @@ public class ResourcesFragment extends Fragment {
 
     private void getResourceDataPaginationFromSever() {
         if (Connection.isOnline(mContext)) {
-            progress.setVisibility(View.VISIBLE);
+
             isLoading = true;
             NetworkEngine.getInstance().getResourceByPagination(paginater, new Callback<List<com.smk.model.ResourceItem>>() {
                 @Override
                 public void success(List<com.smk.model.ResourceItem> resourceItems, Response response) {
                     ResourceItems.addAll(resourceItems);
                     adapter.notifyDataSetChanged();
-                    progress.setVisibility(View.INVISIBLE);
                     isLoading = false;
                     if(ResourceItems.size() == 12){
                         lvResouces.setNextPage(true);
@@ -288,7 +265,6 @@ public class ResourcesFragment extends Fragment {
                     }
                 } else {
 
-                    mProgressDialog.dismiss();
                 }
 
             } catch (IllegalStateException ex) {
@@ -313,9 +289,7 @@ public class ResourcesFragment extends Fragment {
                 skipLimit = cursorMain.getCount();// my way
 
                 Log.e("Resource Offset  Count", "==>" + offsetlimit + "/" + skipLimit);
-                mProgressDialog.show();//{"isAllow": true}
                 String sCondition = "{\"isAllow\": true}";
-                mProgressDialog.show();
                 ResourceAPI.getInstance().getService().getResourceList("createdAt", offsetlimit, skipLimit, sCondition, new Callback<String>() {
                     @Override
                     public void success(String s, Response response) {
@@ -395,23 +369,19 @@ public class ResourcesFragment extends Fragment {
                             e.printStackTrace();
                             Log.e("JSON err", "==>" + e.toString());
                         }
-                        mProgressDialog.dismiss();
 
                     }
 
                     @Override
                     public void failure(RetrofitError error) {
                         Log.e("error", "==" + error);
-                        mProgressDialog.dismiss();
                     }
                 });
 
             } else {
-                mProgressDialog.show();
                 //Log.e("First Time Offset Range Count", "==>" + offsetlimit + "/" + skipLimit);//where={"isAllow": true}
 
                 String sCondition = "{\"isAllow\": true}";
-                mProgressDialog.show();
                 ResourceAPI.getInstance().getService().getResourceList("createdAt", offsetlimit, skipLimit, sCondition, new Callback<String>() {
                     @Override
                     public void success(String s, Response response) {
@@ -494,14 +464,11 @@ public class ResourcesFragment extends Fragment {
                             e.printStackTrace();
                             Log.e("JSON err", "==>" + e.toString());
                         }
-                        mProgressDialog.dismiss();
-
                     }
 
                     @Override
                     public void failure(RetrofitError error) {
                         Log.e("error", "==" + error);
-                        mProgressDialog.dismiss();
                     }
                 });
 

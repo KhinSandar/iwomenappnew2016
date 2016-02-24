@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="debug"><source path="/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/ZProgressHUD/build/intermediates/bundles/debug/assets"/></dataSet><dataSet config="main"><source path="/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/ZProgressHUD/src/androidTest/assets"/></dataSet></merger>
+<merger version="3"><dataSet config="debug"><source path="D:\Android\@Android Studio\iwomenapp\iwomenappnew2016\ZProgressHUD\build\intermediates\bundles\debug\assets"/></dataSet><dataSet config="main"><source path="D:\Android\@Android Studio\iwomenapp\iwomenappnew2016\ZProgressHUD\src\androidTest\assets"/></dataSet></merger>

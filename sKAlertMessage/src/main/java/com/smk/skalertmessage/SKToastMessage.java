@@ -3,7 +3,6 @@ package com.smk.skalertmessage;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +19,7 @@ public class SKToastMessage extends Toast {
 	private Context context;
 	private TextView txt_message;
 	private Typeface typeface;
+	private static int CustomDuration = 0;
 	public SKToastMessage(Context context) {
 		super(context);
 		this.context = context;
@@ -39,26 +39,12 @@ public class SKToastMessage extends Toast {
 		}
 		instance.setMessage(message);
 		instance.setMessageType(messageType);
-		instance.setDuration(LENGTH_LONG);
-		instance.show();
-
-	}
-
-	public static void showMessage(Context context, String message, int messageType, int duration){
-		if(instance == null){
-			instance = new SKToastMessage(context);
+		if(getCustomDuration() != 0){
+			instance.setDuration(getCustomDuration());
+		}else{
+			instance.setDuration(LENGTH_LONG);
 		}
-		instance.setMessage(message);
-		instance.setMessageType(messageType);
-        instance.setDuration(LENGTH_LONG);
-        instance.show();
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                instance.cancel();
-            }
-        }, 3000 * 5);
+		instance.show();
 	}
 	
 	public String getMessage() {
@@ -77,6 +63,14 @@ public class SKToastMessage extends Toast {
 
 	public void setTypeface(Typeface typeface) {
 		this.typeface = typeface;
+	}
+	
+	public static int getCustomDuration() {
+		return CustomDuration;
+	}
+
+	public static void setCustomDuration(int customDuration) {
+		CustomDuration = customDuration;
 	}
 
 	public void setMessageType(int messageType) {

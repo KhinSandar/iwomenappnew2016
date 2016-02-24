@@ -3,7 +3,9 @@ package org.smk.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class IWomenPost {
+import java.io.Serializable;
+
+public class IWomenPost implements Serializable{
 
 @SerializedName("id")
 @Expose
@@ -94,7 +96,7 @@ private String createdAt;
 private String updatedAt;
 @SerializedName("deleted_at")
 @Expose
-private Object deletedAt;
+private String deletedAt;
 
 /**
 * 
@@ -623,7 +625,7 @@ this.updatedAt = updatedAt;
 * @return
 * The deletedAt
 */
-public Object getDeletedAt() {
+public String getDeletedAt() {
 return deletedAt;
 }
 
@@ -632,7 +634,7 @@ return deletedAt;
 * @param deletedAt
 * The deleted_at
 */
-public void setDeletedAt(Object deletedAt) {
+public void setDeletedAt(String deletedAt) {
 this.deletedAt = deletedAt;
 }
 

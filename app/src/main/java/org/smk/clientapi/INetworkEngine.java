@@ -32,13 +32,13 @@ import retrofit.mime.TypedFile;
 
 public interface INetworkEngine {
 
-    @GET("/api-v1/competition")
+    @GET("/api/v1/competition")
     void getCompetitionQuestion(
             @Query("access_token") String token,
             @Query("user_id") String user_id,
             Callback<CompetitionQuestion> callback);
 
-    @GET("/api-v1/competitiongroup")
+    @GET("/api/v1/competitiongroup")
     void getCompetitionGroupUser(
             @Query("access_token") String token,
             @Query("user_id") String user_id,
@@ -46,7 +46,7 @@ public interface INetworkEngine {
             Callback<List<GroupUser>> callback);
 
     @FormUrlEncoded
-    @POST("/api-v1/competitionanswer")
+    @POST("/api/v1/competitionanswer")
     void postCompetitionAnswer(
             @Field("access_token") String access_token,
             @Field("answer1_id") Integer answer1_id,
@@ -62,23 +62,23 @@ public interface INetworkEngine {
             @Field("group_user_id") Integer group_user_id,
             Callback<String> callback);
 
-    @GET("/api-v1/app")
+    @GET("/api/v1/app")
     void getAPKVersion(
             @Query("access_token") String access_token,
             Callback<APKVersion> callback);
 
-    @GET("/api-v1/competitionanswer/{id}")
+    @GET("/api/v1/competitionanswer/{id}")
     void getUserAnswer(
             @Path("id") Integer id,
             Callback<List<Answer>> callback);
 
-    @GET("/api-v1/review")
+    @GET("/api/v1/review")
     void getReview(
             @Query("function") String function,
             Callback<Rating> callback);
 
     @FormUrlEncoded
-    @POST("/api-v1/review")
+    @POST("/api/v1/review")
     void postReview(
             @Field("user_id") String user_id,
             @Field("ratings") Double ratings,
@@ -87,7 +87,7 @@ public interface INetworkEngine {
             Callback<Review> callback);
 
     //KSD URL
-    //http://api.shopyface.com/api-v1/auth/photo
+    //http://api.shopyface.com/api/v1/auth/photo
     @Multipart
     @POST(CommonConfig.CREATE_USER_PHOTO_URL)
     void postUserPhoto(
@@ -129,6 +129,8 @@ public interface INetworkEngine {
     @GET(CommonConfig.GET_IWOMEN_POST_BY_DATE_URL)
     void getIWomenPostByDateByPagination(
             @Query("page") int page,
+            @Query("sorting") String sorting,
+            @Query("isAllow") Boolean isAllow,
             Callback<List<IWomenPost>> callback);
 
     @GET(CommonConfig.GET_CALENDAR_EVENT)
