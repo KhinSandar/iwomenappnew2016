@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -2192,6 +2193,22 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                         //Utils.doToastEng(getApplicationContext(), "Is playing ");
                     }
                 }*/
+                /***********EPP functions **************/
+                setVolumeControlStream(AudioManager.STREAM_ALARM);
+
+                //MediaPlayer mediaPlayer;
+                mMedia = new MediaPlayer();
+                try{
+                    //Uri uri = Uri.parse("android.resource://org.undp_iwomen.iwomen/" + R.raw.wai_wai_audio);
+                    String uri = "android.resource://" + getPackageName() + "/raw/wai_wai_audio";//+R.raw.wai_wai_audio;
+                    mMedia.setDataSource(uri);
+                    mMedia.prepare();
+                    //isPrepared = true;
+                    mMedia.setVolume(1.0f, 1.0f);
+                    mMedia.setOnCompletionListener((MediaPlayer.OnCompletionListener) this);
+                } catch(Exception ex){
+                    throw new RuntimeException("Couldn't load music");
+                }
 
 
                 break;
@@ -2217,17 +2234,37 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                     File file = new File(uri);
                     audio_intent.setDataAndType(Uri.fromFile(file), "audio*//*");
                     startActivity(audio_intent);*/
-                    if (!isPlaying) {
+                    /*if (!isPlaying) {
 
                         mMedia = MediaPlayer.create(this, R.raw.wai_wai_audio);
 
                         mMedia.start();
 
+
+
                         isPlaying = true;
                     } else {
                         //Utils.doToastEng(getApplicationContext(), "Is playing ");
+                    }*/
+
+                    /***********EPP functions **************/
+                    setVolumeControlStream(AudioManager.STREAM_ALARM);
+
+                    //MediaPlayer mediaPlayer;
+                    mMedia = new MediaPlayer();
+                    try{
+                        //Uri uri = Uri.parse("android.resource://org.undp_iwomen.iwomen/" + R.raw.wai_wai_audio);
+                        String uri = "android.resource://" + getPackageName() + "/raw/wai_wai_audio";//+R.raw.wai_wai_audio;
+                        mMedia.setDataSource(uri);
+                        mMedia.prepare();
+                        //isPrepared = true;
+                        mMedia.setVolume(1.0f, 1.0f);
+                        mMedia.setOnCompletionListener((MediaPlayer.OnCompletionListener) this);
+                    } catch(Exception ex){
+                        throw new RuntimeException("Couldn't load music");
                     }
-                    break;
+
+
                 }
                 break;
 
