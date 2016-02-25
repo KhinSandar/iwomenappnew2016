@@ -9,7 +9,9 @@
     android:paddingTop="16dp">
 
     <TextView
+        android:id="@+id/postdetail_like_txt"
         style="@style/PostDetailIconStyle"
+
         android:drawableLeft="@drawable/ic_like_fill"
         android:text="150"/>
 

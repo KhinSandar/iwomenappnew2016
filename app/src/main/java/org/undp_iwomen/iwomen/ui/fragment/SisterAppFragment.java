@@ -1,6 +1,5 @@
 package org.undp_iwomen.iwomen.ui.fragment;
 
-import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.ContentValues;
 import android.content.Context;
@@ -67,15 +66,15 @@ public class SisterAppFragment extends Fragment {
     private StorageUtil storageUtil;
 
 
-    private ProgressDialog mProgressDialog;
+    //private ProgressDialog mProgressDialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        mProgressDialog = new ProgressDialog(getActivity());
+        /*mProgressDialog = new ProgressDialog(getActivity());
         mProgressDialog.setCancelable(false);
-
+*/
     }
 
     @Override
@@ -126,7 +125,6 @@ public class SisterAppFragment extends Fragment {
         sisterAppListAdapter.notifyDataSetChanged();
 
         getSisterListPaginationFromSever();
-        progress.setVisibility(View.VISIBLE);
 
 
 
@@ -211,7 +209,7 @@ public class SisterAppFragment extends Fragment {
 
                 @Override
                 public void failure(RetrofitError error) {
-
+                    progress.setVisibility(View.INVISIBLE);
                 }
             });
 
@@ -224,8 +222,8 @@ public class SisterAppFragment extends Fragment {
     private void getSisterAppListFromServer() {
         if (Connection.isOnline(mContext)) {
             String sCondition = "{\"isAllow\": true}";
-            mProgressDialog.setMessage("Loading...");
-            mProgressDialog.show();
+            //mProgressDialog.setMessage("Loading...");
+            //mProgressDialog.show();
             UserPostAPI.getInstance().getService().getSisterAppList("createdAt", sCondition, new Callback<String>() {
                 @Override
                 public void success(String s, Response response) {
@@ -313,11 +311,11 @@ public class SisterAppFragment extends Fragment {
                             lv_sister.addFooterView(padding);
                             Helper.getListViewSize(lv_sister);
                         }
-                        mProgressDialog.dismiss();
+                        //mProgressDialog.dismiss();
 
 
                     } catch (JSONException e) {
-                        mProgressDialog.dismiss();
+                        //mProgressDialog.dismiss();
 
                     }
                 }
@@ -325,7 +323,7 @@ public class SisterAppFragment extends Fragment {
                 @Override
                 public void failure(RetrofitError error) {
 
-                    mProgressDialog.dismiss();
+                    //mProgressDialog.dismiss();
                 }
             });
 
@@ -386,7 +384,8 @@ public class SisterAppFragment extends Fragment {
         if (id == R.id.action_refresh) {
 
 
-            getSisterAppListFromServer();
+            //getSisterAppListFromServer();
+            getSisterListPaginationFromSever();
             return false;
 
         }

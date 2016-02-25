@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ScrollView;
@@ -17,6 +18,7 @@ import com.roomorama.caldroid.CaldroidListener;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.ui.adapter.CalendarViewPagerFragmentAdapter;
 import org.undp_iwomen.iwomen.ui.fragment.CaldroidSampleCustomFragment;
+import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -32,7 +34,7 @@ public class CalendarActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private CalendarViewPagerFragmentAdapter mAdapter;
     ScrollView hsv ;
-    int scaleImage=200;
+    private CustomTextView textViewTitle;
 
 
     private void setCustomResourceForDates() {
@@ -62,14 +64,26 @@ public class CalendarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acitvity_calendar_custom_main);
 
+        /**********Set up the ToolBar**************/
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("");
+
+        textViewTitle = (CustomTextView) toolbar.findViewById(R.id.title_action2);
+
+        if (toolbar != null) {
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
+        textViewTitle.setText(getResources().getString(R.string.app_name));
+
+        /**********Set up the ToolBar**************/
+
         final SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
 
         // Setup caldroid fragment
         // **** If you want normal CaldroidFragment, use below line ****
         //caldroidFragment = new CaldroidFragment();
-
-
-
 
         /**********View Pager**************/
         // //////////////////////////////////////////////////////////////////////
@@ -331,6 +345,12 @@ public class CalendarActivity extends AppCompatActivity {
             dialogCaldroidFragment.saveStatesToKey(outState,
                     "DIALOG_CALDROID_SAVED_STATE");
         }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        super.onBackPressed();
+        return true;
     }
 
 }

@@ -84,7 +84,7 @@
     <string name="new_post_video_eng">Click Here to Upload Video</string>
 
     <string name="post_detail_comment_mm">မွတ္ ခ်က္ (သိုု ့မဟုုတ္) ေကာမန္ ့ေရးရန္</string>
-    <string name="post_detail_comment_eng">Enter your Comment</string>
+    <string name="post_detail_comment_eng">Tell iWomen How You Feel</string>
 
     <string name="post_detail_share_post_mm">ရွဲမွ်ေ၀ပါသည္။</string>
     <string name="post_detail_share_post_eng">Share This Post</string>
@@ -465,6 +465,7 @@
         <item>December Women Remember Day</item>
     </string-array>
     <string name="post_detail_more">more &gt;&gt;</string>
+    <string name="calendar_name">Calendar</string>
 
     <string name="large_text">
         "Material is the metaphor.\n\n"

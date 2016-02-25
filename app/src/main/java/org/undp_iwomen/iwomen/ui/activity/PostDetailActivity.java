@@ -14,6 +14,7 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.BaseColumns;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.Spannable;
@@ -113,7 +114,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     TextView post_content_user_id;
     TextView post_content_user_name;
     TextView post_content_user_role;
-    TextView post_content_user_more_id;
+    CustomTextView post_content_user_more_id;
     TextView post_content_posted_date;
     LinearLayout post_content_user_role_ly;
     TextView post_content_user_img_path;
@@ -137,7 +138,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     //private TextView txt_simile_emoji_icon;
     private EmojiconEditText et_comment;
     //FrameLayout et_comment_frame;
-    private TextView txt_comment_submit;
+    private ImageView img_comment_submit;
 
     private ImageView img_viber_share;
     private ImageView img_download;
@@ -188,7 +189,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     public ImageView emojiIconToggle;
 
     //Sticker
-    public ImageView stickerImg;
+    public RoundedImageView stickerImg;
     //Sticker LinearLayout
     private LinearLayout ly_sticker_holder;
 
@@ -221,6 +222,9 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     String cmd_count = "0";
     String authorID;
     private String userprofile_Image_path;
+
+    //New UI
+    ImageView img_social_facebook;
     private FacebookCallback<Sharer.Result> shareCallback = new FacebookCallback<Sharer.Result>() {
         @Override
         public void onCancel() {
@@ -269,7 +273,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
         @Override
         public void onNextPageRequest() {
-            if(!isLoading){
+            if (!isLoading) {
                 getCommentByPagination();
             }
         }
@@ -281,7 +285,6 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         super.onCreate(savedInstanceState);
 
         mContext = getApplicationContext();
-
 
 
         mProgressDialog = new ProgressDialog(PostDetailActivity.this);
@@ -299,7 +302,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
             pendingAction = PendingAction.valueOf(name);
         }
         //FB SHARE
-        setContentView(R.layout.activity_post_detail);
+        setContentView(R.layout.activity_post_detail_v2);
         sharePrefLanguageUtil = getSharedPreferences(Utils.PREF_SETTING, Context.MODE_PRIVATE);
 
         mstr_lang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
@@ -323,24 +326,21 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         LoadStickerData();*/
 
 
-
-
     }
 
     private void init() {
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
-        if (toolbar != null) {
-            setSupportActionBar(toolbar);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle("");
-        }
 
-        /*toolbar = (Toolbar) findViewById(R.id.toolbar);
+        // Set up the toolbar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
-
         setSupportActionBar(toolbar);
-        toolbar.setTitle("Detail");*/
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
+        collapsingToolbarLayout.setTitleEnabled(false);
+
+
         mSharedPreferencesUserInfo = getSharedPreferences(CommonConfig.SHARE_PREFERENCE_USER_INFO, Context.MODE_PRIVATE);
 
         if (!mSharedPreferencesUserInfo.getBoolean(CommonConfig.IS_LOGIN, false)) {
@@ -359,7 +359,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         post_content_user_name = (TextView) findViewById(R.id.postdetail_content_username);
         post_content_posted_date = (TextView) findViewById(R.id.postdetail_content_posted_date);
         post_content_user_role = (TextView) findViewById(R.id.postdetail_content_user_role);
-        post_content_user_more_id = (TextView) findViewById(R.id.postdetail_content_user_role_more);
+        post_content_user_more_id = (CustomTextView) findViewById(R.id.postdetail_content_user_role_more);
         post_content_user_role_ly = (LinearLayout) findViewById(R.id.postdetail_content_role_more_ly);
 
 
@@ -373,14 +373,14 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
         listView_Comment = (SKListView) findViewById(R.id.postdetail_comment_listview);
         ly_likes_button = (LinearLayout) findViewById(R.id.postdetail_like_button);
-        img_like = (ImageView) findViewById(R.id.postdetail_like_img);
+        //img_like = (ImageView) findViewById(R.id.postdetail_like_txt);
         txt_like_count = (TextView) findViewById(R.id.postdetail_like_count);
         txt_cmd_count = (TextView) findViewById(R.id.postdetail_cmd_count);
 
         //txt_simile_emoji_icon = (TextView) findViewById(R.id.postdetail_smile_img_upload);
         et_comment = (EmojiconEditText) findViewById(R.id.postdetail_et_comment_upload);
         //et_comment_frame = (FrameLayout) findViewById(R.id.emojicons);
-        txt_comment_submit = (TextView) findViewById(R.id.postdetail_submit_comment);
+        img_comment_submit = (ImageView) findViewById(R.id.postdetail_submit_comment);
 
         img_viber_share = (ImageView) findViewById(R.id.postdetail_viber_img);
         ly_postdetail_share_button = (LinearLayout) findViewById(R.id.postdetail_share_button);
@@ -393,23 +393,26 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         img_player = (ImageView) findViewById(R.id.postdetail_img_player);
         txt_player = (TextView) findViewById(R.id.postdetail_player_text);
         emojiIconToggle = (ImageView) findViewById(R.id.toggleEmojiIcon);
-        stickerImg = (ImageView) findViewById(R.id.postdetail_img_sticker);
+        stickerImg = (RoundedImageView) findViewById(R.id.postdetail_img_sticker);
 
 
         shareButton = (ShareButton) findViewById(R.id.postdetail_fb_share_button);
         progressWheel_comment = (ProgressWheel) findViewById(R.id.postdetail_progress_wheel_comment);
         video_icon = (ImageView) findViewById(R.id.postdeail_video_icon);
 
-        txt_lbl_like_post = (CustomTextView) findViewById(R.id.postdetail_like_post_lbl);
-        txt_lbl_share_post = (CustomTextView) findViewById(R.id.postdetail_share_post_lbl);
+        /*txt_lbl_like_post = (CustomTextView) findViewById(R.id.postdetail_like_post_lbl);
+        txt_lbl_share_post = (CustomTextView) findViewById(R.id.postdetail_share_post_lbl);*/
 
         img_credit_logo = (ResizableImageView) findViewById(R.id.postdetail_credit_img);
         txt_credit_link = (TextView) findViewById(R.id.postdetail_credit_link);
         progressBar_credit = (ProgressBar) findViewById(R.id.postdetail_credit_progress);
         ly_credit = (LinearLayout) findViewById(R.id.postdetail_ly_credit);
+        img_social_facebook = (ImageView) findViewById(R.id.social_facebook);
+
+        strLang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
 
         //TODO id
-        Intent i  = getIntent();
+        Intent i = getIntent();
         postId = "73";// i.getStringExtra("post_id");
         //Log.e("<<<<PostID 22 at Detail>>>>","===>" + postId);
 
@@ -429,7 +432,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
                 getIWomenPostByPostID();
 
-            }else{
+            } else {
                 //TODO  showing Local data , before update from server by Id
                 //getLocalPostDetail(postId);
             }
@@ -440,16 +443,18 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
         shareButton.setShareContent(getLinkContent());
 
-        ly_likes_button.setOnClickListener(this);
+        //TODO social_facebook. performCLick mhar ShareButton yae yan
+        //ly_likes_button.setOnClickListener(this);
         //txt_simile_emoji_icon.setOnClickListener(this);
-        txt_comment_submit.setOnClickListener(this);
-        img_viber_share.setOnClickListener(this);
-        ly_postdetail_share_button.setOnClickListener(this);
+        img_comment_submit.setOnClickListener(this);
+        //img_viber_share.setOnClickListener(this);
+        //ly_postdetail_share_button.setOnClickListener(this);
         postIMg.setOnClickListener(this);
+        img_social_facebook.setOnClickListener(this);
 
-        ly_postdetail_audio.setOnClickListener(this);
+        /*ly_postdetail_audio.setOnClickListener(this);
         ly_postdetail_download.setOnClickListener(this);
-        video_icon.setOnClickListener(this);
+        video_icon.setOnClickListener(this);*/
 
 
         if (mstrPostType != null) {
@@ -512,13 +517,16 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     }
 
 
-    private void getIWomenPostByPostID(){
+    private void getIWomenPostByPostID() {
         if (Connection.isOnline(getApplicationContext())) {
             NetworkEngine.getInstance().getIwomenPostByPostID(postId, new Callback<IWomenPost>() {
                 @Override
                 public void success(IWomenPost iWomenPost, Response response) {
 
-                    setPostItem(iWomenPost);
+                    setPostItem(iWomenPost);//
+
+
+
                 }
 
                 @Override
@@ -527,7 +535,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                 }
             });
 
-        }else {
+        } else {
             SKConnectionDetector.getInstance(this).showErrorMessage();
         }
     }
@@ -537,16 +545,13 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         profile.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
 
-        strLang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
-
-
-
         post_content_user_name.setText(item.getPostUploadName());
 
         post_content_user_role.setText(item.getPostAuthorRole());
 
         authorID = item.getAuthorId();
 
+        //TODO
         if (authorID != null) {
 
 
@@ -578,7 +583,8 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
             e.printStackTrace();
         }
 
-        txt_lbl_share_post.setText(getResources().getString(R.string.post_detail_share_post));
+        //TODO
+        //txt_lbl_share_post.setText(getResources().getString(R.string.post_detail_share_post));
 
         mstrPostType = item.getContentType();
         //TODO TableColumnUpdate 10 data set show in UI
@@ -630,17 +636,18 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
             txt_like_count.setText(item.getLikes() + "");
 
 
-            txt_cmd_count.setText(item.getCommentCount() + "Comments");
+            txt_cmd_count.setText(item.getCommentCount() + "");
             txt_lbl_share_post.setText(item.getShareCount() + R.string.post_detail_share_post_eng);
 
             et_comment.setTypeface(MyTypeFace.get(this, MyTypeFace.NORMAL));
             mPostTile.setTypeface(MyTypeFace.get(this, MyTypeFace.NORMAL));
             post_content.setTypeface(MyTypeFace.get(this, MyTypeFace.NORMAL));
-            post_suggest_text.setTypeface(MyTypeFace.get(this, MyTypeFace.NORMAL));
+            //post_suggest_text.setTypeface(MyTypeFace.get(this, MyTypeFace.NORMAL));
 
-            txt_credit_link.setText("Credit to " + item.getCreditName());
             //Log.e("Link===", "==>" + item.getCreditLink());
             if (item.getCreditName() != null && !item.getCreditName().isEmpty()) {
+
+
                 txt_credit_link.setVisibility(View.VISIBLE);
 
 
@@ -665,6 +672,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
             }
 
         } else {
+            // If Language Myanmar case
             postdetail_username.setTypeface(MyTypeFace.get(getApplicationContext(), MyTypeFace.ZAWGYI));
 
             if (item.getContentType().equalsIgnoreCase("Letter")) {
@@ -708,11 +716,14 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
             et_comment.setTypeface(MyTypeFace.get(this, MyTypeFace.ZAWGYI));
 
-            txt_lbl_like_post.setText(R.string.post_detail_like_post_mm);
+            //TODO
+            /*txt_lbl_like_post.setText(R.string.post_detail_like_post_mm);
             txt_lbl_share_post.setText(item.getShareCount() + R.string.post_detail_share_post_mm);
+            */
 
-            txt_credit_link.setText("Credit to " + item.getCreditName());
             if (item.getCreditName() != null && !item.getCreditName().isEmpty()) {
+                txt_credit_link.setText("Credit to " + item.getCreditName());
+
                 txt_credit_link.setVisibility(View.VISIBLE);
                 /*Pattern pattern = Pattern.compile("[a-zA-Z]+");
                 Linkify.addLinks(txt_credit_link,pattern, item.getCredit_link_eng());*/
@@ -763,10 +774,10 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
             img_like.setImageResource(R.drawable.like_fill);
         }*/
-        txt_like_count.setText(item.getLikes() + " ");
+        txt_like_count.setText(item.getLikes() + "");
 
 
-        txt_cmd_count.setText(item.getCommentCount() + "Comments");
+        txt_cmd_count.setText(item.getCommentCount() + "");
         if (item.getCreditLogoUrl() != null && !item.getCreditLogoUrl().isEmpty()) {
             try {
                 img_credit_logo.setVisibility(View.VISIBLE);
@@ -1134,12 +1145,12 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         iconToBeChanged.setImageResource(drawableResourceId);
     }
 
-    public void getCommentByPagination(){
+    public void getCommentByPagination() {
         if (Connection.isOnline(mContext)) {
             progressWheel_comment.setVisibility(View.VISIBLE);
             //TODO BY POST ID
 
-            NetworkEngine.getInstance().getCommentlistByPostIDByPagination(paginater, "tJG4qymeU8", new Callback<List<com.smk.model.CommentItem>>() {
+            NetworkEngine.getInstance().getCommentlistByPostIDByPagination(paginater, "tdNUBu44ir", new Callback<List<com.smk.model.CommentItem>>() {
                 @Override
                 public void success(List<com.smk.model.CommentItem> commentItems, Response response) {
 
@@ -1147,13 +1158,18 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                     adapter.notifyDataSetChanged();
                     progressWheel_comment.setVisibility(View.INVISIBLE);
                     isLoading = false;
-                    if(listComment.size() == 12){
+                    if (listComment.size() == 12) {
                         listView_Comment.setNextPage(true);
                         paginater++;
-                    }else{
+                    } else {
                         // If no more item
                         listView_Comment.setNextPage(false);
                     }
+                    View padding = new View(PostDetailActivity.this);
+                    padding.setMinimumHeight(20);
+                    listView_Comment.addFooterView(padding);
+
+                    Helper.getListViewSize(listView_Comment);
                 }
 
                 @Override
@@ -1161,7 +1177,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                     progressWheel_comment.setVisibility(View.INVISIBLE);
                 }
             });
-        }else {
+        } else {
             SKConnectionDetector.getInstance(this).showErrorMessage();
         }
     }
@@ -1169,7 +1185,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     public void getTestCommentList() {
 
 
-       // listComment = new ArrayList<>();
+        // listComment = new ArrayList<>();
 
         if (Connection.isOnline(mContext)) {
 
@@ -1281,7 +1297,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                                 TimeDiff.getTimeDifference(d0, d1, TimeDiff.TimeField.DAY));*/
 
 
-                           // listComment.add(new CommentItem(comment_img_path, comment_user_name, comment, str_comment_time_long,comment_sticker_img_path));
+                            // listComment.add(new CommentItem(comment_img_path, comment_user_name, comment, str_comment_time_long,comment_sticker_img_path));
                             str_comment_time_long = "";
                         }
 
@@ -1680,8 +1696,9 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
             et_comment.setTypeface(MyTypeFace.get(this, MyTypeFace.ZAWGYI));
 
-            txt_lbl_like_post.setText(R.string.post_detail_like_post_mm);
-            txt_lbl_share_post.setText(item.getPost_share_count() + R.string.post_detail_share_post_mm);
+            //TODO
+            /*txt_lbl_like_post.setText(R.string.post_detail_like_post_mm);
+            txt_lbl_share_post.setText(item.getPost_share_count() + R.string.post_detail_share_post_mm);*/
 
             txt_credit_link.setText("Credit to " + item.getCredit_name());
             if (item.getCredit_name() != null && !item.getCredit_name().isEmpty()) {
@@ -2017,7 +2034,8 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
                                 }
                             });
-*/                            img_like.setImageResource(R.drawable.like_fill);
+*/
+                            img_like.setImageResource(R.drawable.like_fill);
                         } else {
                             //Utils.doToastEng(getApplicationContext(), "unLike click");
                         }
@@ -2198,7 +2216,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
                 //MediaPlayer mediaPlayer;
                 mMedia = new MediaPlayer();
-                try{
+                try {
                     //Uri uri = Uri.parse("android.resource://org.undp_iwomen.iwomen/" + R.raw.wai_wai_audio);
                     String uri = "android.resource://" + getPackageName() + "/raw/wai_wai_audio";//+R.raw.wai_wai_audio;
                     mMedia.setDataSource(uri);
@@ -2206,7 +2224,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                     //isPrepared = true;
                     mMedia.setVolume(1.0f, 1.0f);
                     mMedia.setOnCompletionListener((MediaPlayer.OnCompletionListener) this);
-                } catch(Exception ex){
+                } catch (Exception ex) {
                     throw new RuntimeException("Couldn't load music");
                 }
 
@@ -2252,7 +2270,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
                     //MediaPlayer mediaPlayer;
                     mMedia = new MediaPlayer();
-                    try{
+                    try {
                         //Uri uri = Uri.parse("android.resource://org.undp_iwomen.iwomen/" + R.raw.wai_wai_audio);
                         String uri = "android.resource://" + getPackageName() + "/raw/wai_wai_audio";//+R.raw.wai_wai_audio;
                         mMedia.setDataSource(uri);
@@ -2260,7 +2278,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                         //isPrepared = true;
                         mMedia.setVolume(1.0f, 1.0f);
                         mMedia.setOnCompletionListener((MediaPlayer.OnCompletionListener) this);
-                    } catch(Exception ex){
+                    } catch (Exception ex) {
                         throw new RuntimeException("Couldn't load music");
                     }
 
@@ -2284,6 +2302,9 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                     mContext.startActivity(video_intent);
                     break;
                 }
+                break;
+            case R.id.social_facebook:
+                shareButton.performClick();
                 break;
 
         }

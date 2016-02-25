@@ -266,6 +266,7 @@
 
 
     <string name="register_ph_hint_password_input_hint">လွ်ိဳ ့၀ွက္ စာလံုုး</string>
+    <string name="register_ph_hint_confirm_password_input_hint">လ်ိဳ ့ ၀ွက္ စာလံုုးေနာက္တစ္ၾကိမ္ၿပန္ရိုုက္ပါ</string>
     <string name="register_title_profile">ကိုုယ္ေရး အခ်က္ အလက္</string>
 
     <string name="register_township_title">TLG/SRG ၿမိဳ ့နယ္ေရြးမည္</string>
@@ -286,6 +287,7 @@
 
     </string-array>
     <string name="post_detail_more"> ပိုုိမိုုဖတ္ရွဳရန္ &gt;&gt; </string>
+    <string name="calendar_name">ၿပကၡဒိန္</string>
 
 
     <string name="str_poor">ညံ</string>
@@ -298,6 +300,12 @@
     <string name="str_overall_rating_be_knowledgeable">ဗဟုသုတရရန္ စုစုေပါင္း Rating</string>
     <string name="str_overall_rating_be_together">ေပါင္းစည္းေဆာင္ရြတ္ရန္ စုစုေပါင္း Rating</string>
     <string name="str_overall_rating_talk_together">ေမးျမန္းေဆြးေႏြးရန္ စုစုေပါင္း Rating</string>
+
+
+
+    <string name="register_pwd_greet1">လ်ိဳ ့၀ွက္စာလံုုး ရိုုက္ထည့္ရန္</string>
+<string name="register_pwd_greet2"> စာလုုံုုးေရ အနည္းဆံုုး အကၡရာ ေၿခာက္လံုုးရိုုက္ထည့္ပါ </string>
+
 
 
 </resources>

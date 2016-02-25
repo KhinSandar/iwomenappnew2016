@@ -7,7 +7,7 @@
     android:background="@color/white"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    tools:context="org.undp_iwomen.iwomen.ui.activity.PostDetailV2Activity">
+    tools:context="org.undp_iwomen.iwomen.ui.activity.PostDetailActivity">
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -34,7 +34,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
-                    <ImageView
+                    <!--<org.undp_iwomen.iwomen.ui.widget.ResizableImageView
                         android:id="@+id/postdetail_content_img"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/feed_item_post_pic_height"
@@ -43,7 +43,17 @@
                         android:src="@drawable/bg_sample"
                         android:visibility="visible"
                         app:layout_collapseMode="parallax"
-                        app:layout_collapseParallaxMultiplier="0.7" />
+                        app:layout_collapseParallaxMultiplier="0.7" />-->
+                    <org.undp_iwomen.iwomen.ui.widget.ResizableImageView
+                        android:id="@+id/postdetail_content_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/feed_item_post_pic_height"
+                        android:background="@drawable/bg_sample"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/bg_sample"
+                        android:visibility="visible"
+                        app:layout_collapseMode="parallax"
+                        app:layout_collapseParallaxMultiplier="0.7"/>
 
                     <ProgressBar
                         android:id="@+id/postdetail_feed_item_progressBar"
@@ -82,38 +92,295 @@
 
     </android.support.design.widget.CoordinatorLayout>
 
+
+<!--
     <RelativeLayout
+
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
+        android:layout_height="60dp"
         android:layout_gravity="bottom"
         android:background="@color/primary"
-        android:padding="8dp">
+        >
 
-        <ImageView
-            android:id="@+id/ic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ic_mood_white" />
 
-        <EditText
+        <RelativeLayout
+            android:id="@+id/rly_cmt1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="8dp"
-            android:layout_toLeftOf="@+id/iic"
-            android:layout_toRightOf="@+id/ic"
-            android:hint="Tell iWomen How You Feel"
-            android:textColor="#fff"
-            android:textColorHint="#8fff" />
+            android:layout_height="30dp">
 
-        <ImageView
-            android:id="@+id/iic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ic_send_white" />
+            &lt;!&ndash;<ImageView
+                android:id="@+id/ic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_mood_white" />
+                &ndash;&gt;
+
+            <com.algo.hha.emojiicon.EmojiconEditText
+                android:id="@+id/postdetail_et_comment_upload"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:paddingLeft="@dimen/activity_vertical_margin"
+                android:layout_centerVertical="true"
+                android:background="@null"
+                android:hint="@string/post_detail_comment_eng"
+                android:singleLine="false"
+
+                android:textColor="#fff"
+                android:textColorHint="#8fff" />
+
+            <ImageView
+                android:id="@+id/postdetail_submit_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_send_white" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_below="@+id/rly_cmt1">
+
+            <LinearLayout
+                android:id="@+id/rly_cmt2"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:gravity="center_vertical|bottom"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/postdetail_ly_icons_holder"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@color/primary"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_gravity="center"
+                        android:paddingLeft="@dimen/activity_vertical_margin">
+                        &lt;!&ndash;- toggleEmojiIcon&ndash;&gt;
+
+                        <ImageView
+                        android:id="@+id/toggleEmojiIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_mood_white" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_gravity="center"
+                        android:paddingLeft="@dimen/activity_vertical_margin">
+
+                        <com.makeramen.RoundedImageView
+                            xmlns:app="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/postdetail_img_sticker"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="8dp"
+                            android:src="@drawable/i_women_sticker_sets_01"
+                            android:scaleType="fitXY"
+
+                            android:visibility="visible"
+                            app:riv_border_color="#333333"
+                            app:riv_border_width="0dip"
+                            app:riv_corner_radius="30dip"
+                            app:riv_mutate_background="true"
+                            app:riv_oval="true"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/postdetail_ly_sticker_holder"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:background="@color/light_blue_500"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <FrameLayout
+
+                        android:id="@+id/content_frame"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ScrollView
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:background="@color/line_color">
+
+                            <include
+                                layout="@layout/activity_talk_together_sticker_grid"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center_horizontal"></include>
+                        </ScrollView>
+                    </FrameLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
 
     </RelativeLayout>
+-->
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom"
+        android:background="@color/primary"
+        >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_vertical|bottom"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/bottom_bar"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@color/primary"
+
+            android:gravity="center_vertical"
+            android:minHeight="56dp"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/activity_vertical_margin">
+
+                <com.algo.hha.emojiicon.EmojiconEditText
+                    android:id="@+id/postdetail_et_comment_upload"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:paddingLeft="@dimen/activity_vertical_margin"
+                    android:layout_centerVertical="true"
+                    android:background="@null"
+                    android:hint="@string/post_detail_comment_eng"
+                    android:singleLine="false"
+
+                    android:textColor="#fff"
+                    android:textColorHint="#8fff" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:orientation="horizontal"
+                android:paddingRight="@dimen/activity_vertical_margin">
+
+                <ImageView
+                    android:id="@+id/postdetail_submit_comment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_send_white" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/postdetail_ly_icons_holder"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@color/primary"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/activity_vertical_margin">
+
+                <ImageView
+                    android:id="@+id/toggleEmojiIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_mood_white" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/activity_vertical_margin">
+
+                <com.makeramen.RoundedImageView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/postdetail_img_sticker"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="8dp"
+                    android:src="@drawable/i_women_sticker_sets_01"
+                    android:scaleType="fitXY"
+
+                    android:visibility="visible"
+                    app:riv_border_color="#333333"
+                    app:riv_border_width="0dip"
+                    app:riv_corner_radius="30dip"
+                    app:riv_mutate_background="true"
+                    app:riv_oval="true"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/postdetail_ly_sticker_holder"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@color/light_blue_500"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <FrameLayout
+
+                android:id="@+id/content_frame"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ScrollView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@color/line_color">
+
+                    <include
+                        layout="@layout/activity_talk_together_sticker_grid"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"></include>
+                </ScrollView>
+            </FrameLayout>
+        </LinearLayout>
+
+
+    </LinearLayout>
+    </RelativeLayout>>
+
 
 </FrameLayout>
