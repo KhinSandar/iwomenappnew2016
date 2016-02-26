@@ -557,4 +557,7 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
 
+    <string name="title_leadership_tips">Leadership</string>
+    <string name="title_leadership_lesson">Leadership Lesson</string>
+
 </resources>
