@@ -322,8 +322,8 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         progress_wheel.setRimColor(Color.LTGRAY);
         gridView.setLoadingView(progress_wheel);
 
-        /*storageUtil = StorageUtil.getInstance(getApplicationContext());
-        LoadStickerData();*/
+        storageUtil = StorageUtil.getInstance(getApplicationContext());
+        LoadStickerData();
 
 
     }
@@ -637,7 +637,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
 
             txt_cmd_count.setText(item.getCommentCount() + "");
-            txt_lbl_share_post.setText(item.getShareCount() + R.string.post_detail_share_post_eng);
+            //txt_lbl_share_post.setText(item.getShareCount() + R.string.post_detail_share_post_eng);
 
             et_comment.setTypeface(MyTypeFace.get(this, MyTypeFace.NORMAL));
             mPostTile.setTypeface(MyTypeFace.get(this, MyTypeFace.NORMAL));

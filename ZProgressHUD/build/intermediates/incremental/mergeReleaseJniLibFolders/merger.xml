@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/ZProgressHUD/src/main/jniLibs"/></dataSet><dataSet config="release"><source path="/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/ZProgressHUD/build-types/release/jniLibs"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="/Users/Admin/AndroidStudioProjects/iwomenappnew2016/ZProgressHUD/src/main/jniLibs"/></dataSet><dataSet config="release"><source path="/Users/Admin/AndroidStudioProjects/iwomenappnew2016/ZProgressHUD/build-types/release/jniLibs"/></dataSet></merger>

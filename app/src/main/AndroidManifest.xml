@@ -243,7 +243,7 @@
             android:name=".ui.activity.PostDetailActivity"
             android:label="@string/title_activity_post_detail"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.activity.TLGUserPostDetailActivity"
             android:label="@string/title_activity_post_detail"

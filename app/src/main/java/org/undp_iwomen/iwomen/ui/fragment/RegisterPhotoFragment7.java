@@ -4,10 +4,12 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.transition.ChangeBounds;
 import android.transition.Slide;
@@ -71,6 +73,8 @@ public class RegisterPhotoFragment7 extends Fragment implements  View.OnClickLis
     private static int REQUEST_PICTURE = 1;
     private static int REQUEST_CROP_PICTURE = 2;
 
+    private final String STORAGE_READ_PERMISSION = "android.permission.READ_EXTERNAL_STORAGE";
+    boolean storagePermissionAccepted = false;
 
 
     public static RegisterPhotoFragment7 newInstance(Sample sample) {
@@ -124,7 +128,21 @@ public class RegisterPhotoFragment7 extends Fragment implements  View.OnClickLis
             public void onClick(View v) {
                 //Utils.doToastEng(getActivity().getApplicationContext(),"Coming soon pls !");
                 //takePicture();
-                chooseImage();
+
+                //check whether there is permission for READ_STORAGE_PERMISSION
+                if(!hasPermission(STORAGE_READ_PERMISSION)) {
+
+                    //if no permission, request permission
+                    String[] perms = {STORAGE_READ_PERMISSION};
+
+                    int permsRequestCode = 200;
+
+                    requestPermissions(perms, permsRequestCode);
+
+                }else {
+
+                    chooseImage();
+                }
 
             }
         });
@@ -132,12 +150,42 @@ public class RegisterPhotoFragment7 extends Fragment implements  View.OnClickLis
 
         setEnglishFont();
 
+
+
         return view;
     }
 
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch(requestCode){
 
-    private void addNextFragment( final Button squareBlue, final boolean overlap) {
+            case 200:
+
+                storagePermissionAccepted = grantResults[0]== PackageManager.PERMISSION_GRANTED;
+
+                if(storagePermissionAccepted){
+                    chooseImage();
+                }
+
+                break;
+
+        }
+    }
+
+    private boolean hasPermission(String permission){
+
+        if(Build.VERSION.SDK_INT>Build.VERSION_CODES.LOLLIPOP_MR1) {
+            return (getActivity().checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED);
+        }else{
+            return true;
+        }
+
+
+    }
+
+
+    private void addNextFragment(final Button squareBlue, final boolean overlap) {
 
         if (crop_file_path != null) {
 
