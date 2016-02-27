@@ -381,7 +381,6 @@ int id none 0x7f0b000e
 int id normal 0x7f0b000a
 int id progress_circular 0x7f0b0005
 int id progress_horizontal 0x7f0b0006
-int id progress_wheel 0x7f0b003f
 int id radio 0x7f0b002b
 int id search_badge 0x7f0b0035
 int id search_bar 0x7f0b0034

@@ -16,6 +16,7 @@
         android:orientation="vertical">
 
         <android.support.design.widget.TextInputLayout
+            android:id="@+id/new_event_title_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -28,6 +29,7 @@
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
+            android:id="@+id/new_event_description_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -40,6 +42,7 @@
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
+            android:id="@+id/new_event_location_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -59,6 +62,7 @@
 
 
             <android.support.design.widget.TextInputLayout
+                android:id="@+id/new_event_start_date_input"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
@@ -77,6 +81,7 @@
                 android:layout_height="wrap_content"/>
 
             <android.support.design.widget.TextInputLayout
+                android:id="@+id/new_event_end_date_input"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
@@ -98,6 +103,7 @@
             android:orientation="horizontal">
 
             <android.support.design.widget.TextInputLayout
+                android:id="@+id/new_event_start_time_input"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
@@ -116,6 +122,7 @@
                 android:layout_height="wrap_content"/>
 
             <android.support.design.widget.TextInputLayout
+                android:id="@+id/new_event_end_time_input"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">

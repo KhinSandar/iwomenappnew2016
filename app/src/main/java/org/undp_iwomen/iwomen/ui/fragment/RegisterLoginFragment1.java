@@ -60,7 +60,6 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
     private SharedPreferences.Editor mEditorUserInfo;
 
 
-
     public static RegisterLoginFragment1 newInstance(Sample sample) {
 
         Bundle args = new Bundle();
@@ -156,7 +155,6 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
             if (lang.equals(Utils.ENG_LANG)) {
                 Utils.doToastEng(mContext, getResources().getString(R.string.your_name_error));
             } else if (lang.equals(Utils.MM_LANG)) {
-
                 Utils.doToastMM(mContext, getResources().getString(R.string.your_name_error_mm));
             }
 
@@ -173,7 +171,6 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
             if (lang.equals(Utils.ENG_LANG)) {
                 Utils.doToastEng(mContext, getResources().getString(R.string.mobile_number_error));
             } else if (lang.equals(Utils.MM_LANG)) {
-
                 Utils.doToastMM(mContext, getResources().getString(R.string.mobile_number_error_mm));
             }
             inputMobileOk = false;

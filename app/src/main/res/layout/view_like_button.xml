@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+
+    <org.undp_iwomen.iwomen.ui.widget.DotsView
+        android:id="@+id/vDotsView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"/>
+
+    <org.undp_iwomen.iwomen.ui.widget.CircleView
+        android:id="@+id/vCircle"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_gravity="center"/>
+
+    <ImageView
+        android:id="@+id/ivStar"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_heart_rate_off"/>
+
+</merge>

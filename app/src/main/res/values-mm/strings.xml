@@ -266,6 +266,7 @@
 
 
     <string name="register_ph_hint_password_input_hint">လွ်ိဳ ့၀ွက္ စာလံုုး</string>
+    <string name="register_ph_hint_confirm_password_input_hint">လ်ိဳ ့ ၀ွက္ စာလံုုးေနာက္တစ္ၾကိမ္ၿပန္ရိုုက္ပါ</string>
     <string name="register_title_profile">ကိုုယ္ေရး အခ်က္ အလက္</string>
 
     <string name="register_township_title">TLG/SRG ၿမိဳ ့နယ္ေရြးမည္</string>
@@ -286,6 +287,7 @@
 
     </string-array>
     <string name="post_detail_more"> ပိုုိမိုုဖတ္ရွဳရန္ &gt;&gt; </string>
+    <string name="calendar_name">ၿပကၡဒိန္</string>
 
 
     <string name="str_poor">ညံ</string>
@@ -300,4 +302,17 @@
     <string name="str_overall_rating_talk_together">ေမးျမန္းေဆြးေႏြးရန္ စုစုေပါင္း Rating</string>
 
 
+    <string name="register_pwd_greet1">လ်ိဳ ့၀ွက္စာလံုုး ရိုုက္ထည့္ရန္</string>
+    <string name="register_pwd_greet2"> စာလုုံုုးေရ အနည္းဆံုုး အကၡရာ ေၿခာက္လံုုးရိုုက္ထည့္ပါ </string>
+
+    <string name="calendar_description_error">Error</string>
+    <string name="calendar_title_error">Error</string>
+    <string name="calendar_location_error">Error</string>
+    <string name="calendar_start_date_error">Error</string>
+    <string name="calendar_end_date_error">Error</string>
+    <string name="calendar_start_time_error">Error</string>
+    <string name="calendar_end_time_error">Error</string>
+
+    <string name="calendar_success">Save Successfully</string>
+    <string name="calendar_success_mm">အစည္းအေ၀း မွတ္တမ္းေအာင္ၿမင္စြာ ေရာက္ရွိပါသည္။</string>
 </resources>

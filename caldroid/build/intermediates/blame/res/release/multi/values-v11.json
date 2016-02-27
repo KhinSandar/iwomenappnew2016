@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\build\\intermediates\\res\\merged\\release\\values-v11\\values-v11.xml",
+        "outputFile": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/build/intermediates/res/merged/release/values-v11/values-v11.xml",
         "map": [
             {
                 "to": {
@@ -12,14 +12,14 @@
                     "endOffset": 187
                 },
                 "from": {
-                    "file": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values-v11\\styles.xml",
+                    "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/values-v11/styles.xml",
                     "position": {
                         "startLine": 6,
                         "startColumn": 4,
-                        "startOffset": 183,
+                        "startOffset": 177,
                         "endLine": 8,
                         "endColumn": 12,
-                        "endOffset": 317
+                        "endOffset": 309
                     }
                 }
             }

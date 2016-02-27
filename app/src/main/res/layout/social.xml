@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp">
+
+    <!--<TextView
+        style="@style/PostDetailIconStyle"
+        android:id="@+id/postdetail_like_count"
+        android:drawableLeft="@drawable/ic_like_fill"
+        android:text="150"/>-->
+    <!--<FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.5">
+
+        <org.undp_iwomen.iwomen.ui.widget.LikeButtonView
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+    </FrameLayout>-->
+    <org.undp_iwomen.iwomen.ui.widget.LikeButtonView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/postdetail_like_count"
+        style="@style/PostDetailIconStyle"
+        android:text="150" />
+
+    <TextView
+        android:id="@+id/postdetail_cmd_count"
+        style="@style/PostDetailIconStyle"
+        android:drawableLeft="@drawable/ic_comment"
+        android:text="12" />
+
+    <TextView
+        android:id="@+id/social_share"
+        style="@style/PostDetailIconStyle"
+        android:drawableLeft="@drawable/ic_share"
+        android:text="Share" />
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.5">
+
+        <ImageView
+            android:id="@+id/social_facebook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_share_facebook" />
+
+        <com.facebook.share.widget.ShareButton
+            android:id="@+id/postdetail_fb_share_button"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:padding="8dp"
+            android:visibility="gone" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.5">
+
+        <ImageView
+            android:id="@+id/social_viber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_share_viber" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.5">
+
+        <ImageView
+            android:id="@+id/social_audio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_audio" />
+
+    </FrameLayout>
+
+</LinearLayout>

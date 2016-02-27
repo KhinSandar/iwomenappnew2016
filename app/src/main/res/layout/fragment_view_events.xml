@@ -34,7 +34,7 @@
 
     </android.support.v7.widget.CardView>
 
-    <android.support.v7.widget.RecyclerView
+    <!--<android.support.v7.widget.RecyclerView
         android:layout_above="@+id/view_events_create_event_button"
         android:layout_below="@+id/view_events_special_card"
         android:id="@+id/view_events_list"
@@ -42,7 +42,17 @@
         android:layout_marginBottom="8dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutManager="LinearLayoutManager"/>
+        app:layoutManager="LinearLayoutManager"/>-->
+    <com.smk.sklistview.SKListView
+        android:layout_above="@+id/view_events_create_event_button"
+        android:layout_below="@+id/view_events_special_card"
+        android:id="@+id/view_events_list"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@android:color/transparent" />
+
 
     <TextView
         android:layout_above="@+id/view_events_create_event_button"
@@ -51,6 +61,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
+        android:visibility="gone"
         android:text="No Event"/>
 
     <Button

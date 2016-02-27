@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ScrollView;
@@ -13,14 +14,24 @@ import android.widget.Toast;
 
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
+import com.smk.skconnectiondetector.SKConnectionDetector;
 
+import org.smk.clientapi.NetworkEngine;
+import org.smk.model.CalendarEvent;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.ui.adapter.CalendarViewPagerFragmentAdapter;
 import org.undp_iwomen.iwomen.ui.fragment.CaldroidSampleCustomFragment;
+import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
+import org.undp_iwomen.iwomen.utils.Connection;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 @SuppressLint("SimpleDateFormat")
 public class CalendarActivity extends AppCompatActivity {
@@ -31,11 +42,42 @@ public class CalendarActivity extends AppCompatActivity {
     //MY CUSTOM CODE
     private ViewPager viewPager;
     private CalendarViewPagerFragmentAdapter mAdapter;
-    ScrollView hsv ;
-    int scaleImage=200;
+    ScrollView hsv;
+    private CustomTextView textViewTitle;
 
 
     private void setCustomResourceForDates() {
+
+        /*********Get the Date From Server**************/
+
+        if (Connection.isOnline(getApplicationContext())) {
+
+            NetworkEngine.getInstance().getCalendarEvent(1, new Callback<List<CalendarEvent>>() {
+                @Override
+                public void success(List<CalendarEvent> calendarEvents, Response response) {
+
+                    for (int i = 0; i < calendarEvents.size() ; i++){
+                        if(calendarEvents.get(i).getStartTime() != null & !calendarEvents.get(i).getStartTime().isEmpty() ){
+
+                        }
+                    }
+
+
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+
+                }
+            });
+
+        } else {
+            SKConnectionDetector.getInstance(CalendarActivity.this).showErrorMessage();
+        }
+
+
+        /**********Get the Date From Server**************/
+
         Calendar cal = Calendar.getInstance();
 
         // Min date is last 7 days
@@ -62,14 +104,26 @@ public class CalendarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acitvity_calendar_custom_main);
 
+        /**********Set up the ToolBar**************/
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("");
+
+        textViewTitle = (CustomTextView) toolbar.findViewById(R.id.title_action2);
+
+        if (toolbar != null) {
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
+        textViewTitle.setText(getResources().getString(R.string.calendar_name));
+
+        /**********Set up the ToolBar**************/
+
         final SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
 
         // Setup caldroid fragment
         // **** If you want normal CaldroidFragment, use below line ****
         //caldroidFragment = new CaldroidFragment();
-
-
-
 
         /**********View Pager**************/
         // //////////////////////////////////////////////////////////////////////
@@ -77,7 +131,7 @@ public class CalendarActivity extends AppCompatActivity {
         // version, uncomment below line ****
         caldroidFragment = new CaldroidSampleCustomFragment();
         mAdapter = new CalendarViewPagerFragmentAdapter(getSupportFragmentManager());
-        viewPager = (ViewPager)findViewById(R.id.calendar_pager);
+        viewPager = (ViewPager) findViewById(R.id.calendar_pager);
         hsv = (ScrollView) findViewById(R.id.hsv_calendar);
         viewPager.setAdapter(mAdapter);
 
@@ -104,7 +158,6 @@ public class CalendarActivity extends AppCompatActivity {
                 return viewPager.onTouchEvent(event);
             }
         });
-
 
 
         // Setup arguments
@@ -331,6 +384,12 @@ public class CalendarActivity extends AppCompatActivity {
             dialogCaldroidFragment.saveStatesToKey(outState,
                     "DIALOG_CALDROID_SAVED_STATE");
         }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        super.onBackPressed();
+        return true;
     }
 
 }

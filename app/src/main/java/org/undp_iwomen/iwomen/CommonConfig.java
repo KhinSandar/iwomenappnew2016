@@ -99,5 +99,7 @@ public class CommonConfig {
 
     public static final String GET_CATEGORIES_LIST__URL = "/api/v1/categories";
 
+    public static final String CREATE_CALENDAR_EVENT_URL= "/api/v1/calendars";
+
 
 }

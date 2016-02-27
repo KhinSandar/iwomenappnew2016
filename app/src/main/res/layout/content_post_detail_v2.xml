@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:wheel="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+
+    >
+    <!--tools:context="org.undp_iwomen.iwomen.ui.activity.PostDetailActivity"
+    tools:showIn="@layout/activity_post_detail_v2" -->
+
+    <LinearLayout
+        android:id="@+id/detail_ly_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="8dp">
+
+        <LinearLayout
+            android:id="@+id/detail_ly_media_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#eee"
+            android:orientation="horizontal"
+            android:paddingBottom="16dp"
+            android:paddingTop="16dp">
+
+            <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                android:id="@+id/postdetail_download_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/ic_file_download_black_24dp"
+                android:drawablePadding="0dp"
+                android:gravity="center"
+                android:paddingLeft="24dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:paddingRight="24dp"
+                android:text="@string/detail_download_text_eng" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#d2d2d2" />
+
+            <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                android:id="@+id/postdetail_player_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/ic_file_download_black_24dp"
+                android:drawablePadding="0dp"
+                android:gravity="center"
+                android:paddingLeft="24dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:paddingRight="24dp"
+                android:text="@string/detail_listen_text_eng" />
+
+
+        </LinearLayout>
+
+        <include layout="@layout/social" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingBottom="8dp">
+
+            <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                android:id="@+id/postdetail_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Let's Honestly Help Each Other"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+            <TextView
+                android:id="@+id/postdetail_content_posted_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:paddingBottom="8dp"
+                android:paddingTop="4dp"
+                android:text="21 August, 2015" />
+
+            <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                android:id="@+id/postdetail_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="1.5sp"
+                android:paddingBottom="5dp"
+                android:text="Dear" />
+
+            <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                android:id="@+id/postdetail_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="1.5sp"
+                android:text="Dear Moe Moe, \n\nAlternative text is text associated with an image that serves the same purpose and conveys the same essential information as the image.Alternative text is text associated with an image that serves the same purpose and conveys the same essential information as the image."
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="?android:textColorSecondary" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="16dp"
+                android:paddingTop="16dp">
+
+                <FrameLayout
+                    android:id="@+id/postdetail_credit_pic_rounded_frame"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="4dp">
+
+                    <ImageView
+                        android:id="@+id/postdetail_credit_pic_rounded"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_credit" />
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/postdetail_credit_img_frame"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_toRightOf="@+id/postdetail_credit_pic_rounded_frame">
+
+                    <org.undp_iwomen.iwomen.ui.widget.ResizableImageView
+                        android:id="@+id/postdetail_credit_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/sample_circle" />
+                    <ProgressBar
+                        android:id="@+id/postdetail_credit_progress"
+                        style="?android:attr/progressBarStyle"
+                        android:layout_width="@dimen/feed_item_profile_pic"
+                        android:layout_height="@dimen/feed_item_profile_pic"
+
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_gravity="left"
+                        android:visibility="visible" />
+
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/postdetail_credit_link"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:layout_toRightOf="@+id/postdetail_credit_img_frame"
+                    android:paddingLeft="4dp"
+                    android:text="Create to Great Women Speak Out" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <FrameLayout
+                    android:id="@+id/postdetail_profilePic_rounded_frame"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="8dp">
+
+                    <com.makeramen.RoundedImageView
+                        android:id="@+id/postdetail_profilePic_rounded"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/sample_circle" />
+                    <ProgressBar
+                        android:id="@+id/postdetail_progressBar_profile_item"
+                        style="?android:attr/progressBarStyle"
+                        android:layout_width="@dimen/feed_item_profile_pic"
+                        android:layout_height="@dimen/feed_item_profile_pic"
+
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_gravity="left"
+                        android:visibility="visible" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/postdetail_content_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toRightOf="@+id/postdetail_profilePic_rounded_frame"
+                    android:text="Hter Hter"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+                <TextView
+                    android:id="@+id/postdetail_content_user_role"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/postdetail_content_username"
+                    android:layout_toRightOf="@+id/postdetail_profilePic_rounded_frame"
+                    android:text="Founder and Director of Akhaya Women"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+
+                <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                    android:id="@+id/postdetail_content_user_role_more"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/postdetail_content_user_role"
+                    android:layout_marginTop="8dp"
+                    android:layout_toRightOf="@+id/postdetail_profilePic_rounded_frame"
+                    android:text="@string/post_detail_more" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <include layout="@layout/social_without_ear_phone" />
+
+        <!--<ListView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginBottom="?actionBarSize"
+            android:layout_weight="1"
+            android:background="#eee"></ListView>-->
+        <org.undp_iwomen.iwomen.ui.widget.ProgressWheel
+            android:id="@+id/postdetail_progress_wheel_comment"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            wheel:matProg_barColor="@color/primary"
+            wheel:matProg_progressIndeterminate="true" />
+        <com.smk.sklistview.SKListView
+            android:id="@+id/postdetail_comment_listview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:choiceMode="singleChoice"
+            android:background="#eee"
+            android:clipToPadding="false"
+            android:divider="@android:color/transparent"
+            android:layout_marginBottom="100dp"
+            android:paddingBottom="10dp"
+            /><!--  -->
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

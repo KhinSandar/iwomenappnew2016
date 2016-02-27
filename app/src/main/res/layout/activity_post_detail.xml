@@ -228,26 +228,26 @@
     </ScrollView>-->
 
 
-    <include layout="@layout/activity_post_detail_content"
-        />
+    <include layout="@layout/activity_post_detail_content" />
+
     <include layout="@layout/toolbar_actionbar_translucent" />
 
 
     <LinearLayout
-        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:gravity="center_vertical|bottom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/bottom_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="56dp"
-
             android:background="@color/light_blue_500"
+
             android:gravity="center_vertical"
+            android:minHeight="56dp"
             android:orientation="horizontal"
             android:visibility="visible">
 
@@ -288,10 +288,10 @@
 
         <LinearLayout
             android:id="@+id/postdetail_ly_icons_holder"
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/light_blue_500">
+            android:background="@color/light_blue_500"
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -303,52 +303,56 @@
                     android:id="@+id/toggleEmojiIcon"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/ic_smiley"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginRight="8dp"/>
+                    android:layout_marginRight="8dp"
+                    android:src="@drawable/ic_smiley" />
 
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingLeft="@dimen/activity_vertical_margin" >
+                android:paddingLeft="@dimen/activity_vertical_margin">
 
                 <ImageView
                     android:id="@+id/postdetail_img_sticker"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/ic_launcher"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginRight="8dp" />
+                    android:layout_marginRight="8dp"
+                    android:src="@drawable/ic_launcher" />
             </LinearLayout>
 
         </LinearLayout>
-    <LinearLayout
-        android:id="@+id/postdetail_ly_sticker_holder"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:visibility="gone"
-        android:background="@color/light_blue_500">
-        <FrameLayout
 
-            android:id="@+id/content_frame"
+        <LinearLayout
+            android:id="@+id/postdetail_ly_sticker_holder"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-            <ScrollView
-                android:layout_width="fill_parent"
-                android:background="@color/line_color"
-                android:layout_height="fill_parent">
+            android:layout_height="200dp"
+            android:background="@color/light_blue_500"
+            android:orientation="horizontal"
+            android:visibility="gone">
 
-                <include
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center_horizontal"
-                    layout="@layout/activity_talk_together_sticker_grid"></include>
-            </ScrollView>
-        </FrameLayout>
+            <FrameLayout
+
+                android:id="@+id/content_frame"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ScrollView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@color/line_color">
+
+                    <include
+                        layout="@layout/activity_talk_together_sticker_grid"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"></include>
+                </ScrollView>
+            </FrameLayout>
         </LinearLayout>
 
 

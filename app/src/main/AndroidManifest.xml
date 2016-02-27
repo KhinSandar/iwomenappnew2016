@@ -22,6 +22,7 @@
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.RECORD_VIDEO" />
@@ -53,7 +54,7 @@
 
     <uses-permission android:name="android.permission.CAMERA" />
 
-    <uses-feature android:name="android.hardware.camera"></uses-feature>
+    <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application
@@ -83,7 +84,6 @@
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="@string/google_maps_key" />
 
-
         <!-- CUSTOM LOGIN AND MAIN ACTIVITY -->
         <activity
             android:name=".ui.activity.MainLoginActivity"
@@ -91,10 +91,10 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Iwomen.SignUp"
-            android:windowSoftInputMode="adjustResize|stateHidden">
-        </activity>
+            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
         <!-- PARSE LOGIN AND MAIN ACTIVITY -->
-        <!--<activity
+        <!--
+        <activity
             android:name="com.parse.ui.ParseLoginActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop"
@@ -113,7 +113,8 @@
             <meta-data
                 android:name="com.parse.ui.ParseLoginActivity.TWITTER_LOGIN_ENABLED"
                 android:value="false" />
-        </activity>-->
+        </activity>
+        -->
         <!-- PARSE LOGIN END -->
 
 
@@ -154,7 +155,8 @@
             android:enabled="true"
             android:exported="false" />
         <!-- PARSE PUSH NOTRIFICATION -->
-        <!--<service android:name="com.parse.PushService" />
+        <!--
+        <service android:name="com.parse.PushService" />
 
         <receiver android:name="com.parse.ParseBroadcastReceiver">
             <intent-filter>
@@ -181,7 +183,9 @@
                 &lt;!&ndash; IMPORTANT: Change "com.parse.tutorials.pushnotifications" to match your app's package name. &ndash;&gt;
                 <category android:name="org.undp_iwomen.iwomen" />
             </intent-filter>
-        </receiver>-->
+        </receiver>
+        -->
+
 
         <!-- PARSE PUSH NOTRIFICATION -->
         <!--
@@ -215,14 +219,12 @@
             android:authorities="com.facebook.app.FacebookContentProvider909633732437583"
             android:exported="true" />
 
-
-
         <activity
             android:name=".ui.activity.RegisterMainActivity"
             android:label="@string/app_name"
-            android:theme="@style/MaterialAnimations.Blue"
-            android:screenOrientation="portrait"
             android:parentActivityName=".ui.activity.MainLoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MaterialAnimations.Blue"
             android:windowSoftInputMode="stateAlwaysHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -235,19 +237,18 @@
             android:name=".ui.activity.DrawerMainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden"></activity>
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name=".ui.activity.MainActivity" />
-
         <activity
             android:name=".ui.activity.PostDetailActivity"
             android:label="@string/title_activity_post_detail"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden"></activity>
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".ui.activity.TLGUserPostDetailActivity"
             android:label="@string/title_activity_post_detail"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden"></activity>
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".ui.activity.AboutUsWebActivity"
             android:label="@string/title_activity_post_detail"
@@ -279,7 +280,7 @@
             android:name=".ui.activity.SubResourceListActivity"
             android:label="@string/title_activity_post_detail"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"></activity>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".ui.activity.ResourceDetailActivity"
             android:label="@string/leadership_eng"
@@ -308,17 +309,17 @@
             android:name=".ui.activity.TlgProfileActivity"
             android:label="@string/title_activity_post_detail"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden"></activity>
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".ui.activity.TLGListActivity"
             android:label="@string/title_activity_post_detail"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden"></activity>
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".ui.activity.AuthorDetailActivity"
             android:label="@string/title_activity_post_detail"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden"></activity>
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".ui.activity.ProfileEditActivity"
             android:label="@string/title_activity_post_detail"
@@ -332,12 +333,12 @@
         <activity
             android:name=".ui.activity.ProfileEditTLGActivity"
             android:label="@string/title_activity_post_detail"
-            android:windowSoftInputMode="stateAlwaysHidden"
             android:parentActivityName=".ui.activity.ProfileEditActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.activity.ProfileEditTLGActivity"/>
+                android:value=".ui.activity.ProfileEditTLGActivity" />
         </activity>
         <activity
             android:name=".ui.activity.TalkTogetherMainActivity"
@@ -352,54 +353,58 @@
             android:name=".ui.activity.CalendarActivity"
             android:label="@string/title_activity_post_detail"
             android:parentActivityName=".ui.activity.DrawerMainActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:theme="@style/AppTheme"
             android:screenOrientation="portrait">
+
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.activity.DrawerMainActivity" />
         </activity>
         <activity
             android:name=".ui.activity.PostNewsActivity"
-            android:label="@string/title_activity_post_news" >
-        </activity>
-        <activity
-            android:name=".ui.activity.PostNewsActivity"
             android:label="@string/title_activity_post_news"></activity>
+
         <activity
             android:name="org.smk.iwomen.CompetitionNewGameActivity"
-            android:label="@string/title_activity_competition_new_game"></activity>
+            android:label="@string/title_activity_competition_new_game" />
         <activity
             android:name="org.smk.iwomen.CompetitionWinnerGroupActivity"
-            android:label="@string/title_activity_competition_winner_group"></activity>
+            android:label="@string/title_activity_competition_winner_group" />
         <activity
             android:name="org.smk.iwomen.CompetitionSubmitAnswerActivity"
-            android:label="@string/title_activity_competition_submit_answer"></activity>
+            android:label="@string/title_activity_competition_submit_answer" />
         <activity
             android:name="org.smk.iwomen.CompetitionGroupUserActivity"
-            android:label="@string/title_activity_competition_group_user"></activity>
+            android:label="@string/title_activity_competition_group_user" />
         <activity
             android:name="org.smk.iwomen.GameOverActivity"
-            android:label="@string/title_activity_game_over"></activity>
+            android:label="@string/title_activity_game_over" />
         <!-- Declare the bundled CropImage Activity -->
         <activity android:name="com.android.camera.CropImage" />
         <activity
             android:name="org.smk.iwomen.AudioRecordingActivity"
             android:label="@string/title_activity_audio_recording"
-            android:theme="@style/AppTheme"></activity>
-
+            android:theme="@style/AppTheme" />
         <activity
             android:name="org.smk.iwomen.VideoRecordingActivity"
             android:label="@string/title_activity_video_recording"
-            android:theme="@style/AppTheme"></activity>
-
-        <activity android:name=".ui.activity.ViewEventsActivity"
-            android:label="@string/title_view_events">
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ui.activity.ViewEventsActivity"
+            android:label="@string/title_view_events"></activity>
+        <activity
+            android:name=".ui.activity.EventDetailActivity"
+            android:label="@string/title_event_detail" />
+        <activity
+            android:name=".ui.activity.NewEventActivity"
+            android:label="@string/title_new_event" />
+        <activity
+            android:name=".ui.activity.PostDetailV2Activity"
+            android:windowSoftInputMode="adjustPan"
+            android:theme="@style/AppTheme">
 
         </activity>
-        <activity android:name=".ui.activity.EventDetailActivity"
-            android:label="@string/title_event_detail"/>
-        <activity android:name=".ui.activity.NewEventActivity"
-            android:label="@string/title_new_event"/>
-
     </application>
 
 </manifest>

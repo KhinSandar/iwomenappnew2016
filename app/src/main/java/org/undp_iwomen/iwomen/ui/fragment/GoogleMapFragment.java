@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +33,8 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.makeramen.RoundedImageView;
+
 import org.smk.clientapi.NetworkEngine;
 import org.smk.iwomen.BaseActionBarActivity;
 import org.smk.model.Rating;
@@ -43,6 +46,7 @@ import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.data.TlgProfileItem;
 import org.undp_iwomen.iwomen.model.retrofit_api.TlgProfileAPI;
 import org.undp_iwomen.iwomen.ui.activity.TlgProfileActivity;
+import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.utils.Connection;
 import org.undp_iwomen.iwomen.utils.StorageUtil;
 import org.undp_iwomen.iwomen.utils.Utils;
@@ -72,6 +76,12 @@ public class GoogleMapFragment extends Fragment {//
     private Menu menu;
     private Rating avgRatings;
 
+    private CustomTextView txtName;
+    private CustomTextView txtBody;
+    private RoundedImageView profileImg;
+    private ProgressBar profileProgressbar;
+    private CustomTextView txtAuthorTitle;
+
     public GoogleMapFragment() {
     }
 
@@ -97,7 +107,13 @@ public class GoogleMapFragment extends Fragment {//
     }
 
     private void init(View rootView) {
+        txtName = (CustomTextView) rootView.findViewById(R.id.map_mdk_name);
+        txtAuthorTitle = (CustomTextView) rootView.findViewById(R.id.map_mdy_network);
+        txtBody = (CustomTextView) rootView.findViewById(R.id.map_about_mdk);
 
+
+        profileImg = (RoundedImageView) rootView.findViewById(R.id.map_profilePic_rounded);
+        profileProgressbar = (ProgressBar) rootView.findViewById(R.id.map_progressBar_profile_item);
         tlgArraylist = new ArrayList<TlgProfileItem>();
         tlgArraylist = (ArrayList<TlgProfileItem>)storageUtil.ReadArrayListFromSD("TlgArrayList");
 
@@ -471,6 +487,23 @@ public class GoogleMapFragment extends Fragment {//
             ratingOfDesc = getResources().getString(R.string.str_excellent);
         }
         return ratingOfDesc;
+    }
+    private class ImageLoadedCallback implements com.squareup.picasso.Callback {
+        ProgressBar progressBar;
+
+        public ImageLoadedCallback(ProgressBar progBar) {
+            progressBar = progBar;
+        }
+
+        @Override
+        public void onSuccess() {
+
+        }
+
+        @Override
+        public void onError() {
+
+        }
     }
 
 
