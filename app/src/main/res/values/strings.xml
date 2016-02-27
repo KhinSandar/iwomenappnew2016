@@ -19,8 +19,8 @@
     <string name="title_notrification_mm">အသိေပးအေၾကာင္းၾကားစာလက္ခံရန္</string>
 
     <string name="login_fb_appid">909633732437583</string>
-   <string name="title_change_theme_eng">Change Theme</string>
-   <string name="title_change_theme_mm">အေရာင္ေၿပာင္းလဲရန္</string>
+    <string name="title_change_theme_eng">Change Theme</string>
+    <string name="title_change_theme_mm">အေရာင္ေၿပာင္းလဲရန္</string>
 
 
     <string name="action_refresh">Refresh</string>
@@ -559,5 +559,8 @@
 
     <string name="title_leadership_tips">Leadership</string>
     <string name="title_leadership_lesson">Leadership Lesson</string>
+    <string name="title_activity_sister_app_detail">Sister Apps</string>
+    <string name="title_activity_new_post">New Post</string>
+    <string name="new_post_hint">Here you can ask question to other TLGs, ask for advice to other TLGs and share your livelihood skills with other TLGs, And of course you can also post your successful TLGs activities.</string>
 
 </resources>
