@@ -302,10 +302,17 @@
     <string name="str_overall_rating_talk_together">ေမးျမန္းေဆြးေႏြးရန္ စုစုေပါင္း Rating</string>
 
 
-
     <string name="register_pwd_greet1">လ်ိဳ ့၀ွက္စာလံုုး ရိုုက္ထည့္ရန္</string>
-<string name="register_pwd_greet2"> စာလုုံုုးေရ အနည္းဆံုုး အကၡရာ ေၿခာက္လံုုးရိုုက္ထည့္ပါ </string>
+    <string name="register_pwd_greet2"> စာလုုံုုးေရ အနည္းဆံုုး အကၡရာ ေၿခာက္လံုုးရိုုက္ထည့္ပါ </string>
 
+    <string name="calendar_description_error">Error</string>
+    <string name="calendar_title_error">Error</string>
+    <string name="calendar_location_error">Error</string>
+    <string name="calendar_start_date_error">Error</string>
+    <string name="calendar_end_date_error">Error</string>
+    <string name="calendar_start_time_error">Error</string>
+    <string name="calendar_end_time_error">Error</string>
 
-
+    <string name="calendar_success">Save Successfully</string>
+    <string name="calendar_success_mm">အစည္းအေ၀း မွတ္တမ္းေအာင္ၿမင္စြာ ေရာက္ရွိပါသည္။</string>
 </resources>

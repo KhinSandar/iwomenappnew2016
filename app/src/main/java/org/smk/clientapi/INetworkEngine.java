@@ -162,6 +162,34 @@ public interface INetworkEngine {
             @Query("page") int page,
             Callback<List<Categories>> callback);
 
+    @FormUrlEncoded
+    @POST(CommonConfig.CREATE_CALENDAR_EVENT_URL)
+    void postCreateCalendarEventMM(
+            @Field("description_mm") String description_mm,
+            @Field("title_mm") String title_mm,
+            @Field("location") String location,
+            @Field("start_date") String start_date,
+            @Field("end_date") String end_date,
+            @Field("start_time") String start_time,
+            @Field("end_time") String end_time,
+
+            Callback<CalendarEvent> callback);
+
+    @FormUrlEncoded
+    @POST(CommonConfig.CREATE_CALENDAR_EVENT_URL)
+    void postCreateCalendarEventEng(
+
+            @Field("description") String description,
+            @Field("title") String title,
+
+            @Field("location") String location,
+            @Field("start_date") String start_date,
+            @Field("end_date") String end_date,
+            @Field("start_time") String start_time,
+            @Field("end_time") String end_time,
+
+            Callback<CalendarEvent> callback);
+
 
 
 }

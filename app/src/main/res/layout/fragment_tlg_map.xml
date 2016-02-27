@@ -1,65 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="fill_parent"
+    android:background="#FFF">
 
-    <FrameLayout
-        android:id="@+id/content_map_frame"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <fragment
-            android:id="@+id/tlg_map_detail"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
-            tools:context=".activity.DrawerMainActivity"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="10dp" />
-    </FrameLayout>
-
-   <!-- <LinearLayout
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/main_ui_container"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:background="#FFF"
+
         android:orientation="vertical">
 
         <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/list_background"
-            android:padding="16dp">
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp">
 
-            <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+            <FrameLayout
+                android:layout_width="@dimen/feed_item_profile_pic"
+                android:layout_height="@dimen/feed_item_profile_pic">
+
+
+                <com.makeramen.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/map_profilePic_rounded"
+                    android:layout_width="@dimen/feed_item_profile_pic"
+                    android:layout_height="@dimen/feed_item_profile_pic"
+
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/blank_profile"
+                    android:visibility="visible"
+                    app:riv_border_color="#333333"
+                    app:riv_border_width="0dip"
+                    app:riv_corner_radius="30dip"
+                    app:riv_mutate_background="true"
+                    app:riv_oval="true"></com.makeramen.RoundedImageView>
+
+                <ProgressBar
+                    android:id="@+id/map_progressBar_profile_item"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="@dimen/feed_item_profile_pic"
+                    android:layout_height="@dimen/feed_item_profile_pic"
+
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_gravity="left"
+                    android:visibility="visible" />
+            </FrameLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New Text"
-                android:id="@+id/textView2" />
+                android:layout_margin="8dp"
+                android:orientation="vertical">
 
-            <org.undp_iwomen.iwomen.ui.widget.CustomTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New Text"
-                android:id="@+id/textView3"
-                android:layout_marginLeft="16dp" />
+                <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                    android:id="@+id/map_mdk_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="8dp"
+                    android:gravity="center_vertical"
+                    android:text="May Doe Kabar"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/postdetail_content_role_more_ly"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                        android:id="@+id/map_mdy_network"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:text="National Network of Rural Myanmar Women "
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <ListView
-                android:id="@+id/tlg_comment_lv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp">
+            <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                android:id="@+id/map_about_mdk"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:background="@color/list_background"
-                android:choiceMode="singleChoice"
-                android:divider="@android:color/transparent"
-                android:dividerHeight="0dp" />
+                android:layout_margin="8dp"
+                android:text="Body text "
+                />
+
         </LinearLayout>
-    </LinearLayout>-->
-</LinearLayout>
+        <FrameLayout
+
+
+            android:id="@+id/content_map_frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_gravity="bottom">
+
+            <fragment
+                android:id="@+id/tlg_map_detail"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                tools:context=".activity.DrawerMainActivity"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginBottom="5dp"
+                 />
+        </FrameLayout>
+
+    </LinearLayout>
+
+</ScrollView>
+
+
+

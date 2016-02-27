@@ -557,4 +557,17 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
 
+    <string name="calendar_description_error">Error</string>
+    <string name="calendar_title_error">Error</string>
+    <string name="calendar_location_error">Error</string>
+    <string name="calendar_start_date_error">Error</string>
+    <string name="calendar_end_date_error">Error</string>
+    <string name="calendar_start_time_error">Error</string>
+    <string name="calendar_end_time_error">Error</string>
+
+    <string name="calendar_success">Save Successfully</string>
+    <string name="calendar_success_mm">အစည္းအေ၀း မွတ္တမ္းေအာင္ၿမင္စြာ ေရာက္ရွိပါသည္။</string>
+
+
+
 </resources>
