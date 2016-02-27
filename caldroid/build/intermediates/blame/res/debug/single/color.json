@@ -1,10 +1,10 @@
 [
     {
-        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/build/intermediates/res/merged/debug/color/cell_text_color.xml",
-        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/color/cell_text_color.xml"
+        "merged": "C:\\Users\\Toe Lie\\Documents\\sat\\workspace\\iwomenappnew2016\\caldroid\\build\\intermediates\\res\\merged\\debug\\color\\cell_text_color_dark.xml",
+        "source": "C:\\Users\\Toe Lie\\Documents\\sat\\workspace\\iwomenappnew2016\\caldroid\\src\\main\\res\\color\\cell_text_color_dark.xml"
     },
     {
-        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/build/intermediates/res/merged/debug/color/cell_text_color_dark.xml",
-        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/color/cell_text_color_dark.xml"
+        "merged": "C:\\Users\\Toe Lie\\Documents\\sat\\workspace\\iwomenappnew2016\\caldroid\\build\\intermediates\\res\\merged\\debug\\color\\cell_text_color.xml",
+        "source": "C:\\Users\\Toe Lie\\Documents\\sat\\workspace\\iwomenappnew2016\\caldroid\\src\\main\\res\\color\\cell_text_color.xml"
     }
 ]
