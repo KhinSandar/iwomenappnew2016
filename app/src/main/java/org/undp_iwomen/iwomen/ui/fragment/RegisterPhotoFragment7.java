@@ -4,10 +4,12 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.transition.ChangeBounds;
 import android.transition.Slide;
@@ -28,8 +30,9 @@ import com.kbeanie.imagechooser.api.ChosenImages;
 import com.kbeanie.imagechooser.api.ImageChooserListener;
 import com.kbeanie.imagechooser.api.ImageChooserManager;
 import com.makeramen.RoundedImageView;
-import org.smk.clientapi.NetworkEngine;
 
+import org.smk.clientapi.NetworkEngine;
+import org.smk.model.PhotoUpload;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.data.Sample;
@@ -40,12 +43,13 @@ import java.io.File;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+import retrofit.mime.MultipartTypedOutput;
 import retrofit.mime.TypedFile;
 
 /**
  * Created by lgvalle on 05/09/15.
  */
-public class RegisterPhotoFragment7 extends Fragment implements  View.OnClickListener, ImageChooserListener {
+public class RegisterPhotoFragment7 extends Fragment implements View.OnClickListener, ImageChooserListener {
 
     private static final String EXTRA_SAMPLE = "sample";
     SharedPreferences sharePrefLanguageUtil;
@@ -71,6 +75,8 @@ public class RegisterPhotoFragment7 extends Fragment implements  View.OnClickLis
     private static int REQUEST_PICTURE = 1;
     private static int REQUEST_CROP_PICTURE = 2;
 
+    private final String STORAGE_READ_PERMISSION = "android.permission.READ_EXTERNAL_STORAGE";
+    boolean storagePermissionAccepted = false;
 
 
     public static RegisterPhotoFragment7 newInstance(Sample sample) {
@@ -83,7 +89,7 @@ public class RegisterPhotoFragment7 extends Fragment implements  View.OnClickLis
         return fragment;
     }
 
-    public static RegisterPhotoFragment7 newInstance( ) {
+    public static RegisterPhotoFragment7 newInstance() {
 
         Bundle args = new Bundle();
 
@@ -111,7 +117,7 @@ public class RegisterPhotoFragment7 extends Fragment implements  View.OnClickLis
 
         mSharedPreferencesUserInfo = getActivity().getSharedPreferences(CommonConfig.SHARE_PREFERENCE_USER_INFO, Context.MODE_PRIVATE);
 
-        btn_next = (Button)view.findViewById(R.id.Next);
+        btn_next = (Button) view.findViewById(R.id.Next);
         register_profilePic_progressBar = (ProgressBar) view.findViewById(R.id.register_photo_profilePic_pgbar);
         register_profilePic_progressBar.setVisibility(View.GONE);
 
@@ -124,7 +130,21 @@ public class RegisterPhotoFragment7 extends Fragment implements  View.OnClickLis
             public void onClick(View v) {
                 //Utils.doToastEng(getActivity().getApplicationContext(),"Coming soon pls !");
                 //takePicture();
-                chooseImage();
+
+                //check whether there is permission for READ_STORAGE_PERMISSION
+                if (!hasPermission(STORAGE_READ_PERMISSION)) {
+
+                    //if no permission, request permission
+                    String[] perms = {STORAGE_READ_PERMISSION};
+
+                    int permsRequestCode = 200;
+
+                    requestPermissions(perms, permsRequestCode);
+
+                } else {
+
+                    chooseImage();
+                }
 
             }
         });
@@ -132,55 +152,65 @@ public class RegisterPhotoFragment7 extends Fragment implements  View.OnClickLis
 
         setEnglishFont();
 
+
         return view;
     }
 
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
 
-    private void addNextFragment( final Button squareBlue, final boolean overlap) {
+            case 200:
+
+                storagePermissionAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+
+                if (storagePermissionAccepted) {
+                    chooseImage();
+                }
+
+                break;
+
+        }
+    }
+
+    private boolean hasPermission(String permission) {
+
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
+            return (getActivity().checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED);
+        } else {
+            return true;
+        }
+
+
+    }
+
+
+    private void addNextFragment(final Button squareBlue, final boolean overlap) {
 
         if (crop_file_path != null) {
 
-            /*File photo = new File(crop_file_path);
-
-            FileInputStream fileInputStream = null;
-
-
-            byte[] bFile = new byte[(int) photo.length()];
-
-            try {
-                //convert file into array of bytes
-                fileInputStream = new FileInputStream(photo);
-                fileInputStream.read(bFile);
-                fileInputStream.close();
-
-                for (int i = 0; i < bFile.length; i++) {
-
-                }
-
-
-                //System.out.println("Done");
-            } catch (Exception e) {
-                e.printStackTrace();
-                Log.e("Image Upload Sing up", "==>" + e.toString());
-            }*/
 
             mProgressDialog.setMessage("Loading...");
             mProgressDialog.show();//{"isAllow": true}
 
-            File photo = new File(crop_file_path);
-            TypedFile typedFile = new TypedFile("multipart/form-data", photo);//croppedImageFile
-            NetworkEngine.getInstance().postUserPhoto(typedFile, new Callback<String>() {
+            /*final File photo = new File(crop_file_path);
+            TypedFile typedFile = new TypedFile("multipart/form-data", photo);*///croppedImageFile
+            MultipartTypedOutput multipartTypedOutput = new MultipartTypedOutput();
+            multipartTypedOutput.addPart("image", new TypedFile("image/png", new File(crop_file_path)));
+
+
+            NetworkEngine.getInstance().postUserPhoto(multipartTypedOutput, new Callback<PhotoUpload>() {
                 @Override
-                public void success(String s, Response response) {
-                    Log.e("<<<<Success>>>","===>" +s);
+                public void success(PhotoUpload photoUpload, Response response) {
+                    Log.e("<<<<Success>>>", "===>" + photoUpload.getResizeUrl().get(2).toString());
 
                     //photo_20160205070904_7780379861454656029697.jpg
 
                     mEditorUserInfo = mSharedPreferencesUserInfo.edit();
-                    mEditorUserInfo.putString(CommonConfig.USER_UPLOAD_IMG_NAME, s);
+                    mEditorUserInfo.putString(CommonConfig.USER_UPLOAD_IMG_NAME, photoUpload.getName());
 
-
+                    mEditorUserInfo.putString(CommonConfig.USER_UPLOAD_IMG_URL, photoUpload.getResizeUrl().get(2).toString());
                     mEditorUserInfo.commit();
                     RegisterTermsFragment8 registerTermsFragment8 = RegisterTermsFragment8.newInstance();
 
@@ -215,25 +245,18 @@ public class RegisterPhotoFragment7 extends Fragment implements  View.OnClickLis
 
                 @Override
                 public void failure(RetrofitError error) {
-                    Log.e("<<<<Fail>>>","===>" +error.toString());
+                    Log.e("<<<<Fail>>>", "===>" + error.toString());
 
                     mProgressDialog.dismiss();
                     return;
                 }
             });
 
-
-        }else{
+        } else {
 
             //TODO showtoast please upload image or choose image
 
         }
-
-
-
-
-
-
 
 
     }
@@ -248,11 +271,13 @@ public class RegisterPhotoFragment7 extends Fragment implements  View.OnClickLis
         }
 
     }
+
     public void setEnglishFont() {
 
         // Set title bar
         ((RegisterMainActivity) getActivity()).textViewTitle.setText(R.string.register_photo_title);
     }
+
     public void setMyanmarFont() {
 
         // Set title bar
@@ -294,8 +319,6 @@ public class RegisterPhotoFragment7 extends Fragment implements  View.OnClickLis
     }
 
 
-
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -324,35 +347,7 @@ public class RegisterPhotoFragment7 extends Fragment implements  View.OnClickLis
 
 
         }
-        //Toast.makeText(getActivity().getApplicationContext(), "Image"+crop_file_name +"Path \n"+ crop_file_path, Toast.LENGTH_SHORT).show();
 
-
-        //For fb
-        //callbackManager.onActivityResult(requestCode, resultCode, data);
-
-
-        /*if(crop_file_path != null ){
-
-            Intent intent = new Intent(MainReportActivity.this, MainPhotoReportActivity.class);
-            intent.putExtra("ImageName" ,crop_file_name);
-            intent.putExtra("ImagePath",crop_file_path);
-            intent.putExtra("ImageAbsolutePath" ,croppedImageFile.getAbsolutePath());
-
-
-            startActivity(intent);*//*
-
-            *//*MainReportFragment mainReportFragment = new MainReportFragment();
-            Bundle b = new Bundle();
-
-            b.putString("ImageName",crop_file_name);
-            b.putString("ImagePath",crop_file_path);
-            b.putString("ImageAbsolutePath",croppedImageFile.getAbsolutePath());
-
-            mainReportFragment.setArguments(b);
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, mainReportFragment)
-                    .commit();
-        }*/
     }
 
 

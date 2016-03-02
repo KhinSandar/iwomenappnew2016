@@ -14,7 +14,7 @@ public class CommonConfig {
     public static final String USER_EMAIL= "email";
     public static final String USER_FBID_INCLUDE = "FbId_Include";
     public static final String USER_FBID = "FbId";
-
+    public static final String REGISTER_MSG = "register_msg";
 
     public static final String USER_PWD = "password";
     public static final String USER_CON_PWD = "confirmpwd";
@@ -25,6 +25,7 @@ public class CommonConfig {
 
 
     public static final String USER_UPLOAD_IMG_NAME = "img_name";
+    public static final String USER_UPLOAD_IMG_URL= "user_img_url";
 
     public static final String USER_ROLE = "user_role";
 
@@ -35,7 +36,7 @@ public class CommonConfig {
 
 
     //https://api.parse.com/1/classes/City?X-Parse-Application-Id=OUN2VvuU6SN6DcRIDq3bT0ovJPXAk630qHVNJ9Gk&X-Parse-REST-API-Key=wxZB1WZBLzHEwfkUMToL0ykTLaiWY7Z1NuzfADLO
-    public static final String BASE_URL = "https://api.parse.com/1";
+    public static final String BASE_URL = "http://api.iwomenapp.org";
 
     public static final String COMMENT_URL = "/classes/Comment";
 

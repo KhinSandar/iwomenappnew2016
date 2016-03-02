@@ -89,7 +89,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
 
     private SharedPreferences mSharedPreferencesUserInfo;
     private SharedPreferences.Editor mEditorUserInfo;
-    private String user_name, user_obj_id, user_ph;
+    private String user_name, user_obj_id, user_ph , register_msg;
     SharedPreferences sharePrefLanguageUtil;
     String mstr_lang;
     Runnable run;
@@ -194,7 +194,10 @@ public class DrawerMainActivity extends BaseActionBarActivity {
 
 
 
+
         txt_user_name.setText(user_name);
+
+
 
 
 
@@ -205,6 +208,8 @@ public class DrawerMainActivity extends BaseActionBarActivity {
             selectItem(0);
             drawerLayoutt.openDrawer(mDrawerLinearLayout);
         }
+
+
 
 
         //getUserPostCount();
@@ -249,13 +254,13 @@ public class DrawerMainActivity extends BaseActionBarActivity {
             public void run() {
 
 
-                //queryToBooking();
+
 
                 drawer_adapter.notifyDataSetChanged();
                 mDrawerList.invalidateViews();
                 mDrawerList.refreshDrawableState();
 
-                //Log.e("Load Adapter===","==runRunnable=" );
+
             }
         };
 

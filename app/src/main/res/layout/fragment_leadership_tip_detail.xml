@@ -67,6 +67,6 @@
         android:text="@string/large_sample_text"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
-    <include layout="@layout/social" />
+    <include layout="@layout/social_without_ear_phone" />
 
 </LinearLayout>

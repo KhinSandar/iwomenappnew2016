@@ -106,7 +106,7 @@
     <string name="i_agree_mm">မွတ္ပံုုတင္အခ်က္ အလက္မ်ားကိုုသေဘာတူပါသည္ <a href="https://www.facebook.com/UndpMyanmar"></a></string>
 
 
-    <string name="signup_tlg_member_exit_mm">TLG (သိုု့) SRG အဖြဲ ့၀င္ၿဖစ္လ်င္အမွန္ၿခစ္ လုုပ္ပါ</string>
+    <string name="signup_tlg_member_exit_mm">TLG (သိုု့) SRG အဖြဲ ့၀င္ၿဖစ္လ်ွင္အမွန္ၿခစ္ လုုပ္ပါ</string>
     <string name="signup_tlg_member_exit_eng">I am a TLG or SRG member</string>
 
     <string name="signup_tlg_member_exit">I am a TLG or SRG member</string>
@@ -180,7 +180,7 @@
     <string name="upload_success_toast_eng">Success Upload post</string>
 
     <string name="iwomen_postupload_success_toast_mm">သင္၏ စိတ္ဓာတ္ခြန္အားေပးၿဖစ္ရပ္အေၾကာင္းအရာေပးပိုု ့မွုုလက္ခံရရွိပါသည္။ တာ၀န္ရွိသူမွ စစ္ေဆး
-ၾကည့္ရွုု ၿပီးမွ ပိုု ့စ္ေပါ ္လာပါမည္။</string>
+ၾကည့္ရွုု ၿပီးမွ ပိုု ့စ္ေပၚ လာပါမည္။</string>
     <string name="iwomen_postupload_success_toast_eng">Thank you for submitting your inspiring story. The administrator will review it and will publish it. You will be motified when your story is being published.</string>
     <string name="google_maps_key">AIzaSyC0x9igzav3skQvcf2RDdD2xZPNXr0GUlY</string>
 
@@ -236,7 +236,7 @@
     <string name="edit_profile_btn_next_tlg_edit">TLG or SRG အခ်က္အလက္ၿပင္ဆင္ရန္ဒိေနရာကိုုႏွိပ္ပါ။!</string>
 
 
-    <string name="edit_profile_tlg_township">မိဳ ့နယ္ေရြးမည္</string>
+    <string name="edit_profile_tlg_township">ျမိဳ႕ နယ္ေရြးမည္</string>
     <string name="str_rating_reviews">ေက်းဇူးျပဳၿပီး Rate သတ္မွတ္ေပးပါ။</string>
     <string name="str_be_inspired">စိတ္ဓာတ္ခြန္္အားျဖည့္ရန္</string>
     <string name="str_be_knowledgeable">ဗဟုသုတရရန္</string>
@@ -302,17 +302,17 @@
     <string name="str_overall_rating_talk_together">ေမးျမန္းေဆြးေႏြးရန္ စုစုေပါင္း Rating</string>
 
 
-    <string name="register_pwd_greet1">လ်ိဳ ့၀ွက္စာလံုုး ရိုုက္ထည့္ရန္</string>
+    <string name="register_pwd_greet1">လွ်ိဳ ့၀ွက္စာလံုုး ရိုုက္ထည့္ရန္</string>
     <string name="register_pwd_greet2"> စာလုုံုုးေရ အနည္းဆံုုး အကၡရာ ေၿခာက္လံုုးရိုုက္ထည့္ပါ </string>
 
-    <string name="calendar_description_error">Error</string>
-    <string name="calendar_title_error">Error</string>
-    <string name="calendar_location_error">Error</string>
-    <string name="calendar_start_date_error">Error</string>
-    <string name="calendar_end_date_error">Error</string>
-    <string name="calendar_start_time_error">Error</string>
-    <string name="calendar_end_time_error">Error</string>
 
-    <string name="calendar_success">Save Successfully</string>
+    <string name="calendar_description_error">အစည္းအေ၀းအေျကာင္းအရာကိုရိုုက္ထည့္ပါ</string>
+    <string name="calendar_title_error">အစည္းအေ၀းေခါင္းစဥ္ကိုရိုုက္ထည့္ပါ</string>
+    <string name="calendar_location_error">အစည္းအေ၀းေနရာကိုရိုုက္ထည့္ပါ</string>
+    <string name="calendar_start_date_error">အစည္းအေ၀းစမည့္ရက္ကိုရိုုက္ထည့္ပါ</string>
+    <string name="calendar_end_date_error">အစည္းအေ၀းျပီးဆံုးမည့္ရက္ကိုရိုုက္ထည့္ပါ</string>
+    <string name="calendar_start_time_error">အစည္းအေ၀းစမည့္အခ်ိန္ကိုရိုုက္ထည့္ပါ</string>
+    <string name="calendar_end_time_error">အစည္းအေ၀းျပီးဆံုးမည့္အခ်ိန္ကိုရိုုက္ထည့္ပါ</string>
+    <string name="calendar_success">အစည္းအေ၀း မွတ္တမ္းေအာင္ၿမင္စြာ ေရာက္ရွိပါသည္။</string>
     <string name="calendar_success_mm">အစည္းအေ၀း မွတ္တမ္းေအာင္ၿမင္စြာ ေရာက္ရွိပါသည္။</string>
 </resources>
