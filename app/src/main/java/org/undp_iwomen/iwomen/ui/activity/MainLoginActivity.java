@@ -101,7 +101,7 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
 
         //TODO CHECK LOGIN OR NOT
 
-        if (mSharedPreferencesUserInfo.getString(CommonConfig.REGISTER_MSG, null) != null) {
+        if (mSharedPreferencesUserInfo.getString(CommonConfig.USER_NAME, null) != null) {
             startActivity(new Intent(this, DrawerMainActivity.class));
             finish();
         }

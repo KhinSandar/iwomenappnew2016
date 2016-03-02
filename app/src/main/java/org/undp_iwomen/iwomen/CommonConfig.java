@@ -102,5 +102,7 @@ public class CommonConfig {
 
     public static final String CREATE_CALENDAR_EVENT_URL= "/api/v1/calendars";
 
+    public static final String GET_CALENDAR_EVENT_BY_ID_URL = "/api/v1/calendars/{id}";
+
 
 }

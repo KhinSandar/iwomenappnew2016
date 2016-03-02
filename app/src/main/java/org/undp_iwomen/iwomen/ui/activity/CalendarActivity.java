@@ -90,9 +90,9 @@ public class CalendarActivity extends AppCompatActivity {
         Date greenDate = cal.getTime();
 
         if (caldroidFragment != null) {
-            caldroidFragment.setBackgroundResourceForDate(R.color.blue_500,
+            caldroidFragment.setBackgroundResourceForDate(R.color.accent,
                     blueDate);
-            caldroidFragment.setBackgroundResourceForDate(R.color.green,
+            caldroidFragment.setBackgroundResourceForDate(R.color.primary,
                     greenDate);
             caldroidFragment.setTextColorForDate(R.color.white, blueDate);
             caldroidFragment.setTextColorForDate(R.color.white, greenDate);

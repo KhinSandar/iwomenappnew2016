@@ -1,10 +1,10 @@
 [
     {
-        "merged": "C:\\Users\\Toe Lie\\Documents\\sat\\workspace\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\success.png",
-        "source": "C:\\Users\\Toe Lie\\Documents\\sat\\workspace\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\success.png"
+        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/ZProgressHUD/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi-v4/failure.png",
+        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/ZProgressHUD/build/intermediates/bundles/debug/res/drawable-xhdpi-v4/failure.png"
     },
     {
-        "merged": "C:\\Users\\Toe Lie\\Documents\\sat\\workspace\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\failure.png",
-        "source": "C:\\Users\\Toe Lie\\Documents\\sat\\workspace\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\failure.png"
+        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/ZProgressHUD/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi-v4/success.png",
+        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/ZProgressHUD/build/intermediates/bundles/debug/res/drawable-xhdpi-v4/success.png"
     }
 ]

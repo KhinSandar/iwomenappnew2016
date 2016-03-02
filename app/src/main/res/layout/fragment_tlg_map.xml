@@ -36,7 +36,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
                     android:scaleType="fitXY"
-                    android:src="@drawable/blank_profile"
+                    android:src="@drawable/mdkb"
                     android:visibility="visible"
                     app:riv_border_color="#333333"
                     app:riv_border_width="0dip"
@@ -44,7 +44,7 @@
                     app:riv_mutate_background="true"
                     app:riv_oval="true"></com.makeramen.RoundedImageView>
 
-                <ProgressBar
+                <!--<ProgressBar
                     android:id="@+id/map_progressBar_profile_item"
                     style="?android:attr/progressBarStyle"
                     android:layout_width="@dimen/feed_item_profile_pic"
@@ -54,7 +54,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
                     android:layout_gravity="left"
-                    android:visibility="visible" />
+                    android:visibility="visible" />-->
             </FrameLayout>
 
             <LinearLayout
@@ -107,7 +107,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:text="Body text "
+                android:text="@string/may_doe_kabar"
                 />
 
         </LinearLayout>

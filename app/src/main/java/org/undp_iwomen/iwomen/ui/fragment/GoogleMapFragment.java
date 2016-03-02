@@ -79,7 +79,7 @@ public class GoogleMapFragment extends Fragment {//
     private CustomTextView txtName;
     private CustomTextView txtBody;
     private RoundedImageView profileImg;
-    private ProgressBar profileProgressbar;
+    //private ProgressBar profileProgressbar;
     private CustomTextView txtAuthorTitle;
 
     public GoogleMapFragment() {
@@ -113,7 +113,7 @@ public class GoogleMapFragment extends Fragment {//
 
 
         profileImg = (RoundedImageView) rootView.findViewById(R.id.map_profilePic_rounded);
-        profileProgressbar = (ProgressBar) rootView.findViewById(R.id.map_progressBar_profile_item);
+        //profileProgressbar = (ProgressBar) rootView.findViewById(R.id.map_progressBar_profile_item);
         tlgArraylist = new ArrayList<TlgProfileItem>();
         tlgArraylist = (ArrayList<TlgProfileItem>)storageUtil.ReadArrayListFromSD("TlgArrayList");
 
