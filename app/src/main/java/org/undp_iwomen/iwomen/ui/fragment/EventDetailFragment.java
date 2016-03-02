@@ -88,7 +88,7 @@ public class EventDetailFragment extends Fragment {
     private void setEventData() {
         if (Connection.isOnline(mContext)) {
 
-            SMKserverAPI.getInstance().getService().getCalendarEventDetailByID("3", new Callback<CalendarEvent>() {
+            SMKserverAPI.getInstance().getService().getCalendarEventDetailByID("6", new Callback<CalendarEvent>() {
                 @Override
                 public void success(CalendarEvent calendarEvent, Response response) {
 
