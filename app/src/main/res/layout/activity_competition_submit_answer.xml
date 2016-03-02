@@ -40,6 +40,13 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/competition_text" />
 
+            <LinearLayout
+                android:id="@+id/layout_question"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:layout_height="match_parent"></LinearLayout>
+
             <org.undp_iwomen.iwomen.ui.widget.CustomEditText
                 android:id="@+id/edt_competition_answer_1"
                 android:layout_width="match_parent"

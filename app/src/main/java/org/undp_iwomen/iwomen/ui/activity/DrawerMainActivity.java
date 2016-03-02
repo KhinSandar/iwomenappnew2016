@@ -33,6 +33,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.smk.application.StoreUtil;
 import org.smk.clientapi.NetworkEngine;
+import org.smk.gcm.GcmCommon;
 import org.smk.iwomen.BaseActionBarActivity;
 import org.smk.iwomen.CompetitionNewGameActivity;
 import org.smk.iwomen.CompetitionWinnerGroupActivity;
@@ -139,6 +140,12 @@ public class DrawerMainActivity extends BaseActionBarActivity {
         FacebookSdk.sdkInitialize(getApplicationContext());
         // Initialize the SDK before executing any other operations,
         // especially, if you're using Facebook UI elements.
+
+
+        //Register GCM Device User
+        if (Connection.isOnline(getApplicationContext())) {
+            GcmCommon.register(this);
+        }
 
 
         org.undp_iwomen.iwomen.utils.Utils.onActivityCreateSetTheme(this);

@@ -219,6 +219,16 @@
             android:authorities="com.facebook.app.FacebookContentProvider909633732437583"
             android:exported="true" />
 
+        <receiver
+            android:name="org.smk.gcm.GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="org.undp_iwomen.iwomen" />
+            </intent-filter>
+        </receiver>
+        <service android:name="org.smk.gcm.GcmIntentService" />
+
         <activity
             android:name=".ui.activity.RegisterMainActivity"
             android:label="@string/app_name"

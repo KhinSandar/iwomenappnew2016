@@ -7,17 +7,23 @@ import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.smk.skalertmessage.SKToastMessage;
+
 import org.smk.application.StoreUtil;
 import org.smk.clientapi.NetworkEngine;
 import org.smk.model.AnswerList;
 import org.smk.model.CompetitionQuestion;
-import com.smk.skalertmessage.SKToastMessage;
-
 import org.undp_iwomen.iwomen.R;
+import org.undp_iwomen.iwomen.ui.widget.CustomEditText;
+import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -39,6 +45,7 @@ public class CompetitionSubmitAnswerActivity extends BaseActionBarActivity {
 	private org.smk.model.AnswerList AnswerList;
 	private int groupUserId;
 	private Button btn_go_back;
+	private LinearLayout layout_question;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +70,8 @@ public class CompetitionSubmitAnswerActivity extends BaseActionBarActivity {
 			txt_question.setText(Html.fromHtml(competitionQuestion.getQuestion()));
 			txt_description.setText(Html.fromHtml(competitionQuestion.getAnswerSubmitDescription()));
 		}
-		
+
+		layout_question = (LinearLayout) findViewById(R.id.layout_question);
 		
 		edt_answer_1 = (EditText) findViewById(R.id.edt_competition_answer_1);
 		edt_answer_2 = (EditText) findViewById(R.id.edt_competition_answer_2);
@@ -120,6 +128,48 @@ public class CompetitionSubmitAnswerActivity extends BaseActionBarActivity {
 		btn_save.setOnClickListener(clickListener);
 		btn_submit.setOnClickListener(clickListener);
 		btn_go_back.setOnClickListener(clickListener);
+	}
+
+	private void generateUi(){
+		// For Text Question
+		CustomTextView txt_question_text = new CustomTextView(this);
+		CustomEditText edt_question_text = new CustomEditText(this);
+		txt_question_text.setText("Question 1.....");
+		layout_question.addView(txt_question_text);
+		layout_question.addView(edt_question_text);
+
+		// For checkbox Question
+		CustomTextView txt_question_checkbox = new CustomTextView(this);
+		LinearLayout layout_checkbox = new LinearLayout(this);
+		layout_checkbox.setOrientation(LinearLayout.VERTICAL);
+		txt_question_checkbox.setText("Question 2.....");
+
+		for(int i=0; i<5; i++){
+			CheckBox chk_question = new CheckBox(this);
+			chk_question.setText("Chk "+ (i+1));
+			layout_checkbox.addView(chk_question);
+		}
+
+		layout_question.addView(txt_question_checkbox);
+		layout_question.addView(layout_checkbox);
+
+		// For Radio Question
+		CustomTextView txt_question_radio = new CustomTextView(this);
+		RadioGroup layout_radio = new RadioGroup(this);
+		layout_radio.setOrientation(LinearLayout.VERTICAL);
+		txt_question_radio.setText("Question 3.....");
+
+		for(int i=0; i<5; i++){
+			RadioButton chk_question = new RadioButton(this);
+			chk_question.setText("Rdo "+ (i+1));
+			layout_checkbox.addView(chk_question);
+		}
+
+		layout_question.addView(txt_question_radio);
+		layout_question.addView(layout_checkbox);
+
+
+
 	}
 	
 	private View.OnClickListener clickListener = new View.OnClickListener() {

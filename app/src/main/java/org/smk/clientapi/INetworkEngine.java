@@ -1,5 +1,6 @@
 package org.smk.clientapi;
 
+import com.google.gson.JsonObject;
 import com.smk.model.Categories;
 import com.smk.model.CommentItem;
 import com.smk.model.ResourceItem;
@@ -85,6 +86,15 @@ public interface INetworkEngine {
             @Field("function") String function,
             @Field("review") String review,
             Callback<Review> callback);
+
+    @FormUrlEncoded
+    @POST("/api/v1/gcms")
+    void postRegisterNotification(
+            @Field("reg_id") String regId,
+            @Field("device_id") String devId,
+            @Field("user_id") String user_id,
+            Callback<JsonObject> callback);
+
 
     //KSD URL
     //http://api.shopyface.com/api/v1/auth/photo
