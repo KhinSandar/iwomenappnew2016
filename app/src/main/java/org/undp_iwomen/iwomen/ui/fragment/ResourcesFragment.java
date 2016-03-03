@@ -23,10 +23,12 @@ import android.widget.TextView;
 
 import com.smk.skconnectiondetector.SKConnectionDetector;
 import com.smk.sklistview.SKListView;
+import com.thuongnh.zprogresshud.ZProgressHUD;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.smk.application.StoreUtil;
 import org.smk.clientapi.NetworkEngine;
 import org.smk.iwomen.BaseActionBarActivity;
 import org.smk.model.Rating;
@@ -66,6 +68,7 @@ public class ResourcesFragment extends Fragment {
     private int offsetlimit = 3;
     private int skipLimit = 0;
     private Menu menu;
+    private ZProgressHUD zPDialog;
 
 
     public ResourcesFragment() {
@@ -91,8 +94,6 @@ public class ResourcesFragment extends Fragment {
         mContext = getActivity().getApplicationContext();
         storageUtil = StorageUtil.getInstance(mContext);
 
-        //LayoutInflater footerinflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        //footer = (View) inflater.inflate(R.layout.loading_layout, null);
 
         init(rootView);
 
@@ -132,35 +133,42 @@ public class ResourcesFragment extends Fragment {
         lvResouces.setNextPage(true);
         adapter.notifyDataSetChanged();
 
-        getResourceDataPaginationFromSever();
+        List<com.smk.model.ResourceItem> resourceItems = StoreUtil.getInstance().selectFrom("ResourcesList");
+        if (Connection.isOnline(mContext)){
+            // Showing local data while loading from internet
+            if(resourceItems != null && resourceItems.size() > 0){
+                ResourceItems.addAll(resourceItems);
+                adapter.notifyDataSetChanged();
+                zPDialog = new ZProgressHUD(getActivity());
+            }
+            getResourceDataPaginationFromSever();
+        }else{
+            SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
+            List<com.smk.model.ResourceItem> resourceItems1 = StoreUtil.getInstance().selectFrom("ResourcesList");
+            if(resourceItems1 != null){
+                ResourceItems.clear();
+                ResourceItems.addAll(resourceItems1);
+                adapter.notifyDataSetChanged();
+            }
+        }
+
         //When very start this fragment open , need to check db data
-        String selections = TableAndColumnsName.ResourceUtil.STATUS + "=?";
+        /*String selections = TableAndColumnsName.ResourceUtil.STATUS + "=?";
         String[] selectionargs = {"0"};
         Cursor cursor = getActivity().getContentResolver().query(IwomenProviderData.ResourceProvider.CONTETN_URI, null, selections, selectionargs, BaseColumns._ID + " DESC");//DESC
-
-
         if (cursor.getCount() > 0) {
             Log.e("cursor.getCount()", "===>" + cursor.getCount());
             setupAdapter();
 
-
         } else {
-
             if (Connection.isOnline(getActivity())) {
                 //getPostDataOrderByLikesDate();
                 getResourceDataFromSever();
             } else {
-
                 SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
 
-                /*if (mstr_lang.equals(Utils.ENG_LANG)) {
-                    Utils.doToastEng(mContext, getResources().getString(R.string.open_internet_warning_eng));
-                } else {
-
-                    Utils.doToastMM(mContext, getActivity().getResources().getString(R.string.open_internet_warning_mm));
-                }*/
             }
-        }
+        }*/
 
 
         lvResouces.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -191,9 +199,16 @@ public class ResourcesFragment extends Fragment {
             NetworkEngine.getInstance().getResourceByPagination(paginater, new Callback<List<com.smk.model.ResourceItem>>() {
                 @Override
                 public void success(List<com.smk.model.ResourceItem> resourceItems, Response response) {
+
+                    // Only first REQUEST that visible
+                    if(zPDialog != null && zPDialog.isShowing()){
+                        ResourceItems.clear();
+                        zPDialog.dismissWithSuccess();
+                    }
                     ResourceItems.addAll(resourceItems);
                     adapter.notifyDataSetChanged();
                     isLoading = false;
+                    StoreUtil.getInstance().saveTo("ResourcesList", ResourceItems);
                     if(ResourceItems.size() == 12){
                         lvResouces.setNextPage(true);
                         paginater++;
@@ -211,6 +226,12 @@ public class ResourcesFragment extends Fragment {
 
         }else {
             SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
+            List<com.smk.model.ResourceItem> iWomenPosts = StoreUtil.getInstance().selectFrom("ResourcesList");
+            if(iWomenPosts != null){
+                ResourceItems.clear();
+                ResourceItems.addAll(iWomenPosts);
+                adapter.notifyDataSetChanged();
+            }
         }
     }
 

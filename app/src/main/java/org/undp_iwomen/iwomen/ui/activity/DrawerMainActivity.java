@@ -27,10 +27,8 @@ import com.facebook.FacebookSdk;
 import com.google.gson.Gson;
 import com.makeramen.RoundedImageView;
 import com.smk.skconnectiondetector.SKConnectionDetector;
+import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.smk.application.StoreUtil;
 import org.smk.clientapi.NetworkEngine;
 import org.smk.iwomen.BaseActionBarActivity;
@@ -40,7 +38,7 @@ import org.smk.model.CompetitionQuestion;
 import org.smk.model.Review;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
-import org.undp_iwomen.iwomen.model.retrofit_api.UserPostAPI;
+import org.undp_iwomen.iwomen.model.retrofit_api.SMKserverStringConverterAPI;
 import org.undp_iwomen.iwomen.ui.adapter.DrawerListViewAdapter;
 import org.undp_iwomen.iwomen.ui.fragment.BeTogetherFragment;
 import org.undp_iwomen.iwomen.ui.fragment.GoogleMapFragment;
@@ -52,7 +50,6 @@ import org.undp_iwomen.iwomen.ui.fragment.TLGUserStoriesRecentFragment;
 import org.undp_iwomen.iwomen.ui.fragment.TalkTogetherCategoryFragment;
 import org.undp_iwomen.iwomen.ui.widget.AnimateCustomTextView;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
-import org.undp_iwomen.iwomen.ui.widget.ProfilePictureView;
 import org.undp_iwomen.iwomen.utils.Connection;
 import org.undp_iwomen.iwomen.utils.SharePrefUtils;
 import org.undp_iwomen.iwomen.utils.Utils;
@@ -89,13 +86,13 @@ public class DrawerMainActivity extends BaseActionBarActivity {
 
     private SharedPreferences mSharedPreferencesUserInfo;
     private SharedPreferences.Editor mEditorUserInfo;
-    private String user_name, user_obj_id, user_ph , register_msg;
+    private String user_name, user_obj_id,user_id, user_ph , register_msg ,user_img_path;
     SharedPreferences sharePrefLanguageUtil;
     String mstr_lang;
     Runnable run;
     DrawerListViewAdapter drawer_adapter;
 
-    ProfilePictureView userProfilePicture;
+    //ProfilePictureView userProfilePicture;
     ProgressBar drawer_progressBar_profile_item;
 
 
@@ -162,7 +159,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
 
         drawerLayoutt = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerLinearLayout = (LinearLayout) findViewById(R.id.left_drawer);
-        userProfilePicture = (ProfilePictureView) findViewById(R.id.profilePicture);
+        //userProfilePicture = (ProfilePictureView) findViewById(R.id.profilePicture);
         mDrawerList = (ListView) findViewById(R.id.left_drawer_lv);
         txt_user_name = (TextView) findViewById(R.id.txt_user_name);
         txt_sing_out = (CustomTextView) findViewById(R.id.menu_sing_out);
@@ -192,8 +189,11 @@ public class DrawerMainActivity extends BaseActionBarActivity {
         user_name= mSharedPreferencesUserInfo.getString(CommonConfig.USER_NAME, null);
         user_obj_id = mSharedPreferencesUserInfo.getString(CommonConfig.USER_OBJ_ID, null);
 
+        user_id =mSharedPreferencesUserInfo.getString(CommonConfig.USER_ID, null);
+        user_img_path = mSharedPreferencesUserInfo.getString(CommonConfig.USER_UPLOAD_IMG_URL, null);
 
 
+        setUserImg();
 
         txt_user_name.setText(user_name);
 
@@ -212,7 +212,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
 
 
 
-        //getUserPostCount();
+        getUserPostCount();
         getCompetitionQuestion();
 
 
@@ -266,6 +266,43 @@ public class DrawerMainActivity extends BaseActionBarActivity {
 
 
     }
+    //TODO show profile image
+    private void setUserImg(){
+
+
+        if(Connection.isOnline(getApplicationContext())){
+            if (user_img_path != null && user_img_path != "") {
+                try {
+
+                    drawer_progressBar_profile_item.setVisibility(View.VISIBLE);
+
+                    Picasso.with(getApplicationContext())
+                            .load(user_img_path) //"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
+                            .placeholder(R.drawable.place_holder)
+                            .error(R.drawable.place_holder)
+                            .into(drawer_profilePic_rounded, new ImageLoadedCallback(drawer_progressBar_profile_item) {
+                                @Override
+                                public void onSuccess() {
+                                    if (this.progressBar != null) {
+                                        this.progressBar.setVisibility(View.GONE);
+                                    } else {
+                                        this.progressBar.setVisibility(View.VISIBLE);
+                                    }
+                                }
+
+                            });
+                } catch (OutOfMemoryError outOfMemoryError) {
+                    outOfMemoryError.printStackTrace();
+                }
+            } else {
+
+                drawer_progressBar_profile_item.setVisibility(View.GONE);
+            }
+        }else{
+            drawer_progressBar_profile_item.setVisibility(View.GONE);
+        }
+
+    }
 
     //TODO Comment Count API
     private void getUserPostCount() {
@@ -273,28 +310,19 @@ public class DrawerMainActivity extends BaseActionBarActivity {
 
         if (Connection.isOnline(getApplicationContext())) {
 
-            UserPostAPI.getInstance().getService().getPostCount(0, 1, "{\"postUploadName\":\"" + user_name + "\"}", new Callback<String>() {
+            SMKserverStringConverterAPI.getInstance().getService().getUserPostCountByObjID(user_obj_id, new Callback<String>() {
                 @Override
                 public void success(String s, Response response) {
-                    try {
-                        JSONObject whole_body = new JSONObject(s);
-                        JSONArray result = whole_body.getJSONArray("results");
-
-                        post_count = whole_body.getString("count");
-                        menu_user_post_count.setText(post_count + " Post");
-
-                    } catch (JSONException ex) {
-                        ex.printStackTrace();
-                    }
-
+                    post_count = s;
+                    menu_user_post_count.setText(post_count + " Post");
                 }
 
                 @Override
                 public void failure(RetrofitError error) {
-                    Log.e("///Count Error//", "==>" + error.toString());
 
                 }
             });
+
 
         } else {
 

@@ -14,7 +14,7 @@ public class CalendarViewPagerFragmentAdapter extends FragmentPagerAdapter { //i
     ,"8", "9", "10"
     ,"11", "12"};
     int[] randomImg = new int[]{R.drawable.jan ,R.drawable.feb, R.drawable.mar
-            ,R.drawable.samplecalender,R.drawable.may ,R.drawable.june, R.drawable.july
+            ,R.drawable.april,R.drawable.may ,R.drawable.june, R.drawable.july
             ,R.drawable.aug ,R.drawable.sep, R.drawable.oct
             ,R.drawable.nov ,R.drawable.dec
                                 };/*For View Pager*/

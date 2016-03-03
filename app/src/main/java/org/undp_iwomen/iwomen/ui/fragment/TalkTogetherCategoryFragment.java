@@ -44,9 +44,10 @@ import com.etsy.android.sample.R;
 /**
  * Created by dharmaone on 29/05/2014.
  */
-public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragment implements WrappedGridView.EndlessListener{
+public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragment implements WrappedGridView.EndlessListener {
 
     private android.support.v4.app.Fragment mFragment;
+
 
     private static int ITEM_PER_REQUEST = 10;
 
@@ -72,8 +73,7 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
     JSONObject main_pair;
     int offset = 0;
 
-    private  boolean gridViewResized = false;
-
+    private boolean gridViewResized = false;
 
 
     //public static final String ARG_PLANET_NUMBER = "planet_number";
@@ -94,7 +94,7 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
 
         ctx = getActivity().getApplicationContext();
         v = inflater.inflate(R.layout.fragment_talk_together_main, container, false);
-        storageUtil =StorageUtil.getInstance(getActivity().getApplicationContext());
+        storageUtil = StorageUtil.getInstance(getActivity().getApplicationContext());
 
 
         /**********Ajust Layout Image size depend on screen at Explore ************/
@@ -103,7 +103,7 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
         //mAdapter = new CategoryGridViewAdapter(ctx, listShopName, listShopImg);
         // Set custom adapter to gridview
         //progressBar =(ProgressBar)v.findViewById(R.id.ProgressLoading_category);
-        progress_wheel = (ProgressWheel)v.findViewById(R.id.progress_wheel);
+        progress_wheel = (ProgressWheel) v.findViewById(R.id.progress_wheel);
         gridView = (WrappedGridView) v.findViewById(R.id.grid_view_cate); // Implement On Item click listener
 
         //gridView.setLoadingView(progressBar);
@@ -118,8 +118,8 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
         //return inflater.inflate(R.layout.activity_sgv, container, false);
     }
 
-    public void LoadData(){
-        if(Connection.isOnline(getActivity().getApplicationContext())){
+    public void LoadData() {
+        if (Connection.isOnline(getActivity().getApplicationContext())) {
 
             progress_wheel.setVisibility(View.VISIBLE);
             isLoading = true;
@@ -152,53 +152,32 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
 
 
 
+        } else {
 
-            /*CategoriesDataModel cat_model0 = new CategoriesDataModel("0","Calendar","http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-06f18fed-199e-4aa8-8e56-74475674cf84-applause-to-the-woman.png");
-            CategoriesModelList.add(cat_model0);
-
-
-            CategoriesDataModel cat_model = new CategoriesDataModel("1","Activities","http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-b06f0901-87c3-4f89-b52e-39eecf7f4fa5-unity-is-strength.png");
-            CategoriesModelList.add(cat_model);
-            */
-
-
-
-
-
-
-
-
-            }else{
 
             SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
-            CategoriesModelList = (ArrayList<Categories>)storageUtil.ReadArrayListFromSD("Categories");
+            CategoriesModelList = (ArrayList<Categories>) storageUtil.ReadArrayListFromSD("Categories");
 
-            if(CategoriesModelList.size() > 0){
-                mAdapter = new TalkTogetherGridViewAdapter(getActivity(),ctx, CategoriesModelList);
+            if (CategoriesModelList.size() > 0) {
+                mAdapter = new TalkTogetherGridViewAdapter(getActivity(), ctx, CategoriesModelList);
                 gridView.setAdapter(mAdapter);
             }
-            //Log.e("Categories API data", "Network failure case case");
-                    /*Toast.makeText(ctx, "Check your network connection", Toast.LENGTH_SHORT).show();
 
 
-                    */
-
-
-             }
+        }
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             public void onItemClick(AdapterView<?> arg0, View arg1, int position,
                                     long arg3) {
 
 
-                if ( position == 0){
+                if (position == 0) {
                     Intent i = new Intent(ctx, CalendarActivity.class);
                     i.putExtra("CategoryName", CategoriesModelList.get(position).getName());//CategoryName
                     startActivity(i);
-                }else{
+                } else {
                     Intent i = new Intent(ctx, TalkTogetherMainActivity.class);
                     i.putExtra("CategoryName", CategoriesModelList.get(position).getName());//CategoryName
-
                     i.putExtra("CategoryID", CategoriesModelList.get(position).getId());//CategoryName
                     startActivity(i);
                 }
@@ -208,6 +187,7 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
         });
 
     }
+
     @Override
     public void onActivityCreated(final Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -225,7 +205,7 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        if(menu!=null){
+        if (menu != null) {
             menu.close();
             menu.removeItem(12);
 
@@ -235,11 +215,11 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
     private List<Categories> createItems(int os) {
         List<Categories> result = new ArrayList<Categories>();
 
-        if(os+10 > CategoriesModelList.size()){ //10 > 85 90    //
+        if (os + 10 > CategoriesModelList.size()) { //10 > 85 90    //
             ITEM_PER_REQUEST = CategoriesModelList.size() - os; //5
         }
 
-        if(ITEM_PER_REQUEST > 0) { //10 20
+        if (ITEM_PER_REQUEST > 0) { //10 20
             for (int j = os; j < ITEM_PER_REQUEST + os; j++) {
                 result.add(CategoriesModelList.get(j));
             }
@@ -251,7 +231,7 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
     @Override
     public void loadData() {
 
-        offset +=10;
+        offset += 10;
         gridView.addNewData(createItems(offset));
     }
 
@@ -274,17 +254,19 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
             // TODO Auto-generated constructor stub
         }
 
-        *//**
-         * This method can be invoked from doInBackground(Params...) to publish
-         * updates on the UI thread while the background computation is still
-         * running. Each call to this method will trigger the execution of
-         * onProgressUpdate(Progress...) on the UI thread.
-         *
-         * onProgressUpdate(Progress...) will not be called if the task has been
-         * canceled.
-         *
-         * Parameters values The progress values to update the UI with.
-         *//*
+        */
+
+    /**
+     * This method can be invoked from doInBackground(Params...) to publish
+     * updates on the UI thread while the background computation is still
+     * running. Each call to this method will trigger the execution of
+     * onProgressUpdate(Progress...) on the UI thread.
+     * <p/>
+     * onProgressUpdate(Progress...) will not be called if the task has been
+     * canceled.
+     * <p/>
+     * Parameters values The progress values to update the UI with.
+     *//*
         @Override
         protected void onProgressUpdate(Integer... values) {
             // TODO Auto-generated method stub
@@ -302,11 +284,6 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
 
 
     }*/
-
-
-
-
-
     @Override
     public void onPause() {
         super.onPause();

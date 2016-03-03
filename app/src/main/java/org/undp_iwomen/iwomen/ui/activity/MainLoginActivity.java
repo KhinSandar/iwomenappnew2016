@@ -101,7 +101,7 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
 
         //TODO CHECK LOGIN OR NOT
 
-        if (mSharedPreferencesUserInfo.getString(CommonConfig.USER_NAME, null) != null) {
+        if (mSharedPreferencesUserInfo.getString(CommonConfig.USER_ROLE, null) != null) {
             startActivity(new Intent(this, DrawerMainActivity.class));
             finish();
         }
@@ -193,7 +193,9 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
 
                     mEditorUserInfo.putString(CommonConfig.USER_EMAIL, user.getEmail());
                     mEditorUserInfo.putString(CommonConfig.USER_NAME, user.getUsername());
-                    mEditorUserInfo.putString(CommonConfig.USER_OBJ_ID, user.getId());
+                    mEditorUserInfo.putString(CommonConfig.USER_ID, user.getId());
+                    mEditorUserInfo.putString(CommonConfig.USER_OBJ_ID, user.getObjectId());
+                    mEditorUserInfo.putString(CommonConfig.USER_ROLE, user.getRole());
 
                     /*Role role;
                     List<Role> roleArrayList;

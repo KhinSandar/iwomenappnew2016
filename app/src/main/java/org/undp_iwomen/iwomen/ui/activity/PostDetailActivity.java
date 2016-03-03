@@ -12,6 +12,7 @@ import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.BaseColumns;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -323,7 +324,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         gridView.setLoadingView(progress_wheel);
 
         storageUtil = StorageUtil.getInstance(getApplicationContext());
-        LoadStickerData();
+
 
 
     }
@@ -417,13 +418,19 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         //Log.e("<<<<PostID 22 at Detail>>>>","===>" + postId);
 
         //TODO for Comment
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            listView_Comment.setNestedScrollingEnabled(true);
+        }
+
+
         listComment = new ArrayList<>();
         adapter = new CommentAdapter(PostDetailActivity.this, listComment);
         listView_Comment.setAdapter(adapter);
         listView_Comment.setCallbacks(skCallbacks);
         listView_Comment.setNextPage(true);
         adapter.notifyDataSetChanged();
-        getCommentByPagination();
+
 
 
         if (postId != null) {
@@ -524,7 +531,8 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                 public void success(IWomenPost iWomenPost, Response response) {
 
                     setPostItem(iWomenPost);//
-
+                    //TODO comment after finish this Detail Post thread
+                    //getCommentByPagination();
 
 
                 }
@@ -865,6 +873,8 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
             postIMg.setVisibility(View.GONE);
             feed_item_progressBar.setVisibility(View.GONE);
         }
+
+        getCommentByPagination();
     }
 
     public void LoadStickerData() {
@@ -1169,7 +1179,10 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                     padding.setMinimumHeight(20);
                     listView_Comment.addFooterView(padding);
 
-                    Helper.getListViewSize(listView_Comment);
+                    //Helper.getListViewSize(listView_Comment);
+
+                    //TODO get sticker for comment
+                    LoadStickerData();
                 }
 
                 @Override

@@ -27,4 +27,9 @@ public interface SMKSeverService {
             @Path("id") String id,
             Callback<CalendarEvent> callback);
 
+    @GET(CommonConfig.GET_USER_POST_COUNT_BY_OBJ_ID)
+    void getUserPostCountByObjID(
+            @Path("id") String id,
+            Callback<String> callback);
+
 }

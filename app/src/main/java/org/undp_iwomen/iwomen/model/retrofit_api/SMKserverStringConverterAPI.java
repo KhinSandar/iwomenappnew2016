@@ -30,8 +30,8 @@ import retrofit.mime.TypedInput;
 import retrofit.mime.TypedOutput;
 
 
-public class SMKserverAPI {
-    private static SMKserverAPI mInstance;
+public class SMKserverStringConverterAPI {
+    private static SMKserverStringConverterAPI mInstance;
     private SMKSeverService mService;
 
     public static RequestInterceptor requestInterceptor = new RequestInterceptor() {
@@ -44,7 +44,7 @@ public class SMKserverAPI {
         }
     };
 
-    public SMKserverAPI(){
+    public SMKserverStringConverterAPI(){
 
 
 
@@ -66,7 +66,7 @@ public class SMKserverAPI {
                         Log.e("<<<<<< Retrofit API >>>>>", msg);
                     }
                 })
-                //.setConverter(new StringConverter()) //Reply String result
+                .setConverter(new StringConverter()) //Reply String result
                 .build();
 
 
@@ -82,9 +82,9 @@ public class SMKserverAPI {
     //.setRequestInterceptor(requestInterceptor)
 
 
-    public static SMKserverAPI getInstance(){
+    public static SMKserverStringConverterAPI getInstance(){
         if(mInstance == null){
-            mInstance = new SMKserverAPI();
+            mInstance = new SMKserverStringConverterAPI();
         }
         return  mInstance;
     }

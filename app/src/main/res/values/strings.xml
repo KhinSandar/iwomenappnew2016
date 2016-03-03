@@ -404,7 +404,7 @@
 
 
     <string name="com_parse_ui_mismatch_confirm_password_toast_mm">လွ်ိဳ ့၀ွက္ စာလံုုး မတူပါ ေနာက္တစ္ၾကိမ္ၿပန္ရိုုက္ပါ</string>
-    <string name="com_parse_ui_mismatch_confirm_password_toast">Passwords don\'t match, please try again</string>
+    <string name="com_parse_ui_mismatch_confirm_password_toast">Passwords don\&apos;t match, please try again</string>
     <plurals name="com_parse_ui_password_too_short_toast_mm">
         <item quantity="one">လွ်ိဳ ့၀ွက္ စာလံုုး အေရအတြက္အနည္းဆံုုး  %d လံုုး ရွိရပါမည္။</item>
         <item quantity="other">လွ်ိဳ့ ၀ွက္ စာလံုုး အေရအတြက္ အမ်ားဆံုုး %d လံုုး ရွိရပါမည္။</item>
@@ -451,18 +451,19 @@
 
     <!--Women Remember Day  -->
     <string-array name="women_remember_day_array">
-        <item>Jan Women Remember Day</item>
-        <item>Feb Women Remember Day</item>
-        <item>March Women Remember Day</item>
-        <item>April Women Remember Day</item>
-        <item>May Women Remember Day</item>
-        <item>June Women Remember Day</item>
-        <item>July Women Remember Day</item>
-        <item>August Women Remember Day</item>
-        <item>September Women Remember Day</item>
-        <item>October Women Remember Day</item>
-        <item>November Women Remember Day</item>
-        <item>December Women Remember Day</item>
+        <item>First Myanmar Women pilot to take the sky</item>
+        <item>In 1986, the first woman president of an Asian Country is elected in the Philipphines: Ms Corazon Aquino.\n International Day of Women and Girls in Science\n</item>
+        <item>International Women Day</item>
+        <item>Wangari Maathai Birthday</item>
+
+        <item>2015: Ban of Femal Genital Mutilation in Nigeria</item>
+        <item>1920: Women in the US can vote for the first time.</item>
+        <item>Myanmar Women\'s Day</item>
+        <item>August\n</item>
+        <item>International Day for Democracy\n1915: The first meeting of what became known as the UK Federation of Women\'s institutes, one of the oldest women\'s network in the world was held.</item>
+        <item>International Rural Women Day.Anniversary of May Doe Kabar Rural Women Network in Myanmar Launch</item>
+        <item>International Day for the Elimination of Violence against Women\n</item>
+        <item>Tawakkol Karman receives Nobel Peace Prize\n</item>
     </string-array>
     <string name="post_detail_more">more &gt;&gt;</string>
     <string name="calendar_name">Calendar</string>
@@ -577,4 +578,14 @@
 
     <string name="may_doe_kabar">May Doe Kabar is a National Network of village- based women’s Self-Reliant Groups (SRGs) and their federations of Township Leading Groups (TLGs). It spans 22,000 members and 2,000 villages in 31 townships in the Delta, the Dry Zone, Chin, Kachin, Kayah, Mon, Rakhine, and Shan States.
 </string>
+    <string-array name="navigation_drawer_items">
+        <item>Job Information</item>
+        <item>Job Status List</item>
+        <item>My Profile</item>
+        <item>Pricing Details</item>
+        <item>About Us</item>
+        <item>Contact Us</item>
+        <item>Logout</item>
+
+    </string-array>
 </resources>
