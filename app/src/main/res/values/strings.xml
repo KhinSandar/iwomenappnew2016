@@ -590,4 +590,11 @@
     </string-array>
 
     <string name="share">share</string>
+
+    <string name="calendar_permission">You need to have admin rights to see this.</string>
+
+    <string name="ethic_shan">SHAN LANGUAGE</string>
+    <string name="ethic_mon">MON LANGUAGE</string>
+
+    <string name="organization_title">Organization Detail</string>
 </resources>

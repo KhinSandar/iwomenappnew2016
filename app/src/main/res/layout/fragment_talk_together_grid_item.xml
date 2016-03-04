@@ -23,6 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:background="@color/white"
         android:paddingBottom="5dp">
 
         <org.undp_iwomen.iwomen.ui.widget.SquareImageView
@@ -31,7 +32,8 @@
             android:layout_height="fill_parent"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
-            android:src="@drawable/winner"
+            android:src="@drawable/jan"
+
 
             />
         <ProgressBar

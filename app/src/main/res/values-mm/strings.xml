@@ -333,4 +333,10 @@
 
     </string-array>
     <string name="share">ရွဲရန္</string>
+    <string name="calendar_permission">သင့္အေကာင့္သည္ခြင့္ၿပဳခ်က္ရွိမွၾကည့္ႏိုုင္ပါမည္။</string>
+
+    <string name="ethic_shan">ရွမ္း </string>
+    <string name="ethic_mon"> မြန္</string>
+    <string name="organization_title"> အဖြဲ ့အစည္းအမည္</string>
+
 </resources>

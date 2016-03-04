@@ -114,6 +114,8 @@ public class CommonConfig {
 
     public static final String GET_AUTHOR_BY_ID_URL = "/api/v1/authors/{id}";
 
+    public static final String GET_POST_BY_DATE_URL = "/api/v1/posts";
+
 
 
 }

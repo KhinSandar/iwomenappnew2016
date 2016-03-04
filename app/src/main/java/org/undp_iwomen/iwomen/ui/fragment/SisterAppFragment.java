@@ -139,10 +139,9 @@ public class SisterAppFragment extends Fragment {
             getSisterListPaginationFromSever();
         }else{
             SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
-            List<SisterAppItem> sisterappitem2  = StoreUtil.getInstance().selectFrom("SisterAppList");
-            if(sisterappitem2 != null){
+            if(sisterAppItems != null){
                 sisterAppItemList.clear();
-                sisterAppItemList.addAll(sisterappitem2);
+                sisterAppItemList.addAll(sisterAppItems);
                 sisterAppListAdapter.notifyDataSetChanged();
             }
         }
@@ -203,6 +202,11 @@ public class SisterAppFragment extends Fragment {
             NetworkEngine.getInstance().getSisterAppByPagination(paginater, new Callback<List<SisterAppItem>>() {
                 @Override
                 public void success(List<com.smk.model.SisterAppItem> sisterAppItems, Response response) {
+                    // Only first REQUEST that visible
+                    if(zPDialog != null && zPDialog.isShowing()){
+                        sisterAppItemList.clear();
+                        zPDialog.dismissWithSuccess();
+                    }
                     sisterAppItemList.addAll(sisterAppItems);
                     sisterAppListAdapter.notifyDataSetChanged();
                     progress.setVisibility(View.INVISIBLE);

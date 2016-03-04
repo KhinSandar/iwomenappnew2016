@@ -15,6 +15,7 @@ import android.widget.GridView;
 import com.pnikosis.materialishprogress.ProgressWheel;
 import com.smk.model.Categories;
 import com.smk.skconnectiondetector.SKConnectionDetector;
+import com.thuongnh.zprogresshud.ZProgressHUD;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -74,6 +75,7 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
     int offset = 0;
 
     private boolean gridViewResized = false;
+    private ZProgressHUD zPDialog;
 
 
     //public static final String ARG_PLANET_NUMBER = "planet_number";
@@ -111,8 +113,31 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
         progress_wheel.setRimColor(Color.LTGRAY);
         gridView.setLoadingView(progress_wheel);
 
+        CategoriesModelList = new ArrayList<>();
+        mAdapter = new TalkTogetherGridViewAdapter(getActivity(), ctx, CategoriesModelList);
+        gridView.setAdapter(mAdapter);
 
-        LoadData();
+
+        List<Categories> categories = (ArrayList<Categories>) storageUtil.ReadArrayListFromSD("Categories");
+        if (Connection.isOnline(ctx)) {
+            if (categories != null && categories.size() > 0) {
+                CategoriesModelList.addAll(categories);
+                mAdapter.notifyDataSetChanged();
+                zPDialog = new ZProgressHUD(getActivity());
+                zPDialog.show();
+            }
+            LoadData();
+        }else{
+            SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
+            if(categories != null){
+                CategoriesModelList.clear();
+                CategoriesModelList.addAll(categories);
+                mAdapter.notifyDataSetChanged();
+            }
+        }
+
+
+
 
         return v;
         //return inflater.inflate(R.layout.activity_sgv, container, false);
@@ -127,7 +152,12 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
             NetworkEngine.getInstance().getCategoriesByPagination(1, new Callback<List<Categories>>() {
                 @Override
                 public void success(List<Categories> categories, Response response) {
-                    CategoriesModelList = new ArrayList<Categories>();
+                    //CategoriesModelList = new ArrayList<Categories>();
+                    // Only first REQUEST that visible
+                    if(zPDialog != null && zPDialog.isShowing()){
+                        CategoriesModelList.clear();
+                        zPDialog.dismissWithSuccess();
+                    }
                     CategoriesModelList.addAll(categories);
 
 
@@ -171,7 +201,7 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
                                     long arg3) {
 
 
-                if (position == 0) {
+                if (CategoriesModelList.get(position).getName().equalsIgnoreCase("Calendar")) {//position == 0 ||
                     Intent i = new Intent(ctx, CalendarActivity.class);
                     i.putExtra("CategoryName", CategoriesModelList.get(position).getName());//CategoryName
                     startActivity(i);

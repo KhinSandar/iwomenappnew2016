@@ -88,7 +88,7 @@ public class SubResourceListActivity extends BaseActionBarActivity {
 
         Log.e("<<<Resesource ID>>","==>"+ mResourceId);
 
-        mResourceId= "SRBlN1Kow5";
+        //mResourceId= "SRBlN1Kow5";
 
         storagelistname = "SubResourcesList"+mResourceId;
         lv = (SKListView) findViewById(R.id.sub_resource_list);
@@ -190,6 +190,7 @@ public class SubResourceListActivity extends BaseActionBarActivity {
                         SubResourceItems.clear();
                         zPDialog.dismissWithSuccess();
                     }
+
                     SubResourceItems.addAll(subResourceItems);
                     mAdapter.notifyDataSetChanged();
                     isLoading = false;
@@ -202,6 +203,23 @@ public class SubResourceListActivity extends BaseActionBarActivity {
                         // If no more item
                         lv.setNextPage(false);
                     }
+
+                    Log.e("<<<SubResource List size>>>","==>"+SubResourceItems.size());
+                    if( SubResourceItems.size() == 0){
+                        // If no more item
+                        lv.setNextPage(false);
+                        if (mstr_lang.equals(Utils.ENG_LANG)) {
+                            Utils.doToastEng(mContext, getResources().getString(R.string.resource_coming_soon_eng));
+                        } else {
+
+                            Utils.doToastMM(mContext, getResources().getString(R.string.resource_coming_soon_mm));
+                        }
+                        //zPDialog.dismissWithSuccess();
+                    }
+
+
+
+
 
                 }
 

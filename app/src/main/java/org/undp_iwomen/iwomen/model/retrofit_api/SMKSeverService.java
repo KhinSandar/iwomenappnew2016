@@ -1,6 +1,7 @@
 package org.undp_iwomen.iwomen.model.retrofit_api;
 
 import org.smk.model.CalendarEvent;
+import org.smk.model.IWomenPost;
 import org.smk.model.PhotoUpload;
 import org.smk.model.Sticker;
 import org.smk.model.SubResourceItem;
@@ -55,10 +56,8 @@ public interface SMKSeverService {
             @Field("sticker_img_path") String sticker_img_path,
             @Field("user_img_path") String user_img_path,
             @Field("comment_contents") String comment_contents,
-
-
-
             Callback<CalendarEvent> callback);
+
     @FormUrlEncoded
     @POST(CommonConfig.GET_COMMENT_LIST_BY_POST_ID_URL)
     void postCommentTestByPostID(
@@ -68,9 +67,6 @@ public interface SMKSeverService {
             @Field("user_name") String user_name,
             @Field("user_img_path") String user_img_path,
             @Field("comment_contents") String comment_contents,
-
-
-
             Callback<CalendarEvent> callback);
 
 
@@ -95,4 +91,11 @@ public interface SMKSeverService {
             @Path("id") String id,
             Callback<AuthorItem> callback);
 
+    @GET(CommonConfig.GET_POST_BY_DATE_URL)
+    void getPostByDateByPagination(
+            @Query("page") int page,
+            @Query("category") String category,
+            //@Query("sorting") String sorting,
+            //@Query("isAllow") Boolean isAllow,
+            Callback<List<IWomenPost>> callback);
 }

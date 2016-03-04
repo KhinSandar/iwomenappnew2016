@@ -179,7 +179,7 @@ public class ResourcesFragment extends Fragment {
 
                 Intent intent = new Intent(mContext, SubResourceListActivity.class);
 
-                intent.putExtra("ResourceId", ResourceItems.get(i).getId());
+                intent.putExtra("ResourceId", ResourceItems.get(i).getObjectId());
                 intent.putExtra("TitleEng", ResourceItems.get(i).getResourceTitleEng());
                 intent.putExtra("TitleMM", ResourceItems.get(i).getResourceTitleMm());
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
