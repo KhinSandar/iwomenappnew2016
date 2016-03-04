@@ -63,12 +63,14 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.smk.application.StoreUtil;
 import org.smk.clientapi.NetworkEngine;
 import org.smk.iwomen.BaseActionBarActivity;
+import org.smk.model.CalendarEvent;
 import org.smk.model.IWomenPost;
+import org.smk.model.Sticker;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
-import org.undp_iwomen.iwomen.data.CategoriesDataModel;
 import org.undp_iwomen.iwomen.data.FeedItem;
 import org.undp_iwomen.iwomen.database.TableAndColumnsName;
 import org.undp_iwomen.iwomen.model.Helper;
@@ -78,6 +80,7 @@ import org.undp_iwomen.iwomen.model.TextWatcherAdapter;
 import org.undp_iwomen.iwomen.model.TimeDiff;
 import org.undp_iwomen.iwomen.model.URLSpanNoUnderline;
 import org.undp_iwomen.iwomen.model.retrofit_api.CommentAPI;
+import org.undp_iwomen.iwomen.model.retrofit_api.SMKserverAPI;
 import org.undp_iwomen.iwomen.model.retrofit_api.UserPostAPI;
 import org.undp_iwomen.iwomen.provider.IwomenProviderData;
 import org.undp_iwomen.iwomen.ui.adapter.CommentAdapter;
@@ -153,7 +156,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     private LinearLayout ly_credit;
 
 
-    private CustomTextView txt_lbl_like_post, txt_lbl_share_post;
+    //private CustomTextView txt_lbl_like_post, txt_lbl_share_post;
 
     private LinearLayout ly_postdetail_share_button;
     private LinearLayout ly_postdetail_download;
@@ -185,7 +188,6 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         POST_STATUS_UPDATE
     }
 
-
     //Emoji Keyboard
     public ImageView emojiIconToggle;
 
@@ -194,14 +196,12 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     //Sticker LinearLayout
     private LinearLayout ly_sticker_holder;
 
-    private StickerGridViewAdapter mAdapter;
-
-
     //TODO for sticker grid show up
+    private StickerGridViewAdapter mAdapter;
     private WrappedGridView gridView;
-
-    private ArrayList<CategoriesDataModel> CategoriesModelList;
-    com.pnikosis.materialishprogress.ProgressWheel progress_wheel;
+    private List<Sticker> stickerArrayList;
+    private int sticker_paginater = 1;
+    private com.pnikosis.materialishprogress.ProgressWheel progress_wheel;
     private StorageUtil storageUtil;
 
 
@@ -223,6 +223,18 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     String cmd_count = "0";
     String authorID;
     private String userprofile_Image_path;
+
+    //TODO social share
+    private CustomTextView txt_social_share;
+
+    //TODO Social With No earing
+    private TextView txt_social_no_ear_like;
+    private TextView txt_social_no_ear_comment;
+    private TextView txt_social_no_ear_share;
+    private ImageView img_social_no_ear_fb;
+    private ImageView img_social_no_ear_viber;
+
+
 
     //New UI
     ImageView img_social_facebook;
@@ -326,7 +338,6 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         storageUtil = StorageUtil.getInstance(getApplicationContext());
 
 
-
     }
 
     private void init() {
@@ -344,13 +355,9 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
         mSharedPreferencesUserInfo = getSharedPreferences(CommonConfig.SHARE_PREFERENCE_USER_INFO, Context.MODE_PRIVATE);
 
-        if (!mSharedPreferencesUserInfo.getBoolean(CommonConfig.IS_LOGIN, false)) {
 
-        } else {
-            user_name = mSharedPreferencesUserInfo.getString(CommonConfig.USER_NAME, null);
-            user_obj_id = mSharedPreferencesUserInfo.getString(CommonConfig.USER_OBJ_ID, null);
-
-        }
+        user_name = mSharedPreferencesUserInfo.getString(CommonConfig.USER_NAME, null);
+        user_obj_id = mSharedPreferencesUserInfo.getString(CommonConfig.USER_OBJ_ID, null);
         userprofile_Image_path = mSharedPreferencesUserInfo.getString(CommonConfig.USER_IMAGE_PATH, null);
 
 
@@ -383,7 +390,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         //et_comment_frame = (FrameLayout) findViewById(R.id.emojicons);
         img_comment_submit = (ImageView) findViewById(R.id.postdetail_submit_comment);
 
-        img_viber_share = (ImageView) findViewById(R.id.postdetail_viber_img);
+
         ly_postdetail_share_button = (LinearLayout) findViewById(R.id.postdetail_share_button);
 
         ly_postdetail_download = (LinearLayout) findViewById(R.id.detail_ly_download);
@@ -410,6 +417,16 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         ly_credit = (LinearLayout) findViewById(R.id.postdetail_ly_credit);
         img_social_facebook = (ImageView) findViewById(R.id.social_facebook);
 
+        txt_social_share =(CustomTextView) findViewById(R.id.social_share);
+        img_viber_share = (ImageView) findViewById(R.id.social_viber);
+
+        //TODO Social With No earing
+        txt_social_no_ear_like =(TextView) findViewById(R.id.social_no_ear_like_txt);
+        txt_social_no_ear_comment =(TextView) findViewById(R.id.social_no_ear_comment_txt);
+        txt_social_no_ear_share =(TextView) findViewById(R.id.social_no_ear_share_txt);
+        img_social_no_ear_fb = (ImageView) findViewById(R.id.social_no_ear_share_img);
+        img_social_no_ear_viber = (ImageView) findViewById(R.id.social_no_ear_viber_img);
+
         strLang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
 
         //TODO id
@@ -430,7 +447,6 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         listView_Comment.setCallbacks(skCallbacks);
         listView_Comment.setNextPage(true);
         adapter.notifyDataSetChanged();
-
 
 
         if (postId != null) {
@@ -454,11 +470,15 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         //ly_likes_button.setOnClickListener(this);
         //txt_simile_emoji_icon.setOnClickListener(this);
         img_comment_submit.setOnClickListener(this);
-        //img_viber_share.setOnClickListener(this);
+        img_viber_share.setOnClickListener(this);
         //ly_postdetail_share_button.setOnClickListener(this);
         postIMg.setOnClickListener(this);
         img_social_facebook.setOnClickListener(this);
+        txt_social_no_ear_share.setOnClickListener(this);
+        img_social_no_ear_fb.setOnClickListener(this);
+        img_social_no_ear_viber.setOnClickListener(this);
 
+        txt_social_share.setOnClickListener(this);
         /*ly_postdetail_audio.setOnClickListener(this);
         ly_postdetail_download.setOnClickListener(this);
         video_icon.setOnClickListener(this);*/
@@ -642,9 +662,11 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
             post_content.setText(item.getContent());
             et_comment.setHint(R.string.post_detail_comment_eng);
             txt_like_count.setText(item.getLikes() + "");
+            txt_social_no_ear_like.setText(item.getLikes() + "");
 
 
             txt_cmd_count.setText(item.getCommentCount() + "");
+            txt_social_no_ear_comment.setText(item.getCommentCount() + "");
             //txt_lbl_share_post.setText(item.getShareCount() + R.string.post_detail_share_post_eng);
 
             et_comment.setTypeface(MyTypeFace.get(this, MyTypeFace.NORMAL));
@@ -783,9 +805,11 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
             img_like.setImageResource(R.drawable.like_fill);
         }*/
         txt_like_count.setText(item.getLikes() + "");
+        txt_social_no_ear_like.setText(item.getLikes() + "");
 
 
         txt_cmd_count.setText(item.getCommentCount() + "");
+        txt_social_no_ear_comment.setText(item.getCommentCount() + "");
         if (item.getCreditLogoUrl() != null && !item.getCreditLogoUrl().isEmpty()) {
             try {
                 img_credit_logo.setVisibility(View.VISIBLE);
@@ -880,53 +904,34 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     public void LoadStickerData() {
         if (Connection.isOnline(getApplicationContext())) {
 
-            //Parameter
+            SMKserverAPI.getInstance().getService().getStickersByPagination(sticker_paginater, new Callback<List<Sticker>>() {
+                @Override
+                public void success(List<Sticker> stickers, Response response) {
+                    stickerArrayList = new ArrayList<Sticker>();
+                    stickerArrayList.addAll(stickers);
+                    if (mAdapter == null) {
+                        mAdapter = new StickerGridViewAdapter(PostDetailActivity.this, mContext, stickerArrayList);
 
+                    }
+                    //sticker_paginater++;
+                    progress_wheel.setVisibility(View.GONE);
+                    gridView.setAdapter(mAdapter);
+                    StoreUtil.getInstance().saveTo("StickersList", stickerArrayList);
+                    mAdapter.notifyDataSetChanged();
+                }
 
-            CategoriesModelList = new ArrayList<CategoriesDataModel>();
-
-
-            CategoriesDataModel cat_model0 = new CategoriesDataModel("0", "Calendar", "http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-06f18fed-199e-4aa8-8e56-74475674cf84-applause-to-the-woman.png");
-            CategoriesModelList.add(cat_model0);
-
-
-            CategoriesDataModel cat_model = new CategoriesDataModel("1", "Activities", "http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-b06f0901-87c3-4f89-b52e-39eecf7f4fa5-unity-is-strength.png");
-            CategoriesModelList.add(cat_model);
-            CategoriesDataModel cat_model2 = new CategoriesDataModel("2", "Livelihood", "http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-b0069850-941d-460c-85f6-5c8631abca4f-lets-go.png");
-            CategoriesModelList.add(cat_model2);
-
-            CategoriesDataModel cat_model3 = new CategoriesDataModel("3", "Q&A", "http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-760c37e9-f739-4222-992c-d0f2232a61fa-dun-believe-the-rumour.png");
-            CategoriesModelList.add(cat_model3);
-
-            CategoriesDataModel cat_model4 = new CategoriesDataModel("4", "Sample", "http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-06f18fed-199e-4aa8-8e56-74475674cf84-applause-to-the-woman.png");
-            CategoriesModelList.add(cat_model4);
-
-            CategoriesDataModel cat_model5 = new CategoriesDataModel("4", "Sample", "http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-06f18fed-199e-4aa8-8e56-74475674cf84-applause-to-the-woman.png");
-            CategoriesModelList.add(cat_model5);
-
-
-            if (mAdapter == null) {
-                mAdapter = new StickerGridViewAdapter(this, mContext, CategoriesModelList);
-
-            }
-            storageUtil.SaveArrayListToSD("Categories", CategoriesModelList);
-
-            //mAdapter.notifyDataSetChanged();
-            //progressBar.setVisibility(View.GONE);
-            progress_wheel.setVisibility(View.GONE);
-            gridView.setAdapter(mAdapter);
+                @Override
+                public void failure(RetrofitError error) {
+                    progress_wheel.setVisibility(View.GONE);
+                }
+            });
 
 
         } else {
-
-            //Log.e("Categories API data", "Network failure case case");
-            Toast.makeText(mContext, "Check your network connection", Toast.LENGTH_SHORT).show();
-
-            CategoriesModelList = (ArrayList<CategoriesDataModel>) storageUtil.ReadArrayListFromSD("Categories");
-
-            if (CategoriesModelList.size() > 0) {
-                mAdapter = new StickerGridViewAdapter(this, mContext, CategoriesModelList);
-                //mAdapter = new CategoryGridViewAdapter(getActivity(),ctx, (ArrayList<CategoriesDataModel>) createItems(0) );//CategoriesModelList
+            SKConnectionDetector.getInstance(this).showErrorMessage();
+            List<Sticker> stickers = StoreUtil.getInstance().selectFrom("StickersList");
+            if (stickers.size() > 0) {
+                mAdapter = new StickerGridViewAdapter(this, mContext, stickers);
                 gridView.setAdapter(mAdapter);
             }
 
@@ -946,19 +951,80 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                 et_comment.setFocusableInTouchMode(false);
                 /*Intent i = new Intent(ctx, TLGUserStoriesRecentFragment.class);
 
-
-
-
                 i.putExtra("limit" , 20);
                 i.putExtra("catId", CategoriesModelList.get(position).category_id);
                 i.putExtra("catName",CategoriesModelList.get(position).category);
-
                 startActivity(i);*/
 
-
                 mProgressDialog.show();
-                Utils.doToastEng(getApplicationContext(), "Comment");
+
+
+                String cmt_text = null;
+                if (et_comment.length() != 0) {
+                     cmt_text = et_comment.getText().toString();
+                }
+                //TODO it is not postId , it is postObj id
+
+                SMKserverAPI.getInstance().getService().postCommentByPostID("tdNUBu44ir", user_obj_id, user_name, stickerArrayList.get(position).getStickerImgPath(), userprofile_Image_path, cmt_text, new Callback<CalendarEvent>() {
+                    @Override
+                    public void success(CalendarEvent calendarEvent, Response response) {
+                        //Utils.doToastEng(getApplicationContext(), "Comment Su");
+                        //mProgressDialog.dismiss();
+                        //TODO Comment load again
+
+                        if (Connection.isOnline(mContext)) {
+                            progressWheel_comment.setVisibility(View.VISIBLE);
+                            //TODO BY POST ID
+
+                            NetworkEngine.getInstance().getCommentlistByPostIDByPagination(paginater, "tdNUBu44ir", new Callback<List<com.smk.model.CommentItem>>() {
+                                @Override
+                                public void success(List<com.smk.model.CommentItem> commentItems, Response response) {
+
+                                    listComment.addAll(commentItems);
+                                    adapter.notifyDataSetChanged();
+
+                                    progressWheel_comment.setVisibility(View.INVISIBLE);
+                                    mProgressDialog.dismiss();
+
+                                    isLoading = false;
+                                    if (listComment.size() == 12) {
+                                        listView_Comment.setNextPage(true);
+                                        paginater++;
+                                    } else {
+                                        // If no more item
+                                        listView_Comment.setNextPage(false);
+                                    }
+                                    View padding = new View(PostDetailActivity.this);
+                                    padding.setMinimumHeight(20);
+                                    listView_Comment.addFooterView(padding);
+
+                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                        //listView_Comment.setNestedScrollingEnabled(true);
+                                    }else{
+                                        Helper.getListViewSize(listView_Comment);
+                                    }
+                                    //TODO get sticker for comment
+                                }
+
+                                @Override
+                                public void failure(RetrofitError error) {
+                                    progressWheel_comment.setVisibility(View.INVISIBLE);
+                                    mProgressDialog.dismiss();
+                                }
+                            });
+                        } else {
+                            SKConnectionDetector.getInstance(PostDetailActivity.this).showErrorMessage();
+                        }
+
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                        mProgressDialog.dismiss();
+                    }
+                });
                 //TODO COMMENT PSOT
+
                 /*commentParse = new Comment();
                 if (et_comment.length() != 0) {
                     commentParse.setcomment_contents(et_comment.getText().toString());
@@ -1017,6 +1083,8 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         });
 
     }
+
+
 
     public void initEmojiIcon() {
         boolean isLargerLollipop = (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP);
@@ -1179,7 +1247,11 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                     padding.setMinimumHeight(20);
                     listView_Comment.addFooterView(padding);
 
-                    //Helper.getListViewSize(listView_Comment);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        //listView_Comment.setNestedScrollingEnabled(true);
+                    }else{
+                        Helper.getListViewSize(listView_Comment);
+                    }
 
                     //TODO get sticker for comment
                     LoadStickerData();
@@ -1579,7 +1651,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         } catch (java.text.ParseException e) {
             e.printStackTrace();
         }
-        txt_lbl_share_post.setText(getResources().getString(R.string.post_detail_share_post));
+        //txt_lbl_share_post.setText(getResources().getString(R.string.post_detail_share_post));
 
         mstrPostType = item.getPost_content_type();
         //TODO TableColumnUpdate 10 data set show in UI
@@ -1629,10 +1701,12 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
             post_content.setText(item.getPost_content());
             et_comment.setHint(R.string.post_detail_comment_eng);
             txt_like_count.setText(item.getPost_like() + "");
+            txt_social_no_ear_like.setText(item.getPost_like() + "");
 
 
             txt_cmd_count.setText(item.getPost_comment_count() + "Comments");
-            txt_lbl_share_post.setText(item.getPost_share_count() + R.string.post_detail_share_post_eng);
+            txt_social_no_ear_comment.setText(item.getPost_comment_count() + "Comments");
+            //txt_lbl_share_post.setText(item.getPost_share_count() + R.string.post_detail_share_post_eng);
 
             et_comment.setTypeface(MyTypeFace.get(this, MyTypeFace.NORMAL));
             mPostTile.setTypeface(MyTypeFace.get(this, MyTypeFace.NORMAL));
@@ -1765,9 +1839,11 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
             img_like.setImageResource(R.drawable.like_fill);
         }
         txt_like_count.setText(item.getPost_like() + " ");
+        txt_social_no_ear_like.setText(item.getPost_like() + " ");
 
 
         txt_cmd_count.setText(item.getPost_comment_count() + "Comments");
+        txt_social_no_ear_comment.setText(item.getPost_comment_count() + "Comments");
         if (item.getCredit_logo_link() != null && !item.getCredit_logo_link().isEmpty()) {
             try {
                 img_credit_logo.setVisibility(View.VISIBLE);
@@ -2069,7 +2145,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                 //et_comment_frame.setVisibility(View.VISIBLE);
 
                 break;*/
-            case R.id.postdetail_viber_img:
+            case R.id.social_viber:
                 /*Uri uri = Uri.parse("http://www.google.com"); // missing 'http://' will cause crashed
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);*/
@@ -2316,8 +2392,21 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                     break;
                 }
                 break;
+            case R.id.social_share:
+                shareTextUrl();
+                break;
             case R.id.social_facebook:
                 shareButton.performClick();
+                break;
+            case R.id.social_no_ear_share_txt:
+                //Normal Share
+                shareTextUrl();
+                break;
+            case R.id.social_no_ear_share_img:
+                shareButton.performClick();
+                break;
+            case R.id.social_no_ear_viber_img:
+                img_viber_share.performClick();
                 break;
 
         }
@@ -2679,6 +2768,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                         cmd_count = whole_body.getString("count");
 
                         txt_cmd_count.setText(cmd_count + "Comments");
+                        txt_social_no_ear_comment.setText(cmd_count + "Comments");
                         //TODO update local db
 
                         int c_count = Integer.parseInt(cmd_count);

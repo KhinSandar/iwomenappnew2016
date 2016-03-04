@@ -108,5 +108,7 @@ public class CommonConfig {
 
     public static final String GET_USER_POST_COUNT_BY_OBJ_ID = "/api/v1/postCounts/{id}";
 
+    public static final String GET_STICKER_LIST_URL = "/api/v1/stickerStores";
+
 
 }

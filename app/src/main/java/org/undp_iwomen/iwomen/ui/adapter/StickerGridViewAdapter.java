@@ -13,10 +13,9 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import org.smk.model.Sticker;
 import org.undp_iwomen.iwomen.R;
-import org.undp_iwomen.iwomen.data.CategoriesDataModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,11 +23,8 @@ import java.util.List;
  */
 public class StickerGridViewAdapter extends BaseAdapter
 {
-    /*private ArrayList<String> listName = null;
-    private ArrayList<String> listImg = null ;
-    private ArrayList<String>  listID = null;
-*/
-    ArrayList<CategoriesDataModel> cat_data_list = null;
+
+    List<Sticker> cat_data_list ;
 
     protected Activity mActivity;
 
@@ -47,16 +43,14 @@ public class StickerGridViewAdapter extends BaseAdapter
     // Declare Variables
     Context mContext;
     LayoutInflater inflater;
-    public StickerGridViewAdapter(Activity atx, Context context, ArrayList<CategoriesDataModel> catlist) { //
+    public StickerGridViewAdapter(Activity atx, Context context, List<Sticker> catlist) { //
         super();
         mActivity = atx;
         mContext = context;
         inflater = LayoutInflater.from(mContext);
-        //Log.e("BrowseGridviewAdapter Constructor", "" + listCountry.size() +listCountry.toString());
         this.cat_data_list = catlist;
 
-        //Log.e("BrowseGridviewAdapter Constructor", "" + listShopName.size() +listShopName.toString());
-        //this.activity = activity;
+
     }
     public void setServerListSize(int serverListSize){
         this.serverListSize = serverListSize;
@@ -74,7 +68,7 @@ public class StickerGridViewAdapter extends BaseAdapter
      * Custom Add all
      */
 
-    public void Addall(List<CategoriesDataModel> list){
+    public void Addall(List<Sticker> list){
      this.cat_data_list.addAll(list);
     }
 
@@ -109,7 +103,7 @@ public class StickerGridViewAdapter extends BaseAdapter
     @Override
     public String getItem(int position) {
         // TODO Auto-generated method stub
-        return  cat_data_list.get(position).category_id;
+        return  cat_data_list.get(position).getObjectId();
          /*return (getItemViewType(position) == VIEW_TYPE_ACTIVITY) ? listID
                 .get(position) : null;*/
     }
@@ -124,25 +118,6 @@ public class StickerGridViewAdapter extends BaseAdapter
     }
 
 
-
-    /*public int getCount() {
-        // TODO Auto-generated method stub
-        return listName.size();
-    }*/
-
-
-    /*public String getItem(int position) {
-        // TODO Auto-generated method stub
-        return listID.get(position);
-    }*/
-
-
-/*
-    public long getItemId(int position) {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-*/
 
     public static class ViewHolder
     {
@@ -179,13 +154,12 @@ public class StickerGridViewAdapter extends BaseAdapter
         }
 
         //holder.txtCateName.setText(cat_data_list.get(position).category);
-
         //holder.txtCateName.setTypeface(DrawerMainActivity.faceNormal);
 
 
         try {
             Picasso.with(mContext)
-                    .load(cat_data_list.get(position).image_path )//"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
+                    .load(cat_data_list.get(position).getStickerImgPath() )//"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
                     .placeholder(R.drawable.place_holder)
                     .error(R.drawable.place_holder)
                     .into(holder.imgViewCate, new ImageLoadedCallback(holder.progressBar) {

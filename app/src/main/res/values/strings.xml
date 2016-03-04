@@ -588,4 +588,6 @@
         <item>Logout</item>
 
     </string-array>
+
+    <string name="share">share</string>
 </resources>

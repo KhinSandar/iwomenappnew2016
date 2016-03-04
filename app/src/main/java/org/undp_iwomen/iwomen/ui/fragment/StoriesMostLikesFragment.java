@@ -1331,7 +1331,6 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
                     }
 
                     iWomenPostList.addAll(iWomenPosts);
-
                     stories.notifyDataSetChanged();
 
                     StoreUtil.getInstance().saveTo("stories_most_like", iWomenPostList);
