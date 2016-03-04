@@ -209,7 +209,7 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
                     mEditorUserInfo.commit();
                     Intent i = new Intent(MainLoginActivity.this, DrawerMainActivity.class);//DrawerMainActivity
                     startActivity(i);
-                    finish();
+                    //finish();
 
                 }
 

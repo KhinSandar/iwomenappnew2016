@@ -79,7 +79,7 @@ public class TLGListViewAdapter extends BaseAdapter
 
         if(view ==null)
         {holder = new ViewHolder();
-            view = inflater.inflate(R.layout.sub_resource_list_item_new, null);//gridview_row //fra_browse_gridview_item
+            view = inflater.inflate(R.layout.tlg_list_item_new, null);//gridview_row //fra_browse_gridview_item
             /*holder.txtName= (TextView)view.findViewById(R.id.txt_sub_resource_item_name);
             holder.txtTime= (TextView)view.findViewById(R.id.txt_sub_resource_item_time);
             holder.imgIcon = (ImageView) view.findViewById(R.id.sub_resource_icon);*/

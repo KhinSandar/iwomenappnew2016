@@ -3,6 +3,7 @@ package org.undp_iwomen.iwomen.ui.activity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -25,12 +26,10 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
@@ -55,10 +54,12 @@ import com.facebook.share.model.ShareContent;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareButton;
 import com.facebook.share.widget.ShareDialog;
+import com.google.gson.Gson;
 import com.makeramen.RoundedImageView;
 import com.smk.skconnectiondetector.SKConnectionDetector;
 import com.smk.sklistview.SKListView;
 import com.squareup.picasso.Picasso;
+import com.thuongnh.zprogresshud.ZProgressHUD;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -138,7 +139,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     private LinearLayout ly_likes_button;
     private ImageView img_like;
     private TextView txt_like_count, txt_cmd_count;
-    private String postId, like_status;
+    private String postId, postObjId, like_status;
     //private TextView txt_simile_emoji_icon;
     private EmojiconEditText et_comment;
     //FrameLayout et_comment_frame;
@@ -164,7 +165,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     private LinearLayout ly_media_main;
 
     //TODO Comment
-    SKListView listView_Comment;
+    ListView listView_Comment;
     private int paginater = 1;
     private List<com.smk.model.CommentItem> listComment;
     private CommentAdapter adapter;
@@ -181,6 +182,8 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     private final String PENDING_ACTION_BUNDLE_KEY =
             "org.undp_iwomen.iwomen.app:PendingAction";
     private PendingAction pendingAction = PendingAction.NONE;
+    private IWomenPost iWomenPost;
+    private boolean alreadySticker = false;
 
     private enum PendingAction {
         NONE,
@@ -233,6 +236,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     private TextView txt_social_no_ear_share;
     private ImageView img_social_no_ear_fb;
     private ImageView img_social_no_ear_viber;
+    private ZProgressHUD zPDialog;
 
 
 
@@ -379,7 +383,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         feed_item_progressBar = (ProgressBar) findViewById(R.id.postdetail_feed_item_progressBar);
         profile_item_progressBar = (ProgressBar) findViewById(R.id.postdetail_progressBar_profile_item);
 
-        listView_Comment = (SKListView) findViewById(R.id.postdetail_comment_listview);
+        listView_Comment = (ListView) findViewById(R.id.postdetail_comment_listview);
         ly_likes_button = (LinearLayout) findViewById(R.id.postdetail_like_button);
         //img_like = (ImageView) findViewById(R.id.postdetail_like_txt);
         txt_like_count = (TextView) findViewById(R.id.postdetail_like_count);
@@ -431,8 +435,15 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
         //TODO id
         Intent i = getIntent();
-        postId = "73";// i.getStringExtra("post_id");
-        //Log.e("<<<<PostID 22 at Detail>>>>","===>" + postId);
+
+        Bundle bundle = getIntent().getExtras();
+        if(bundle != null){
+            iWomenPost = new Gson().fromJson(bundle.getString("postObj"), IWomenPost.class);
+        }
+        postId = iWomenPost.getId().toString();// i.getStringExtra("post_id");
+        postObjId = iWomenPost.getObjectId();
+
+        Log.e("<<<<PostID 22 at Detail>>>>","===>" + iWomenPost.getId().toString() + iWomenPost.getObjectId());
 
         //TODO for Comment
 
@@ -444,12 +455,11 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         listComment = new ArrayList<>();
         adapter = new CommentAdapter(PostDetailActivity.this, listComment);
         listView_Comment.setAdapter(adapter);
-        listView_Comment.setCallbacks(skCallbacks);
-        listView_Comment.setNextPage(true);
         adapter.notifyDataSetChanged();
 
 
-        if (postId != null) {
+        setPostItem(iWomenPost);
+        /*if (postId != null) {
 
             if (Connection.isOnline(getApplicationContext())) {
 
@@ -457,12 +467,12 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
             } else {
                 //TODO  showing Local data , before update from server by Id
-                //getLocalPostDetail(postId);
+                setPostItem(iWomenPost);//
             }
 
         } else {
             Utils.doToastEng(this, "Nothing to show!");
-        }
+        }*/
 
         shareButton.setShareContent(getLinkContent());
 
@@ -898,7 +908,27 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
             feed_item_progressBar.setVisibility(View.GONE);
         }
 
-        getCommentByPagination();
+
+
+        final List<com.smk.model.CommentItem> comment = StoreUtil.getInstance().selectFrom("commentlist");
+        if (Connection.isOnline(mContext)){
+            // Showing local data while loading from internet
+            if(comment != null && comment.size() > 0){
+                listComment.addAll(comment);
+                adapter.notifyDataSetChanged();
+                zPDialog = new ZProgressHUD(this);
+                zPDialog.show();
+            }
+
+            getCommentByPagination();
+        }else{
+            SKConnectionDetector.getInstance(this).showErrorMessage();
+            if(comment != null){
+                listComment.clear();
+                listComment.addAll(comment);
+                adapter.notifyDataSetChanged();
+            }
+        }
     }
 
     public void LoadStickerData() {
@@ -907,6 +937,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
             SMKserverAPI.getInstance().getService().getStickersByPagination(sticker_paginater, new Callback<List<Sticker>>() {
                 @Override
                 public void success(List<Sticker> stickers, Response response) {
+                    alreadySticker = true;
                     stickerArrayList = new ArrayList<Sticker>();
                     stickerArrayList.addAll(stickers);
                     if (mAdapter == null) {
@@ -941,7 +972,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
             public void onItemClick(AdapterView<?> arg0, View arg1, int position,
                                     long arg3) {
-                Toast.makeText(mContext, mAdapter.getItem(position), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mContext, mAdapter.getItem(position), Toast.LENGTH_SHORT).show();
 
                 //popup.dismiss();
                 ly_sticker_holder.setVisibility(View.GONE);
@@ -949,12 +980,6 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                 inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
 
                 et_comment.setFocusableInTouchMode(false);
-                /*Intent i = new Intent(ctx, TLGUserStoriesRecentFragment.class);
-
-                i.putExtra("limit" , 20);
-                i.putExtra("catId", CategoriesModelList.get(position).category_id);
-                i.putExtra("catName",CategoriesModelList.get(position).category);
-                startActivity(i);*/
 
                 mProgressDialog.show();
 
@@ -965,56 +990,16 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                 }
                 //TODO it is not postId , it is postObj id
 
-                SMKserverAPI.getInstance().getService().postCommentByPostID("tdNUBu44ir", user_obj_id, user_name, stickerArrayList.get(position).getStickerImgPath(), userprofile_Image_path, cmt_text, new Callback<CalendarEvent>() {
+                if(userprofile_Image_path != null){
+
+                }else{
+                    userprofile_Image_path ="http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-7f0323bc-a862-4184-9e51-d55189fcab18-ic_launcher.png";
+                }
+                SMKserverAPI.getInstance().getService().postCommentByPostID(postObjId, user_obj_id, user_name, stickerArrayList.get(position).getStickerImgPath(), userprofile_Image_path, cmt_text, new Callback<CalendarEvent>() {
                     @Override
                     public void success(CalendarEvent calendarEvent, Response response) {
-                        //Utils.doToastEng(getApplicationContext(), "Comment Su");
-                        //mProgressDialog.dismiss();
-                        //TODO Comment load again
 
-                        if (Connection.isOnline(mContext)) {
-                            progressWheel_comment.setVisibility(View.VISIBLE);
-                            //TODO BY POST ID
-
-                            NetworkEngine.getInstance().getCommentlistByPostIDByPagination(paginater, "tdNUBu44ir", new Callback<List<com.smk.model.CommentItem>>() {
-                                @Override
-                                public void success(List<com.smk.model.CommentItem> commentItems, Response response) {
-
-                                    listComment.addAll(commentItems);
-                                    adapter.notifyDataSetChanged();
-
-                                    progressWheel_comment.setVisibility(View.INVISIBLE);
-                                    mProgressDialog.dismiss();
-
-                                    isLoading = false;
-                                    if (listComment.size() == 12) {
-                                        listView_Comment.setNextPage(true);
-                                        paginater++;
-                                    } else {
-                                        // If no more item
-                                        listView_Comment.setNextPage(false);
-                                    }
-                                    View padding = new View(PostDetailActivity.this);
-                                    padding.setMinimumHeight(20);
-                                    listView_Comment.addFooterView(padding);
-
-                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                                        //listView_Comment.setNestedScrollingEnabled(true);
-                                    }else{
-                                        Helper.getListViewSize(listView_Comment);
-                                    }
-                                    //TODO get sticker for comment
-                                }
-
-                                @Override
-                                public void failure(RetrofitError error) {
-                                    progressWheel_comment.setVisibility(View.INVISIBLE);
-                                    mProgressDialog.dismiss();
-                                }
-                            });
-                        } else {
-                            SKConnectionDetector.getInstance(PostDetailActivity.this).showErrorMessage();
-                        }
+                        getCommentByPagination();
 
                     }
 
@@ -1024,59 +1009,6 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                     }
                 });
                 //TODO COMMENT PSOT
-
-                /*commentParse = new Comment();
-                if (et_comment.length() != 0) {
-                    commentParse.setcomment_contents(et_comment.getText().toString());
-                }
-
-                commentParse.setUserId(user_obj_id);
-
-                if (userprofile_Image_path != null) {
-                    commentParse.setUserImgPathName(userprofile_Image_path);
-                }
-
-                commentParse.setStickerImgPathName(CategoriesModelList.get(position).getImage_path());
-
-                commentParse.setUserName(user_name);
-                commentParse.setpostId(postId);
-
-                commentParse.setcomment_created_time(new Date());
-                *//**Very Important *//*
-                ParseACL groupACL = new ParseACL();
-
-
-                groupACL.setPublicReadAccess(true);
-
-                commentParse.setACL(groupACL);
-                commentParse.saveInBackground(new SaveCallback() {
-                    @Override
-                    public void done(ParseException e) {
-                        if (e == null) {
-
-                            et_comment.setText("");
-
-                            mProgressDialog.dismiss();
-
-
-                            getTestCommentList();
-                            //TODO comment adapter notrifieddatasetchange
-
-
-                        } else {
-
-                            mProgressDialog.dismiss();
-
-
-                            Utils.doToastEng(getApplicationContext(), "Error saving: \" + e.getMessage()");
-                            //progressbackground.setVisibility(View.INVISIBLE);
-                            Toast.makeText(getApplicationContext(),
-                                    "Error saving: " + e.getMessage(),
-                                    Toast.LENGTH_LONG).show();
-
-                        }
-                    }
-                });*/
 
 
             }
@@ -1228,33 +1160,31 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
             progressWheel_comment.setVisibility(View.VISIBLE);
             //TODO BY POST ID
 
-            NetworkEngine.getInstance().getCommentlistByPostIDByPagination(paginater, "tdNUBu44ir", new Callback<List<com.smk.model.CommentItem>>() {
+            NetworkEngine.getInstance().getCommentlistByPostIDByPagination(paginater, postObjId, new Callback<List<com.smk.model.CommentItem>>() {
                 @Override
                 public void success(List<com.smk.model.CommentItem> commentItems, Response response) {
 
+                    if (zPDialog != null && zPDialog.isShowing()) {
+                        listComment.clear();
+                        zPDialog.dismissWithSuccess();
+                    }
                     listComment.addAll(commentItems);
                     adapter.notifyDataSetChanged();
                     progressWheel_comment.setVisibility(View.INVISIBLE);
-                    isLoading = false;
-                    if (listComment.size() == 12) {
-                        listView_Comment.setNextPage(true);
-                        paginater++;
-                    } else {
-                        // If no more item
-                        listView_Comment.setNextPage(false);
-                    }
                     View padding = new View(PostDetailActivity.this);
                     padding.setMinimumHeight(20);
                     listView_Comment.addFooterView(padding);
 
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        //listView_Comment.setNestedScrollingEnabled(true);
-                    }else{
+                        listView_Comment.setNestedScrollingEnabled(true);
+                    } else {
                         Helper.getListViewSize(listView_Comment);
                     }
 
+                    StoreUtil.getInstance().saveTo("commentlist", listComment);
                     //TODO get sticker for comment
-                    LoadStickerData();
+                    if(!alreadySticker)
+                        LoadStickerData();
                 }
 
                 @Override
@@ -2105,25 +2035,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                             _param.put("objectId", postId);
 
                             //TODO Google Anaytics Like count
-                            /*ParseCloud.callFunctionInBackground("IWomen_Likes_increment", _param, new FunctionCallback<Integer>() {
-                                @Override
-                                public void done(Integer like_count, ParseException e) {
 
-                                    if (e == null) {
-                                        Log.e("Cloud Increment", "===>" + like_count);
-                                        txt_like_count.setText(like_count + " ");//+ " likes"
-                                        //TODO call updatePost
-                                        updatePostLikeStatus(postId, like_count);
-                                        like_status = "1";
-
-                                    } else {
-
-                                        Log.e("Cloud Increment", "ERRr" + like_count + e.toString());
-                                    }
-
-                                }
-                            });
-*/
                             img_like.setImageResource(R.drawable.like_fill);
                         } else {
                             //Utils.doToastEng(getApplicationContext(), "unLike click");
@@ -2146,28 +2058,27 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
                 break;*/
             case R.id.social_viber:
-                /*Uri uri = Uri.parse("http://www.google.com"); // missing 'http://' will cause crashed
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(intent);*/
 
+                try{
+                    Intent intent = new Intent("android.intent.action.VIEW");
+                    intent.setClassName("com.viber.voip", "com.viber.voip.WelcomeActivity");
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    //FLAG_ACTIVITY_NEW_TASK
+                    //intent.setData(uri);
+                    if (post_content.getText().length() > 20) {
+                        share_data = post_content.getText().toString().substring(0, 12) + " ...";
+                    } else {
+                        share_data = post_content.getText().toString();
+                    }
+                    intent.putExtra(Intent.EXTRA_SUBJECT, share_data + "...");//Title Of The Post
+                    intent.putExtra(Intent.EXTRA_TEXT, CommonConfig.SHARE_URL);
+                    intent.setType("text/plain");
+                    getApplicationContext().startActivity(intent);
+                }catch (ActivityNotFoundException ex){
 
-                /*String sphone = "12345678";
-                Uri uri = Uri.parse("tel:" + Uri.encode(sphone));*/
-                Intent intent = new Intent("android.intent.action.VIEW");
-                intent.setClassName("com.viber.voip", "com.viber.voip.WelcomeActivity");
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                //FLAG_ACTIVITY_NEW_TASK
-                //intent.setData(uri);
-                if (post_content.getText().length() > 20) {
-                    share_data = post_content.getText().toString().substring(0, 12) + " ...";
-                } else {
-                    share_data = post_content.getText().toString();
                 }
-                intent.putExtra(Intent.EXTRA_SUBJECT, share_data + "...");//Title Of The Post
-                intent.putExtra(Intent.EXTRA_TEXT, CommonConfig.SHARE_URL);
-                intent.setType("text/plain");
-                getApplicationContext().startActivity(intent);
+
                 break;
 
             case R.id.postdetail_share_button:
@@ -2177,25 +2088,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                     _param.put("objectId", postId);
 
                     //TODO Google Analytics
-/*
-                    ParseCloud.callFunctionInBackground("IWomen_Share_increment", _param, new FunctionCallback<Integer>() {
-                        @Override
-                        public void done(Integer like_count, ParseException e) {
 
-                            if (e == null) {
-                                //Log.e("Cloud Increment", "===>" + like_count);
-                                txt_lbl_share_post.setText(like_count + getResources().getString(R.string.post_detail_share_post));//+ " likes"
-                                //TODO call updatePost
-                                updatePostShareStatus(postId, like_count);
-
-                            } else {
-
-                                // Log.e("Cloud Increment", "ERRr" + like_count + e.toString());
-                            }
-
-                        }
-                    });
-*/
                 }
 
                 break;
@@ -2218,53 +2111,60 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                         mProgressDialog.show();
                         Utils.doToastEng(getApplicationContext(), "Comment");
                         //TODO Comment Post
-                        /*commentParse = new Comment();
-
-                        commentParse.setcomment_contents(et_comment.getText().toString());
-                        commentParse.setUserId(user_obj_id);
 
                         if (userprofile_Image_path != null) {
-                            commentParse.setUserImgPathName(userprofile_Image_path);
+
+                        }else{
+                            userprofile_Image_path= "http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-7f0323bc-a862-4184-9e51-d55189fcab18-ic_launcher.png" ;
                         }
-                        commentParse.setUserName(user_name);
-                        commentParse.setpostId(postId);
-
-                        commentParse.setcomment_created_time(new Date());
-                        *//**Very Important *//*
-                        ParseACL groupACL = new ParseACL();
-
-
-                        groupACL.setPublicReadAccess(true);
-
-                        commentParse.setACL(groupACL);
-                        commentParse.saveInBackground(new SaveCallback() {
+                        SMKserverAPI.getInstance().getService().postCommentTestByPostID(postObjId, user_obj_id, user_name, userprofile_Image_path, et_comment.getText().toString(), new Callback<CalendarEvent>() {
                             @Override
-                            public void done(ParseException e) {
-                                if (e == null) {
+                            public void success(CalendarEvent calendarEvent, Response response) {
 
-                                    et_comment.setText("");
+                                //TODO Comment load again
+                                if (Connection.isOnline(mContext)) {
+                                    progressWheel_comment.setVisibility(View.VISIBLE);
+                                    //TODO BY POST ID
+                                    NetworkEngine.getInstance().getCommentlistByPostIDByPagination(paginater, postObjId, new Callback<List<com.smk.model.CommentItem>>() {
+                                        @Override
+                                        public void success(List<com.smk.model.CommentItem> commentItems, Response response) {
 
-                                    mProgressDialog.dismiss();
+                                            listComment.addAll(commentItems);
+                                            adapter.notifyDataSetChanged();
+                                            progressWheel_comment.setVisibility(View.INVISIBLE);
+                                            mProgressDialog.dismiss();
 
+                                            View padding = new View(PostDetailActivity.this);
+                                            padding.setMinimumHeight(20);
+                                            listView_Comment.addFooterView(padding);
 
-                                    getTestCommentList();
-                                    //TODO comment adapter notrifieddatasetchange
+                                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                                //listView_Comment.setNestedScrollingEnabled(true);
+                                            } else {
+                                                Helper.getListViewSize(listView_Comment);
+                                            }
+                                            //TODO get sticker for comment
+                                        }
 
-
+                                        @Override
+                                        public void failure(RetrofitError error) {
+                                            progressWheel_comment.setVisibility(View.INVISIBLE);
+                                            mProgressDialog.dismiss();
+                                        }
+                                    });
                                 } else {
-
-                                    mProgressDialog.dismiss();
-
-
-                                    Utils.doToastEng(getApplicationContext(), "Error saving: \" + e.getMessage()");
-                                    //progressbackground.setVisibility(View.INVISIBLE);
-                                    Toast.makeText(getApplicationContext(),
-                                            "Error saving: " + e.getMessage(),
-                                            Toast.LENGTH_LONG).show();
-
+                                    SKConnectionDetector.getInstance(PostDetailActivity.this).showErrorMessage();
                                 }
+
                             }
-                        });*/
+
+                            @Override
+                            public void failure(RetrofitError error) {
+                                mProgressDialog.dismiss();
+                            }
+                        });
+
+
                     }
                 } else {
 
@@ -2821,32 +2721,6 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     }
 
 
-    /**
-     * * Method for Setting the Height of the ListView dynamically.
-     * *** Hack to fix the issue of not showing all the items of the ListView
-     * *** when placed inside a ScrollView  ***
-     */
-    public static void setListViewHeightBasedOnChildren(ListView listView) {
-        ListAdapter listAdapter = listView.getAdapter();
-        if (listAdapter == null)
-            return;
-
-        int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.UNSPECIFIED);
-        int totalHeight = 0;
-        View view = null;
-        for (int i = 0; i < listAdapter.getCount(); i++) {
-            view = listAdapter.getView(i, view, listView);
-            if (i == 0)
-                view.setLayoutParams(new ViewGroup.LayoutParams(desiredWidth, LinearLayout.LayoutParams.WRAP_CONTENT));
-
-            view.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
-            totalHeight += view.getMeasuredHeight();
-        }
-        ViewGroup.LayoutParams params = listView.getLayoutParams();
-        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-        listView.setLayoutParams(params);
-        listView.requestLayout();
-    }
 
 
     //Share URL

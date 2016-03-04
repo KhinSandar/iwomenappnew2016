@@ -110,5 +110,10 @@ public class CommonConfig {
 
     public static final String GET_STICKER_LIST_URL = "/api/v1/stickerStores";
 
+    public static final String GET_SUB_RESOURCE_LIST_BY_RESOURCID_URL="/api/v1/subResourceDetails";
+
+    public static final String GET_AUTHOR_BY_ID_URL = "/api/v1/authors/{id}";
+
+
 
 }

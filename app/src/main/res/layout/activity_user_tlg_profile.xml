@@ -256,7 +256,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:orientation="horizontal"
                 android:paddingBottom="@dimen/activity_vertical_margin"
@@ -362,8 +362,8 @@
 
                             <ImageView
                                 android:id="@+id/tlg_ph_img"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
                                 android:layout_gravity="center"
                                 android:src="@drawable/ic_upload_audio" />
 
@@ -376,8 +376,8 @@
 
                             <ImageView
                                 android:id="@+id/tlg_fb_img"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
                                 android:layout_gravity="center"
                                 android:src="@drawable/ic_share_facebook" />
 
@@ -389,8 +389,8 @@
                             android:paddingLeft="16dp">
 
                             <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
                                 android:layout_gravity="center"
                                 android:id="@+id/tlg_viber_img"
                                 android:src="@drawable/ic_share_viber" />

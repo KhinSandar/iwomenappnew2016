@@ -17,6 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Meeting"
+            android:textColor="@color/text_sub_head_color"
+            android:textStyle="bold"
             android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
         <org.undp_iwomen.iwomen.ui.widget.CustomTextView
@@ -25,6 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="16dp"
+            android:textColor="@color/text_sub_head_color"
             android:text="@string/large_sample_text" />
 
 
@@ -36,6 +39,7 @@
             android:layout_marginTop="8dp"
             android:drawableLeft="@drawable/ic_place"
             android:drawablePadding="16dp"
+            android:textColor="@color/text_sub_head_color"
             android:drawableTint="?android:textColorSecondary"
             android:gravity="center_vertical"
             android:text="KyietLet, Ayeyarwady" />
@@ -48,6 +52,7 @@
             android:layout_marginTop="8dp"
             android:drawableLeft="@drawable/ic_event_date"
             android:drawablePadding="16dp"
+            android:textColor="@color/text_sub_head_color"
             android:drawableTint="?android:textColorSecondary"
             android:gravity="center_vertical"
             android:text="Monday, 11 January 2016" />
@@ -60,6 +65,7 @@
             android:layout_marginTop="8dp"
             android:drawableLeft="@drawable/ic_clock"
             android:drawablePadding="16dp"
+            android:textColor="@color/text_sub_head_color"
             android:drawableTint="?android:textColorSecondary"
             android:gravity="center_vertical"
             android:text="From 9:00 PM-3:00 AM" />

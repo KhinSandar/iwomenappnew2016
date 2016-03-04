@@ -3,7 +3,9 @@ package org.undp_iwomen.iwomen.model.retrofit_api;
 import org.smk.model.CalendarEvent;
 import org.smk.model.PhotoUpload;
 import org.smk.model.Sticker;
+import org.smk.model.SubResourceItem;
 import org.undp_iwomen.iwomen.CommonConfig;
+import org.undp_iwomen.iwomen.data.AuthorItem;
 
 import java.util.List;
 
@@ -50,7 +52,6 @@ public interface SMKSeverService {
             @Field("postId") String postId,
             @Field("userId") String userId,
             @Field("user_name") String user_name,
-
             @Field("sticker_img_path") String sticker_img_path,
             @Field("user_img_path") String user_img_path,
             @Field("comment_contents") String comment_contents,
@@ -58,6 +59,40 @@ public interface SMKSeverService {
 
 
             Callback<CalendarEvent> callback);
+    @FormUrlEncoded
+    @POST(CommonConfig.GET_COMMENT_LIST_BY_POST_ID_URL)
+    void postCommentTestByPostID(
 
+            @Field("postId") String postId,
+            @Field("userId") String userId,
+            @Field("user_name") String user_name,
+            @Field("user_img_path") String user_img_path,
+            @Field("comment_contents") String comment_contents,
+
+
+
+            Callback<CalendarEvent> callback);
+
+
+    @GET(CommonConfig.GET_SUB_RESOURCE_LIST_BY_RESOURCID_URL)
+    void getSubResourceByResourceIDByPagination(
+            @Query("page") int page,
+            @Query("resource_id") String resourceId,
+            Callback<List<SubResourceItem>> callback);
+
+    @GET(CommonConfig.GET_CALENDAR_EVENT)
+    void getCalendarEventDetailByDate(
+            @Query("date") int page,
+            Callback<CalendarEvent> callback);
+
+    @GET(CommonConfig.GET_CALENDAR_EVENT)
+    void getCalendarListByDateEvent(
+            @Query("date") int page,
+            Callback<List<CalendarEvent>> callback);
+
+    @GET(CommonConfig.GET_AUTHOR_BY_ID_URL)
+    void getAuthorDetailByID(
+            @Path("id") String id,
+            Callback<AuthorItem> callback);
 
 }

@@ -140,6 +140,7 @@ public class ResourcesFragment extends Fragment {
                 ResourceItems.addAll(resourceItems);
                 adapter.notifyDataSetChanged();
                 zPDialog = new ZProgressHUD(getActivity());
+                zPDialog.show();
             }
             getResourceDataPaginationFromSever();
         }else{

@@ -29,6 +29,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.smk.skconnectiondetector.SKConnectionDetector;
 import com.smk.sklistview.SKListView;
 import com.thuongnh.zprogresshud.ZProgressHUD;
@@ -179,6 +180,7 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
                     Intent intent = new Intent(mContext, PostDetailActivity.class);
 
                     intent.putExtra("post_id", iWomenPostList.get(position).getId());
+                    intent.putExtra("postObj", new Gson().toJson(parent.getAdapter().getItem(position)));
 
                     //intent.putExtra("ImgUrl", mImgurl.get(getPosition()));
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

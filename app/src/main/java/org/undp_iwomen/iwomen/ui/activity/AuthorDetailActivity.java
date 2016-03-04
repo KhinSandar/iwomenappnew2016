@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,14 +14,12 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.makeramen.RoundedImageView;
-import org.smk.iwomen.BaseActionBarActivity;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.smk.iwomen.BaseActionBarActivity;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.data.AuthorItem;
-import org.undp_iwomen.iwomen.model.retrofit_api.UserPostAPI;
+import org.undp_iwomen.iwomen.model.retrofit_api.SMKserverAPI;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.utils.Connection;
 import org.undp_iwomen.iwomen.utils.StorageUtil;
@@ -78,6 +77,8 @@ public class AuthorDetailActivity extends BaseActionBarActivity {
 
         mstrAuthorId = i.getStringExtra("AuthorId");
 
+        Log.e("<<<Author Detail >>>","==>"+ mstrAuthorId);
+        mstrAuthorId="18";
 
         txtName = (CustomTextView) findViewById(R.id.authordetail_author_name);
         txtAuthorTitle = (CustomTextView) findViewById(R.id.authordetail_author_title);
@@ -132,103 +133,16 @@ public class AuthorDetailActivity extends BaseActionBarActivity {
         if (Connection.isOnline(mContext)) {
 
             mProgressDialog.show();
-            UserPostAPI.getInstance().getService().getAuhtorDetailById(mstrAuthorId, new Callback<String>() {
+            SMKserverAPI.getInstance().getService().getAuthorDetailByID(mstrAuthorId, new Callback<AuthorItem>() {
                 @Override
-                public void success(String s, Response response) {
-                    try {
+                public void success(AuthorItem authorItem, Response response) {
 
-                        JSONObject whole_object = new JSONObject(s);
-                        AuthorItem item = new AuthorItem();
+                    authorItemArrayList.clear();
+                    authorItemArrayList.add(authorItem);
 
-                        authorItemArrayList.clear();
-                        if (!whole_object.isNull("authorInfoEng")) {
-
-                            item.setAuthorInfoEng(whole_object.getString("authorInfoEng"));
-
-                        } else {
-
-                            item.setAuthorInfoEng("");
-                        }
-
-                        if (!whole_object.isNull("authorInfoMM")) {
-
-                            item.setAuthorInfoMM(whole_object.getString("authorInfoMM"));
-
-                        } else {
-
-                            item.setAuthorInfoMM("");
-                        }
-
-                        if (!whole_object.isNull("authorName")) {
-
-                            item.setAuthorName(whole_object.getString("authorName"));
-
-                        } else {
-
-                            item.setAuthorName("");
-                        }
-
-                        if (!whole_object.isNull("authorTitleEng")) {
-
-                            item.setAuthorTitleEng(whole_object.getString("authorTitleEng"));
-
-                        } else {
-
-                            item.setAuthorTitleEng("");
-                        }
-
-                        if (!whole_object.isNull("authorTitleMM")) {
-
-                            item.setAuthorTitleMM(whole_object.getString("authorTitleMM"));
-
-                        } else {
-
-                            item.setAuthorTitleMM("");
-                        }
-
-
-                        if (!whole_object.isNull("updatedAt")) {
-
-                            item.setUpdatedAt(whole_object.getString("updatedAt"));
-
-                        } else {
-
-                            item.setUpdatedAt("");
-                        }
-
-                        //TlgLeaderImg
-                        if (!whole_object.isNull("authorImg")) {
-                            JSONObject groupLogoObject = whole_object.getJSONObject("authorImg");
-                            if (!groupLogoObject.isNull("url")) {
-                                item.setAuthorImg(groupLogoObject.getString("url"));
-
-                            } else {
-                                item.setAuthorImg("");
-                            }
-
-
-                        } else {
-                            item.setAuthorImg("");
-                        }
-
-                        if (!whole_object.isNull("createdAt")) {
-
-                            item.setCreatedAt(whole_object.getString("createdAt"));
-
-                        } else {
-
-                            item.setCreatedAt("");
-                        }
-
-
-                        authorItemArrayList.add(item);
-
-                        storageUtil.SaveArrayListToSD("AuthorArrayList" + mstrAuthorId, authorItemArrayList);
-                        setAuthorItem(authorItemArrayList);
-                        mProgressDialog.dismiss();
-                    } catch (JSONException ex) {
-                        ex.printStackTrace();
-                    }
+                    storageUtil.SaveArrayListToSD("AuthorArrayList" + mstrAuthorId, authorItemArrayList);
+                    setAuthorItem(authorItemArrayList);
+                    mProgressDialog.dismiss();
                 }
 
                 @Override

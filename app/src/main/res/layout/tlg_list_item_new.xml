@@ -19,7 +19,7 @@
         android:orientation="horizontal"
         android:padding="10dp">
 
-        <!--<FrameLayout
+        <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
@@ -52,7 +52,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_gravity="left"
                 android:visibility="visible" />
-        </FrameLayout>-->
+        </FrameLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -83,6 +83,7 @@
                 <LinearLayout
                     android:paddingBottom="16dp"
                     android:paddingTop="16dp"
+                    android:paddingLeft="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -92,8 +93,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Title"
-                        android:textColor="@color/text_sub_head_color"
-                        android:textStyle="bold"
                         android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
                     <org.undp_iwomen.iwomen.ui.widget.CustomTextView
@@ -102,15 +101,13 @@
                         android:layout_height="wrap_content"
                         android:paddingTop="8dp"
                         android:text="By @author name"
-                        android:textColor="@color/text_sub_head_color"
-                        android:textStyle="normal"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                         />
+                        android:textColor="?android:textColorSecondary" />
 
                 </LinearLayout>
             </LinearLayout>
 
-            <!--<LinearLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -131,7 +128,7 @@
                     android:layout_height="wrap_content"
                     android:text="Change Theme"
                     android:visibility="gone" />
-            </LinearLayout>-->
+            </LinearLayout>
 
             <!--<org.undp_iwomen.iwomen.ui.widget.CustomTextView
                 android:layout_width="match_parent"
