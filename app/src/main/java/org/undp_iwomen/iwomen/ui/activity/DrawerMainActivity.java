@@ -86,7 +86,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
 
     private SharedPreferences mSharedPreferencesUserInfo;
     private SharedPreferences.Editor mEditorUserInfo;
-    private String user_name, user_obj_id,user_id, user_ph , register_msg ,user_img_path;
+    private String user_name, user_obj_id, user_id, user_ph, register_msg, user_img_path;
     SharedPreferences sharePrefLanguageUtil;
     String mstr_lang;
     Runnable run;
@@ -186,19 +186,16 @@ public class DrawerMainActivity extends BaseActionBarActivity {
 
         sessionManager = new SharePrefUtils(getApplicationContext());
 
-        user_name= mSharedPreferencesUserInfo.getString(CommonConfig.USER_NAME, null);
+        user_name = mSharedPreferencesUserInfo.getString(CommonConfig.USER_NAME, null);
         user_obj_id = mSharedPreferencesUserInfo.getString(CommonConfig.USER_OBJ_ID, null);
 
-        user_id =mSharedPreferencesUserInfo.getString(CommonConfig.USER_ID, null);
+        user_id = mSharedPreferencesUserInfo.getString(CommonConfig.USER_ID, null);
         user_img_path = mSharedPreferencesUserInfo.getString(CommonConfig.USER_UPLOAD_IMG_URL, null);
 
 
         setUserImg();
 
         txt_user_name.setText(user_name);
-
-
-
 
 
         //TODO WHEN DRAWER ACTIVITY START CALLING for check
@@ -208,8 +205,6 @@ public class DrawerMainActivity extends BaseActionBarActivity {
             selectItem(0);
             drawerLayoutt.openDrawer(mDrawerLinearLayout);
         }
-
-
 
 
         getUserPostCount();
@@ -232,8 +227,6 @@ public class DrawerMainActivity extends BaseActionBarActivity {
         });
 
 
-
-
         txt_sing_out.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -254,8 +247,6 @@ public class DrawerMainActivity extends BaseActionBarActivity {
             public void run() {
 
 
-
-
                 drawer_adapter.notifyDataSetChanged();
                 mDrawerList.invalidateViews();
                 mDrawerList.refreshDrawableState();
@@ -266,11 +257,12 @@ public class DrawerMainActivity extends BaseActionBarActivity {
 
 
     }
+
     //TODO show profile image
-    private void setUserImg(){
+    private void setUserImg() {
 
 
-        if(Connection.isOnline(getApplicationContext())){
+        if (Connection.isOnline(getApplicationContext())) {
             if (user_img_path != null && user_img_path != "") {
                 try {
 
@@ -298,7 +290,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
 
                 drawer_progressBar_profile_item.setVisibility(View.GONE);
             }
-        }else{
+        } else {
             drawer_progressBar_profile_item.setVisibility(View.GONE);
         }
 
@@ -563,12 +555,12 @@ public class DrawerMainActivity extends BaseActionBarActivity {
 
                     Intent intent2 = new Intent(this, AboutUsWebActivity.class);
                     intent2.putExtra("ActivityName", "DrawerMainActivity");
-                    intent2.putExtra("URL", "file:///android_asset/tos/About-Us-Eng.html");
+                    intent2.putExtra("URL", "file:///android_asset/tos/About-Us-Eng-v2.html");
                     startActivity(intent2);
                 } else {
                     Intent intent2 = new Intent(this, AboutUsWebActivity.class);
                     intent2.putExtra("ActivityName", "DrawerMainActivity");
-                    intent2.putExtra("URL", "file:///android_asset/tos/About-Us-MM.html");
+                    intent2.putExtra("URL", "file:///android_asset/tos/About-Us-MM-v2.html");
                     startActivity(intent2);
                 }
 
@@ -772,7 +764,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
         if (user_obj_id != null) {
             Review review = StoreUtil.getInstance().selectFrom(user_obj_id + versionCode);
             Log.i("Reviews", "Reviews :" + review);
-            if (review == null && UsageCount > 3) {
+            if (review == null && UsageCount != null && UsageCount > 3) {
                 showReviewDialog(user_obj_id);
             } else {
                 finish();

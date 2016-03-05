@@ -90,6 +90,7 @@ import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.ui.widget.ProgressWheel;
 import org.undp_iwomen.iwomen.ui.widget.ResizableImageView;
 import org.undp_iwomen.iwomen.ui.widget.WrappedGridView;
+import org.undp_iwomen.iwomen.ui.widget.animatedbutton.AnimatedButton;
 import org.undp_iwomen.iwomen.utils.Connection;
 import org.undp_iwomen.iwomen.utils.StorageUtil;
 import org.undp_iwomen.iwomen.utils.Utils;
@@ -156,6 +157,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     private ProgressBar progressBar_credit;
     private LinearLayout ly_credit;
 
+    private AnimatedButton mLikeAnimatedButton;
 
     //private CustomTextView txt_lbl_like_post, txt_lbl_share_post;
 
@@ -184,6 +186,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     private PendingAction pendingAction = PendingAction.NONE;
     private IWomenPost iWomenPost;
     private boolean alreadySticker = false;
+    private AnimatedButton mSocialNoEarLikeAnimatedButton;
 
     private enum PendingAction {
         NONE,
@@ -426,6 +429,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
         //TODO Social With No earing
         txt_social_no_ear_like =(TextView) findViewById(R.id.social_no_ear_like_txt);
+        mSocialNoEarLikeAnimatedButton = (AnimatedButton) findViewById(R.id.social_no_ear_like_animated_button);
         txt_social_no_ear_comment =(TextView) findViewById(R.id.social_no_ear_comment_txt);
         txt_social_no_ear_share =(TextView) findViewById(R.id.social_no_ear_share_txt);
         img_social_no_ear_fb = (ImageView) findViewById(R.id.social_no_ear_share_img);
@@ -433,6 +437,8 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
         strLang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
 
+        mLikeAnimatedButton = (AnimatedButton) findViewById(R.id.postdetail_like_animated_button);
+        mLikeAnimatedButton.setText(102 + "");
         //TODO id
         Intent i = getIntent();
 
@@ -672,8 +678,13 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
             mPostTile.setText(item.getTitle());
             post_content.setText(item.getContent());
             et_comment.setHint(R.string.post_detail_comment_eng);
+
             txt_like_count.setText(item.getLikes() + "");
+            mLikeAnimatedButton.setText(item.getLikes() + "");
+
             txt_social_no_ear_like.setText(item.getLikes() + "");
+            mSocialNoEarLikeAnimatedButton.setText(item.getLikes() + "");
+
 
 
             txt_cmd_count.setText(item.getCommentCount() + "");
@@ -816,8 +827,10 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
             img_like.setImageResource(R.drawable.like_fill);
         }*/
         txt_like_count.setText(item.getLikes() + "");
-        txt_social_no_ear_like.setText(item.getLikes() + "");
+        mLikeAnimatedButton.setText(item.getLikes() + "");
 
+        txt_social_no_ear_like.setText(item.getLikes() + "");
+        mSocialNoEarLikeAnimatedButton.setText(item.getLikes() + "");
 
         txt_cmd_count.setText(item.getCommentCount() + "");
         txt_social_no_ear_comment.setText(item.getCommentCount() + "");
@@ -1633,8 +1646,9 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
             post_content.setText(item.getPost_content());
             et_comment.setHint(R.string.post_detail_comment_eng);
             txt_like_count.setText(item.getPost_like() + "");
+            mLikeAnimatedButton.setText(item.getPost_like() + "");
             txt_social_no_ear_like.setText(item.getPost_like() + "");
-
+            mSocialNoEarLikeAnimatedButton.setText(item.getPost_like() + "");
 
             txt_cmd_count.setText(item.getPost_comment_count() + "Comments");
             txt_social_no_ear_comment.setText(item.getPost_comment_count() + "Comments");
@@ -1773,8 +1787,9 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
             img_like.setImageResource(R.drawable.like_fill);
         }
         txt_like_count.setText(item.getPost_like() + " ");
+        mLikeAnimatedButton.setText(item.getPost_like() + " ");
         txt_social_no_ear_like.setText(item.getPost_like() + " ");
-
+        mSocialNoEarLikeAnimatedButton.setText(item.getPost_like() + " ");
 
         txt_cmd_count.setText(item.getPost_comment_count() + "Comments");
         txt_social_no_ear_comment.setText(item.getPost_comment_count() + "Comments");

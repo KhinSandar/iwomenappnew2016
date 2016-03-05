@@ -5,8 +5,8 @@
 
     <org.undp_iwomen.iwomen.ui.widget.DotsView
         android:id="@+id/vDotsView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:layout_gravity="center"/>
 
     <org.undp_iwomen.iwomen.ui.widget.CircleView
