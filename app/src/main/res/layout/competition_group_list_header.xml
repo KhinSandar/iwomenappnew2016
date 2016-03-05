@@ -26,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:text="Name of the game"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/competition_text" />
+                android:textColor="@color/competition_text_color" />
 
 
         </LinearLayout>
@@ -49,7 +49,7 @@
                 android:gravity="center"
                 android:text="Group 1"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/competition_primary" />
+                android:textColor="@color/primary" />
 
         </LinearLayout>
     </RelativeLayout>
@@ -61,7 +61,7 @@
         android:layout_marginTop="@dimen/competition_vertical_margin"
         android:text="name of the game description here"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/competition_text" />
+        android:textColor="@color/competition_text_color" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -82,14 +82,14 @@
                 android:layout_height="wrap_content"
                 android:text="1"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/competition_primary" />
+                android:textColor="@color/primary" />
 
             <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="@string/competition_day"
-                android:textColor="@color/competition_primary" />
+                android:textColor="@color/primary" />
         </LinearLayout>
 
         <LinearLayout
@@ -106,14 +106,14 @@
                 android:layout_height="wrap_content"
                 android:text="2"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/competition_primary" />
+                android:textColor="@color/primary" />
 
             <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="@string/competition_hour"
-                android:textColor="@color/competition_primary" />
+                android:textColor="@color/primary" />
         </LinearLayout>
 
         <LinearLayout
@@ -130,14 +130,14 @@
                 android:layout_height="wrap_content"
                 android:text="3"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/competition_primary" />
+                android:textColor="@color/primary" />
 
             <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="@string/competition_minute"
-                android:textColor="@color/competition_primary" />
+                android:textColor="@color/primary" />
         </LinearLayout>
 
         <LinearLayout
@@ -153,14 +153,14 @@
                 android:layout_height="wrap_content"
                 android:text="4"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/competition_primary" />
+                android:textColor="@color/primary" />
 
             <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="@string/competition_second"
-                android:textColor="@color/competition_primary" />
+                android:textColor="@color/primary" />
         </LinearLayout>
     </LinearLayout>
 
@@ -203,7 +203,7 @@
             android:singleLine="true"
             android:text="5 Answers to Complete the Game"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/competition_text" />
+            android:textColor="@color/competition_text_color" />
 
     </RelativeLayout>
 

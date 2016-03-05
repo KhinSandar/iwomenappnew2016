@@ -9,13 +9,14 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
-import android.support.v4.app.NotificationCompat;
+import android.support.v7.app.NotificationCompat;
 import android.util.DisplayMetrics;
 import android.util.Log;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.gson.Gson;
 
+import org.smk.iwomen.GcmNotificationDialogActivity;
 import org.smk.model.GcmMessage;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.ui.activity.MainLoginActivity;
@@ -43,21 +44,21 @@ public class GcmIntentService extends IntentService {
 			long when = System.currentTimeMillis();
 			NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
 			GcmMessage gcmMessage = new Gson().fromJson(message.getExtras().getString(GcmCommon.MESSAGE_KEY), GcmMessage.class);
-			Log.i("iWomen","Gcm Message: "+ gcmMessage.toString());
+			Log.i("iWomen","Gcm Message: "+ message.getExtras().getString(GcmCommon.MESSAGE_KEY));
 			Intent notificationIntent = new Intent(context, MainLoginActivity.class).putExtra("gcm_message", new Gson().toJson(gcmMessage));
 			notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
 			PendingIntent intent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 			
 			NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
 			builder.setSmallIcon(icon);
-			builder.setContentTitle(message.getExtras().getString(GcmCommon.TITLE_KEY));
-			builder.setStyle(new NotificationCompat.BigTextStyle().bigText(message.getExtras().getString(GcmCommon.MESSAGE_KEY)));
-			builder.setContentText(message.getExtras().getString(GcmCommon.MESSAGE_KEY));
+			builder.setContentTitle(gcmMessage.getTitle());
+			builder.setStyle(new NotificationCompat.BigTextStyle().bigText(gcmMessage.getMessage()));
+			builder.setContentText(gcmMessage.getMessage());
 			builder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
 			builder.setAutoCancel(true);
 			builder.setWhen(when);
 			builder.addAction(R.drawable.ic_launcher, "i-Women", intent);
-			if(message.getExtras().getString(GcmCommon.IMAGE_URL).length() > 0){
+			if(gcmMessage.getImage() != null && gcmMessage.getMessage().length() > 0){
 				Bitmap bmURL=getBitmapFromURL(message.getExtras().getString(GcmCommon.IMAGE_URL).replace(" ", "%20"));
 				if(bmURL!=null){
 					float multiplier= getImageFactor(getResources());
@@ -70,6 +71,10 @@ public class GcmIntentService extends IntentService {
 			Random random = new Random();
 			int m = random.nextInt(9999 - 1000) + 1000;
 			notificationManager.notify(m, builder.build());
+
+			Intent popuIntent = new Intent(context, GcmNotificationDialogActivity.class).putExtra("gcm_message", new Gson().toJson(gcmMessage));;
+			popuIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			this.getApplicationContext().startActivity(popuIntent);
 		}
 	}
 	

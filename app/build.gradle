@@ -113,5 +113,6 @@ dependencies {
     compile 'com.wdullaer:materialdatetimepicker:2.1.1'
     compile 'com.kbeanie:image-chooser-library:1.5.8@aar'
     compile 'com.orhanobut:dialogplus:1.11@aar'
+    compile 'com.kbeanie:multipicker:0.9.5@aar'
 
 }

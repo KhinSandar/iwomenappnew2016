@@ -1,66 +1,65 @@
 package org.smk.model;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class GcmMessage {
 
-    @SerializedName("id")
+    @SerializedName("_token")
     @Expose
-    private Integer id;
-    @SerializedName("reg_id")
+    private String Token;
+    @SerializedName("title")
     @Expose
-    private String regId;
-    @SerializedName("device_id")
+    private String title;
+    @SerializedName("message")
     @Expose
-    private String deviceId;
+    private String message;
     @SerializedName("user_id")
     @Expose
     private String userId;
-    @SerializedName("created_at")
+    @SerializedName("image")
     @Expose
-    private String createdAt;
+    private String image;
 
     /**
-     * @return The id
+     * @return The Token
      */
-    public Integer getId() {
-        return id;
+    public String getToken() {
+        return Token;
     }
 
     /**
-     * @param id The id
+     * @param Token The _token
      */
-    public void setId(Integer id) {
-        this.id = id;
+    public void setToken(String Token) {
+        this.Token = Token;
     }
 
     /**
-     * @return The regId
+     * @return The title
      */
-    public String getRegId() {
-        return regId;
+    public String getTitle() {
+        return title;
     }
 
     /**
-     * @param regId The reg_id
+     * @param title The title
      */
-    public void setRegId(String regId) {
-        this.regId = regId;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     /**
-     * @return The deviceId
+     * @return The message
      */
-    public String getDeviceId() {
-        return deviceId;
+    public String getMessage() {
+        return message;
     }
 
     /**
-     * @param deviceId The device_id
+     * @param message The message
      */
-    public void setDeviceId(String deviceId) {
-        this.deviceId = deviceId;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     /**
@@ -78,28 +77,18 @@ public class GcmMessage {
     }
 
     /**
-     * @return The createdAt
+     * @return The image
      */
-    public String getCreatedAt() {
-        return createdAt;
+    public String getImage() {
+        return image;
     }
 
     /**
-     * @param createdAt The created_at
+     * @param image The image
      */
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    @Override
-    public String toString() {
-        return "GcmMessage{" +
-                "id=" + id +
-                ", regId='" + regId + '\'' +
-                ", deviceId='" + deviceId + '\'' +
-                ", userId='" + userId + '\'' +
-                ", createdAt='" + createdAt + '\'' +
-                '}';
-    }
 }
 

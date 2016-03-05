@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/competition_btn_go_to_answers"
         android:text="@string/competition_go_to_answer"
-        android:textColor="@color/competition_text"
+        android:textColor="@color/competition_text_color"
         android:textStyle="bold" />
         
     </LinearLayout>

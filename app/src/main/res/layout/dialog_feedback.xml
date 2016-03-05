@@ -25,11 +25,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
         android:id="@+id/textView9"
         android:textColor="@color/white"
         android:layout_marginTop="24dp"
-        android:textSize="22dp" />
+        android:textSize="22dp"
+        android:text="@string/str_write_feedback" />
 
     <org.undp_iwomen.iwomen.ui.widget.CustomEditText
         android:layout_marginTop="50dp"

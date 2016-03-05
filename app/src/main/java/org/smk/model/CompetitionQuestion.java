@@ -53,6 +53,9 @@ private String dayLeft;
 @SerializedName("current_datetime")
 @Expose
 private String currentDatetime;
+@SerializedName("multiple_question")
+@Expose
+private List<Question> multipleQuestion = new ArrayList<Question>();
 @SerializedName("status")
 @Expose
 private String status;
@@ -342,6 +345,13 @@ public void setCurrentDatetime(String currentDatetime) {
 this.currentDatetime = currentDatetime;
 }
 
+public List<Question> getMultipleQuestion() {
+    return multipleQuestion;
+}
+
+public void setMultipleQuestion(List<Question> multipleQuestion) {
+    this.multipleQuestion = multipleQuestion;
+}
 /**
 * 
 * @return

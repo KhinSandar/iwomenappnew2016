@@ -12,6 +12,7 @@ import org.smk.model.CalendarEvent;
 import org.smk.model.CompetitionQuestion;
 import org.smk.model.GroupUser;
 import org.smk.model.IWomenPost;
+import org.smk.model.PhotoUpload;
 import org.smk.model.Rating;
 import org.smk.model.Review;
 import org.smk.model.TLGTownship;
@@ -21,6 +22,7 @@ import org.undp_iwomen.iwomen.CommonConfig;
 import java.util.List;
 
 import retrofit.Callback;
+import retrofit.http.Body;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
@@ -29,6 +31,7 @@ import retrofit.http.POST;
 import retrofit.http.Part;
 import retrofit.http.Path;
 import retrofit.http.Query;
+import retrofit.mime.MultipartTypedOutput;
 import retrofit.mime.TypedFile;
 
 public interface INetworkEngine {
@@ -63,6 +66,13 @@ public interface INetworkEngine {
             @Field("group_user_id") Integer group_user_id,
             Callback<String> callback);
 
+    @FormUrlEncoded
+    @POST("/api/v1/mutipleAnswers")
+    void postCompetitionMutipleAnswer(
+            @Field("answers") String answer,
+            @Field("user_id") Integer user_id,
+            Callback<String> callback);
+
     @GET("/api/v1/app")
     void getAPKVersion(
             @Query("access_token") String access_token,
@@ -95,14 +105,17 @@ public interface INetworkEngine {
             @Field("user_id") String user_id,
             Callback<JsonObject> callback);
 
+    @POST("/api/v1/file/imageUpload")
+    void uploadImage(
+            @Body MultipartTypedOutput attachments,
+            Callback<PhotoUpload> callback);
 
     //KSD URL
     //http://api.shopyface.com/api/v1/auth/photo
-    @Multipart
     @POST(CommonConfig.CREATE_USER_PHOTO_URL)
     void postUserPhoto(
-            @Part("image") TypedFile image,
-            Callback<String> callback);
+            @Body MultipartTypedOutput attachments,
+            Callback<PhotoUpload> callback);
 
     @FormUrlEncoded
     @POST(CommonConfig.CREATE_REGISTER_URL)
@@ -110,12 +123,23 @@ public interface INetworkEngine {
             @Field("username") String name,
             @Field("password") String pwd,
             @Field("phoneNo") String ph,
-            @Field("profileimage") String add,
-            @Field("isTlgTownshipExit") String photo,
-            @Field("tlg_city_address") String role,// Role ?
+            @Field("profileimage") String photo,
+            @Field("isTlgTownshipExit") String isTlg,
+            @Field("tlg_city_address") String tlg_city_address,// Role ?
 
             Callback<User> callback);
 
+    @POST(CommonConfig.UPDATE_USER_URL)
+    void postUpdateUser(
+            @Path("id") Integer id,
+            @Query("username") String name,
+            @Query("password") String pwd,
+            @Query("phoneNo") String ph,
+            @Query("profileimage") String photo,
+            @Query("isTlgTownshipExit") String isTlg,
+            @Query("tlg_city_address") String tlg_city_address,// Role ?
+
+            Callback<User> callback);
 
     ///api-v1/auth/login
     @FormUrlEncoded

@@ -29,7 +29,7 @@
                 android:layout_marginTop="@dimen/competition_vertical_margin"
                 android:text="Name of the game"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/competition_text" />
+                android:textColor="@color/competition_text_color" />
 
             <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                 android:id="@+id/txt_competition_description"
@@ -38,7 +38,7 @@
                 android:layout_marginTop="@dimen/competition_vertical_margin"
                 android:text="Name of the game description..."
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@color/competition_text" />
+                android:textColor="@color/competition_text_color" />
 
             <LinearLayout
                 android:id="@+id/layout_question"
@@ -57,7 +57,8 @@
                 android:gravity="top|left"
                 android:hint="@string/competition_answer_hit_1"
                 android:inputType="textMultiLine"
-                android:lines="3" >
+                android:lines="3"
+                android:visibility="gone">
             </org.undp_iwomen.iwomen.ui.widget.CustomEditText>
 
             <org.undp_iwomen.iwomen.ui.widget.CustomEditText
@@ -70,7 +71,8 @@
                 android:gravity="top|left"
                 android:hint="@string/competition_answer_hit_2"
                 android:inputType="textMultiLine"
-                android:lines="3" />
+                android:lines="3"
+                android:visibility="gone" />
 
             <org.undp_iwomen.iwomen.ui.widget.CustomEditText
                 android:id="@+id/edt_competition_answer_3"
@@ -82,7 +84,8 @@
                 android:gravity="top|left"
                 android:hint="@string/competition_answer_hit_3"
                 android:inputType="textMultiLine"
-                android:lines="3" />
+                android:lines="3"
+                android:visibility="gone" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -102,14 +105,14 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/competition_btn_take_challange"
                         android:text="@string/competition_save"
-                        android:textColor="@color/competition_text" />
+                        android:textColor="@color/competition_text_color" />
 
                     <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:text="@string/competition_save_desc"
-                        android:textColor="@color/competition_text" />
+                        android:textColor="@color/competition_text_color" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -125,14 +128,14 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/competition_btn_take_challange"
                         android:text="@string/competition_submit"
-                        android:textColor="@color/competition_text" />
+                        android:textColor="@color/competition_text_color" />
 
                     <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:text="@string/competition_submit_desc"
-                        android:textColor="@color/competition_text" />
+                        android:textColor="@color/competition_text_color" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -167,7 +170,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/competition_btn_take_challange"
         android:text="@string/competition_go_to_group_answer"
-        android:textColor="@color/white"
+        android:textColor="@color/competition_text_color"
         android:id="@+id/btn_go_back"
         android:layout_alignParentBottom="true" />
 

@@ -8,11 +8,11 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import org.smk.application.CircleTransform;
 import org.smk.model.Answer;
 import org.smk.model.GroupUser;
-import com.squareup.picasso.Picasso;
-
 import org.undp_iwomen.iwomen.R;
 
 import java.util.List;
@@ -158,7 +158,14 @@ public class GroupUserListAdapter extends BaseExpandableListAdapter {
 				}
 			}
 		});
-	    
+
+		if(groups.size() == 1){
+			userViber.setVisibility(View.INVISIBLE);
+			userPhone.setVisibility(View.INVISIBLE);
+		}else{
+			userViber.setVisibility(View.VISIBLE);
+			userPhone.setVisibility(View.VISIBLE);
+		}
 
 	    return v;
 

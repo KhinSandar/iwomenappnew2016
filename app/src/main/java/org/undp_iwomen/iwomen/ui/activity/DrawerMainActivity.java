@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -90,7 +91,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
 
     private SharedPreferences mSharedPreferencesUserInfo;
     private SharedPreferences.Editor mEditorUserInfo;
-    private String user_name, user_obj_id, user_ph;
+    private String user_name, user_obj_id, user_ph , register_msg;
     SharedPreferences sharePrefLanguageUtil;
     String mstr_lang;
     Runnable run;
@@ -112,6 +113,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
     LinearLayout ly_menu_profile_area;
     private AnimateCustomTextView btn_play_game;
     private LinearLayout layout_play_game;
+    private ImageView img_play_game;
 
     @Override
     protected void onStart() {
@@ -179,6 +181,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
         drawer_progressBar_profile_item = (ProgressBar) findViewById(R.id.drawer_progressBar_profile_item);
         layout_play_game = (LinearLayout) findViewById(R.id.ly2);
         btn_play_game = (AnimateCustomTextView) findViewById(R.id.drawer_btn_take_challenge);
+        img_play_game = (ImageView) findViewById(R.id.img_play_game);
 
         // set a custom shadow that overlays the main content when the drawer opens
         drawerLayoutt.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
@@ -201,7 +204,10 @@ public class DrawerMainActivity extends BaseActionBarActivity {
 
 
 
+
         txt_user_name.setText(user_name);
+
+
 
 
 
@@ -212,6 +218,8 @@ public class DrawerMainActivity extends BaseActionBarActivity {
             selectItem(0);
             drawerLayoutt.openDrawer(mDrawerLinearLayout);
         }
+
+
 
 
         //getUserPostCount();
@@ -256,13 +264,13 @@ public class DrawerMainActivity extends BaseActionBarActivity {
             public void run() {
 
 
-                //queryToBooking();
+
 
                 drawer_adapter.notifyDataSetChanged();
                 mDrawerList.invalidateViews();
                 mDrawerList.refreshDrawableState();
 
-                //Log.e("Load Adapter===","==runRunnable=" );
+
             }
         };
 
@@ -710,6 +718,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                     // TODO Auto-generated method stub
                     layout_play_game.setVisibility(View.VISIBLE);
                     if (arg0.getCorrectAnswer().size() == 0) {
+                        img_play_game.setImageResource(R.drawable.sticker2);
                         btn_play_game.setText(getResources().getString(R.string.competition_play_game));
                         btn_play_game.setOnClickListener(new View.OnClickListener() {
 
@@ -721,6 +730,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                         });
 
                     } else {
+                        img_play_game.setImageResource(R.drawable.sticker1);
                         btn_play_game.setText(getResources().getString(R.string.competition_discover_winner));
                         btn_play_game.setOnClickListener(new View.OnClickListener() {
 
