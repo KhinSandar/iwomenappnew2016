@@ -365,8 +365,10 @@
     <string name="register_terms_greet1">Do You Agree With The Following </string>
     <string name="register_terms_greet2">Terms And Conditions?</string>
 
-    <string name="register_terms_body">Text body </string>
-    <string name="register_terms_link">www.iwomen.com</string>
+    <string name="register_terms_body">Our privacy policy and terms of use   are accepted if you download this app. See More at Our Website
+www.iwomenapp.org
+</string>
+    <string name="register_terms_link">www.iwomenapp.com</string>
 
     <!-- string resources used in Event Detail -->
 <string name="large_sample_text">"A material metaphor is the unifying theory of a rationalized space and a system of motion."

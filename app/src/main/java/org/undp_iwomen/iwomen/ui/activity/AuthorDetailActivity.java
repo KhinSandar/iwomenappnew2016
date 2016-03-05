@@ -49,7 +49,7 @@ public class AuthorDetailActivity extends BaseActionBarActivity {
     String strLang;
     private ProgressDialog mProgressDialog;
 
-    String mstrAuthorId,mstrOrganization, mstrTitleMm, mstrContentEng;
+    String mstrAuthorId, mstrOrganization, mstrTitleMm, mstrContentEng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +75,7 @@ public class AuthorDetailActivity extends BaseActionBarActivity {
         Intent i = getIntent();
 
         mstrAuthorId = i.getStringExtra("AuthorId");
-        mstrOrganization= i.getStringExtra("Organization");
+        //mstrOrganization= i.getStringExtra("Organization");
 
 
         txtName = (CustomTextView) findViewById(R.id.authordetail_author_name);
@@ -92,27 +92,13 @@ public class AuthorDetailActivity extends BaseActionBarActivity {
         strLang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
 
 
-        if(mstrOrganization!= null){
-            if (strLang.equals(Utils.ENG_LANG)) {
+        if (strLang.equals(Utils.ENG_LANG)) {
 
-                textViewTitle.setText(R.string.organization_title);
+            textViewTitle.setText(R.string.author_title_eng);
 
-            } else //FOR ALl MM FONT
-            {
-                textViewTitle.setText(R.string.organization_title);
-
-            }
-
-        }else{
-            if (strLang.equals(Utils.ENG_LANG)) {
-
-                textViewTitle.setText(R.string.author_title_eng);
-
-            } else //FOR ALl MM FONT
-            {
-                textViewTitle.setText(R.string.author_title_mm);
-
-            }
+        } else //FOR ALl MM FONT
+        {
+            textViewTitle.setText(R.string.author_title_mm);
 
         }
 
@@ -134,7 +120,8 @@ public class AuthorDetailActivity extends BaseActionBarActivity {
 
 
     }
-    private void clearData(){
+
+    private void clearData() {
         txtAuthorTitle.setText("");
         txtBody.setText("");
         txtName.setText("");
@@ -187,8 +174,26 @@ public class AuthorDetailActivity extends BaseActionBarActivity {
             txtBody.setText(item.getAuthorInfoMM());
         }
 
-        //Common
-        txtName.setText(item.getAuthorName());
+        if(item.getOrganizationName()!= null && item.getOrganizationNameMm() != null && item.getOrganizationNameMm() != ""
+                && item.getOrganizationName() != "" && item.getOrganizationName().length() > 0  && item.getOrganizationNameMm().length() > 0){
+            if (strLang.equals(Utils.ENG_LANG)) {
+
+                txtName.setText(item.getOrganizationName());
+                textViewTitle.setText(R.string.organization_title);
+
+            } else //FOR ALl MM FONT
+            {
+                txtName.setText(item.getOrganizationNameMm());
+                textViewTitle.setText(R.string.organization_title);
+
+            }
+
+        }else{
+            //Common
+            txtName.setText(item.getAuthorName());
+        }
+
+
         if (item.getAuthorImg() != null && item.getAuthorImg() != "") {
 
             try {
