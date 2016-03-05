@@ -49,7 +49,7 @@
                         android:layout_alignParentStart="true"
                         android:layout_alignParentTop="true"
                         android:scaleType="fitXY"
-                        android:src="@drawable/maydoearrman"
+                        android:src="@drawable/place_holder"
                         android:visibility="visible"
                         app:riv_border_color="#333333"
                         app:riv_border_width="0dip"
@@ -111,7 +111,7 @@
                         android:layout_alignParentStart="true"
                         android:layout_alignParentTop="true"
                         android:scaleType="fitXY"
-                        android:src="@drawable/maydoearrman"
+                        android:src="@drawable/mdkb"
                         android:visibility="visible"
                         app:riv_border_color="#333333"
                         app:riv_border_width="0dip"
@@ -276,7 +276,7 @@
                         android:layout_alignParentStart="true"
                         android:layout_alignParentTop="true"
                         android:scaleType="fitXY"
-                        android:src="@drawable/tlg_leader"
+                        android:src="@drawable/blank_profile"
                         android:visibility="visible"
                         app:riv_border_color="#333333"
                         app:riv_border_width="0dip"
@@ -365,7 +365,7 @@
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
                                 android:layout_gravity="center"
-                                android:src="@drawable/ic_upload_audio" />
+                                android:src="@drawable/ic_normal_phone" />
 
                         </FrameLayout>
 

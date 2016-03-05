@@ -257,12 +257,47 @@
     <string name="register_ph_hint">ဖုုန္း နံပါတ္</string>
 
 
-    <string name="register_next">ေနာက္သိုု ့</string>
-
-    <string name="register_fb_login_greet1">သင့္၏ ေဖ့ဘုုတ္စ္ အေကာင့္ၿဖင့္ မွတ္ပံုုတင္ႏိုုင္သည္</string>
-    <string name="register_fb_login_greet2">(သိုု ့) အမည္ႏွင္ ့ ဖုုန္းနံပါတ္ရိုုက္ထည့္ပါ။</string>
-
     <string name="register_title">အမည္</string>
+
+
+    <string name="register_country_hint"> သင့္တိုင္းျပည္ကိုရိုက္ထည့္ပါ</string>
+
+    <string name="register_congrat_eng1">ဂုဏ္ယူပါတယ္</string>
+    <string name="register_congrat_eng2">သင္ဟာအခုခ်ိန္မွစတင္ၿပီး</string>
+    <string name="register_congrat_eng3">စြမ္းရည္ျမင့္မားသူတစ္ေယာက္ျဖစ္ပါသည္</string>
+
+    <string name="register_enjoy">Appကိုခံစားၾကည့္ပါ</string>
+    <string name="register_tour">Appထဲဝင္ၾကည့္မယ္</string>
+
+    <string name="register_fb_login_greet1">Facebook Accountနဲ႔မွတ္ပုံတင္ပါ</string>
+    <string name="register_fb_login_greet2">သို႔မဟုတ္ သင့္နာမည္ႏွင့္ဖုန္းနံပါတ္</string>
+
+    <string name="register_next">ေနာက္တစ္ဆင့္</string>
+
+    <string name="password_error">လၽွို႔ဝွက္စကားလုံးလိုအပ္ပါသည္</string>
+
+    <string name="register_pwd_greet1">လၽွို႔ဝွက္စကားလုံးထည့္ပါ</string>
+    <string name="register_pwd_greet2">လၽွို႔ဝွက္စကားလုံးအနည္းဆုံးေျခာက္လုံးရွိရပါမည္</string>
+
+    <string name="register_pro_greet1">သင္ျမန္မာႏုိင္ငံကလား</string>
+    <string name="register_pro_greet2">သင္ကTLG/SRGအဖြဲ႕ဝင္ျဖစ္ပါသလား</string>
+
+    <string name="register_pro_yes">ဟုတ္ပါတယ္</string>
+    <string name="register_pro_no">မဟုတ္ပါ</string>
+
+    <string name="register_tlg_greet1">သင့္ရဲ့TLG/SRGၿမိဳ႕နယ္ကိုေရြးပါ</string>
+    <string name="register_tlg_btn_wrong">သင္ကTLG/SRGအဖြဲ႕ဝင္မဟုတ္ပါကဒီမွာႏွိပ္ပါ</string>
+
+    <string name="register_state_greet1">ေက်းဇူးျပဳ ၿပီးသင့္ျပည္နယ္/တိုင္းကိုေရြးပါ</string>
+
+    <string name="register_country_greet1">သင့္တိုင္းျပည္ကိုရိုက္ထည့္ပါ</string>
+    <string name="register_photo_upload_greet1">ေက်းဇူးျပဳ ၿပီးသင့္ဓါတ္ပုံကိုuploadလုပ္ပါ</string>
+
+    <string name="register_country_error">Your Country Name is required</string>
+    <string name="register_country_error_mm">သင့္တိုင္းျပည္နာမည္လိုအပ္ပါသည္</string>
+
+    <string name="register_terms_greet1">ေအာက္ပါတို႔ကိုသေဘာတူပါသလား</string>
+    <string name="register_terms_greet2">သေဘာတူညီခ်က္မ်ား</string>
 
 
     <string name="register_ph_hint_password_input_hint">လွ်ိဳ ့၀ွက္ စာလံုုး</string>
@@ -304,10 +339,6 @@
     <string name="str_overall_rating_be_knowledgeable">ဗဟုသုတရရန္ စုစုေပါင္း Rating</string>
     <string name="str_overall_rating_be_together">ေပါင္းစည္းေဆာင္ရြတ္ရန္ စုစုေပါင္း Rating</string>
     <string name="str_overall_rating_talk_together">ေမးျမန္းေဆြးေႏြးရန္ စုစုေပါင္း Rating</string>
-
-
-    <string name="register_pwd_greet1">လွ်ိဳ ့၀ွက္စာလံုုး ရိုုက္ထည့္ရန္</string>
-    <string name="register_pwd_greet2"> စာလုုံုုးေရ အနည္းဆံုုး အကၡရာ ေၿခာက္လံုုးရိုုက္ထည့္ပါ </string>
 
 
     <string name="calendar_description_error">အစည္းအေ၀းအေျကာင္းအရာကိုရိုုက္ထည့္ပါ</string>

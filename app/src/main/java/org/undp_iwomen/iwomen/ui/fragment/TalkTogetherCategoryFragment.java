@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -208,7 +209,8 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
                 } else {
                     Intent i = new Intent(ctx, TalkTogetherMainActivity.class);
                     i.putExtra("CategoryName", CategoriesModelList.get(position).getName());//CategoryName
-                    i.putExtra("CategoryID", CategoriesModelList.get(position).getId());//CategoryName
+                    Log.e("<<Calender Cat IG>>","==>" + CategoriesModelList.get(position).getObjectId());
+                    i.putExtra("CategoryID", CategoriesModelList.get(position).getObjectId());//CategoryName
                     startActivity(i);
                 }
 

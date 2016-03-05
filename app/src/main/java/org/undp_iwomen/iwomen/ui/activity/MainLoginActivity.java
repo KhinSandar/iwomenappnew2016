@@ -11,6 +11,7 @@ import android.support.design.widget.TextInputLayout;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,7 +36,6 @@ import com.smk.skconnectiondetector.SKConnectionDetector;
 import org.smk.clientapi.NetworkEngine;
 import org.smk.iwomen.BaseActionBarActivity;
 import org.smk.model.User;
-
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.model.MyTypeFace;
@@ -196,6 +196,7 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
                     mEditorUserInfo.putString(CommonConfig.USER_ID, user.getId());
                     mEditorUserInfo.putString(CommonConfig.USER_OBJ_ID, user.getObjectId());
                     mEditorUserInfo.putString(CommonConfig.USER_ROLE, user.getRole());
+                    Log.e("<<<User Role >>> ", "===>" + user.getRole());
 
                     /*Role role;
                     List<Role> roleArrayList;

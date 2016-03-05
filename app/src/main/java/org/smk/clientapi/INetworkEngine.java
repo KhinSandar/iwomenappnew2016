@@ -132,7 +132,7 @@ public interface INetworkEngine {
     void getIWomenPostByDateByPagination(
             @Query("page") int page,
             @Query("sorting") String sorting,
-            @Query("isAllow") Boolean isAllow,
+            @Query("isAllow") int isAllow,
             Callback<List<IWomenPost>> callback);
 
     @GET(CommonConfig.GET_CALENDAR_EVENT)

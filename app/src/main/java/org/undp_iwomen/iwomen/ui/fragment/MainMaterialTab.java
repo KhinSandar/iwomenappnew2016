@@ -15,6 +15,7 @@ import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.util.TypedValue;
@@ -187,9 +188,9 @@ public class MainMaterialTab extends Fragment {
 
 
         tabs = (PagerSlidingTabStrip)v.findViewById(R.id.tabs);
-        tabs.setTextColor(getResources().getColor(android.R.color.white));
-        tabs.setBackgroundColor(getResources().getColor(R.color.line_color));
-        tabs.setIndicatorColor(getResources().getColor(android.R.color.white));
+        tabs.setTextColor(ContextCompat.getColor(ctx, R.color.white));
+        tabs.setBackgroundColor(ContextCompat.getColor(ctx, R.color.line_color));
+        tabs.setIndicatorColor(ContextCompat.getColor(ctx, R.color.white));
         tabs.setIndicatorHeight(2);
 
 

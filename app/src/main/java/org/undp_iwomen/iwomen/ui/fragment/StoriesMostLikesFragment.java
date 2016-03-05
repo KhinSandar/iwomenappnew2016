@@ -1323,7 +1323,7 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
         if (Connection.isOnline(mContext)) {
 
             isLoading = true;
-            NetworkEngine.getInstance().getIWomenPostByDateByPagination(paginater,"Most Like", true, new Callback<List<IWomenPost>>() {
+            NetworkEngine.getInstance().getIWomenPostByDateByPagination(paginater,"Most Like", 1, new Callback<List<IWomenPost>>() {
                 @Override
                 public void success(List<IWomenPost> iWomenPosts, Response response) {
                     // Only first REQUEST that visible

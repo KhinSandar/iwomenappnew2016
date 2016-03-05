@@ -1412,7 +1412,7 @@ public class TLGUserPostRecentFragment extends Fragment implements View.OnClickL
     private void getIWomenPostByPagination() {
         if (Connection.isOnline(mContext)) {
             isLoading = true;
-            SMKserverAPI.getInstance().getService().getPostByDateByPagination(paginater, mCatID, new Callback<List<IWomenPost>>() {
+            SMKserverAPI.getInstance().getService().getPostByDateByPagination(paginater,1, mCatID, new Callback<List<IWomenPost>>() {
                 @Override
                 public void success(List<IWomenPost> iWomenPosts, Response response) {
                     if (zPDialog != null && zPDialog.isShowing()) {

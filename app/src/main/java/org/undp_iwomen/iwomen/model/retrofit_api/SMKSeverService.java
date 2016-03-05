@@ -94,6 +94,7 @@ public interface SMKSeverService {
     @GET(CommonConfig.GET_POST_BY_DATE_URL)
     void getPostByDateByPagination(
             @Query("page") int page,
+            @Query("isAllow") int isAllow,
             @Query("category") String category,
             //@Query("sorting") String sorting,
             //@Query("isAllow") Boolean isAllow,

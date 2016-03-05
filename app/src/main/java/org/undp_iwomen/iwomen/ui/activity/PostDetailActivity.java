@@ -17,6 +17,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.BaseColumns;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.Spannable;
@@ -34,7 +35,6 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.algo.hha.emojiicon.EmojiconEditText;
 import com.algo.hha.emojiicon.EmojiconGridView;
@@ -147,7 +147,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
     private ImageView img_viber_share;
     private ImageView img_download;
-    private ImageView img_player;
+    //private ImageView img_player;
     private TextView txt_player;
     private TextView txt_download;
 
@@ -402,7 +402,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         ly_media_main = (LinearLayout) findViewById(R.id.detail_ly_media_main);
         ly_sticker_holder = (LinearLayout) findViewById(R.id.postdetail_ly_sticker_holder);
 
-        img_player = (ImageView) findViewById(R.id.postdetail_img_player);
+        //img_player = (ImageView) findViewById(R.id.postdetail_img_player);
         txt_player = (TextView) findViewById(R.id.postdetail_player_text);
         emojiIconToggle = (ImageView) findViewById(R.id.toggleEmojiIcon);
         stickerImg = (RoundedImageView) findViewById(R.id.postdetail_img_sticker);
@@ -498,7 +498,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
 
             if (mstrPostType.equalsIgnoreCase("Video")) {
-                img_player.setOnClickListener(new View.OnClickListener() {
+                txt_player.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Intent intent = new Intent(mContext, YouTubeWebviewActivity.class);
@@ -642,7 +642,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                 video_icon.setVisibility(View.GONE);
                 ly_media_main.setVisibility(View.VISIBLE);
                 isPlaying = false;
-                img_player.setImageResource(R.drawable.ic_headset_grey600_48dp);
+                txt_player.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(this, R.drawable.ic_headset_grey600_48dp), null, null, null);
                 txt_player.setText(R.string.detail_listen_text_eng);
 
             } else if (item.getContentType().equalsIgnoreCase("Video")) {
@@ -650,7 +650,8 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                 video_icon.setVisibility(View.VISIBLE);
                 ly_media_main.setVisibility(View.VISIBLE);
 
-                img_player.setImageResource(R.drawable.ic_watch_now);
+                txt_player.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(this, R.drawable.ic_watch_now), null, null, null);
+
                 txt_player.setText(R.string.detail_play_text_eng);
 
                 isPlaying = true;
@@ -726,14 +727,14 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                 ly_media_main.setVisibility(View.VISIBLE);
                 video_icon.setVisibility(View.GONE);
                 isPlaying = false;
-                img_player.setImageResource(R.drawable.ic_headset_grey600_48dp);
+                txt_player.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(this, R.drawable.ic_headset_grey600_48dp), null, null, null);
                 txt_player.setText(R.string.detail_listen_text_mm);
 
             } else if (item.getContentType().equalsIgnoreCase("Video")) {
                 postdetail_username.setText("");
                 ly_media_main.setVisibility(View.VISIBLE);
                 video_icon.setVisibility(View.VISIBLE);
-                img_player.setImageResource(R.drawable.ic_watch_now);
+                txt_player.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(this, R.drawable.ic_watch_now), null, null, null);
                 txt_player.setText(R.string.detail_play_text_mm);
 
                 isPlaying = true;
@@ -845,7 +846,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
             img_credit_logo.setVisibility(View.GONE);
             profile.setImageResource(R.drawable.blank_profile);
 
-            profile_item_progressBar.setVisibility(View.GONE);
+            progressBar_credit.setVisibility(View.GONE);
         }
 
         //viewHolder.mCatNameTextView.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
@@ -875,7 +876,6 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         } else {
 
             profile.setImageResource(R.drawable.blank_profile);
-
             profile_item_progressBar.setVisibility(View.GONE);
         }
 
@@ -981,7 +981,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
                 et_comment.setFocusableInTouchMode(false);
 
-                mProgressDialog.show();
+
 
 
                 String cmt_text = null;
@@ -1183,7 +1183,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
                     StoreUtil.getInstance().saveTo("commentlist", listComment);
                     //TODO get sticker for comment
-                    if(!alreadySticker)
+                    if (!alreadySticker)
                         LoadStickerData();
                 }
 
@@ -1601,7 +1601,8 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                 video_icon.setVisibility(View.GONE);
                 ly_media_main.setVisibility(View.VISIBLE);
                 isPlaying = false;
-                img_player.setImageResource(R.drawable.ic_headset_grey600_48dp);
+                txt_player.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(this, R.drawable.ic_headset_grey600_48dp), null, null, null);
+
                 txt_player.setText(R.string.detail_listen_text_eng);
 
             } else if (item.getPost_content_type().equalsIgnoreCase("Video")) {
@@ -1609,7 +1610,8 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                 video_icon.setVisibility(View.VISIBLE);
                 ly_media_main.setVisibility(View.VISIBLE);
 
-                img_player.setImageResource(R.drawable.ic_watch_now);
+                txt_player.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(this, R.drawable.ic_watch_now), null, null, null);
+
                 txt_player.setText(R.string.detail_play_text_eng);
 
                 isPlaying = true;
@@ -1683,14 +1685,16 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                 ly_media_main.setVisibility(View.VISIBLE);
                 video_icon.setVisibility(View.GONE);
                 isPlaying = false;
-                img_player.setImageResource(R.drawable.ic_headset_grey600_48dp);
+                txt_player.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(this, R.drawable.ic_headset_grey600_48dp), null, null, null);
+
                 txt_player.setText(R.string.detail_listen_text_mm);
 
             } else if (item.getPost_content_type().equalsIgnoreCase("Video")) {
                 postdetail_username.setText("");
                 ly_media_main.setVisibility(View.VISIBLE);
                 video_icon.setVisibility(View.VISIBLE);
-                img_player.setImageResource(R.drawable.ic_watch_now);
+                txt_player.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(this, R.drawable.ic_watch_now), null, null, null);
+
                 txt_player.setText(R.string.detail_play_text_mm);
 
                 isPlaying = true;
@@ -2201,20 +2205,26 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                     }
                 }*/
                 /***********EPP functions **************/
-                setVolumeControlStream(AudioManager.STREAM_ALARM);
+                else if (mstrPostType.equalsIgnoreCase("Audio")) {
+                    setVolumeControlStream(AudioManager.STREAM_ALARM);
 
-                //MediaPlayer mediaPlayer;
-                mMedia = new MediaPlayer();
-                try {
-                    //Uri uri = Uri.parse("android.resource://org.undp_iwomen.iwomen/" + R.raw.wai_wai_audio);
-                    String uri = "android.resource://" + getPackageName() + "/raw/wai_wai_audio";//+R.raw.wai_wai_audio;
-                    mMedia.setDataSource(uri);
-                    mMedia.prepare();
-                    //isPrepared = true;
-                    mMedia.setVolume(1.0f, 1.0f);
-                    mMedia.setOnCompletionListener((MediaPlayer.OnCompletionListener) this);
-                } catch (Exception ex) {
-                    throw new RuntimeException("Couldn't load music");
+                    if(iWomenPost.getPostUploadName().equalsIgnoreCase("Wai Wai")){
+                        //MediaPlayer mediaPlayer;
+                        mMedia = new MediaPlayer();
+                        try {
+                            //Uri uri = Uri.parse("android.resource://org.undp_iwomen.iwomen/" + R.raw.wai_wai_audio);
+                            String uri = "android.resource://" + getPackageName() + "/raw/wai_wai_audio";//+R.raw.wai_wai_audio;
+                            mMedia.setDataSource(uri);
+                            mMedia.prepare();
+                            //isPrepared = true;
+                            mMedia.setVolume(1.0f, 1.0f);
+                            mMedia.setOnCompletionListener((MediaPlayer.OnCompletionListener) this);
+                        } catch (Exception ex) {
+                            throw new RuntimeException("Couldn't load music");
+                        }
+                    }
+
+
                 }
 
 

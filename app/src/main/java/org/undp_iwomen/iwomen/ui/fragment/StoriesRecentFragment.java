@@ -1467,7 +1467,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
     private void getIWomenPostByPagination() {
         if (Connection.isOnline(mContext)) {
             isLoading = true;
-            NetworkEngine.getInstance().getIWomenPostByDateByPagination(paginater,"Recent", true, new Callback<List<IWomenPost>>() {
+            NetworkEngine.getInstance().getIWomenPostByDateByPagination(paginater,"Recent", 1, new Callback<List<IWomenPost>>() {
                 @Override
                 public void success(List<IWomenPost> iWomenPosts, Response response) {
                     if(zPDialog != null && zPDialog.isShowing()){
