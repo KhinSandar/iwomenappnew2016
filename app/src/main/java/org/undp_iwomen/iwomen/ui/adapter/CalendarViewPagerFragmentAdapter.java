@@ -9,11 +9,14 @@ import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.ui.fragment.CalendarViewPagerFragment;
 
 public class CalendarViewPagerFragmentAdapter extends FragmentPagerAdapter { //implements IconPagerAdapter FragmentPagerAdapter
-    protected static final String[] CONTENT = new String[] { "This", "Is", "A"
-    ,"This", "Is", "A"
-    ,"This", "Is", "A"
-    ,"This", "Is", "A"};
-    int[] randomImg = new int[]{R.drawable.img_jan ,R.drawable.img_feb, R.drawable.img_march
+    protected static final String[] CONTENT = new String[] { "1", "2", "3",
+    "4","5", "6", "7"
+    ,"8", "9", "10"
+    ,"11", "12"};
+    int[] randomImg = new int[]{R.drawable.jan ,R.drawable.feb, R.drawable.mar
+            ,R.drawable.april,R.drawable.may ,R.drawable.june, R.drawable.july
+            ,R.drawable.aug ,R.drawable.sep, R.drawable.oct
+            ,R.drawable.nov ,R.drawable.dec
                                 };/*For View Pager*/
 	protected  static String[] imgurl ;
     LayoutInflater inflater;

@@ -9,28 +9,36 @@
     android:paddingTop="16dp">
 
     <TextView
-        android:id="@+id/postdetail_like_txt"
+        android:id="@+id/social_no_ear_like_txt"
         style="@style/PostDetailIconStyle"
 
-        android:drawableLeft="@drawable/ic_like_fill"
+        android:drawableLeft="@drawable/ic_like_stoke"
         android:text="150"/>
 
     <TextView
+        android:id="@+id/social_no_ear_comment_txt"
         style="@style/PostDetailIconStyle"
         android:drawableLeft="@drawable/ic_comment"
         android:text="12"/>
 
-    <TextView
+    <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+        android:id="@+id/social_no_ear_share_txt"
         style="@style/PostDetailIconStyle"
         android:drawableLeft="@drawable/ic_share"
-        android:text="Share"/>
+        android:text="@string/share"/>
 
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1.5">
-
+        <com.facebook.share.widget.ShareButton
+            android:id="@+id/social_no_ear_fb_share_button"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:padding="8dp"
+            android:visibility="gone" />
         <ImageView
+            android:id="@+id/social_no_ear_share_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -44,6 +52,7 @@
         android:layout_weight="1.5">
 
         <ImageView
+            android:id="@+id/social_no_ear_viber_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -58,6 +67,7 @@
         android:visibility="invisible">
 
         <ImageView
+            android:id="@+id/social_no_ear_earphone_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

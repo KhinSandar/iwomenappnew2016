@@ -11,12 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ListView
+        <com.smk.sklistview.SKListView
             android:id="@+id/sub_resource_list"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="@color/feed_bg"
-
+            android:background="@color/white"
             android:divider="@null" />
 
         <View

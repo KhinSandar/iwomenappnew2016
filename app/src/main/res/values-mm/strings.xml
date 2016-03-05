@@ -106,7 +106,7 @@
     <string name="i_agree_mm">မွတ္ပံုုတင္အခ်က္ အလက္မ်ားကိုုသေဘာတူပါသည္ <a href="https://www.facebook.com/UndpMyanmar"></a></string>
 
 
-    <string name="signup_tlg_member_exit_mm">TLG (သိုု့) SRG အဖြဲ ့၀င္ၿဖစ္လ်င္အမွန္ၿခစ္ လုုပ္ပါ</string>
+    <string name="signup_tlg_member_exit_mm">TLG (သိုု့) SRG အဖြဲ ့၀င္ၿဖစ္လ်ွင္အမွန္ၿခစ္ လုုပ္ပါ</string>
     <string name="signup_tlg_member_exit_eng">I am a TLG or SRG member</string>
 
     <string name="signup_tlg_member_exit">I am a TLG or SRG member</string>
@@ -180,7 +180,7 @@
     <string name="upload_success_toast_eng">Success Upload post</string>
 
     <string name="iwomen_postupload_success_toast_mm">သင္၏ စိတ္ဓာတ္ခြန္အားေပးၿဖစ္ရပ္အေၾကာင္းအရာေပးပိုု ့မွုုလက္ခံရရွိပါသည္။ တာ၀န္ရွိသူမွ စစ္ေဆး
-ၾကည့္ရွုု ၿပီးမွ ပိုု ့စ္ေပါ ္လာပါမည္။</string>
+ၾကည့္ရွုု ၿပီးမွ ပိုု ့စ္ေပၚ လာပါမည္။</string>
     <string name="iwomen_postupload_success_toast_eng">Thank you for submitting your inspiring story. The administrator will review it and will publish it. You will be motified when your story is being published.</string>
     <string name="google_maps_key">AIzaSyC0x9igzav3skQvcf2RDdD2xZPNXr0GUlY</string>
 
@@ -236,7 +236,7 @@
     <string name="edit_profile_btn_next_tlg_edit">TLG or SRG အခ်က္အလက္ၿပင္ဆင္ရန္ဒိေနရာကိုုႏွိပ္ပါ။!</string>
 
 
-    <string name="edit_profile_tlg_township">မိဳ ့နယ္ေရြးမည္</string>
+    <string name="edit_profile_tlg_township">ျမိဳ႕ နယ္ေရြးမည္</string>
     <string name="str_rating_reviews">ေက်းဇူးျပဳၿပီး Rate သတ္မွတ္ေပးပါ။</string>
     <string name="str_be_inspired">စိတ္ဓာတ္ခြန္္အားျဖည့္ရန္</string>
     <string name="str_be_knowledgeable">ဗဟုသုတရရန္</string>
@@ -272,18 +272,22 @@
     <string name="register_township_title">TLG/SRG ၿမိဳ ့နယ္ေရြးမည္</string>
     <!--Women Remember Day  -->
     <string-array name="women_remember_day_array">
-        <item>ဇန္န၀ါရီ လ</item>
-        <item>ဇန္န၀ါရီ လ</item>
-        <item>ဇန္န၀ါရီ လ</item>
-        <item>ဇန္န၀ါရီ လ</item>
-        <item>ဇန္န၀ါရီ လ</item>
-        <item>ဇန္န၀ါရီ လ</item>
-        <item>ဇန္န၀ါရီ လ</item>
-        <item>ဇန္န၀ါရီ လ</item>
-        <item>ဇန္န၀ါရီ လ</item>
-        <item>ဇန္န၀ါရီ လ</item>
-        <item>ဇန္န၀ါရီ လ</item>
-        <item>ဇန္န၀ါရီ လ</item>
+        <item>ပထမ ျမန္မာအမ်ိဳးသမီး ေလယာဥ္မွဴးမ်ား ေကာင္းကင္သို႔ ပ်ံတက္ခဲ့သည္။</item>
+        <item>အာရွႏိုင္ငံတစ္ႏိုင္ငံျဖစ္သည့္ ဖိလစ္ပိုင္ႏိုင္ငံ၏ ပထမဆံုး အမ်ိဳးသမီးသမၼတသည္ ၁၉၈၆ခုႏွစ္တြင္ ေရြးေကာက္တင္ေျမႇာက္ခံခဲ့ရပါသည္။ သူမသည္ မစၥကိုရာဇုန္အကီြႏို ျဖစ္ပါသည္။</item>
+        <item>ႏိုင္ငံတကာ အမ်ိဳးသမီးမ်ားေန႕</item>
+        <item>၀မ္ဂါရီ မတ္ထိုင္း၏ ေမြးေန႕</item>
+        <item>၂၀၁၅ခုႏွစ္တြင္ - ႏိုက္ဂ်ီးရီးယားတြင္ အမ်ိဳးသမီးလိင္အဂၤါျဖတ္ေတာက္မႈကို တားျမစ္ပိတ္ပင္ခဲ့ပါသည္။</item>
+        <item>၁၉၂၀ခုႏွစ္ - အေမရိကန္ျပည္ေထာင္စုတြင္ ပထမဆံုးအႀကိမ္အျဖစ္ အမ်ိဳးသမီးမ်ား စတင္ မဲေပးခြင့္ ရရွိပါသည္။
+၁၉၆၃ခုႏွစ္ ဗယ္လင္တီးနား ထရက္ရွ္ကိုဗာသည္ အာကာသထဲသို႔ ေရာက္ရွိခဲ့သည့္ ပထမဆံုး အမ်ိဳးသမီး ျဖစ္လာခဲ့သည္။
+ရွီရင္းအက္ဘာတီ၏ ေမြးေန႕</item>
+        <item>ျမန္မာအမ်ိဳးသမီးမ်ားေန႕</item>
+        <item>Aug</item>
+        <item>ႏိုင္ငံတကာ ဒီမိုကေရစီေန႕
+၁၉၁၅ခုႏွစ္ - ကမၻာေပၚတြင္ သက္တမ္းအရွည္ၾကာဆံုး အမ်ိဳးသမီးကြန္ယက္မ်ားထဲမွ တစ္ခုျဖစ္သည့္ ယူေကအမ်ိဳးသမီးမ်ားအဖဲြ႕ခ်ဳပ္၏ ပထမဆံုး အစည္းအေ၀းကို က်င္းပခဲ့ပါသည္။</item>
+        <item>ႏိုင္ငံတကာေက်းလက္အမ်ိဳးသမီးမ်ားေန႕
+ျမန္မာႏိုင္ငံရွိ ေမတို႔ကမၻာအမ်ိဳးသမီးမ်ားကြန္ယက္အား စတင္မိတ္ဆက္ခဲ့သည့္ ႏွစ္ပတ္လည္ေန႕</item>
+        <item>ႏိုင္ငံတကာ အမ်ိဳးသမီးမ်ားအား အၾကမ္းဖက္မႈတိုက္ဖ်က္ေရးေန႕ </item>
+        <item>တ၀ါးကိုးကာမန္သည္ ၿငိမ္းခ်မ္းေရးႏိုဘယ္ဆုကို လက္ခံရရွိသည္။</item>
 
     </string-array>
     <string name="post_detail_more"> ပိုုိမိုုဖတ္ရွဳရန္ &gt;&gt; </string>
@@ -302,17 +306,37 @@
     <string name="str_overall_rating_talk_together">ေမးျမန္းေဆြးေႏြးရန္ စုစုေပါင္း Rating</string>
 
 
-    <string name="register_pwd_greet1">လ်ိဳ ့၀ွက္စာလံုုး ရိုုက္ထည့္ရန္</string>
+    <string name="register_pwd_greet1">လွ်ိဳ ့၀ွက္စာလံုုး ရိုုက္ထည့္ရန္</string>
     <string name="register_pwd_greet2"> စာလုုံုုးေရ အနည္းဆံုုး အကၡရာ ေၿခာက္လံုုးရိုုက္ထည့္ပါ </string>
 
-    <string name="calendar_description_error">Error</string>
-    <string name="calendar_title_error">Error</string>
-    <string name="calendar_location_error">Error</string>
-    <string name="calendar_start_date_error">Error</string>
-    <string name="calendar_end_date_error">Error</string>
-    <string name="calendar_start_time_error">Error</string>
-    <string name="calendar_end_time_error">Error</string>
 
-    <string name="calendar_success">Save Successfully</string>
+    <string name="calendar_description_error">အစည္းအေ၀းအေျကာင္းအရာကိုရိုုက္ထည့္ပါ</string>
+    <string name="calendar_title_error">အစည္းအေ၀းေခါင္းစဥ္ကိုရိုုက္ထည့္ပါ</string>
+    <string name="calendar_location_error">အစည္းအေ၀းေနရာကိုရိုုက္ထည့္ပါ</string>
+    <string name="calendar_start_date_error">အစည္းအေ၀းစမည့္ရက္ကိုရိုုက္ထည့္ပါ</string>
+    <string name="calendar_end_date_error">အစည္းအေ၀းျပီးဆံုးမည့္ရက္ကိုရိုုက္ထည့္ပါ</string>
+    <string name="calendar_start_time_error">အစည္းအေ၀းစမည့္အခ်ိန္ကိုရိုုက္ထည့္ပါ</string>
+    <string name="calendar_end_time_error">အစည္းအေ၀းျပီးဆံုးမည့္အခ်ိန္ကိုရိုုက္ထည့္ပါ</string>
+    <string name="calendar_success">အစည္းအေ၀း မွတ္တမ္းေအာင္ၿမင္စြာ ေရာက္ရွိပါသည္။</string>
     <string name="calendar_success_mm">အစည္းအေ၀း မွတ္တမ္းေအာင္ၿမင္စြာ ေရာက္ရွိပါသည္။</string>
+
+    <string name="may_doe_kabar">ေမတို႔ကမၻာသည္ ေက်းရြာအေျချပဳ အမ်ိဳးသမီးကိုယ့္အားကိုယ္ကိုး အုပ္စုမ်ား(SRGs) ႏွင့္ ယင္းတို႔ကို ေပါင္းစည္းထားေသာ ၿမိဳ႕နယ္ ဦးေဆာင္အုပ္စုမ်ား (TLGs) ကို ခ်ိတ္ဆက္ထားေသာ ႏိုင္ငံလံုး ဆိုင္ရာ ကြန္ယက္တစ္ခု ျဖစ္ပါသည္။ ဤကြန္ယက္သည္ ျမစ္၀ကၽြန္းေပၚ ၊ အပူပိုင္းဇုန္၊ ခ်င္း၊ ကခ်င္၊ ကယား၊ မြန္၊ ရခိုင္ႏွင့္ ရွမ္းျပည္နယ္တို႔မွ ၿမိဳ႕နယ္ေပါင္း ၃၁ ၿမိဳ႕နယ္ရွိ ေက်းရြာေပါင္း ၂,၀၀၀ မွ အဖဲြ႕၀င္ေပါင္း ၂၂,၀၀၀ ကို လႊမ္းျခံဳခ်ိတ္ဆက္ထားပါသည္။ </string>
+
+    <string-array name="navigation_drawer_items">
+        <item>Job Information</item>
+        <item>Job Status List</item>
+        <item>My Profile</item>
+        <item>Pricing Details</item>
+        <item>About Us</item>
+        <item>Contact Us</item>
+        <item>Logout</item>
+
+    </string-array>
+    <string name="share">ရွဲရန္</string>
+    <string name="calendar_permission">သင့္အေကာင့္သည္ခြင့္ၿပဳခ်က္ရွိမွၾကည့္ႏိုုင္ပါမည္။</string>
+
+    <string name="ethic_shan">ရွမ္း </string>
+    <string name="ethic_mon"> မြန္</string>
+    <string name="organization_title"> အဖြဲ ့အစည္းအမည္</string>
+
 </resources>

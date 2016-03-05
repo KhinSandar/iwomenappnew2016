@@ -11,6 +11,7 @@ import org.smk.model.CalendarEvent;
 import org.smk.model.CompetitionQuestion;
 import org.smk.model.GroupUser;
 import org.smk.model.IWomenPost;
+import org.smk.model.PhotoUpload;
 import org.smk.model.Rating;
 import org.smk.model.Review;
 import org.smk.model.TLGTownship;
@@ -20,6 +21,7 @@ import org.undp_iwomen.iwomen.CommonConfig;
 import java.util.List;
 
 import retrofit.Callback;
+import retrofit.http.Body;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
@@ -28,6 +30,7 @@ import retrofit.http.POST;
 import retrofit.http.Part;
 import retrofit.http.Path;
 import retrofit.http.Query;
+import retrofit.mime.MultipartTypedOutput;
 import retrofit.mime.TypedFile;
 
 public interface INetworkEngine {
@@ -88,11 +91,10 @@ public interface INetworkEngine {
 
     //KSD URL
     //http://api.shopyface.com/api/v1/auth/photo
-    @Multipart
     @POST(CommonConfig.CREATE_USER_PHOTO_URL)
     void postUserPhoto(
-            @Part("image") TypedFile image,
-            Callback<String> callback);
+            @Body MultipartTypedOutput attachments,
+            Callback<PhotoUpload> callback);
 
     @FormUrlEncoded
     @POST(CommonConfig.CREATE_REGISTER_URL)
@@ -189,6 +191,8 @@ public interface INetworkEngine {
             @Field("end_time") String end_time,
 
             Callback<CalendarEvent> callback);
+
+
 
 
 

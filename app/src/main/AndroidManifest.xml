@@ -5,6 +5,10 @@
     <uses-sdk tools:overrideLibrary="com.android.camera" />
 
     <!-- Permissions -->
+    <!-- google map my location permission above 6.0 phone -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- google map my location permission above 6.0 phone -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -91,7 +95,7 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Iwomen.SignUp"
-            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
+            android:windowSoftInputMode="adjustResize|stateHidden" />
         <!-- PARSE LOGIN AND MAIN ACTIVITY -->
         <!--
         <activity
@@ -243,7 +247,7 @@
             android:name=".ui.activity.PostDetailActivity"
             android:label="@string/title_activity_post_detail"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.activity.TLGUserPostDetailActivity"
             android:label="@string/title_activity_post_detail"
@@ -353,18 +357,16 @@
             android:name=".ui.activity.CalendarActivity"
             android:label="@string/title_activity_post_detail"
             android:parentActivityName=".ui.activity.DrawerMainActivity"
-            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
-            android:screenOrientation="portrait">
-
+            android:windowSoftInputMode="adjustPan">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.activity.DrawerMainActivity" />
         </activity>
         <activity
             android:name=".ui.activity.PostNewsActivity"
-            android:label="@string/title_activity_post_news"></activity>
-
+            android:label="@string/title_activity_post_news" />
         <activity
             android:name="org.smk.iwomen.CompetitionNewGameActivity"
             android:label="@string/title_activity_competition_new_game" />
@@ -392,7 +394,7 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.activity.ViewEventsActivity"
-            android:label="@string/title_view_events"></activity>
+            android:label="@string/title_view_events" />
         <activity
             android:name=".ui.activity.EventDetailActivity"
             android:label="@string/title_event_detail" />
@@ -401,7 +403,22 @@
             android:label="@string/title_new_event" />
         <activity
             android:name=".ui.activity.PostDetailV2Activity"
-            android:windowSoftInputMode="adjustPan"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustPan"></activity>
+        <activity
+            android:name=".ui.activity.LeadershipTipsActivity"
+            android:label="@string/title_leadership_tips">
+        </activity>
+        <activity
+            android:name=".ui.activity.LeadershipTipDetailActivity"
+            android:label="@string/title_leadership_lesson" />
+        <activity
+            android:name=".ui.activity.SisterAppDetailActivity"
+            android:label="@string/title_activity_sister_app_detail"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity android:name=".ui.activity.NewPostActivity"
+            android:label="@string/title_activity_new_post"
             android:theme="@style/AppTheme">
 
         </activity>

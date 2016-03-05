@@ -148,6 +148,10 @@ public class RegisterTermsFragment8 extends Fragment implements View.OnClickList
                             mEditorUserInfo.putString(CommonConfig.USER_ROLE, user.getRole());
                             mEditorUserInfo.putString(CommonConfig.USER_NAME, user.getUsername());
                             mEditorUserInfo.putString(CommonConfig.USER_PH, user.getPhone());
+                            mEditorUserInfo.putString(CommonConfig.USER_ID, user.getId());
+                            mEditorUserInfo.putString(CommonConfig.USER_OBJ_ID, user.getObjectId());
+
+                            mEditorUserInfo.putString(CommonConfig.REGISTER_MSG, user.getMessage());
 
                             if(user.getEmail()!= null || user.getEmail() != ""){
                                 mEditorUserInfo.putString(CommonConfig.USER_EMAIL, user.getEmail());

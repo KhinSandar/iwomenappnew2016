@@ -13,12 +13,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import com.google.gson.Gson;
 import com.makeramen.RoundedImageView;
-import org.smk.iwomen.BaseActionBarActivity;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.smk.iwomen.BaseActionBarActivity;
+import org.smk.model.TLGTownship;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.data.TlgProfileItem;
 import org.undp_iwomen.iwomen.model.MyTypeFace;
@@ -72,6 +74,7 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
 
     String tlgLeaderPhno;
     String tlgLeaderFbLink;
+    private TLGTownship tlgTownship;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,9 +82,12 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
         setContentView(R.layout.activity_user_tlg_profile);
 
         Bundle bundle = getIntent().getExtras();
-        tlgName = bundle.getString("TLGName");
-        tlgId = bundle.getString("TLGID");
-        tlgAddress = bundle.getString("TLGAddress");
+        if(bundle != null){
+            tlgTownship = new Gson().fromJson(bundle.getString("tlgObj"), TLGTownship.class);
+        }
+        tlgName = tlgTownship.getTlgGroupName();
+        //tlgId = tlgTownship.getId();
+        tlgAddress = tlgTownship.getTlgGroupAddress();
         mContext = getApplicationContext();
         Log.e("tlgId", "===>" + tlgId + "///" + tlgName);
         sharePrefLanguageUtil = getSharedPreferences(Utils.PREF_SETTING, Context.MODE_PRIVATE);
@@ -146,9 +152,35 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
         }*/
 
         clearData();
+        setData(tlgTownship);
 
-        getTLGDetailByIdFromSever();
+        //getTLGDetailByIdFromSever();
 
+
+
+    }
+
+    private void setData(TLGTownship tlgTownship){
+        txt_tlg_group_name.setText(tlgTownship.getTlgGroupName());
+        txt_tlg_group_address.setText(tlgTownship.getTlgGroupAddress());
+        txt_tlg_leader_name.setText("");
+        txt_tlg_leader_role_lbl.setText(R.string.tlg_leader_role_eng);
+        txt_tlg_info_who_we_are_lbl.setText(R.string.tlg_who_we_r_eng);
+
+        txt_tlg_member_lbl.setText(R.string.tlg_member_lbl_eng);
+        txt_tlg_member_txt.setText("");
+
+        txt_tlg_srg_member_lbl.setText(R.string.tlg_srg_member_lbl_eng);
+        txt_tlg_srg_member_txt.setText("");
+
+        txt_tlg_key_activity_lbl.setText(R.string.tlg_key_activity_lbl_eng);
+        txt_tlg_key_activity_txt.setText("..");
+
+        txt_tlg_key_skill_lbl.setText(R.string.tlg_key_skill_lbl_eng);
+        txt_tlg_key_skill_txt.setText("...");
+
+        tlgLogoImg.setImageResource(R.drawable.place_holder);
+        leaderProfileImg.setImageResource(R.drawable.blank_profile);
     }
 
     private void clearData(){

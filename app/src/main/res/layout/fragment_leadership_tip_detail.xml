@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
+
+        <FrameLayout
+            android:id="@+id/tip_leader_icon_frame"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginRight="8dp">
+
+            <com.makeramen.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/tipdetail_profilePic_rounded"
+                android:layout_width="@dimen/feed_item_profile_pic"
+                android:layout_height="@dimen/feed_item_profile_pic"
+
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/blank_profile"
+                android:visibility="visible"
+                app:riv_border_color="#333333"
+                app:riv_border_width="0dip"
+                app:riv_corner_radius="30dip"
+                app:riv_mutate_background="true"
+                app:riv_oval="true"></com.makeramen.RoundedImageView>
+
+            <ProgressBar
+                android:id="@+id/tipdetail_progressBar_profile_item"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="@dimen/feed_item_profile_pic"
+                android:layout_height="@dimen/feed_item_profile_pic"
+
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_gravity="left"
+                android:visibility="visible" />
+
+        </FrameLayout>
+
+        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+            android:id="@+id/tipdetail_content_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tip_leader_icon_frame"
+            android:text="Dr. Mary"
+            android:textColor="@color/text_sub_head_color"
+            android:textStyle="bold"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+            android:id="@+id/tipdetail_content_user_role"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tipdetail_content_username"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/text_sub_head_color"
+            android:layout_toRightOf="@+id/tip_leader_icon_frame"
+            android:text="Regional Director of Legal and Corporate Affairs in Southeast Asia" />
+
+        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+            android:id="@+id/tipdetail_content_user_role_more"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tipdetail_content_user_role"
+            android:layout_toRightOf="@+id/tip_leader_icon_frame"
+            android:text="@string/post_detail_more"
+            android:textColor="@color/text_sub_head_color"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+
+    </RelativeLayout>
+
+    <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+        android:id="@+id/tipdetail_title_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:text="Title of Post"
+
+        android:textColor="@color/text_sub_head_color"
+        android:textSize="18sp" />
+
+    <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+        android:id="@+id/tipdetail_body"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:text="@string/large_sample_text"
+        android:textColor="@color/text_sub_head_color"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+
+    <LinearLayout
+        android:id="@+id/tipdetail_ly_social"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/social_without_ear_phone" />
+    </LinearLayout>
+
+</LinearLayout>

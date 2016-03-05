@@ -8,15 +8,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.makeramen.RoundedImageView;
-import org.smk.iwomen.BaseActionBarActivity;
 import com.squareup.picasso.Picasso;
 
+import org.smk.iwomen.BaseActionBarActivity;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.model.MyTypeFace;
@@ -34,7 +34,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity {
     private ProgressBar profileProgressbar;
     private TextView profileName;
     private TextView txtMore;
-    private Button btnShare;
+    private LinearLayout lysocial;
 
 
     private Context mContext;
@@ -43,10 +43,11 @@ public class ResourceDetailActivity extends BaseActionBarActivity {
 
 
     String mstrTitleEng, mstrTitleMm, mstrContentEng, mstrContentMm, mstrAuthorName , mstrAuthorId, mstrAuthorImgPath, mstrPostDate;
+    String mstrSubResourceTitleEng, mstrSubResourceTitleMm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_sub_resource);
+        setContentView(R.layout.activity_detail_sub_resource);//activity_detail_sub_resource
         sharePrefLanguageUtil = getSharedPreferences(Utils.PREF_SETTING, Context.MODE_PRIVATE);
 
         mContext = getApplicationContext();
@@ -65,6 +66,11 @@ public class ResourceDetailActivity extends BaseActionBarActivity {
 
         mstrTitleEng = i.getStringExtra("TitleEng");
         mstrTitleMm = i.getStringExtra("TitleMM");
+
+        mstrSubResourceTitleEng= i.getStringExtra("SubResourceDetailTitleEng");
+        mstrSubResourceTitleMm = i.getStringExtra("SubResourceDetailTitleMM");
+
+
         mstrContentEng = i.getStringExtra("ContentEng");
         mstrContentMm = i.getStringExtra("ContentMM");
         mstrAuthorName = i.getStringExtra("AuthorName");
@@ -81,7 +87,9 @@ public class ResourceDetailActivity extends BaseActionBarActivity {
         profileName = (TextView)findViewById(R.id.tipdetail_content_username);
         profileProgressbar = (ProgressBar)findViewById(R.id.tipdetail_progressBar_profile_item);
         txtMore = (TextView)findViewById(R.id.tipdetail_content_user_role_more);
-        btnShare = (Button)findViewById(R.id.tipdetail_fb_share_btn);
+
+
+        lysocial = (LinearLayout)findViewById(R.id.tipdetail_ly_social);
 
 
 
@@ -93,7 +101,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity {
 
             textViewTitle.setText(mstrTitleEng);
             txtBody.setText(mstrContentEng);
-            txtName.setText(mstrTitleEng);
+            txtName.setText(mstrSubResourceTitleEng);
 
             textViewTitle.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
 
@@ -104,7 +112,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity {
         {
             textViewTitle.setText(mstrTitleMm);
             txtBody.setText(mstrContentMm);
-            txtName.setText(mstrTitleEng);
+            txtName.setText(mstrSubResourceTitleMm);
 
             //textViewTitle.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
 
@@ -163,13 +171,19 @@ public class ResourceDetailActivity extends BaseActionBarActivity {
                 mContext.startActivity(intent);
             }
         });
-
-        btnShare.setOnClickListener(new View.OnClickListener() {
+        lysocial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                shareTextUrl();
+                if (strLang.equals(Utils.ENG_LANG)) {
+                    Utils.doToastEng(mContext, getResources().getString(R.string.resource_coming_soon_eng));
+                } else {
+
+                    Utils.doToastMM(mContext, getResources().getString(R.string.resource_coming_soon_mm));
+                }
             }
         });
+
+
 
 
     }

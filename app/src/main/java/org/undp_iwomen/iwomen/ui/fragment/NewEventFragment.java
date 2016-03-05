@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -251,8 +252,10 @@ public class NewEventFragment extends Fragment implements View.OnClickListener {
             } else {
                 mEndTimeInputLayout.setErrorEnabled(false);
             }
+            Log.e("<<Calendar>>","Date==>" +getServerDateString(mStartDate));
+            //Date==>Wed Mar 02 23:51:09 GMT+06:30 2016
             if (lang.equals(Utils.ENG_LANG)) {
-                NetworkEngine.getInstance().postCreateCalendarEventEng(description, title, location, start_date, end_date, start_time, end_time, new Callback<CalendarEvent>() {
+                NetworkEngine.getInstance().postCreateCalendarEventEng(description, title, location, getServerDateString(mStartDate), getServerDateString(mEndDate), start_time, end_time, new Callback<CalendarEvent>() {
                     @Override
                     public void success(CalendarEvent calendarEvent, Response response) {
                         Utils.doToastEng(mContext, getResources().getString(R.string.calendar_success));
@@ -265,7 +268,7 @@ public class NewEventFragment extends Fragment implements View.OnClickListener {
                     }
                 });
             }else{
-                NetworkEngine.getInstance().postCreateCalendarEventMM(description, title, location, start_date, end_date, start_time, end_time, new Callback<CalendarEvent>() {
+                NetworkEngine.getInstance().postCreateCalendarEventMM(description, title, location, getServerDateString(mStartDate), getServerDateString(mEndDate), start_time, end_time, new Callback<CalendarEvent>() {
                     @Override
                     public void success(CalendarEvent calendarEvent, Response response) {
                         Utils.doToastMM(mContext, getResources().getString(R.string.calendar_success_mm));
@@ -394,6 +397,13 @@ public class NewEventFragment extends Fragment implements View.OnClickListener {
 
     private String getUserFriendlyTimeString(Date date){
         String format = "h:mm a";
+        SimpleDateFormat sdf = new SimpleDateFormat(format);
+        return sdf.format(date);
+    }
+
+    private String getServerDateString(Date date){
+        String format = "yyyy-MM-dd hh:mm:ss";
+
         SimpleDateFormat sdf = new SimpleDateFormat(format);
         return sdf.format(date);
     }

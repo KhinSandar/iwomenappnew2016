@@ -5,14 +5,15 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.android.gms.analytics.Tracker;
-import org.smk.iwomen.BaseActionBarActivity;
 
+import org.smk.iwomen.BaseActionBarActivity;
 import org.undp_iwomen.iwomen.R;
-import org.undp_iwomen.iwomen.ui.fragment.TLGUserStoriesRecentFragment;
+import org.undp_iwomen.iwomen.ui.fragment.TLGUserPostRecentFragment;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.utils.Utils;
 
@@ -24,6 +25,7 @@ public class TalkTogetherMainActivity extends BaseActionBarActivity {
     private Context mContext;
     SharedPreferences sharePrefLanguageUtil;
     String strLang, mstrTitle , mCatID;
+    Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +53,15 @@ public class TalkTogetherMainActivity extends BaseActionBarActivity {
 
         mstrTitle = i.getStringExtra("CategoryName");
         mCatID = i.getStringExtra("CategoryID");
+
+        Log.e("<<<Talktogether Main Activitiy Cat ID>>","==>"+ mCatID);
         textViewTitle.setText(mstrTitle);
+
+        bundle = new Bundle();
+        bundle.putString("CategoryName", mstrTitle);
+        bundle.putString("CategoryID", mCatID);
+
+
         /*if (strLang.equals(Utils.ENG_LANG)) {
 
             textViewTitle.setText(R.string.edit_profile_eng);
@@ -62,14 +72,14 @@ public class TalkTogetherMainActivity extends BaseActionBarActivity {
 
         }*/
         if (savedInstanceState == null) {
-            TLGUserStoriesRecentFragment tlgUserStoriesRecentFragment = new TLGUserStoriesRecentFragment();
+            TLGUserPostRecentFragment tlgUserPostRecentFragment = new TLGUserPostRecentFragment();
+            tlgUserPostRecentFragment.setArguments(bundle);
 
-            /*Bundle b = new Bundle();
-            b.putString(CommonConfig.BOOKING_ID,strBookId);
-            b.putString(CommonConfig.TICKET_PAYMENT_STATUS, strPaymentStatus);
-            ticketFragment.setArguments(b);*/
+            /*TLGUserStoriesRecentFragment tlgUserStoriesRecentFragment = new TLGUserStoriesRecentFragment();
+            tlgUserStoriesRecentFragment.setArguments(bundle);*/
+
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, tlgUserStoriesRecentFragment)
+                    .add(R.id.container, tlgUserPostRecentFragment)
                     .commit();
         }
 

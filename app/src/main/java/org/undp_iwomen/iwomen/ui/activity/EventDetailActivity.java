@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.ui.fragment.EventDetailFragment;
@@ -26,6 +27,7 @@ public class EventDetailActivity extends AppCompatActivity {
 
         if(null == savedInstanceState){
             String id = getIntent().getStringExtra(EventDetailFragment.EXTRA_ID);
+            Log.e("<<View event frag detail>>>", "==>" + id);
             initFragment(EventDetailFragment.newInstance(id));
         }
     }

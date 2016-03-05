@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="5dp"
         android:background="@drawable/toolbar_dropshawdow"/>
-    <include layout="@layout/activity_detail_sub_resources"/>
+    <include layout="@layout/fragment_leadership_tip_detail"/>
     <!--<ScrollView
         android:layout_width="match_parent" android:layout_height="match_parent">
 

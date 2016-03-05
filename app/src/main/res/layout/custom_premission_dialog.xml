@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:padding="@dimen/abc_dialog_padding_material"
+    android:layout_height="match_parent"
+    android:background="@color/light_green_500">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content">
+
+        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+            android:id="@+id/dialog_refresh_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:gravity="center_vertical"
+            android:paddingTop="@dimen/abc_dialog_padding_material"
+            android:textColor="@color/white"
+            android:text="@string/app_name"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/postdetail_content_role_more_ly"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+
+        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+            android:id="@+id/dialog_refresh_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:text="@string/calendar_permission"
+            android:textStyle="bold" />
+    </LinearLayout>
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="22dp">
+
+        <org.undp_iwomen.iwomen.ui.widget.CustomButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ok"
+            android:id="@+id/permission_dialog_btn_ok"
+            android:layout_gravity="right"
+            android:background="@android:color/transparent"
+            android:textColor="@color/white"
+            android:textSize="18dp"
+            android:layout_alignParentRight="true"
+            android:textAllCaps="true"
+            android:layout_alignParentTop="true" />
+    </RelativeLayout>
+
+</LinearLayout>

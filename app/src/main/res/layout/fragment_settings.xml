@@ -49,6 +49,21 @@
                 android:layout_height="wrap_content"
                 android:text="DEFAULT" />
 
+            <!-- New Coming Soon-->
+
+            <RadioButton
+                android:id="@+id/settings_ethic_shan_language"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/ethic_shan" />
+
+            <RadioButton
+                android:id="@+id/settings_ethic_mon_language"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ethic_mon" />
+
         </RadioGroup>
 
         <View
@@ -78,9 +93,11 @@
             android:layout_margin="16dp"
             android:layout_marginLeft="18dp"
             android:text="Change Theme"
+            android:visibility="gone"
             android:textColor="@color/black" />
 
         <RadioGroup
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -120,6 +137,7 @@
         </RadioGroup>
 
         <View
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_margin="16dp"

@@ -99,7 +99,9 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
         txtChangLanEng = (TextView) findViewById(R.id.login_change_lan_eng);
         txtChangLanMM = (TextView) findViewById(R.id.login_change_lan_mm);
 
-        if (mSharedPreferencesUserInfo.getString(CommonConfig.USER_NAME, null) != null) {
+        //TODO CHECK LOGIN OR NOT
+
+        if (mSharedPreferencesUserInfo.getString(CommonConfig.USER_ROLE, null) != null) {
             startActivity(new Intent(this, DrawerMainActivity.class));
             finish();
         }
@@ -191,7 +193,9 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
 
                     mEditorUserInfo.putString(CommonConfig.USER_EMAIL, user.getEmail());
                     mEditorUserInfo.putString(CommonConfig.USER_NAME, user.getUsername());
-                    mEditorUserInfo.putString(CommonConfig.USER_OBJ_ID, user.getId());
+                    mEditorUserInfo.putString(CommonConfig.USER_ID, user.getId());
+                    mEditorUserInfo.putString(CommonConfig.USER_OBJ_ID, user.getObjectId());
+                    mEditorUserInfo.putString(CommonConfig.USER_ROLE, user.getRole());
 
                     /*Role role;
                     List<Role> roleArrayList;
@@ -205,7 +209,7 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
                     mEditorUserInfo.commit();
                     Intent i = new Intent(MainLoginActivity.this, DrawerMainActivity.class);//DrawerMainActivity
                     startActivity(i);
-                    finish();
+                    //finish();
 
                 }
 
