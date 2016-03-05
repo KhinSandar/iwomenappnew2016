@@ -3,9 +3,9 @@ package org.undp_iwomen.iwomen.ui.fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +19,8 @@ import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.utils.Connection;
 import org.undp_iwomen.iwomen.utils.Utils;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -33,42 +35,55 @@ import retrofit.client.Response;
  */
 public class EventDetailFragment extends Fragment {
 
-    //TODO: replace with your desired data
     public static final String EXTRA_ID = "id";
+    public static final String EXTRA_EVENT_TYPE = "event_type";
+    public static final String EXTRA_MONTH = "month";
 
     private CustomTextView event_title;
     private CustomTextView event_desc;
     private CustomTextView event_location;
     private CustomTextView event_date;
     private CustomTextView event_time;
-    private String id;
 
     private SharedPreferences sharePrefLanguageUtil;
     private String lang;
     private Context mContext;
 
-    //TODO: replace with your desired data
-    public static EventDetailFragment newInstance(String id) {
+    @IntDef({TYPE_IMPLICIT, TYPE_USER_DEFINED})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface EventType {
+    }
+
+    public static final int TYPE_IMPLICIT = 0;
+    public static final int TYPE_USER_DEFINED = 1;
+
+    private String mId;
+    private int mMonthResIndex;
+    private int mEventType;
+
+    public static EventDetailFragment newInstance(String id, @EventType int eventType, int month) {
         EventDetailFragment fragment = new EventDetailFragment();
         Bundle args = new Bundle();
+        args.putInt(EXTRA_EVENT_TYPE, eventType);
         args.putString(EXTRA_ID, id);
-        Log.e("<<event 1 detail>>>", "==>" + id);
-
+        args.putInt(EXTRA_MONTH, month);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Bundle args = getArguments();
+        mId = args.getString(EXTRA_ID);
+        mEventType = args.getInt(EXTRA_EVENT_TYPE);
+        mMonthResIndex = args.getInt(EXTRA_MONTH);
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_event_detail, container, false);
-        Bundle bundleArgs = getArguments();
-        if (bundleArgs != null) {
-            id = bundleArgs.getString(EventDetailFragment.EXTRA_ID);
-
-            Log.e("<<event 2 detail>>>", "==>" + id);
-            //Toast.makeText(getActivity().getApplicationContext(), "Trip ID>>" + strTripId, Toast.LENGTH_SHORT).show();
-        }
 
         mContext = getActivity().getApplicationContext();
         sharePrefLanguageUtil = getActivity().getSharedPreferences(org.undp_iwomen.iwomen.utils.Utils.PREF_SETTING, Context.MODE_PRIVATE);
@@ -80,9 +95,23 @@ public class EventDetailFragment extends Fragment {
         event_date = (CustomTextView) rootView.findViewById(R.id.event_detail_date);
         event_time = (CustomTextView) rootView.findViewById(R.id.event_detail_time);
 
-
         setEventData();
+        updateUi();
         return rootView;
+    }
+
+    private void updateUi() {
+        if (mEventType == TYPE_IMPLICIT) {
+            String title = getResources().getStringArray(R.array.women_remember_day_array)[mMonthResIndex];
+            event_title.setText(title);
+
+            String description = getResources().getStringArray(R.array.women_remember_day_desc_array)[mMonthResIndex];
+            event_desc.setText(description);
+
+            event_location.setVisibility(View.INVISIBLE);
+            event_date.setVisibility(View.INVISIBLE);
+            event_time.setVisibility(View.INVISIBLE);
+        }
     }
 
     private void setEventData() {
@@ -92,13 +121,12 @@ public class EventDetailFragment extends Fragment {
                 @Override
                 public void success(CalendarEvent calendarEvent, Response response) {
 
-
                     if (lang.equals(Utils.ENG_LANG)) {
                         event_title.setText(calendarEvent.getTitle());
                         event_desc.setText(calendarEvent.getDescription());
                         event_location.setText(calendarEvent.getLocation());
 
-                    }else{
+                    } else {
                         event_title.setText(calendarEvent.getTitleMm());
                         event_desc.setText(calendarEvent.getDescriptionMm());
                         event_location.setText(calendarEvent.getLocation());

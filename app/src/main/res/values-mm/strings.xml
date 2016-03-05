@@ -390,4 +390,19 @@ female-pilots-iaa1s
     <string name ="nov_des">ကမၻာအရပ္ရပ္၌ အမ်ိဳးသမီး ၃ ဦးတြင္ ၁ ဦးသည္ ကိုယ္ကာယပိုင္းဆိုင္ရာ သို႔မဟုတ္ လိင္ပိုင္းဆိုင္ရာ အၾကမ္းဖက္မႈကို ၾကံဳေတြ႕ခံစားဖူးၾကပါသည္။ ဤႏိုင္ငံတကာေန႕အား ေျပာင္းလဲမႈမ်ား ျပဳလုပ္ရန္အတြက္ လူထုကို အသိပညာေပးရန္ႏွင့္ ေနရာတိုင္းမွ လူမ်ားအား ႏိုးေဆာင္စည္းရံုးရန္ ရည္ရြယ္ခ်က္ျဖင့္ က်င္းပျခင္းျဖစ္ပါသည္။</string>
     <string name ="dec_des">တ၀ါးကိုးကာမန္သည္ ယီမင္တြင္ အမ်ိဳးသမီးမ်ား၏ ေဘးကင္းလံုျခံဳေရးအတြက္ အၾကမ္းမဖက္ လႈပ္ရွားမႈမ်ားႏွင့္ ၿငိမ္းခ်မ္းေရးတည္ေဆာက္မႈလုပ္ငန္းမ်ားတြင္ အမ်ိဳးသမီးမ်ား အျပည့္အ၀ ပါ၀င္ေဆာင္ရြက္ခြင့္မ်ားအတြက္ လုပ္ေဆာင္ခ်က္မ်ားေၾကာင့္ ၂၀၁၁ခုႏွစ္တြင္ ၿငိမ္းခ်မ္းေရးႏိုဘယ္ဆုကို ခ်ီးျမႇင့္ျခင္း ခံခဲ့ရပါသည္။</string>
 
+    <string-array name="women_remember_day_desc_array">
+        <item>@string/jan_des</item>
+        <item>@string/feb_des</item>
+        <item>@string/mar_des</item>
+        <item>@string/apr_des</item>
+        <item>@string/may_des</item>
+        <item>@string/jun_des</item>
+        <item>@string/jul_des</item>
+        <item>@string/aug_des</item>
+        <item>@string/sep_des</item>
+        <item>@string/oct_des</item>
+        <item>@string/nov_des</item>
+        <item>@string/dec_des</item>
+    </string-array>
+
 </resources>

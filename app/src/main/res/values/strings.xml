@@ -623,5 +623,19 @@ Shirin Ebadi, J.D., was awarded the 2003 Nobel Peace Prize for her efforts to pr
     <string name="nov_des">1 out of 3 women worlwide have experienced physical or sexual violence. This International Day aim to raise public awareness and mobilizing people everywhere in the world to bring about change.</string>
     <string name="dec_des">Tawakkol Karman was awarded the Nobel Peace Prize in 2011 in recognition of her work in nonviolent struggle for the safety of women and for women’s rights to full participation in peacebuilding work in Yemen.</string>
 
+    <string-array name="women_remember_day_desc_array">
+        <item>@string/jan_des</item>
+        <item>@string/feb_des</item>
+        <item>@string/mar_des</item>
+        <item>@string/apr_des</item>
+        <item>@string/may_des</item>
+        <item>@string/jun_des</item>
+        <item>@string/jul_des</item>
+        <item>@string/aug_des</item>
+        <item>@string/sep_des</item>
+        <item>@string/oct_des</item>
+        <item>@string/nov_des</item>
+        <item>@string/dec_des</item>
+    </string-array>
 
 </resources>
