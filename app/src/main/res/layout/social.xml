@@ -29,7 +29,7 @@
         android:layout_weight="1"
         app:src="@drawable/ic_heart_rate_off_18dp"
         app:srcChecked="@drawable/ic_heart_rate_on_18dp"
-        app:text="100" />
+        app:text="0" />
 
     <org.undp_iwomen.iwomen.ui.widget.LikeButtonView
         android:layout_width="wrap_content"

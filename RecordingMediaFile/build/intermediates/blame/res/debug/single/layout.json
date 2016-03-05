@@ -40,12 +40,12 @@
         "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\RecordingMediaFile\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\layout\\abc_action_mode_close_item_material.xml"
     },
     {
-        "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\RecordingMediaFile\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_singlechoice_material.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\RecordingMediaFile\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\layout\\select_dialog_singlechoice_material.xml"
-    },
-    {
         "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\RecordingMediaFile\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_part_time.xml",
         "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\RecordingMediaFile\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\layout\\notification_template_part_time.xml"
+    },
+    {
+        "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\RecordingMediaFile\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_singlechoice_material.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\RecordingMediaFile\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\layout\\select_dialog_singlechoice_material.xml"
     },
     {
         "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\RecordingMediaFile\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view_list_item.xml",

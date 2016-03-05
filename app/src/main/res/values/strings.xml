@@ -365,8 +365,10 @@
     <string name="register_terms_greet1">Do You Agree With The Following </string>
     <string name="register_terms_greet2">Terms And Conditions?</string>
 
-    <string name="register_terms_body">Text body </string>
-    <string name="register_terms_link">www.iwomen.com</string>
+    <string name="register_terms_body">Our privacy policy and terms of use   are accepted if you download this app. See More at Our Website
+www.iwomenapp.org
+</string>
+    <string name="register_terms_link">www.iwomenapp.com</string>
 
     <!-- string resources used in Event Detail -->
 <string name="large_sample_text">"A material metaphor is the unifying theory of a rationalized space and a system of motion."
@@ -629,5 +631,19 @@ Shirin Ebadi, J.D., was awarded the 2003 Nobel Peace Prize for her efforts to pr
     <string name="str_ready_submit">Ready to Submit</string>
     <string name="str_already_uploaded">Already Uploaded</string>
 
+    <string-array name="women_remember_day_desc_array">
+        <item>@string/jan_des</item>
+        <item>@string/feb_des</item>
+        <item>@string/mar_des</item>
+        <item>@string/apr_des</item>
+        <item>@string/may_des</item>
+        <item>@string/jun_des</item>
+        <item>@string/jul_des</item>
+        <item>@string/aug_des</item>
+        <item>@string/sep_des</item>
+        <item>@string/oct_des</item>
+        <item>@string/nov_des</item>
+        <item>@string/dec_des</item>
+    </string-array>
 
 </resources>

@@ -95,6 +95,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity {
 
 
 
+        txtName.setVisibility(View.GONE);
 
         strLang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
         if(strLang.equals(Utils.ENG_LANG)){

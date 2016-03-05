@@ -59,6 +59,8 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
     private CustomTextView txt_tlg_key_skill_lbl;
     private CustomTextView txt_tlg_key_skill_txt;
 
+    private CustomTextView txt_bod_name;
+
     private ImageView img_tlg_ph_no;
     private ImageView img_tlg_viber_no;
     private ImageView img_tlg_fb_link;
@@ -139,6 +141,8 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
         tlgLogoImg = (RoundedImageView) findViewById(R.id.tlg_group_logo_img);
         profile_item_progressBar = (ProgressBar)findViewById(R.id.tlg_leader_profile_progressBar_profile_item);
         logo_progressBar = (ProgressBar)findViewById(R.id.tlg_group_logo_progressBar_profile_item);
+
+        txt_bod_name = (CustomTextView)findViewById(R.id.tlg_leader_profile_bod_username);
 
 
         img_tlg_ph_no.setOnClickListener(this);
@@ -566,6 +570,17 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
 
             txt_tlg_key_skill_lbl.setText(R.string.tlg_key_skill_lbl_mm);
             txt_tlg_key_skill_txt.setText(item.getTlgGroupKeySkillsMm());
+        }
+
+        if(item.getIsLeader() != null) {
+            Log.e("<<<TLG Leader>>","==>" +item.getIsLeader());
+            if (item.getIsLeader()) {
+                txt_bod_name.setVisibility(View.VISIBLE);
+            } else {
+                txt_bod_name.setVisibility(View.INVISIBLE);
+            }
+        }else{
+            txt_bod_name.setVisibility(View.INVISIBLE);
         }
 
         //Phone No

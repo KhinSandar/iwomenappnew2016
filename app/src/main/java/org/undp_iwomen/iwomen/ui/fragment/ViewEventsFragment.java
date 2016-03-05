@@ -71,11 +71,11 @@ public class ViewEventsFragment extends Fragment {
     int imonth;
 
 
-    public ViewEventsFragment(){
+    public ViewEventsFragment() {
         // Required empty public constructor
     }
 
-    public static ViewEventsFragment newInstance(){
+    public static ViewEventsFragment newInstance() {
 
         return new ViewEventsFragment();
     }
@@ -110,6 +110,7 @@ public class ViewEventsFragment extends Fragment {
         initViewsListeners();
         return rootView;
     }
+
     private boolean isLoading = true;
     private SKListView.Callbacks skCallbacks = new SKListView.Callbacks() {
         @Override
@@ -124,19 +125,20 @@ public class ViewEventsFragment extends Fragment {
 
         @Override
         public void onNextPageRequest() {
-            if(!isLoading){
+            if (!isLoading) {
                 getCalendarListByPagination();
             }
         }
     };
-    private void initViews(View rootView){
+
+    private void initViews(View rootView) {
         mContext = getActivity().getApplicationContext();
         sharePrefLanguageUtil = getActivity().getSharedPreferences(Utils.PREF_SETTING, Context.MODE_PRIVATE);
 
         lvCalendar = (SKListView) rootView.findViewById(R.id.view_events_list);
         mstr_lang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
         calendarEventArrayList = new ArrayList<>();
-        mEventAdapter = new EventAdapter(getActivity().getApplicationContext(),calendarEventArrayList, mstr_lang);
+        mEventAdapter = new EventAdapter(getActivity().getApplicationContext(), calendarEventArrayList, mstr_lang);
         lvCalendar.setAdapter(mEventAdapter);
         lvCalendar.setCallbacks(skCallbacks);
         lvCalendar.setNextPage(true);
@@ -149,24 +151,35 @@ public class ViewEventsFragment extends Fragment {
 
         mCreateEventButton = (Button) rootView.findViewById(R.id.view_events_create_event_button);
         txt_women_remember_day = (CustomTextView) rootView.findViewById(R.id.view_events_women_day_txt);
-        txt_date_title = (CustomTextView)rootView.findViewById(R.id.view_events_date_title);
+        txt_date_title = (CustomTextView) rootView.findViewById(R.id.view_events_date_title);
 
         Bundle bundle = getArguments();
         str_date = bundle.getString(STR_DATE);
         imonth = bundle.getInt(STR_MONTH);
         txt_women_remember_day.setText(getResources().getStringArray(R.array.women_remember_day_array)[imonth]);
         txt_date_title.setText(str_date);
-
+        txt_women_remember_day.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, EventDetailActivity.class);
+                intent.putExtra(EventDetailFragment.EXTRA_EVENT_TYPE, EventDetailFragment.TYPE_IMPLICIT);
+                intent.putExtra(EventDetailFragment.EXTRA_MONTH, imonth);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(intent);
+            }
+        });
 
         lvCalendar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Intent intent = new Intent(mContext, EventDetailActivity.class);
-                    intent.putExtra(EventDetailFragment.EXTRA_ID, calendarEventArrayList.get(position).getId());
-                    Log.e("<<View event detail>>>", "==>" + calendarEventArrayList.get(position).getId() +"/"+calendarEventArrayList.size());
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    mContext.startActivity(intent);
+                Intent intent = new Intent(mContext, EventDetailActivity.class);
+                intent.putExtra(EventDetailFragment.EXTRA_EVENT_TYPE, EventDetailFragment.TYPE_USER_DEFINED);
+                intent.putExtra(EventDetailFragment.EXTRA_ID, calendarEventArrayList.get(position).getId());
+                Log.e("<<View event detail>>>", "==>" + calendarEventArrayList.get(position).getId() + "/" + calendarEventArrayList.size());
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(intent);
 
 
             }
@@ -180,7 +193,7 @@ public class ViewEventsFragment extends Fragment {
 
     }
 
-    private void initViewsListeners(){
+    private void initViewsListeners() {
         mCreateEventButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -189,7 +202,8 @@ public class ViewEventsFragment extends Fragment {
             }
         });
     }
-    private void getCalendarListByPagination(){
+
+    private void getCalendarListByPagination() {
         if (Connection.isOnline(getActivity())) {
             isLoading = true;
             NetworkEngine.getInstance().getCalendarEvent(paginater, new Callback<List<CalendarEvent>>() {
@@ -198,10 +212,10 @@ public class ViewEventsFragment extends Fragment {
                     calendarEventArrayList.addAll(calendarEvents);
                     mEventAdapter.notifyDataSetChanged();
                     isLoading = false;
-                    if(calendarEventArrayList.size() == 12){
+                    if (calendarEventArrayList.size() == 12) {
                         lvCalendar.setNextPage(true);
                         paginater++;
-                    }else{
+                    } else {
                         // If no more item
                         lvCalendar.setNextPage(false);
                     }
@@ -246,10 +260,10 @@ public class ViewEventsFragment extends Fragment {
 */
 
 
-    private List<String> generateSampleEvents(){
+    private List<String> generateSampleEvents() {
         List<String> events = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
-            events.add("Meeting " + i+1);
+            events.add("Meeting " + i + 1);
         }
         return events;
     }

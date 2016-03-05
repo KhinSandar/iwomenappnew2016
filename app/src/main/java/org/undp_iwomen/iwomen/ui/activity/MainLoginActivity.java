@@ -1,7 +1,6 @@
 package org.undp_iwomen.iwomen.ui.activity;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
