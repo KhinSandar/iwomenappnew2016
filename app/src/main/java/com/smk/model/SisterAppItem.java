@@ -3,7 +3,9 @@ package com.smk.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class SisterAppItem {
+import java.io.Serializable;
+
+public class SisterAppItem implements Serializable{
 
 @SerializedName("id")
 @Expose

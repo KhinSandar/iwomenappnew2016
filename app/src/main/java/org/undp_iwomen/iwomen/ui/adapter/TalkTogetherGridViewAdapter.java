@@ -201,6 +201,7 @@ public class TalkTogetherGridViewAdapter extends BaseAdapter {
             holder.progressBar.setVisibility(View.GONE);
         }
 
+
         /*if (getItemViewType(position) == VIEW_TYPE_LOADING) {
             // display the last row
             return getFooterView(position, view, parent);

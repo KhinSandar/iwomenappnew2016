@@ -1,6 +1,5 @@
 package org.smk.iwomen;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,13 +11,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.thuongnh.zprogresshud.ZProgressHUD;
+
 import org.smk.application.TimeSubtractionUtil;
 import org.smk.application.TimeSubtractionUtil.Callback;
 import org.smk.clientapi.NetworkEngine;
 import org.smk.model.CompetitionQuestion;
 import org.smk.model.GroupUser;
 import org.smk.model.GroupUserList;
-
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 
@@ -42,6 +42,7 @@ public class CompetitionNewGameActivity extends BaseActionBarActivity {
 	private SharedPreferences mSharedPreferencesUserInfo;
 	private SharedPreferences.Editor mEditorUserInfo;
 	private String user_name, user_obj_id, user_ph;
+	private ZProgressHUD dialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +50,7 @@ public class CompetitionNewGameActivity extends BaseActionBarActivity {
 		setContentView(R.layout.activity_competition_new_game);
 		mSharedPreferencesUserInfo = getSharedPreferences(CommonConfig.SHARE_PREFERENCE_USER_INFO, MODE_PRIVATE);
 
-		user_obj_id = mSharedPreferencesUserInfo.getString(CommonConfig.USER_OBJ_ID, null);
+		user_obj_id = mSharedPreferencesUserInfo.getString(CommonConfig.USER_ID, null);
 
 		txt_question = (TextView)findViewById(R.id.txt_competition_question);
 		txt_question_desc = (TextView) findViewById(R.id.txt_competition_description);
@@ -129,15 +130,14 @@ public class CompetitionNewGameActivity extends BaseActionBarActivity {
 	}
 	
 	private void getCompetitionGroupUser(){
-		final ProgressDialog dialog = new ProgressDialog(this);
-		dialog.setMessage("Loading...");
+		dialog = new ZProgressHUD(this);
 		dialog.show();
 		NetworkEngine.getInstance().getCompetitionGroupUser("", user_obj_id, competitionQuestion.getId(), new retrofit.Callback<List<GroupUser>>() {
 
 			@Override
 			public void failure(RetrofitError arg0) {
 				// TODO Auto-generated method stub
-				dialog.dismiss();
+				dialog.dismissWithFailure();
 			}
 
 			@Override
@@ -147,7 +147,7 @@ public class CompetitionNewGameActivity extends BaseActionBarActivity {
 				bundle.putString("competition_question", new Gson().toJson(competitionQuestion));
 				bundle.putString("competition_group", new Gson().toJson(new GroupUserList(arg0)));
 				startActivity(new Intent(getApplicationContext(), CompetitionGroupUserActivity.class).putExtras(bundle));
-				dialog.dismiss();
+				dialog.dismissWithSuccess();
 			}
 		});
 	}

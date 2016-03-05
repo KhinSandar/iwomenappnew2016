@@ -29,6 +29,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.smk.skconnectiondetector.SKConnectionDetector;
 import com.smk.sklistview.SKListView;
 import com.thuongnh.zprogresshud.ZProgressHUD;
@@ -179,6 +180,7 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
                     Intent intent = new Intent(mContext, PostDetailActivity.class);
 
                     intent.putExtra("post_id", iWomenPostList.get(position).getId());
+                    intent.putExtra("postObj", new Gson().toJson(parent.getAdapter().getItem(position)));
 
                     //intent.putExtra("ImgUrl", mImgurl.get(getPosition()));
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -1321,7 +1323,7 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
         if (Connection.isOnline(mContext)) {
 
             isLoading = true;
-            NetworkEngine.getInstance().getIWomenPostByDateByPagination(paginater,"Most Like", true, new Callback<List<IWomenPost>>() {
+            NetworkEngine.getInstance().getIWomenPostByDateByPagination(paginater,"Most Like", 1, new Callback<List<IWomenPost>>() {
                 @Override
                 public void success(List<IWomenPost> iWomenPosts, Response response) {
                     // Only first REQUEST that visible
@@ -1331,7 +1333,6 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
                     }
 
                     iWomenPostList.addAll(iWomenPosts);
-
                     stories.notifyDataSetChanged();
 
                     StoreUtil.getInstance().saveTo("stories_most_like", iWomenPostList);

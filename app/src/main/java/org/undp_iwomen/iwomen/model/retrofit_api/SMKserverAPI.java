@@ -55,7 +55,7 @@ public class SMKserverAPI {
         final RestAdapter restAdapter = new
                 RestAdapter.Builder().setLogLevel(RestAdapter.LogLevel.BASIC)
                 .setLogLevel(RestAdapter.LogLevel.FULL)
-                .setEndpoint(CommonConfig.BASE_URL)
+                .setEndpoint(CommonConfig.BASE_SMK_URL)
 
                 .setRequestInterceptor(requestInterceptor)
                 .setClient(new OkClient(okHttpClient))

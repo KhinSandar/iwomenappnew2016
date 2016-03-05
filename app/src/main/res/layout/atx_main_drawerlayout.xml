@@ -46,13 +46,15 @@
                         android:layout_width="@dimen/feed_item_profile_pic"
                         android:layout_height="@dimen/feed_item_profile_pic">
 
-                        <org.undp_iwomen.iwomen.ui.widget.ProfilePictureView
+                        <!--<org.undp_iwomen.iwomen.ui.widget.ProfilePictureView
                             android:id="@+id/profilePicture"
                             android:layout_width="@dimen/feed_item_profile_pic"
                             android:layout_height="@dimen/feed_item_profile_pic"
                             android:scaleType="fitXY"
                             android:src="@drawable/place_holder"
-                            android:visibility="gone"></org.undp_iwomen.iwomen.ui.widget.ProfilePictureView>
+                            android:visibility="gone">
+
+                        </org.undp_iwomen.iwomen.ui.widget.ProfilePictureView>-->
 
                         <com.makeramen.RoundedImageView
                             xmlns:app="http://schemas.android.com/apk/res-auto"

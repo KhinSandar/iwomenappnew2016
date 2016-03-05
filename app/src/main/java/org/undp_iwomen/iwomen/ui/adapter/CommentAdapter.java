@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.algo.hha.emojiicon.EmojiconTextView;
 import com.makeramen.RoundedImageView;
+import com.smk.model.CommentItem;
 import com.squareup.picasso.Picasso;
 
 import org.undp_iwomen.iwomen.R;
@@ -26,7 +27,7 @@ public class CommentAdapter extends BaseAdapter {
     List<com.smk.model.CommentItem> datalist;
     Activity mActivity;
 
-    public CommentAdapter(Context context, List<com.smk.model.CommentItem> dl){
+    public CommentAdapter(Context context, List<CommentItem> dl){
         this.datalist = dl;
         mActivity = (Activity) context;
     }
@@ -37,7 +38,7 @@ public class CommentAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int i) {
+    public CommentItem getItem(int i) {
         return this.datalist.get(i);
     }
 
@@ -132,7 +133,7 @@ public class CommentAdapter extends BaseAdapter {
 
         vh.tv_name.setText(datalist.get(i).getUserName());
         vh.tv_message.setText(datalist.get(i).getCommentContents());
-        vh.tv_timestamp.setText(datalist.get(i).getCommentCreatedTime());
+        vh.tv_timestamp.setText(datalist.get(i).getHumanCreatedAt());
 
         return view;
     }

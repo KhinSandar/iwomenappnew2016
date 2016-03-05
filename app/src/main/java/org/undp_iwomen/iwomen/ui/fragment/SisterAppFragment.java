@@ -25,10 +25,12 @@ import com.pnikosis.materialishprogress.ProgressWheel;
 import com.smk.model.SisterAppItem;
 import com.smk.skconnectiondetector.SKConnectionDetector;
 import com.smk.sklistview.SKListView;
+import com.thuongnh.zprogresshud.ZProgressHUD;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.smk.application.StoreUtil;
 import org.smk.clientapi.NetworkEngine;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.model.Helper;
@@ -64,7 +66,7 @@ public class SisterAppFragment extends Fragment {
     private TextView txt_gen_link;
     private TextView txt_undp_link;
     private StorageUtil storageUtil;
-
+    private ZProgressHUD zPDialog;
 
     //private ProgressDialog mProgressDialog;
 
@@ -124,8 +126,25 @@ public class SisterAppFragment extends Fragment {
         lv_sister.setNextPage(true);
         sisterAppListAdapter.notifyDataSetChanged();
 
-        getSisterListPaginationFromSever();
 
+        List<SisterAppItem> sisterAppItems = StoreUtil.getInstance().selectFrom("SisterAppList");
+        if (Connection.isOnline(mContext)){
+            // Showing local data while loading from internet
+            if(sisterAppItems != null && sisterAppItems.size() > 0){
+                sisterAppItemList.addAll(sisterAppItems);
+                sisterAppListAdapter.notifyDataSetChanged();
+                zPDialog = new ZProgressHUD(getActivity());
+                zPDialog.show();
+            }
+            getSisterListPaginationFromSever();
+        }else{
+            SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
+            if(sisterAppItems != null){
+                sisterAppItemList.clear();
+                sisterAppItemList.addAll(sisterAppItems);
+                sisterAppListAdapter.notifyDataSetChanged();
+            }
+        }
 
 
         txt_gen_link = (TextView) rootView.findViewById(R.id.sister_app_gen_txt);
@@ -183,10 +202,16 @@ public class SisterAppFragment extends Fragment {
             NetworkEngine.getInstance().getSisterAppByPagination(paginater, new Callback<List<SisterAppItem>>() {
                 @Override
                 public void success(List<com.smk.model.SisterAppItem> sisterAppItems, Response response) {
+                    // Only first REQUEST that visible
+                    if(zPDialog != null && zPDialog.isShowing()){
+                        sisterAppItemList.clear();
+                        zPDialog.dismissWithSuccess();
+                    }
                     sisterAppItemList.addAll(sisterAppItems);
                     sisterAppListAdapter.notifyDataSetChanged();
                     progress.setVisibility(View.INVISIBLE);
                     isLoading = false;
+                    StoreUtil.getInstance().saveTo("SisterAppList", sisterAppItemList);
                     if (sisterAppItems.size() == 12) {
                         lv_sister.setNextPage(true);
                         paginater++;

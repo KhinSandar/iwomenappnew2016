@@ -13,12 +13,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import com.google.gson.Gson;
 import com.makeramen.RoundedImageView;
-import org.smk.iwomen.BaseActionBarActivity;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.smk.iwomen.BaseActionBarActivity;
+import org.smk.model.TLGTownship;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.data.TlgProfileItem;
 import org.undp_iwomen.iwomen.model.MyTypeFace;
@@ -72,6 +74,7 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
 
     String tlgLeaderPhno;
     String tlgLeaderFbLink;
+    private TLGTownship tlgTownship;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,9 +82,12 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
         setContentView(R.layout.activity_user_tlg_profile);
 
         Bundle bundle = getIntent().getExtras();
-        tlgName = bundle.getString("TLGName");
-        tlgId = bundle.getString("TLGID");
-        tlgAddress = bundle.getString("TLGAddress");
+        if(bundle != null){
+            tlgTownship = new Gson().fromJson(bundle.getString("tlgObj"), TLGTownship.class);
+        }
+        tlgName = tlgTownship.getTlgGroupName();
+        //tlgId = tlgTownship.getId();
+        tlgAddress = tlgTownship.getTlgGroupAddress();
         mContext = getApplicationContext();
         Log.e("tlgId", "===>" + tlgId + "///" + tlgName);
         sharePrefLanguageUtil = getSharedPreferences(Utils.PREF_SETTING, Context.MODE_PRIVATE);
@@ -139,17 +145,19 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
         img_tlg_viber_no.setOnClickListener(this);
         img_tlg_viber_no.setOnClickListener(this);
 
-        /*if(strLang.equals(Utils.ENG_LANG)) {
-            setEnglishFont();
-        }else if(strLang.equals(Utils.MM_LANG)){
-            setMyanmarFont();
-        }*/
+
 
         clearData();
 
-        getTLGDetailByIdFromSever();
+
+        setTLgDetailItem(tlgTownship);
+        //getTLGDetailByIdFromSever();
+
+
 
     }
+
+
 
     private void clearData(){
         txt_tlg_group_name.setText("");
@@ -475,7 +483,7 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
                             item.setTlgGroupKeySkillsMm("");
                         }
 
-                        setTLgDetailItem(item);
+                        //setTLgDetailItem(item);
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -503,14 +511,12 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
         }
     }
 
-    private void setTLgDetailItem(TlgProfileItem item) {
+    private void setTLgDetailItem(TLGTownship item) {
         if(strLang.equals(Utils.ENG_LANG)) {
-            textViewTitle.setText(item.get_tlg_group_name());
+            textViewTitle.setText(item.getTlgGroupName());
+            txt_tlg_group_name.setText(item.getTlgGroupName());
 
-            txt_tlg_group_name.setText(item.get_tlg_group_name());
-
-
-            txt_tlg_group_address.setText(item.get_tlg_group_address());
+            txt_tlg_group_address.setText(item.getTlgGroupAddress());
 
 
 
@@ -535,12 +541,12 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
 
         }else {
 
-            textViewTitle.setText(item.get_tlg_group_name_mm());
+            textViewTitle.setText(item.getTlgGroupNameMm());
 
-            txt_tlg_group_name.setText(item.get_tlg_group_name_mm());
+            txt_tlg_group_name.setText(item.getTlgGroupNameMm());
 
 
-            txt_tlg_group_address.setText(item.get_tlg_group_address_mm());
+            txt_tlg_group_address.setText(item.getTlgGroupAddressMm());
 
 
 
@@ -566,13 +572,13 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
         tlgLeaderPhno = item.getTlgLeaderPh();
         tlgLeaderFbLink = item.getTlgLeaderFbLink();
         //TODO Picaso calling
-        if (item.getTlgLogoImg() != null && !item.getTlgLogoImg().isEmpty()) {
+        if (item.getTlgGroupLogo() != null && !item.getTlgGroupLogo().isEmpty()) {
             try {
 
                 logo_progressBar.setVisibility(View.VISIBLE);
 
                 Picasso.with(mContext)
-                        .load(item.getTlgLogoImg()) //"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
+                        .load(item.getTlgGroupLogo()) //"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
                         .placeholder(R.drawable.place_holder)
                         .error(R.drawable.place_holder)
                         .into(tlgLogoImg, new ImageLoadedCallback(logo_progressBar) {

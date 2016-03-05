@@ -3,6 +3,7 @@ package org.undp_iwomen.iwomen.ui.activity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -12,9 +13,11 @@ import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.BaseColumns;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.Spannable;
@@ -24,17 +27,14 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.algo.hha.emojiicon.EmojiconEditText;
 import com.algo.hha.emojiicon.EmojiconGridView;
@@ -54,20 +54,24 @@ import com.facebook.share.model.ShareContent;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareButton;
 import com.facebook.share.widget.ShareDialog;
+import com.google.gson.Gson;
 import com.makeramen.RoundedImageView;
 import com.smk.skconnectiondetector.SKConnectionDetector;
 import com.smk.sklistview.SKListView;
 import com.squareup.picasso.Picasso;
+import com.thuongnh.zprogresshud.ZProgressHUD;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.smk.application.StoreUtil;
 import org.smk.clientapi.NetworkEngine;
 import org.smk.iwomen.BaseActionBarActivity;
+import org.smk.model.CalendarEvent;
 import org.smk.model.IWomenPost;
+import org.smk.model.Sticker;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
-import org.undp_iwomen.iwomen.data.CategoriesDataModel;
 import org.undp_iwomen.iwomen.data.FeedItem;
 import org.undp_iwomen.iwomen.database.TableAndColumnsName;
 import org.undp_iwomen.iwomen.model.Helper;
@@ -77,6 +81,7 @@ import org.undp_iwomen.iwomen.model.TextWatcherAdapter;
 import org.undp_iwomen.iwomen.model.TimeDiff;
 import org.undp_iwomen.iwomen.model.URLSpanNoUnderline;
 import org.undp_iwomen.iwomen.model.retrofit_api.CommentAPI;
+import org.undp_iwomen.iwomen.model.retrofit_api.SMKserverAPI;
 import org.undp_iwomen.iwomen.model.retrofit_api.UserPostAPI;
 import org.undp_iwomen.iwomen.provider.IwomenProviderData;
 import org.undp_iwomen.iwomen.ui.adapter.CommentAdapter;
@@ -85,6 +90,7 @@ import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.ui.widget.ProgressWheel;
 import org.undp_iwomen.iwomen.ui.widget.ResizableImageView;
 import org.undp_iwomen.iwomen.ui.widget.WrappedGridView;
+import org.undp_iwomen.iwomen.ui.widget.animatedbutton.AnimatedButton;
 import org.undp_iwomen.iwomen.utils.Connection;
 import org.undp_iwomen.iwomen.utils.StorageUtil;
 import org.undp_iwomen.iwomen.utils.Utils;
@@ -134,7 +140,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     private LinearLayout ly_likes_button;
     private ImageView img_like;
     private TextView txt_like_count, txt_cmd_count;
-    private String postId, like_status;
+    private String postId, postObjId, like_status;
     //private TextView txt_simile_emoji_icon;
     private EmojiconEditText et_comment;
     //FrameLayout et_comment_frame;
@@ -142,7 +148,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
     private ImageView img_viber_share;
     private ImageView img_download;
-    private ImageView img_player;
+    //private ImageView img_player;
     private TextView txt_player;
     private TextView txt_download;
 
@@ -151,8 +157,9 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     private ProgressBar progressBar_credit;
     private LinearLayout ly_credit;
 
+    private AnimatedButton mLikeAnimatedButton;
 
-    private CustomTextView txt_lbl_like_post, txt_lbl_share_post;
+    //private CustomTextView txt_lbl_like_post, txt_lbl_share_post;
 
     private LinearLayout ly_postdetail_share_button;
     private LinearLayout ly_postdetail_download;
@@ -160,7 +167,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     private LinearLayout ly_media_main;
 
     //TODO Comment
-    SKListView listView_Comment;
+    ListView listView_Comment;
     private int paginater = 1;
     private List<com.smk.model.CommentItem> listComment;
     private CommentAdapter adapter;
@@ -177,13 +184,15 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     private final String PENDING_ACTION_BUNDLE_KEY =
             "org.undp_iwomen.iwomen.app:PendingAction";
     private PendingAction pendingAction = PendingAction.NONE;
+    private IWomenPost iWomenPost;
+    private boolean alreadySticker = false;
+    private AnimatedButton mSocialNoEarLikeAnimatedButton;
 
     private enum PendingAction {
         NONE,
         POST_PHOTO,
         POST_STATUS_UPDATE
     }
-
 
     //Emoji Keyboard
     public ImageView emojiIconToggle;
@@ -193,14 +202,12 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     //Sticker LinearLayout
     private LinearLayout ly_sticker_holder;
 
-    private StickerGridViewAdapter mAdapter;
-
-
     //TODO for sticker grid show up
+    private StickerGridViewAdapter mAdapter;
     private WrappedGridView gridView;
-
-    private ArrayList<CategoriesDataModel> CategoriesModelList;
-    com.pnikosis.materialishprogress.ProgressWheel progress_wheel;
+    private List<Sticker> stickerArrayList;
+    private int sticker_paginater = 1;
+    private com.pnikosis.materialishprogress.ProgressWheel progress_wheel;
     private StorageUtil storageUtil;
 
 
@@ -222,6 +229,19 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     String cmd_count = "0";
     String authorID;
     private String userprofile_Image_path;
+
+    //TODO social share
+    private CustomTextView txt_social_share;
+
+    //TODO Social With No earing
+    private TextView txt_social_no_ear_like;
+    private TextView txt_social_no_ear_comment;
+    private TextView txt_social_no_ear_share;
+    private ImageView img_social_no_ear_fb;
+    private ImageView img_social_no_ear_viber;
+    private ZProgressHUD zPDialog;
+
+
 
     //New UI
     ImageView img_social_facebook;
@@ -323,7 +343,6 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         gridView.setLoadingView(progress_wheel);
 
         storageUtil = StorageUtil.getInstance(getApplicationContext());
-        LoadStickerData();
 
 
     }
@@ -343,13 +362,9 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
         mSharedPreferencesUserInfo = getSharedPreferences(CommonConfig.SHARE_PREFERENCE_USER_INFO, Context.MODE_PRIVATE);
 
-        if (!mSharedPreferencesUserInfo.getBoolean(CommonConfig.IS_LOGIN, false)) {
 
-        } else {
-            user_name = mSharedPreferencesUserInfo.getString(CommonConfig.USER_NAME, null);
-            user_obj_id = mSharedPreferencesUserInfo.getString(CommonConfig.USER_OBJ_ID, null);
-
-        }
+        user_name = mSharedPreferencesUserInfo.getString(CommonConfig.USER_NAME, null);
+        user_obj_id = mSharedPreferencesUserInfo.getString(CommonConfig.USER_OBJ_ID, null);
         userprofile_Image_path = mSharedPreferencesUserInfo.getString(CommonConfig.USER_IMAGE_PATH, null);
 
 
@@ -371,7 +386,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         feed_item_progressBar = (ProgressBar) findViewById(R.id.postdetail_feed_item_progressBar);
         profile_item_progressBar = (ProgressBar) findViewById(R.id.postdetail_progressBar_profile_item);
 
-        listView_Comment = (SKListView) findViewById(R.id.postdetail_comment_listview);
+        listView_Comment = (ListView) findViewById(R.id.postdetail_comment_listview);
         ly_likes_button = (LinearLayout) findViewById(R.id.postdetail_like_button);
         //img_like = (ImageView) findViewById(R.id.postdetail_like_txt);
         txt_like_count = (TextView) findViewById(R.id.postdetail_like_count);
@@ -382,7 +397,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         //et_comment_frame = (FrameLayout) findViewById(R.id.emojicons);
         img_comment_submit = (ImageView) findViewById(R.id.postdetail_submit_comment);
 
-        img_viber_share = (ImageView) findViewById(R.id.postdetail_viber_img);
+
         ly_postdetail_share_button = (LinearLayout) findViewById(R.id.postdetail_share_button);
 
         ly_postdetail_download = (LinearLayout) findViewById(R.id.detail_ly_download);
@@ -390,7 +405,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         ly_media_main = (LinearLayout) findViewById(R.id.detail_ly_media_main);
         ly_sticker_holder = (LinearLayout) findViewById(R.id.postdetail_ly_sticker_holder);
 
-        img_player = (ImageView) findViewById(R.id.postdetail_img_player);
+        //img_player = (ImageView) findViewById(R.id.postdetail_img_player);
         txt_player = (TextView) findViewById(R.id.postdetail_player_text);
         emojiIconToggle = (ImageView) findViewById(R.id.toggleEmojiIcon);
         stickerImg = (RoundedImageView) findViewById(R.id.postdetail_img_sticker);
@@ -409,24 +424,48 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         ly_credit = (LinearLayout) findViewById(R.id.postdetail_ly_credit);
         img_social_facebook = (ImageView) findViewById(R.id.social_facebook);
 
+        txt_social_share =(CustomTextView) findViewById(R.id.social_share);
+        img_viber_share = (ImageView) findViewById(R.id.social_viber);
+
+        //TODO Social With No earing
+        txt_social_no_ear_like =(TextView) findViewById(R.id.social_no_ear_like_txt);
+        mSocialNoEarLikeAnimatedButton = (AnimatedButton) findViewById(R.id.social_no_ear_like_animated_button);
+        txt_social_no_ear_comment =(TextView) findViewById(R.id.social_no_ear_comment_txt);
+        txt_social_no_ear_share =(TextView) findViewById(R.id.social_no_ear_share_txt);
+        img_social_no_ear_fb = (ImageView) findViewById(R.id.social_no_ear_share_img);
+        img_social_no_ear_viber = (ImageView) findViewById(R.id.social_no_ear_viber_img);
+
         strLang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
 
+        mLikeAnimatedButton = (AnimatedButton) findViewById(R.id.postdetail_like_animated_button);
+        //mLikeAnimatedButton.setText(102 + "");
         //TODO id
         Intent i = getIntent();
-        postId = "73";// i.getStringExtra("post_id");
-        //Log.e("<<<<PostID 22 at Detail>>>>","===>" + postId);
+
+        Bundle bundle = getIntent().getExtras();
+        if(bundle != null){
+            iWomenPost = new Gson().fromJson(bundle.getString("postObj"), IWomenPost.class);
+        }
+        postId = iWomenPost.getId().toString();// i.getStringExtra("post_id");
+        postObjId = iWomenPost.getObjectId();
+
+        Log.e("<<<<PostID 22 at Detail>>>>","===>" + iWomenPost.getId().toString() + iWomenPost.getObjectId());
 
         //TODO for Comment
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            listView_Comment.setNestedScrollingEnabled(true);
+        }
+
+
         listComment = new ArrayList<>();
         adapter = new CommentAdapter(PostDetailActivity.this, listComment);
         listView_Comment.setAdapter(adapter);
-        listView_Comment.setCallbacks(skCallbacks);
-        listView_Comment.setNextPage(true);
         adapter.notifyDataSetChanged();
-        getCommentByPagination();
 
 
-        if (postId != null) {
+        setPostItem(iWomenPost);
+        /*if (postId != null) {
 
             if (Connection.isOnline(getApplicationContext())) {
 
@@ -434,12 +473,12 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
             } else {
                 //TODO  showing Local data , before update from server by Id
-                //getLocalPostDetail(postId);
+                setPostItem(iWomenPost);//
             }
 
         } else {
             Utils.doToastEng(this, "Nothing to show!");
-        }
+        }*/
 
         shareButton.setShareContent(getLinkContent());
 
@@ -447,11 +486,15 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         //ly_likes_button.setOnClickListener(this);
         //txt_simile_emoji_icon.setOnClickListener(this);
         img_comment_submit.setOnClickListener(this);
-        //img_viber_share.setOnClickListener(this);
+        img_viber_share.setOnClickListener(this);
         //ly_postdetail_share_button.setOnClickListener(this);
         postIMg.setOnClickListener(this);
         img_social_facebook.setOnClickListener(this);
+        txt_social_no_ear_share.setOnClickListener(this);
+        img_social_no_ear_fb.setOnClickListener(this);
+        img_social_no_ear_viber.setOnClickListener(this);
 
+        txt_social_share.setOnClickListener(this);
         /*ly_postdetail_audio.setOnClickListener(this);
         ly_postdetail_download.setOnClickListener(this);
         video_icon.setOnClickListener(this);*/
@@ -461,7 +504,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
 
             if (mstrPostType.equalsIgnoreCase("Video")) {
-                img_player.setOnClickListener(new View.OnClickListener() {
+                txt_player.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Intent intent = new Intent(mContext, YouTubeWebviewActivity.class);
@@ -524,7 +567,8 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                 public void success(IWomenPost iWomenPost, Response response) {
 
                     setPostItem(iWomenPost);//
-
+                    //TODO comment after finish this Detail Post thread
+                    //getCommentByPagination();
 
 
                 }
@@ -604,7 +648,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                 video_icon.setVisibility(View.GONE);
                 ly_media_main.setVisibility(View.VISIBLE);
                 isPlaying = false;
-                img_player.setImageResource(R.drawable.ic_headset_grey600_48dp);
+                txt_player.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(this, R.drawable.ic_headset_grey600_48dp), null, null, null);
                 txt_player.setText(R.string.detail_listen_text_eng);
 
             } else if (item.getContentType().equalsIgnoreCase("Video")) {
@@ -612,7 +656,8 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                 video_icon.setVisibility(View.VISIBLE);
                 ly_media_main.setVisibility(View.VISIBLE);
 
-                img_player.setImageResource(R.drawable.ic_watch_now);
+                txt_player.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(this, R.drawable.ic_watch_now), null, null, null);
+
                 txt_player.setText(R.string.detail_play_text_eng);
 
                 isPlaying = true;
@@ -633,10 +678,17 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
             mPostTile.setText(item.getTitle());
             post_content.setText(item.getContent());
             et_comment.setHint(R.string.post_detail_comment_eng);
+
             txt_like_count.setText(item.getLikes() + "");
+            mLikeAnimatedButton.setText(item.getLikes() + "");
+
+            txt_social_no_ear_like.setText(item.getLikes() + "");
+            mSocialNoEarLikeAnimatedButton.setText(item.getLikes() + "");
+
 
 
             txt_cmd_count.setText(item.getCommentCount() + "");
+            txt_social_no_ear_comment.setText(item.getCommentCount() + "");
             //txt_lbl_share_post.setText(item.getShareCount() + R.string.post_detail_share_post_eng);
 
             et_comment.setTypeface(MyTypeFace.get(this, MyTypeFace.NORMAL));
@@ -686,14 +738,14 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                 ly_media_main.setVisibility(View.VISIBLE);
                 video_icon.setVisibility(View.GONE);
                 isPlaying = false;
-                img_player.setImageResource(R.drawable.ic_headset_grey600_48dp);
+                txt_player.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(this, R.drawable.ic_headset_grey600_48dp), null, null, null);
                 txt_player.setText(R.string.detail_listen_text_mm);
 
             } else if (item.getContentType().equalsIgnoreCase("Video")) {
                 postdetail_username.setText("");
                 ly_media_main.setVisibility(View.VISIBLE);
                 video_icon.setVisibility(View.VISIBLE);
-                img_player.setImageResource(R.drawable.ic_watch_now);
+                txt_player.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(this, R.drawable.ic_watch_now), null, null, null);
                 txt_player.setText(R.string.detail_play_text_mm);
 
                 isPlaying = true;
@@ -775,9 +827,13 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
             img_like.setImageResource(R.drawable.like_fill);
         }*/
         txt_like_count.setText(item.getLikes() + "");
+        mLikeAnimatedButton.setText(item.getLikes() + "");
 
+        txt_social_no_ear_like.setText(item.getLikes() + "");
+        mSocialNoEarLikeAnimatedButton.setText(item.getLikes() + "");
 
         txt_cmd_count.setText(item.getCommentCount() + "");
+        txt_social_no_ear_comment.setText(item.getCommentCount() + "");
         if (item.getCreditLogoUrl() != null && !item.getCreditLogoUrl().isEmpty()) {
             try {
                 img_credit_logo.setVisibility(View.VISIBLE);
@@ -803,7 +859,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
             img_credit_logo.setVisibility(View.GONE);
             profile.setImageResource(R.drawable.blank_profile);
 
-            profile_item_progressBar.setVisibility(View.GONE);
+            progressBar_credit.setVisibility(View.GONE);
         }
 
         //viewHolder.mCatNameTextView.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
@@ -833,7 +889,6 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         } else {
 
             profile.setImageResource(R.drawable.blank_profile);
-
             profile_item_progressBar.setVisibility(View.GONE);
         }
 
@@ -865,58 +920,62 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
             postIMg.setVisibility(View.GONE);
             feed_item_progressBar.setVisibility(View.GONE);
         }
+
+
+
+        final List<com.smk.model.CommentItem> comment = StoreUtil.getInstance().selectFrom("commentlist");
+        if (Connection.isOnline(mContext)){
+            // Showing local data while loading from internet
+            if(comment != null && comment.size() > 0){
+                listComment.addAll(comment);
+                adapter.notifyDataSetChanged();
+                zPDialog = new ZProgressHUD(this);
+                zPDialog.show();
+            }
+
+            getCommentByPagination();
+        }else{
+            SKConnectionDetector.getInstance(this).showErrorMessage();
+            if(comment != null){
+                listComment.clear();
+                listComment.addAll(comment);
+                adapter.notifyDataSetChanged();
+            }
+        }
     }
 
     public void LoadStickerData() {
         if (Connection.isOnline(getApplicationContext())) {
 
-            //Parameter
+            SMKserverAPI.getInstance().getService().getStickersByPagination(sticker_paginater, new Callback<List<Sticker>>() {
+                @Override
+                public void success(List<Sticker> stickers, Response response) {
+                    alreadySticker = true;
+                    stickerArrayList = new ArrayList<Sticker>();
+                    stickerArrayList.addAll(stickers);
+                    if (mAdapter == null) {
+                        mAdapter = new StickerGridViewAdapter(PostDetailActivity.this, mContext, stickerArrayList);
 
+                    }
+                    //sticker_paginater++;
+                    progress_wheel.setVisibility(View.GONE);
+                    gridView.setAdapter(mAdapter);
+                    StoreUtil.getInstance().saveTo("StickersList", stickerArrayList);
+                    mAdapter.notifyDataSetChanged();
+                }
 
-            CategoriesModelList = new ArrayList<CategoriesDataModel>();
-
-
-            CategoriesDataModel cat_model0 = new CategoriesDataModel("0", "Calendar", "http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-06f18fed-199e-4aa8-8e56-74475674cf84-applause-to-the-woman.png");
-            CategoriesModelList.add(cat_model0);
-
-
-            CategoriesDataModel cat_model = new CategoriesDataModel("1", "Activities", "http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-b06f0901-87c3-4f89-b52e-39eecf7f4fa5-unity-is-strength.png");
-            CategoriesModelList.add(cat_model);
-            CategoriesDataModel cat_model2 = new CategoriesDataModel("2", "Livelihood", "http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-b0069850-941d-460c-85f6-5c8631abca4f-lets-go.png");
-            CategoriesModelList.add(cat_model2);
-
-            CategoriesDataModel cat_model3 = new CategoriesDataModel("3", "Q&A", "http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-760c37e9-f739-4222-992c-d0f2232a61fa-dun-believe-the-rumour.png");
-            CategoriesModelList.add(cat_model3);
-
-            CategoriesDataModel cat_model4 = new CategoriesDataModel("4", "Sample", "http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-06f18fed-199e-4aa8-8e56-74475674cf84-applause-to-the-woman.png");
-            CategoriesModelList.add(cat_model4);
-
-            CategoriesDataModel cat_model5 = new CategoriesDataModel("4", "Sample", "http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-06f18fed-199e-4aa8-8e56-74475674cf84-applause-to-the-woman.png");
-            CategoriesModelList.add(cat_model5);
-
-
-            if (mAdapter == null) {
-                mAdapter = new StickerGridViewAdapter(this, mContext, CategoriesModelList);
-
-            }
-            storageUtil.SaveArrayListToSD("Categories", CategoriesModelList);
-
-            //mAdapter.notifyDataSetChanged();
-            //progressBar.setVisibility(View.GONE);
-            progress_wheel.setVisibility(View.GONE);
-            gridView.setAdapter(mAdapter);
+                @Override
+                public void failure(RetrofitError error) {
+                    progress_wheel.setVisibility(View.GONE);
+                }
+            });
 
 
         } else {
-
-            //Log.e("Categories API data", "Network failure case case");
-            Toast.makeText(mContext, "Check your network connection", Toast.LENGTH_SHORT).show();
-
-            CategoriesModelList = (ArrayList<CategoriesDataModel>) storageUtil.ReadArrayListFromSD("Categories");
-
-            if (CategoriesModelList.size() > 0) {
-                mAdapter = new StickerGridViewAdapter(this, mContext, CategoriesModelList);
-                //mAdapter = new CategoryGridViewAdapter(getActivity(),ctx, (ArrayList<CategoriesDataModel>) createItems(0) );//CategoriesModelList
+            SKConnectionDetector.getInstance(this).showErrorMessage();
+            List<Sticker> stickers = StoreUtil.getInstance().selectFrom("StickersList");
+            if (stickers.size() > 0) {
+                mAdapter = new StickerGridViewAdapter(this, mContext, stickers);
                 gridView.setAdapter(mAdapter);
             }
 
@@ -926,7 +985,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
             public void onItemClick(AdapterView<?> arg0, View arg1, int position,
                                     long arg3) {
-                Toast.makeText(mContext, mAdapter.getItem(position), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mContext, mAdapter.getItem(position), Toast.LENGTH_SHORT).show();
 
                 //popup.dismiss();
                 ly_sticker_holder.setVisibility(View.GONE);
@@ -934,79 +993,43 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                 inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
 
                 et_comment.setFocusableInTouchMode(false);
-                /*Intent i = new Intent(ctx, TLGUserStoriesRecentFragment.class);
 
 
 
 
-                i.putExtra("limit" , 20);
-                i.putExtra("catId", CategoriesModelList.get(position).category_id);
-                i.putExtra("catName",CategoriesModelList.get(position).category);
-
-                startActivity(i);*/
-
-
-                mProgressDialog.show();
-                Utils.doToastEng(getApplicationContext(), "Comment");
-                //TODO COMMENT PSOT
-                /*commentParse = new Comment();
+                String cmt_text = null;
                 if (et_comment.length() != 0) {
-                    commentParse.setcomment_contents(et_comment.getText().toString());
+                     cmt_text = et_comment.getText().toString();
                 }
+                //TODO it is not postId , it is postObj id
 
-                commentParse.setUserId(user_obj_id);
+                if(userprofile_Image_path != null){
 
-                if (userprofile_Image_path != null) {
-                    commentParse.setUserImgPathName(userprofile_Image_path);
+                }else{
+                    userprofile_Image_path ="http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-7f0323bc-a862-4184-9e51-d55189fcab18-ic_launcher.png";
                 }
-
-                commentParse.setStickerImgPathName(CategoriesModelList.get(position).getImage_path());
-
-                commentParse.setUserName(user_name);
-                commentParse.setpostId(postId);
-
-                commentParse.setcomment_created_time(new Date());
-                *//**Very Important *//*
-                ParseACL groupACL = new ParseACL();
-
-
-                groupACL.setPublicReadAccess(true);
-
-                commentParse.setACL(groupACL);
-                commentParse.saveInBackground(new SaveCallback() {
+                SMKserverAPI.getInstance().getService().postCommentByPostID(postObjId, user_obj_id, user_name, stickerArrayList.get(position).getStickerImgPath(), userprofile_Image_path, cmt_text, new Callback<CalendarEvent>() {
                     @Override
-                    public void done(ParseException e) {
-                        if (e == null) {
+                    public void success(CalendarEvent calendarEvent, Response response) {
 
-                            et_comment.setText("");
+                        getCommentByPagination();
 
-                            mProgressDialog.dismiss();
-
-
-                            getTestCommentList();
-                            //TODO comment adapter notrifieddatasetchange
-
-
-                        } else {
-
-                            mProgressDialog.dismiss();
-
-
-                            Utils.doToastEng(getApplicationContext(), "Error saving: \" + e.getMessage()");
-                            //progressbackground.setVisibility(View.INVISIBLE);
-                            Toast.makeText(getApplicationContext(),
-                                    "Error saving: " + e.getMessage(),
-                                    Toast.LENGTH_LONG).show();
-
-                        }
                     }
-                });*/
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                        mProgressDialog.dismiss();
+                    }
+                });
+                //TODO COMMENT PSOT
 
 
             }
         });
 
     }
+
+
 
     public void initEmojiIcon() {
         boolean isLargerLollipop = (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP);
@@ -1150,26 +1173,32 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
             progressWheel_comment.setVisibility(View.VISIBLE);
             //TODO BY POST ID
 
-            NetworkEngine.getInstance().getCommentlistByPostIDByPagination(paginater, "tdNUBu44ir", new Callback<List<com.smk.model.CommentItem>>() {
+            NetworkEngine.getInstance().getCommentlistByPostIDByPagination(paginater, postObjId, new Callback<List<com.smk.model.CommentItem>>() {
                 @Override
                 public void success(List<com.smk.model.CommentItem> commentItems, Response response) {
 
+                    if (zPDialog != null && zPDialog.isShowing()) {
+                        listComment.clear();
+                        zPDialog.dismissWithSuccess();
+                    }
                     listComment.addAll(commentItems);
                     adapter.notifyDataSetChanged();
                     progressWheel_comment.setVisibility(View.INVISIBLE);
-                    isLoading = false;
-                    if (listComment.size() == 12) {
-                        listView_Comment.setNextPage(true);
-                        paginater++;
-                    } else {
-                        // If no more item
-                        listView_Comment.setNextPage(false);
-                    }
                     View padding = new View(PostDetailActivity.this);
                     padding.setMinimumHeight(20);
                     listView_Comment.addFooterView(padding);
 
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        listView_Comment.setNestedScrollingEnabled(true);
+                    } else {
+
+                    }
                     Helper.getListViewSize(listView_Comment);
+
+                    StoreUtil.getInstance().saveTo("commentlist", listComment);
+                    //TODO get sticker for comment
+                    if (!alreadySticker)
+                        LoadStickerData();
                 }
 
                 @Override
@@ -1566,7 +1595,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         } catch (java.text.ParseException e) {
             e.printStackTrace();
         }
-        txt_lbl_share_post.setText(getResources().getString(R.string.post_detail_share_post));
+        //txt_lbl_share_post.setText(getResources().getString(R.string.post_detail_share_post));
 
         mstrPostType = item.getPost_content_type();
         //TODO TableColumnUpdate 10 data set show in UI
@@ -1586,7 +1615,8 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                 video_icon.setVisibility(View.GONE);
                 ly_media_main.setVisibility(View.VISIBLE);
                 isPlaying = false;
-                img_player.setImageResource(R.drawable.ic_headset_grey600_48dp);
+                txt_player.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(this, R.drawable.ic_headset_grey600_48dp), null, null, null);
+
                 txt_player.setText(R.string.detail_listen_text_eng);
 
             } else if (item.getPost_content_type().equalsIgnoreCase("Video")) {
@@ -1594,7 +1624,8 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                 video_icon.setVisibility(View.VISIBLE);
                 ly_media_main.setVisibility(View.VISIBLE);
 
-                img_player.setImageResource(R.drawable.ic_watch_now);
+                txt_player.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(this, R.drawable.ic_watch_now), null, null, null);
+
                 txt_player.setText(R.string.detail_play_text_eng);
 
                 isPlaying = true;
@@ -1616,10 +1647,13 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
             post_content.setText(item.getPost_content());
             et_comment.setHint(R.string.post_detail_comment_eng);
             txt_like_count.setText(item.getPost_like() + "");
-
+            mLikeAnimatedButton.setText(item.getPost_like() + "");
+            txt_social_no_ear_like.setText(item.getPost_like() + "");
+            mSocialNoEarLikeAnimatedButton.setText(item.getPost_like() + "");
 
             txt_cmd_count.setText(item.getPost_comment_count() + "Comments");
-            txt_lbl_share_post.setText(item.getPost_share_count() + R.string.post_detail_share_post_eng);
+            txt_social_no_ear_comment.setText(item.getPost_comment_count() + "Comments");
+            //txt_lbl_share_post.setText(item.getPost_share_count() + R.string.post_detail_share_post_eng);
 
             et_comment.setTypeface(MyTypeFace.get(this, MyTypeFace.NORMAL));
             mPostTile.setTypeface(MyTypeFace.get(this, MyTypeFace.NORMAL));
@@ -1666,14 +1700,16 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                 ly_media_main.setVisibility(View.VISIBLE);
                 video_icon.setVisibility(View.GONE);
                 isPlaying = false;
-                img_player.setImageResource(R.drawable.ic_headset_grey600_48dp);
+                txt_player.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(this, R.drawable.ic_headset_grey600_48dp), null, null, null);
+
                 txt_player.setText(R.string.detail_listen_text_mm);
 
             } else if (item.getPost_content_type().equalsIgnoreCase("Video")) {
                 postdetail_username.setText("");
                 ly_media_main.setVisibility(View.VISIBLE);
                 video_icon.setVisibility(View.VISIBLE);
-                img_player.setImageResource(R.drawable.ic_watch_now);
+                txt_player.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(this, R.drawable.ic_watch_now), null, null, null);
+
                 txt_player.setText(R.string.detail_play_text_mm);
 
                 isPlaying = true;
@@ -1752,9 +1788,12 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
             img_like.setImageResource(R.drawable.like_fill);
         }
         txt_like_count.setText(item.getPost_like() + " ");
-
+        mLikeAnimatedButton.setText(item.getPost_like() + " ");
+        txt_social_no_ear_like.setText(item.getPost_like() + " ");
+        mSocialNoEarLikeAnimatedButton.setText(item.getPost_like() + " ");
 
         txt_cmd_count.setText(item.getPost_comment_count() + "Comments");
+        txt_social_no_ear_comment.setText(item.getPost_comment_count() + "Comments");
         if (item.getCredit_logo_link() != null && !item.getCredit_logo_link().isEmpty()) {
             try {
                 img_credit_logo.setVisibility(View.VISIBLE);
@@ -2016,25 +2055,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                             _param.put("objectId", postId);
 
                             //TODO Google Anaytics Like count
-                            /*ParseCloud.callFunctionInBackground("IWomen_Likes_increment", _param, new FunctionCallback<Integer>() {
-                                @Override
-                                public void done(Integer like_count, ParseException e) {
 
-                                    if (e == null) {
-                                        Log.e("Cloud Increment", "===>" + like_count);
-                                        txt_like_count.setText(like_count + " ");//+ " likes"
-                                        //TODO call updatePost
-                                        updatePostLikeStatus(postId, like_count);
-                                        like_status = "1";
-
-                                    } else {
-
-                                        Log.e("Cloud Increment", "ERRr" + like_count + e.toString());
-                                    }
-
-                                }
-                            });
-*/
                             img_like.setImageResource(R.drawable.like_fill);
                         } else {
                             //Utils.doToastEng(getApplicationContext(), "unLike click");
@@ -2056,29 +2077,28 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                 //et_comment_frame.setVisibility(View.VISIBLE);
 
                 break;*/
-            case R.id.postdetail_viber_img:
-                /*Uri uri = Uri.parse("http://www.google.com"); // missing 'http://' will cause crashed
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(intent);*/
+            case R.id.social_viber:
 
+                try{
+                    Intent intent = new Intent("android.intent.action.VIEW");
+                    intent.setClassName("com.viber.voip", "com.viber.voip.WelcomeActivity");
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    //FLAG_ACTIVITY_NEW_TASK
+                    //intent.setData(uri);
+                    if (post_content.getText().length() > 20) {
+                        share_data = post_content.getText().toString().substring(0, 12) + " ...";
+                    } else {
+                        share_data = post_content.getText().toString();
+                    }
+                    intent.putExtra(Intent.EXTRA_SUBJECT, share_data + "...");//Title Of The Post
+                    intent.putExtra(Intent.EXTRA_TEXT, CommonConfig.SHARE_URL);
+                    intent.setType("text/plain");
+                    getApplicationContext().startActivity(intent);
+                }catch (ActivityNotFoundException ex){
 
-                /*String sphone = "12345678";
-                Uri uri = Uri.parse("tel:" + Uri.encode(sphone));*/
-                Intent intent = new Intent("android.intent.action.VIEW");
-                intent.setClassName("com.viber.voip", "com.viber.voip.WelcomeActivity");
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                //FLAG_ACTIVITY_NEW_TASK
-                //intent.setData(uri);
-                if (post_content.getText().length() > 20) {
-                    share_data = post_content.getText().toString().substring(0, 12) + " ...";
-                } else {
-                    share_data = post_content.getText().toString();
                 }
-                intent.putExtra(Intent.EXTRA_SUBJECT, share_data + "...");//Title Of The Post
-                intent.putExtra(Intent.EXTRA_TEXT, CommonConfig.SHARE_URL);
-                intent.setType("text/plain");
-                getApplicationContext().startActivity(intent);
+
                 break;
 
             case R.id.postdetail_share_button:
@@ -2088,25 +2108,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                     _param.put("objectId", postId);
 
                     //TODO Google Analytics
-/*
-                    ParseCloud.callFunctionInBackground("IWomen_Share_increment", _param, new FunctionCallback<Integer>() {
-                        @Override
-                        public void done(Integer like_count, ParseException e) {
 
-                            if (e == null) {
-                                //Log.e("Cloud Increment", "===>" + like_count);
-                                txt_lbl_share_post.setText(like_count + getResources().getString(R.string.post_detail_share_post));//+ " likes"
-                                //TODO call updatePost
-                                updatePostShareStatus(postId, like_count);
-
-                            } else {
-
-                                // Log.e("Cloud Increment", "ERRr" + like_count + e.toString());
-                            }
-
-                        }
-                    });
-*/
                 }
 
                 break;
@@ -2129,53 +2131,60 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                         mProgressDialog.show();
                         Utils.doToastEng(getApplicationContext(), "Comment");
                         //TODO Comment Post
-                        /*commentParse = new Comment();
-
-                        commentParse.setcomment_contents(et_comment.getText().toString());
-                        commentParse.setUserId(user_obj_id);
 
                         if (userprofile_Image_path != null) {
-                            commentParse.setUserImgPathName(userprofile_Image_path);
+
+                        }else{
+                            userprofile_Image_path= "http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-7f0323bc-a862-4184-9e51-d55189fcab18-ic_launcher.png" ;
                         }
-                        commentParse.setUserName(user_name);
-                        commentParse.setpostId(postId);
-
-                        commentParse.setcomment_created_time(new Date());
-                        *//**Very Important *//*
-                        ParseACL groupACL = new ParseACL();
-
-
-                        groupACL.setPublicReadAccess(true);
-
-                        commentParse.setACL(groupACL);
-                        commentParse.saveInBackground(new SaveCallback() {
+                        SMKserverAPI.getInstance().getService().postCommentTestByPostID(postObjId, user_obj_id, user_name, userprofile_Image_path, et_comment.getText().toString(), new Callback<CalendarEvent>() {
                             @Override
-                            public void done(ParseException e) {
-                                if (e == null) {
+                            public void success(CalendarEvent calendarEvent, Response response) {
 
-                                    et_comment.setText("");
+                                //TODO Comment load again
+                                if (Connection.isOnline(mContext)) {
+                                    progressWheel_comment.setVisibility(View.VISIBLE);
+                                    //TODO BY POST ID
+                                    NetworkEngine.getInstance().getCommentlistByPostIDByPagination(paginater, postObjId, new Callback<List<com.smk.model.CommentItem>>() {
+                                        @Override
+                                        public void success(List<com.smk.model.CommentItem> commentItems, Response response) {
 
-                                    mProgressDialog.dismiss();
+                                            listComment.addAll(commentItems);
+                                            adapter.notifyDataSetChanged();
+                                            progressWheel_comment.setVisibility(View.INVISIBLE);
+                                            mProgressDialog.dismiss();
 
+                                            View padding = new View(PostDetailActivity.this);
+                                            padding.setMinimumHeight(20);
+                                            listView_Comment.addFooterView(padding);
 
-                                    getTestCommentList();
-                                    //TODO comment adapter notrifieddatasetchange
+                                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                                //listView_Comment.setNestedScrollingEnabled(true);
+                                            } else {
+                                                Helper.getListViewSize(listView_Comment);
+                                            }
+                                            //TODO get sticker for comment
+                                        }
 
-
+                                        @Override
+                                        public void failure(RetrofitError error) {
+                                            progressWheel_comment.setVisibility(View.INVISIBLE);
+                                            mProgressDialog.dismiss();
+                                        }
+                                    });
                                 } else {
-
-                                    mProgressDialog.dismiss();
-
-
-                                    Utils.doToastEng(getApplicationContext(), "Error saving: \" + e.getMessage()");
-                                    //progressbackground.setVisibility(View.INVISIBLE);
-                                    Toast.makeText(getApplicationContext(),
-                                            "Error saving: " + e.getMessage(),
-                                            Toast.LENGTH_LONG).show();
-
+                                    SKConnectionDetector.getInstance(PostDetailActivity.this).showErrorMessage();
                                 }
+
                             }
-                        });*/
+
+                            @Override
+                            public void failure(RetrofitError error) {
+                                mProgressDialog.dismiss();
+                            }
+                        });
+
+
                     }
                 } else {
 
@@ -2212,20 +2221,26 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                     }
                 }*/
                 /***********EPP functions **************/
-                setVolumeControlStream(AudioManager.STREAM_ALARM);
+                else if (mstrPostType.equalsIgnoreCase("Audio")) {
+                    setVolumeControlStream(AudioManager.STREAM_ALARM);
 
-                //MediaPlayer mediaPlayer;
-                mMedia = new MediaPlayer();
-                try {
-                    //Uri uri = Uri.parse("android.resource://org.undp_iwomen.iwomen/" + R.raw.wai_wai_audio);
-                    String uri = "android.resource://" + getPackageName() + "/raw/wai_wai_audio";//+R.raw.wai_wai_audio;
-                    mMedia.setDataSource(uri);
-                    mMedia.prepare();
-                    //isPrepared = true;
-                    mMedia.setVolume(1.0f, 1.0f);
-                    mMedia.setOnCompletionListener((MediaPlayer.OnCompletionListener) this);
-                } catch (Exception ex) {
-                    throw new RuntimeException("Couldn't load music");
+                    if(iWomenPost.getPostUploadName().equalsIgnoreCase("Wai Wai")){
+                        //MediaPlayer mediaPlayer;
+                        mMedia = new MediaPlayer();
+                        try {
+                            //Uri uri = Uri.parse("android.resource://org.undp_iwomen.iwomen/" + R.raw.wai_wai_audio);
+                            String uri = "android.resource://" + getPackageName() + "/raw/wai_wai_audio";//+R.raw.wai_wai_audio;
+                            mMedia.setDataSource(uri);
+                            mMedia.prepare();
+                            //isPrepared = true;
+                            mMedia.setVolume(1.0f, 1.0f);
+                            mMedia.setOnCompletionListener((MediaPlayer.OnCompletionListener) this);
+                        } catch (Exception ex) {
+                            throw new RuntimeException("Couldn't load music");
+                        }
+                    }
+
+
                 }
 
 
@@ -2303,8 +2318,21 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                     break;
                 }
                 break;
+            case R.id.social_share:
+                shareTextUrl();
+                break;
             case R.id.social_facebook:
                 shareButton.performClick();
+                break;
+            case R.id.social_no_ear_share_txt:
+                //Normal Share
+                shareTextUrl();
+                break;
+            case R.id.social_no_ear_share_img:
+                shareButton.performClick();
+                break;
+            case R.id.social_no_ear_viber_img:
+                img_viber_share.performClick();
                 break;
 
         }
@@ -2666,6 +2694,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                         cmd_count = whole_body.getString("count");
 
                         txt_cmd_count.setText(cmd_count + "Comments");
+                        txt_social_no_ear_comment.setText(cmd_count + "Comments");
                         //TODO update local db
 
                         int c_count = Integer.parseInt(cmd_count);
@@ -2718,32 +2747,6 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     }
 
 
-    /**
-     * * Method for Setting the Height of the ListView dynamically.
-     * *** Hack to fix the issue of not showing all the items of the ListView
-     * *** when placed inside a ScrollView  ***
-     */
-    public static void setListViewHeightBasedOnChildren(ListView listView) {
-        ListAdapter listAdapter = listView.getAdapter();
-        if (listAdapter == null)
-            return;
-
-        int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.UNSPECIFIED);
-        int totalHeight = 0;
-        View view = null;
-        for (int i = 0; i < listAdapter.getCount(); i++) {
-            view = listAdapter.getView(i, view, listView);
-            if (i == 0)
-                view.setLayoutParams(new ViewGroup.LayoutParams(desiredWidth, LinearLayout.LayoutParams.WRAP_CONTENT));
-
-            view.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
-            totalHeight += view.getMeasuredHeight();
-        }
-        ViewGroup.LayoutParams params = listView.getLayoutParams();
-        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-        listView.setLayoutParams(params);
-        listView.requestLayout();
-    }
 
 
     //Share URL

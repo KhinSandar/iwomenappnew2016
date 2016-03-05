@@ -9,6 +9,7 @@ public class CommonConfig {
     public static final String SHARE_PREFERENCE_USER_INFO = "org.undp_iwomen.iwomen.user.info";
     public static final String IS_LOGIN = "hasLogin";
     public static final String USER_OBJ_ID = "objectId";
+    public static final String USER_ID = "user_Id";
     public static final String USER_NAME = "username";
     public static final String USER_PH = "ph";
     public static final String USER_EMAIL= "email";
@@ -36,7 +37,8 @@ public class CommonConfig {
 
 
     //https://api.parse.com/1/classes/City?X-Parse-Application-Id=OUN2VvuU6SN6DcRIDq3bT0ovJPXAk630qHVNJ9Gk&X-Parse-REST-API-Key=wxZB1WZBLzHEwfkUMToL0ykTLaiWY7Z1NuzfADLO
-    public static final String BASE_URL = "http://api.iwomenapp.org";
+    public static final String BASE_SMK_URL = "http://api.iwomenapp.org";
+    public static final String BASE_URL = "https://api.parse.com/1";
 
     public static final String COMMENT_URL = "/classes/Comment";
 
@@ -103,6 +105,19 @@ public class CommonConfig {
     public static final String GET_CATEGORIES_LIST__URL = "/api/v1/categories";
 
     public static final String CREATE_CALENDAR_EVENT_URL= "/api/v1/calendars";
+
+    public static final String GET_CALENDAR_EVENT_BY_ID_URL = "/api/v1/calendars/{id}";
+
+    public static final String GET_USER_POST_COUNT_BY_OBJ_ID = "/api/v1/postCounts/{id}";
+
+    public static final String GET_STICKER_LIST_URL = "/api/v1/stickerStores";
+
+    public static final String GET_SUB_RESOURCE_LIST_BY_RESOURCID_URL="/api/v1/subResourceDetails";
+
+    public static final String GET_AUTHOR_BY_ID_URL = "/api/v1/authors/{id}";
+
+    public static final String GET_POST_BY_DATE_URL = "/api/v1/posts";
+
 
 
 }

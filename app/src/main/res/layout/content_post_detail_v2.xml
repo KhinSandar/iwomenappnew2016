@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:wheel="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:wheel="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/post_detail_hsv"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:fillViewport="true"
 
+
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     >
     <!--tools:context="org.undp_iwomen.iwomen.ui.activity.PostDetailActivity"
     tools:showIn="@layout/activity_post_detail_v2" -->
@@ -36,9 +40,9 @@
                 android:drawablePadding="0dp"
                 android:gravity="center"
                 android:paddingLeft="24dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:paddingRight="24dp"
-                android:text="@string/detail_download_text_eng" />
+                android:text="@string/detail_download_text_eng"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
             <View
                 android:layout_width="1dp"
@@ -50,13 +54,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:drawableLeft="@drawable/ic_file_download_black_24dp"
+                android:drawableLeft="@drawable/ic_headset_grey600_48dp"
                 android:drawablePadding="0dp"
                 android:gravity="center"
                 android:paddingLeft="24dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:paddingRight="24dp"
-                android:text="@string/detail_listen_text_eng" />
+                android:text="@string/detail_listen_text_eng"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
 
         </LinearLayout>
@@ -67,10 +71,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:paddingBottom="8dp"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
-            android:paddingTop="@dimen/activity_vertical_margin"
-            android:paddingBottom="8dp">
+            android:paddingTop="@dimen/activity_vertical_margin">
 
             <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                 android:id="@+id/postdetail_title"
@@ -137,11 +141,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/sample_circle" />
+
                     <ProgressBar
                         android:id="@+id/postdetail_credit_progress"
                         style="?android:attr/progressBarStyle"
-                        android:layout_width="@dimen/feed_item_profile_pic"
-                        android:layout_height="@dimen/feed_item_profile_pic"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
 
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
@@ -178,6 +183,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/sample_circle" />
+
                     <ProgressBar
                         android:id="@+id/postdetail_progressBar_profile_item"
                         style="?android:attr/progressBarStyle"
@@ -229,6 +235,7 @@
             android:layout_marginBottom="?actionBarSize"
             android:layout_weight="1"
             android:background="#eee"></ListView>-->
+        <!--  -->
         <org.undp_iwomen.iwomen.ui.widget.ProgressWheel
             android:id="@+id/postdetail_progress_wheel_comment"
             android:layout_width="48dp"
@@ -237,17 +244,18 @@
             android:gravity="center"
             wheel:matProg_barColor="@color/primary"
             wheel:matProg_progressIndeterminate="true" />
-        <com.smk.sklistview.SKListView
+
+        <ListView
             android:id="@+id/postdetail_comment_listview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:choiceMode="singleChoice"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="100dp"
             android:background="#eee"
+            android:choiceMode="singleChoice"
             android:clipToPadding="false"
             android:divider="@android:color/transparent"
-            android:layout_marginBottom="100dp"
             android:paddingBottom="10dp"
-            /><!--  -->
+            android:scrollbars="vertical" />
 
     </LinearLayout>
 

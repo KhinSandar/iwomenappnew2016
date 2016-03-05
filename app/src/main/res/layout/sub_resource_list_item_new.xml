@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
 
-    android:background="@color/feed_bg"
+    android:background="@color/white"
 
     android:orientation="vertical">
 
@@ -19,7 +19,7 @@
         android:orientation="horizontal"
         android:padding="10dp">
 
-        <FrameLayout
+        <!--<FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
@@ -52,7 +52,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_gravity="left"
                 android:visibility="visible" />
-        </FrameLayout>
+        </FrameLayout>-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -65,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                <!--<org.undp_iwomen.iwomen.ui.widget.CustomTextView
                     android:id="@+id/sub_resouce_list_item_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -79,10 +79,38 @@
                     android:paddingTop="16dp"
                     android:text="Name"
                     android:textColor="@color/black"
-                    android:textSize="16dp" />
+                    android:textSize="16dp" />-->
+                <LinearLayout
+                    android:paddingBottom="16dp"
+                    android:paddingTop="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                        android:id="@+id/sub_resouce_list_item_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Title"
+                        android:textColor="@color/text_sub_head_color"
+                        android:textStyle="bold"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+                    <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                        android:id="@+id/sub_resouce_list_item_author"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="8dp"
+                        android:text="By @author name"
+                        android:textColor="@color/text_sub_head_color"
+                        android:textStyle="normal"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                         />
+
+                </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout
+            <!--<LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -103,7 +131,7 @@
                     android:layout_height="wrap_content"
                     android:text="Change Theme"
                     android:visibility="gone" />
-            </LinearLayout>
+            </LinearLayout>-->
 
             <!--<org.undp_iwomen.iwomen.ui.widget.CustomTextView
                 android:layout_width="match_parent"

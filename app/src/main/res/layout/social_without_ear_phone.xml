@@ -1,40 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="16dp"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="16dp">
+    android:gravity="center_vertical"
+    android:paddingLeft="8dp"
+    android:paddingRight="16dp">
+
+    <org.undp_iwomen.iwomen.ui.widget.animatedbutton.AnimatedButton
+        android:id="@+id/social_no_ear_like_animated_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        app:src="@drawable/ic_heart_rate_off_18dp"
+        app:srcChecked="@drawable/ic_heart_rate_on_18dp"
+        app:text="Star" />
 
     <TextView
-        android:id="@+id/postdetail_like_txt"
+        android:id="@+id/social_no_ear_like_txt"
         style="@style/PostDetailIconStyle"
-
-        android:drawableLeft="@drawable/ic_like_fill"
-        android:text="150"/>
+        android:drawableLeft="@drawable/ic_like_stoke"
+        android:text="150"
+        android:visibility="gone" />
 
     <TextView
+        android:id="@+id/social_no_ear_comment_txt"
         style="@style/PostDetailIconStyle"
         android:drawableLeft="@drawable/ic_comment"
-        android:text="12"/>
+        android:text="12" />
 
-    <TextView
+    <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+        android:id="@+id/social_no_ear_share_txt"
         style="@style/PostDetailIconStyle"
         android:drawableLeft="@drawable/ic_share"
-        android:text="Share"/>
+        android:text="@string/share" />
 
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1.5">
 
+        <com.facebook.share.widget.ShareButton
+            android:id="@+id/social_no_ear_fb_share_button"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:padding="8dp"
+            android:visibility="gone" />
+
         <ImageView
+            android:id="@+id/social_no_ear_share_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/ic_share_facebook"/>
+            android:src="@drawable/ic_share_facebook" />
 
     </FrameLayout>
 
@@ -44,10 +62,11 @@
         android:layout_weight="1.5">
 
         <ImageView
+            android:id="@+id/social_no_ear_viber_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/ic_share_viber"/>
+            android:src="@drawable/ic_share_viber" />
 
     </FrameLayout>
 
@@ -58,10 +77,11 @@
         android:visibility="invisible">
 
         <ImageView
+            android:id="@+id/social_no_ear_earphone_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/ic_audio"/>
+            android:src="@drawable/ic_audio" />
 
     </FrameLayout>
 

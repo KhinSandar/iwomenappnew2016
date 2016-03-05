@@ -1,7 +1,10 @@
 package org.undp_iwomen.iwomen.ui.activity;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
@@ -9,8 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ScrollView;
-import android.widget.Toast;
 
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
@@ -18,11 +21,13 @@ import com.smk.skconnectiondetector.SKConnectionDetector;
 
 import org.smk.clientapi.NetworkEngine;
 import org.smk.model.CalendarEvent;
+import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.ui.adapter.CalendarViewPagerFragmentAdapter;
 import org.undp_iwomen.iwomen.ui.fragment.CaldroidSampleCustomFragment;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.utils.Connection;
+import org.undp_iwomen.iwomen.utils.Utils;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -42,8 +47,12 @@ public class CalendarActivity extends AppCompatActivity {
     //MY CUSTOM CODE
     private ViewPager viewPager;
     private CalendarViewPagerFragmentAdapter mAdapter;
-    ScrollView hsv;
+    private ScrollView hsv;
     private CustomTextView textViewTitle;
+    private SharedPreferences mSharedPreferencesUserInfo;
+    private SharedPreferences sharePrefLanguageUtil;
+    private String mstr_lang;
+    private String user_name, user_obj_id,user_id,user_role,user_ph , register_msg ,user_img_path;
 
 
     private void setCustomResourceForDates() {
@@ -90,9 +99,9 @@ public class CalendarActivity extends AppCompatActivity {
         Date greenDate = cal.getTime();
 
         if (caldroidFragment != null) {
-            caldroidFragment.setBackgroundResourceForDate(R.color.blue_500,
+            caldroidFragment.setBackgroundResourceForDate(R.color.accent,
                     blueDate);
-            caldroidFragment.setBackgroundResourceForDate(R.color.green,
+            caldroidFragment.setBackgroundResourceForDate(R.color.primary,
                     greenDate);
             caldroidFragment.setTextColorForDate(R.color.white, blueDate);
             caldroidFragment.setTextColorForDate(R.color.white, greenDate);
@@ -120,6 +129,21 @@ public class CalendarActivity extends AppCompatActivity {
         /**********Set up the ToolBar**************/
 
         final SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
+
+
+        mSharedPreferencesUserInfo = getSharedPreferences(CommonConfig.SHARE_PREFERENCE_USER_INFO, Context.MODE_PRIVATE);
+        sharePrefLanguageUtil = getSharedPreferences(Utils.PREF_SETTING, Context.MODE_PRIVATE);
+
+        mstr_lang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
+        user_role = mSharedPreferencesUserInfo.getString(CommonConfig.USER_ROLE, null);
+
+
+
+
+        user_name= mSharedPreferencesUserInfo.getString(CommonConfig.USER_NAME, null);
+        user_obj_id = mSharedPreferencesUserInfo.getString(CommonConfig.USER_OBJ_ID, null);
+
+
 
         // Setup caldroid fragment
         // **** If you want normal CaldroidFragment, use below line ****
@@ -201,18 +225,23 @@ public class CalendarActivity extends AppCompatActivity {
 
             @Override
             public void onSelectDate(Date date, View view) {
-                Toast.makeText(getApplicationContext(), formatter.format(date),
-                        Toast.LENGTH_SHORT).show();
-                Calendar cal = Calendar.getInstance();
-                cal.setTime(date);
-                int month = cal.get(Calendar.MONTH);
+                /*Toast.makeText(getApplicationContext(), formatter.format(date),
+                        Toast.LENGTH_SHORT).show();*/
+                if(user_role.equalsIgnoreCase("User")) {
+                    showPermissionDialog();
+                }else{
+                    Calendar cal = Calendar.getInstance();
+                    cal.setTime(date);
+                    int month = cal.get(Calendar.MONTH);
 
-                Intent i = new Intent(getApplicationContext(), ViewEventsActivity.class);
+                    Intent i = new Intent(getApplicationContext(), ViewEventsActivity.class);
 
-                i.putExtra("Date", formatter.format(date).toString());
-                i.putExtra("Month", month);
+                    i.putExtra("Date", formatter.format(date).toString());
+                    i.putExtra("Month", month);
 
-                startActivity(i);
+                    startActivity(i);
+                }
+
 
             }
 
@@ -390,6 +419,24 @@ public class CalendarActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         super.onBackPressed();
         return true;
+    }
+
+    public void showPermissionDialog(){
+        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        View convertView = View.inflate(this,R.layout.custom_premission_dialog,null);
+
+        Button btn_ok = (Button)convertView.findViewById(R.id.permission_dialog_btn_ok);
+        alertDialog.setView(convertView);
+        alertDialog.show();
+
+        btn_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                finish();
+
+            }
+        });
     }
 
 }

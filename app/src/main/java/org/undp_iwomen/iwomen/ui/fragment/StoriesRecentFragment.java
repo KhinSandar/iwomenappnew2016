@@ -31,6 +31,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.smk.skconnectiondetector.SKConnectionDetector;
 import com.smk.sklistview.SKListView;
 import com.thuongnh.zprogresshud.ZProgressHUD;
@@ -167,7 +168,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
          * This is load data from local or server when connection is connected or not connected
          */
         //Load data from local storage for no connection
-        List<IWomenPost> iWomenPosts = StoreUtil.getInstance().selectFrom("stories_recent");
+        final List<IWomenPost> iWomenPosts = StoreUtil.getInstance().selectFrom("stories_recent");
         if (Connection.isOnline(mContext)){
             // Showing local data while loading from internet
             if(iWomenPosts != null && iWomenPosts.size() > 0){
@@ -200,6 +201,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
 
                     //intent.putExtra("post_id", feedItems.get(position).getPost_obj_id());
                     intent.putExtra("post_id", iWomenPostList.get(position).getId());
+                    intent.putExtra("postObj", new Gson().toJson(parent.getAdapter().getItem(position)));
 
                     //intent.putExtra("ImgUrl", mImgurl.get(getPosition()));
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -1465,7 +1467,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
     private void getIWomenPostByPagination() {
         if (Connection.isOnline(mContext)) {
             isLoading = true;
-            NetworkEngine.getInstance().getIWomenPostByDateByPagination(paginater,"Recent", true, new Callback<List<IWomenPost>>() {
+            NetworkEngine.getInstance().getIWomenPostByDateByPagination(paginater,"Recent", 1, new Callback<List<IWomenPost>>() {
                 @Override
                 public void success(List<IWomenPost> iWomenPosts, Response response) {
                     if(zPDialog != null && zPDialog.isShowing()){

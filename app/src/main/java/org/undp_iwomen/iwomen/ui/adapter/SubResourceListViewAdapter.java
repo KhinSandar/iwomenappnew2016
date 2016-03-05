@@ -8,11 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.makeramen.RoundedImageView;
-import com.squareup.picasso.Picasso;
-
 import org.undp_iwomen.iwomen.R;
-import org.undp_iwomen.iwomen.data.SubResourceItem;
 import org.undp_iwomen.iwomen.model.MyTypeFace;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.utils.Utils;
@@ -33,11 +29,11 @@ public class SubResourceListViewAdapter extends BaseAdapter
     //private Activity activity;
 
     // Declare Variables
-    private List<SubResourceItem> SubResourceItems;
+    private List<org.smk.model.SubResourceItem> SubResourceItems;
     Context mContext;
     LayoutInflater inflater;
     String mstr_lang;
-    public SubResourceListViewAdapter(Context context,List<SubResourceItem> resourceItems , String typeFaceName) { //
+    public SubResourceListViewAdapter(Context context,List<org.smk.model.SubResourceItem> resourceItems , String typeFaceName) { //
         super();
         mContext = context;
         inflater = LayoutInflater.from(mContext);
@@ -67,10 +63,10 @@ public class SubResourceListViewAdapter extends BaseAdapter
     {
         public TextView txtAuthour;
         public CustomTextView txtName;
-        public TextView txtTime;
-        public RoundedImageView imgIcon;
-        public ProgressBar progressBar;
-        //public TextView txtViewTitle;
+        //public TextView txtTime;
+        /*public RoundedImageView imgIcon;
+        public ProgressBar progressBar;*/
+
     }
 
 
@@ -88,11 +84,9 @@ public class SubResourceListViewAdapter extends BaseAdapter
             holder.imgIcon = (ImageView) view.findViewById(R.id.sub_resource_icon);*/
 
 
-            holder.txtAuthour = (TextView)view.findViewById(R.id.sub_resouce_list_item_author_name);
+            holder.txtAuthour = (TextView)view.findViewById(R.id.sub_resouce_list_item_author);
             holder.txtName= (CustomTextView)view.findViewById(R.id.sub_resouce_list_item_title);
-            holder.txtTime= (TextView)view.findViewById(R.id.sub_resouce_list_item_time);
-            holder.imgIcon = (RoundedImageView) view.findViewById(R.id.sub_resouce_list_item_img);
-            holder.progressBar = (ProgressBar) view.findViewById(R.id.sub_resouce_list_item_progressBar);
+
 
 
 
@@ -104,29 +98,26 @@ public class SubResourceListViewAdapter extends BaseAdapter
             holder = (ViewHolder) view.getTag();
         }
 
-        /*holder.txtAuthour.setText(listAuthorName[position]);
 
-        holder.txtName.setText(listName[position]);
-        holder.txtName.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
-
-        holder.txtTime.setText(listDate[position]);*/
 
         if (mstr_lang.equals(Utils.ENG_LANG)) {
-            holder.txtName.setText(SubResourceItems.get(position).getSub_resource_title_eng());
+            holder.txtName.setText(SubResourceItems.get(position).getSubResourceTitleEng());
+
             //holder.txtBodyText.setText(ResourceItems.get(position).getResourceText());
 
             holder.txtName.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
         }else if (mstr_lang.equals(Utils.MM_LANG)) {
-            holder.txtName.setText(SubResourceItems.get(position).getSub_resource_title_mm());
+            holder.txtName.setText(SubResourceItems.get(position).getSubResourceTitleMm());
             //holder.txtBodyText.setText(ResourceItems.get(position).getResourceText());
 
             holder.txtName.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
 
         }else {//FOR Default and Custom
-            holder.txtName.setText(SubResourceItems.get(position).getSub_resource_title_mm());
+            holder.txtName.setText(SubResourceItems.get(position).getSubResourceTitleMm());
         }
+        holder.txtAuthour.setText(SubResourceItems.get(position).getAuthorName());
 
-        if(SubResourceItems.get(position).getIcon_img_url() != null && !SubResourceItems.get(position).getIcon_img_url().isEmpty()) {
+        /*if(SubResourceItems.get(position).getIcon_img_url() != null && !SubResourceItems.get(position).getIcon_img_url().isEmpty()) {
 
             try {
 
@@ -150,10 +141,10 @@ public class SubResourceListViewAdapter extends BaseAdapter
             }
         }else{
             holder.progressBar.setVisibility(View.GONE);
-        }
+        }*/
 
 
-        //holder.imgIcon.setImageResource(listicon[position]);//listicon[position]
+
 
 
 

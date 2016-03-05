@@ -12,28 +12,32 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <TextView
+        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
             android:id="@+id/item_event_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Meeting"
+            android:textColor="@color/text_sub_head_color"
+            android:textStyle="bold"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
-        <TextView
+        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
             android:id="@+id/item_event_place"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/item_event_title"
             android:text="Kyietlet, Ayeyarwady"
+            android:textColor="@color/text_sub_head_color"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="?android:textColorSecondary" />
+             />
 
-        <TextView
+        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
             android:id="@+id/item_event_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:text="9:00 AM - 3:00 PM"
+            android:textColor="@color/text_sub_head_color"
             android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
     </RelativeLayout>
 </android.support.v7.widget.CardView>

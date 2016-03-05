@@ -72,17 +72,7 @@ public class EventAdapter extends BaseAdapter {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.US);
 
         SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy");
-        //2015-09-16T13:46:34.875Z
-        //Sun Jun 22 18:32:00 GMT+06:30 2014
-        //Log.e("Stories Post Adapter==","Date===>" + item.getCreated_at());
-        /*try {
-            Date timedate = format.parse(calendar.getStartDate());
-            holder.mEventTime.setText(sdf.format(timedate));
 
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-       */
         if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
             holder.mEventTitle.setText(calendar.getTitle());
         }else{

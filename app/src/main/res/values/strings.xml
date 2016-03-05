@@ -404,7 +404,7 @@
 
 
     <string name="com_parse_ui_mismatch_confirm_password_toast_mm">လွ်ိဳ ့၀ွက္ စာလံုုး မတူပါ ေနာက္တစ္ၾကိမ္ၿပန္ရိုုက္ပါ</string>
-    <string name="com_parse_ui_mismatch_confirm_password_toast">Passwords don\'t match, please try again</string>
+    <string name="com_parse_ui_mismatch_confirm_password_toast">Passwords don\&apos;t match, please try again</string>
     <plurals name="com_parse_ui_password_too_short_toast_mm">
         <item quantity="one">လွ်ိဳ ့၀ွက္ စာလံုုး အေရအတြက္အနည္းဆံုုး  %d လံုုး ရွိရပါမည္။</item>
         <item quantity="other">လွ်ိဳ့ ၀ွက္ စာလံုုး အေရအတြက္ အမ်ားဆံုုး %d လံုုး ရွိရပါမည္။</item>
@@ -451,18 +451,19 @@
 
     <!--Women Remember Day  -->
     <string-array name="women_remember_day_array">
-        <item>Jan Women Remember Day</item>
-        <item>Feb Women Remember Day</item>
-        <item>March Women Remember Day</item>
-        <item>April Women Remember Day</item>
-        <item>May Women Remember Day</item>
-        <item>June Women Remember Day</item>
-        <item>July Women Remember Day</item>
-        <item>August Women Remember Day</item>
-        <item>September Women Remember Day</item>
-        <item>October Women Remember Day</item>
-        <item>November Women Remember Day</item>
-        <item>December Women Remember Day</item>
+        <item>First Myanmar Women pilot to take the sky</item>
+        <item>In 1986, the first woman president of an Asian Country is elected in the Philipphines: Ms Corazon Aquino.\n International Day of Women and Girls in Science\n</item>
+        <item>International Women Day</item>
+        <item>Wangari Maathai Birthday</item>
+
+        <item>2015: Ban of Femal Genital Mutilation in Nigeria</item>
+        <item>1920: Women in the US can vote for the first time.</item>
+        <item>Myanmar Women\'s Day</item>
+        <item>August\n</item>
+        <item>International Day for Democracy\n1915: The first meeting of what became known as the UK Federation of Women\'s institutes, one of the oldest women\'s network in the world was held.</item>
+        <item>International Rural Women Day.Anniversary of May Doe Kabar Rural Women Network in Myanmar Launch</item>
+        <item>International Day for the Elimination of Violence against Women\n</item>
+        <item>Tawakkol Karman receives Nobel Peace Prize\n</item>
     </string-array>
     <string name="post_detail_more">more &gt;&gt;</string>
     <string name="calendar_name">Calendar</string>
@@ -578,5 +579,55 @@
     <string name="str_upload_audio">Upload Audio</string>
     <string name="str_write_feedback">Tell iWomen Team what you love about the app, what you would like to see improved or any technical problems you encountered. Thank you!</string>
     <string name="title_activity_gcm_notification_dialog"></string>
+
+    <string name="may_doe_kabar">May Doe Kabar is a National Network of village- based women’s Self-Reliant Groups (SRGs) and their federations of Township Leading Groups (TLGs). It spans 22,000 members and 2,000 villages in 31 townships in the Delta, the Dry Zone, Chin, Kachin, Kayah, Mon, Rakhine, and Shan States.
+</string>
+    <string-array name="navigation_drawer_items">
+        <item>Job Information</item>
+        <item>Job Status List</item>
+        <item>My Profile</item>
+        <item>Pricing Details</item>
+        <item>About Us</item>
+        <item>Contact Us</item>
+        <item>Logout</item>
+
+    </string-array>
+
+    <string name="share">share</string>
+
+    <string name="calendar_permission">You need to have admin rights to see this.</string>
+
+    <string name="ethic_shan">SHAN LANGUAGE</string>
+    <string name="ethic_mon">MON LANGUAGE</string>
+
+    <string name="organization_title">Organization Detail</string>
+
+    <string name="jan_des">2010: As the first female pilots in Burma, two women, after completing commercial pilot courses from Malaysia, have begun operating flights as co-pilots with Air Bagan.
+
+female_pilots_iaa1s
+Hnin Oo Wai and May Cho Win (fourth and fifth from left), the first two Burmese female pilots, along with colleagues and friends. Photo IAA/Mizzima. The two women, Hnin Oo Way and May Cho Win, completed a two-year training course at the Integrated Aviation Academy (IAA) in Malaysia and received their commercial pilots licenses in August 2009.
+</string>
+    <string name="feb_des">Corazon Aquino (1933 to 2009) was the first female president of the Phillipines, and is known for leading the People Power Revolution in 1986 which restored democracy to the country. She was named TIME\'s Woman of the Year in 1986.</string>
+    <string name="mar_des">In 1911 the first International Women Day was celebrated. It is a day when all women are recognized for their achievements without regard to divisions, whether national, ethnic, linguistic, cultural, economic or political.</string>
+    <string name="apr_des"> Dr. Wangari Muta Maathai was awarded the Nobel Peace Prize in 2004 for her actions to promote sustainable development, democracy and peace and was the first African woman to receive the Nobel Peace Prize.
+   Fashion Revolution was born. On 24 April 2013, 1,134 people were killed
+and over 2,500 were injured when the
+Rana Plaza complex collapsed in Dhaka,
+Bangladesh. We believe that’s too many
+ people to lose on one day. That’s when Fashion Revolution was born. Fashion Revolution is a global movement aimed to change the way clothes are produced.  Fashion Revolution believes fashion can be made in a safe,  clean and beautiful way. Where creativity, quality,  environment and people are valued equally.
+</string>
+<string name="may_des">In May 2015, Nigerian Government has passed a bill to ban female genital mutilation (a cultural practice which comprises all procedures that involve partial or total removal of the external female genitalia, or other injury to the female genital organs for non-medical reasons).
+</string>
+<string name="jun_des">Soviet cosmonaut Valentina Tereshkova became the first woman to fly to space when she launched on the Vostok 6 mission June 16, 1963.
+Shirin Ebadi, J.D., was awarded the 2003 Nobel Peace Prize for her efforts to promote human rights, in particular, the rights of women, children, and political prisoners in Iran. She is the first Muslim woman to receive the Nobel Peace Prize, and only the fifth Muslim to receive a Nobel Prize in any field.</string>
+    <string name="jul_des"></string>
+    <string name="aug_des"></string>
+    <string name="sep_des"></string>
+    <string name="oct_des">The first International Day of Rural Women was observed on 15 October 2008. This new international day, established by the UN in 2007, recognizes “the critical role and contribution of rural women, including indigenous women, in enhancing agricultural and rural development, improving food security and eradicating rural poverty.”</string>
+    <string name="nov_des">1 out of 3 women worlwide have experienced physical or sexual violence. This International Day aim to raise public awareness and mobilizing people everywhere in the world to bring about change.</string>
+    <string name="dec_des">Tawakkol Karman was awarded the Nobel Peace Prize in 2011 in recognition of her work in nonviolent struggle for the safety of women and for women’s rights to full participation in peacebuilding work in Yemen.</string>
+    <string name="str_ready_submit">Ready to Submit</string>
+    <string name="str_already_uploaded">Already Uploaded</string>
+
 
 </resources>

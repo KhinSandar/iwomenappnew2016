@@ -11,6 +11,7 @@ import android.support.design.widget.TextInputLayout;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,12 +33,12 @@ import com.orhanobut.dialogplus.OnItemClickListener;
 import com.orhanobut.dialogplus.ViewHolder;
 import com.smk.skalertmessage.SKToastMessage;
 import com.smk.skconnectiondetector.SKConnectionDetector;
+import com.thuongnh.zprogresshud.ZProgressHUD;
 
 import org.smk.clientapi.NetworkEngine;
 import org.smk.iwomen.BaseActionBarActivity;
 import org.smk.iwomen.ResponseError;
 import org.smk.model.User;
-
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.model.MyTypeFace;
@@ -74,6 +75,7 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
     private Button btnOk;
     private RadioButton rd_lang_en, rd_lang_mm_zawgyi, rd_lang_mm_uni, rd_lang_mm_default;
     private String lang;
+    private ZProgressHUD dialog;
 
 
     @Override
@@ -103,7 +105,7 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
 
         //TODO CHECK LOGIN OR NOT
 
-        if (mSharedPreferencesUserInfo.getString(CommonConfig.REGISTER_MSG, null) != null) {
+        if (mSharedPreferencesUserInfo.getString(CommonConfig.USER_ROLE, null) != null) {
             startActivity(new Intent(this, DrawerMainActivity.class));
             finish();
         }
@@ -182,20 +184,22 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
             }
 
 
-            final ProgressDialog dialog = new ProgressDialog(this);
-            dialog.setMessage("Loading...");
+            dialog = new ZProgressHUD(this);
             dialog.show();
             NetworkEngine.getInstance().postLogin(username, pwd, new Callback<User>() {
                 @Override
                 public void success(User user, Response response) {
                     //Log.e("<<< >>> ", "===>" + user.getEmail());
-                    dialog.dismiss();
+                    dialog.dismissWithSuccess();
 
                     mEditorUserInfo = mSharedPreferencesUserInfo.edit();
 
                     mEditorUserInfo.putString(CommonConfig.USER_EMAIL, user.getEmail());
                     mEditorUserInfo.putString(CommonConfig.USER_NAME, user.getUsername());
-                    mEditorUserInfo.putString(CommonConfig.USER_OBJ_ID, user.getId());
+                    mEditorUserInfo.putString(CommonConfig.USER_ID, user.getId());
+                    mEditorUserInfo.putString(CommonConfig.USER_OBJ_ID, user.getObjectId());
+                    mEditorUserInfo.putString(CommonConfig.USER_ROLE, user.getRole());
+                    Log.e("<<<User Role >>> ", "===>" + user.getRole());
 
                     /*Role role;
                     List<Role> roleArrayList;
@@ -209,6 +213,7 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
                     mEditorUserInfo.commit();
                     Intent i = new Intent(MainLoginActivity.this, DrawerMainActivity.class);//DrawerMainActivity
                     startActivity(i);
+                    finish();
 
                 }
 
@@ -234,7 +239,7 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
                         }
                     }
 
-                    dialog.dismiss();
+                    dialog.dismissWithFailure();
 
                 }
             });

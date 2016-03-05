@@ -8,6 +8,11 @@ public class User {
     @SerializedName("id")
     @Expose
     private String id;
+
+    @SerializedName("objectId")
+    @Expose
+    private String objectId;
+
     @SerializedName("username")
     @Expose
     private String username;
@@ -38,6 +43,7 @@ public class User {
     @SerializedName("updated_at")
     @Expose
     private String updatedAt;
+
     @SerializedName("role")
     @Expose
     private String role;
@@ -67,6 +73,14 @@ public class User {
      */
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getObjectId() {
+        return objectId;
+    }
+
+    public void setObjectId(String objectId) {
+        this.objectId = objectId;
     }
 
     /**

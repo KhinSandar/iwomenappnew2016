@@ -44,6 +44,7 @@ import org.smk.adapter.QuestionImageListAdapter;
 import org.smk.application.MCrypt;
 import org.smk.application.StoreUtil;
 import org.smk.clientapi.NetworkEngine;
+import org.smk.model.Answer;
 import org.smk.model.AnswerList;
 import org.smk.model.CompetitionQuestion;
 import org.smk.model.MutipleAnswer;
@@ -188,8 +189,18 @@ public class CompetitionSubmitAnswerActivity extends BaseActionBarActivity imple
 		edt_question_text.setLayoutParams(llp2);
 		edt_question_text.setBackgroundResource(R.drawable.competition_answer_edittext);
 		edt_question_text.setId(question.getId() + text_id);
+		//Checking for Local Saved
 		if(question.getAnswer() != null && question.getAnswer().length() > 0){
 			edt_question_text.setText(question.getAnswer());
+		}
+		//Checking for Already Submitted
+		if(AnswerList.getAnswers() != null && AnswerList.getAnswers().size() > 0){
+			edt_question_text.setEnabled(false);
+			for(Answer answer:AnswerList.getAnswers()){
+				if(answer.getMutipleQuestionId() == question.getId()){
+					edt_question_text.setText(answer.getAnswer());
+				}
+			}
 		}
 		text_id++;
 		layout_question.addView(txt_question_text);
@@ -222,11 +233,28 @@ public class CompetitionSubmitAnswerActivity extends BaseActionBarActivity imple
 				chk_question.setText(Html.fromHtml(option.getOption()));
 			chk_question.setTextColor(getResources().getColor(R.color.competition_text_color));
 			chk_question.setId(question.getId() + checkbox_id);
+			// Checking for Local Saved
 			if(question.getAnswer() != null && question.getAnswer().length() > 0){
 				String[] answers = question.getAnswer().split(",");
 				for(String ans: answers){
 					if(option.getOption().equals(ans) || option.getOptionMm().equals(ans)){
 						chk_question.setChecked(true);
+					}
+				}
+			}
+			//Checking for Already Submitted
+			if(AnswerList.getAnswers() != null && AnswerList.getAnswers().size() > 0){
+				chk_question.setEnabled(false);
+				for(Answer answer:AnswerList.getAnswers()){
+					if(answer.getMutipleQuestionId() == question.getId()){
+						String[] answers = answer.getAnswer().split(",");
+						for(String ans: answers){
+							if(option.getOption().equals(ans) || option.getOptionMm().equals(ans)){
+								chk_question.setChecked(true);
+							}else{
+								chk_question.setChecked(false);
+							}
+						}
 					}
 				}
 			}
@@ -267,9 +295,24 @@ public class CompetitionSubmitAnswerActivity extends BaseActionBarActivity imple
 				rdo_question.setText(Html.fromHtml(option.getOption()));
 			rdo_question.setTextColor(getResources().getColor(R.color.competition_text_color));
 			rdo_question.setId(question.getId() + radio_id);
+			//Checking for Local Saved
 			if(question.getAnswer() != null && question.getAnswer().length() > 0){
 				if(option.getOption().equals(question.getAnswer()) || option.getOptionMm().equals(question.getAnswer())){
 					rdo_question.setChecked(true);
+				}
+			}
+			//Checking for Already Submitted
+			if(AnswerList.getAnswers() != null && AnswerList.getAnswers().size() > 0){
+				rdo_question.setEnabled(false);
+				for(Answer answer:AnswerList.getAnswers()){
+					if(answer.getMutipleQuestionId() == question.getId()){
+						String[] answers = answer.getAnswer().split(",");
+						for(String ans: answers){
+							if(option.getOption().equals(ans) || option.getOptionMm().equals(ans)){
+								rdo_question.setChecked(true);
+							}
+						}
+					}
 				}
 			}
 			layout_radio.addView(rdo_question);
@@ -311,9 +354,27 @@ public class CompetitionSubmitAnswerActivity extends BaseActionBarActivity imple
 				}
 			}
 		}
+		//Checking for Already Submitted
+		if(AnswerList.getAnswers() != null && AnswerList.getAnswers().size() > 0){
+			grd_question.setEnabled(false);
+			for(Answer answer:AnswerList.getAnswers()){
+				if(answer.getMutipleQuestionId() == question.getId()){
+					for(int i=0; i < question.getOption().size(); i++){
+						if(question.getOption().get(i).getOption().equals(answer.getAnswer())){
+							grd_question.setItemChecked(i, true);
+						}
+					}
+				}
+			}
+		}
 		image_id++;
 		layout_question.addView(txt_question_text);
 		layout_question.addView(grd_question);
+
+		if(AnswerList.getAnswers() != null && AnswerList.getAnswers().size() > 0){
+			btn_save.setEnabled(false);
+			btn_submit.setEnabled(false);
+		}
 	}
 
 	private void generatePhotoQuestion(Question question){
@@ -366,22 +427,28 @@ public class CompetitionSubmitAnswerActivity extends BaseActionBarActivity imple
 				}
 			}
 		});
+
+		//Checking for Local Saved
 		if(question.getAnswer() != null && question.getAnswer().length() > 0){
 			Picasso.with(this).load(question.getAnswer()).into(image_upload_view);
 			image_upload_view.setVisibility(View.VISIBLE);
 		}
 
+		//Checking for Already Submitted
+		if(AnswerList.getAnswers() != null && AnswerList.getAnswers().size() > 0){
+			image_upload_question.setEnabled(false);
+			for(Answer answer:AnswerList.getAnswers()){
+				if(answer.getMutipleQuestionId() == question.getId()){
+					Picasso.with(this).load(answer.getAnswer()).into(image_upload_view);
+					image_upload_view.setVisibility(View.VISIBLE);
+				}
+			}
+		}
 		upload_image_id++;
 		upload_image_view_id++;
 		layout_question.addView(txt_question_text);
 		layout_question.addView(image_upload_view);
 		layout_question.addView(image_upload_question);
-	}
-
-	private void reinitializeImageChooser() {
-		imageChooserManager = new ImageChooserManager(this, chooserType,"myfolder", true);
-		imageChooserManager.setImageChooserListener(this);
-		imageChooserManager.reinitialize(filePath);
 	}
 
 	private void generateAudioQuestion(Question question){
@@ -432,11 +499,29 @@ public class CompetitionSubmitAnswerActivity extends BaseActionBarActivity imple
 			}
 		});
 		if(question.getAnswer() != null && question.getAnswer().length() > 0){
+			audio_upload_question.setText(getResources().getString(R.string.str_ready_submit));
+		}
 
+		//Checking for Already Submitted
+		if(AnswerList.getAnswers() != null && AnswerList.getAnswers().size() > 0){
+			audio_upload_question.setEnabled(false);
+			for(Answer answer:AnswerList.getAnswers()){
+				if(answer.getMutipleQuestionId() == question.getId()){
+					if(answer.getAnswer() != null && answer.getAnswer().length() > 0){
+						audio_upload_question.setText(getResources().getString(R.string.str_already_uploaded));
+					}
+				}
+			}
 		}
 		upload_audio_id++;
 		layout_question.addView(txt_question_text);
 		layout_question.addView(audio_upload_question);
+	}
+
+	private void reinitializeImageChooser() {
+		imageChooserManager = new ImageChooserManager(this, chooserType,"myfolder", true);
+		imageChooserManager.setImageChooserListener(this);
+		imageChooserManager.reinitialize(filePath);
 	}
 
 	@Override
@@ -706,6 +791,9 @@ public class CompetitionSubmitAnswerActivity extends BaseActionBarActivity imple
 			public void success(String s, Response response) {
 				dialog.dismissWithSuccess();
 				SKToastMessage.showMessage(CompetitionSubmitAnswerActivity.this,s,SKToastMessage.SUCCESS);
+				Intent returnIntent = new Intent();
+				setResult(RESULT_OK,returnIntent);
+				finish();
 			}
 
 			@Override

@@ -5,551 +5,460 @@ import com.google.gson.annotations.SerializedName;
 
 public class TLGTownship {
 
-@SerializedName("id")
-@Expose
-private Integer id;
-@SerializedName("objectId")
-@Expose
-private String objectId;
-@SerializedName("tlg_group_address")
-@Expose
-private String tlgGroupAddress;
-@SerializedName("tlg_group_address_mm")
-@Expose
-private String tlgGroupAddressMm;
-@SerializedName("tlg_group_key_activity")
-@Expose
-private String tlgGroupKeyActivity;
-@SerializedName("tlg_group_key_activity_mm")
-@Expose
-private String tlgGroupKeyActivityMm;
-@SerializedName("tlg_group_key_skills")
-@Expose
-private String tlgGroupKeySkills;
-@SerializedName("tlg_group_key_skills_mm")
-@Expose
-private String tlgGroupKeySkillsMm;
-@SerializedName("tlg_group_lat_address")
-@Expose
-private String tlgGroupLatAddress;
-@SerializedName("tlg_group_lng_address")
-@Expose
-private String tlgGroupLngAddress;
-@SerializedName("tlg_group_logo")
-@Expose
-private String tlgGroupLogo;
-@SerializedName("tlg_group_member_no")
-@Expose
-private String tlgGroupMemberNo;
-@SerializedName("tlg_group_name")
-@Expose
-private String tlgGroupName;
-@SerializedName("tlg_group_name_mm")
-@Expose
-private String tlgGroupNameMm;
-@SerializedName("tlg_group_other_member_no")
-@Expose
-private String tlgGroupOtherMemberNo;
-@SerializedName("tlg_leader_fb_link")
-@Expose
-private String tlgLeaderFbLink;
-@SerializedName("tlg_leader_img")
-@Expose
-private String tlgLeaderImg;
-@SerializedName("tlg_leader_name")
-@Expose
-private String tlgLeaderName;
-@SerializedName("tlg_leader_name_mm")
-@Expose
-private String tlgLeaderNameMm;
-@SerializedName("tlg_leader_ph")
-@Expose
-private String tlgLeaderPh;
-@SerializedName("tlg_leader_role")
-@Expose
-private String tlgLeaderRole;
-@SerializedName("tlg_member_ph")
-@Expose
-private String tlgMemberPh;
-@SerializedName("tlg_member_ph_no")
-@Expose
-private String tlgMemberPhNo;
-@SerializedName("created_at")
-@Expose
-private String createdAt;
-@SerializedName("updated_at")
-@Expose
-private String updatedAt;
-@SerializedName("deleted_at")
-@Expose
-private Object deletedAt;
+    @SerializedName("id")
+    @Expose
+    private Integer id;
 
-/**
-* 
-* @return
-* The id
-*/
-public Integer getId() {
-return id;
-}
+    @SerializedName("is_leader")
+    @Expose
+    private String is_leader;
+    //is_leader
+    @SerializedName("objectId")
+    @Expose
+    private String objectId;
+    @SerializedName("tlg_group_address")
+    @Expose
+    private String tlgGroupAddress;
+    @SerializedName("tlg_group_address_mm")
+    @Expose
+    private String tlgGroupAddressMm;
+    @SerializedName("tlg_group_key_activity")
+    @Expose
+    private String tlgGroupKeyActivity;
+    @SerializedName("tlg_group_key_activity_mm")
+    @Expose
+    private String tlgGroupKeyActivityMm;
+    @SerializedName("tlg_group_key_skills")
+    @Expose
+    private String tlgGroupKeySkills;
+    @SerializedName("tlg_group_key_skills_mm")
+    @Expose
+    private String tlgGroupKeySkillsMm;
+    @SerializedName("tlg_group_lat_address")
+    @Expose
+    private String tlgGroupLatAddress;
+    @SerializedName("tlg_group_lng_address")
+    @Expose
+    private String tlgGroupLngAddress;
+    @SerializedName("tlg_group_logo")
+    @Expose
+    private String tlgGroupLogo;
+    @SerializedName("tlg_group_member_no")
+    @Expose
+    private String tlgGroupMemberNo;
+    @SerializedName("tlg_group_name")
+    @Expose
+    private String tlgGroupName;
+    @SerializedName("tlg_group_name_mm")
+    @Expose
+    private String tlgGroupNameMm;
+    @SerializedName("tlg_group_other_member_no")
+    @Expose
+    private String tlgGroupOtherMemberNo;
+    @SerializedName("tlg_leader_fb_link")
+    @Expose
+    private String tlgLeaderFbLink;
+    @SerializedName("tlg_leader_img")
+    @Expose
+    private String tlgLeaderImg;
+    @SerializedName("tlg_leader_name")
+    @Expose
+    private String tlgLeaderName;
+    @SerializedName("tlg_leader_name_mm")
+    @Expose
+    private String tlgLeaderNameMm;
+    @SerializedName("tlg_leader_ph")
+    @Expose
+    private String tlgLeaderPh;
+    @SerializedName("tlg_leader_role")
+    @Expose
+    private String tlgLeaderRole;
+    @SerializedName("tlg_member_ph")
+    @Expose
+    private String tlgMemberPh;
+    @SerializedName("tlg_member_ph_no")
+    @Expose
+    private String tlgMemberPhNo;
+    @SerializedName("created_at")
+    @Expose
+    private String createdAt;
+    @SerializedName("updated_at")
+    @Expose
+    private String updatedAt;
+    @SerializedName("deleted_at")
+    @Expose
+    private Object deletedAt;
 
-/**
-* 
-* @param id
-* The id
-*/
-public void setId(Integer id) {
-this.id = id;
-}
+    /**
+     * @return The id
+     */
+    public Integer getId() {
+        return id;
+    }
 
-/**
-* 
-* @return
-* The objectId
-*/
-public String getObjectId() {
-return objectId;
-}
+    /**
+     * @param id The id
+     */
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-/**
-* 
-* @param objectId
-* The objectId
-*/
-public void setObjectId(String objectId) {
-this.objectId = objectId;
-}
+    public String getIs_leader() {
+        return is_leader;
+    }
 
-/**
-* 
-* @return
-* The tlgGroupAddress
-*/
-public String getTlgGroupAddress() {
-return tlgGroupAddress;
-}
+    public void setIs_leader(String is_leader) {
+        this.is_leader = is_leader;
+    }
 
-/**
-* 
-* @param tlgGroupAddress
-* The tlg_group_address
-*/
-public void setTlgGroupAddress(String tlgGroupAddress) {
-this.tlgGroupAddress = tlgGroupAddress;
-}
+    /**
+     * @return The objectId
+     */
+    public String getObjectId() {
+        return objectId;
+    }
 
-/**
-* 
-* @return
-* The tlgGroupAddressMm
-*/
-public String getTlgGroupAddressMm() {
-return tlgGroupAddressMm;
-}
+    /**
+     * @param objectId The objectId
+     */
+    public void setObjectId(String objectId) {
+        this.objectId = objectId;
+    }
 
-/**
-* 
-* @param tlgGroupAddressMm
-* The tlg_group_address_mm
-*/
-public void setTlgGroupAddressMm(String tlgGroupAddressMm) {
-this.tlgGroupAddressMm = tlgGroupAddressMm;
-}
+    /**
+     * @return The tlgGroupAddress
+     */
+    public String getTlgGroupAddress() {
+        return tlgGroupAddress;
+    }
 
-/**
-* 
-* @return
-* The tlgGroupKeyActivity
-*/
-public String getTlgGroupKeyActivity() {
-return tlgGroupKeyActivity;
-}
+    /**
+     * @param tlgGroupAddress The tlg_group_address
+     */
+    public void setTlgGroupAddress(String tlgGroupAddress) {
+        this.tlgGroupAddress = tlgGroupAddress;
+    }
 
-/**
-* 
-* @param tlgGroupKeyActivity
-* The tlg_group_key_activity
-*/
-public void setTlgGroupKeyActivity(String tlgGroupKeyActivity) {
-this.tlgGroupKeyActivity = tlgGroupKeyActivity;
-}
+    /**
+     * @return The tlgGroupAddressMm
+     */
+    public String getTlgGroupAddressMm() {
+        return tlgGroupAddressMm;
+    }
 
-/**
-* 
-* @return
-* The tlgGroupKeyActivityMm
-*/
-public String getTlgGroupKeyActivityMm() {
-return tlgGroupKeyActivityMm;
-}
+    /**
+     * @param tlgGroupAddressMm The tlg_group_address_mm
+     */
+    public void setTlgGroupAddressMm(String tlgGroupAddressMm) {
+        this.tlgGroupAddressMm = tlgGroupAddressMm;
+    }
 
-/**
-* 
-* @param tlgGroupKeyActivityMm
-* The tlg_group_key_activity_mm
-*/
-public void setTlgGroupKeyActivityMm(String tlgGroupKeyActivityMm) {
-this.tlgGroupKeyActivityMm = tlgGroupKeyActivityMm;
-}
+    /**
+     * @return The tlgGroupKeyActivity
+     */
+    public String getTlgGroupKeyActivity() {
+        return tlgGroupKeyActivity;
+    }
 
-/**
-* 
-* @return
-* The tlgGroupKeySkills
-*/
-public String getTlgGroupKeySkills() {
-return tlgGroupKeySkills;
-}
+    /**
+     * @param tlgGroupKeyActivity The tlg_group_key_activity
+     */
+    public void setTlgGroupKeyActivity(String tlgGroupKeyActivity) {
+        this.tlgGroupKeyActivity = tlgGroupKeyActivity;
+    }
 
-/**
-* 
-* @param tlgGroupKeySkills
-* The tlg_group_key_skills
-*/
-public void setTlgGroupKeySkills(String tlgGroupKeySkills) {
-this.tlgGroupKeySkills = tlgGroupKeySkills;
-}
+    /**
+     * @return The tlgGroupKeyActivityMm
+     */
+    public String getTlgGroupKeyActivityMm() {
+        return tlgGroupKeyActivityMm;
+    }
 
-/**
-* 
-* @return
-* The tlgGroupKeySkillsMm
-*/
-public String getTlgGroupKeySkillsMm() {
-return tlgGroupKeySkillsMm;
-}
+    /**
+     * @param tlgGroupKeyActivityMm The tlg_group_key_activity_mm
+     */
+    public void setTlgGroupKeyActivityMm(String tlgGroupKeyActivityMm) {
+        this.tlgGroupKeyActivityMm = tlgGroupKeyActivityMm;
+    }
 
-/**
-* 
-* @param tlgGroupKeySkillsMm
-* The tlg_group_key_skills_mm
-*/
-public void setTlgGroupKeySkillsMm(String tlgGroupKeySkillsMm) {
-this.tlgGroupKeySkillsMm = tlgGroupKeySkillsMm;
-}
+    /**
+     * @return The tlgGroupKeySkills
+     */
+    public String getTlgGroupKeySkills() {
+        return tlgGroupKeySkills;
+    }
 
-/**
-* 
-* @return
-* The tlgGroupLatAddress
-*/
-public String getTlgGroupLatAddress() {
-return tlgGroupLatAddress;
-}
+    /**
+     * @param tlgGroupKeySkills The tlg_group_key_skills
+     */
+    public void setTlgGroupKeySkills(String tlgGroupKeySkills) {
+        this.tlgGroupKeySkills = tlgGroupKeySkills;
+    }
 
-/**
-* 
-* @param tlgGroupLatAddress
-* The tlg_group_lat_address
-*/
-public void setTlgGroupLatAddress(String tlgGroupLatAddress) {
-this.tlgGroupLatAddress = tlgGroupLatAddress;
-}
+    /**
+     * @return The tlgGroupKeySkillsMm
+     */
+    public String getTlgGroupKeySkillsMm() {
+        return tlgGroupKeySkillsMm;
+    }
 
-/**
-* 
-* @return
-* The tlgGroupLngAddress
-*/
-public String getTlgGroupLngAddress() {
-return tlgGroupLngAddress;
-}
+    /**
+     * @param tlgGroupKeySkillsMm The tlg_group_key_skills_mm
+     */
+    public void setTlgGroupKeySkillsMm(String tlgGroupKeySkillsMm) {
+        this.tlgGroupKeySkillsMm = tlgGroupKeySkillsMm;
+    }
 
-/**
-* 
-* @param tlgGroupLngAddress
-* The tlg_group_lng_address
-*/
-public void setTlgGroupLngAddress(String tlgGroupLngAddress) {
-this.tlgGroupLngAddress = tlgGroupLngAddress;
-}
+    /**
+     * @return The tlgGroupLatAddress
+     */
+    public String getTlgGroupLatAddress() {
+        return tlgGroupLatAddress;
+    }
 
-/**
-* 
-* @return
-* The tlgGroupLogo
-*/
-public String getTlgGroupLogo() {
-return tlgGroupLogo;
-}
+    /**
+     * @param tlgGroupLatAddress The tlg_group_lat_address
+     */
+    public void setTlgGroupLatAddress(String tlgGroupLatAddress) {
+        this.tlgGroupLatAddress = tlgGroupLatAddress;
+    }
 
-/**
-* 
-* @param tlgGroupLogo
-* The tlg_group_logo
-*/
-public void setTlgGroupLogo(String tlgGroupLogo) {
-this.tlgGroupLogo = tlgGroupLogo;
-}
+    /**
+     * @return The tlgGroupLngAddress
+     */
+    public String getTlgGroupLngAddress() {
+        return tlgGroupLngAddress;
+    }
 
-/**
-* 
-* @return
-* The tlgGroupMemberNo
-*/
-public String getTlgGroupMemberNo() {
-return tlgGroupMemberNo;
-}
+    /**
+     * @param tlgGroupLngAddress The tlg_group_lng_address
+     */
+    public void setTlgGroupLngAddress(String tlgGroupLngAddress) {
+        this.tlgGroupLngAddress = tlgGroupLngAddress;
+    }
 
-/**
-* 
-* @param tlgGroupMemberNo
-* The tlg_group_member_no
-*/
-public void setTlgGroupMemberNo(String tlgGroupMemberNo) {
-this.tlgGroupMemberNo = tlgGroupMemberNo;
-}
+    /**
+     * @return The tlgGroupLogo
+     */
+    public String getTlgGroupLogo() {
+        return tlgGroupLogo;
+    }
 
-/**
-* 
-* @return
-* The tlgGroupName
-*/
-public String getTlgGroupName() {
-return tlgGroupName;
-}
+    /**
+     * @param tlgGroupLogo The tlg_group_logo
+     */
+    public void setTlgGroupLogo(String tlgGroupLogo) {
+        this.tlgGroupLogo = tlgGroupLogo;
+    }
 
-/**
-* 
-* @param tlgGroupName
-* The tlg_group_name
-*/
-public void setTlgGroupName(String tlgGroupName) {
-this.tlgGroupName = tlgGroupName;
-}
+    /**
+     * @return The tlgGroupMemberNo
+     */
+    public String getTlgGroupMemberNo() {
+        return tlgGroupMemberNo;
+    }
 
-/**
-* 
-* @return
-* The tlgGroupNameMm
-*/
-public String getTlgGroupNameMm() {
-return tlgGroupNameMm;
-}
+    /**
+     * @param tlgGroupMemberNo The tlg_group_member_no
+     */
+    public void setTlgGroupMemberNo(String tlgGroupMemberNo) {
+        this.tlgGroupMemberNo = tlgGroupMemberNo;
+    }
 
-/**
-* 
-* @param tlgGroupNameMm
-* The tlg_group_name_mm
-*/
-public void setTlgGroupNameMm(String tlgGroupNameMm) {
-this.tlgGroupNameMm = tlgGroupNameMm;
-}
+    /**
+     * @return The tlgGroupName
+     */
+    public String getTlgGroupName() {
+        return tlgGroupName;
+    }
 
-/**
-* 
-* @return
-* The tlgGroupOtherMemberNo
-*/
-public String getTlgGroupOtherMemberNo() {
-return tlgGroupOtherMemberNo;
-}
+    /**
+     * @param tlgGroupName The tlg_group_name
+     */
+    public void setTlgGroupName(String tlgGroupName) {
+        this.tlgGroupName = tlgGroupName;
+    }
 
-/**
-* 
-* @param tlgGroupOtherMemberNo
-* The tlg_group_other_member_no
-*/
-public void setTlgGroupOtherMemberNo(String tlgGroupOtherMemberNo) {
-this.tlgGroupOtherMemberNo = tlgGroupOtherMemberNo;
-}
+    /**
+     * @return The tlgGroupNameMm
+     */
+    public String getTlgGroupNameMm() {
+        return tlgGroupNameMm;
+    }
 
-/**
-* 
-* @return
-* The tlgLeaderFbLink
-*/
-public String getTlgLeaderFbLink() {
-return tlgLeaderFbLink;
-}
+    /**
+     * @param tlgGroupNameMm The tlg_group_name_mm
+     */
+    public void setTlgGroupNameMm(String tlgGroupNameMm) {
+        this.tlgGroupNameMm = tlgGroupNameMm;
+    }
 
-/**
-* 
-* @param tlgLeaderFbLink
-* The tlg_leader_fb_link
-*/
-public void setTlgLeaderFbLink(String tlgLeaderFbLink) {
-this.tlgLeaderFbLink = tlgLeaderFbLink;
-}
+    /**
+     * @return The tlgGroupOtherMemberNo
+     */
+    public String getTlgGroupOtherMemberNo() {
+        return tlgGroupOtherMemberNo;
+    }
 
-/**
-* 
-* @return
-* The tlgLeaderImg
-*/
-public String getTlgLeaderImg() {
-return tlgLeaderImg;
-}
+    /**
+     * @param tlgGroupOtherMemberNo The tlg_group_other_member_no
+     */
+    public void setTlgGroupOtherMemberNo(String tlgGroupOtherMemberNo) {
+        this.tlgGroupOtherMemberNo = tlgGroupOtherMemberNo;
+    }
 
-/**
-* 
-* @param tlgLeaderImg
-* The tlg_leader_img
-*/
-public void setTlgLeaderImg(String tlgLeaderImg) {
-this.tlgLeaderImg = tlgLeaderImg;
-}
+    /**
+     * @return The tlgLeaderFbLink
+     */
+    public String getTlgLeaderFbLink() {
+        return tlgLeaderFbLink;
+    }
 
-/**
-* 
-* @return
-* The tlgLeaderName
-*/
-public String getTlgLeaderName() {
-return tlgLeaderName;
-}
+    /**
+     * @param tlgLeaderFbLink The tlg_leader_fb_link
+     */
+    public void setTlgLeaderFbLink(String tlgLeaderFbLink) {
+        this.tlgLeaderFbLink = tlgLeaderFbLink;
+    }
 
-/**
-* 
-* @param tlgLeaderName
-* The tlg_leader_name
-*/
-public void setTlgLeaderName(String tlgLeaderName) {
-this.tlgLeaderName = tlgLeaderName;
-}
+    /**
+     * @return The tlgLeaderImg
+     */
+    public String getTlgLeaderImg() {
+        return tlgLeaderImg;
+    }
 
-/**
-* 
-* @return
-* The tlgLeaderNameMm
-*/
-public String getTlgLeaderNameMm() {
-return tlgLeaderNameMm;
-}
+    /**
+     * @param tlgLeaderImg The tlg_leader_img
+     */
+    public void setTlgLeaderImg(String tlgLeaderImg) {
+        this.tlgLeaderImg = tlgLeaderImg;
+    }
 
-/**
-* 
-* @param tlgLeaderNameMm
-* The tlg_leader_name_mm
-*/
-public void setTlgLeaderNameMm(String tlgLeaderNameMm) {
-this.tlgLeaderNameMm = tlgLeaderNameMm;
-}
+    /**
+     * @return The tlgLeaderName
+     */
+    public String getTlgLeaderName() {
+        return tlgLeaderName;
+    }
 
-/**
-* 
-* @return
-* The tlgLeaderPh
-*/
-public String getTlgLeaderPh() {
-return tlgLeaderPh;
-}
+    /**
+     * @param tlgLeaderName The tlg_leader_name
+     */
+    public void setTlgLeaderName(String tlgLeaderName) {
+        this.tlgLeaderName = tlgLeaderName;
+    }
 
-/**
-* 
-* @param tlgLeaderPh
-* The tlg_leader_ph
-*/
-public void setTlgLeaderPh(String tlgLeaderPh) {
-this.tlgLeaderPh = tlgLeaderPh;
-}
+    /**
+     * @return The tlgLeaderNameMm
+     */
+    public String getTlgLeaderNameMm() {
+        return tlgLeaderNameMm;
+    }
 
-/**
-* 
-* @return
-* The tlgLeaderRole
-*/
-public String getTlgLeaderRole() {
-return tlgLeaderRole;
-}
+    /**
+     * @param tlgLeaderNameMm The tlg_leader_name_mm
+     */
+    public void setTlgLeaderNameMm(String tlgLeaderNameMm) {
+        this.tlgLeaderNameMm = tlgLeaderNameMm;
+    }
 
-/**
-* 
-* @param tlgLeaderRole
-* The tlg_leader_role
-*/
-public void setTlgLeaderRole(String tlgLeaderRole) {
-this.tlgLeaderRole = tlgLeaderRole;
-}
+    /**
+     * @return The tlgLeaderPh
+     */
+    public String getTlgLeaderPh() {
+        return tlgLeaderPh;
+    }
 
-/**
-* 
-* @return
-* The tlgMemberPh
-*/
-public String getTlgMemberPh() {
-return tlgMemberPh;
-}
+    /**
+     * @param tlgLeaderPh The tlg_leader_ph
+     */
+    public void setTlgLeaderPh(String tlgLeaderPh) {
+        this.tlgLeaderPh = tlgLeaderPh;
+    }
 
-/**
-* 
-* @param tlgMemberPh
-* The tlg_member_ph
-*/
-public void setTlgMemberPh(String tlgMemberPh) {
-this.tlgMemberPh = tlgMemberPh;
-}
+    /**
+     * @return The tlgLeaderRole
+     */
+    public String getTlgLeaderRole() {
+        return tlgLeaderRole;
+    }
 
-/**
-* 
-* @return
-* The tlgMemberPhNo
-*/
-public String getTlgMemberPhNo() {
-return tlgMemberPhNo;
-}
+    /**
+     * @param tlgLeaderRole The tlg_leader_role
+     */
+    public void setTlgLeaderRole(String tlgLeaderRole) {
+        this.tlgLeaderRole = tlgLeaderRole;
+    }
 
-/**
-* 
-* @param tlgMemberPhNo
-* The tlg_member_ph_no
-*/
-public void setTlgMemberPhNo(String tlgMemberPhNo) {
-this.tlgMemberPhNo = tlgMemberPhNo;
-}
+    /**
+     * @return The tlgMemberPh
+     */
+    public String getTlgMemberPh() {
+        return tlgMemberPh;
+    }
 
-/**
-* 
-* @return
-* The createdAt
-*/
-public String getCreatedAt() {
-return createdAt;
-}
+    /**
+     * @param tlgMemberPh The tlg_member_ph
+     */
+    public void setTlgMemberPh(String tlgMemberPh) {
+        this.tlgMemberPh = tlgMemberPh;
+    }
 
-/**
-* 
-* @param createdAt
-* The created_at
-*/
-public void setCreatedAt(String createdAt) {
-this.createdAt = createdAt;
-}
+    /**
+     * @return The tlgMemberPhNo
+     */
+    public String getTlgMemberPhNo() {
+        return tlgMemberPhNo;
+    }
 
-/**
-* 
-* @return
-* The updatedAt
-*/
-public String getUpdatedAt() {
-return updatedAt;
-}
+    /**
+     * @param tlgMemberPhNo The tlg_member_ph_no
+     */
+    public void setTlgMemberPhNo(String tlgMemberPhNo) {
+        this.tlgMemberPhNo = tlgMemberPhNo;
+    }
 
-/**
-* 
-* @param updatedAt
-* The updated_at
-*/
-public void setUpdatedAt(String updatedAt) {
-this.updatedAt = updatedAt;
-}
+    /**
+     * @return The createdAt
+     */
+    public String getCreatedAt() {
+        return createdAt;
+    }
 
-/**
-* 
-* @return
-* The deletedAt
-*/
-public Object getDeletedAt() {
-return deletedAt;
-}
+    /**
+     * @param createdAt The created_at
+     */
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
 
-/**
-* 
-* @param deletedAt
-* The deleted_at
-*/
-public void setDeletedAt(Object deletedAt) {
-this.deletedAt = deletedAt;
-}
+    /**
+     * @return The updatedAt
+     */
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
+    /**
+     * @param updatedAt The updated_at
+     */
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    /**
+     * @return The deletedAt
+     */
+    public Object getDeletedAt() {
+        return deletedAt;
+    }
+
+    /**
+     * @param deletedAt The deleted_at
+     */
+    public void setDeletedAt(Object deletedAt) {
+        this.deletedAt = deletedAt;
+    }
 
 }

@@ -85,6 +85,8 @@ public class TLGUserStoriesRecentFragment extends Fragment implements View.OnCli
     private Menu menu;
     private Rating avgRatings;
 
+    String  mstrCatName , mCatID;
+
     public TLGUserStoriesRecentFragment() {
         // Empty constructor required for fragment subclasses
     }
@@ -108,9 +110,7 @@ public class TLGUserStoriesRecentFragment extends Fragment implements View.OnCli
         View rootView = inflater.inflate(R.layout.fragment_stories, container, false);
         mContext = getActivity().getApplicationContext();
 
-        //int index = getArguments().getInt(ARG_MENU_INDEX);
-        //SetUserData();
-        //SetPostData();
+
         init(rootView);
         getReview();
 
@@ -118,6 +118,12 @@ public class TLGUserStoriesRecentFragment extends Fragment implements View.OnCli
     }
 
     private void init(View rootView) {
+
+        Bundle bundle = getArguments();
+        mstrCatName = bundle.getString("CategoryName");
+        mCatID = bundle.getString("CategoryID");
+
+
         sharePrefLanguageUtil = getActivity().getSharedPreferences(Utils.PREF_SETTING, Context.MODE_PRIVATE);
 
         feedItems = new ArrayList<FeedItem>();
@@ -131,6 +137,15 @@ public class TLGUserStoriesRecentFragment extends Fragment implements View.OnCli
         progress = (ProgressWheel) rootView.findViewById(R.id.progress_wheel);
         fab = (FloatingActionButton) rootView.findViewById(R.id.post_news);
         fab.setOnClickListener(this);
+
+
+        //TODO NO more post for Archive
+        if(mstrCatName.equalsIgnoreCase("Archive")){
+
+            fab.setVisibility(View.GONE);
+        }else{
+            fab.setVisibility(View.VISIBLE);
+        }
 
         progress.setVisibility(View.VISIBLE);
 
@@ -161,9 +176,6 @@ public class TLGUserStoriesRecentFragment extends Fragment implements View.OnCli
 
             }
         }
-
-
-        //setupAdapter();
 
 
         mRecyclerView.addOnItemTouchListener(new RecyclerOnItemClickListener(getActivity(), new RecyclerOnItemClickListener.OnItemClickListener() {
@@ -1233,8 +1245,7 @@ public class TLGUserStoriesRecentFragment extends Fragment implements View.OnCli
 
                 intent.putExtra("PostType", "TalkTogetherPost");
                 startActivity(intent);
-                //startActivity(new Intent(getActivity(), MainPhotoPostActivity.class));
-                //Utils.doToastEng(mContext, "Coming Soon!");
+
 
                 break;
         }
