@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -16,10 +17,10 @@
             android:id="@+id/event_detail_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Meeting"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textColor="@color/text_sub_head_color"
             android:textStyle="bold"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+            tools:text="Meeting" />
 
         <org.undp_iwomen.iwomen.ui.widget.CustomTextView
             android:id="@+id/event_detail_desc"
@@ -28,7 +29,7 @@
             android:layout_marginBottom="8dp"
             android:layout_marginTop="16dp"
             android:textColor="@color/text_sub_head_color"
-            android:text="@string/large_sample_text" />
+            tools:text="@string/large_sample_text" />
 
 
         <org.undp_iwomen.iwomen.ui.widget.CustomTextView
@@ -39,10 +40,10 @@
             android:layout_marginTop="8dp"
             android:drawableLeft="@drawable/ic_place"
             android:drawablePadding="16dp"
-            android:textColor="@color/text_sub_head_color"
             android:drawableTint="?android:textColorSecondary"
             android:gravity="center_vertical"
-            android:text="KyietLet, Ayeyarwady" />
+            android:text="KyietLet, Ayeyarwady"
+            android:textColor="@color/text_sub_head_color" />
 
         <org.undp_iwomen.iwomen.ui.widget.CustomTextView
             android:id="@+id/event_detail_date"
@@ -52,10 +53,10 @@
             android:layout_marginTop="8dp"
             android:drawableLeft="@drawable/ic_event_date"
             android:drawablePadding="16dp"
-            android:textColor="@color/text_sub_head_color"
             android:drawableTint="?android:textColorSecondary"
             android:gravity="center_vertical"
-            android:text="Monday, 11 January 2016" />
+            android:text="Monday, 11 January 2016"
+            android:textColor="@color/text_sub_head_color" />
 
         <org.undp_iwomen.iwomen.ui.widget.CustomTextView
             android:id="@+id/event_detail_time"
@@ -65,10 +66,10 @@
             android:layout_marginTop="8dp"
             android:drawableLeft="@drawable/ic_clock"
             android:drawablePadding="16dp"
-            android:textColor="@color/text_sub_head_color"
             android:drawableTint="?android:textColorSecondary"
             android:gravity="center_vertical"
-            android:text="From 9:00 PM-3:00 AM" />
+            android:text="From 9:00 PM-3:00 AM"
+            android:textColor="@color/text_sub_head_color" />
 
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

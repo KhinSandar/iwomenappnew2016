@@ -392,4 +392,19 @@ female-pilots-iaa1s
 <string name="register_terms_body">သင္သည္ iWomen Application ကိုု ေဒါင္းလုုတ္ခ်ျပီးသည္နွင့္ တျပိဳင္နက္ ကၽြနုု္ပ္ တိုု႕၏ စည္းမ်ဥ္းမ်ားကိုု နားလည္ လက္ခံျပီးျဖစ္ပါသည္။
 ပိုုမိုုဖတ္ရႈရန္ </string>
 
+    <string-array name="women_remember_day_desc_array">
+        <item>@string/jan_des</item>
+        <item>@string/feb_des</item>
+        <item>@string/mar_des</item>
+        <item>@string/apr_des</item>
+        <item>@string/may_des</item>
+        <item>@string/jun_des</item>
+        <item>@string/jul_des</item>
+        <item>@string/aug_des</item>
+        <item>@string/sep_des</item>
+        <item>@string/oct_des</item>
+        <item>@string/nov_des</item>
+        <item>@string/dec_des</item>
+    </string-array>
+
 </resources>

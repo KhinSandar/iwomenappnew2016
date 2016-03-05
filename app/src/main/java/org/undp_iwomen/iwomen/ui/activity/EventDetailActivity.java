@@ -26,9 +26,15 @@ public class EventDetailActivity extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
 
         if(null == savedInstanceState){
-            String id = getIntent().getStringExtra(EventDetailFragment.EXTRA_ID);
-            Log.e("<<View event frag detail>>>", "==>" + id);
-            initFragment(EventDetailFragment.newInstance(id));
+            int type = getIntent().getIntExtra(EventDetailFragment.EXTRA_EVENT_TYPE, 0);
+
+            if(type == EventDetailFragment.TYPE_IMPLICIT){
+                int month = getIntent().getIntExtra(EventDetailFragment.EXTRA_MONTH, 0);
+                initFragment(EventDetailFragment.newInstance("", EventDetailFragment.TYPE_IMPLICIT, month));
+            }else{
+                String id = getIntent().getStringExtra(EventDetailFragment.EXTRA_ID);
+                initFragment(EventDetailFragment.newInstance(id, EventDetailFragment.TYPE_USER_DEFINED, -1));
+            }
         }
     }
 
