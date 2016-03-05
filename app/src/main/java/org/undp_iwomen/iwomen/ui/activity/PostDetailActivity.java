@@ -438,7 +438,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         strLang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
 
         mLikeAnimatedButton = (AnimatedButton) findViewById(R.id.postdetail_like_animated_button);
-        mLikeAnimatedButton.setText(102 + "");
+        //mLikeAnimatedButton.setText(102 + "");
         //TODO id
         Intent i = getIntent();
 
