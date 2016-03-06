@@ -121,8 +121,8 @@ public class RegisterTermsFragment8 extends Fragment implements View.OnClickList
             String user_name = mSharedPreferencesUserInfo.getString(CommonConfig.USER_NAME, null);
             String phone = mSharedPreferencesUserInfo.getString(CommonConfig.USER_PH, null);
 
-            String email = mSharedPreferencesUserInfo.getString(CommonConfig.USER_PH, null);
-            String pwd = mSharedPreferencesUserInfo.getString(CommonConfig.USER_PH, null);
+            String email = mSharedPreferencesUserInfo.getString(CommonConfig.USER_EMAIL, null);
+            String pwd = mSharedPreferencesUserInfo.getString(CommonConfig.USER_PWD, null);
 
             String address_tlg_township_name = mSharedPreferencesUserInfo.getString(CommonConfig.USER_TLG_NAME, null);
 
@@ -132,7 +132,7 @@ public class RegisterTermsFragment8 extends Fragment implements View.OnClickList
             String tlg_country= mSharedPreferencesUserInfo.getString(CommonConfig.USER_COUNTRY, null);
 
 
-            String user_photo = mSharedPreferencesUserInfo.getString(CommonConfig.USER_PH, null);
+            String user_photo = mSharedPreferencesUserInfo.getString(CommonConfig.USER_UPLOAD_IMG_URL, null);
 
             //String user_role = "User";
             //TODO remark group_id

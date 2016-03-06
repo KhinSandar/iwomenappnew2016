@@ -1394,7 +1394,6 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
                 //Intent intent = new Intent(mContext, MainPhotoPostActivity.class);
                 Intent intent = new Intent(mContext, NewPostActivity.class);
 
-                intent.putExtra("PostType", "BeInspiredIwomenPost");
                 startActivity(intent);
                 //startActivity(new Intent(getActivity(), MainPhotoPostActivity.class));
 

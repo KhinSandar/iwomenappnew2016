@@ -29,6 +29,14 @@ apply plugin: 'com.google.gms.google-services'
 
 
 android {
+    signingConfigs {
+        release {
+            keyAlias 'iwomen'
+            keyPassword 'iwomen'
+            storeFile file('D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\iwomen.jks')
+            storePassword 'undp2105'
+        }
+    }
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
     useLibrary 'org.apache.http.legacy'
@@ -44,6 +52,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            signingConfig signingConfigs.release
         }
     }
 }
@@ -51,7 +60,7 @@ android {
 dependencies {
     // Google Play Services
     //compile 'com.google.android.gms:play-services-analytics:7.5.0'
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile fileTree(dir: 'libs', include: ['*.jar'])
     //compile 'com.afollestad:material-dialogs:0.7.4.1'
     //compile project(':facebook')
     //1.6.0
@@ -72,11 +81,9 @@ dependencies {
     compile project(':SKListView')
     compile project(':SKConnectionDetector')
     //compile 'com.google.android.gms:play-services:8.1.0'
-
     compile project(':GifImageViewlibrary')
     compile project(':caldroid')
     compile 'org.greenrobot:eventbus:3.0.0'
-
     compile 'com.path:android-priority-jobqueue:1.1.2'
     compile 'com.android.support:appcompat-v7:23.2.0'
     compile 'com.android.support:support-v4:23.2.0'

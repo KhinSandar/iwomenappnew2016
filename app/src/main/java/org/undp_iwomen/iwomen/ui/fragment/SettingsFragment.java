@@ -175,16 +175,22 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
 
 
                     StoreUtil.getInstance().saveTo("fonts", "english");
-
                     editor.putString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
+                    editor.commit();
 
-                    setEnglishFont();
+                    String languageToLoad = "eng"; // your language
+                    Locale locale = new Locale(languageToLoad);
+                    Locale.setDefault(locale);
+                    Configuration config = new Configuration();
+                    config.locale = locale;
+                    getActivity().getBaseContext().getResources().updateConfiguration(config,getActivity().getResources().getDisplayMetrics());
 
 
                     SharedPreferences.Editor fontEditor = getActivity().getSharedPreferences("mLanguage", Activity.MODE_PRIVATE).edit();
                     fontEditor.putString("lang", "eng");
                     fontEditor.commit();
 
+                    setEnglishFont();
 
                 } else if (buttonView.getId() == R.id.settings_mm_zawgyi_language) {
                     StoreUtil.getInstance().saveTo("fonts", "zawgyione");
@@ -195,7 +201,7 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
                     Locale.setDefault(locale);
                     Configuration config = new Configuration();
                     config.locale = locale;
-                    getActivity().getBaseContext().getResources().updateConfiguration(config, getActivity().getBaseContext().getResources().getDisplayMetrics());
+                    getActivity().getBaseContext().getResources().updateConfiguration(config, getResources().getDisplayMetrics());
 
                     SharedPreferences.Editor fontEditor = getActivity().getSharedPreferences("mLanguage", Activity.MODE_PRIVATE).edit();
                     fontEditor.putString("lang", "mm");
@@ -213,7 +219,7 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
                     Locale.setDefault(locale);
                     Configuration config = new Configuration();
                     config.locale = locale;
-                    getActivity().getBaseContext().getResources().updateConfiguration(config, getActivity().getBaseContext().getResources().getDisplayMetrics());
+                    getActivity().getBaseContext().getResources().updateConfiguration(config, getResources().getDisplayMetrics());
 
                     SharedPreferences.Editor fontEditor = getActivity().getSharedPreferences("mLanguage", Activity.MODE_PRIVATE).edit();
                     fontEditor.putString("lang", "mm");
@@ -230,7 +236,7 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
                     Locale.setDefault(locale);
                     Configuration config = new Configuration();
                     config.locale = locale;
-                    getActivity().getBaseContext().getResources().updateConfiguration(config, getActivity().getBaseContext().getResources().getDisplayMetrics());
+                    getActivity().getBaseContext().getResources().updateConfiguration(config, getResources().getDisplayMetrics());
 
                     SharedPreferences.Editor fontEditor = getActivity().getSharedPreferences("mLanguage", Activity.MODE_PRIVATE).edit();
                     fontEditor.putString("lang", "mm");

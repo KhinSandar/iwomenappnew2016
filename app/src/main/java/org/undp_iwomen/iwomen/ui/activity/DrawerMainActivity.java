@@ -27,6 +27,7 @@ import android.widget.TextView;
 import com.facebook.FacebookSdk;
 import com.google.gson.Gson;
 import com.makeramen.RoundedImageView;
+import com.smk.skalertmessage.SKToastMessage;
 import com.smk.skconnectiondetector.SKConnectionDetector;
 import com.squareup.picasso.Picasso;
 
@@ -230,13 +231,15 @@ public class DrawerMainActivity extends BaseActionBarActivity {
             @Override
             public void onClick(View view) {
                 //org.undp_iwomen.iwomen.utils.Utils.doToastEng(getApplicationContext(), "On CLick" + user_obj_id);
-
+            /*
                 Intent intent = new Intent(getApplicationContext(), ProfileEditActivity.class);
 
                 intent.putExtra("UserId", user_obj_id);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
+                startActivity(intent);*/
+                SKToastMessage.showMessage(DrawerMainActivity.this, getResources().getString(R.string.resource_coming_soon_eng), SKToastMessage.ERROR);
+
 
             }
         });
@@ -777,9 +780,12 @@ public class DrawerMainActivity extends BaseActionBarActivity {
         Log.i("Reviews", "Reviews : here");
         if (user_obj_id != null) {
             Review review = StoreUtil.getInstance().selectFrom(user_obj_id + versionCode);
+            Boolean feedback = StoreUtil.getInstance().selectFrom("feedback");
             Log.i("Reviews", "Reviews :" + review);
             if (review == null && UsageCount != null && UsageCount > 3) {
                 showReviewDialog(user_obj_id);
+            } else if(UsageCount != null && UsageCount > 3 && feedback == null) {
+                showFeedBack(user_obj_id);
             } else {
                 finish();
             }

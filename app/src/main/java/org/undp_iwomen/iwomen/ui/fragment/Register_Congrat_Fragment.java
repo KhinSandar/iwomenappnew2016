@@ -82,7 +82,7 @@ public class Register_Congrat_Fragment extends Fragment implements View.OnClickL
             //animation.gif is just an example, use the name of your file
             //that is inside the assets folder.
 
-            InputStream is = getActivity().getAssets().open("congratulationsAsset.gif");
+            InputStream is = getActivity().getAssets().open("congratulations.gif");
             byte[] bytes = new byte[is.available()];
             is.read(bytes);
             is.close();

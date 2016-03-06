@@ -102,6 +102,43 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
         txtChangLanEng = (TextView) findViewById(R.id.login_change_lan_eng);
         txtChangLanMM = (TextView) findViewById(R.id.login_change_lan_mm);
 
+        lang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
+
+        if (lang.equals(Utils.ENG_LANG)) {
+
+            String languageToLoad = "eng"; // your language
+            Locale locale = new Locale(languageToLoad);
+            Locale.setDefault(locale);
+            Configuration config = new Configuration();
+            config.locale = locale;
+            getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+
+            setEnglishFont();
+        } else if (lang.equals(Utils.MM_LANG)) {
+
+            String languageToLoadm = "mm"; // your language
+            Locale localem = new Locale(languageToLoadm);
+            Locale.setDefault(localem);
+            Configuration configm = new Configuration();
+            configm.locale = localem;
+            getBaseContext().getResources().updateConfiguration(configm, getBaseContext().getResources().getDisplayMetrics());
+
+
+            setMyanmarFontZawgyi();
+        } else if (lang.equals(Utils.MM_LANG_UNI)) {
+
+            String languageToLoadm = "mm"; // your language
+            Locale localem = new Locale(languageToLoadm);
+            Locale.setDefault(localem);
+            Configuration configm = new Configuration();
+            configm.locale = localem;
+            getBaseContext().getResources().updateConfiguration(configm, getBaseContext().getResources().getDisplayMetrics());
+
+            setMyanmarFontUni();
+        } else if (lang.equals(Utils.MM_LANG_DEFAULT)) {
+            setMyanmarFontDefault();
+        }
+
         //TODO CHECK LOGIN OR NOT
         if (mSharedPreferencesUserInfo.getString(CommonConfig.USER_ROLE, null) != null) {
             startActivity(new Intent(this, DrawerMainActivity.class));
@@ -290,6 +327,14 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
                         editor.putString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
                         editor.commit();
 
+                        String languageToLoad = "eng"; // your language
+                        Locale locale = new Locale(languageToLoad);
+                        Locale.setDefault(locale);
+                        Configuration config = new Configuration();
+                        config.locale = locale;
+                        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+
+
                         SharedPreferences.Editor fontEditor = getSharedPreferences("mLanguage", Activity.MODE_PRIVATE).edit();
                         fontEditor.putString("lang", "eng");
                         fontEditor.commit();
@@ -303,12 +348,12 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
                         editor.putString(Utils.PREF_SETTING_LANG, Utils.MM_LANG);
                         editor.commit();
 
-                        String languageToLoad = "mm"; // your language
-                        Locale locale = new Locale(languageToLoad);
-                        Locale.setDefault(locale);
-                        Configuration config = new Configuration();
-                        config.locale = locale;
-                        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+                        String languageToLoadm = "mm"; // your language
+                        Locale localem = new Locale(languageToLoadm);
+                        Locale.setDefault(localem);
+                        Configuration configm = new Configuration();
+                        configm.locale = localem;
+                        getBaseContext().getResources().updateConfiguration(configm, getBaseContext().getResources().getDisplayMetrics());
 
                         SharedPreferences.Editor fontEditorMM = getSharedPreferences("mLanguage", Activity.MODE_PRIVATE).edit();
                         fontEditorMM.putString("lang", "mm");
@@ -426,12 +471,37 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
         rd_lang_mm_default = (RadioButton) view.findViewById(R.id.dialog_mm_default_language);
         if (lang.equals(Utils.ENG_LANG)) {
             rd_lang_en.setChecked(true);
+
+            String languageToLoad = "eng"; // your language
+            Locale locale = new Locale(languageToLoad);
+            Locale.setDefault(locale);
+            Configuration config = new Configuration();
+            config.locale = locale;
+            getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+
             setEnglishFont();
         } else if (lang.equals(Utils.MM_LANG)) {
             rd_lang_mm_zawgyi.setChecked(true);
+
+            String languageToLoadm = "mm"; // your language
+            Locale localem = new Locale(languageToLoadm);
+            Locale.setDefault(localem);
+            Configuration configm = new Configuration();
+            configm.locale = localem;
+            getBaseContext().getResources().updateConfiguration(configm, getBaseContext().getResources().getDisplayMetrics());
+
+
             setMyanmarFontZawgyi();
         } else if (lang.equals(Utils.MM_LANG_UNI)) {
             rd_lang_mm_uni.setChecked(true);
+
+            String languageToLoadm = "mm"; // your language
+            Locale localem = new Locale(languageToLoadm);
+            Locale.setDefault(localem);
+            Configuration configm = new Configuration();
+            configm.locale = localem;
+            getBaseContext().getResources().updateConfiguration(configm, getBaseContext().getResources().getDisplayMetrics());
+
             setMyanmarFontUni();
         } else if (lang.equals(Utils.MM_LANG_DEFAULT)) {
             rd_lang_mm_default.setChecked(true);

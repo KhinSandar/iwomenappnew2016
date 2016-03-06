@@ -234,6 +234,7 @@ public interface INetworkEngine {
     @FormUrlEncoded
     @POST(CommonConfig.CREATE_NEW_POST)
     void postCreateNewPost(
+            @Field("isAllow") int isAllow,
             @Field("content") String content,
             @Field("contentType") String contentType,
             @Field("content_mm") String content_mm,
@@ -250,9 +251,11 @@ public interface INetworkEngine {
             Callback<IWomenPost> callback
     );
 
+
     @FormUrlEncoded
     @POST(CommonConfig.CREATE_NEW_WOMENPOST)
-    void postCreateNewWomenPost(
+    void postCreateWomenPost(
+            @Field("isAllow") int isAllow,
             @Field("content") String content,
             @Field("contentType") String contentType,
             @Field("content_mm") String content_mm,

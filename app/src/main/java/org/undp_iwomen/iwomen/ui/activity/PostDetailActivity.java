@@ -188,6 +188,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     private IWomenPost iWomenPost;
     private boolean alreadySticker = false;
     private AnimatedButton mSocialNoEarLikeAnimatedButton;
+    private ImageView img_credit_icon_img;
 
     private enum PendingAction {
         NONE,
@@ -419,6 +420,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         /*txt_lbl_like_post = (CustomTextView) findViewById(R.id.postdetail_like_post_lbl);
         txt_lbl_share_post = (CustomTextView) findViewById(R.id.postdetail_share_post_lbl);*/
 
+        img_credit_icon_img = (ImageView)findViewById(R.id.postdetail_credit_pic_rounded);
         img_credit_logo = (ResizableImageView) findViewById(R.id.postdetail_credit_img);
         txt_credit_link = (TextView) findViewById(R.id.postdetail_credit_link);
         progressBar_credit = (ProgressBar) findViewById(R.id.postdetail_credit_progress);
@@ -712,6 +714,22 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
         mstrPostType = item.getContentType();
         mVideoId = item.getVideoId();
+        //TODO hide visible
+        if (postType.equalsIgnoreCase("iWomenPost")) {
+            postdetail_username.setVisibility(View.VISIBLE);
+            img_credit_logo.setVisibility(View.VISIBLE);
+            img_credit_icon_img.setVisibility(View.VISIBLE);
+            txt_credit_link.setVisibility(View.VISIBLE);
+            post_content_posted_date.setVisibility(View.VISIBLE);
+        }else{
+            postdetail_username.setVisibility(View.INVISIBLE);
+            img_credit_logo.setVisibility(View.INVISIBLE);
+            img_credit_icon_img.setVisibility(View.INVISIBLE);
+            txt_credit_link.setVisibility(View.INVISIBLE);
+            post_content_posted_date.setVisibility(View.INVISIBLE);
+
+        }
+
         //TODO TableColumnUpdate 10 data set show in UI
         if (strLang.equals(Utils.ENG_LANG)) {
             postdetail_username.setTypeface(MyTypeFace.get(getApplicationContext(), MyTypeFace.NORMAL));

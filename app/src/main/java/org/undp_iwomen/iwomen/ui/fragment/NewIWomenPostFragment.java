@@ -62,10 +62,9 @@ import retrofit.client.Response;
 import retrofit.mime.MultipartTypedOutput;
 import retrofit.mime.TypedFile;
 
-public class NewPostFragment extends Fragment implements View.OnClickListener, ImageChooserListener {
+public class NewIWomenPostFragment extends Fragment implements View.OnClickListener, ImageChooserListener {
 
     public static final String TAG = "New Post";
-    private static String cateId;
 
     public Button mPostBtn;
     public EditText et_postDesc;
@@ -83,6 +82,8 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
     public String audio_file_id = null;
     public String postuploadImagePath = null;
 
+    SharedPreferences sharePrefLanguageUtil;
+    private String mstr_lang;
 
     String login_user_name, login_user_id;
 
@@ -100,7 +101,7 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
 
     //for audio recording process
     private static String mAudioFilePath = null;
-    private MediaPlayer mPlayer = null;
+    private MediaPlayer   mPlayer = null;
     private int timeElapsed = 0, finalTime = 0;
     private Handler durationHandler = new Handler();
     private MediaRecorder mRecorder = null;
@@ -116,17 +117,13 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
     private SharedPreferences mSharedPreferencesUserInfo;
     private String uploadPhoto;
 
-    SharedPreferences sharePrefLanguageUtil;
-    private String mstr_lang;
-
-    public NewPostFragment() {
+    public NewIWomenPostFragment() {
     }
 
-    public static NewPostFragment newInstance(String categoryId) {
-        NewPostFragment fragment = new NewPostFragment();
+    public static NewIWomenPostFragment newInstance(){
+        NewIWomenPostFragment fragment = new NewIWomenPostFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
-        cateId = categoryId;
         return fragment;
     }
 
@@ -145,14 +142,18 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
         login_user_name = mSharedPreferencesUserInfo.getString(CommonConfig.USER_NAME, null);
         login_user_id = mSharedPreferencesUserInfo.getString(CommonConfig.USER_ID, null);
         postuploadImagePath = mSharedPreferencesUserInfo.getString(CommonConfig.USER_UPLOAD_IMG_URL, null);
+
         //TODO to update
         //login_user_id = mSharedPreferencesUserInfo.getString(CommonConfig.USER_ID, null);
+
+
+
 
 
         return rootView;
     }
 
-    public void init(View rootView) {
+    public void init(View rootView){
 
         take_photo_btn = (TextView) rootView.findViewById(R.id.new_post_photo_take_btn);
         upload_photo_btn = (TextView) rootView.findViewById(R.id.new_post_photo_upload_btn);
@@ -174,8 +175,6 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
         mPostBtn.setOnClickListener(this);
         take_photo_btn.setOnClickListener(this);
         upload_photo_btn.setOnClickListener(this);
-
-
         audio_upload_btn.setOnClickListener(this);
         video_upload_btn.setOnClickListener(this);
         audio_record_done_btn.setOnClickListener(this);
@@ -188,11 +187,13 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
         audio_record_progress_view.setVisibility(View.INVISIBLE);
 
         if (mstr_lang != null && mstr_lang.equals(Utils.MM_LANG)) {
-            et_postDesc.setHint(getResources().getString(R.string.post_body_hint_mm));
+            et_postDesc.setHint(getResources().getString(R.string.new_iwomen_post_hint_title_mm));
         } else {
 
-            et_postDesc.setHint(getResources().getString(R.string.post_body_hint_eng));
+            et_postDesc.setHint(getResources().getString(R.string.new_iwomen_post_hint_title_eng));
         }
+
+
 
 
         //setup for progress wheel
@@ -203,12 +204,12 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
+        switch (view.getId()){
             case R.id.new_post_upload_btn:
 
-                if (SKConnectionDetector.getInstance(getActivity()).isConnectingToInternet()) {
+                if(SKConnectionDetector.getInstance(getActivity()).isConnectingToInternet()){
                     checkProcessWhattoDo();
-                } else {
+                }else{
                     SKToastMessage.getInstance(getActivity()).showMessage(getActivity(), "No Internet!", SKToastMessage.ERROR);
                 }
 
@@ -218,14 +219,14 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
             case R.id.new_post_photo_take_btn:
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     SKToastMessage.showMessage(getActivity(), getResources().getString(R.string.resource_coming_soon_eng), SKToastMessage.ERROR);
-                } else {
+                }else {
                     takePicture();
                 }
                 break;
 
             case R.id.new_post_photo_upload_btn:
                 //check whether there is permission for READ_STORAGE_PERMISSION
-                if (!hasPermission(CAMERA_PERMISSION)) {
+                if(!hasPermission(CAMERA_PERMISSION)) {
 
                     //if no permission, request permission
                     String[] perms = {CAMERA_PERMISSION};
@@ -234,7 +235,7 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
 
                     requestPermissions(perms, permsRequestCode);
 
-                } else {
+                }else {
 
                     chooseImage();
                 }
@@ -243,7 +244,7 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
             case R.id.new_post_audio_upload_btn:
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     SKToastMessage.showMessage(getActivity(), getResources().getString(R.string.resource_coming_soon_eng), SKToastMessage.ERROR);
-                } else {
+                }else {
                     performAudioRecord();
                 }
                 break;
@@ -256,7 +257,7 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
             case R.id.audio_record_done_btn:
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     SKToastMessage.showMessage(getActivity(), getResources().getString(R.string.resource_coming_soon_eng), SKToastMessage.ERROR);
-                } else {
+                }else {
                     onAudioRecordDoneClick();
                 }
                 break;
@@ -264,7 +265,7 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
             case R.id.audio_record_dismiss_btn:
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     SKToastMessage.showMessage(getActivity(), getResources().getString(R.string.resource_coming_soon_eng), SKToastMessage.ERROR);
-                } else {
+                }else {
                     onAudioRecordDismissClick();
                 }
                 break;
@@ -279,16 +280,16 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
         }
     }
 
-    private void checkProcessWhattoDo() {
+    private void checkProcessWhattoDo(){
 
         progress_wheel.setVisibility(View.VISIBLE);
 
-        if (crop_file_path != null) {
+        if(crop_file_path != null){
             uploadImage();
-        } else if (mAudioFilePath != null) {
+        }else if(mAudioFilePath != null){
             String uploadUrl = "http://api.iwomenapp.org/api/v1/file/audioUpload";
             uploadingAudioFile(uploadUrl, mAudioFilePath);
-        } else {
+        }else{
             //we will post all data to server, if it's here, we assume all data is ready
             performPostUpload();
         }
@@ -330,31 +331,30 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
     /***
      * prepare data to upload and post data to server
      */
-    void performPostUpload() {
+    void performPostUpload(){
 
         String content = null, content_type = null, content_mm = null, postUploadName = null;
 
-        if (mstr_lang != null && mstr_lang.equals(Utils.ENG_LANG)) {
+        if(mstr_lang != null && mstr_lang.equals(Utils.ENG_LANG)){
             content = et_postDesc.getText().toString();
-        } else {
+        }else{
             content_mm = et_postDesc.getText().toString();
         }
 
-        if (login_user_name != null) {
+        if(login_user_name != null) {
             postUploadName = login_user_name;
-        } else {
+        }else{
             postUploadName = "";
         }
 
-        if (audio_file_id != null) { //to check if user upload audio
+        if(audio_file_id != null){ //to check if user upload audio
             content_type = "audio";
-        } else { // user doesn't choose audio nor video
+        }else{ // user doesn't choose audio nor video
             content_type = "letter";
         }
-        Log.d("Param:", content + "," + content_type + "," + content_mm + "," + postUploadName + "," + login_user_id + "," + postuploadImagePath + "," + cateId);
-        NetworkEngine.getInstance().postCreateNewPost(
-                1,
-                content,
+
+        NetworkEngine.getInstance().postCreateWomenPost(
+                0, content,
                 content_type,
                 content_mm,
                 postUploadName,
@@ -366,7 +366,6 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
                 "videoid",
                 audio_file_id,
                 postuploadImagePath,
-                cateId,
                 createPostcallback);
 
     }
@@ -389,7 +388,7 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
     };
 
 
-    void performImageCropAfterChose(ChosenImage image) {
+    void performImageCropAfterChose(ChosenImage image){
         progress_wheel.setVisibility(View.GONE);
         if (image != null) {
             //textViewFile.setText(image.getFilePathOriginal());
@@ -406,17 +405,18 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
         }
     }
 
-    public void performAudioRecord() {
+    public void performAudioRecord(){
 
-        if (mAudioFilePath == null || !new File(mAudioFilePath).exists()) {
+        if(mAudioFilePath == null || !new File(mAudioFilePath).exists()){
             mStartRecording = true;
             audio_record_progress_btn.setText("Tap and Talk");
             audio_record_progress_view.setVisibility(View.VISIBLE);
-        } else {
+        }else{
             mStartRecording = false;
             audio_record_progress_btn.setText("Replay");
             audio_record_progress_view.setVisibility(View.VISIBLE);
         }
+
 
 
     }
@@ -453,17 +453,17 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
 
     /***
      * to check where given permission is already permitted or not
-     *
      * @param permission
      * @return
      */
-    private boolean hasPermission(String permission) {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
+    private boolean hasPermission(String permission){
+        if(Build.VERSION.SDK_INT>Build.VERSION_CODES.LOLLIPOP_MR1) {
             return (getActivity().checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED);
-        } else {
+        }else{
             return true;
         }
     }
+
 
 
     private void onRecord(boolean start) {
@@ -506,7 +506,7 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
     private Runnable updateProgressTime = new Runnable() {
         public void run() {
 
-            if (mPlayer != null) {
+            if(mPlayer != null) {
                 //get current position
                 timeElapsed = mPlayer.getCurrentPosition();
 
@@ -529,7 +529,7 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
     };
 
     private void stopPlaying() {
-        if (mPlayer != null) {
+        if(mPlayer != null) {
             mPlayer.release();
             mPlayer = null;
         }
@@ -553,7 +553,7 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
     }
 
     private void stopRecording() {
-        if (mRecorder != null) {
+        if(mRecorder != null) {
             mRecorder.stop();
             mRecorder.release();
             mRecorder = null;
@@ -589,7 +589,7 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
                 audio_record_progress_btn.setText("Stop");
 
                 countDownTimer = getCountDown();
-                if (countDownTimer != null) {
+                if(countDownTimer != null){
                     countDownTimer.start();
                 }
 
@@ -599,12 +599,13 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
             } else {
 
 
-                if (audio_record_progress_btn.getText().equals("Replay")) {
+
+                if(audio_record_progress_btn.getText().equals("Replay")){
                     audio_record_progress_btn.setText("Stop");
                     onPlay(true);
-                } else {
+                }else{
                     audio_record_progress_btn.setText("Replay");
-                    if (countDownTimer != null) {
+                    if(countDownTimer != null){
                         countDownTimer.cancel();
                     }
                     onPlay(false);
@@ -614,12 +615,12 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
         }
     };
 
-    public CountDownTimer getCountDown() {
+    public CountDownTimer getCountDown(){
         return new CountDownTimer(20000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 //audio_record_progress_btn.setText("Recording : " + millisUntilFinished / 1000);
-                audio_record_progress_bar.setProgress(20 - (int) millisUntilFinished / 1000);
+                audio_record_progress_bar.setProgress(20 - (int)millisUntilFinished/ 1000);
             }
 
             public void onFinish() {
@@ -630,19 +631,19 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
         };
     }
 
-    public void onAudioRecordDoneClick() {
+    public void onAudioRecordDoneClick(){
         audio_record_progress_view.setVisibility(View.INVISIBLE);
         onPlay(false);
         onRecord(false);
 
 
-        if (new File(mAudioFilePath).exists()) {
+        if(new File(mAudioFilePath).exists()){
             wasAudioRecord = true;
         }
 
     }
 
-    public void onAudioRecordDismissClick() {
+    public void onAudioRecordDismissClick(){
         audio_record_progress_view.setVisibility(View.INVISIBLE);
         onPlay(false);
         onRecord(false);
@@ -767,7 +768,7 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
         imageChooserManager.reinitialize(filePath);
     }
 
-    public void uploadImage() {
+    public void uploadImage(){
         File photo = new File(crop_file_path);
         MultipartTypedOutput multipartTypedOutput = new MultipartTypedOutput();
         multipartTypedOutput.addPart("image", new TypedFile("image/png", photo));
