@@ -117,6 +117,12 @@ public interface INetworkEngine {
             @Body MultipartTypedOutput attachments,
             Callback<PhotoUpload> callback);
 
+    //http://api.shopyface.com/api/v1/auth/photo
+    @POST(CommonConfig.CREATE_POST_PHOTO_URL)
+    void postPostPhoto(
+            @Body MultipartTypedOutput attachments,
+            Callback<PhotoUpload> callback);
+
     @FormUrlEncoded
     @POST(CommonConfig.CREATE_REGISTER_URL)
     void postCreateUser(
@@ -231,6 +237,24 @@ public interface INetworkEngine {
 
             Callback<CalendarEvent> callback);
 
+    @FormUrlEncoded
+    @POST(CommonConfig.CREATE_NEW_POST)
+    void postCreateNewPost(
+            @Field("content") String content,
+            @Field("contentType") String contentType,
+            @Field("content_mm") String content_mm,
+            @Field("postUploadName") String postUploadName,
+            @Field("title") String title,
+            @Field("titleMm") String titleMm,
+            @Field("image") String image,
+            @Field("postUploadedDate") String postUploadedDate,//yyyy-MM-dd
+            @Field("userId") String userId,//user object id
+            @Field("videoId") String videoId,
+            @Field("audioFile") String audioFile,
+            @Field("postUploadUserImgPath") String postUploadUserImgPath,
+            @Field("category_id") String category_id,
+            Callback<IWomenPost> callback
+    );
 
 
 

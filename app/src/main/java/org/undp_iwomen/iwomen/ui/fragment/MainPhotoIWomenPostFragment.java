@@ -858,7 +858,6 @@ public class MainPhotoIWomenPostFragment extends Fragment implements ImageChoose
             crop_file_name = Uri.fromFile(croppedImageFile).getLastPathSegment().toString();
             crop_file_path = Uri.fromFile(croppedImageFile).getPath();
 
-
         }
 
 

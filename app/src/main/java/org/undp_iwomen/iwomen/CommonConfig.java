@@ -81,6 +81,8 @@ public class CommonConfig {
     //http://shopyface.com/api/v1/usersUpload
     public static final String CREATE_USER_PHOTO_URL ="/api/v1/usersUpload";
 
+    public static final String CREATE_POST_PHOTO_URL ="/api/v1/file/imageUpload";
+
     //http://shopyface.com/api/v1/file/imageUpload
     public static final String CREATE_IWOMEN_POST_PHOTO_URL ="api/v1/file/imageUpload";
 
@@ -124,6 +126,7 @@ public class CommonConfig {
 
     public static final String POST_POSTS_LIKE = "/api/v1/postLikes";
 
+    public static final String CREATE_NEW_POST = "/api/v1/posts";
 
 
 }

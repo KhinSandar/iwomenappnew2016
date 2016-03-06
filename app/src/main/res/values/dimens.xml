@@ -59,5 +59,10 @@
     <dimen name="app_bar_height">180dp</dimen>
     <dimen name="text_margin">16dp</dimen>
 
+    <dimen name="thumbnail_width">80dp</dimen>
+    <dimen name="thumbnail_height">48dp</dimen>
+    <dimen name="photo_height">200dp</dimen>
+    <dimen name="list_item_vert_margin">8dp</dimen>
+    <dimen name="detail_horiz_margin">16dp</dimen>
 
 </resources>
