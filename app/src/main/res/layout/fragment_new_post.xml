@@ -43,6 +43,30 @@
                 android:hint="@string/new_post_hint"
                 android:padding="8dp" />
 
+            <FrameLayout
+                android:id="@+id/fy_photo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/activity_vertical_margin">
+
+                <org.undp_iwomen.iwomen.ui.widget.ResizableImageView
+                    android:id="@+id/new_post_selected_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="240dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+                    android:visibility="gone" />
+
+
+                <com.pnikosis.materialishprogress.ProgressWheel
+                    android:id="@+id/new_post_photo_progress_wheel"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center" />
+
+
+            </FrameLayout>
+
 
             <TextView
                 android:id="@+id/new_post_photo_upload_btn"
@@ -99,7 +123,7 @@
     </ScrollView>
 
     <com.pnikosis.materialishprogress.ProgressWheel
-        android:id="@+id/new_post_photo_progress_wheel"
+        android:id="@+id/new_post_progress_wheel"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_centerInParent="true"/>
@@ -156,7 +180,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
-                android:text="Done"/>
+                android:text="OK"/>
 
             <View
                 android:layout_width="1dp"
@@ -168,7 +192,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
-                android:text="Dismiss" />
+                android:text="Cancel" />
 
         </LinearLayout>
 

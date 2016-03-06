@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
@@ -15,7 +16,10 @@ import android.os.CountDownTimer;
 import android.os.Environment;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.transition.ChangeBounds;
+import android.transition.Slide;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,14 +38,18 @@ import com.kbeanie.imagechooser.api.ChosenImages;
 import com.kbeanie.imagechooser.api.ImageChooserListener;
 import com.kbeanie.imagechooser.api.ImageChooserManager;
 import com.pnikosis.materialishprogress.ProgressWheel;
+import com.smk.skalertmessage.SKToastMessage;
+import com.smk.skconnectiondetector.SKConnectionDetector;
 
 import org.smk.clientapi.NetworkEngine;
 import org.smk.model.IWomenPost;
+import org.smk.model.PhotoUpload;
 import org.undp_iwomen.iwomen.BuildConfig;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.ui.activity.MainActivity;
 import org.undp_iwomen.iwomen.ui.widget.CircleProgressBar;
+import org.undp_iwomen.iwomen.ui.widget.ResizableImageView;
 import org.undp_iwomen.iwomen.utils.Utils;
 
 import java.io.File;
@@ -54,10 +62,10 @@ import java.util.concurrent.TimeUnit;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+import retrofit.mime.TypedFile;
 
 public class NewPostFragment extends Fragment implements View.OnClickListener, ImageChooserListener {
 
-    private static final int AUDIO_CAPTURE = 101;
     public static final String TAG = "New Post";
 
     public Button mPostBtn;
@@ -70,16 +78,20 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
     public CircleProgressBar audio_record_progress_bar;
     public View background_audio_record_process;
     public TextView audio_record_done_btn, audio_record_dismiss_btn;
+    public ResizableImageView selectedImage;
+    public ProgressWheel selectedImg_progress_wheel;
 
+    public String audio_file_id = null;
+    public String postuploadImagePath = null;
 
     String mstr_lang;
-    String login_user_name;
+    String login_user_name, login_user_id;
 
     Uri videoUri;
 
     //For Image Chooser
     private ImageChooserManager imageChooserManager;
-    String crop_file_name, crop_file_path;
+    String crop_file_name, crop_file_path = null;
     private int chooserType;
     private String filePath;
     private String capture_filePath;
@@ -98,6 +110,7 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
 
     //for audio uploading processs
     private ProgressDialog pgDialog;
+    private boolean wasAudioRecord = false;
 
 
     private final String CAMERA_PERMISSION = "android.permission.CAMERA";
@@ -127,6 +140,10 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
         mSharedPreferencesUserInfo = getActivity().getSharedPreferences(CommonConfig.SHARE_PREFERENCE_USER_INFO, Context.MODE_PRIVATE);
         login_user_name = mSharedPreferencesUserInfo.getString(CommonConfig.USER_NAME, null);
 
+        //TODO to update
+        //login_user_id = mSharedPreferencesUserInfo.getString(CommonConfig.USER_ID, null);
+
+
 
 
         return rootView;
@@ -140,7 +157,9 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
         video_upload_btn = (TextView) rootView.findViewById(R.id.new_post_video_upload_btn);
         et_postDesc = (EditText) rootView.findViewById(R.id.new_post_description_text);
         mPostBtn = (Button) rootView.findViewById(R.id.new_post_upload_btn);
-        progress_wheel = (ProgressWheel) rootView.findViewById(R.id.new_post_photo_progress_wheel);
+        progress_wheel = (ProgressWheel) rootView.findViewById(R.id.new_post_progress_wheel);
+        selectedImage = (ResizableImageView) rootView.findViewById(R.id.new_post_selected_img);
+        selectedImg_progress_wheel = (ProgressWheel) rootView.findViewById(R.id.new_post_photo_progress_wheel);
 
         audio_record_done_btn = (TextView) rootView.findViewById(R.id.audio_record_done_btn);
         audio_record_dismiss_btn = (TextView) rootView.findViewById(R.id.audio_record_dismiss_btn);
@@ -176,7 +195,14 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.new_post_upload_btn:
-                performPostUpload();
+
+                if(SKConnectionDetector.getInstance(getActivity()).isConnectingToInternet()){
+                    checkProcessWhattoDo();
+                }else{
+                    SKToastMessage.getInstance(getActivity()).showMessage(getActivity(), "No Internet!", SKToastMessage.ERROR);
+                }
+
+
                 break;
 
             case R.id.new_post_photo_take_btn:
@@ -215,9 +241,26 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
                 onAudioRecordDismissClick();
                 break;
 
+            case R.id.background_audio_record:
+                break;
+
             default:
                 break;
         }
+    }
+
+    private void checkProcessWhattoDo(){
+
+        if(crop_file_path != null){
+            uploadImage();
+        }else if(mAudioFilePath != null){
+            String uploadUrl = "http://api.iwomenapp.org/api/v1/file/audioUpload";
+            uploadingAudioFile(uploadUrl, mAudioFilePath);
+        }else{
+            //we will post all data to server, if it's here, we assume all data is ready
+            performPostUpload();
+        }
+
     }
 
     private void takePicture() {
@@ -271,10 +314,8 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
             postUploadName = "";
         }
 
-        if(false){ //to check if user upload audio
+        if(audio_file_id != null){ //to check if user upload audio
             content_type = "audio";
-        }else if(false){ //to check if user upload video
-            content_type = "video";
         }else{ // user doesn't choose audio nor video
             content_type = "letter";
         }
@@ -285,12 +326,12 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
                 postUploadName,
                 null,
                 null,
-                "image",
+                null,
                 "postuploaddate",
-                "userid",
+                login_user_name,
                 "videoid",
-                "audiofile",
-                "postuploadImgPath",
+                audio_file_id,
+                postuploadImagePath,
                 "category_id",
                 createPostcallback);
 
@@ -299,12 +340,13 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
     Callback<IWomenPost> createPostcallback = new Callback<IWomenPost>() {
         @Override
         public void success(IWomenPost iWomenPost, Response response) {
-
+            SKToastMessage.getInstance(getActivity()).showMessage(getActivity(), "Post Success", SKToastMessage.SUCCESS);
+            getActivity().finish();
         }
 
         @Override
         public void failure(RetrofitError error) {
-
+            SKToastMessage.getInstance(getActivity()).showMessage(getActivity(), "Error in Createing Post", SKToastMessage.ERROR);
         }
     };
 
@@ -519,6 +561,8 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
 
             } else {
 
+
+
                 if(audio_record_progress_btn.getText().equals("Replay")){
                     audio_record_progress_btn.setText("Stop");
                     onPlay(true);
@@ -555,8 +599,11 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
         onPlay(false);
         onRecord(false);
 
-        String uploadUrl = "http://api.iwomenapp.org/api/v1/file/audioUpload";
-        uploadingAudioFile(uploadUrl, mAudioFilePath);
+
+        if(new File(mAudioFilePath).exists()){
+            wasAudioRecord = true;
+        }
+
     }
 
     public void onAudioRecordDismissClick(){
@@ -598,11 +645,11 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
 
     private UploadNotificationConfig getNotificationConfig() {
         return new UploadNotificationConfig()
-                .setIcon(R.mipmap.ic_launcher)
+                .setIcon(R.drawable.ic_launcher)
                 .setTitle(getString(R.string.app_name))
                 .setInProgressMessage("Your recording audio is uploading.")
                 .setCompletedMessage("Your recording audio was successfully uploaded.")
-                .setErrorMessage("Your recording audio is error.")
+                .setErrorMessage("Your audio file uploading is error.")
                 .setAutoClearOnSuccess(false)
                 .setClickIntent(new Intent(getActivity(), MainActivity.class))
                 .setClearOnAction(true)
@@ -634,7 +681,11 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
                     Log.i(TAG, "Upload with ID " + uploadId + " is completed: " + serverResponseCode + ", "
                             + serverResponseMessage);
                     Toast.makeText(getActivity(), serverResponseMessage, Toast.LENGTH_LONG).show();
-                    // To Upload Video Post
+
+                    audio_file_id = uploadId;
+
+                    mAudioFilePath = null;
+                    checkProcessWhattoDo();
 
                 }
             };
@@ -642,10 +693,67 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
     @Override
     public void onResume() {
         super.onResume();
-
         uploadReceiver.register(getActivity());
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == getActivity().RESULT_OK && (requestCode == ChooserType.REQUEST_PICK_PICTURE || requestCode == ChooserType.REQUEST_CAPTURE_PICTURE)) {
+            if (imageChooserManager == null) {
+                reinitializeImageChooser();
+            }
+            imageChooserManager.submit(requestCode, data);
+            //startActivityForResult(MediaStoreUtils.getPickImageIntent(getActivity().getApplicationContext()),REQUEST_PICTURE );
+        } else {
+            progress_wheel.setVisibility(View.GONE);
+        }
+        if ((requestCode == REQUEST_CROP_PICTURE) && (resultCode == getActivity().RESULT_OK)) {
+            // When we are done cropping, display it in the ImageView.
 
+            selectedImage.setVisibility(View.VISIBLE);
+            selectedImage.setImageBitmap(BitmapFactory.decodeFile(croppedImageFile.getAbsolutePath()));
+            //img_job.setMaxWidth(300);
+            selectedImage.setMaxHeight(400);
+            crop_file_name = Uri.fromFile(croppedImageFile).getLastPathSegment().toString();
+            crop_file_path = Uri.fromFile(croppedImageFile).getPath();
+
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    // Should be called if for some reason the ImageChooserManager is null (Due
+    // to destroying of activity for low memory situations)
+    private void reinitializeImageChooser() {
+        imageChooserManager = new ImageChooserManager(this, chooserType,
+                "myfolder", true);
+        imageChooserManager.setImageChooserListener(this);
+        imageChooserManager.reinitialize(filePath);
+    }
+
+    public void uploadImage(){
+        File photo = new File(crop_file_path);
+        TypedFile typedFile = new TypedFile("multipart/form-data", photo);//croppedImageFile
+        NetworkEngine.getInstance().postUserPhoto(typedFile, new Callback<PhotoUpload>() {
+            @Override
+            public void success(PhotoUpload photo, Response response) {
+
+                if(photo.getResizeUrl().size() > 0) {
+                    postuploadImagePath = photo.getResizeUrl().get(0);
+                    crop_file_path = null;
+                }
+
+                checkProcessWhattoDo();
+
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Log.e("<<<<Fail>>>","===>" +error.toString());
+
+                return;
+            }
+        });
+    }
 
 }

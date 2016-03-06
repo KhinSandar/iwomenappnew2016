@@ -11,6 +11,7 @@ import org.smk.model.CalendarEvent;
 import org.smk.model.CompetitionQuestion;
 import org.smk.model.GroupUser;
 import org.smk.model.IWomenPost;
+import org.smk.model.PhotoUpload;
 import org.smk.model.Rating;
 import org.smk.model.Review;
 import org.smk.model.TLGTownship;
@@ -92,7 +93,7 @@ public interface INetworkEngine {
     @POST(CommonConfig.CREATE_USER_PHOTO_URL)
     void postUserPhoto(
             @Part("image") TypedFile image,
-            Callback<String> callback);
+            Callback<PhotoUpload> callback);
 
     @FormUrlEncoded
     @POST(CommonConfig.CREATE_REGISTER_URL)
