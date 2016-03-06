@@ -26,7 +26,6 @@ import retrofit.http.Body;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
-import retrofit.http.HEAD;
 import retrofit.http.Multipart;
 import retrofit.http.POST;
 import retrofit.http.Part;
@@ -248,6 +247,24 @@ public interface INetworkEngine {
             @Field("audioFile") String audioFile,
             @Field("postUploadUserImgPath") String postUploadUserImgPath,
             @Field("category_id") String category_id,
+            Callback<IWomenPost> callback
+    );
+
+    @FormUrlEncoded
+    @POST(CommonConfig.CREATE_NEW_WOMENPOST)
+    void postCreateNewWomenPost(
+            @Field("content") String content,
+            @Field("contentType") String contentType,
+            @Field("content_mm") String content_mm,
+            @Field("postUploadName") String postUploadName,
+            @Field("title") String title,
+            @Field("titleMm") String titleMm,
+            @Field("image") String image,
+            @Field("postUploadedDate") String postUploadedDate,//yyyy-MM-dd
+            @Field("userId") String userId,//user object id
+            @Field("videoId") String videoId,
+            @Field("audioFile") String audioFile,
+            @Field("postUploadUserImgPath") String postUploadUserImgPath,
             Callback<IWomenPost> callback
     );
 

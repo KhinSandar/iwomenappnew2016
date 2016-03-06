@@ -25,6 +25,7 @@ import com.google.android.gms.analytics.Tracker;
 import com.path.android.jobqueue.JobManager;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 import org.nullwire.trace.ExceptionHandler;
 import org.smk.application.DownloadManager;
 import org.smk.application.StoreUtil;
@@ -105,6 +106,7 @@ public class BaseActionBarActivity extends AppCompatActivity{
 										.setMessage("Do you download new version?")
 										.setCancelable(true)
 										.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+											@Subscribe
 											public void onClick(DialogInterface dialog,int id) {
 												EventBus.getDefault().register(BaseActionBarActivity.this);
 												JobManager jobManager = MainApplication.getInstance().getJobManager();

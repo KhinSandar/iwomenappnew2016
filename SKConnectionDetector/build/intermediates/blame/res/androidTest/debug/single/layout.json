@@ -1,10 +1,10 @@
 [
     {
-        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKConnectionDetector/build/intermediates/res/merged/androidTest/debug/layout/vertical_toast.xml",
-        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKConnectionDetector/build/intermediates/bundles/debug/res/layout/vertical_toast.xml"
+        "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKConnectionDetector\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\horizontal_toast.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKConnectionDetector\\build\\intermediates\\bundles\\debug\\res\\layout\\horizontal_toast.xml"
     },
     {
-        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKConnectionDetector/build/intermediates/res/merged/androidTest/debug/layout/horizontal_toast.xml",
-        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKConnectionDetector/build/intermediates/bundles/debug/res/layout/horizontal_toast.xml"
+        "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKConnectionDetector\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\vertical_toast.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKConnectionDetector\\build\\intermediates\\bundles\\debug\\res\\layout\\vertical_toast.xml"
     }
 ]
