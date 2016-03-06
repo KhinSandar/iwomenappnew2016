@@ -209,39 +209,39 @@
                 </LinearLayout>
             </LinearLayout>
 
+            <RelativeLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="22dp">
+
+                <org.undp_iwomen.iwomen.ui.widget.CustomButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/str_not_now"
+                    android:id="@+id/btn_not_now"
+                    android:layout_gravity="right"
+                    android:background="@android:color/transparent"
+                    android:textColor="@color/white"
+                    android:textSize="18dp"
+                    android:layout_toLeftOf="@+id/btn_ok"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="20dp" />
+
+                <org.undp_iwomen.iwomen.ui.widget.CustomButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/str_ok"
+                    android:id="@+id/btn_ok"
+                    android:layout_gravity="right"
+                    android:background="@android:color/transparent"
+                    android:textColor="@color/white"
+                    android:textSize="18dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true" />
+            </RelativeLayout>
+
         </LinearLayout>
     </ScrollView>
-
-    <RelativeLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="22dp">
-
-        <org.undp_iwomen.iwomen.ui.widget.CustomButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/str_not_now"
-            android:id="@+id/btn_not_now"
-            android:layout_gravity="right"
-            android:background="@android:color/transparent"
-            android:textColor="@color/white"
-            android:textSize="18dp"
-            android:layout_toLeftOf="@+id/btn_ok"
-            android:layout_alignParentTop="true"
-            android:layout_marginRight="20dp" />
-
-        <org.undp_iwomen.iwomen.ui.widget.CustomButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/str_ok"
-            android:id="@+id/btn_ok"
-            android:layout_gravity="right"
-            android:background="@android:color/transparent"
-            android:textColor="@color/white"
-            android:textSize="18dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true" />
-    </RelativeLayout>
 
 </LinearLayout>

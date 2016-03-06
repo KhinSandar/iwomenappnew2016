@@ -5,11 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import com.google.android.gms.analytics.Tracker;
 
 import org.smk.iwomen.BaseActionBarActivity;
 import org.undp_iwomen.iwomen.R;
@@ -20,7 +17,6 @@ import org.undp_iwomen.iwomen.utils.Utils;
 public class TalkTogetherMainActivity extends BaseActionBarActivity {
 
     String strBookId, strPaymentStatus;
-    private Tracker mTracker;
     private CustomTextView textViewTitle;
     private Context mContext;
     SharedPreferences sharePrefLanguageUtil;
@@ -54,7 +50,6 @@ public class TalkTogetherMainActivity extends BaseActionBarActivity {
         mstrTitle = i.getStringExtra("CategoryName");
         mCatID = i.getStringExtra("CategoryID");
 
-        Log.e("<<<Talktogether Main Activitiy Cat ID>>","==>"+ mCatID);
         textViewTitle.setText(mstrTitle);
 
         bundle = new Bundle();

@@ -251,9 +251,5 @@ public interface INetworkEngine {
             Callback<IWomenPost> callback
     );
 
-
-
-
-
 }
 

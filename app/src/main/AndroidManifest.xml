@@ -436,8 +436,6 @@
             android:label="@string/title_activity_gcm_notification_dialog"
             android:theme="@style/Theme.Transparent"></activity>
 
-
-
         <activity
             android:name="org.youtube.Youtube_MainActivity"
             android:configChanges="orientation|screenSize"

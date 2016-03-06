@@ -10,9 +10,6 @@ import android.transition.Slide;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import com.google.android.gms.analytics.Tracker;
-
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.ui.fragment.RegisterLoginFragment1;
 import org.undp_iwomen.iwomen.ui.fragment.Register_Congrat_Fragment;
@@ -22,7 +19,6 @@ import org.undp_iwomen.iwomen.utils.Utils;
 public class RegisterMainActivity extends BaseDetailTransitionActivity {
 
     String strBookId, strPaymentStatus;
-    private Tracker mTracker;
     public CustomTextView textViewTitle;
     private Context mContext;
     SharedPreferences sharePrefLanguageUtil;

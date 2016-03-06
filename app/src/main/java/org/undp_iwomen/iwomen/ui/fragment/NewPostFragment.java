@@ -137,6 +137,7 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
 
         mSharedPreferencesUserInfo = getActivity().getSharedPreferences(CommonConfig.SHARE_PREFERENCE_USER_INFO, Context.MODE_PRIVATE);
         login_user_name = mSharedPreferencesUserInfo.getString(CommonConfig.USER_NAME, null);
+        login_user_id = mSharedPreferencesUserInfo.getString(CommonConfig.USER_ID, null);
 
         //TODO to update
         //login_user_id = mSharedPreferencesUserInfo.getString(CommonConfig.USER_ID, null);
@@ -327,8 +328,8 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
                 null,
                 null,
                 null,
-                "postuploaddate",
-                login_user_name,
+                null,
+                login_user_id,
                 "videoid",
                 audio_file_id,
                 postuploadImagePath,
@@ -743,7 +744,7 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
             @Override
             public void success(PhotoUpload photo, Response response) {
 
-                if(photo.getResizeUrl().size() > 0) {
+                if (photo.getResizeUrl().size() > 0) {
                     postuploadImagePath = photo.getResizeUrl().get(0);
                     crop_file_path = null;
                 }
@@ -754,7 +755,7 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
 
             @Override
             public void failure(RetrofitError error) {
-                Log.e("<<<<Fail>>>","===>" +error.toString());
+                Log.e("<<<<Fail>>>", "===>" + error.toString());
 
                 return;
             }

@@ -1,11 +1,18 @@
 [
     {
+<<<<<<< HEAD
         "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/res/merged/debug/drawable/abc_list_selector_background_transition_holo_light.xml",
         "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.2/res/drawable/abc_list_selector_background_transition_holo_light.xml"
     },
     {
+=======
+>>>>>>> update_post_detail
         "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/res/merged/debug/drawable/abc_list_selector_holo_dark.xml",
         "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.2/res/drawable/abc_list_selector_holo_dark.xml"
+    },
+    {
+        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/res/merged/debug/drawable/abc_list_selector_background_transition_holo_light.xml",
+        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.2/res/drawable/abc_list_selector_background_transition_holo_light.xml"
     },
     {
         "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/res/merged/debug/drawable/abc_switch_thumb_material.xml",

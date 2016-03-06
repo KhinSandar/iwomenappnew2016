@@ -6,9 +6,13 @@ import android.util.Log;
 
 import com.alexbbb.uploadservice.UploadService;
 import com.facebook.FacebookSdk;
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.Tracker;
 import com.path.android.jobqueue.JobManager;
 import com.path.android.jobqueue.config.Configuration;
 import com.path.android.jobqueue.log.CustomLogger;
+
+import org.undp_iwomen.iwomen.R;
 
 
 /**
@@ -17,47 +21,32 @@ import com.path.android.jobqueue.log.CustomLogger;
 public class MainApplication extends MultiDexApplication {
     private static MainApplication instance;
     private JobManager jobManager;
+
     public MainApplication() {
         instance = this;
     }
+
+    private Tracker mTracker;
+
+    /**
+     * Gets the default {@link Tracker} for this {@link Application}.
+     * @return tracker
+     */
+    synchronized public Tracker getDefaultTracker() {
+        if (mTracker == null) {
+            GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
+            // To enable debug logging use: adb shell setprop log.tag.GAv4 DEBUG
+            mTracker = analytics.newTracker(R.xml.global_tracker);
+        }
+        return mTracker;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
-
         FacebookSdk.sdkInitialize(getApplicationContext());
 
-        /*// Required - Initialize the Parse SDK
-        Parse.enableLocalDatastore(this);
-        Parse.initialize(this, getString(R.string.parse_app_id),
-                getString(R.string.parse_client_key));
-        PushService.setDefaultPushCallback(this, DrawerMainActivity.class);
-        PushService.startServiceIfRequired(this);
-        //channel '13fb3c43 com.questmyanmar.gobus/com.questmyanmar.gobus.ui.activity.SearchActivity (server)'
-        Parse.setLogLevel(Parse.LOG_LEVEL_DEBUG);
-
-        //You must register this ParseObject subclass before instantiating it.
-        ParseObject.registerSubclass(AppVersion.class);
-        ParseObject.registerSubclass(Post.class);
-        ParseObject.registerSubclass(Comment.class);
-        ParseObject.registerSubclass(IwomenPost.class);
-
-        
-        ParseACL defaultACL = new ParseACL();
-        ParseACL.setDefaultACL(defaultACL, true);*/
-
         UploadService.NAMESPACE = "org.undp_iwomen.iwomen";
-
-        /*ParsePush.subscribeInBackground("", new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                if (e == null) {
-                    Log.d("com.parse.push", "successfully subscribed to the broadcast channel.");
-                } else {
-                    Log.e("com.parse.push", "failed to subscribe for push", e);
-                }
-            }
-        });
-        */
 
         configureJobManager();
     }

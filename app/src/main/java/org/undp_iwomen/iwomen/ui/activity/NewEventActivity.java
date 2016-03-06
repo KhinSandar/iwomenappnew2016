@@ -5,14 +5,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import org.smk.iwomen.BaseActionBarActivity;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.ui.fragment.NewEventFragment;
 
 
-public class NewEventActivity extends AppCompatActivity {
+public class NewEventActivity extends BaseActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
