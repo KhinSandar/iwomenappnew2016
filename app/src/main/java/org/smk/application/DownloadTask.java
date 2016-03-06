@@ -3,6 +3,7 @@ package org.smk.application;
 import android.os.Environment;
 import android.util.Log;
 
+import org.greenrobot.eventbus.EventBus;
 import org.smk.clientapi.MySSLSocketFactory;
 import org.smk.model.Download;
 import com.squareup.okhttp.OkHttpClient;
@@ -17,7 +18,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.KeyStore;
 
-import de.greenrobot.event.EventBus;
 
 public class DownloadTask{
     private final static int BUFFER_SIZE = 1024 * 8;

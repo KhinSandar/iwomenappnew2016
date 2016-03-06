@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.path.android.jobqueue.JobManager;
 
+import org.greenrobot.eventbus.EventBus;
 import org.nullwire.trace.ExceptionHandler;
 import org.smk.application.DownloadManager;
 import org.smk.application.StoreUtil;
@@ -32,7 +33,6 @@ import org.undp_iwomen.iwomen.manager.MainApplication;
 
 import java.io.File;
 
-import de.greenrobot.event.EventBus;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;

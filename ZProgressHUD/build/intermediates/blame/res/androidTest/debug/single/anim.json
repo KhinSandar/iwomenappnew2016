@@ -1,18 +1,18 @@
 [
     {
-        "merged": "C:\\Users\\Toe Lie\\Documents\\sat\\workspace\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\round_spinner.xml",
-        "source": "C:\\Users\\Toe Lie\\Documents\\sat\\workspace\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\bundles\\debug\\res\\anim\\round_spinner.xml"
+        "merged": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/ZProgressHUD/build/intermediates/res/merged/androidTest/debug/anim/round_spinner_fade.xml",
+        "source": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/ZProgressHUD/build/intermediates/bundles/debug/res/anim/round_spinner_fade.xml"
     },
     {
-        "merged": "C:\\Users\\Toe Lie\\Documents\\sat\\workspace\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\round_spinner_apple.xml",
-        "source": "C:\\Users\\Toe Lie\\Documents\\sat\\workspace\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\bundles\\debug\\res\\anim\\round_spinner_apple.xml"
+        "merged": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/ZProgressHUD/build/intermediates/res/merged/androidTest/debug/anim/gear_spinner.xml",
+        "source": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/ZProgressHUD/build/intermediates/bundles/debug/res/anim/gear_spinner.xml"
     },
     {
-        "merged": "C:\\Users\\Toe Lie\\Documents\\sat\\workspace\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\round_spinner_fade.xml",
-        "source": "C:\\Users\\Toe Lie\\Documents\\sat\\workspace\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\bundles\\debug\\res\\anim\\round_spinner_fade.xml"
+        "merged": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/ZProgressHUD/build/intermediates/res/merged/androidTest/debug/anim/round_spinner_apple.xml",
+        "source": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/ZProgressHUD/build/intermediates/bundles/debug/res/anim/round_spinner_apple.xml"
     },
     {
-        "merged": "C:\\Users\\Toe Lie\\Documents\\sat\\workspace\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\gear_spinner.xml",
-        "source": "C:\\Users\\Toe Lie\\Documents\\sat\\workspace\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\bundles\\debug\\res\\anim\\gear_spinner.xml"
+        "merged": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/ZProgressHUD/build/intermediates/res/merged/androidTest/debug/anim/round_spinner.xml",
+        "source": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/ZProgressHUD/build/intermediates/bundles/debug/res/anim/round_spinner.xml"
     }
 ]

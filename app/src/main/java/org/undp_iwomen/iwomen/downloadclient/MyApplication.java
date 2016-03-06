@@ -1,13 +1,14 @@
 package org.undp_iwomen.iwomen.downloadclient;
 
 import android.app.Application;
+import android.support.multidex.MultiDexApplication;
 import android.util.Log;
 
 import com.path.android.jobqueue.JobManager;
 import com.path.android.jobqueue.config.Configuration;
 import com.path.android.jobqueue.log.CustomLogger;
 
-public class MyApplication extends Application {
+public class MyApplication extends MultiDexApplication {
 	private static MyApplication instance;
     private JobManager jobManager;
 

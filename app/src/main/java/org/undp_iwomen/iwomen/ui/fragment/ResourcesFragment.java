@@ -481,7 +481,6 @@ public class ResourcesFragment extends Fragment {
             if (mstr_lang.equals(Utils.ENG_LANG)) {
                 Utils.doToastEng(mContext, getResources().getString(R.string.open_internet_warning_eng));
             } else {
-
                 Utils.doToastMM(mContext, getActivity().getResources().getString(R.string.open_internet_warning_mm));
             }
         }

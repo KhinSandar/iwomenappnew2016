@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="debug"><source path="C:\Users\Toe Lie\Documents\sat\workspace\iwomenappnew2016\sKAlertMessage\build\intermediates\bundles\debug\assets"/></dataSet><dataSet config="main"><source path="C:\Users\Toe Lie\Documents\sat\workspace\iwomenappnew2016\sKAlertMessage\src\androidTest\assets"/></dataSet></merger>
+<merger version="3"><dataSet config="debug"><source path="/Users/Admin/AndroidStudioProjects/iwomenappnew2016/sKAlertMessage/build/intermediates/bundles/debug/assets"/></dataSet><dataSet config="main"><source path="/Users/Admin/AndroidStudioProjects/iwomenappnew2016/sKAlertMessage/src/androidTest/assets"/></dataSet></merger>

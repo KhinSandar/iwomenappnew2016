@@ -49,6 +49,7 @@ import org.undp_iwomen.iwomen.database.TableAndColumnsName;
 import org.undp_iwomen.iwomen.model.retrofit_api.UserPostAPI;
 import org.undp_iwomen.iwomen.provider.IwomenProviderData;
 import org.undp_iwomen.iwomen.ui.activity.MainPhotoPostActivity;
+import org.undp_iwomen.iwomen.ui.activity.NewPostActivity;
 import org.undp_iwomen.iwomen.ui.activity.PostDetailActivity;
 import org.undp_iwomen.iwomen.ui.adapter.IWomenPostListByDateRecyclerViewAdapter;
 import org.undp_iwomen.iwomen.ui.adapter.StoriesRecentListAdapter;
@@ -1530,7 +1531,8 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
         switch (v.getId()) {
             case R.id.post_news:
 
-                Intent intent = new Intent(mContext, MainPhotoPostActivity.class);
+                //Intent intent = new Intent(mContext, MainPhotoPostActivity.class);
+                Intent intent = new Intent(mContext, NewPostActivity.class);
 
                 intent.putExtra("PostType", "BeInspiredIwomenPost");
                 startActivity(intent);
