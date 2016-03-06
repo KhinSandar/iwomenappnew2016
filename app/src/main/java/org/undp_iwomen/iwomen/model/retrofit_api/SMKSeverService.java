@@ -74,6 +74,7 @@ public interface SMKSeverService {
     void getSubResourceByResourceIDByPagination(
             @Query("page") int page,
             @Query("resource_id") String resourceId,
+            @Query("isAllow") int isAllow,
             Callback<List<SubResourceItem>> callback);
 
     @GET(CommonConfig.GET_CALENDAR_EVENT)

@@ -135,14 +135,20 @@ public interface INetworkEngine {
             @Query("isAllow") int isAllow,
             Callback<List<IWomenPost>> callback);
 
+    @GET(CommonConfig.GET_CALENDDARE_EVENT_LIST_BY_DATE_URL)
+    void getEventListByDate(
+            @Query("date") String date,
+            Callback<List<CalendarEvent>> callback);
+
     @GET(CommonConfig.GET_CALENDAR_EVENT)
-    void getCalendarEvent(
-            @Query("page") int page,
+    void getCalendarListByDateMothEvent(
+            @Query("date") String date,
             Callback<List<CalendarEvent>> callback);
 
     @GET(CommonConfig.GET_RESOURCE_URL)
     void getResourceByPagination(
             @Query("page") int page,
+            @Query("isAllow") int isAllow,
             Callback<List<ResourceItem>> callback);
     @GET(CommonConfig.GET_SISTER_APP_LIST_URL)
     void getSisterAppByPagination(

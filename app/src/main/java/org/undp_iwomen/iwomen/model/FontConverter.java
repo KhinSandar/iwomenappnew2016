@@ -387,6 +387,35 @@ public class FontConverter {
     	output_text = output_text.replaceAll("(\\u103a)(\\u1037)", "$2$1");
     	return output_text;
      }
-     
-    	 
+
+	//Zawgyi to Unicode correction
+	public static String Correction(String InputStr)
+	{
+		/// Correction
+		InputStr=InputStr.replaceAll("([ြ]?)([က-အ])","$2$1");
+		InputStr=InputStr.replaceAll("([ေ])([က-အ])([ြ-ှ]*)","$2$3$1");
+		InputStr=InputStr.replaceAll("([ရလ])([ြ])([ါ-းွှ]+)([က-အ])","$1$3$4$2");//for ရြှိပီး
+		InputStr=InputStr.replaceAll("([က-အ])([ါ-း]+)([ျ-ှ])","$1$3$2");//////for ကိုျး
+		InputStr=InputStr.replaceAll("([က-အ])([ေ])([ိ-ူဲံ])","$2$1$3");//////for ‌နနေဲ
+		InputStr=InputStr.replaceAll("([က-အ])([ေ])([ိ-ူဲံ]?)([က-အ])([်])","$2$1$3$4$5");//////for ‌‌သပေန်း
+		InputStr=InputStr.replaceAll("([က-အ])([က-အ])([ေ])([ါာ])","$1$3$2$4");//////for ‌လပေါ
+		InputStr=InputStr.replaceAll("ရြုံဖ", "ရုံဖြ"); //   ရြုံဖ
+		InputStr=InputStr.replaceAll("([ခ])([ြ])([ဲ့]+)([က-အ])","$1$3$4$2");//for /ခြဲ့က
+		InputStr=InputStr.replaceAll("([က-အ])([ါာ])([္])([က-အ])","$1$3$4$2");//for မာ္ဘ့
+		InputStr=InputStr.replaceAll("([ုူ့])([ိီဲံ])","$2$1");
+		InputStr=InputStr.replaceAll("ဥ([္်])","ဉ$1");
+		InputStr=InputStr.replaceAll("ံု","ုံ");//ဆံု
+		InputStr=InputStr.replaceAll("့်","့်");//င့်  င့် ဒ
+		InputStr=InputStr.replaceAll("([က-အ])ှေျ","$1ျှေ");//မှေျာ
+		InputStr=InputStr.replaceAll("([က-အ])ျ်","$1်ျ");// က်ျာကျ်ာ
+		InputStr=InputStr.replaceAll("([ွှ])([ျြ])","$2$1");//ၽ
+		InputStr=InputStr.replaceAll("\u200C","");
+		InputStr=InputStr.replaceAll("ြြ", "ြ");
+		InputStr=InputStr.replaceAll("ုု", "ု");
+		//End
+		return InputStr;
+	}
+
+
+
 }

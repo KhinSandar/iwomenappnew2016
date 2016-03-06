@@ -86,7 +86,7 @@ public class SubResourceListActivity extends BaseActionBarActivity {
         mTitleEng = i.getStringExtra("TitleEng");
         mTitleMM = i.getStringExtra("TitleMM");
 
-        Log.e("<<<Resesource ID>>","==>"+ mResourceId);
+        //Log.e("<<<Resesource ID>>","==>"+ mResourceId);
 
         //mResourceId= "SRBlN1Kow5";
 
@@ -182,7 +182,7 @@ public class SubResourceListActivity extends BaseActionBarActivity {
         if (Connection.isOnline(mContext)) {
 
 
-            SMKserverAPI.getInstance().getService().getSubResourceByResourceIDByPagination(paginater, id, new Callback<List<SubResourceItem>>() {
+            SMKserverAPI.getInstance().getService().getSubResourceByResourceIDByPagination(paginater, id,1, new Callback<List<SubResourceItem>>() {
                 @Override
                 public void success(List<SubResourceItem> subResourceItems, Response response) {
                     // Only first REQUEST that visible

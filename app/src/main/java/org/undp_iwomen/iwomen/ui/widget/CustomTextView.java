@@ -59,7 +59,7 @@ public class CustomTextView extends TextView{
 		if(selected_font != null){
 			if(selected_font.equals("myanmar3")){
 				if(text != null){
-					text = FontConverter.zg12uni51(text.toString());
+					text = FontConverter.Correction(FontConverter.zg12uni51(text.toString()));
 				}
 			}
 		}
