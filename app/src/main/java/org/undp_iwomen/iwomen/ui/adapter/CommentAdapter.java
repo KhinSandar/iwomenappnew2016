@@ -133,7 +133,7 @@ public class CommentAdapter extends BaseAdapter {
 
         vh.tv_name.setText(datalist.get(i).getUserName());
         vh.tv_message.setText(datalist.get(i).getCommentContents());
-        vh.tv_timestamp.setText(datalist.get(i).getCommentCreatedTime());
+        vh.tv_timestamp.setText(datalist.get(i).getHumanCreatedAt());
 
         return view;
     }

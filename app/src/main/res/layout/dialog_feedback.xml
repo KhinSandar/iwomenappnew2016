@@ -9,36 +9,48 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:background="@color/primary">
 
-    <org.undp_iwomen.iwomen.ui.widget.CustomTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/str_write_reviews"
-        android:id="@+id/textView5"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:singleLine="true"
-        android:ellipsize="marquee"
-        android:textSize="24dp" />
-
-    <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-        android:id="@+id/textView9"
-        android:textColor="@color/white"
-        android:layout_marginTop="24dp"
-        android:textSize="22dp" />
+        android:id="@+id/scrollView" >
 
-    <org.undp_iwomen.iwomen.ui.widget.CustomEditText
-        android:layout_marginTop="50dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/str_your_review"
-        android:textColorHint="@color/white"
-        android:textColor="@color/white"
-        android:id="@+id/edt_review" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/str_write_reviews"
+                android:id="@+id/textView5"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:textSize="24dp" />
+
+            <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/textView9"
+                android:textColor="@color/white"
+                android:layout_marginTop="24dp"
+                android:textSize="22dp"
+                android:text="@string/str_write_feedback" />
+
+            <org.undp_iwomen.iwomen.ui.widget.CustomEditText
+                android:layout_marginTop="50dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/str_your_review"
+                android:textColorHint="@color/white"
+                android:textColor="@color/white"
+                android:id="@+id/edt_review" />
+        </LinearLayout>
+    </ScrollView>
 
     <RelativeLayout
         android:orientation="horizontal"

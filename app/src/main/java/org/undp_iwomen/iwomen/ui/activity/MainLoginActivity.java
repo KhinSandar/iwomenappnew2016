@@ -1,7 +1,6 @@
 package org.undp_iwomen.iwomen.ui.activity;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -31,10 +30,13 @@ import com.orhanobut.dialogplus.DialogPlus;
 import com.orhanobut.dialogplus.OnClickListener;
 import com.orhanobut.dialogplus.OnItemClickListener;
 import com.orhanobut.dialogplus.ViewHolder;
+import com.smk.skalertmessage.SKToastMessage;
 import com.smk.skconnectiondetector.SKConnectionDetector;
+import com.thuongnh.zprogresshud.ZProgressHUD;
 
 import org.smk.clientapi.NetworkEngine;
 import org.smk.iwomen.BaseActionBarActivity;
+import org.smk.iwomen.ResponseError;
 import org.smk.model.User;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
@@ -72,6 +74,7 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
     private Button btnOk;
     private RadioButton rd_lang_en, rd_lang_mm_zawgyi, rd_lang_mm_uni, rd_lang_mm_default;
     private String lang;
+    private ZProgressHUD dialog;
 
 
     @Override
@@ -100,7 +103,6 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
         txtChangLanMM = (TextView) findViewById(R.id.login_change_lan_mm);
 
         //TODO CHECK LOGIN OR NOT
-
         if (mSharedPreferencesUserInfo.getString(CommonConfig.USER_ROLE, null) != null) {
             startActivity(new Intent(this, DrawerMainActivity.class));
             finish();
@@ -180,14 +182,13 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
             }
 
 
-            final ProgressDialog dialog = new ProgressDialog(this);
-            dialog.setMessage("Loading...");
+            dialog = new ZProgressHUD(this);
             dialog.show();
             NetworkEngine.getInstance().postLogin(username, pwd, new Callback<User>() {
                 @Override
                 public void success(User user, Response response) {
                     //Log.e("<<< >>> ", "===>" + user.getEmail());
-                    dialog.dismiss();
+                    dialog.dismissWithSuccess();
 
                     mEditorUserInfo = mSharedPreferencesUserInfo.edit();
 
@@ -210,22 +211,33 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
                     mEditorUserInfo.commit();
                     Intent i = new Intent(MainLoginActivity.this, DrawerMainActivity.class);//DrawerMainActivity
                     startActivity(i);
-                    //finish();
+                    finish();
 
                 }
 
                 @Override
-                public void failure(RetrofitError error) {
-                    //Log.e("<<< Login Err >>> ", "===>" + error.toString());
-                    if (lang.equals(Utils.ENG_LANG)) {
-                        //doToast(getResources().getString(R.string.confirm_password_error));
-                        Utils.doToastEng(getApplicationContext(), error.toString());
-                    } else if (lang.equals(Utils.MM_LANG)) {
+                public void failure(RetrofitError arg0) {
 
-                        Utils.doToastMM(getApplicationContext(), error.toString());
+                    if(arg0.getResponse() != null){
+                        switch (arg0.getResponse().getStatus()) {
+                            case 400:
+                                try {
+                                    ResponseError error = (ResponseError) arg0.getBodyAs(ResponseError.class);
+                                    if (lang.equals(Utils.ENG_LANG)) {
+                                        SKToastMessage.showMessage(MainLoginActivity.this, error.getError(), SKToastMessage.ERROR);
+                                    } else if (lang.equals(Utils.MM_LANG)) {
+                                        SKToastMessage.showMessage(MainLoginActivity.this, error.getErrorMm(), SKToastMessage.ERROR);
+                                    }
+                                }catch (Exception e){
+
+                                }
+                                break;
+                            default:
+                                break;
+                        }
                     }
 
-                    dialog.dismiss();
+                    dialog.dismissWithFailure();
 
                 }
             });

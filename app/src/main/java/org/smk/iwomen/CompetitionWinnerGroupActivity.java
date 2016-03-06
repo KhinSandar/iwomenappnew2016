@@ -2,6 +2,7 @@ package org.smk.iwomen;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
@@ -51,7 +52,7 @@ public class CompetitionWinnerGroupActivity extends BaseActionBarActivity {
 				llp.setMargins(0, 22, 0, 0); // llp.setMargins(left, top, right, bottom);
 				textView1.setLayoutParams(llp);
 				textView1.setTextSize(18f);
-				textView1.setTextColor(getResources().getColor(R.color.competition_text));
+				textView1.setTextColor(getResources().getColor(R.color.competition_text_color));
 				layout_answers.addView(textView1);
 
 				CustomTextView ansTextView1 = new CustomTextView(this);
@@ -60,7 +61,7 @@ public class CompetitionWinnerGroupActivity extends BaseActionBarActivity {
 				llp1.setMargins(0, 22, 0, 0); // llp.setMargins(left, top, right, bottom);
 				ansTextView1.setLayoutParams(llp1);
 				ansTextView1.setTextSize(18f);
-				ansTextView1.setTextColor(getResources().getColor(R.color.competition_text));
+				ansTextView1.setTextColor(getResources().getColor(R.color.competition_text_color));
 				layout_answers.addView(ansTextView1);
 			}
 		}else{
@@ -79,16 +80,16 @@ public class CompetitionWinnerGroupActivity extends BaseActionBarActivity {
 				llp.setMargins(0, 22, 0, 0); // llp.setMargins(left, top, right, bottom);
 				textView1.setLayoutParams(llp);
 				textView1.setTextSize(18f);
-				textView1.setTextColor(getResources().getColor(R.color.competition_text));
+				textView1.setTextColor(getResources().getColor(R.color.competition_text_color));
 				layout_answers.addView(textView1);
 
 				CustomTextView ansTextView1 = new CustomTextView(this);
-				ansTextView1.setText(answer.getAnswer());
+				ansTextView1.setText(Html.fromHtml(answer.getAnswer()));
 				LinearLayout.LayoutParams llp1 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 				llp1.setMargins(0, 22, 0, 0); // llp.setMargins(left, top, right, bottom);
 				ansTextView1.setLayoutParams(llp1);
 				ansTextView1.setTextSize(18f);
-				ansTextView1.setTextColor(getResources().getColor(R.color.competition_text));
+				ansTextView1.setTextColor(getResources().getColor(R.color.competition_text_color));
 				layout_answers.addView(ansTextView1);
 			}
 		}

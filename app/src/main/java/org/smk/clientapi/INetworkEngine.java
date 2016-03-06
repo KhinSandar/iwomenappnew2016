@@ -1,5 +1,6 @@
 package org.smk.clientapi;
 
+import com.google.gson.JsonObject;
 import com.smk.model.Categories;
 import com.smk.model.CommentItem;
 import com.smk.model.ResourceItem;
@@ -65,6 +66,13 @@ public interface INetworkEngine {
             @Field("group_user_id") Integer group_user_id,
             Callback<String> callback);
 
+    @FormUrlEncoded
+    @POST("/api/v1/mutipleAnswers")
+    void postCompetitionMutipleAnswer(
+            @Field("answers") String answer,
+            @Field("user_id") Integer user_id,
+            Callback<String> callback);
+
     @GET("/api/v1/app")
     void getAPKVersion(
             @Query("access_token") String access_token,
@@ -89,6 +97,19 @@ public interface INetworkEngine {
             @Field("review") String review,
             Callback<Review> callback);
 
+    @FormUrlEncoded
+    @POST("/api/v1/gcms")
+    void postRegisterNotification(
+            @Field("reg_id") String regId,
+            @Field("device_id") String devId,
+            @Field("user_id") String user_id,
+            Callback<JsonObject> callback);
+
+    @POST("/api/v1/file/imageUpload")
+    void uploadImage(
+            @Body MultipartTypedOutput attachments,
+            Callback<PhotoUpload> callback);
+
     //KSD URL
     //http://api.shopyface.com/api/v1/auth/photo
     @POST(CommonConfig.CREATE_USER_PHOTO_URL)
@@ -102,12 +123,25 @@ public interface INetworkEngine {
             @Field("username") String name,
             @Field("password") String pwd,
             @Field("phoneNo") String ph,
-            @Field("profileimage") String add,
-            @Field("isTlgTownshipExit") String photo,
-            @Field("tlg_city_address") String role,// Role ?
+            @Field("profileimage") String photo,
+            @Field("isTlgTownshipExit") int isTlg,
+            @Field("tlg_city_address") String tlg_city_address,// Role ?
 
+            @Field("tlg_city") String sate,
+            @Field("tlg_country") String country,
             Callback<User> callback);
 
+    @POST(CommonConfig.UPDATE_USER_URL)
+    void postUpdateUser(
+            @Path("id") Integer id,
+            @Query("username") String name,
+            @Query("password") String pwd,
+            @Query("phoneNo") String ph,
+            @Query("profileimage") String photo,
+            @Query("isTlgTownshipExit") String isTlg,
+            @Query("tlg_city_address") String tlg_city_address,// Role ?
+
+            Callback<User> callback);
 
     ///api-v1/auth/login
     @FormUrlEncoded
@@ -173,6 +207,7 @@ public interface INetworkEngine {
     @FormUrlEncoded
     @POST(CommonConfig.CREATE_CALENDAR_EVENT_URL)
     void postCreateCalendarEventMM(
+            @Field("userId") String userID,
             @Field("description_mm") String description_mm,
             @Field("title_mm") String title_mm,
             @Field("location") String location,
@@ -186,10 +221,9 @@ public interface INetworkEngine {
     @FormUrlEncoded
     @POST(CommonConfig.CREATE_CALENDAR_EVENT_URL)
     void postCreateCalendarEventEng(
-
+            @Field("userId") String userID,
             @Field("description") String description,
             @Field("title") String title,
-
             @Field("location") String location,
             @Field("start_date") String start_date,
             @Field("end_date") String end_date,

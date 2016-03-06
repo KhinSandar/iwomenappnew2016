@@ -252,14 +252,14 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
         ((RegisterMainActivity) getActivity()).textViewTitle.setText(R.string.register_title);
 
         //((RegisterMainActivity) getActivity()).textViewTitle.setTypeface(MyTypeFace.get(getActivity().getApplicationContext(), MyTypeFace.NORMAL));
-        /*usernameField.setHint(getResources().getString(R.string.register_name_hint));
+        usernameField.setHint(getResources().getString(R.string.register_name_hint));
         mobileNoForNrcField.setHint(getResources().getString(R.string.register_ph_hint));
 
 
         //Set Type Face
 
         usernameField.setTypeface(MyTypeFace.get(getActivity().getApplicationContext(), MyTypeFace.NORMAL));
-        mobileNoForNrcField.setTypeface(MyTypeFace.get(getActivity().getApplicationContext(), MyTypeFace.NORMAL));*/
+        mobileNoForNrcField.setTypeface(MyTypeFace.get(getActivity().getApplicationContext(), MyTypeFace.NORMAL));
 
 
     }
@@ -270,12 +270,12 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
         ((RegisterMainActivity) getActivity()).textViewTitle.setText(R.string.register_title_mm);
         ((RegisterMainActivity) getActivity()).textViewTitle.setTypeface(MyTypeFace.get(getActivity().getApplicationContext(), MyTypeFace.ZAWGYI));
 
-       /* usernameField.setHint(getResources().getString(R.string.register_name_hint));
+        usernameField.setHint(getResources().getString(R.string.register_name_hint));
         mobileNoForNrcField.setHint(getResources().getString(R.string.register_ph_hint));
 
         //Set Type Face
         usernameField.setTypeface(MyTypeFace.get(getActivity().getApplicationContext(), MyTypeFace.ZAWGYI));
-        mobileNoForNrcField.setTypeface(MyTypeFace.get(getActivity().getApplicationContext(), MyTypeFace.ZAWGYI));*/
+        mobileNoForNrcField.setTypeface(MyTypeFace.get(getActivity().getApplicationContext(), MyTypeFace.ZAWGYI));
 
 
     }

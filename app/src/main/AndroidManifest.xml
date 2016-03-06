@@ -223,6 +223,18 @@
             android:authorities="com.facebook.app.FacebookContentProvider909633732437583"
             android:exported="true" />
 
+        <receiver
+            android:name="org.smk.gcm.GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+
+                <category android:name="org.undp_iwomen.iwomen" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name="org.smk.gcm.GcmIntentService" />
+
         <activity
             android:name=".ui.activity.RegisterMainActivity"
             android:label="@string/app_name"
@@ -404,24 +416,25 @@
         <activity
             android:name=".ui.activity.PostDetailV2Activity"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.activity.LeadershipTipsActivity"
-            android:label="@string/title_leadership_tips">
-        </activity>
+            android:label="@string/title_leadership_tips"></activity>
         <activity
             android:name=".ui.activity.LeadershipTipDetailActivity"
             android:label="@string/title_leadership_lesson" />
         <activity
             android:name=".ui.activity.SisterAppDetailActivity"
             android:label="@string/title_activity_sister_app_detail"
-            android:theme="@style/AppTheme">
-        </activity>
-        <activity android:name=".ui.activity.NewPostActivity"
+            android:theme="@style/AppTheme"></activity>
+        <activity
+            android:name=".ui.activity.NewPostActivity"
             android:label="@string/title_activity_new_post"
-            android:theme="@style/AppTheme">
-
-        </activity>
+            android:theme="@style/AppTheme"></activity>
+        <activity
+            android:name="org.smk.iwomen.GcmNotificationDialogActivity"
+            android:label="@string/title_activity_gcm_notification_dialog"
+            android:theme="@style/Theme.Transparent"></activity>
     </application>
 
 </manifest>

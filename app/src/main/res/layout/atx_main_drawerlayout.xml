@@ -243,16 +243,16 @@
 
 
             <ImageView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:src="@drawable/trophy"
-                android:id="@+id/imageView" />
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/sticker2"
+                android:id="@+id/img_play_game" />
 
             <org.undp_iwomen.iwomen.ui.widget.AnimateCustomTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="New Button"
-                android:textColor="@color/white"
+                android:textColor="@color/competition_text_color"
                 android:textSize="18sp"
                 android:gravity="center"
                 android:background="@android:color/transparent"

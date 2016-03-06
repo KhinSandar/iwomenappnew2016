@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -31,6 +32,7 @@ import com.squareup.picasso.Picasso;
 
 import org.smk.application.StoreUtil;
 import org.smk.clientapi.NetworkEngine;
+import org.smk.gcm.GcmCommon;
 import org.smk.iwomen.BaseActionBarActivity;
 import org.smk.iwomen.CompetitionNewGameActivity;
 import org.smk.iwomen.CompetitionWinnerGroupActivity;
@@ -108,6 +110,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
     LinearLayout ly_menu_profile_area;
     private AnimateCustomTextView btn_play_game;
     private LinearLayout layout_play_game;
+    private ImageView img_play_game;
 
     @Override
     protected void onStart() {
@@ -136,6 +139,12 @@ public class DrawerMainActivity extends BaseActionBarActivity {
         FacebookSdk.sdkInitialize(getApplicationContext());
         // Initialize the SDK before executing any other operations,
         // especially, if you're using Facebook UI elements.
+
+
+        //Register GCM Device User
+        if (Connection.isOnline(getApplicationContext())) {
+            GcmCommon.register(this);
+        }
 
 
         org.undp_iwomen.iwomen.utils.Utils.onActivityCreateSetTheme(this);
@@ -169,6 +178,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
         drawer_progressBar_profile_item = (ProgressBar) findViewById(R.id.drawer_progressBar_profile_item);
         layout_play_game = (LinearLayout) findViewById(R.id.ly2);
         btn_play_game = (AnimateCustomTextView) findViewById(R.id.drawer_btn_take_challenge);
+        img_play_game = (ImageView) findViewById(R.id.img_play_game);
 
         // set a custom shadow that overlays the main content when the drawer opens
         drawerLayoutt.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
@@ -191,7 +201,12 @@ public class DrawerMainActivity extends BaseActionBarActivity {
 
         user_id = mSharedPreferencesUserInfo.getString(CommonConfig.USER_ID, null);
         user_img_path = mSharedPreferencesUserInfo.getString(CommonConfig.USER_UPLOAD_IMG_URL, null);
-
+        //TODO CHECK LOGIN OR NOT
+        if (mSharedPreferencesUserInfo.getString(CommonConfig.USER_ROLE, null) == null) {
+            startActivity(new Intent(this, MainLoginActivity.class));
+            finish();
+            return;// add this to prevent from doing unnecessary stuffs
+        }
 
         setUserImg();
 
@@ -702,7 +717,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
     private void getCompetitionQuestion() {
         if (Connection.isOnline(this)) {
 
-            NetworkEngine.getInstance().getCompetitionQuestion("", user_obj_id, new Callback<CompetitionQuestion>() {
+            NetworkEngine.getInstance().getCompetitionQuestion("", user_id, new Callback<CompetitionQuestion>() {
 
                 @Override
                 public void failure(RetrofitError arg0) {
@@ -710,11 +725,8 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                     if (arg0.getResponse() != null) {
                         switch (arg0.getResponse().getStatus()) {
                             case 403:
-                                //startActivity(new Intent(getApplicationContext(), GameOverActivity.class));
                                 break;
                             case 400:
-                                //String error = (String) arg0.getBodyAs(String.class);
-                                //SKToastMessage.showMessage(DrawerMainActivity.this, error ,SKToastMessage.ERROR);
                                 layout_play_game.setVisibility(View.GONE);
                                 break;
                             default:
@@ -728,6 +740,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                     // TODO Auto-generated method stub
                     layout_play_game.setVisibility(View.VISIBLE);
                     if (arg0.getCorrectAnswer().size() == 0) {
+                        img_play_game.setImageResource(R.drawable.sticker2);
                         btn_play_game.setText(getResources().getString(R.string.competition_play_game));
                         btn_play_game.setOnClickListener(new View.OnClickListener() {
 
@@ -739,6 +752,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                         });
 
                     } else {
+                        img_play_game.setImageResource(R.drawable.sticker1);
                         btn_play_game.setText(getResources().getString(R.string.competition_discover_winner));
                         btn_play_game.setOnClickListener(new View.OnClickListener() {
 

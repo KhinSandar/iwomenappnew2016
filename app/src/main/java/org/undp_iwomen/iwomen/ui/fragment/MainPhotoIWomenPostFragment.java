@@ -820,7 +820,7 @@ public class MainPhotoIWomenPostFragment extends Fragment implements ImageChoose
         if (requestCode == VIDEO_CAPTURE) {
             if (resultCode == getActivity().RESULT_OK) {
                 Toast.makeText(getActivity(), "Video has been saved to:\n" + data.getData(), Toast.LENGTH_LONG).show();
-                uploadingAudioFile("http://api.shopyface.com/api-v1/post/video", data.getData().getPath());
+                uploadingAudioFile("http://api.iwomenapp.org/api/v1/file/videoUpload", data.getData().getPath());
             } else if (resultCode == getActivity().RESULT_CANCELED) {
                 Toast.makeText(getActivity(), "Video recording cancelled.", Toast.LENGTH_LONG).show();
             } else {
@@ -831,7 +831,7 @@ public class MainPhotoIWomenPostFragment extends Fragment implements ImageChoose
         if (requestCode == AUDIO_CAPTURE) {
             if (resultCode == getActivity().RESULT_OK) {
                 Toast.makeText(getActivity(), "Audio has been saved to:\n" + data.getData(), Toast.LENGTH_LONG).show();
-                uploadingAudioFile("http://api.shopyface.com/api-v1/post/audio", data.getData().getPath());
+                uploadingAudioFile("http://api.iwomenapp.org/api/v1/file/audioUpload", data.getData().getPath());
             } else if (resultCode == getActivity().RESULT_CANCELED) {
                 Toast.makeText(getActivity(), "Audio recording cancelled.", Toast.LENGTH_LONG).show();
             } else {

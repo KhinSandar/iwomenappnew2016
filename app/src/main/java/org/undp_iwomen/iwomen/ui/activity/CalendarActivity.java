@@ -1,7 +1,6 @@
 package org.undp_iwomen.iwomen.ui.activity;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,7 +11,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
@@ -246,7 +244,8 @@ public class CalendarActivity extends AppCompatActivity {
                 /*Toast.makeText(getApplicationContext(), formatter.format(date),
                         Toast.LENGTH_SHORT).show();*/
                 if (user_role.equalsIgnoreCase("User")) {
-                    showPermissionDialog();
+
+                    Utils.showPermissionDialog(CalendarActivity.this);
                 } else {
                     Calendar cal = Calendar.getInstance();
                     cal.setTime(date);
@@ -445,22 +444,6 @@ public class CalendarActivity extends AppCompatActivity {
         return true;
     }
 
-    public void showPermissionDialog() {
-        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-        View convertView = View.inflate(this, R.layout.custom_premission_dialog, null);
 
-        Button btn_ok = (Button) convertView.findViewById(R.id.permission_dialog_btn_ok);
-        alertDialog.setView(convertView);
-        alertDialog.show();
-
-        btn_ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                finish();
-
-            }
-        });
-    }
 
 }

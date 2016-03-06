@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.transition.ChangeBounds;
 import android.transition.Slide;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,6 +42,8 @@ public class RegisterTermsFragment8 extends Fragment implements View.OnClickList
     private ProgressDialog mProgressDialog;
 
     private Button btn_next;
+
+    int isTlgExit = 0 ;
 
     public static RegisterTermsFragment8 newInstance(Sample sample) {
 
@@ -121,26 +124,27 @@ public class RegisterTermsFragment8 extends Fragment implements View.OnClickList
             String email = mSharedPreferencesUserInfo.getString(CommonConfig.USER_PH, null);
             String pwd = mSharedPreferencesUserInfo.getString(CommonConfig.USER_PH, null);
 
-            String address_tlg_township_name = mSharedPreferencesUserInfo.getString(CommonConfig.USER_PH, null);
+            String address_tlg_township_name = mSharedPreferencesUserInfo.getString(CommonConfig.USER_TLG_NAME, null);
 
             //TODO city field
-            //String address_sate_name = mSharedPreferencesUserInfo.getString(CommonConfig.USER_PH, null);
+            String tlg_sate= mSharedPreferencesUserInfo.getString(CommonConfig.USER_STATE, null);
             //TODO country
-            //String address_country_name = mSharedPreferencesUserInfo.getString(CommonConfig.USER_PH, null);
+            String tlg_country= mSharedPreferencesUserInfo.getString(CommonConfig.USER_COUNTRY, null);
 
 
             String user_photo = mSharedPreferencesUserInfo.getString(CommonConfig.USER_PH, null);
 
-            String user_role = "User";
+            //String user_role = "User";
             //TODO remark group_id
-            //String groud_id = "1";
 
             //TODO tlg user (istlgexit true and tlg address0
-            String isTlgExit = "true";
-            String tlgName = "Kanpetlet, Chin State";
-
-
-            NetworkEngine.getInstance().postCreateUser(user_name, pwd, phone, user_photo, isTlgExit, tlgName, new Callback<User>() {
+            if(address_tlg_township_name != null){
+                isTlgExit = 1;//true shi
+            }else{
+                isTlgExit = 0;
+            }
+            Log.e("<<Register>","==>"+user_name+"/"+ pwd+"/"+  phone+"/"+  user_photo+"/"+  isTlgExit+"/"+  address_tlg_township_name+"/"+  tlg_sate+"/"+ tlg_country );
+            NetworkEngine.getInstance().postCreateUser(user_name, pwd, phone, user_photo, isTlgExit, address_tlg_township_name, tlg_sate, tlg_country, new Callback<User>() {
                         @Override
                         public void success(User user, Response response) {
                             mEditorUserInfo = mSharedPreferencesUserInfo.edit();
@@ -153,10 +157,9 @@ public class RegisterTermsFragment8 extends Fragment implements View.OnClickList
 
                             mEditorUserInfo.putString(CommonConfig.REGISTER_MSG, user.getMessage());
 
-                            if(user.getEmail()!= null || user.getEmail() != ""){
+                            if (user.getEmail() != null || user.getEmail() != "") {
                                 mEditorUserInfo.putString(CommonConfig.USER_EMAIL, user.getEmail());
                             }
-
 
 
                             mEditorUserInfo.commit();

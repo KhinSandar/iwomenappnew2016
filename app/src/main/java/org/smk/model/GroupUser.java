@@ -1,9 +1,10 @@
 package org.smk.model;
 
-import java.util.ArrayList;
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GroupUser {
 
@@ -43,6 +44,9 @@ private String imageUrl;
 @SerializedName("total_has_answer")
 @Expose
 private Integer totalHasAnswer;
+@SerializedName("limited_answer")
+@Expose
+private Integer limitedAnswer;
 @SerializedName("current_has_answer")
 @Expose
 private Integer currentHasAnswer;
@@ -269,7 +273,15 @@ public void setTotalHasAnswer(Integer totalHasAnswer) {
 this.totalHasAnswer = totalHasAnswer;
 }
 
-/**
+public Integer getLimitedAnswer() {
+    return limitedAnswer;
+}
+
+public void setLimitedAnswer(Integer limitedAnswer) {
+    this.limitedAnswer = limitedAnswer;
+}
+
+    /**
 * 
 * @return
 * The currentHasAnswer

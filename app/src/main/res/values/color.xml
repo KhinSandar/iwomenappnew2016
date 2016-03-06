@@ -82,9 +82,10 @@
     <color name="black_overlay">#66000000</color>
 
     <color name="competition_black_overlay">#66000000</color>
-    <color name="competition_primary">#F5A623</color>
-    <color name="competition_accent">#ED670A</color>
+    <color name="competition_primary">#CDDC39</color>
+    <color name="competition_accent">#A9C310</color>
     <color name="competition_text">#FFFFFF</color>
+    <color name="competition_text_color">#545547</color>
     <color name="competition_progress">#7ED321</color>
     <color name="competition_progress_bar">#D8D8D8</color>
     <color name="competition_phone">#01AC46</color>

@@ -220,7 +220,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     public static final int MENU_Share = Menu.FIRST + 1;
     MediaPlayer mMedia;
     private boolean isPlaying;
-    private String mstrPostType;
+    private String mstrPostType , mVideoId;
     private Context mContext;
 
     private ProgressDialog mProgressDialog;
@@ -509,9 +509,13 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                     public void onClick(View view) {
                         Intent intent = new Intent(mContext, YouTubeWebviewActivity.class);
 
-                        //intent.putExtra("post_id", feedItems.get(position).getPost_obj_id());
+                        if(mVideoId != null){
+                            intent.putExtra("video_id", mVideoId);
+                        }else{
+                            intent.putExtra("video_id", "YOAu82xu8VY");
+                        }
 
-                        //intent.putExtra("ImgUrl", mImgurl.get(getPosition()));
+
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         mContext.startActivity(intent);
@@ -631,6 +635,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         //txt_lbl_share_post.setText(getResources().getString(R.string.post_detail_share_post));
 
         mstrPostType = item.getContentType();
+        mVideoId = item.getVideoId();
         //TODO TableColumnUpdate 10 data set show in UI
         if (strLang.equals(Utils.ENG_LANG)) {
             postdetail_username.setTypeface(MyTypeFace.get(getApplicationContext(), MyTypeFace.NORMAL));
@@ -1191,8 +1196,9 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         listView_Comment.setNestedScrollingEnabled(true);
                     } else {
-                        Helper.getListViewSize(listView_Comment);
+
                     }
+                    Helper.getListViewSize(listView_Comment);
 
                     StoreUtil.getInstance().saveTo("commentlist", listComment);
                     //TODO get sticker for comment
@@ -1597,6 +1603,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         //txt_lbl_share_post.setText(getResources().getString(R.string.post_detail_share_post));
 
         mstrPostType = item.getPost_content_type();
+        mVideoId = item.getPost_content_video_id();
         //TODO TableColumnUpdate 10 data set show in UI
         if (strLang.equals(Utils.ENG_LANG)) {
             postdetail_username.setTypeface(MyTypeFace.get(getApplicationContext(), MyTypeFace.NORMAL));
@@ -2041,7 +2048,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     public void onClick(View view) {
 
         switch (view.getId()) {
-            case R.id.postdetail_like_button:
+            case R.id.postdetail_like_animated_button:
                 if (Connection.isOnline(getApplicationContext())) {
 
                     if (like_status != null) {
@@ -2199,9 +2206,11 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                 if (mstrPostType.equalsIgnoreCase("Video")) {
                     Intent video_intent = new Intent(mContext, YouTubeWebviewActivity.class);
 
-                    //intent.putExtra("post_id", feedItems.get(position).getPost_obj_id());
-
-                    //intent.putExtra("ImgUrl", mImgurl.get(getPosition()));
+                    if(mVideoId != null){
+                        video_intent.putExtra("video_id", mVideoId);
+                    }else{
+                        video_intent.putExtra("video_id", "YOAu82xu8VY");
+                    }
                     video_intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     video_intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     mContext.startActivity(video_intent);

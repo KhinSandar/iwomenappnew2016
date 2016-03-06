@@ -106,12 +106,12 @@ public class ResourcesListViewAdapter extends BaseAdapter
 
         holder.imgIcon.setAdjustViewBounds(true);
         holder.imgIcon.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        if(ResourceItems.get(position).getResourceIconImg() != null && !ResourceItems.get(position).getResourceIconImg().isEmpty()) {
+        if(ResourceItems.get(position).getAuthorImgPath() != null && !ResourceItems.get(position).getAuthorImgPath().isEmpty()) {
 
             try {
 
                 Picasso.with(mContext)
-                        .load(ResourceItems.get(position).getResourceIconImg()) //"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
+                        .load(ResourceItems.get(position).getAuthorImgPath()) //"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
                         .placeholder(R.drawable.blank_profile)
                         .error(R.drawable.blank_profile)
                         .into(holder.imgIcon, new ImageLoadedCallback(holder.progressBar) {

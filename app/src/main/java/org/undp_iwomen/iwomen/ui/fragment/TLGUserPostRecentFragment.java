@@ -44,6 +44,7 @@ import org.smk.clientapi.NetworkEngine;
 import org.smk.iwomen.BaseActionBarActivity;
 import org.smk.model.IWomenPost;
 import org.smk.model.Rating;
+import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.data.FeedItem;
 import org.undp_iwomen.iwomen.database.TableAndColumnsName;
@@ -91,6 +92,12 @@ public class TLGUserPostRecentFragment extends Fragment implements View.OnClickL
 
     String  mstrCatName , mCatID;
 
+    String storage_arraylistname;
+    private SharedPreferences mSharedPreferencesUserInfo;
+
+    private String user_name, user_obj_id, user_id, user_role, user_ph, register_msg, user_img_path;
+
+
     public TLGUserPostRecentFragment() {
 
     }
@@ -119,8 +126,11 @@ public class TLGUserPostRecentFragment extends Fragment implements View.OnClickL
     }
 
     private void init(View rootView) {
+        mSharedPreferencesUserInfo = getActivity().getSharedPreferences(CommonConfig.SHARE_PREFERENCE_USER_INFO, Context.MODE_PRIVATE);
+
         sharePrefLanguageUtil = getActivity().getSharedPreferences(Utils.PREF_SETTING, Context.MODE_PRIVATE);
         mstr_lang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
+        user_role = mSharedPreferencesUserInfo.getString(CommonConfig.USER_ROLE, null);
 
         feedItems = new ArrayList<FeedItem>();
         skListView = (SKListView) rootView.findViewById(R.id.lst_stories);
@@ -153,7 +163,8 @@ public class TLGUserPostRecentFragment extends Fragment implements View.OnClickL
          * This is load data from local or server when connection is connected or not connected
          */
         //Load data from local storage for no connection
-        final List<IWomenPost> iWomenPosts = StoreUtil.getInstance().selectFrom("stories_recent");
+        storage_arraylistname = "Post"+mCatID;
+        final List<IWomenPost> iWomenPosts = StoreUtil.getInstance().selectFrom(storage_arraylistname);
         if (Connection.isOnline(mContext)){
             // Showing local data while loading from internet
             if(iWomenPosts != null && iWomenPosts.size() > 0){
@@ -1421,7 +1432,7 @@ public class TLGUserPostRecentFragment extends Fragment implements View.OnClickL
                     }
                     iWomenPostList.addAll(iWomenPosts);
                     stories.notifyDataSetChanged();
-                    StoreUtil.getInstance().saveTo("stories_recent", iWomenPostList);
+                    StoreUtil.getInstance().saveTo(storage_arraylistname, iWomenPostList);
                     isLoading = false;
                     if (iWomenPosts.size() == 12) {
                         skListView.setNextPage(true);
@@ -1453,7 +1464,7 @@ public class TLGUserPostRecentFragment extends Fragment implements View.OnClickL
 
         } else {
             SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
-            List<IWomenPost> iWomenPosts = StoreUtil.getInstance().selectFrom("stories_recent");
+            List<IWomenPost> iWomenPosts = StoreUtil.getInstance().selectFrom(storage_arraylistname);
             if(iWomenPosts != null){
                 iWomenPostList.clear();
                 iWomenPostList.addAll(iWomenPosts);

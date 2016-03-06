@@ -577,6 +577,10 @@ www.iwomenapp.org
     <string name="title_activity_sister_app_detail">Sister Apps</string>
     <string name="title_activity_new_post">New Post</string>
     <string name="new_post_hint">Here you can ask question to other TLGs, ask for advice to other TLGs and share your livelihood skills with other TLGs, And of course you can also post your successful TLGs activities.</string>
+    <string name="str_upload_image">Upload Photo</string>
+    <string name="str_upload_audio">Upload Audio</string>
+    <string name="str_write_feedback">Tell iWomen Team what you love about the app, what you would like to see improved or any technical problems you encountered. Thank you!</string>
+    <string name="title_activity_gcm_notification_dialog"></string>
 
     <string name="may_doe_kabar">May Doe Kabar is a National Network of village- based women’s Self-Reliant Groups (SRGs) and their federations of Township Leading Groups (TLGs). It spans 22,000 members and 2,000 villages in 31 townships in the Delta, the Dry Zone, Chin, Kachin, Kayah, Mon, Rakhine, and Shan States.
 </string>
@@ -624,6 +628,8 @@ Shirin Ebadi, J.D., was awarded the 2003 Nobel Peace Prize for her efforts to pr
     <string name="oct_des">The first International Day of Rural Women was observed on 15 October 2008. This new international day, established by the UN in 2007, recognizes “the critical role and contribution of rural women, including indigenous women, in enhancing agricultural and rural development, improving food security and eradicating rural poverty.”</string>
     <string name="nov_des">1 out of 3 women worlwide have experienced physical or sexual violence. This International Day aim to raise public awareness and mobilizing people everywhere in the world to bring about change.</string>
     <string name="dec_des">Tawakkol Karman was awarded the Nobel Peace Prize in 2011 in recognition of her work in nonviolent struggle for the safety of women and for women’s rights to full participation in peacebuilding work in Yemen.</string>
+    <string name="str_ready_submit">Ready to Submit</string>
+    <string name="str_already_uploaded">Already Uploaded</string>
 
     <string-array name="women_remember_day_desc_array">
         <item>@string/jan_des</item>
@@ -639,5 +645,35 @@ Shirin Ebadi, J.D., was awarded the 2003 Nobel Peace Prize for her efforts to pr
         <item>@string/nov_des</item>
         <item>@string/dec_des</item>
     </string-array>
+
+    <string name="state_1">Yangon </string>
+    <string name="state_2"> Mandalay</string>
+    <string name="state_3">Magwe </string>
+    <string name="state_4"> Bago</string>
+    <string name="state_5">Ayeyarwaddy </string>
+    <string name="state_6"> Sagaing</string>
+    <string name="state_7"> Thaninthayi</string>
+    <string name="state_8"> Kachin</string>
+    <string name="state_9"> Kayah</string>
+    <string name="state_10">Kayin </string>
+    <string name="state_11">Chin </string>
+    <string name="state_12">Mon </string>
+    <string name="state_13"> Rakhine</string>
+    <string name="state_14"> Shan</string>
+    <string name="state_1m"> ရန္ကုန္</string>
+    <string name="state_2m">မႏၲေလး </string>
+    <string name="state_3m"> မေကြး</string>
+    <string name="state_4m"> ပဲခူး</string>
+    <string name="state_5m"> ဧရာဝတီ</string>
+    <string name="state_6m">စစ္ကိုင္း </string>
+    <string name="state_7m"> တနသႍာရီ</string>
+    <string name="state_8m">ကခ်င္ </string>
+    <string name="state_9m"> ကယား</string>
+    <string name="state_10m"> ကရင္</string>
+    <string name="state_11m">ခ်င္း </string>
+    <string name="state_12m">မြန္ </string>
+    <string name="state_13m">ရခိုင္ </string>
+    <string name="state_14m"> ရွမ္း</string>
+
 
 </resources>

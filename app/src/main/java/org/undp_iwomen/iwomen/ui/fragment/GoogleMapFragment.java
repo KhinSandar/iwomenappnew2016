@@ -130,6 +130,7 @@ public class GoogleMapFragment extends Fragment {//
         tlgArraylist = (ArrayList<TLGTownship>) storageUtil.ReadArrayListFromSD("TlgArrayList");
 
 
+        txtBody.setText(getResources().getString(R.string.may_doe_kabar));
         if (!isGooglePlayServicesAvailable()) {
             Log.e("Google Map not ok", "==>");
             //getActivity().finish();

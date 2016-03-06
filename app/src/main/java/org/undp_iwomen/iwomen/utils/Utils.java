@@ -1,9 +1,12 @@
 package org.undp_iwomen.iwomen.utils;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -96,6 +99,25 @@ public class Utils {
 
     public static double clamp(double value, double low, double high) {
         return Math.min(Math.max(value, low), high);
+    }
+
+    public static void showPermissionDialog(Activity activity) {
+        final Dialog alertDialog = new Dialog(activity);
+        View convertView = View.inflate(activity, R.layout.custom_premission_dialog, null);
+
+        Button btn_ok = (Button) convertView.findViewById(R.id.permission_dialog_btn_ok);
+        alertDialog.setContentView(convertView);
+        alertDialog.show();
+
+        btn_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //finish();
+                alertDialog.dismiss();
+
+            }
+        });
     }
 
 }

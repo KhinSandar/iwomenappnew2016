@@ -1,6 +1,7 @@
 package org.undp_iwomen.iwomen.ui.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ public class YouTubeWebviewActivity extends BaseActionBarActivity {
     private VideoEnabledWebView webView;
     private VideoEnabledWebChromeClient webChromeClient;
     private ProgressBar Pbar;
+    private String videoID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,8 @@ public class YouTubeWebviewActivity extends BaseActionBarActivity {
         // Makes Progress bar Visible
         this.getWindow().setFeatureInt(Window.FEATURE_PROGRESS, Window.PROGRESS_VISIBILITY_ON);
 
+        Intent i = getIntent();
+        videoID = i.getStringExtra("video_id");
         // Save the web view
         webView = (VideoEnabledWebView) findViewById(R.id.webView);
         Pbar = (ProgressBar) findViewById(R.id.wv_progressBar);
@@ -108,7 +112,7 @@ public class YouTubeWebviewActivity extends BaseActionBarActivity {
 
         // Navigate anywhere you want, but consider that this classes have only been tested on YouTube's mobile site
         //https://youtu.be/YOAu82xu8VY
-        webView.loadUrl("http://m.youtube.com/watch?v=YOAu82xu8VY");//https://www.youtube.com/watch?v=lqplGpum-E4
+        webView.loadUrl("http://m.youtube.com/watch?v="+videoID);//https://www.youtube.com/watch?v=lqplGpum-E4
 
     }
 

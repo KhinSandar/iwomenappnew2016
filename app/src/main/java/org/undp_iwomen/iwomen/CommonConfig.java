@@ -90,6 +90,8 @@ public class CommonConfig {
 
     public static final String CREATE_REGISTER_URL = "/api/v1/users";
 
+    public static final String UPDATE_USER_URL = "/api/v1/users/{id}";
+
     public static final String GET_IWOMEN_POST_BY_DATE_URL = "/api/v1/iwomenPosts";
 
     public static final String GET_RESOURCE_URL = "/api/v1/resources";

@@ -21,6 +21,7 @@ import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import org.smk.clientapi.NetworkEngine;
 import org.smk.model.CalendarEvent;
+import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.utils.Connection;
 import org.undp_iwomen.iwomen.utils.Utils;
@@ -68,6 +69,9 @@ public class NewEventFragment extends Fragment implements View.OnClickListener {
     private Date mStartTime;
     private Date mEndTime;
 
+    private SharedPreferences mSharedPreferencesUserInfo;
+    private String user_name, user_obj_id, user_id, user_role, user_ph, register_msg, user_img_path;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,6 +93,9 @@ public class NewEventFragment extends Fragment implements View.OnClickListener {
         mContext = getActivity().getApplicationContext();
         sharePrefLanguageUtil = getActivity().getSharedPreferences(org.undp_iwomen.iwomen.utils.Utils.PREF_SETTING, Context.MODE_PRIVATE);
         lang = sharePrefLanguageUtil.getString(org.undp_iwomen.iwomen.utils.Utils.PREF_SETTING_LANG, org.undp_iwomen.iwomen.utils.Utils.ENG_LANG);
+        mSharedPreferencesUserInfo = getActivity().getSharedPreferences(CommonConfig.SHARE_PREFERENCE_USER_INFO, Context.MODE_PRIVATE);
+
+        user_id = mSharedPreferencesUserInfo.getString(CommonConfig.USER_ID, null);
 
         initViews(rootView);
         initViewsListeners();
@@ -255,7 +262,7 @@ public class NewEventFragment extends Fragment implements View.OnClickListener {
             Log.e("<<Calendar>>","Date==>" +getServerDateString(mStartDate));
             //Date==>Wed Mar 02 23:51:09 GMT+06:30 2016
             if (lang.equals(Utils.ENG_LANG)) {
-                NetworkEngine.getInstance().postCreateCalendarEventEng(description, title, location, getServerDateString(mStartDate), getServerDateString(mEndDate), start_time, end_time, new Callback<CalendarEvent>() {
+                NetworkEngine.getInstance().postCreateCalendarEventEng(user_id,description, title, location, getServerDateString(mStartDate), getServerDateString(mEndDate), start_time, end_time, new Callback<CalendarEvent>() {
                     @Override
                     public void success(CalendarEvent calendarEvent, Response response) {
                         Utils.doToastEng(mContext, getResources().getString(R.string.calendar_success));
@@ -268,7 +275,7 @@ public class NewEventFragment extends Fragment implements View.OnClickListener {
                     }
                 });
             }else{
-                NetworkEngine.getInstance().postCreateCalendarEventMM(description, title, location, getServerDateString(mStartDate), getServerDateString(mEndDate), start_time, end_time, new Callback<CalendarEvent>() {
+                NetworkEngine.getInstance().postCreateCalendarEventMM(user_id,description, title, location, getServerDateString(mStartDate), getServerDateString(mEndDate), start_time, end_time, new Callback<CalendarEvent>() {
                     @Override
                     public void success(CalendarEvent calendarEvent, Response response) {
                         Utils.doToastMM(mContext, getResources().getString(R.string.calendar_success_mm));
