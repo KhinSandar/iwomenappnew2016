@@ -31,19 +31,6 @@ apply plugin: 'com.google.gms.google-services'
 android {
     signingConfigs {
         release {
-            try {
-                keyAlias 'iwomenapp'
-                keyPassword KEY_PASSWORD
-                storeFile file('/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/app/iwomenapp.jks')
-                //storeFile file('D:\\PRIVATE STATIC FINAL DEVELOPMENT ANDROID\\MyTicket\\gobus\\app\\myTickets.jks')
-                storePassword KEYSTORE_PASSWORD
-            } catch (ex) {
-                //throw new InvalidUserDataException("You should define KEYSTORE_PASSWORD and KEY_PASSWORD in gradle.properties.")
-            }
-            keyAlias 'iwomenapp'
-            keyPassword 'uNDP2@15'
-            storeFile file('/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/app/iwomenapp.jks')
-            storePassword 'uNDP2@15'
         }
     }
     compileSdkVersion 23
@@ -65,6 +52,8 @@ android {
         }
     }
 }
+
+
 
 dependencies {
     // Google Play Services
