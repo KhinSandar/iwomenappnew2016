@@ -2,15 +2,12 @@ package org.undp_iwomen.iwomen.ui.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 
+import org.smk.iwomen.BaseActionBarActivity;
 import org.undp_iwomen.iwomen.R;
 
-public class PostDetailV2Activity extends AppCompatActivity {
+public class PostDetailV2Activity extends BaseActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -5,6 +5,8 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,6 +20,8 @@ import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.path.android.jobqueue.JobManager;
 
 import org.greenrobot.eventbus.EventBus;
@@ -43,6 +47,7 @@ public class BaseActionBarActivity extends AppCompatActivity{
 	private static boolean isCheckedVersion = false;
 	public Integer  UsageCount = 0;
 	public int versionCode = 0;
+	private Tracker mTracker;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +62,18 @@ public class BaseActionBarActivity extends AppCompatActivity{
 		}
 
 		checkAPKVersion();
+		MainApplication application = (MainApplication) getApplication();
+		mTracker = application.getDefaultTracker();
 
+		PackageManager packageManager = getPackageManager();
+		try {
+			ActivityInfo info = packageManager.getActivityInfo(getComponentName(), 0);
+			Log.e("app", "Activity name:" + info.name);
+			mTracker.setScreenName("Screen: "+ info.name);
+			mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+		} catch (NameNotFoundException e) {
+			e.printStackTrace();
+		}
 
 	}
 

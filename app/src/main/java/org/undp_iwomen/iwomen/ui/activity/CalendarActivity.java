@@ -20,6 +20,7 @@ import com.smk.skconnectiondetector.SKConnectionDetector;
 import com.thuongnh.zprogresshud.ZProgressHUD;
 
 import org.smk.clientapi.NetworkEngine;
+import org.smk.iwomen.BaseActionBarActivity;
 import org.smk.model.CalendarEvent;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
@@ -40,7 +41,7 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 @SuppressLint("SimpleDateFormat")
-public class CalendarActivity extends AppCompatActivity {
+public class CalendarActivity extends BaseActionBarActivity {
     private boolean undo = false;
     private CaldroidFragment caldroidFragment;
     private CaldroidFragment dialogCaldroidFragment;
