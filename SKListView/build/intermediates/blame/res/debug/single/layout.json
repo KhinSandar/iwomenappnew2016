@@ -52,12 +52,12 @@
         "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\layout\\abc_list_menu_item_checkbox.xml"
     },
     {
-        "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\res\\merged\\debug\\layout\\support_simple_spinner_dropdown_item.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\layout\\support_simple_spinner_dropdown_item.xml"
-    },
-    {
         "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view_list_item.xml",
         "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\layout\\abc_activity_chooser_view_list_item.xml"
+    },
+    {
+        "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\res\\merged\\debug\\layout\\support_simple_spinner_dropdown_item.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\layout\\support_simple_spinner_dropdown_item.xml"
     },
     {
         "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_radio.xml",

@@ -6,8 +6,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-
-import com.google.android.gms.analytics.Tracker;
 import org.smk.iwomen.BaseActionBarActivity;
 
 import org.undp_iwomen.iwomen.R;
@@ -18,7 +16,6 @@ import org.undp_iwomen.iwomen.utils.Utils;
 
 public class SettingActivity extends BaseActionBarActivity {
     private Toolbar mActionBarToolbar;
-    private Tracker mTracker;
     private Toolbar toolbar;
     public CustomTextView textViewTitle;
     SharedPreferences sharePrefLanguageUtil;

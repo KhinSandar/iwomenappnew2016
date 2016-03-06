@@ -56,12 +56,12 @@
         "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\layout\\abc_search_view.xml"
     },
     {
-        "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_menu_layout.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\layout\\abc_action_menu_layout.xml"
-    },
-    {
         "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\res\\merged\\release\\layout\\abc_screen_simple_overlay_action_mode.xml",
         "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\layout\\abc_screen_simple_overlay_action_mode.xml"
+    },
+    {
+        "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_menu_layout.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\layout\\abc_action_menu_layout.xml"
     },
     {
         "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\res\\merged\\release\\layout\\abc_list_menu_item_layout.xml",
