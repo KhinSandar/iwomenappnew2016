@@ -106,12 +106,14 @@
                     android:layout_weight="1"
                     android:background="@drawable/com_parse_ui_parse_signup_button_background_selector"
                     android:gravity="center"
+                    android:visibility="gone"
                     android:orientation="vertical">
 
                     <org.undp_iwomen.iwomen.ui.widget.CustomButton
                         android:id="@+id/register_terms_yes"
                         style="@style/ParseLoginUI.Register.Terms"
                         android:text="@string/register_pro_yes"
+                        android:visibility="gone"
                         android:textColor="@color/white"
                         android:textSize="15sp" />
                 </LinearLayout>

@@ -1,7 +1,6 @@
 package org.undp_iwomen.iwomen.ui.activity;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,12 +11,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ScrollView;
+import android.widget.Toast;
 
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
 import com.smk.skconnectiondetector.SKConnectionDetector;
+import com.thuongnh.zprogresshud.ZProgressHUD;
 
 import org.smk.clientapi.NetworkEngine;
 import org.smk.model.CalendarEvent;
@@ -29,6 +29,7 @@ import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.utils.Connection;
 import org.undp_iwomen.iwomen.utils.Utils;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -52,31 +53,48 @@ public class CalendarActivity extends AppCompatActivity {
     private SharedPreferences mSharedPreferencesUserInfo;
     private SharedPreferences sharePrefLanguageUtil;
     private String mstr_lang;
-    private String user_name, user_obj_id,user_id,user_role,user_ph , register_msg ,user_img_path;
+    private String user_name, user_obj_id, user_id, user_role, user_ph, register_msg, user_img_path;
 
+    private ZProgressHUD zPDialog;
 
-    private void setCustomResourceForDates() {
+    private void setCustomResourceForDates(String month_dates) {
 
         /*********Get the Date From Server**************/
 
+        final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+
+
         if (Connection.isOnline(getApplicationContext())) {
 
-            NetworkEngine.getInstance().getCalendarEvent(1, new Callback<List<CalendarEvent>>() {
+            zPDialog = new ZProgressHUD(this);
+            zPDialog.show();
+            NetworkEngine.getInstance().getCalendarListByDateMothEvent(month_dates, new Callback<List<CalendarEvent>>() {
                 @Override
                 public void success(List<CalendarEvent> calendarEvents, Response response) {
 
-                    for (int i = 0; i < calendarEvents.size() ; i++){
-                        if(calendarEvents.get(i).getStartTime() != null & !calendarEvents.get(i).getStartTime().isEmpty() ){
+                    zPDialog.dismissWithSuccess();
+                    for (int i = 0; i < calendarEvents.size(); i++) {
 
+                        Date color_date = null;
+                        try {
+                            color_date = formatter.parse(calendarEvents.get(i).getStartDate());
+
+
+                            caldroidFragment.setBackgroundResourceForDate(R.color.primary,
+                                    color_date);
+                            caldroidFragment.setTextColorForDate(R.color.white, color_date);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
                         }
-                    }
 
+                    }
 
                 }
 
                 @Override
                 public void failure(RetrofitError error) {
-
+                    zPDialog.dismissWithSuccess();
                 }
             });
 
@@ -84,11 +102,9 @@ public class CalendarActivity extends AppCompatActivity {
             SKConnectionDetector.getInstance(CalendarActivity.this).showErrorMessage();
         }
 
-
         /**********Get the Date From Server**************/
 
-        Calendar cal = Calendar.getInstance();
-
+       /* Calendar cal = Calendar.getInstance();
         // Min date is last 7 days
         cal.add(Calendar.DATE, -7);
         Date blueDate = cal.getTime();
@@ -96,16 +112,16 @@ public class CalendarActivity extends AppCompatActivity {
         // Max date is next 7 days
         cal = Calendar.getInstance();
         cal.add(Calendar.DATE, 7);
-        Date greenDate = cal.getTime();
+        Date greenDate = cal.getTime();*/
 
-        if (caldroidFragment != null) {
+        /*if (caldroidFragment != null) {
             caldroidFragment.setBackgroundResourceForDate(R.color.accent,
                     blueDate);
             caldroidFragment.setBackgroundResourceForDate(R.color.primary,
                     greenDate);
             caldroidFragment.setTextColorForDate(R.color.white, blueDate);
             caldroidFragment.setTextColorForDate(R.color.white, greenDate);
-        }
+        }*/
     }
 
     @Override
@@ -138,11 +154,8 @@ public class CalendarActivity extends AppCompatActivity {
         user_role = mSharedPreferencesUserInfo.getString(CommonConfig.USER_ROLE, null);
 
 
-
-
-        user_name= mSharedPreferencesUserInfo.getString(CommonConfig.USER_NAME, null);
+        user_name = mSharedPreferencesUserInfo.getString(CommonConfig.USER_NAME, null);
         user_obj_id = mSharedPreferencesUserInfo.getString(CommonConfig.USER_OBJ_ID, null);
-
 
 
         // Setup caldroid fragment
@@ -213,7 +226,10 @@ public class CalendarActivity extends AppCompatActivity {
             caldroidFragment.setArguments(args);
         }
 
-        setCustomResourceForDates();
+        final SimpleDateFormat formatter2 = new SimpleDateFormat("yyyy-MM-dd");
+        /*Calendar cal = Calendar.getInstance();
+        Date todayDate = cal.getTime();//formatter.format(todayDate).toString()
+        setCustomResourceForDates(formatter2.format(todayDate).toString());*/
 
         // Attach to the activity
         FragmentTransaction t = getSupportFragmentManager().beginTransaction();
@@ -227,9 +243,10 @@ public class CalendarActivity extends AppCompatActivity {
             public void onSelectDate(Date date, View view) {
                 /*Toast.makeText(getApplicationContext(), formatter.format(date),
                         Toast.LENGTH_SHORT).show();*/
-                if(user_role.equalsIgnoreCase("User")) {
-                    showPermissionDialog();
-                }else{
+                if (user_role.equalsIgnoreCase("User")) {
+
+                    Utils.showPermissionDialog(CalendarActivity.this);
+                } else {
                     Calendar cal = Calendar.getInstance();
                     cal.setTime(date);
                     int month = cal.get(Calendar.MONTH);
@@ -237,6 +254,7 @@ public class CalendarActivity extends AppCompatActivity {
                     Intent i = new Intent(getApplicationContext(), ViewEventsActivity.class);
 
                     i.putExtra("Date", formatter.format(date).toString());
+                    i.putExtra("CalculateDate", formatter2.format(date).toString());
                     i.putExtra("Month", month);
 
                     startActivity(i);
@@ -248,9 +266,14 @@ public class CalendarActivity extends AppCompatActivity {
             @Override
             public void onChangeMonth(int month, int year) {
                 String text = "month: " + month + " year: " + year;
-                /*Toast.makeText(getApplicationContext(), text + "vp item "+ viewPager.getCurrentItem(),
-                        Toast.LENGTH_SHORT).show();*/
+
                 viewPager.setCurrentItem(month - 1);
+                String monthly_date= year + "-"+month+"-"+"1";
+
+                Toast.makeText(getApplicationContext(), monthly_date + viewPager.getCurrentItem(),
+                        Toast.LENGTH_SHORT).show();
+
+                setCustomResourceForDates(monthly_date);
 
             }
 
@@ -421,22 +444,6 @@ public class CalendarActivity extends AppCompatActivity {
         return true;
     }
 
-    public void showPermissionDialog(){
-        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-        View convertView = View.inflate(this,R.layout.custom_premission_dialog,null);
 
-        Button btn_ok = (Button)convertView.findViewById(R.id.permission_dialog_btn_ok);
-        alertDialog.setView(convertView);
-        alertDialog.show();
-
-        btn_ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                finish();
-
-            }
-        });
-    }
 
 }

@@ -118,6 +118,12 @@ public class CommonConfig {
 
     public static final String GET_POST_BY_DATE_URL = "/api/v1/posts";
 
+    public static final String GET_CALENDDARE_EVENT_LIST_BY_DATE_URL = "/api/v1/events";
+
+    public static final String POST_IWOMEN_POST_LIKE = "/api/v1/iwomenPostLikes";
+
+    public static final String POST_POSTS_LIKE = "/api/v1/postLikes";
+
 
 
 }

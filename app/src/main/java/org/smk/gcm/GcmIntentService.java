@@ -19,13 +19,14 @@ import com.google.gson.Gson;
 import org.smk.iwomen.GcmNotificationDialogActivity;
 import org.smk.model.GcmMessage;
 import org.undp_iwomen.iwomen.R;
-import org.undp_iwomen.iwomen.ui.activity.MainLoginActivity;
+import org.undp_iwomen.iwomen.ui.activity.DrawerMainActivity;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Random;
+
 
 public class GcmIntentService extends IntentService {
 
@@ -45,7 +46,8 @@ public class GcmIntentService extends IntentService {
 			NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
 			GcmMessage gcmMessage = new Gson().fromJson(message.getExtras().getString(GcmCommon.MESSAGE_KEY), GcmMessage.class);
 			Log.i("iWomen","Gcm Message: "+ message.getExtras().getString(GcmCommon.MESSAGE_KEY));
-			Intent notificationIntent = new Intent(context, MainLoginActivity.class).putExtra("gcm_message", new Gson().toJson(gcmMessage));
+			Intent notificationIntent = new Intent(context, DrawerMainActivity.class).putExtra("gcm_message", new Gson().toJson(gcmMessage));
+
 			notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
 			PendingIntent intent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 			
@@ -59,7 +61,7 @@ public class GcmIntentService extends IntentService {
 			builder.setWhen(when);
 			builder.addAction(R.drawable.ic_launcher, "i-Women", intent);
 			if(gcmMessage.getImage() != null && gcmMessage.getMessage().length() > 0){
-				Bitmap bmURL=getBitmapFromURL(message.getExtras().getString(GcmCommon.IMAGE_URL).replace(" ", "%20"));
+				Bitmap bmURL=getBitmapFromURL(gcmMessage.getImage().replace(" ", "%20"));
 				if(bmURL!=null){
 					float multiplier= getImageFactor(getResources());
 					bmURL=Bitmap.createScaledBitmap(bmURL, (int)(bmURL.getWidth()*multiplier), (int)(bmURL.getHeight()*multiplier), false);

@@ -645,4 +645,34 @@ Shirin Ebadi, J.D., was awarded the 2003 Nobel Peace Prize for her efforts to pr
         <item>@string/dec_des</item>
     </string-array>
 
+    <string name="state_1">Yangon </string>
+    <string name="state_2"> Mandalay</string>
+    <string name="state_3">Magwe </string>
+    <string name="state_4"> Bago</string>
+    <string name="state_5">Ayeyarwaddy </string>
+    <string name="state_6"> Sagaing</string>
+    <string name="state_7"> Thaninthayi</string>
+    <string name="state_8"> Kachin</string>
+    <string name="state_9"> Kayah</string>
+    <string name="state_10">Kayin </string>
+    <string name="state_11">Chin </string>
+    <string name="state_12">Mon </string>
+    <string name="state_13"> Rakhine</string>
+    <string name="state_14"> Shan</string>
+    <string name="state_1m"> ရန္ကုန္</string>
+    <string name="state_2m">မႏၲေလး </string>
+    <string name="state_3m"> မေကြး</string>
+    <string name="state_4m"> ပဲခူး</string>
+    <string name="state_5m"> ဧရာဝတီ</string>
+    <string name="state_6m">စစ္ကိုင္း </string>
+    <string name="state_7m"> တနသႍာရီ</string>
+    <string name="state_8m">ကခ်င္ </string>
+    <string name="state_9m"> ကယား</string>
+    <string name="state_10m"> ကရင္</string>
+    <string name="state_11m">ခ်င္း </string>
+    <string name="state_12m">မြန္ </string>
+    <string name="state_13m">ရခိုင္ </string>
+    <string name="state_14m"> ရွမ္း</string>
+
+
 </resources>

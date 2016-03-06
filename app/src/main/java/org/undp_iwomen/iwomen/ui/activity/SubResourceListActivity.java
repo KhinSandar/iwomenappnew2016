@@ -86,7 +86,7 @@ public class SubResourceListActivity extends BaseActionBarActivity {
         mTitleEng = i.getStringExtra("TitleEng");
         mTitleMM = i.getStringExtra("TitleMM");
 
-        Log.e("<<<Resesource ID>>","==>"+ mResourceId);
+        //Log.e("<<<Resesource ID>>","==>"+ mResourceId);
 
         //mResourceId= "SRBlN1Kow5";
 
@@ -147,6 +147,10 @@ public class SubResourceListActivity extends BaseActionBarActivity {
                 intent.putExtra("ContentEng", SubResourceItems.get(i).getSubResouceContentEng());
                 intent.putExtra("ContentMM", SubResourceItems.get(i).getSubResouceContentMm());
                 intent.putExtra("AuthorName", SubResourceItems.get(i).getAuthorName());
+                intent.putExtra("AuthorTitleEng", SubResourceItems.get(i).getAuthor().getAuthorTitleEng());
+                intent.putExtra("AuthorTitleMM", SubResourceItems.get(i).getAuthor().getAuthorTitleMM());
+
+
                 intent.putExtra("AuthorId", SubResourceItems.get(i).getAuthorId());
                 intent.putExtra("AuthorImgPath", SubResourceItems.get(i).getAuthorImgUrl());
                 intent.putExtra("PostDate", SubResourceItems.get(i).getPostedDate());
@@ -182,7 +186,7 @@ public class SubResourceListActivity extends BaseActionBarActivity {
         if (Connection.isOnline(mContext)) {
 
 
-            SMKserverAPI.getInstance().getService().getSubResourceByResourceIDByPagination(paginater, id, new Callback<List<SubResourceItem>>() {
+            SMKserverAPI.getInstance().getService().getSubResourceByResourceIDByPagination(paginater, id,1, new Callback<List<SubResourceItem>>() {
                 @Override
                 public void success(List<SubResourceItem> subResourceItems, Response response) {
                     // Only first REQUEST that visible

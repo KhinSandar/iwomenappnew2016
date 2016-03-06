@@ -197,7 +197,7 @@ public class ResourcesFragment extends Fragment {
         if (Connection.isOnline(mContext)) {
 
             isLoading = true;
-            NetworkEngine.getInstance().getResourceByPagination(paginater, new Callback<List<com.smk.model.ResourceItem>>() {
+            NetworkEngine.getInstance().getResourceByPagination(paginater,1, new Callback<List<com.smk.model.ResourceItem>>() {
                 @Override
                 public void success(List<com.smk.model.ResourceItem> resourceItems, Response response) {
 

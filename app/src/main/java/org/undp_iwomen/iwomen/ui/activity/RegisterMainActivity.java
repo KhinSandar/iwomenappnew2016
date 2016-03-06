@@ -50,14 +50,15 @@ public class RegisterMainActivity extends BaseDetailTransitionActivity {
 
         mstrTitle = i.getStringExtra("CategoryName");
         textViewTitle.setText(mstrTitle);*/
-        if (strLang.equals(Utils.ENG_LANG)) {
+        textViewTitle.setText(R.string.register_title);
+        /*if (strLang.equals(Utils.ENG_LANG)) {
 
             textViewTitle.setText(R.string.register_title);
 
         }else {//FOR ALl MM FONT{
             textViewTitle.setText(R.string.register_title);
 
-        }
+        }*/
 
 
         setupWindowAnimations();

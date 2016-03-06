@@ -98,18 +98,39 @@ public class RegisterStateFragment5 extends Fragment implements  View.OnClickLis
         final ArrayList<CityForShow> cities = new ArrayList<CityForShow>();
 
 
-        CityForShow ygnCity = new CityForShow("Klsa0sQrMw", "Yangon", getResources().getString(R.string.register_state_ygn));
-        CityForShow mdyCity = new CityForShow("A471gH1HNh", "Mandalay", getResources().getString(R.string.register_state_mdy));
-        CityForShow nptCity = new CityForShow("EGDFFZrIM7", "Nay Pyi Taw", getResources().getString(R.string.register_state_npt));
+        CityForShow city1 = new CityForShow("Klsa0sQrMw",  getResources().getString(R.string.state_1), getResources().getString(R.string.state_1m));
+        CityForShow city2 = new CityForShow("A471gH1HNh",  getResources().getString(R.string.state_2), getResources().getString(R.string.state_2m));
+        CityForShow city3 = new CityForShow("EGDFFZrIM7",  getResources().getString(R.string.state_3), getResources().getString(R.string.state_3m));
+        CityForShow city4 = new CityForShow("EGDFFZrIM7",  getResources().getString(R.string.state_4), getResources().getString(R.string.state_4m
+        ));
 
-        cities.add(ygnCity);
-        cities.add(mdyCity);
-        cities.add(nptCity);
+        CityForShow city5 = new CityForShow("A471gH1HNh", getResources().getString(R.string.state_5), getResources().getString(R.string.state_5m));
+        CityForShow city6 = new CityForShow("EGDFFZrIM7", getResources().getString(R.string.state_6), getResources().getString(R.string.state_6m));
+        CityForShow city7 = new CityForShow("Klsa0sQrMw", getResources().getString(R.string.state_7), getResources().getString(R.string.state_7m));
+        CityForShow city8 = new CityForShow("A471gH1HNh", getResources().getString(R.string.state_8), getResources().getString(R.string.state_8m));
+        CityForShow city9 = new CityForShow("EGDFFZrIM7", getResources().getString(R.string.state_9), getResources().getString(R.string.state_9m));
+        CityForShow city10 = new CityForShow("Klsa0sQrMw", getResources().getString(R.string.state_10), getResources().getString(R.string.state_10m));
+        CityForShow city11 = new CityForShow("A471gH1HNh", getResources().getString(R.string.state_11), getResources().getString(R.string.state_11m));
+        CityForShow city12 = new CityForShow("EGDFFZrIM7", getResources().getString(R.string.state_12), getResources().getString(R.string.state_12m));
+        CityForShow city13 = new CityForShow("Klsa0sQrMw",getResources().getString(R.string.state_13), getResources().getString(R.string.state_13m));
+        CityForShow city14 = new CityForShow("A471gH1HNh", getResources().getString(R.string.state_14), getResources().getString(R.string.state_14m));
 
-        String[] str_item_type = new String[3];
-        str_item_type[0] = "Type of Item";
-        str_item_type[1] = "Non-Refrigerated Goods";
-        str_item_type[2] = "Refrigerated Goods (+ S$2.00)";
+        cities.add(city1);
+        cities.add(city2);
+        cities.add(city3);
+        cities.add(city4);
+        cities.add(city5);
+        cities.add(city6);
+        cities.add(city7);
+        cities.add(city8);
+        cities.add(city9);
+        cities.add(city10);
+        cities.add(city11);
+        cities.add(city12);
+        cities.add(city13);
+        cities.add(city14);
+
+
         StateSpinnerAdapter adapter = new StateSpinnerAdapter((AppCompatActivity)getActivity(), cities);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

@@ -43,7 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutManager="LinearLayoutManager"/>-->
-    <com.smk.sklistview.SKListView
+    <ListView
         android:layout_above="@+id/view_events_create_event_button"
         android:layout_below="@+id/view_events_special_card"
         android:id="@+id/view_events_list"

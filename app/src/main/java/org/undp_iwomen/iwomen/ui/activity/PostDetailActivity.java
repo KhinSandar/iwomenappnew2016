@@ -69,6 +69,7 @@ import org.smk.clientapi.NetworkEngine;
 import org.smk.iwomen.BaseActionBarActivity;
 import org.smk.model.CalendarEvent;
 import org.smk.model.IWomenPost;
+import org.smk.model.LikeItem;
 import org.smk.model.Sticker;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
@@ -133,14 +134,14 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     private RoundedImageView profile;
     private ResizableImageView postIMg;
     private SharedPreferences mSharedPreferencesUserInfo;
-    private String user_name, user_obj_id, user_ph;
+    private String user_name, user_obj_id, user_ph,user_id;
     SharedPreferences sharePrefLanguageUtil;
     String strLang;
     //private Toolbar toolbar;
     private LinearLayout ly_likes_button;
     private ImageView img_like;
     private TextView txt_like_count, txt_cmd_count;
-    private String postId, postObjId, like_status;
+    private String postId, postObjId, like_status, postType;
     //private TextView txt_simile_emoji_icon;
     private EmojiconEditText et_comment;
     //FrameLayout et_comment_frame;
@@ -220,7 +221,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     public static final int MENU_Share = Menu.FIRST + 1;
     MediaPlayer mMedia;
     private boolean isPlaying;
-    private String mstrPostType;
+    private String mstrPostType , mVideoId;
     private Context mContext;
 
     private ProgressDialog mProgressDialog;
@@ -362,9 +363,9 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
         mSharedPreferencesUserInfo = getSharedPreferences(CommonConfig.SHARE_PREFERENCE_USER_INFO, Context.MODE_PRIVATE);
 
-
         user_name = mSharedPreferencesUserInfo.getString(CommonConfig.USER_NAME, null);
         user_obj_id = mSharedPreferencesUserInfo.getString(CommonConfig.USER_OBJ_ID, null);
+        user_id =mSharedPreferencesUserInfo.getString(CommonConfig.USER_ID, null);
         userprofile_Image_path = mSharedPreferencesUserInfo.getString(CommonConfig.USER_IMAGE_PATH, null);
 
 
@@ -438,7 +439,9 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         strLang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
 
         mLikeAnimatedButton = (AnimatedButton) findViewById(R.id.postdetail_like_animated_button);
-        //mLikeAnimatedButton.setText(102 + "");
+        mLikeAnimatedButton.setEnabled(true);
+        mSocialNoEarLikeAnimatedButton.setEnabled(true);
+
         //TODO id
         Intent i = getIntent();
 
@@ -446,12 +449,84 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         if(bundle != null){
             iWomenPost = new Gson().fromJson(bundle.getString("postObj"), IWomenPost.class);
         }
+        postType = i.getStringExtra("post_type");
         postId = iWomenPost.getId().toString();// i.getStringExtra("post_id");
         postObjId = iWomenPost.getObjectId();
 
-        Log.e("<<<<PostID 22 at Detail>>>>","===>" + iWomenPost.getId().toString() + iWomenPost.getObjectId());
+        //Log.e("<<<<PostID 22 at Detail>>>>","===>" + postType);
 
         //TODO for Comment
+
+
+
+
+        mLikeAnimatedButton.setCallbackListener(new AnimatedButton.Callbacks() {
+            @Override
+            public void onClick() {
+
+
+
+                if(mLikeAnimatedButton.isEnabled()){
+                    if (postType.equalsIgnoreCase("iWomenPost")) {
+
+                        //Check status
+
+
+
+
+                        //
+                        SMKserverAPI.getInstance().getService().postIWomenPostLike(postId, user_id, new Callback<LikeItem>() {
+                            @Override
+                            public void success(LikeItem item, Response response) {
+                                mLikeAnimatedButton.setEnabled(false);
+                                mLikeAnimatedButton.setText(String.valueOf(iWomenPost.getLikes() + 1));
+                                mLikeAnimatedButton.setOnClickListener(PostDetailActivity.this);
+
+                                txt_social_no_ear_like.setText(String.valueOf(iWomenPost.getLikes() + 1));
+                                mSocialNoEarLikeAnimatedButton.setText(String.valueOf(iWomenPost.getLikes() + 1));
+
+                                mSocialNoEarLikeAnimatedButton.setEnabled(false);
+                                mSocialNoEarLikeAnimatedButton.setOnClickListener(PostDetailActivity.this);
+                            }
+
+                            @Override
+                            public void failure(RetrofitError error) {
+
+                            }
+                        });
+
+                    }else{
+                        SMKserverAPI.getInstance().getService().postPostsLike(postId, user_id, new Callback<LikeItem>() {
+                            @Override
+                            public void success(LikeItem item, Response response) {
+
+                                mLikeAnimatedButton.setEnabled(false);
+                                mLikeAnimatedButton.setText(String.valueOf(iWomenPost.getLikes() + 1));
+                                mLikeAnimatedButton.setOnClickListener(PostDetailActivity.this);
+                                txt_social_no_ear_like.setText(String.valueOf(iWomenPost.getLikes() + 1));
+                                mSocialNoEarLikeAnimatedButton.setText(String.valueOf(iWomenPost.getLikes() + 1));
+
+                                mSocialNoEarLikeAnimatedButton.setEnabled(false);
+                                mSocialNoEarLikeAnimatedButton.setOnClickListener(PostDetailActivity.this);
+
+                            }
+
+                            @Override
+                            public void failure(RetrofitError error) {
+
+                            }
+                        });
+                    }
+                }
+            }
+        });
+
+        mSocialNoEarLikeAnimatedButton.setCallbackListener(new AnimatedButton.Callbacks() {
+            @Override
+            public void onClick() {
+                mLikeAnimatedButton.performClick();
+            }
+        });
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             listView_Comment.setNestedScrollingEnabled(true);
@@ -495,6 +570,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         img_social_no_ear_viber.setOnClickListener(this);
 
         txt_social_share.setOnClickListener(this);
+        //mLikeAnimatedButton.setText(item.getLikes() + "");.setOnClickListener(this);
         /*ly_postdetail_audio.setOnClickListener(this);
         ly_postdetail_download.setOnClickListener(this);
         video_icon.setOnClickListener(this);*/
@@ -509,9 +585,13 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                     public void onClick(View view) {
                         Intent intent = new Intent(mContext, YouTubeWebviewActivity.class);
 
-                        //intent.putExtra("post_id", feedItems.get(position).getPost_obj_id());
+                        if(mVideoId != null){
+                            intent.putExtra("video_id", mVideoId);
+                        }else{
+                            intent.putExtra("video_id", "YOAu82xu8VY");
+                        }
 
-                        //intent.putExtra("ImgUrl", mImgurl.get(getPosition()));
+
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         mContext.startActivity(intent);
@@ -631,6 +711,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         //txt_lbl_share_post.setText(getResources().getString(R.string.post_detail_share_post));
 
         mstrPostType = item.getContentType();
+        mVideoId = item.getVideoId();
         //TODO TableColumnUpdate 10 data set show in UI
         if (strLang.equals(Utils.ENG_LANG)) {
             postdetail_username.setTypeface(MyTypeFace.get(getApplicationContext(), MyTypeFace.NORMAL));
@@ -1598,6 +1679,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         //txt_lbl_share_post.setText(getResources().getString(R.string.post_detail_share_post));
 
         mstrPostType = item.getPost_content_type();
+        mVideoId = item.getPost_content_video_id();
         //TODO TableColumnUpdate 10 data set show in UI
         if (strLang.equals(Utils.ENG_LANG)) {
             postdetail_username.setTypeface(MyTypeFace.get(getApplicationContext(), MyTypeFace.NORMAL));
@@ -2042,25 +2124,10 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     public void onClick(View view) {
 
         switch (view.getId()) {
-            case R.id.postdetail_like_button:
+            case R.id.postdetail_like_animated_button:
                 if (Connection.isOnline(getApplicationContext())) {
 
-                    if (like_status != null) {
 
-
-                        if (like_status.equalsIgnoreCase("0")) {
-                            /*********************************************************
-                             **************Calling Serial No Cloud Code***************/
-                            HashMap<String, String> _param = new HashMap<>();
-                            _param.put("objectId", postId);
-
-                            //TODO Google Anaytics Like count
-
-                            img_like.setImageResource(R.drawable.like_fill);
-                        } else {
-                            //Utils.doToastEng(getApplicationContext(), "unLike click");
-                        }
-                    }
                 } else {
                     if (strLang.equals(Utils.ENG_LANG)) {
                         Utils.doToastEng(getApplicationContext(), getResources().getString(R.string.open_internet_warning));
@@ -2200,9 +2267,11 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                 if (mstrPostType.equalsIgnoreCase("Video")) {
                     Intent video_intent = new Intent(mContext, YouTubeWebviewActivity.class);
 
-                    //intent.putExtra("post_id", feedItems.get(position).getPost_obj_id());
-
-                    //intent.putExtra("ImgUrl", mImgurl.get(getPosition()));
+                    if(mVideoId != null){
+                        video_intent.putExtra("video_id", mVideoId);
+                    }else{
+                        video_intent.putExtra("video_id", "YOAu82xu8VY");
+                    }
                     video_intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     video_intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     mContext.startActivity(video_intent);

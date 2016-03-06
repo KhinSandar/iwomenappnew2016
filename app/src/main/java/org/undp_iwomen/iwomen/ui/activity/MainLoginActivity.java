@@ -103,7 +103,6 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
         txtChangLanMM = (TextView) findViewById(R.id.login_change_lan_mm);
 
         //TODO CHECK LOGIN OR NOT
-
         if (mSharedPreferencesUserInfo.getString(CommonConfig.USER_ROLE, null) != null) {
             startActivity(new Intent(this, DrawerMainActivity.class));
             finish();

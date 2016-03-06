@@ -2,9 +2,9 @@ package org.undp_iwomen.iwomen.ui.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,6 +21,7 @@ import com.thuongnh.zprogresshud.ZProgressHUD;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.smk.clientapi.NetworkEngine;
+import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.ui.activity.CalendarActivity;
 import org.undp_iwomen.iwomen.ui.activity.TalkTogetherMainActivity;
@@ -29,6 +30,7 @@ import org.undp_iwomen.iwomen.ui.widget.WrappedGridView;
 import org.undp_iwomen.iwomen.utils.Connection;
 import org.undp_iwomen.iwomen.utils.SharePrefUtils;
 import org.undp_iwomen.iwomen.utils.StorageUtil;
+import org.undp_iwomen.iwomen.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,8 +80,9 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
     private boolean gridViewResized = false;
     private ZProgressHUD zPDialog;
 
+    private SharedPreferences mSharedPreferencesUserInfo;
+    private String user_name, user_obj_id, user_id, user_role, user_ph, register_msg, user_img_path;
 
-    //public static final String ARG_PLANET_NUMBER = "planet_number";
 
     public TalkTogetherCategoryFragment() {
         // Empty constructor required for fragment subclasses
@@ -98,7 +101,9 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
         ctx = getActivity().getApplicationContext();
         v = inflater.inflate(R.layout.fragment_talk_together_main, container, false);
         storageUtil = StorageUtil.getInstance(getActivity().getApplicationContext());
+        mSharedPreferencesUserInfo = getActivity().getSharedPreferences(CommonConfig.SHARE_PREFERENCE_USER_INFO, Context.MODE_PRIVATE);
 
+        user_role = mSharedPreferencesUserInfo.getString(CommonConfig.USER_ROLE, null);
 
         /**********Ajust Layout Image size depend on screen at Explore ************/
         //prepareList();
@@ -202,17 +207,36 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
                                     long arg3) {
 
 
-                if (CategoriesModelList.get(position).getName().equalsIgnoreCase("Calendar")) {//position == 0 ||
-                    Intent i = new Intent(ctx, CalendarActivity.class);
-                    i.putExtra("CategoryName", CategoriesModelList.get(position).getName());//CategoryName
-                    startActivity(i);
-                } else {
-                    Intent i = new Intent(ctx, TalkTogetherMainActivity.class);
-                    i.putExtra("CategoryName", CategoriesModelList.get(position).getName());//CategoryName
-                    Log.e("<<Calender Cat IG>>","==>" + CategoriesModelList.get(position).getObjectId());
-                    i.putExtra("CategoryID", CategoriesModelList.get(position).getObjectId());//CategoryName
-                    startActivity(i);
+
+                if (user_role.equalsIgnoreCase("User")) {
+                    if (CategoriesModelList.get(position).getName().equalsIgnoreCase("Archive")) {//position == 0 ||
+                        Utils.showPermissionDialog(getActivity());
+                    }
+                    else if (CategoriesModelList.get(position).getName().equalsIgnoreCase("Calendar")) {//position == 0 ||
+                        Intent i = new Intent(ctx, CalendarActivity.class);
+                        i.putExtra("CategoryName", CategoriesModelList.get(position).getName());//CategoryName
+                        startActivity(i);
+                    } else {
+                        Intent i = new Intent(ctx, TalkTogetherMainActivity.class);
+                        i.putExtra("CategoryName", CategoriesModelList.get(position).getName());//CategoryName
+                        //Log.e("<<Calender Cat IG>>","==>" + CategoriesModelList.get(position).getObjectId());
+                        i.putExtra("CategoryID", CategoriesModelList.get(position).getObjectId());//CategoryName
+                        startActivity(i);
+                    }
+                }else{
+                    if (CategoriesModelList.get(position).getName().equalsIgnoreCase("Calendar")) {//position == 0 ||
+                        Intent i = new Intent(ctx, CalendarActivity.class);
+                        i.putExtra("CategoryName", CategoriesModelList.get(position).getName());//CategoryName
+                        startActivity(i);
+                    } else {
+                        Intent i = new Intent(ctx, TalkTogetherMainActivity.class);
+                        i.putExtra("CategoryName", CategoriesModelList.get(position).getName());//CategoryName
+                        //Log.e("<<Calender Cat IG>>","==>" + CategoriesModelList.get(position).getObjectId());
+                        i.putExtra("CategoryID", CategoriesModelList.get(position).getObjectId());//CategoryName
+                        startActivity(i);
+                    }
                 }
+
 
 
             }

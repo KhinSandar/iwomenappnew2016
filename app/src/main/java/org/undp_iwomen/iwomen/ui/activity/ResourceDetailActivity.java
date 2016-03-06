@@ -34,6 +34,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity {
     private ProgressBar profileProgressbar;
     private TextView profileName;
     private TextView txtMore;
+    private TextView txtAuthorRole;
     private LinearLayout lysocial;
 
 
@@ -42,7 +43,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity {
     String strLang;
 
 
-    String mstrTitleEng, mstrTitleMm, mstrContentEng, mstrContentMm, mstrAuthorName , mstrAuthorId, mstrAuthorImgPath, mstrPostDate;
+    String mstrTitleEng, mstrTitleMm, mstrContentEng, mstrContentMm, mstrAuthorName , mstrAuthorId, mstrAuthorImgPath, mstrPostDate , mstrAuthorRoleMM, mstrAuthorRoleEng;
     String mstrSubResourceTitleEng, mstrSubResourceTitleMm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +75,8 @@ public class ResourceDetailActivity extends BaseActionBarActivity {
         mstrContentEng = i.getStringExtra("ContentEng");
         mstrContentMm = i.getStringExtra("ContentMM");
         mstrAuthorName = i.getStringExtra("AuthorName");
+        mstrAuthorRoleEng= i.getStringExtra("AuthorTitleEng");
+        mstrAuthorRoleMM= i.getStringExtra("AuthorTitleMM");
         mstrAuthorId = i.getStringExtra("AuthorId");
         mstrAuthorImgPath = i.getStringExtra("AuthorImgPath");
         mstrPostDate = i.getStringExtra("PostDate");
@@ -87,6 +90,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity {
         profileName = (TextView)findViewById(R.id.tipdetail_content_username);
         profileProgressbar = (ProgressBar)findViewById(R.id.tipdetail_progressBar_profile_item);
         txtMore = (TextView)findViewById(R.id.tipdetail_content_user_role_more);
+        txtAuthorRole = (TextView)findViewById(R.id.tipdetail_content_user_role);
 
 
         lysocial = (LinearLayout)findViewById(R.id.tipdetail_ly_social);
@@ -106,6 +110,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity {
 
             textViewTitle.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
 
+            txtAuthorRole.setText(mstrAuthorRoleEng);
 
             txtName.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
             txtBody.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
@@ -114,7 +119,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity {
             textViewTitle.setText(mstrTitleMm);
             txtBody.setText(mstrContentMm);
             txtName.setText(mstrSubResourceTitleMm);
-
+            txtAuthorRole.setText(mstrAuthorRoleMM);
             //textViewTitle.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
 
 

@@ -201,7 +201,12 @@ public class DrawerMainActivity extends BaseActionBarActivity {
 
         user_id = mSharedPreferencesUserInfo.getString(CommonConfig.USER_ID, null);
         user_img_path = mSharedPreferencesUserInfo.getString(CommonConfig.USER_UPLOAD_IMG_URL, null);
-
+        //TODO CHECK LOGIN OR NOT
+        if (mSharedPreferencesUserInfo.getString(CommonConfig.USER_ROLE, null) == null) {
+            startActivity(new Intent(this, MainLoginActivity.class));
+            finish();
+            return;// add this to prevent from doing unnecessary stuffs
+        }
 
         setUserImg();
 

@@ -179,7 +179,7 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
 
                     Intent intent = new Intent(mContext, PostDetailActivity.class);
 
-                    intent.putExtra("post_id", iWomenPostList.get(position).getId());
+                    intent.putExtra("post_type", "iWomenPost");
                     intent.putExtra("postObj", new Gson().toJson(parent.getAdapter().getItem(position)));
 
                     //intent.putExtra("ImgUrl", mImgurl.get(getPosition()));

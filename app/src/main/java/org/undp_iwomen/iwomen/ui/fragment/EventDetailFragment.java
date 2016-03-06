@@ -95,9 +95,18 @@ public class EventDetailFragment extends Fragment {
         event_date = (CustomTextView) rootView.findViewById(R.id.event_detail_date);
         event_time = (CustomTextView) rootView.findViewById(R.id.event_detail_time);
 
+        cleardata();
         setEventData();
         updateUi();
         return rootView;
+    }
+
+    private void cleardata() {
+        event_title.setText("");
+        event_desc.setText("");
+        event_location.setText("");
+        event_date.setText("");
+        event_time.setText("");
     }
 
     private void updateUi() {
@@ -117,7 +126,7 @@ public class EventDetailFragment extends Fragment {
     private void setEventData() {
         if (Connection.isOnline(mContext)) {
 
-            SMKserverAPI.getInstance().getService().getCalendarEventDetailByID("6", new Callback<CalendarEvent>() {
+            SMKserverAPI.getInstance().getService().getCalendarEventDetailByID(mId, new Callback<CalendarEvent>() {
                 @Override
                 public void success(CalendarEvent calendarEvent, Response response) {
 

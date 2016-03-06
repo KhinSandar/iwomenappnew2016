@@ -124,9 +124,10 @@ public interface INetworkEngine {
             @Field("password") String pwd,
             @Field("phoneNo") String ph,
             @Field("profileimage") String photo,
-            @Field("isTlgTownshipExit") String isTlg,
+            @Field("isTlgTownshipExit") int isTlg,
             @Field("tlg_city_address") String tlg_city_address,// Role ?
-
+            @Field("tlg_city") String sate,
+            @Field("tlg_country") String country,
             Callback<User> callback);
 
     @POST(CommonConfig.UPDATE_USER_URL)
@@ -167,14 +168,20 @@ public interface INetworkEngine {
             @Query("isAllow") int isAllow,
             Callback<List<IWomenPost>> callback);
 
+    @GET(CommonConfig.GET_CALENDDARE_EVENT_LIST_BY_DATE_URL)
+    void getEventListByDate(
+            @Query("date") String date,
+            Callback<List<CalendarEvent>> callback);
+
     @GET(CommonConfig.GET_CALENDAR_EVENT)
-    void getCalendarEvent(
-            @Query("page") int page,
+    void getCalendarListByDateMothEvent(
+            @Query("date") String date,
             Callback<List<CalendarEvent>> callback);
 
     @GET(CommonConfig.GET_RESOURCE_URL)
     void getResourceByPagination(
             @Query("page") int page,
+            @Query("isAllow") int isAllow,
             Callback<List<ResourceItem>> callback);
     @GET(CommonConfig.GET_SISTER_APP_LIST_URL)
     void getSisterAppByPagination(
@@ -199,6 +206,7 @@ public interface INetworkEngine {
     @FormUrlEncoded
     @POST(CommonConfig.CREATE_CALENDAR_EVENT_URL)
     void postCreateCalendarEventMM(
+            @Field("userId") String userID,
             @Field("description_mm") String description_mm,
             @Field("title_mm") String title_mm,
             @Field("location") String location,
@@ -212,10 +220,9 @@ public interface INetworkEngine {
     @FormUrlEncoded
     @POST(CommonConfig.CREATE_CALENDAR_EVENT_URL)
     void postCreateCalendarEventEng(
-
+            @Field("userId") String userID,
             @Field("description") String description,
             @Field("title") String title,
-
             @Field("location") String location,
             @Field("start_date") String start_date,
             @Field("end_date") String end_date,
@@ -223,6 +230,7 @@ public interface INetworkEngine {
             @Field("end_time") String end_time,
 
             Callback<CalendarEvent> callback);
+
 
 
 

@@ -14,7 +14,7 @@ import org.undp_iwomen.iwomen.ui.fragment.ViewEventsFragment;
 
 public class ViewEventsActivity extends AppCompatActivity {
 
-    String str_date;
+    String str_date,calcuate_date;
     int imonth;
     Bundle bundle;
     @Override
@@ -24,11 +24,13 @@ public class ViewEventsActivity extends AppCompatActivity {
 
         Intent i = getIntent();
         str_date = i.getStringExtra("Date");
+        calcuate_date = i.getStringExtra("CalculateDate");
         imonth = i.getIntExtra("Month", 1);
 
 
         bundle = new Bundle();
         bundle.putString("Date", str_date);
+        bundle.putString("CalculateDate", calcuate_date);
         bundle.putInt("Month", imonth);
 
         // Set up the actionbar
