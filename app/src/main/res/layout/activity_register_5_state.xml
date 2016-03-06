@@ -48,7 +48,6 @@
 
         <Spinner
             android:id="@+id/register_state_state_spn"
-            style="@style/Spinner.TownshipInfo"
             android:layout_width="match_parent"
             android:layout_height="56dp"
 

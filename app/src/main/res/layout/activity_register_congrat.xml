@@ -122,6 +122,7 @@
 
                     style="@style/ParseLoginUI.Button.ThirdPartyLogin"
 
+                    android:visibility="gone"
                     android:text="@string/register_tour" />
             </LinearLayout>
 

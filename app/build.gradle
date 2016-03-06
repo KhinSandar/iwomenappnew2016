@@ -29,6 +29,23 @@ apply plugin: 'com.google.gms.google-services'
 
 
 android {
+    signingConfigs {
+        release {
+            try {
+                keyAlias 'iwomenapp'
+                keyPassword KEY_PASSWORD
+                storeFile file('/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/app/iwomenapp.jks')
+                //storeFile file('D:\\PRIVATE STATIC FINAL DEVELOPMENT ANDROID\\MyTicket\\gobus\\app\\myTickets.jks')
+                storePassword KEYSTORE_PASSWORD
+            } catch (ex) {
+                //throw new InvalidUserDataException("You should define KEYSTORE_PASSWORD and KEY_PASSWORD in gradle.properties.")
+            }
+            keyAlias 'iwomenapp'
+            keyPassword 'uNDP2@15'
+            storeFile file('/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/app/iwomenapp.jks')
+            storePassword 'uNDP2@15'
+        }
+    }
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
     useLibrary 'org.apache.http.legacy'
@@ -37,13 +54,14 @@ android {
         minSdkVersion 14
         targetSdkVersion 23
         multiDexEnabled true
-        versionCode 3
-        versionName "1.3"
+        versionCode 1
+        versionName "1.0"
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            signingConfig signingConfigs.release
         }
     }
 }
@@ -51,7 +69,7 @@ android {
 dependencies {
     // Google Play Services
     //compile 'com.google.android.gms:play-services-analytics:7.5.0'
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile fileTree(dir: 'libs', include: ['*.jar'])
     //compile 'com.afollestad:material-dialogs:0.7.4.1'
     //compile project(':facebook')
     //1.6.0
@@ -72,11 +90,9 @@ dependencies {
     compile project(':SKListView')
     compile project(':SKConnectionDetector')
     //compile 'com.google.android.gms:play-services:8.1.0'
-
     compile project(':GifImageViewlibrary')
     compile project(':caldroid')
     compile 'org.greenrobot:eventbus:3.0.0'
-
     compile 'com.path:android-priority-jobqueue:1.1.2'
     compile 'com.android.support:appcompat-v7:23.2.0'
     compile 'com.android.support:support-v4:23.2.0'

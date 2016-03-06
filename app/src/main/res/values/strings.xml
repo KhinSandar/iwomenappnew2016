@@ -60,10 +60,14 @@
 </string>
     <string name="new_post_hint_title_eng">Here you can ask a question to other TLGs, ask for advice to other TLGs and share your livelihood skills with other TLGs.And of course you can aslo post your successful TLG activities.</string>
 
-    <string name="new_iwomen_post_hint_title_eng">Here you can post an insiprational story of your life.</string>
+    <string name="new_iwomen_post_hint_title_eng">Here you can post an inspirational story.</string>
    <string name="new_iwomen_post_hint_title_mm">ယခုု ေနရာတြင္ မိမိဘ၀တစ္ေလ်ာက္လံုုးအမွတ္ရေနသည္ ့လြမ္းမိုုးသည္ ့စိတ္ဓာတ္ခြန္အားေပးသည့္
 အေၾကာင္းအရာကိုုေရးသားတင္ပိုု ့ေပးႏိုုင္ပါသည္။</string>
 
+    <string name="post_body_hint_eng">Ask a question to the iWomen community, post a poem you have written and share it with iWomen community, post about a successful TLG/SRG/May Doe Kabar activity to inspire other women, post about entrepreneurship trainings, ideas and more.
+</string>
+    <string name="post_body_hint_mm">iWomen အဖြဲ႕အစည္း ကိုု ေမးခြန္းမ်ားေမးျမန္းပါ။ သင္ေရးထားေသာ ကဗ်ာမ်ားကိုု iWomen အဖြဲ႕အစည္းတြင္ ေ၀မွ်ပါ။ အျခား အမ်ိဳးသမီးမ်ား စိတ္အားတက္ႀကြေစရန္
+ျမိဳ႕နယ္ ဦးေဆာင္အဖြဲ႕ ၊ ကိုုယ့္အားကိုုယ္ကိုုးအဖြဲ႕နွင့္ ေမတိုု႕ကမာၻကြန္ရက္တိုု႕ ၏ လႈပ္ရွားမႈမ်ား ၊ အသက္ေမြး၀မ္းေႀကာင္း သင္တန္းမ်ား နွင့္ အႀကံဥာဏ္မ်ား ကိုု ေ၀မွ်ပါ။</string>
     <string name="new_post_hint_body_mm">ပိုု ့စ္အသစ္</string>
     <string name="new_post_hint_body_eng">Story</string>
 
@@ -329,7 +333,7 @@
 
     <string name="register_congrat_eng1">CONGRATULATIONS</string>
     <string name="register_congrat_eng2">You are Now Officially</string>
-    <string name="register_congrat_eng3">an I-Women- Inspiring Woman</string>
+    <string name="register_congrat_eng3">an iWoman- Inspiring Woman</string>
 
     <string name="register_enjoy">ENJOY THE APP</string>
     <string name="register_tour">Take a Tour</string>
@@ -355,8 +359,8 @@
 
     <string name="register_state_greet1">Please Select Your State.</string>
 
-    <string name="register_country_greet1">Please Type Your Country Origin.</string>
-    <string name="register_photo_upload_greet1">Please Upload Your Profile Photo or Avator.</string>
+    <string name="register_country_greet1">Please Type Your Country Of Origin.</string>
+    <string name="register_photo_upload_greet1">Please Upload Your Profile Photo or Avatar.</string>
 
     <string name="register_country_error">Your Country Name is required</string>
     <string name="register_country_error_mm">Your Country Name is required</string>
@@ -365,7 +369,6 @@
     <string name="register_terms_greet2">Terms And Conditions?</string>
 
     <string name="register_terms_body">Our privacy policy and terms of use   are accepted if you download this app. See More at Our Website
-www.iwomenapp.org
 </string>
     <string name="register_terms_link">www.iwomenapp.com</string>
 
@@ -715,5 +718,6 @@ Shirin Ebadi, J.D., was awarded the 2003 Nobel Peace Prize for her efforts to pr
     <string name="video_submitted_to_ytdl">Video submitted to YTDL</string>
     <string name="playing_uploaded_video">Playing uploaded video</string>
     <string name="playing_the_video_in_upload_progress">Playing the video in upload progress</string>
+    <string name="str_required">Please enter your reviews</string>
 
 </resources>

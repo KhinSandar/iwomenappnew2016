@@ -128,5 +128,7 @@ public class CommonConfig {
 
     public static final String CREATE_NEW_POST = "/api/v1/posts";
 
+    public static final String CREATE_NEW_WOMENPOST = "/api/v1/iwomenPosts";
+
 
 }

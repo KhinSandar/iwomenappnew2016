@@ -23,6 +23,7 @@ import android.widget.TextView;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.path.android.jobqueue.JobManager;
+import com.smk.skalertmessage.SKToastMessage;
 
 import org.greenrobot.eventbus.EventBus;
 import org.nullwire.trace.ExceptionHandler;
@@ -108,7 +109,7 @@ public class BaseActionBarActivity extends AppCompatActivity{
 											public void onClick(DialogInterface dialog,int id) {
 												EventBus.getDefault().register(BaseActionBarActivity.this);
 												JobManager jobManager = MainApplication.getInstance().getJobManager();
-												DownloadManager downloadManager = new DownloadManager("http://128.199.70.154/apk/" + arg0.getName(), arg0.getName());
+												DownloadManager downloadManager = new DownloadManager("http://api.iwomenapp.org/apk/" + arg0.getName(), arg0.getName());
 												jobManager.addJob(downloadManager);
 											}
 										})
@@ -204,7 +205,12 @@ public class BaseActionBarActivity extends AppCompatActivity{
 			@Override
 			public void onClick(View v) {
 
-				showFeedbackDialog(userId, Double.valueOf(be_inspired.getRating()), Double.valueOf(be_knowledgeable.getRating()), Double.valueOf(be_together.getRating()), Double.valueOf(talk_together.getRating()));
+				postReview(userId, Double.valueOf(be_inspired.getRating()), "Be Inspired", "");
+				postReview(userId,  Double.valueOf(be_knowledgeable.getRating()), "Be Knowledgeable", "");
+				postReview(userId, Double.valueOf(be_together.getRating()), "Be Together", "");
+				postReview(userId, Double.valueOf(talk_together.getRating()), "Talk Together", "");
+
+				showFeedBack(userId);
 
 			}
 		});
@@ -229,6 +235,41 @@ public class BaseActionBarActivity extends AppCompatActivity{
 				postReview(userId, talk_together, "Talk Together", feedback.getText().toString());
 
 				finish();
+
+			}
+		});
+	}
+
+	public void showFeedBack(final String userId){
+		final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+		View convertView = View.inflate(this,R.layout.dialog_feedback,null);
+		final EditText feedback = (EditText) convertView.findViewById(R.id.edt_review);
+		Button btn_ok = (Button)convertView.findViewById(R.id.btn_ok);
+		Button btn_now_know = (Button)convertView.findViewById(R.id.btn_not_now);
+		alertDialog.setView(convertView);
+		alertDialog.show();
+
+		btn_now_know.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
+
+		btn_ok.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+                if(feedback.getText().length() > 0){
+                    postReview(userId, 0.0, "Be Inspired", feedback.getText().toString());
+                    postReview(userId, 0.0, "Be Knowledgeable", feedback.getText().toString());
+                    postReview(userId, 0.0, "Be Together", feedback.getText().toString());
+                    postReview(userId, 0.0, "Talk Together", feedback.getText().toString());
+                    StoreUtil.getInstance().saveTo("feedback", true);
+                    finish();
+                }else{
+                    SKToastMessage.showMessage(BaseActionBarActivity.this, getResources().getString(R.string.str_required), SKToastMessage.ERROR);
+                }
+
 
 			}
 		});

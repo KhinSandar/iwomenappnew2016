@@ -189,7 +189,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="8dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/i_women_sticker_sets_01"
+                    android:src="@drawable/ic_iwomen_for_sticker"
 
                     android:visibility="visible"
                     app:riv_border_color="#333333"

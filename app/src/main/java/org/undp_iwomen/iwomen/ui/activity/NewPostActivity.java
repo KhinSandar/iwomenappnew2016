@@ -8,9 +8,12 @@ import android.support.v7.widget.Toolbar;
 
 import org.smk.iwomen.BaseActionBarActivity;
 import org.undp_iwomen.iwomen.R;
+import org.undp_iwomen.iwomen.ui.fragment.NewIWomenPostFragment;
 import org.undp_iwomen.iwomen.ui.fragment.NewPostFragment;
 
 public class NewPostActivity extends BaseActionBarActivity {
+
+    private String categoryId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,8 +23,16 @@ public class NewPostActivity extends BaseActionBarActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        Bundle bundle = getIntent().getExtras();
+        if(bundle != null){
+            categoryId = bundle.getString("categoryId");
+        }
+
         if(null == savedInstanceState){
-            initFragment(NewPostFragment.newInstance());
+            if(bundle != null && categoryId != null)
+                initFragment(NewPostFragment.newInstance(categoryId));
+            else
+                initFragment(NewIWomenPostFragment.newInstance());
         }
     }
 

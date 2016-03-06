@@ -128,8 +128,8 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
         btn_next.setOnClickListener(this);
 
 
-        setEnglishFont();
-        /*if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+        //setEnglishFont();
+        if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
             setEnglishFont();
         } else if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.MM_LANG)) {
             setMyanmarFont();
@@ -138,7 +138,7 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
         } else if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.MM_LANG_DEFAULT)) {
             setMyanmarFontDefault();
         }
-*/
+
 
         return view;
     }
