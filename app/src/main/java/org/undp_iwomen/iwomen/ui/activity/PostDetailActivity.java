@@ -440,6 +440,8 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
         mLikeAnimatedButton = (AnimatedButton) findViewById(R.id.postdetail_like_animated_button);
         mLikeAnimatedButton.setEnabled(true);
+        mSocialNoEarLikeAnimatedButton.setEnabled(true);
+
         //TODO id
         Intent i = getIntent();
 
@@ -451,26 +453,40 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         postId = iWomenPost.getId().toString();// i.getStringExtra("post_id");
         postObjId = iWomenPost.getObjectId();
 
-        Log.e("<<<<PostID 22 at Detail>>>>","===>" + postType);
+        //Log.e("<<<<PostID 22 at Detail>>>>","===>" + postType);
 
         //TODO for Comment
+
+
 
 
         mLikeAnimatedButton.setCallbackListener(new AnimatedButton.Callbacks() {
             @Override
             public void onClick() {
 
+
+
                 if(mLikeAnimatedButton.isEnabled()){
                     if (postType.equalsIgnoreCase("iWomenPost")) {
+
+                        //Check status
+
+
+
+
+                        //
                         SMKserverAPI.getInstance().getService().postIWomenPostLike(postId, user_id, new Callback<LikeItem>() {
                             @Override
                             public void success(LikeItem item, Response response) {
                                 mLikeAnimatedButton.setEnabled(false);
                                 mLikeAnimatedButton.setText(String.valueOf(iWomenPost.getLikes() + 1));
-
-
                                 mLikeAnimatedButton.setOnClickListener(PostDetailActivity.this);
 
+                                txt_social_no_ear_like.setText(String.valueOf(iWomenPost.getLikes() + 1));
+                                mSocialNoEarLikeAnimatedButton.setText(String.valueOf(iWomenPost.getLikes() + 1));
+
+                                mSocialNoEarLikeAnimatedButton.setEnabled(false);
+                                mSocialNoEarLikeAnimatedButton.setOnClickListener(PostDetailActivity.this);
                             }
 
                             @Override
@@ -487,6 +503,12 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                                 mLikeAnimatedButton.setEnabled(false);
                                 mLikeAnimatedButton.setText(String.valueOf(iWomenPost.getLikes() + 1));
                                 mLikeAnimatedButton.setOnClickListener(PostDetailActivity.this);
+                                txt_social_no_ear_like.setText(String.valueOf(iWomenPost.getLikes() + 1));
+                                mSocialNoEarLikeAnimatedButton.setText(String.valueOf(iWomenPost.getLikes() + 1));
+
+                                mSocialNoEarLikeAnimatedButton.setEnabled(false);
+                                mSocialNoEarLikeAnimatedButton.setOnClickListener(PostDetailActivity.this);
+
                             }
 
                             @Override
@@ -496,6 +518,13 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                         });
                     }
                 }
+            }
+        });
+
+        mSocialNoEarLikeAnimatedButton.setCallbackListener(new AnimatedButton.Callbacks() {
+            @Override
+            public void onClick() {
+                mLikeAnimatedButton.performClick();
             }
         });
 
