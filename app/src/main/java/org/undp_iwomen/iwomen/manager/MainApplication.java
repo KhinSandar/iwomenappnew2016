@@ -1,6 +1,7 @@
 package org.undp_iwomen.iwomen.manager;
 
 import android.app.Application;
+import android.support.multidex.MultiDexApplication;
 import android.util.Log;
 
 import com.alexbbb.uploadservice.UploadService;
@@ -13,7 +14,7 @@ import com.path.android.jobqueue.log.CustomLogger;
 /**
  * Created by khinsandar on 4/12/15.
  */
-public class MainApplication extends Application {
+public class MainApplication extends MultiDexApplication {
     private static MainApplication instance;
     private JobManager jobManager;
     public MainApplication() {
@@ -45,10 +46,6 @@ public class MainApplication extends Application {
         ParseACL.setDefaultACL(defaultACL, true);*/
 
         UploadService.NAMESPACE = "org.undp_iwomen.iwomen";
-
-
-
-
 
         /*ParsePush.subscribeInBackground("", new SaveCallback() {
             @Override

@@ -6,6 +6,7 @@ import android.util.Log;
 import com.squareup.okhttp.OkHttpClient;
 
 import org.apache.http.conn.ssl.SSLSocketFactory;
+import org.greenrobot.eventbus.EventBus;
 import org.undp_iwomen.iwomen.model.Download;
 
 import java.io.BufferedInputStream;
@@ -21,7 +22,6 @@ import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-import de.greenrobot.event.EventBus;
 
 public class DownloadTask{
     private final static int BUFFER_SIZE = 1024 * 8;

@@ -124,6 +124,7 @@ public class CommonConfig {
 
     public static final String POST_POSTS_LIKE = "/api/v1/postLikes";
 
+    public static final String CREATE_NEW_POST = "/api/v1/posts";
 
 
 }
