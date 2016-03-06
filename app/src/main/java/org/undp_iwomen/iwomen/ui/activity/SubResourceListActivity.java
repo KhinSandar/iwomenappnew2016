@@ -147,6 +147,10 @@ public class SubResourceListActivity extends BaseActionBarActivity {
                 intent.putExtra("ContentEng", SubResourceItems.get(i).getSubResouceContentEng());
                 intent.putExtra("ContentMM", SubResourceItems.get(i).getSubResouceContentMm());
                 intent.putExtra("AuthorName", SubResourceItems.get(i).getAuthorName());
+                intent.putExtra("AuthorTitleEng", SubResourceItems.get(i).getAuthor().getAuthorTitleEng());
+                intent.putExtra("AuthorTitleMM", SubResourceItems.get(i).getAuthor().getAuthorTitleMM());
+
+
                 intent.putExtra("AuthorId", SubResourceItems.get(i).getAuthorId());
                 intent.putExtra("AuthorImgPath", SubResourceItems.get(i).getAuthorImgUrl());
                 intent.putExtra("PostDate", SubResourceItems.get(i).getPostedDate());

@@ -126,7 +126,6 @@ public interface INetworkEngine {
             @Field("profileimage") String photo,
             @Field("isTlgTownshipExit") int isTlg,
             @Field("tlg_city_address") String tlg_city_address,// Role ?
-
             @Field("tlg_city") String sate,
             @Field("tlg_country") String country,
             Callback<User> callback);
@@ -231,6 +230,7 @@ public interface INetworkEngine {
             @Field("end_time") String end_time,
 
             Callback<CalendarEvent> callback);
+
 
 
 

@@ -27,6 +27,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Random;
 
+
 public class GcmIntentService extends IntentService {
 
 	public GcmIntentService() {
@@ -46,6 +47,7 @@ public class GcmIntentService extends IntentService {
 			GcmMessage gcmMessage = new Gson().fromJson(message.getExtras().getString(GcmCommon.MESSAGE_KEY), GcmMessage.class);
 			Log.i("iWomen","Gcm Message: "+ message.getExtras().getString(GcmCommon.MESSAGE_KEY));
 			Intent notificationIntent = new Intent(context, DrawerMainActivity.class).putExtra("gcm_message", new Gson().toJson(gcmMessage));
+
 			notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
 			PendingIntent intent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 			

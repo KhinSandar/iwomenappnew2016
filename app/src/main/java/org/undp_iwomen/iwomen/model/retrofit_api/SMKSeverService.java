@@ -2,6 +2,7 @@ package org.undp_iwomen.iwomen.model.retrofit_api;
 
 import org.smk.model.CalendarEvent;
 import org.smk.model.IWomenPost;
+import org.smk.model.LikeItem;
 import org.smk.model.PhotoUpload;
 import org.smk.model.Sticker;
 import org.smk.model.SubResourceItem;
@@ -100,4 +101,20 @@ public interface SMKSeverService {
             //@Query("sorting") String sorting,
             //@Query("isAllow") Boolean isAllow,
             Callback<List<IWomenPost>> callback);
+
+
+    ///api-v1/auth/login
+    @FormUrlEncoded
+    @POST(CommonConfig.POST_IWOMEN_POST_LIKE)
+    void postIWomenPostLike(
+            @Field("postId") String postId,
+            @Field("userId") String userId,
+            Callback<LikeItem> callback);
+
+    @FormUrlEncoded
+    @POST(CommonConfig.POST_POSTS_LIKE)
+    void postPostsLike(
+            @Field("postId") String postId,
+            @Field("userId") String userId,
+            Callback<LikeItem> callback);
 }

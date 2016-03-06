@@ -17,7 +17,6 @@ import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
-import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -45,6 +44,7 @@ public class AnimatedButton extends FrameLayout implements View.OnClickListener 
 
     private Drawable mNormalDrawable;
     private Drawable mCheckedDrawable;
+    private Callbacks listener;
 
     private AnimatedButton(Context context) {
         super(context);
@@ -97,9 +97,19 @@ public class AnimatedButton extends FrameLayout implements View.OnClickListener 
         a.recycle();
     }
 
+    public void setCallbackListener(Callbacks callbackListener){
+        this.listener = callbackListener;
+    }
+
+    public interface Callbacks{
+        void onClick();
+    }
 
     @Override
     public void onClick(View v) {
+        if(this.listener != null){
+            this.listener.onClick();
+        }
         mChecked = !mChecked;
         mIcon.setImageDrawable(mChecked ? mCheckedDrawable : mNormalDrawable);
 

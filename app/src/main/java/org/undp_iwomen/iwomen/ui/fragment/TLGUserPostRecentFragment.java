@@ -196,7 +196,7 @@ public class TLGUserPostRecentFragment extends Fragment implements View.OnClickL
                     Intent intent = new Intent(mContext, PostDetailActivity.class);
 
                     //intent.putExtra("post_id", feedItems.get(position).getPost_obj_id());
-                    intent.putExtra("post_id", iWomenPostList.get(position).getId());
+                    intent.putExtra("post_type", "Post");
                     intent.putExtra("postObj", new Gson().toJson(parent.getAdapter().getItem(position)));
 
                     //intent.putExtra("ImgUrl", mImgurl.get(getPosition()));
