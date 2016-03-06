@@ -251,6 +251,8 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
 
     private void checkProcessWhattoDo(){
 
+        progress_wheel.setVisibility(View.VISIBLE);
+
         if(crop_file_path != null){
             uploadImage();
         }else if(mAudioFilePath != null){
@@ -342,11 +344,15 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
         public void success(IWomenPost iWomenPost, Response response) {
             SKToastMessage.getInstance(getActivity()).showMessage(getActivity(), "Post Success", SKToastMessage.SUCCESS);
             getActivity().finish();
+
+            progress_wheel.setVisibility(View.GONE);
         }
 
         @Override
         public void failure(RetrofitError error) {
             SKToastMessage.getInstance(getActivity()).showMessage(getActivity(), "Error in Createing Post", SKToastMessage.ERROR);
+
+            progress_wheel.setVisibility(View.GONE);
         }
     };
 
