@@ -34,13 +34,14 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <!--android:layout_width="@dimen/app_bar_height" -->
             <EditText
                 android:id="@+id/new_post_description_text"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/app_bar_height"
+                android:layout_height="@dimen/app_bar_height_new"
                 android:background="#fafafa"
                 android:gravity="top"
-                android:hint="@string/new_post_hint"
+                android:hint="@string/new_iwomen_post_hint_title_eng"
                 android:padding="8dp" />
 
             <FrameLayout

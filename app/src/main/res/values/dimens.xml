@@ -57,6 +57,7 @@
     <integer name="anim_duration_long">500</integer>
     <integer name="anim_duration_medium">300</integer>
     <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="app_bar_height_new">250dp</dimen>
     <dimen name="text_margin">16dp</dimen>
 
     <dimen name="thumbnail_width">80dp</dimen>

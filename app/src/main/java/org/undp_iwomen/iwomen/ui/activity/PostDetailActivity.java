@@ -56,6 +56,7 @@ import com.facebook.share.widget.ShareButton;
 import com.facebook.share.widget.ShareDialog;
 import com.google.gson.Gson;
 import com.makeramen.RoundedImageView;
+import com.smk.skalertmessage.SKToastMessage;
 import com.smk.skconnectiondetector.SKConnectionDetector;
 import com.smk.sklistview.SKListView;
 import com.squareup.picasso.Picasso;
@@ -96,6 +97,7 @@ import org.undp_iwomen.iwomen.utils.Connection;
 import org.undp_iwomen.iwomen.utils.StorageUtil;
 import org.undp_iwomen.iwomen.utils.Utils;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
@@ -222,7 +224,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     public static final int MENU_Share = Menu.FIRST + 1;
     MediaPlayer mMedia;
     private boolean isPlaying;
-    private String mstrPostType, mVideoId;
+    private String mstrPostType, mVideoId, mstrAudioFilePath;
     private Context mContext;
 
     private ProgressDialog mProgressDialog;
@@ -242,6 +244,8 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     private ImageView img_social_no_ear_fb;
     private ImageView img_social_no_ear_viber;
     private ZProgressHUD zPDialog;
+
+    private ImageView img_social_audio;
 
 
     //New UI
@@ -436,6 +440,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         txt_social_no_ear_share = (TextView) findViewById(R.id.social_no_ear_share_txt);
         img_social_no_ear_fb = (ImageView) findViewById(R.id.social_no_ear_share_img);
         img_social_no_ear_viber = (ImageView) findViewById(R.id.social_no_ear_viber_img);
+        img_social_audio = (ImageView) findViewById(R.id.social_audio);
 
         strLang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
 
@@ -453,6 +458,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         postType = i.getStringExtra("post_type");
         postId = iWomenPost.getId().toString();// i.getStringExtra("post_id");
         postObjId = iWomenPost.getObjectId();
+        mstrAudioFilePath = iWomenPost.getAudioFile();
 
         //Log.e("<<<<PostID 22 at Detail>>>>","===>" + postType);
 
@@ -564,7 +570,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         txt_social_no_ear_share.setOnClickListener(this);
         img_social_no_ear_fb.setOnClickListener(this);
         img_social_no_ear_viber.setOnClickListener(this);
-
+        img_social_audio.setOnClickListener(this);
         txt_social_share.setOnClickListener(this);
         //mLikeAnimatedButton.setText(item.getLikes() + "");.setOnClickListener(this);
         /*ly_postdetail_audio.setOnClickListener(this);
@@ -2302,18 +2308,19 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
                     if (iWomenPost.getPostUploadName().equalsIgnoreCase("Wai Wai")) {
                         //MediaPlayer mediaPlayer;
-                        mMedia = new MediaPlayer();
-                        try {
-                            //Uri uri = Uri.parse("android.resource://org.undp_iwomen.iwomen/" + R.raw.wai_wai_audio);
-                            String uri = "android.resource://" + getPackageName() + "/raw/wai_wai_audio";//+R.raw.wai_wai_audio;
-                            mMedia.setDataSource(uri);
-                            mMedia.prepare();
-                            //isPrepared = true;
-                            mMedia.setVolume(1.0f, 1.0f);
-                            mMedia.setOnCompletionListener((MediaPlayer.OnCompletionListener) this);
-                        } catch (Exception ex) {
-                            throw new RuntimeException("Couldn't load music");
+                        if (!isPlaying) {
+
+                            mMedia = MediaPlayer.create(this, R.raw.wai_wai_audio);
+
+                            mMedia.start();
+
+                            isPlaying = true;
+                        } else {
+                            //Utils.doToastEng(getApplicationContext(), "Is playing ");
                         }
+                    } else {
+
+                        img_social_audio.performClick();
                     }
 
 
@@ -2328,66 +2335,45 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                 if (mstrPostType.equalsIgnoreCase("Video")) {
                     Intent video_intent = new Intent(mContext, YouTubeWebviewActivity.class);
 
-                    //intent.putExtra("post_id", feedItems.get(position).getPost_obj_id());
+                    if (mVideoId != null) {
+                        video_intent.putExtra("video_id", mVideoId);
+                    } else {
+                        video_intent.putExtra("video_id", "YOAu82xu8VY");
+                    }
 
-                    //intent.putExtra("ImgUrl", mImgurl.get(getPosition()));
                     video_intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     video_intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     mContext.startActivity(video_intent);
                     break;
                 } else if (mstrPostType.equalsIgnoreCase("Audio")) {
-                    /*Intent audio_intent = new Intent();
-                    audio_intent.setAction(android.content.Intent.ACTION_VIEW);
-                    //Uri uri = Uri.parse("android.resource://org.undp_iwomen.iwomen/" + R.raw.wai_wai_audio);
-                    String uri = "android.resource://" + getPackageName() + "/raw/wai_wai_audio";//+R.raw.wai_wai_audio;
-                    File file = new File(uri);
-                    audio_intent.setDataAndType(Uri.fromFile(file), "audio*//*");
-                    startActivity(audio_intent);*/
-                    /*if (!isPlaying) {
+
+                    /***********EPP functions **************/
+                    if (!isPlaying) {
 
                         mMedia = MediaPlayer.create(this, R.raw.wai_wai_audio);
 
                         mMedia.start();
 
-
-
                         isPlaying = true;
                     } else {
-                        //Utils.doToastEng(getApplicationContext(), "Is playing ");
-                    }*/
-
-                    /***********EPP functions **************/
-                    setVolumeControlStream(AudioManager.STREAM_ALARM);
-
-                    //MediaPlayer mediaPlayer;
-                    mMedia = new MediaPlayer();
-                    try {
-                        //Uri uri = Uri.parse("android.resource://org.undp_iwomen.iwomen/" + R.raw.wai_wai_audio);
-                        String uri = "android.resource://" + getPackageName() + "/raw/wai_wai_audio";//+R.raw.wai_wai_audio;
-                        mMedia.setDataSource(uri);
-                        mMedia.prepare();
-                        //isPrepared = true;
-                        mMedia.setVolume(1.0f, 1.0f);
-                        mMedia.setOnCompletionListener((MediaPlayer.OnCompletionListener) this);
-                    } catch (Exception ex) {
-                        throw new RuntimeException("Couldn't load music");
+                        Utils.doToastEng(getApplicationContext(), "Is playing ");
                     }
-
 
                 }
                 break;
 
 
             case R.id.detail_ly_download:
-
                 break;
 
             case R.id.postdeail_video_icon:
                 if (mstrPostType.equalsIgnoreCase("Video")) {
                     Intent video_intent = new Intent(mContext, YouTubeWebviewActivity.class);
-
-                    //video_intent.putExtra("you_tube_id", ));
-
+                    if (mVideoId != null) {
+                        video_intent.putExtra("video_id", mVideoId);
+                    } else {
+                        video_intent.putExtra("video_id", "YOAu82xu8VY");
+                    }
                     video_intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     video_intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     mContext.startActivity(video_intent);
@@ -2409,6 +2395,48 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                 break;
             case R.id.social_no_ear_viber_img:
                 img_viber_share.performClick();
+                break;
+
+            case R.id.social_audio:
+                SKToastMessage.showMessage(PostDetailActivity.this, getResources().getString(R.string.resource_coming_soon_eng), SKToastMessage.ERROR);
+                if (Connection.isOnline(getApplicationContext())) {
+
+                    String url = "https://dl.dropboxusercontent.com/u/10281242/sample_audio.mp3"; //Default
+                    if (mstrAudioFilePath != null) {
+                        url = mstrAudioFilePath;
+                        Log.e("<<<Audio Path>>>","==>"+ url);
+                    }
+                    final MediaPlayer mediaPlayer = new MediaPlayer();
+                    // Set type to streaming
+                    mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                    // Listen for if the audio file can't be prepared
+                    mediaPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+                        @Override
+                        public boolean onError(MediaPlayer mp, int what, int extra) {
+                            // ... react appropriately ...
+                            // The MediaPlayer has moved to the Error state, must be reset!
+                            return false;
+                        }
+                    });
+                    // Attach to when audio file is prepared for playing
+                    mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                        @Override
+                        public void onPrepared(MediaPlayer mp) {
+                            mediaPlayer.start();
+                        }
+                    });
+                    // Set the data source to the remote URL
+                    try {
+                        mediaPlayer.setDataSource(url);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    // Trigger an async preparation which will file listener when completed
+                    mediaPlayer.prepareAsync();
+
+                } else {
+                    SKConnectionDetector.getInstance(this).showErrorMessage();
+                }
                 break;
 
         }

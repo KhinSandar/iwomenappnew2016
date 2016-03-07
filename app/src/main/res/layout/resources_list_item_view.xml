@@ -58,7 +58,7 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="72dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center">
 
             <org.undp_iwomen.iwomen.ui.widget.CustomTextView
@@ -66,13 +66,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
-                android:ellipsize="end"
-                android:maxEms="30"
-                android:maxLines="1"
+                android:singleLine="false"
                 android:paddingTop="16dp"
                 android:paddingBottom="16dp"
                 android:paddingRight="5dp"
-                android:text="Name"
+                android:text="@string/app_name"
                 android:textColor="@color/black"
                 android:textSize="16dp"
                 android:layout_gravity="center" />
