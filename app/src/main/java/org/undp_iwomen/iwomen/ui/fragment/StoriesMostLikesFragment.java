@@ -355,13 +355,12 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
 
         final SearchView sv = new SearchView(getActivity());//.getActionBar().getThemedContext()
 
-        item.setActionView(sv);
+        //item.setActionView(sv);
 
         SearchView.SearchAutoComplete searchAutoComplete = (SearchView.SearchAutoComplete) sv.findViewById(android.support.v7.appcompat.R.id.search_src_text);
 
 
-        //int searchPlateId = sv.getContext().getResources().getIdentifier("android:id/search_plate", null, null);
-        // Getting the 'search_plate' LinearLayout.
+
         View searchPlate = sv.findViewById(android.support.v7.appcompat.R.id.search_plate);
         // Setting background of 'search_plate' to earlier defined drawable.
         searchPlate.setBackgroundResource(R.drawable.searchviewbackground);
@@ -369,11 +368,6 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
 
         sv.setSubmitButtonEnabled(false);
         sv.setOnQueryTextListener(this);
-        /*EditText et_search = (EditText) sv.findViewById(R.id.search_src_text);
-        et_search.setTextColor(Color.WHITE);*/
-
-        /*ImageView clearBtn = (ImageView) sv.findViewById(R.id.search_close_btn);
-        clearBtn.setImageResource(R.drawable.ic_action_cancel);*/
 
         ImageView close = (ImageView) sv.findViewById(android.support.v7.appcompat.R.id.search_close_btn);
         close.setImageResource(R.drawable.ic_action_cancel);

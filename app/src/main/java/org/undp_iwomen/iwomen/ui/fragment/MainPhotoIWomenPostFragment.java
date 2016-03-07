@@ -206,7 +206,7 @@ public class MainPhotoIWomenPostFragment extends Fragment implements ImageChoose
             user_obj_id = mSharedPreferences.getString(CommonConfig.USER_OBJ_ID, null);
 
         }
-        userprofile_Image_path = mSharedPreferences.getString(CommonConfig.USER_IMAGE_PATH, null);
+        userprofile_Image_path = mSharedPreferences.getString(CommonConfig.USER_UPLOAD_IMG_URL, null);
 
         init(rootView);
         return rootView;

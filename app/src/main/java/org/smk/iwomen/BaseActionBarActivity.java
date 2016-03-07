@@ -26,6 +26,7 @@ import com.path.android.jobqueue.JobManager;
 import com.smk.skalertmessage.SKToastMessage;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 import org.nullwire.trace.ExceptionHandler;
 import org.smk.application.DownloadManager;
 import org.smk.application.StoreUtil;
@@ -76,7 +77,46 @@ public class BaseActionBarActivity extends AppCompatActivity{
 			e.printStackTrace();
 		}
 
+		/*try {
+			//Dialog True 4
+			//Dialog False dismisss ---
+			AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(BaseActionBarActivity.this);
+
+			// set title
+			alertDialogBuilder.setTitle(getResources().getString(R.string.str_new_version));
+
+			// set dialog message
+			alertDialogBuilder
+					.setMessage(getResources().getString(R.string.str_new_version_message))
+					.setCancelable(true)
+					.setPositiveButton(getResources().getString(R.string.str_ok),new DialogInterface.OnClickListener() {
+						@Subscribe
+						public void onClick(DialogInterface dialog,int id) {
+							EventBus.getDefault().register(BaseActionBarActivity.this);
+							JobManager jobManager = MainApplication.getInstance().getJobManager();
+							DownloadManager downloadManager = new DownloadManager("http://api.iwomenapp.org/apk/app-release.apk", "app-release.apk");
+							jobManager.addJob(downloadManager);
+						}
+					})
+					.setNegativeButton(getResources().getString(R.string.str_not_now),new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog,int id) {
+							// if this button is clicked, just close
+							// the dialog box and do nothing
+							dialog.cancel();
+						}
+					});
+
+			// create alert dialog
+			AlertDialog alertDialog = alertDialogBuilder.create();
+
+			// show it
+			alertDialog.show();
+		}catch (WindowManager.BadTokenException e){
+
+		}*/
+
 	}
+
 
 	private void checkAPKVersion(){
 		
@@ -99,13 +139,14 @@ public class BaseActionBarActivity extends AppCompatActivity{
 								AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(BaseActionBarActivity.this);
 
 								// set title
-								alertDialogBuilder.setTitle("New Version "+arg0.getVersionName());
+								alertDialogBuilder.setTitle(getResources().getString(R.string.str_new_version)+arg0.getVersionName());
 
 								// set dialog message
 								alertDialogBuilder
-										.setMessage("Do you download new version?")
+										.setMessage(getResources().getString(R.string.str_new_version_message))
 										.setCancelable(true)
-										.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+										.setPositiveButton(getResources().getString(R.string.str_ok),new DialogInterface.OnClickListener() {
+											@Subscribe
 											public void onClick(DialogInterface dialog,int id) {
 												EventBus.getDefault().register(BaseActionBarActivity.this);
 												JobManager jobManager = MainApplication.getInstance().getJobManager();
@@ -113,7 +154,7 @@ public class BaseActionBarActivity extends AppCompatActivity{
 												jobManager.addJob(downloadManager);
 											}
 										})
-										.setNegativeButton("No",new DialogInterface.OnClickListener() {
+										.setNegativeButton(getResources().getString(R.string.str_not_now),new DialogInterface.OnClickListener() {
 											public void onClick(DialogInterface dialog,int id) {
 												// if this button is clicked, just close
 												// the dialog box and do nothing
@@ -330,6 +371,7 @@ public class BaseActionBarActivity extends AppCompatActivity{
 	}
 	
 	// This is processing when downloading file.
+	@Subscribe
 	public void onEventMainThread(final Download download) {
 		// the posted event can be processed in the main thread
 		Log.i("", "Hello downloading precent is : " + download.getDownloadPercent());

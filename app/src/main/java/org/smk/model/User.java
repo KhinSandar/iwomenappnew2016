@@ -7,235 +7,423 @@ public class User {
 
     @SerializedName("id")
     @Expose
-    private String id;
-
+    private Integer id;
     @SerializedName("objectId")
     @Expose
     private String objectId;
-
     @SerializedName("username")
     @Expose
     private String username;
     @SerializedName("email")
     @Expose
     private String email;
-    @SerializedName("first_name")
+    @SerializedName("facebookId")
     @Expose
-    private String firstName;
-    @SerializedName("last_name")
+    private String facebookId;
+    @SerializedName("isTlgTownshipExit")
     @Expose
-    private String lastName;
-    @SerializedName("phone")
+    private Integer isTlgTownshipExit;
+    @SerializedName("isTestAcc")
     @Expose
-    private String phone;
-    @SerializedName("address")
+    private Integer isTestAcc;
+    @SerializedName("phoneNo")
     @Expose
-    private Object address;
-    @SerializedName("photo")
+    private String phoneNo;
+    @SerializedName("profileimage")
     @Expose
-    private Object photo;
-    @SerializedName("remember_token")
+    private String profileimage;
+    @SerializedName("searchName")
     @Expose
-    private String rememberToken;
+    private String searchName;
+    @SerializedName("tlg_city_address")
+    @Expose
+    private String tlgCityAddress;
+    @SerializedName("tlg_city")
+    @Expose
+    private String tlgCity;
+    @SerializedName("tlg_country")
+    @Expose
+    private String tlgCountry;
+    @SerializedName("user_profile_img")
+    @Expose
+    private String userProfileImg;
+    @SerializedName("registerBODname")
+    @Expose
+    private String registerBODname;
+    @SerializedName("userImgPath")
+    @Expose
+    private String userImgPath;
     @SerializedName("created_at")
     @Expose
     private String createdAt;
     @SerializedName("updated_at")
     @Expose
     private String updatedAt;
-
+    @SerializedName("deleted_at")
+    @Expose
+    private Object deletedAt;
     @SerializedName("role")
     @Expose
     private String role;
 
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    @SerializedName("message")
-    @Expose
-    private String message;
-
-
     /**
-     * @return The id
+     *
+     * @return
+     * The id
      */
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
     /**
-     * @param id The id
+     *
+     * @param id
+     * The id
      */
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     * The objectId
+     */
     public String getObjectId() {
         return objectId;
     }
 
+    /**
+     *
+     * @param objectId
+     * The objectId
+     */
     public void setObjectId(String objectId) {
         this.objectId = objectId;
     }
 
     /**
-     * @return The username
+     *
+     * @return
+     * The username
      */
     public String getUsername() {
         return username;
     }
 
     /**
-     * @param username The username
+     *
+     * @param username
+     * The username
      */
     public void setUsername(String username) {
         this.username = username;
     }
 
     /**
-     * @return The email
+     *
+     * @return
+     * The email
      */
     public String getEmail() {
         return email;
     }
 
     /**
-     * @param email The email
+     *
+     * @param email
+     * The email
      */
     public void setEmail(String email) {
         this.email = email;
     }
 
     /**
-     * @return The firstName
+     *
+     * @return
+     * The facebookId
      */
-    public String getFirstName() {
-        return firstName;
+    public String getFacebookId() {
+        return facebookId;
     }
 
     /**
-     * @param firstName The first_name
+     *
+     * @param facebookId
+     * The facebookId
      */
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFacebookId(String facebookId) {
+        this.facebookId = facebookId;
     }
 
     /**
-     * @return The lastName
+     *
+     * @return
+     * The isTlgTownshipExit
      */
-    public String getLastName() {
-        return lastName;
+    public Integer getIsTlgTownshipExit() {
+        return isTlgTownshipExit;
     }
 
     /**
-     * @param lastName The last_name
+     *
+     * @param isTlgTownshipExit
+     * The isTlgTownshipExit
      */
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setIsTlgTownshipExit(Integer isTlgTownshipExit) {
+        this.isTlgTownshipExit = isTlgTownshipExit;
     }
 
     /**
-     * @return The phone
+     *
+     * @return
+     * The isTestAcc
      */
-    public String getPhone() {
-        return phone;
+    public Integer getIsTestAcc() {
+        return isTestAcc;
     }
 
     /**
-     * @param phone The phone
+     *
+     * @param isTestAcc
+     * The isTestAcc
      */
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setIsTestAcc(Integer isTestAcc) {
+        this.isTestAcc = isTestAcc;
     }
 
     /**
-     * @return The address
+     *
+     * @return
+     * The phoneNo
      */
-    public Object getAddress() {
-        return address;
+    public String getPhoneNo() {
+        return phoneNo;
     }
 
     /**
-     * @param address The address
+     *
+     * @param phoneNo
+     * The phoneNo
      */
-    public void setAddress(Object address) {
-        this.address = address;
+    public void setPhoneNo(String phoneNo) {
+        this.phoneNo = phoneNo;
     }
 
     /**
-     * @return The photo
+     *
+     * @return
+     * The profileimage
      */
-    public Object getPhoto() {
-        return photo;
+    public String getProfileimage() {
+        return profileimage;
     }
 
     /**
-     * @param photo The photo
+     *
+     * @param profileimage
+     * The profileimage
      */
-    public void setPhoto(Object photo) {
-        this.photo = photo;
+    public void setProfileimage(String profileimage) {
+        this.profileimage = profileimage;
     }
 
     /**
-     * @return The rememberToken
+     *
+     * @return
+     * The searchName
      */
-    public String getRememberToken() {
-        return rememberToken;
+    public String getSearchName() {
+        return searchName;
     }
 
     /**
-     * @param rememberToken The remember_token
+     *
+     * @param searchName
+     * The searchName
      */
-    public void setRememberToken(String rememberToken) {
-        this.rememberToken = rememberToken;
+    public void setSearchName(String searchName) {
+        this.searchName = searchName;
     }
 
     /**
-     * @return The createdAt
+     *
+     * @return
+     * The tlgCityAddress
+     */
+    public String getTlgCityAddress() {
+        return tlgCityAddress;
+    }
+
+    /**
+     *
+     * @param tlgCityAddress
+     * The tlg_city_address
+     */
+    public void setTlgCityAddress(String tlgCityAddress) {
+        this.tlgCityAddress = tlgCityAddress;
+    }
+
+    /**
+     *
+     * @return
+     * The tlgCity
+     */
+    public String getTlgCity() {
+        return tlgCity;
+    }
+
+    /**
+     *
+     * @param tlgCity
+     * The tlg_city
+     */
+    public void setTlgCity(String tlgCity) {
+        this.tlgCity = tlgCity;
+    }
+
+    /**
+     *
+     * @return
+     * The tlgCountry
+     */
+    public String getTlgCountry() {
+        return tlgCountry;
+    }
+
+    /**
+     *
+     * @param tlgCountry
+     * The tlg_country
+     */
+    public void setTlgCountry(String tlgCountry) {
+        this.tlgCountry = tlgCountry;
+    }
+
+    /**
+     *
+     * @return
+     * The userProfileImg
+     */
+    public String getUserProfileImg() {
+        return userProfileImg;
+    }
+
+    /**
+     *
+     * @param userProfileImg
+     * The user_profile_img
+     */
+    public void setUserProfileImg(String userProfileImg) {
+        this.userProfileImg = userProfileImg;
+    }
+
+    /**
+     *
+     * @return
+     * The registerBODname
+     */
+    public String getRegisterBODname() {
+        return registerBODname;
+    }
+
+    /**
+     *
+     * @param registerBODname
+     * The registerBODname
+     */
+    public void setRegisterBODname(String registerBODname) {
+        this.registerBODname = registerBODname;
+    }
+
+    /**
+     *
+     * @return
+     * The userImgPath
+     */
+    public String getUserImgPath() {
+        return userImgPath;
+    }
+
+    /**
+     *
+     * @param userImgPath
+     * The userImgPath
+     */
+    public void setUserImgPath(String userImgPath) {
+        this.userImgPath = userImgPath;
+    }
+
+    /**
+     *
+     * @return
+     * The createdAt
      */
     public String getCreatedAt() {
         return createdAt;
     }
 
     /**
-     * @param createdAt The created_at
+     *
+     * @param createdAt
+     * The created_at
      */
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
 
     /**
-     * @return The updatedAt
+     *
+     * @return
+     * The updatedAt
      */
     public String getUpdatedAt() {
         return updatedAt;
     }
 
     /**
-     * @param updatedAt The updated_at
+     *
+     * @param updatedAt
+     * The updated_at
      */
     public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
     }
 
     /**
-     * @return The role
+     *
+     * @return
+     * The deletedAt
      */
-    public void setRole(String role) {
-        this.role = role;
+    public Object getDeletedAt() {
+        return deletedAt;
     }
 
     /**
      *
+     * @param deletedAt
+     * The deleted_at
      */
-    public String getRole() {
-        return this.role;
+    public void setDeletedAt(Object deletedAt) {
+        this.deletedAt = deletedAt;
     }
 
+    /**
+     *
+     * @return
+     * The role
+     */
+    public String getRole() {
+        return role;
+    }
+
+    /**
+     *
+     * @param role
+     * The role
+     */
+    public void setRole(String role) {
+        this.role = role;
+    }
 
 }

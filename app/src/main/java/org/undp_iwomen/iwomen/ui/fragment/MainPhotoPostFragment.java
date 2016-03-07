@@ -191,7 +191,7 @@ public class MainPhotoPostFragment extends Fragment implements ImageChooserListe
 
         }
 
-        userprofile_Image_path = mSharedPreferences.getString(CommonConfig.USER_IMAGE_PATH, null);
+        userprofile_Image_path = mSharedPreferences.getString(CommonConfig.USER_UPLOAD_IMG_URL, null);
 
 
 

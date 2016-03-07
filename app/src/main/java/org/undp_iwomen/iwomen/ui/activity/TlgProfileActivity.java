@@ -1,10 +1,16 @@
 package org.undp_iwomen.iwomen.ui.activity;
 
+import android.Manifest;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -78,13 +84,26 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
     String tlgLeaderFbLink;
     private TLGTownship tlgTownship;
 
+
+    private final String call_phone_READ_PERMISSION = "android.permission.CALL_PHONE";
+    boolean call_phone_PermissionAccepted = false;
+
+
+    //Try request code between 1 to 255
+    private static final int INITIAL_REQUEST = 1;
+    private static final int CAMERA_REQUEST = INITIAL_REQUEST + 2;
+    private static final int CONTACTS_REQUEST = INITIAL_REQUEST + 1;
+    private static final int LOCATION_REQUEST = INITIAL_REQUEST + 3;
+
+    private static final int CALL_REQUEST = INITIAL_REQUEST + 4;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_tlg_profile);
 
         Bundle bundle = getIntent().getExtras();
-        if(bundle != null){
+        if (bundle != null) {
             tlgTownship = new Gson().fromJson(bundle.getString("tlgObj"), TLGTownship.class);
         }
         tlgName = tlgTownship.getTlgGroupName();
@@ -139,16 +158,15 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
 
         leaderProfileImg = (RoundedImageView) findViewById(R.id.tlg_leader_profilePic_rounded);
         tlgLogoImg = (RoundedImageView) findViewById(R.id.tlg_group_logo_img);
-        profile_item_progressBar = (ProgressBar)findViewById(R.id.tlg_leader_profile_progressBar_profile_item);
-        logo_progressBar = (ProgressBar)findViewById(R.id.tlg_group_logo_progressBar_profile_item);
+        profile_item_progressBar = (ProgressBar) findViewById(R.id.tlg_leader_profile_progressBar_profile_item);
+        logo_progressBar = (ProgressBar) findViewById(R.id.tlg_group_logo_progressBar_profile_item);
 
-        txt_bod_name = (CustomTextView)findViewById(R.id.tlg_leader_profile_bod_username);
+        txt_bod_name = (CustomTextView) findViewById(R.id.tlg_leader_profile_bod_username);
 
 
         img_tlg_ph_no.setOnClickListener(this);
         img_tlg_viber_no.setOnClickListener(this);
         img_tlg_viber_no.setOnClickListener(this);
-
 
 
         clearData();
@@ -158,16 +176,14 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
         //getTLGDetailByIdFromSever();
 
 
-
     }
 
 
-
-    private void clearData(){
+    private void clearData() {
         txt_tlg_group_name.setText("");
         txt_tlg_group_address.setText("");
         txt_tlg_leader_name.setText("");
-        txt_tlg_leader_role_lbl.setText(R.string.tlg_leader_role_eng);
+        txt_tlg_leader_role_lbl.setText("");
         txt_tlg_info_who_we_are_lbl.setText(R.string.tlg_who_we_r_eng);
 
         txt_tlg_member_lbl.setText(R.string.tlg_member_lbl_eng);
@@ -352,7 +368,7 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
                             if (!groupLogoObject.isNull("url")) {
                                 item.setTlgLogoImg(groupLogoObject.getString("url"));
 
-                            }else{
+                            } else {
                                 item.setTlgLogoImg("");
                             }
 
@@ -366,7 +382,7 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
                             if (!groupLogoObject.isNull("url")) {
                                 item.setTlgLeaderImg(groupLogoObject.getString("url"));
 
-                            }else{
+                            } else {
                                 item.setTlgLeaderImg("");
                             }
 
@@ -516,19 +532,15 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
     }
 
     private void setTLgDetailItem(TLGTownship item) {
-        if(strLang.equals(Utils.ENG_LANG)) {
+        if (strLang.equals(Utils.ENG_LANG)) {
             textViewTitle.setText(item.getTlgGroupName());
             txt_tlg_group_name.setText(item.getTlgGroupName());
 
             txt_tlg_group_address.setText(item.getTlgGroupAddress());
 
 
-
-
-
-
             txt_tlg_leader_name.setText(item.getTlgLeaderName());
-            txt_tlg_leader_role_lbl.setText(R.string.tlg_leader_role_eng);
+            txt_tlg_leader_role_lbl.setText(R.string.tlg_leader_role);
             txt_tlg_info_who_we_are_lbl.setText(R.string.tlg_who_we_r_eng);
 
             txt_tlg_member_lbl.setText(R.string.tlg_member_lbl_eng);
@@ -543,7 +555,7 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
             txt_tlg_key_skill_lbl.setText(R.string.tlg_key_skill_lbl_eng);
             txt_tlg_key_skill_txt.setText(item.getTlgGroupKeySkills());
 
-        }else {
+        } else {
 
             textViewTitle.setText(item.getTlgGroupNameMm());
 
@@ -553,10 +565,8 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
             txt_tlg_group_address.setText(item.getTlgGroupAddressMm());
 
 
-
-
             txt_tlg_leader_name.setText(item.getTlgLeaderNameMm());
-            txt_tlg_leader_role_lbl.setText(R.string.tlg_leader_role_mm);
+            txt_tlg_leader_role_lbl.setText(R.string.tlg_leader_role);
             txt_tlg_info_who_we_are_lbl.setText(R.string.tlg_who_we_r_mm);
 
             txt_tlg_member_lbl.setText(R.string.tlg_member_lbl_mm);
@@ -572,16 +582,19 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
             txt_tlg_key_skill_txt.setText(item.getTlgGroupKeySkillsMm());
         }
 
-        if(item.getIsLeader() != null) {
-            Log.e("<<<TLG Leader>>","==>" +item.getIsLeader());
-            if (item.getIsLeader()) {
-                txt_bod_name.setVisibility(View.VISIBLE);
+        if (item.getIsLeader() != null) {
+            if (item.getIsLeader()) {//item.getIsLeader()
+
+                txt_bod_name.setText(R.string.tlg_mdk_leader_role);
             } else {
-                txt_bod_name.setVisibility(View.INVISIBLE);
+                txt_tlg_leader_role_lbl.setText(R.string.tlg_leader_role);
+                txt_bod_name.setText(R.string.tlg_normal_leader_role);
             }
-        }else{
-            txt_bod_name.setVisibility(View.INVISIBLE);
+
+        } else {
+            txt_bod_name.setText(R.string.tlg_normal_leader_role);
         }
+        txt_tlg_leader_role_lbl.setText(R.string.tlg_leader_role);
 
         //Phone No
         tlgLeaderPhno = item.getTlgLeaderPh();
@@ -680,25 +693,69 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
 
         switch (view.getId()) {
             case R.id.tlg_ph_img:
-                Intent callIntent = new Intent(Intent.ACTION_CALL);
-                String ph = tlgLeaderPhno;
-                callIntent.setData(Uri.parse("tel:" + Uri.encode(ph)));
-                startActivity(callIntent);
+                Log.e("<<<tlgLeaderPhno>>>", "===>" + tlgLeaderPhno);
+
+
+                // TODO: Consider calling
+                //if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                Log.e("<<<tlgLeaderPhno>>>", "===>" + tlgLeaderPhno);
+                if (!hasPermission(call_phone_READ_PERMISSION)) {
+
+                    //if no permission, request permission
+                    String[] perms = {call_phone_READ_PERMISSION};
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        requestPermissions(perms, CALL_REQUEST);
+                    }
+
+
+                } else {
+                    // Check if we were successful in obtaining the map.
+                    Log.e("<<<tlgLeaderPhno>>>", "===>" + tlgLeaderPhno);
+                    if (tlgLeaderPhno != null) {
+                        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                            // TODO: Consider calling
+                            //    ActivityCompat#requestPermissions
+                            // here to request the missing permissions, and then overriding
+                            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                            //                                          int[] grantResults)
+                            // to handle the case where the user grants the permission. See the documentation
+                            // for ActivityCompat#requestPermissions for more details.
+                            Intent callIntent = new Intent(Intent.ACTION_CALL);
+                            String ph = tlgLeaderPhno;
+                            callIntent.setData(Uri.parse("tel:" + Uri.encode(ph)));
+                            startActivity(callIntent);
+                            return;
+                        }
+
+                    }
+                }
+
 
                 break;
             case R.id.tlg_viber_img:
-                String sphone = tlgLeaderPhno;
-                Uri uri = Uri.parse("tel:" + Uri.encode(sphone));
-                Intent intent = new Intent("android.intent.action.VIEW");
-                intent.setClassName("com.viber.voip", "com.viber.voip.WelcomeActivity");
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                //FLAG_ACTIVITY_NEW_TASK
-                intent.setData(uri);
-                //intent.putExtra(Intent.EXTRA_SUBJECT, post_content.getText().toString().substring(0, 12) + "...");//Title Of The Post
-                //intent.putExtra(Intent.EXTRA_TEXT, CommonConfig.SHARE_URL);
-                //intent.setType("text/plain");
-                getApplicationContext().startActivity(intent);
+                try {
+                    String sphone = tlgLeaderPhno;
+                    Uri uri = Uri.parse("tel:" + Uri.encode(sphone));
+                    Intent intent = new Intent("android.intent.action.VIEW");
+                    intent.setClassName("com.viber.voip", "com.viber.voip.WelcomeActivity");
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    //FLAG_ACTIVITY_NEW_TASK
+                    intent.setData(uri);
+                    //intent.putExtra(Intent.EXTRA_SUBJECT, post_content.getText().toString().substring(0, 12) + "...");//Title Of The Post
+                    //intent.putExtra(Intent.EXTRA_TEXT, CommonConfig.SHARE_URL);
+                    //intent.setType("text/plain");
+                    getApplicationContext().startActivity(intent);
+                } catch (ActivityNotFoundException ex) {
+
+                }
+
                 break;
             case R.id.tlg_fb_img:
 
@@ -737,4 +794,35 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
         }
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+
+            case CALL_REQUEST:
+
+                call_phone_PermissionAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+
+                if (call_phone_PermissionAccepted) {
+                    //TODO fun
+
+                    img_tlg_ph_no.performClick();
+
+                }
+
+                break;
+
+        }
+    }
+
+
+    private boolean hasPermission(String permission) {
+
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
+            return (checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED);
+        } else {
+            return true;
+        }
+
+
+    }
 }

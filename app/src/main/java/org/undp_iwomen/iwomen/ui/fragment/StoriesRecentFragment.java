@@ -49,7 +49,6 @@ import org.undp_iwomen.iwomen.data.FeedItem;
 import org.undp_iwomen.iwomen.database.TableAndColumnsName;
 import org.undp_iwomen.iwomen.model.retrofit_api.UserPostAPI;
 import org.undp_iwomen.iwomen.provider.IwomenProviderData;
-import org.undp_iwomen.iwomen.ui.activity.MainPhotoPostActivity;
 import org.undp_iwomen.iwomen.ui.activity.NewPostActivity;
 import org.undp_iwomen.iwomen.ui.activity.PostDetailActivity;
 import org.undp_iwomen.iwomen.ui.adapter.IWomenPostListByDateRecyclerViewAdapter;
@@ -401,7 +400,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
 
         final SearchView sv = new SearchView(getActivity());//.getActionBar().getThemedContext()
 
-        item.setActionView(sv);
+        //item.setActionView(sv);
 
         SearchView.SearchAutoComplete searchAutoComplete = (SearchView.SearchAutoComplete) sv.findViewById(android.support.v7.appcompat.R.id.search_src_text);
 

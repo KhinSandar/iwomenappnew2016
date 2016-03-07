@@ -134,7 +134,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     private RoundedImageView profile;
     private ResizableImageView postIMg;
     private SharedPreferences mSharedPreferencesUserInfo;
-    private String user_name, user_obj_id, user_ph,user_id;
+    private String user_name, user_obj_id, user_ph, user_id;
     SharedPreferences sharePrefLanguageUtil;
     String strLang;
     //private Toolbar toolbar;
@@ -222,7 +222,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     public static final int MENU_Share = Menu.FIRST + 1;
     MediaPlayer mMedia;
     private boolean isPlaying;
-    private String mstrPostType , mVideoId;
+    private String mstrPostType, mVideoId;
     private Context mContext;
 
     private ProgressDialog mProgressDialog;
@@ -242,7 +242,6 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     private ImageView img_social_no_ear_fb;
     private ImageView img_social_no_ear_viber;
     private ZProgressHUD zPDialog;
-
 
 
     //New UI
@@ -366,8 +365,8 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
         user_name = mSharedPreferencesUserInfo.getString(CommonConfig.USER_NAME, null);
         user_obj_id = mSharedPreferencesUserInfo.getString(CommonConfig.USER_OBJ_ID, null);
-        user_id =mSharedPreferencesUserInfo.getString(CommonConfig.USER_ID, null);
-        userprofile_Image_path = mSharedPreferencesUserInfo.getString(CommonConfig.USER_IMAGE_PATH, null);
+        user_id = mSharedPreferencesUserInfo.getString(CommonConfig.USER_ID, null);
+        userprofile_Image_path = mSharedPreferencesUserInfo.getString(CommonConfig.USER_UPLOAD_IMG_URL, null);
 
 
         profile = (RoundedImageView) findViewById(R.id.postdetail_profilePic_rounded);
@@ -420,21 +419,21 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         /*txt_lbl_like_post = (CustomTextView) findViewById(R.id.postdetail_like_post_lbl);
         txt_lbl_share_post = (CustomTextView) findViewById(R.id.postdetail_share_post_lbl);*/
 
-        img_credit_icon_img = (ImageView)findViewById(R.id.postdetail_credit_pic_rounded);
+        img_credit_icon_img = (ImageView) findViewById(R.id.postdetail_credit_pic_rounded);
         img_credit_logo = (ResizableImageView) findViewById(R.id.postdetail_credit_img);
         txt_credit_link = (TextView) findViewById(R.id.postdetail_credit_link);
         progressBar_credit = (ProgressBar) findViewById(R.id.postdetail_credit_progress);
         ly_credit = (LinearLayout) findViewById(R.id.postdetail_ly_credit);
         img_social_facebook = (ImageView) findViewById(R.id.social_facebook);
 
-        txt_social_share =(CustomTextView) findViewById(R.id.social_share);
+        txt_social_share = (CustomTextView) findViewById(R.id.social_share);
         img_viber_share = (ImageView) findViewById(R.id.social_viber);
 
         //TODO Social With No earing
-        txt_social_no_ear_like =(TextView) findViewById(R.id.social_no_ear_like_txt);
+        txt_social_no_ear_like = (TextView) findViewById(R.id.social_no_ear_like_txt);
         mSocialNoEarLikeAnimatedButton = (AnimatedButton) findViewById(R.id.social_no_ear_like_animated_button);
-        txt_social_no_ear_comment =(TextView) findViewById(R.id.social_no_ear_comment_txt);
-        txt_social_no_ear_share =(TextView) findViewById(R.id.social_no_ear_share_txt);
+        txt_social_no_ear_comment = (TextView) findViewById(R.id.social_no_ear_comment_txt);
+        txt_social_no_ear_share = (TextView) findViewById(R.id.social_no_ear_share_txt);
         img_social_no_ear_fb = (ImageView) findViewById(R.id.social_no_ear_share_img);
         img_social_no_ear_viber = (ImageView) findViewById(R.id.social_no_ear_viber_img);
 
@@ -448,7 +447,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         Intent i = getIntent();
 
         Bundle bundle = getIntent().getExtras();
-        if(bundle != null){
+        if (bundle != null) {
             iWomenPost = new Gson().fromJson(bundle.getString("postObj"), IWomenPost.class);
         }
         postType = i.getStringExtra("post_type");
@@ -460,20 +459,15 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         //TODO for Comment
 
 
-
-
         mLikeAnimatedButton.setCallbackListener(new AnimatedButton.Callbacks() {
             @Override
             public void onClick() {
 
 
-
-                if(mLikeAnimatedButton.isEnabled()){
+                if (mLikeAnimatedButton.isEnabled()) {
                     if (postType.equalsIgnoreCase("iWomenPost")) {
 
                         //Check status
-
-
 
 
                         //
@@ -497,7 +491,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                             }
                         });
 
-                    }else{
+                    } else {
                         SMKserverAPI.getInstance().getService().postPostsLike(postId, user_id, new Callback<LikeItem>() {
                             @Override
                             public void success(LikeItem item, Response response) {
@@ -587,9 +581,9 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                     public void onClick(View view) {
                         Intent intent = new Intent(mContext, YouTubeWebviewActivity.class);
 
-                        if(mVideoId != null){
+                        if (mVideoId != null) {
                             intent.putExtra("video_id", mVideoId);
-                        }else{
+                        } else {
                             intent.putExtra("video_id", "YOAu82xu8VY");
                         }
 
@@ -721,7 +715,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
             img_credit_icon_img.setVisibility(View.VISIBLE);
             txt_credit_link.setVisibility(View.VISIBLE);
             post_content_posted_date.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             postdetail_username.setVisibility(View.INVISIBLE);
             img_credit_logo.setVisibility(View.INVISIBLE);
             img_credit_icon_img.setVisibility(View.INVISIBLE);
@@ -783,7 +777,6 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
             txt_social_no_ear_like.setText(item.getLikes() + "");
             mSocialNoEarLikeAnimatedButton.setText(item.getLikes() + "");
-
 
 
             txt_cmd_count.setText(item.getCommentCount() + "");
@@ -1021,11 +1014,10 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         }
 
 
-
         final List<com.smk.model.CommentItem> comment = StoreUtil.getInstance().selectFrom("commentlist");
-        if (Connection.isOnline(mContext)){
+        if (Connection.isOnline(mContext)) {
             // Showing local data while loading from internet
-            if(comment != null && comment.size() > 0){
+            if (comment != null && comment.size() > 0) {
                 listComment.addAll(comment);
                 adapter.notifyDataSetChanged();
                 zPDialog = new ZProgressHUD(this);
@@ -1033,9 +1025,9 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
             }
 
             getCommentByPagination();
-        }else{
+        } else {
             SKConnectionDetector.getInstance(this).showErrorMessage();
-            if(comment != null){
+            if (comment != null) {
                 listComment.clear();
                 listComment.addAll(comment);
                 adapter.notifyDataSetChanged();
@@ -1094,18 +1086,16 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                 et_comment.setFocusableInTouchMode(false);
 
 
-
-
                 String cmt_text = null;
                 if (et_comment.length() != 0) {
-                     cmt_text = et_comment.getText().toString();
+                    cmt_text = et_comment.getText().toString();
                 }
                 //TODO it is not postId , it is postObj id
 
-                if(userprofile_Image_path != null){
+                if (userprofile_Image_path != null) {
 
-                }else{
-                    userprofile_Image_path ="http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-7f0323bc-a862-4184-9e51-d55189fcab18-ic_launcher.png";
+                } else {
+                    userprofile_Image_path = "http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-7f0323bc-a862-4184-9e51-d55189fcab18-ic_launcher.png";
                 }
                 SMKserverAPI.getInstance().getService().postCommentByPostID(postObjId, user_obj_id, user_name, stickerArrayList.get(position).getStickerImgPath(), userprofile_Image_path, cmt_text, new Callback<CalendarEvent>() {
                     @Override
@@ -1127,7 +1117,6 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         });
 
     }
-
 
 
     public void initEmojiIcon() {
@@ -2164,7 +2153,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                 break;*/
             case R.id.social_viber:
 
-                try{
+                try {
                     Intent intent = new Intent("android.intent.action.VIEW");
                     intent.setClassName("com.viber.voip", "com.viber.voip.WelcomeActivity");
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -2180,7 +2169,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                     intent.putExtra(Intent.EXTRA_TEXT, CommonConfig.SHARE_URL);
                     intent.setType("text/plain");
                     getApplicationContext().startActivity(intent);
-                }catch (ActivityNotFoundException ex){
+                } catch (ActivityNotFoundException ex) {
 
                 }
 
@@ -2219,8 +2208,8 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
                         if (userprofile_Image_path != null) {
 
-                        }else{
-                            userprofile_Image_path= "http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-7f0323bc-a862-4184-9e51-d55189fcab18-ic_launcher.png" ;
+                        } else {
+                            userprofile_Image_path = "http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-7f0323bc-a862-4184-9e51-d55189fcab18-ic_launcher.png";
                         }
                         SMKserverAPI.getInstance().getService().postCommentTestByPostID(postObjId, user_obj_id, user_name, userprofile_Image_path, et_comment.getText().toString(), new Callback<CalendarEvent>() {
                             @Override
@@ -2285,9 +2274,9 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                 if (mstrPostType.equalsIgnoreCase("Video")) {
                     Intent video_intent = new Intent(mContext, YouTubeWebviewActivity.class);
 
-                    if(mVideoId != null){
+                    if (mVideoId != null) {
                         video_intent.putExtra("video_id", mVideoId);
-                    }else{
+                    } else {
                         video_intent.putExtra("video_id", "YOAu82xu8VY");
                     }
                     video_intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -2311,7 +2300,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                 else if (mstrPostType.equalsIgnoreCase("Audio")) {
                     setVolumeControlStream(AudioManager.STREAM_ALARM);
 
-                    if(iWomenPost.getPostUploadName().equalsIgnoreCase("Wai Wai")){
+                    if (iWomenPost.getPostUploadName().equalsIgnoreCase("Wai Wai")) {
                         //MediaPlayer mediaPlayer;
                         mMedia = new MediaPlayer();
                         try {
@@ -2832,8 +2821,6 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         }
 
     }
-
-
 
 
     //Share URL

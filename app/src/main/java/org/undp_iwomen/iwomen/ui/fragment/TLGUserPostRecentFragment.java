@@ -32,6 +32,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.smk.skalertmessage.SKToastMessage;
 import com.smk.skconnectiondetector.SKConnectionDetector;
 import com.smk.sklistview.SKListView;
 import com.thuongnh.zprogresshud.ZProgressHUD;
@@ -1445,12 +1446,9 @@ public class TLGUserPostRecentFragment extends Fragment implements View.OnClickL
                     if(iWomenPostList.size() == 0) {
                         // If no more item
                         skListView.setNextPage(false);
-                        if (mstr_lang.equals(Utils.ENG_LANG)) {
-                            Utils.doToastEng(mContext, getResources().getString(R.string.resource_coming_soon_eng));
-                        } else {
 
-                            Utils.doToastMM(mContext, getResources().getString(R.string.resource_coming_soon_mm));
-                        }
+                        SKToastMessage.showMessage(getActivity().getApplicationContext(), getResources().getString(R.string.empty_talk_together), SKToastMessage.ERROR);
+
 
                     }
 

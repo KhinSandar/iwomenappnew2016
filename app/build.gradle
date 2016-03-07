@@ -31,6 +31,10 @@ apply plugin: 'com.google.gms.google-services'
 android {
     signingConfigs {
         release {
+            keyAlias 'iwomen'
+            keyPassword 'iwomen'
+            storeFile file('/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/iwomen.jks')
+            storePassword 'undp2015'
         }
     }
     compileSdkVersion 23

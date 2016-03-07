@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.transition.ChangeBounds;
 import android.transition.Slide;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +16,6 @@ import android.widget.Button;
 
 import org.smk.clientapi.NetworkEngine;
 import org.smk.model.User;
-
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.data.Sample;
@@ -143,7 +141,7 @@ public class RegisterTermsFragment8 extends Fragment implements View.OnClickList
             }else{
                 isTlgExit = 0;
             }
-            Log.e("<<Register>","==>"+user_name+"/"+ pwd+"/"+  phone+"/"+  user_photo+"/"+  isTlgExit+"/"+  address_tlg_township_name+"/"+  tlg_sate+"/"+ tlg_country );
+            //Log.e("<<Register>","==>"+user_name+"/"+ pwd+"/"+  phone+"/"+  user_photo+"/"+  isTlgExit+"/"+  address_tlg_township_name+"/"+  tlg_sate+"/"+ tlg_country );
             NetworkEngine.getInstance().postCreateUser(user_name, pwd, phone, user_photo, isTlgExit, address_tlg_township_name, tlg_sate, tlg_country, new Callback<User>() {
                         @Override
                         public void success(User user, Response response) {
@@ -151,11 +149,11 @@ public class RegisterTermsFragment8 extends Fragment implements View.OnClickList
 
                             mEditorUserInfo.putString(CommonConfig.USER_ROLE, user.getRole());
                             mEditorUserInfo.putString(CommonConfig.USER_NAME, user.getUsername());
-                            mEditorUserInfo.putString(CommonConfig.USER_PH, user.getPhone());
-                            mEditorUserInfo.putString(CommonConfig.USER_ID, user.getId());
+                            mEditorUserInfo.putString(CommonConfig.USER_PH, user.getPhoneNo());
+                            mEditorUserInfo.putString(CommonConfig.USER_ID, user.getId().toString());
                             mEditorUserInfo.putString(CommonConfig.USER_OBJ_ID, user.getObjectId());
 
-                            mEditorUserInfo.putString(CommonConfig.REGISTER_MSG, user.getMessage());
+                            //mEditorUserInfo.putString(CommonConfig.REGISTER_MSG, user.getMessage());
 
                             if (user.getEmail() != null || user.getEmail() != "") {
                                 mEditorUserInfo.putString(CommonConfig.USER_EMAIL, user.getEmail());

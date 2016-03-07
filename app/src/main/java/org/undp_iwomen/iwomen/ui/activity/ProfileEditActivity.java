@@ -26,13 +26,12 @@ import com.kbeanie.imagechooser.api.ChosenImages;
 import com.kbeanie.imagechooser.api.ImageChooserListener;
 import com.kbeanie.imagechooser.api.ImageChooserManager;
 import com.makeramen.RoundedImageView;
-
-import org.smk.iwomen.BaseActionBarActivity;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.smk.iwomen.BaseActionBarActivity;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.model.retrofit_api.UserPostAPI;
@@ -123,7 +122,7 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
 
         mstrUserId = i.getStringExtra("UserId");
 
-        userprofile_Image_path = mSharedPreferencesUserInfo.getString(CommonConfig.USER_IMAGE_PATH, null);
+        userprofile_Image_path = mSharedPreferencesUserInfo.getString(CommonConfig.USER_UPLOAD_IMG_URL, null);
 
 
         profileImg = (RoundedImageView) findViewById(R.id.edit_profile_profilePic_rounded);
@@ -164,7 +163,7 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
 
         }
 
-        userprofile_Image_path = mSharedPreferencesUserInfo.getString(CommonConfig.USER_IMAGE_PATH, null);
+        userprofile_Image_path = mSharedPreferencesUserInfo.getString(CommonConfig.USER_UPLOAD_IMG_URL, null);
 
 
         if (userprofile_Image_path != null) {

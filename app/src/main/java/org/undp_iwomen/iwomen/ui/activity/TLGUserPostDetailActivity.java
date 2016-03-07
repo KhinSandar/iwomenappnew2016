@@ -272,7 +272,7 @@ public class TLGUserPostDetailActivity extends BaseActionBarActivity implements 
             user_obj_id = mSharedPreferencesUserInfo.getString(CommonConfig.USER_OBJ_ID, null);
 
         }
-        userprofile_Image_path = mSharedPreferencesUserInfo.getString(CommonConfig.USER_IMAGE_PATH, null);
+        userprofile_Image_path = mSharedPreferencesUserInfo.getString(CommonConfig.USER_UPLOAD_IMG_URL, null);
 
 
         profile = (RoundedImageView) findViewById(R.id.postdetail_profilePic_rounded);

@@ -4,12 +4,16 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -46,6 +50,8 @@ import org.undp_iwomen.iwomen.utils.Connection;
 import org.undp_iwomen.iwomen.utils.StoreUtil;
 import org.undp_iwomen.iwomen.utils.Utils;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Locale;
 
 import retrofit.Callback;
@@ -88,6 +94,7 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
 
         EditText editText = new EditText(this);
 
+        printHashKey();
 
         appLogo = (ImageView) findViewById(R.id.app_logo);
         usernameField = (EditText) findViewById(R.id.login_username_input);
@@ -183,6 +190,24 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
         }
     }
 
+    public void printHashKey() {
+        try {
+
+            PackageInfo info = getPackageManager().getPackageInfo("org.undp_iwomen.iwomen", PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.i("TEMPTAGHASH KEY:","FB HashKey : "+ Base64.encodeToString(md.digest(), Base64.DEFAULT));
+
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+
+        }
+    }
+
     public void postLogin() {
 
         if (Connection.isOnline(getApplicationContext())) {
@@ -231,20 +256,13 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
 
                     mEditorUserInfo.putString(CommonConfig.USER_EMAIL, user.getEmail());
                     mEditorUserInfo.putString(CommonConfig.USER_NAME, user.getUsername());
-                    mEditorUserInfo.putString(CommonConfig.USER_ID, user.getId());
+                    mEditorUserInfo.putString(CommonConfig.USER_ID, user.getId().toString());
                     mEditorUserInfo.putString(CommonConfig.USER_OBJ_ID, user.getObjectId());
                     mEditorUserInfo.putString(CommonConfig.USER_ROLE, user.getRole());
-                    Log.e("<<<User Role >>> ", "===>" + user.getRole());
-
-                    /*Role role;
-                    List<Role> roleArrayList;
-                    roleArrayList = new ArrayList<Role>();
-                    roleArrayList = user.getRoles();
-                    Log.e("<<<< Login Name >>> ", "==>" + roleArrayList.get(0).getName());*/
-
-                    mEditorUserInfo.putString(CommonConfig.USER_PH, user.getPhone());
+                    mEditorUserInfo.putString(CommonConfig.USER_UPLOAD_IMG_URL, user.getProfileimage());
+                    //Log.e("<<<User Role >>> ", "===>" + user.getRole());
+                    mEditorUserInfo.putString(CommonConfig.USER_PH, user.getPhoneNo());
                     mEditorUserInfo.putString(CommonConfig.USER_ROLE,user.getRole() );
-
                     mEditorUserInfo.commit();
                     Intent i = new Intent(MainLoginActivity.this, DrawerMainActivity.class);//DrawerMainActivity
                     startActivity(i);
