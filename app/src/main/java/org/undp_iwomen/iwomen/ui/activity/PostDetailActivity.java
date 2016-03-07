@@ -56,6 +56,7 @@ import com.facebook.share.widget.ShareButton;
 import com.facebook.share.widget.ShareDialog;
 import com.google.gson.Gson;
 import com.makeramen.RoundedImageView;
+import com.smk.model.CommentItem;
 import com.smk.skalertmessage.SKToastMessage;
 import com.smk.skconnectiondetector.SKConnectionDetector;
 import com.smk.sklistview.SKListView;
@@ -68,7 +69,6 @@ import org.json.JSONObject;
 import org.smk.application.StoreUtil;
 import org.smk.clientapi.NetworkEngine;
 import org.smk.iwomen.BaseActionBarActivity;
-import org.smk.model.CalendarEvent;
 import org.smk.model.IWomenPost;
 import org.smk.model.LikeItem;
 import org.smk.model.Sticker;
@@ -80,9 +80,7 @@ import org.undp_iwomen.iwomen.model.Helper;
 import org.undp_iwomen.iwomen.model.ISO8601Utils;
 import org.undp_iwomen.iwomen.model.MyTypeFace;
 import org.undp_iwomen.iwomen.model.TextWatcherAdapter;
-import org.undp_iwomen.iwomen.model.TimeDiff;
 import org.undp_iwomen.iwomen.model.URLSpanNoUnderline;
-import org.undp_iwomen.iwomen.model.retrofit_api.CommentAPI;
 import org.undp_iwomen.iwomen.model.retrofit_api.SMKserverAPI;
 import org.undp_iwomen.iwomen.model.retrofit_api.UserPostAPI;
 import org.undp_iwomen.iwomen.provider.IwomenProviderData;
@@ -1103,10 +1101,13 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                 } else {
                     userprofile_Image_path = "http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-7f0323bc-a862-4184-9e51-d55189fcab18-ic_launcher.png";
                 }
-                SMKserverAPI.getInstance().getService().postCommentByPostID(postObjId, user_obj_id, user_name, stickerArrayList.get(position).getStickerImgPath(), userprofile_Image_path, cmt_text, new Callback<CalendarEvent>() {
+                //Log.e("<<Comment>>","==>" +postType,postObjId, user_obj_id, user_name, stickerArrayList.get(position).getStickerImgPath()+""+ userprofile_Image_path+""+ cmt_text );
+                SMKserverAPI.getInstance().getService().postCommentByPostID(postType,postObjId, user_obj_id, user_name, stickerArrayList.get(position).getStickerImgPath(), userprofile_Image_path, cmt_text, new Callback<CommentItem>() {
                     @Override
-                    public void success(CalendarEvent calendarEvent, Response response) {
+                    public void success(CommentItem calendarEvent, Response response) {
 
+                        txt_cmd_count.setText(calendarEvent.getCommentCount() +"");
+                        txt_social_no_ear_comment.setText(calendarEvent.getCommentCount() +"");
                         getCommentByPagination();
 
                     }
@@ -1271,16 +1272,12 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                 @Override
                 public void success(List<com.smk.model.CommentItem> commentItems, Response response) {
 
-                    if (zPDialog != null && zPDialog.isShowing()) {
-                        listComment.clear();
-                        zPDialog.dismissWithSuccess();
-                    }
+                    listComment = new ArrayList<>();
                     listComment.addAll(commentItems);
-                    adapter.notifyDataSetChanged();
+                    adapter = new CommentAdapter(PostDetailActivity.this, listComment);
+                    listView_Comment.setAdapter(adapter);
+
                     progressWheel_comment.setVisibility(View.INVISIBLE);
-                    View padding = new View(PostDetailActivity.this);
-                    padding.setMinimumHeight(20);
-                    listView_Comment.addFooterView(padding);
 
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         listView_Comment.setNestedScrollingEnabled(true);
@@ -1303,167 +1300,6 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         } else {
             SKConnectionDetector.getInstance(this).showErrorMessage();
         }
-    }
-
-    public void getTestCommentList() {
-
-
-        // listComment = new ArrayList<>();
-
-        if (Connection.isOnline(mContext)) {
-
-            //progressWheel.setVisibility(View.VISIBLE);
-
-            //TODO data from server
-            CommentAPI.getInstance().getService().getCommentByPostId("{\"postId\":{\"__type\":\"Pointer\",\"className\":\"Post\",\"objectId\":\"" + postId + "\"}}", "-createdAt", new Callback<String>() {
-                @Override
-                public void success(String s, Response response) {
-
-                    //Log.e("Comments>>>", ">>>>" + s);
-                    String comment;
-                    String comment_created_time;
-                    String comment_user_name;
-
-                    String comment_img_path;
-
-                    String comment_sticker_img_path;
-
-                    try {
-                        JSONObject whole_body = new JSONObject(s);
-                        JSONArray result = whole_body.getJSONArray("results");
-                        for (int i = 0; i < result.length(); i++) {
-                            JSONObject each_object = result.getJSONObject(i);
-
-
-                            if (each_object.isNull("comment_contents")) {
-                                comment = "null";
-                            } else {
-                                comment = each_object.getString("comment_contents");
-                            }
-
-                            if (each_object.isNull("user_img_path")) {
-                                comment_img_path = "null";
-                            } else {
-                                comment_img_path = each_object.getString("user_img_path");
-                            }
-                            if (each_object.isNull("sticker_img_path")) {
-                                comment_sticker_img_path = "null";
-                            } else {
-                                comment_sticker_img_path = each_object.getString("sticker_img_path");
-                            }
-
-                            if (each_object.isNull("user_name")) {
-                                comment_user_name = "null";
-                            } else {
-                                comment_user_name = each_object.getString("user_name");
-                            }
-
-                            //Calculate Date Difference
-                            Date d1 = new Date();
-
-                            //Date d0 = null; // About 3 days ago
-                            try {
-                                ParsePosition pp = new ParsePosition(0);
-                                Date d0 = ISO8601Utils.parse(each_object.getString("createdAt"), pp);//2015-08-26T10:34:52.429Z
-
-
-                                //Log.e("ISO date","==>" + d0);
-                                long[] diff = TimeDiff.getTimeDifference(d0, d1);
-
-
-                                //Log.e("Time difference", "==>" + diff[0] + "/" + diff[1] + "/" + diff[2] + "/" + diff[3] + "/" + diff[4]);
-
-                                //Log.e("Just the number of day", "" + TimeDiff.getTimeDifference(d0, d1, TimeDiff.TimeField.DAY));
-
-                                str_comment_time_long = "";
-                                if (diff[0] != 0) {
-                                    if (diff[0] == 1) {
-                                        str_comment_time_long = diff[0] + " d";
-
-                                    } else {
-                                        if (diff[0] > 365) {
-                                            str_comment_time_long = diff[0] / 365 + " y";
-                                        } else {
-
-
-                                            str_comment_time_long = diff[0] + " d";
-                                        }
-
-                                    }
-                                }
-                                if (diff[1] != 0) {
-                                    if (diff[1] < 24) {
-                                        str_comment_time_long += " " + diff[1] + " h";
-                                    }
-
-                                }
-                                if (diff[2] != 0) {
-                                    if (diff[2] < 60) {
-                                        str_comment_time_long += " " + diff[2] + " m";
-                                    }
-                                }
-
-                                if (diff[2] == 0) {
-                                    str_comment_time_long += " " + diff[3] + " sec ago";
-                                } else {
-                                    str_comment_time_long += " ago";
-                                }
-
-
-                            } catch (java.text.ParseException e) {
-                                e.printStackTrace();
-                                Log.e("Date ParseException", "==>" + e.toString() + d1);
-                            }
-                         /*System.out.printf("Time difference is %d day(s), %d hour(s), %d minute(s), %d second(s) and %d millisecond(s)\n",
-                                diff[0], diff[1], diff[2], diff[3], diff[4]);
-                        System.out.printf("Just the number of days = %d\n",
-                                TimeDiff.getTimeDifference(d0, d1, TimeDiff.TimeField.DAY));*/
-
-
-                            // listComment.add(new CommentItem(comment_img_path, comment_user_name, comment, str_comment_time_long,comment_sticker_img_path));
-                            str_comment_time_long = "";
-                        }
-
-
-                        //CommentAdapter adapter = new CommentAdapter(PostDetailActivity.this, listComment);
-                        //listView_Comment.setAdapter(adapter);
-
-                        mProgressDialog.dismiss();
-                        progressWheel_comment.setVisibility(View.INVISIBLE);
-                        View padding = new View(PostDetailActivity.this);
-                        padding.setMinimumHeight(20);
-                        listView_Comment.addFooterView(padding);
-
-                        Helper.getListViewSize(listView_Comment);
-                        //setListViewHeightBasedOnChildren(listView_Comment);
-
-                    } catch (JSONException e) {
-
-                        progressWheel_comment.setVisibility(View.INVISIBLE);
-                        mProgressDialog.dismiss();
-                        e.printStackTrace();
-                        Log.e("Comments>>>", ">>>>JSONERR" + e.toString());
-
-                    }
-                }
-
-                @Override
-                public void failure(RetrofitError error) {
-                    Log.e("Comments>>>", ">>>>ERR" + error);
-                    progressWheel_comment.setVisibility(View.INVISIBLE);
-                }
-            });
-        } else {
-
-            if (mstr_lang.equals(Utils.ENG_LANG)) {
-                Utils.doToastEng(mContext, getResources().getString(R.string.open_internet_warning_eng));
-            } else {
-
-                Utils.doToastMM(mContext, getResources().getString(R.string.open_internet_warning_mm));
-            }
-        }
-
-
     }
 
     private void getLocalPostDetail(String postId) {
@@ -2209,7 +2045,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                     } else {
 
                         mProgressDialog.show();
-                        Utils.doToastEng(getApplicationContext(), "Comment");
+                        // Utils.doToastEng(getApplicationContext(), "Comment");
                         //TODO Comment Post
 
                         if (userprofile_Image_path != null) {
@@ -2217,9 +2053,13 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                         } else {
                             userprofile_Image_path = "http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-7f0323bc-a862-4184-9e51-d55189fcab18-ic_launcher.png";
                         }
-                        SMKserverAPI.getInstance().getService().postCommentTestByPostID(postObjId, user_obj_id, user_name, userprofile_Image_path, et_comment.getText().toString(), new Callback<CalendarEvent>() {
+
+                        SMKserverAPI.getInstance().getService().postCommentTestByPostID(postType, postObjId, user_obj_id, user_name, userprofile_Image_path, et_comment.getText().toString(), new Callback<CommentItem>() {
                             @Override
-                            public void success(CalendarEvent calendarEvent, Response response) {
+                            public void success(CommentItem calendarEvent, Response response) {
+
+                                txt_cmd_count.setText(calendarEvent.getCommentCount()+"");
+                                txt_social_no_ear_comment.setText(calendarEvent.getCommentCount() +"");
 
                                 //TODO Comment load again
                                 if (Connection.isOnline(mContext)) {
@@ -2229,20 +2069,20 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                                         @Override
                                         public void success(List<com.smk.model.CommentItem> commentItems, Response response) {
 
+                                            listComment = new ArrayList<>();
                                             listComment.addAll(commentItems);
-                                            adapter.notifyDataSetChanged();
+                                            adapter = new CommentAdapter(PostDetailActivity.this, listComment);
+                                            listView_Comment.setAdapter(adapter);
+
                                             progressWheel_comment.setVisibility(View.INVISIBLE);
                                             mProgressDialog.dismiss();
 
-                                            View padding = new View(PostDetailActivity.this);
-                                            padding.setMinimumHeight(20);
-                                            listView_Comment.addFooterView(padding);
-
                                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                                                //listView_Comment.setNestedScrollingEnabled(true);
+                                                listView_Comment.setNestedScrollingEnabled(true);
                                             } else {
-                                                Helper.getListViewSize(listView_Comment);
+
                                             }
+                                            Helper.getListViewSize(listView_Comment);
                                             //TODO get sticker for comment
                                         }
 
@@ -2401,38 +2241,43 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                 SKToastMessage.showMessage(PostDetailActivity.this, getResources().getString(R.string.resource_coming_soon_eng), SKToastMessage.ERROR);
                 if (Connection.isOnline(getApplicationContext())) {
 
-                    String url = "https://dl.dropboxusercontent.com/u/10281242/sample_audio.mp3"; //Default
-                    if (mstrAudioFilePath != null) {
-                        url = mstrAudioFilePath;
-                        Log.e("<<<Audio Path>>>","==>"+ url);
-                    }
-                    final MediaPlayer mediaPlayer = new MediaPlayer();
-                    // Set type to streaming
-                    mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                    // Listen for if the audio file can't be prepared
-                    mediaPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener() {
-                        @Override
-                        public boolean onError(MediaPlayer mp, int what, int extra) {
-                            // ... react appropriately ...
-                            // The MediaPlayer has moved to the Error state, must be reset!
-                            return false;
+                    //String url = "https://dl.dropboxusercontent.com/u/10281242/sample_audio.mp3"; //Default
+                    if (mstrAudioFilePath != null && mstrAudioFilePath.length() > 20) {
+                        try{
+                            final MediaPlayer mediaPlayer = new MediaPlayer();
+                            // Set type to streaming
+                            mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                            // Listen for if the audio file can't be prepared
+                            mediaPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+                                @Override
+                                public boolean onError(MediaPlayer mp, int what, int extra) {
+                                    // ... react appropriately ...
+                                    // The MediaPlayer has moved to the Error state, must be reset!
+                                    return false;
+                                }
+                            });
+                            // Attach to when audio file is prepared for playing
+                            mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                                @Override
+                                public void onPrepared(MediaPlayer mp) {
+                                    mediaPlayer.start();
+                                }
+                            });
+                            // Set the data source to the remote URL
+                            try {
+                                mediaPlayer.setDataSource(mstrAudioFilePath);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            // Trigger an async preparation which will file listener when completed
+                            mediaPlayer.prepareAsync();
+                        }catch (NullPointerException e){
+
                         }
-                    });
-                    // Attach to when audio file is prepared for playing
-                    mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                        @Override
-                        public void onPrepared(MediaPlayer mp) {
-                            mediaPlayer.start();
-                        }
-                    });
-                    // Set the data source to the remote URL
-                    try {
-                        mediaPlayer.setDataSource(url);
-                    } catch (IOException e) {
-                        e.printStackTrace();
+
                     }
-                    // Trigger an async preparation which will file listener when completed
-                    mediaPlayer.prepareAsync();
+
+
 
                 } else {
                     SKConnectionDetector.getInstance(this).showErrorMessage();

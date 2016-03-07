@@ -693,7 +693,6 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
 
         switch (view.getId()) {
             case R.id.tlg_ph_img:
-                Log.e("<<<tlgLeaderPhno>>>", "===>" + tlgLeaderPhno);
 
 
                 // TODO: Consider calling
@@ -704,7 +703,7 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
                 //                                          int[] grantResults)
                 // to handle the case where the user grants the permission. See the documentation
                 // for ActivityCompat#requestPermissions for more details.
-                Log.e("<<<tlgLeaderPhno>>>", "===>" + tlgLeaderPhno);
+                Log.e("<<<tlgLeaderPhno above if >>>", "===>" + tlgLeaderPhno);
                 if (!hasPermission(call_phone_READ_PERMISSION)) {
 
                     //if no permission, request permission
@@ -716,7 +715,7 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
 
                 } else {
                     // Check if we were successful in obtaining the map.
-                    Log.e("<<<tlgLeaderPhno>>>", "===>" + tlgLeaderPhno);
+                    Log.e("<<<tlgLeaderPhno else >>>", "===>" + tlgLeaderPhno);
                     if (tlgLeaderPhno != null) {
                         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                             // TODO: Consider calling
@@ -803,9 +802,25 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
                 call_phone_PermissionAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
 
                 if (call_phone_PermissionAccepted) {
-                    //TODO fun
 
-                    img_tlg_ph_no.performClick();
+                    //img_tlg_ph_no.performClick();
+                    if (tlgLeaderPhno != null) {
+                        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                            // TODO: Consider calling
+                            //    ActivityCompat#requestPermissions
+                            // here to request the missing permissions, and then overriding
+                            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                            //                                          int[] grantResults)
+                            // to handle the case where the user grants the permission. See the documentation
+                            // for ActivityCompat#requestPermissions for more details.
+                            Intent callIntent = new Intent(Intent.ACTION_CALL);
+                            String ph = tlgLeaderPhno;
+                            callIntent.setData(Uri.parse("tel:" + Uri.encode(ph)));
+                            startActivity(callIntent);
+                            return;
+                        }
+
+                    }
 
                 }
 

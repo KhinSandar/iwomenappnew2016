@@ -18,6 +18,8 @@ import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.smk.skalertmessage.SKToastMessage;
+
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.model.FontConverter;
 import org.undp_iwomen.iwomen.model.MyTypeFace;
@@ -36,7 +38,7 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
     private RadioGroup radioLanguageGroup;
     private RadioButton radioLanguageButton;
 
-    RadioButton rd_lang_en, rd_lang_mm_zawgyi, rd_lang_mm_uni, rd_lang_mm_default;
+    RadioButton rd_lang_en, rd_lang_mm_zawgyi, rd_lang_mm_uni, rd_lang_mm_default ,rd_shan, rd_mon;
     SharedPreferences sharePrefLanguageUtil;
 
 
@@ -78,6 +80,8 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
         rd_lang_mm_zawgyi = (RadioButton) rootView.findViewById(R.id.settings_mm_zawgyi_language);
         rd_lang_mm_uni = (RadioButton) rootView.findViewById(R.id.settings_mm_unicode_language);
         rd_lang_mm_default = (RadioButton) rootView.findViewById(R.id.settings_mm_default_language);
+        rd_shan = (RadioButton) rootView.findViewById(R.id.settings_ethic_shan_language);
+        rd_mon = (RadioButton) rootView.findViewById(R.id.settings_ethic_mon_language);
         settings_language_setting_title = (CustomTextView)rootView.findViewById(R.id.settings_language_setting_title);
         settings_changeTheme = (CustomTextView)rootView.findViewById(R.id.settings_changeTheme);
         chk_settings_getnotification = (CheckBox)rootView.findViewById(R.id.settings_getnotification);
@@ -91,6 +95,8 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
         rd_lang_mm_zawgyi.setOnCheckedChangeListener(this);
         rd_lang_mm_uni.setOnCheckedChangeListener(this);
         rd_lang_mm_default.setOnCheckedChangeListener(this);
+        rd_shan.setOnCheckedChangeListener(this);
+        rd_mon.setOnCheckedChangeListener(this);
 
         if(lang.equals(Utils.ENG_LANG)){
             rd_lang_en.setChecked(true);
@@ -108,6 +114,16 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
         }
 
         setSelectedTheme();
+
+        ((CheckBox) rootView.findViewById(R.id.settings_getnotification)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                SKToastMessage.showMessage(getActivity(), getResources().getString(R.string.resource_coming_soon_eng), SKToastMessage.ERROR);
+
+                //passwordField.setInputType(!isChecked ? InputType.TYPE_TEXT_VARIATION_PASSWORD : InputType.TYPE_CLASS_TEXT);
+                //passwordField.setTransformationMethod(!isChecked ? PasswordTransformationMethod.getInstance() : null);
+            }
+        });
 
     }
 
@@ -243,6 +259,12 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
                     fontEditor.commit();
 
                     setMyanmarFontDefault();
+
+                }else if (buttonView.getId() == R.id.settings_ethic_shan_language) {
+                    SKToastMessage.showMessage(getActivity(), getResources().getString(R.string.resource_coming_soon_eng), SKToastMessage.ERROR);
+
+                }else if (buttonView.getId() == R.id.settings_ethic_mon_language) {
+                    SKToastMessage.showMessage(getActivity(), getResources().getString(R.string.resource_coming_soon_eng), SKToastMessage.ERROR);
 
                 }
 

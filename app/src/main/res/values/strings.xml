@@ -369,7 +369,7 @@
 
     <string name="register_terms_body">Our privacy policy and terms of use   are accepted if you download this app. See More at Our Website
 </string>
-    <string name="register_terms_link">www.iwomenapp.com</string>
+    <string name="register_terms_link">iwomenapp.com</string>
 
     <!-- string resources used in Event Detail -->
 <string name="large_sample_text">"A material metaphor is the unifying theory of a rationalized space and a system of motion."
@@ -725,4 +725,5 @@ Shirin Ebadi, J.D., was awarded the 2003 Nobel Peace Prize for her efforts to pr
     <string name = "tlg_normal_leader_role">MAY DOE KABAR  MEMBER</string>
     <string name = "tlg_mdk_leader_role">MAY DOE KABAR BOARD MEMBER</string>
     <string name= "empty_talk_together">Be the first to write a post </string>
+    <string name ="google_not_support">Your phone does not support Google Maps</string>
 </resources>

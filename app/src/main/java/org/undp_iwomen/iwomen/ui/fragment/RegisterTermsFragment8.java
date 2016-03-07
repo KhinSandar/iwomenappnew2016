@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.transition.ChangeBounds;
 import android.transition.Slide;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -192,6 +193,7 @@ public class RegisterTermsFragment8 extends Fragment implements View.OnClickList
 
                         @Override
                         public void failure(RetrofitError error) {
+                            Log.e("==Register ERr=>","=="+error.getCause().toString());
                             if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
                                 org.undp_iwomen.iwomen.utils.Utils.doToastEng(mContext, getResources().getString(R.string.open_internet_warning_eng));
                             } else {

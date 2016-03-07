@@ -22,10 +22,10 @@ public class User {
     private String facebookId;
     @SerializedName("isTlgTownshipExit")
     @Expose
-    private Integer isTlgTownshipExit;
+    private Boolean isTlgTownshipExit;
     @SerializedName("isTestAcc")
     @Expose
-    private Integer isTestAcc;
+    private Boolean isTestAcc;
     @SerializedName("phoneNo")
     @Expose
     private String phoneNo;
@@ -161,7 +161,7 @@ public class User {
      * @return
      * The isTlgTownshipExit
      */
-    public Integer getIsTlgTownshipExit() {
+    public Boolean getIsTlgTownshipExit() {
         return isTlgTownshipExit;
     }
 
@@ -170,7 +170,7 @@ public class User {
      * @param isTlgTownshipExit
      * The isTlgTownshipExit
      */
-    public void setIsTlgTownshipExit(Integer isTlgTownshipExit) {
+    public void setIsTlgTownshipExit(Boolean isTlgTownshipExit) {
         this.isTlgTownshipExit = isTlgTownshipExit;
     }
 
@@ -179,7 +179,7 @@ public class User {
      * @return
      * The isTestAcc
      */
-    public Integer getIsTestAcc() {
+    public Boolean getIsTestAcc() {
         return isTestAcc;
     }
 
@@ -188,7 +188,7 @@ public class User {
      * @param isTestAcc
      * The isTestAcc
      */
-    public void setIsTestAcc(Integer isTestAcc) {
+    public void setIsTestAcc(Boolean isTestAcc) {
         this.isTestAcc = isTestAcc;
     }
 

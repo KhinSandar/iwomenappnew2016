@@ -47,7 +47,6 @@ import org.undp_iwomen.iwomen.data.FeedItem;
 import org.undp_iwomen.iwomen.database.TableAndColumnsName;
 import org.undp_iwomen.iwomen.model.retrofit_api.UserPostAPI;
 import org.undp_iwomen.iwomen.provider.IwomenProviderData;
-import org.undp_iwomen.iwomen.ui.activity.MainPhotoPostActivity;
 import org.undp_iwomen.iwomen.ui.activity.NewPostActivity;
 import org.undp_iwomen.iwomen.ui.activity.PostDetailActivity;
 import org.undp_iwomen.iwomen.ui.adapter.StoriesRecentListAdapter;
@@ -346,7 +345,7 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
         }
 
 
-        final MenuItem item = menu.add(0, 12, 0, "Search");
+        /*final MenuItem item = menu.add(0, 12, 0, "Search");
         //menu.removeItem(12);
         item.setIcon(R.drawable.ic_action_search);
         item.setShowAsAction(MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW
@@ -355,7 +354,7 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
 
         final SearchView sv = new SearchView(getActivity());//.getActionBar().getThemedContext()
 
-        //item.setActionView(sv);
+        item.setActionView(sv);
 
         SearchView.SearchAutoComplete searchAutoComplete = (SearchView.SearchAutoComplete) sv.findViewById(android.support.v7.appcompat.R.id.search_src_text);
 
@@ -387,7 +386,7 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
         ssb.setSpan(new ImageSpan(searchIcon), 1, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         searchAutoComplete.setHint(ssb);
 
-        /*sv.setQueryHint(Html.fromHtml("<font color = #ffffff>" + getResources().getString(R.string.search_hint) + "</font>"));*/
+        *//*sv.setQueryHint(Html.fromHtml("<font color = #ffffff>" + getResources().getString(R.string.search_hint) + "</font>"));*//*
 
 
         close.setOnClickListener(new View.OnClickListener() {
@@ -408,7 +407,7 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
                     item.collapseActionView();
                 }
             }
-        });
+        });*/
     }
 
     @Override

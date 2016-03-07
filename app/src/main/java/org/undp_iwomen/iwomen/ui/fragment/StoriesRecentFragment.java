@@ -7,17 +7,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.provider.BaseColumns;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.SearchView;
-import android.text.Spannable;
-import android.text.SpannableStringBuilder;
-import android.text.style.ImageSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -27,7 +22,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -391,14 +385,14 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
 
         }
 
-        final MenuItem item = menu.add(0, 12, 0, "Search");
+         /*final MenuItem item = menu.add(0, 12, 0, "Search");
         //menu.removeItem(12);
         item.setIcon(R.drawable.ic_action_search);
         item.setShowAsAction(MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW
                 | MenuItem.SHOW_AS_ACTION_ALWAYS);
 
 
-        final SearchView sv = new SearchView(getActivity());//.getActionBar().getThemedContext()
+       final SearchView sv = new SearchView(getActivity());//.getActionBar().getThemedContext()
 
         //item.setActionView(sv);
 
@@ -414,11 +408,11 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
 
         sv.setSubmitButtonEnabled(false);
         sv.setOnQueryTextListener(this);
-        /*EditText et_search = (EditText) sv.findViewById(R.id.search_src_text);
-        et_search.setTextColor(Color.WHITE);*/
+        *//*EditText et_search = (EditText) sv.findViewById(R.id.search_src_text);
+        et_search.setTextColor(Color.WHITE);*//*
 
-        /*ImageView clearBtn = (ImageView) sv.findViewById(R.id.search_close_btn);
-        clearBtn.setImageResource(R.drawable.ic_action_cancel);*/
+        *//*ImageView clearBtn = (ImageView) sv.findViewById(R.id.search_close_btn);
+        clearBtn.setImageResource(R.drawable.ic_action_cancel);*//*
 
         ImageView close = (ImageView) sv.findViewById(android.support.v7.appcompat.R.id.search_close_btn);
         close.setImageResource(R.drawable.ic_action_cancel);
@@ -438,7 +432,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
         ssb.setSpan(new ImageSpan(searchIcon), 1, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         searchAutoComplete.setHint(ssb);
 
-        /*sv.setQueryHint(Html.fromHtml("<font color = #ffffff>" + getResources().getString(R.string.search_hint) + "</font>"));*/
+        *//*sv.setQueryHint(Html.fromHtml("<font color = #ffffff>" + getResources().getString(R.string.search_hint) + "</font>"));*//*
 
 
         close.setOnClickListener(new View.OnClickListener() {
@@ -451,14 +445,14 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
             }
         });
 
-        sv.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
+      sv.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean queryTextFocused) {
                 if (!queryTextFocused) {
                     item.collapseActionView();
                 }
             }
-        });
+        });*/
     }
 
     @Override

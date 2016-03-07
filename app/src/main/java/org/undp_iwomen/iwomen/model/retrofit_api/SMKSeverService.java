@@ -1,5 +1,7 @@
 package org.undp_iwomen.iwomen.model.retrofit_api;
 
+import com.smk.model.CommentItem;
+
 import org.smk.model.CalendarEvent;
 import org.smk.model.IWomenPost;
 import org.smk.model.LikeItem;
@@ -50,25 +52,25 @@ public interface SMKSeverService {
     @FormUrlEncoded
     @POST(CommonConfig.GET_COMMENT_LIST_BY_POST_ID_URL)
     void postCommentByPostID(
-
+            @Field("postType") String postType,
             @Field("postId") String postId,
             @Field("userId") String userId,
             @Field("user_name") String user_name,
             @Field("sticker_img_path") String sticker_img_path,
             @Field("user_img_path") String user_img_path,
             @Field("comment_contents") String comment_contents,
-            Callback<CalendarEvent> callback);
+            Callback<CommentItem> callback);
 
     @FormUrlEncoded
     @POST(CommonConfig.GET_COMMENT_LIST_BY_POST_ID_URL)
     void postCommentTestByPostID(
-
+            @Field("postType") String postType,
             @Field("postId") String postId,
             @Field("userId") String userId,
             @Field("user_name") String user_name,
             @Field("user_img_path") String user_img_path,
             @Field("comment_contents") String comment_contents,
-            Callback<CalendarEvent> callback);
+            Callback<CommentItem> callback);
 
 
     @GET(CommonConfig.GET_SUB_RESOURCE_LIST_BY_RESOURCID_URL)

@@ -22,7 +22,6 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -38,6 +37,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
 import com.makeramen.RoundedImageView;
+import com.smk.skalertmessage.SKToastMessage;
 
 import org.smk.clientapi.NetworkEngine;
 import org.smk.iwomen.BaseActionBarActivity;
@@ -133,8 +133,7 @@ public class GoogleMapFragment extends Fragment {//
         txtBody.setText(getResources().getString(R.string.may_doe_kabar));
         if (!isGooglePlayServicesAvailable()) {
             Log.e("Google Map not ok", "==>");
-            //getActivity().finish();
-            Toast.makeText(mContext, "Google Map not support", Toast.LENGTH_LONG).show();
+            SKToastMessage.showMessage(getActivity(), getResources().getString(R.string.google_not_support), SKToastMessage.ERROR);
             BeTogetherFragment beTogetherFragment = new BeTogetherFragment();
             android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.content_map_frame, beTogetherFragment).commit();

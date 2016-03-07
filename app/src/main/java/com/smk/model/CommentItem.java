@@ -35,6 +35,9 @@ public class CommentItem {
     @SerializedName("created_at")
     @Expose
     private String createdAt;
+    @SerializedName("comment_count")
+    @Expose
+    private Integer commentCount;
     @SerializedName("human_created_at")
     @Expose
     private String humanCreatedAt;
@@ -183,6 +186,14 @@ public class CommentItem {
      */
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Integer getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(Integer commentCount) {
+        this.commentCount = commentCount;
     }
 
     /**
