@@ -2,6 +2,7 @@ package org.smk.iwomen;
 
 import android.app.AlertDialog;
 import android.app.NotificationManager;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -50,6 +51,7 @@ public class BaseActionBarActivity extends AppCompatActivity{
 	public Integer  UsageCount = 0;
 	public int versionCode = 0;
 	private Tracker mTracker;
+	private ProgressDialog pgDialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +65,6 @@ public class BaseActionBarActivity extends AppCompatActivity{
 
 		}
 
-		checkAPKVersion();
 		MainApplication application = (MainApplication) getApplication();
 		mTracker = application.getDefaultTracker();
 
@@ -77,44 +78,7 @@ public class BaseActionBarActivity extends AppCompatActivity{
 			e.printStackTrace();
 		}
 
-		/*try {
-			//Dialog True 4
-			//Dialog False dismisss ---
-			AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(BaseActionBarActivity.this);
-
-			// set title
-			alertDialogBuilder.setTitle(getResources().getString(R.string.str_new_version));
-
-			// set dialog message
-			alertDialogBuilder
-					.setMessage(getResources().getString(R.string.str_new_version_message))
-					.setCancelable(true)
-					.setPositiveButton(getResources().getString(R.string.str_ok),new DialogInterface.OnClickListener() {
-						@Subscribe
-						public void onClick(DialogInterface dialog,int id) {
-							EventBus.getDefault().register(BaseActionBarActivity.this);
-							JobManager jobManager = MainApplication.getInstance().getJobManager();
-							DownloadManager downloadManager = new DownloadManager("http://api.iwomenapp.org/apk/app-release.apk", "app-release.apk");
-							jobManager.addJob(downloadManager);
-						}
-					})
-					.setNegativeButton(getResources().getString(R.string.str_not_now),new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog,int id) {
-							// if this button is clicked, just close
-							// the dialog box and do nothing
-							dialog.cancel();
-						}
-					});
-
-			// create alert dialog
-			AlertDialog alertDialog = alertDialogBuilder.create();
-
-			// show it
-			alertDialog.show();
-		}catch (WindowManager.BadTokenException e){
-
-		}*/
-
+		checkAPKVersion();
 	}
 
 
@@ -126,7 +90,6 @@ public class BaseActionBarActivity extends AppCompatActivity{
 			public void success(final APKVersion arg0, Response arg1) {
 				// TODO Auto-generated method stub
 				try {
-					isCheckedVersion = true;
 
 
 					if(arg0 != null) {
@@ -150,8 +113,15 @@ public class BaseActionBarActivity extends AppCompatActivity{
 											public void onClick(DialogInterface dialog,int id) {
 												EventBus.getDefault().register(BaseActionBarActivity.this);
 												JobManager jobManager = MainApplication.getInstance().getJobManager();
-												DownloadManager downloadManager = new DownloadManager("http://api.iwomenapp.org/apk/" + arg0.getName(), arg0.getName());
+												DownloadManager downloadManager = new DownloadManager(arg0.getName(), "iWomenAPK-"+arg0.getVersionName());
 												jobManager.addJob(downloadManager);
+
+												pgDialog = new ProgressDialog(BaseActionBarActivity.this);
+												pgDialog.setTitle("iWomen Update Downloading");
+												pgDialog.setCancelable(false);
+												pgDialog.setProgress(0);
+												pgDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+												pgDialog.show();
 											}
 										})
 										.setNegativeButton(getResources().getString(R.string.str_not_now),new DialogInterface.OnClickListener() {
@@ -374,7 +344,6 @@ public class BaseActionBarActivity extends AppCompatActivity{
 	@Subscribe
 	public void onEventMainThread(final Download download) {
 		// the posted event can be processed in the main thread
-		Log.i("", "Hello downloading precent is : " + download.getDownloadPercent());
 		int id = 1;
 		mNotifyManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		mBuilder = new Builder(this);
@@ -382,6 +351,10 @@ public class BaseActionBarActivity extends AppCompatActivity{
 		    .setContentText("Download in progress")
 		    .setSmallIcon(R.drawable.ic_launcher);
 		if(download.getStatus()){
+
+			if (pgDialog != null)
+				pgDialog.dismiss();
+
             mBuilder.setContentText("Download is complete")
             	.setProgress(0,0,false);
             mNotifyManager.notify(id, mBuilder.build());
@@ -393,9 +366,11 @@ public class BaseActionBarActivity extends AppCompatActivity{
     		startActivity(intent);
     		
 		}else{
-			//TODO show progress
 			mBuilder.setProgress(100, download.getDownloadPercent(), false);
 			mNotifyManager.notify(id, mBuilder.build());
+
+			if (pgDialog != null)
+				pgDialog.setProgress(download.getDownloadPercent());
 			
 		}
 	}
