@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <string name="app_id" translatable="false">909633732437583</string>
     <string name="app_name">iwomen</string>
     <string name="app_name_mm">စြမ္းရည္ၿမင္ ့မား ေမ့အင္အား</string>
     <string name="parse_app_id">WyU802fB70eNhyF9uSoj1SgKVKGLYYAZ0kX96xhr</string>
@@ -718,5 +718,7 @@ Shirin Ebadi, J.D., was awarded the 2003 Nobel Peace Prize for her efforts to pr
     <string name="playing_uploaded_video">Playing uploaded video</string>
     <string name="playing_the_video_in_upload_progress">Playing the video in upload progress</string>
     <string name="str_required">Please enter your reviews</string>
+    <string name="str_new_version">New Version</string>
+    <string name="str_new_version_message">Do you download new version?</string>
 
 </resources>

@@ -34,7 +34,7 @@ android {
             keyAlias 'iwomen'
             keyPassword 'iwomen'
             storeFile file('D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\iwomen.jks')
-            storePassword 'undp2105'
+            storePassword 'undp2015'
         }
     }
     compileSdkVersion 23
@@ -56,6 +56,8 @@ android {
         }
     }
 }
+
+
 
 dependencies {
     // Google Play Services

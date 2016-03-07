@@ -3,6 +3,9 @@ package org.undp_iwomen.iwomen.ui.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
@@ -10,6 +13,8 @@ import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.transition.ChangeBounds;
 import android.transition.Slide;
+import android.util.Base64;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +39,9 @@ import org.undp_iwomen.iwomen.data.Sample;
 import org.undp_iwomen.iwomen.model.MyTypeFace;
 import org.undp_iwomen.iwomen.ui.activity.RegisterMainActivity;
 import org.undp_iwomen.iwomen.utils.Utils;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 /**
  * Created by lgvalle on 05/09/15.
@@ -91,6 +99,7 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_register_fblogin, container, false);
         //final Sample sample = (Sample) getArguments().getSerializable(EXTRA_SAMPLE);
+        printHashKey();
         mContext = getActivity().getApplicationContext();
         sharePrefLanguageUtil = getActivity().getSharedPreferences(org.undp_iwomen.iwomen.utils.Utils.PREF_SETTING, Context.MODE_PRIVATE);
         lang = sharePrefLanguageUtil.getString(org.undp_iwomen.iwomen.utils.Utils.PREF_SETTING_LANG, org.undp_iwomen.iwomen.utils.Utils.ENG_LANG);
@@ -104,26 +113,31 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
         mMobileNoForNrcTextInputLayout = (TextInputLayout) view.findViewById(R.id.register_fb_phone_number);
         usernameField = (EditText) view.findViewById(R.id.register_fb_username_input);
         mobileNoForNrcField = (EditText) view.findViewById(R.id.register_fb_phone_number_input);
-        loginButton = (LoginButton) view.findViewById(R.id.login_button);
-        loginButton.setReadPermissions("public_profile", "email", "user_friends");
-        loginButton.setFragment(this);
-        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                Toast.makeText(getActivity(), "Login successful", Toast.LENGTH_SHORT).show();
-                updateUI();
-            }
+        try{
+            loginButton = (LoginButton) view.findViewById(R.id.login_button);
+            loginButton.setReadPermissions("public_profile", "email", "user_friends");
+            loginButton.setFragment(this);
+            loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+                @Override
+                public void onSuccess(LoginResult loginResult) {
+                    Toast.makeText(getActivity(), "Login successful", Toast.LENGTH_SHORT).show();
+                    updateUI();
+                }
 
-            @Override
-            public void onCancel() {
-                Toast.makeText(getActivity(), "Login canceled", Toast.LENGTH_SHORT).show();
-            }
+                @Override
+                public void onCancel() {
+                    Toast.makeText(getActivity(), "Login canceled", Toast.LENGTH_SHORT).show();
+                }
 
-            @Override
-            public void onError(FacebookException exception) {
-                Toast.makeText(getActivity(), "Login error", Toast.LENGTH_SHORT).show();
-            }
-        });
+                @Override
+                public void onError(FacebookException exception) {
+                    Toast.makeText(getActivity(), "Login error", Toast.LENGTH_SHORT).show();
+                }
+            });
+        } catch (Exception e){
+
+        }
+
 
         btn_next.setOnClickListener(this);
 
@@ -141,6 +155,24 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
 
 
         return view;
+    }
+
+    public void printHashKey() {
+        try {
+
+            PackageInfo info = getActivity().getPackageManager().getPackageInfo("org.undp_iwomen.iwomen", PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.i("TEMPTAGHASH KEY:","FB HashKey : "+ Base64.encodeToString(md.digest(), Base64.DEFAULT));
+
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+
+        }
     }
 
 

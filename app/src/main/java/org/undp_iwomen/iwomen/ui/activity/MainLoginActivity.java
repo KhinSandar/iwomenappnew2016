@@ -4,12 +4,16 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -46,6 +50,8 @@ import org.undp_iwomen.iwomen.utils.Connection;
 import org.undp_iwomen.iwomen.utils.StoreUtil;
 import org.undp_iwomen.iwomen.utils.Utils;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Locale;
 
 import retrofit.Callback;
@@ -88,6 +94,7 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
 
         EditText editText = new EditText(this);
 
+        printHashKey();
 
         appLogo = (ImageView) findViewById(R.id.app_logo);
         usernameField = (EditText) findViewById(R.id.login_username_input);
@@ -180,6 +187,24 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
                 startActivity(i);
                 //finish();
                 break;
+        }
+    }
+
+    public void printHashKey() {
+        try {
+
+            PackageInfo info = getPackageManager().getPackageInfo("org.undp_iwomen.iwomen", PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.i("TEMPTAGHASH KEY:","FB HashKey : "+ Base64.encodeToString(md.digest(), Base64.DEFAULT));
+
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+
         }
     }
 
