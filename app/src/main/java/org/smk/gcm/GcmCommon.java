@@ -41,10 +41,10 @@ public class GcmCommon {
 				
 				if (!isServerRegistered || regId == null) {
 
-					GoogleCloudMessaging gcm = GoogleCloudMessaging
-							.getInstance(context);
 					try {
-						if (regId == null) {
+						GoogleCloudMessaging gcm = GoogleCloudMessaging
+								.getInstance(context);
+						if (regId == null && gcm != null) {
 							regId = gcm.register(SENDER_ID);
 							Log.i("iWomen","Hello Gcm ID: "+ regId);
 							if (regId != null && regId.length() > 0) {
