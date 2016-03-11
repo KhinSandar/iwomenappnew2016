@@ -115,6 +115,8 @@ public class RegisterStateFragment5 extends Fragment implements  View.OnClickLis
         CityForShow city13 = new CityForShow("Klsa0sQrMw",getResources().getString(R.string.state_13), getResources().getString(R.string.state_13m));
         CityForShow city14 = new CityForShow("A471gH1HNh", getResources().getString(R.string.state_14), getResources().getString(R.string.state_14m));
 
+        CityForShow city15 = new CityForShow("A471gH1HNh",  getResources().getString(R.string.state_15), getResources().getString(R.string.state_15m));
+
         cities.add(city1);
         cities.add(city2);
         cities.add(city3);
@@ -129,6 +131,7 @@ public class RegisterStateFragment5 extends Fragment implements  View.OnClickLis
         cities.add(city12);
         cities.add(city13);
         cities.add(city14);
+        cities.add(city15);
 
 
         StateSpinnerAdapter adapter = new StateSpinnerAdapter((AppCompatActivity)getActivity(), cities);

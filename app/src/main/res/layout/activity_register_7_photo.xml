@@ -1,5 +1,5 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/parse_login"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -105,12 +105,47 @@
 
     </LinearLayout>
 
-   <!-- <org.undp_iwomen.iwomen.ui.widget.CustomButton
-        android:id="@+id/parse_signup_button"
+    <!--<FrameLayout
+        android:id="@+id/explore_grid_frame"
+        android:layout_width="match_parent"
 
-        android:layout_marginTop="20dp"
-        style="@style/ParseLoginUI.Button.ThirdPartyLogin"
-        android:text="@string/register_tlg_btn_wrong" />-->
+        android:layout_height="match_parent">
+        &lt;!&ndash;        <ProgressBar
+                    android:id="@+id/ProgressLoading_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center" />&ndash;&gt;
+        <com.pnikosis.materialishprogress.ProgressWheel
+            android:id="@+id/register_progress_wheel"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            wheel:barColor="#bd2a2a"
+            wheel:progressIndeterminate="true" />
+
+
+
+        <org.undp_iwomen.iwomen.ui.widget.WrappedGridView
+            android:layout_marginTop="5dp"
+            android:id="@+id/register_grid_view_cate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:horizontalSpacing="5dp"
+            android:numColumns="4"
+            android:columnWidth="150dp"
+
+            android:stretchMode="columnWidth"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:verticalSpacing="5dp" />
+
+
+    </FrameLayout>-->
+    <include layout="@layout/activity_edit_profile"></include>
 
 
 </LinearLayout>

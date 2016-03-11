@@ -484,7 +484,7 @@ female-pilots-iaa1s
     <string name="register_photo_title_mm">Upload Photo</string>
     <string name="register_terms_title_mm">Terms and Condition</string>
     <string name="register_congrat_title_mm">Congratulations</string>
-    <string name="register_terms_link">iwomenapp.com</string>
+    <string name="register_terms_link"> iwomenapp.org <a href="http://iwomenapp.org/"></a></string>
 
     <!-- string resources used in Event Detail -->
     <string name="large_sample_text">"A material metaphor is the unifying theory of a rationalized space and a system of motion."

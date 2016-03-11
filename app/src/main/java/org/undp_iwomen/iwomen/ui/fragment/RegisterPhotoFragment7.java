@@ -18,7 +18,9 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -33,12 +35,16 @@ import com.makeramen.RoundedImageView;
 
 import org.smk.clientapi.NetworkEngine;
 import org.smk.model.PhotoUpload;
+import org.smk.model.Sticker;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.data.Sample;
 import org.undp_iwomen.iwomen.ui.activity.RegisterMainActivity;
+import org.undp_iwomen.iwomen.ui.adapter.StickerGridViewAdapter;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -77,6 +83,17 @@ public class RegisterPhotoFragment7 extends Fragment implements View.OnClickList
 
     private final String STORAGE_READ_PERMISSION = "android.permission.READ_EXTERNAL_STORAGE";
     boolean storagePermissionAccepted = false;
+
+    //TODO For Avator
+    private List<Sticker> stickerArrayList;
+    private StickerGridViewAdapter mAdapter;
+    private com.pnikosis.materialishprogress.ProgressWheel progress_wheel;
+    private GridView gridView;
+    private com.pnikosis.materialishprogress.ProgressWheel progress_wheel_gv;
+    String sticker_img_path;
+
+
+
 
 
     public static RegisterPhotoFragment7 newInstance(Sample sample) {
@@ -150,6 +167,12 @@ public class RegisterPhotoFragment7 extends Fragment implements View.OnClickList
         });
         btn_next.setOnClickListener(this);
 
+        gridView = (GridView)view.findViewById(R.id.edit_profile_gv);
+        progress_wheel_gv = (com.pnikosis.materialishprogress.ProgressWheel)view.findViewById(R.id.edit_profile_progress_wheel);
+
+        progress_wheel_gv.setVisibility(View.GONE);
+        LoadStickerData();
+
         setEnglishFont();
 
 
@@ -188,6 +211,7 @@ public class RegisterPhotoFragment7 extends Fragment implements View.OnClickList
 
     private void addNextFragment(final Button squareBlue, final boolean overlap) {
 
+        Log.e("<<ImagePath>>","==>" + crop_file_path+"/"+ sticker_img_path);
         if (crop_file_path != null) {
 
 
@@ -252,9 +276,45 @@ public class RegisterPhotoFragment7 extends Fragment implements View.OnClickList
                 }
             });
 
-        } else {
+        } else if(sticker_img_path != null){
 
             //TODO showtoast please upload image or choose image
+            mEditorUserInfo = mSharedPreferencesUserInfo.edit();
+            //mEditorUserInfo.putString(CommonConfig.USER_UPLOAD_IMG_NAME, photoUpload.getName());
+
+            mEditorUserInfo.putString(CommonConfig.USER_UPLOAD_IMG_URL, sticker_img_path);
+            mEditorUserInfo.commit();
+            RegisterTermsFragment8 registerTermsFragment8 = RegisterTermsFragment8.newInstance();
+
+            Slide slideTransition = null;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                slideTransition = new Slide(Gravity.LEFT);
+                slideTransition.setDuration(getResources().getInteger(R.integer.anim_duration_long));
+
+            }
+
+            ChangeBounds changeBoundsTransition = null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
+                changeBoundsTransition = new ChangeBounds();
+                changeBoundsTransition.setDuration(getResources().getInteger(R.integer.anim_duration_medium));
+
+            }
+
+            mProgressDialog.dismiss();
+
+
+            registerTermsFragment8.setEnterTransition(slideTransition);
+            registerTermsFragment8.setAllowEnterTransitionOverlap(overlap);
+            registerTermsFragment8.setAllowReturnTransitionOverlap(overlap);
+            registerTermsFragment8.setSharedElementEnterTransition(changeBoundsTransition);
+
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.container, registerTermsFragment8)
+                    .addToBackStack(null)
+                    .addSharedElement(squareBlue, getString(R.string.register_next))
+                    .commit();
+
+        }else{
 
         }
 
@@ -343,6 +403,7 @@ public class RegisterPhotoFragment7 extends Fragment implements View.OnClickList
             crop_file_name = Uri.fromFile(croppedImageFile).getLastPathSegment().toString();
             crop_file_path = Uri.fromFile(croppedImageFile).getPath();
 
+            sticker_img_path = null;
             //Toast.makeText(getActivity().getApplicationContext(), "File Name & PATH are:" + crop_file_name + "\n" + crop_file_path, Toast.LENGTH_LONG).show();
 
 
@@ -407,5 +468,74 @@ public class RegisterPhotoFragment7 extends Fragment implements View.OnClickList
         imageChooserManager.setImageChooserListener(this);
         imageChooserManager.reinitialize(filePath);
     }
+
+
+    public void LoadStickerData() {
+
+        stickerArrayList = new ArrayList<Sticker>();
+
+        Sticker st1 = new Sticker("1","http://api.iwomenapp.org/stickers_photo/x400/photo_20160310055354_2991641011.png\t");
+        Sticker st2 = new Sticker("2","http://api.iwomenapp.org/stickers_photo/x400/photo_20160310055524_14832384922.png\t");
+        Sticker st3 = new Sticker("3","http://api.iwomenapp.org/stickers_photo/x400/photo_20160310055642_15890413383.png\t");
+        Sticker st4 = new Sticker("4","http://api.iwomenapp.org/stickers_photo/x400/photo_20160310055651_16156241574.png\t");
+        Sticker st5 = new Sticker("5","http://api.iwomenapp.org/stickers_photo/x400/photo_20160310060004_16379109165.png\t");
+        Sticker st6 = new Sticker("6","http://api.iwomenapp.org/stickers_photo/x400/photo_20160310060019_7731226226.png\t");
+        Sticker st7 = new Sticker("7","http://api.iwomenapp.org/stickers_photo/x400/photo_20160310060035_1632834377.png\t");
+        Sticker st8 = new Sticker("8","http://api.iwomenapp.org/stickers_photo/x400/photo_20160310060053_18858192448.png\t");
+
+
+
+        stickerArrayList.add(st1);
+        stickerArrayList.add(st2);
+        stickerArrayList.add(st3);
+        stickerArrayList.add(st4);
+        stickerArrayList.add(st5);
+        stickerArrayList.add(st6);
+        stickerArrayList.add(st7);
+        stickerArrayList.add(st8);
+
+
+        if (mAdapter == null) {
+            mAdapter = new StickerGridViewAdapter(getActivity(), mContext, stickerArrayList);
+
+        }
+
+        gridView.setAdapter(mAdapter);
+
+        mAdapter.notifyDataSetChanged();
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+                                    long arg3) {
+
+
+                sticker_img_path = stickerArrayList.get(position).getStickerImgPath();
+                profile_rounded.setVisibility(View.VISIBLE);
+
+                profile_rounded.setMaxHeight(400);
+                if(stickerArrayList.get(position).getStickerName().equalsIgnoreCase("1")){
+                    profile_rounded.setImageResource(R.drawable.ava_1);
+                }else if(stickerArrayList.get(position).getStickerName().equalsIgnoreCase("2")){
+                    profile_rounded.setImageResource(R.drawable.ava_2);
+                }else if(stickerArrayList.get(position).getStickerName().equalsIgnoreCase("3")){
+                    profile_rounded.setImageResource(R.drawable.ava_3);
+                }else if(stickerArrayList.get(position).getStickerName().equalsIgnoreCase("4")){
+                    profile_rounded.setImageResource(R.drawable.ava_4);
+                }else if(stickerArrayList.get(position).getStickerName().equalsIgnoreCase("5")){
+                    profile_rounded.setImageResource(R.drawable.ava_5);
+                }else if(stickerArrayList.get(position).getStickerName().equalsIgnoreCase("6")){
+                    profile_rounded.setImageResource(R.drawable.ava_6);
+                }else if(stickerArrayList.get(position).getStickerName().equalsIgnoreCase("7")){
+                    profile_rounded.setImageResource(R.drawable.ava_7);
+                }else if(stickerArrayList.get(position).getStickerName().equalsIgnoreCase("8")){
+                    profile_rounded.setImageResource(R.drawable.ava_8);
+                }
+                crop_file_path = null;
+            }
+        });
+
+    }
+
 
 }

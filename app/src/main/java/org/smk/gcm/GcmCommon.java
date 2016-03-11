@@ -69,6 +69,8 @@ public class GcmCommon {
 						}
 					} catch (IOException e) {
 						e.printStackTrace();
+					}catch (NullPointerException ex){
+						ex.printStackTrace();
 					}
 				}
 				return null;

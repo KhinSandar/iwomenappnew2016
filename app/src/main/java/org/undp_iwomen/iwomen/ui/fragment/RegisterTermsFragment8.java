@@ -1,11 +1,11 @@
 package org.undp_iwomen.iwomen.ui.fragment;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.util.Linkify;
 import android.transition.ChangeBounds;
 import android.transition.Slide;
 import android.util.Log;
@@ -14,6 +14,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+
+import com.thuongnh.zprogresshud.ZProgressHUD;
 
 import org.smk.clientapi.NetworkEngine;
 import org.smk.model.User;
@@ -38,11 +41,12 @@ public class RegisterTermsFragment8 extends Fragment implements View.OnClickList
     private Context mContext;
     private SharedPreferences mSharedPreferencesUserInfo;
     private SharedPreferences.Editor mEditorUserInfo;
-    private ProgressDialog mProgressDialog;
+    private ZProgressHUD zPDialog;
+    private TextView txt_iwomen_link;
 
     private Button btn_next;
 
-    int isTlgExit = 0 ;
+    int isTlgExit = 0;
 
     public static RegisterTermsFragment8 newInstance(Sample sample) {
 
@@ -68,8 +72,7 @@ public class RegisterTermsFragment8 extends Fragment implements View.OnClickList
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        mProgressDialog = new ProgressDialog(getActivity());
-        mProgressDialog.setCancelable(false);
+
 
     }
 
@@ -84,8 +87,11 @@ public class RegisterTermsFragment8 extends Fragment implements View.OnClickList
         mSharedPreferencesUserInfo = getActivity().getSharedPreferences(CommonConfig.SHARE_PREFERENCE_USER_INFO, Context.MODE_PRIVATE);
 
         btn_next = (Button) view.findViewById(R.id.Next);
-
         btn_next.setOnClickListener(this);
+
+        txt_iwomen_link = (TextView)view.findViewById(R.id.register_app_iwomen_txt);
+        txt_iwomen_link.setText("www.iwomenapp.org");
+        Linkify.addLinks(txt_iwomen_link, Linkify.WEB_URLS);
 
         setEnglishFont();
 
@@ -117,6 +123,8 @@ public class RegisterTermsFragment8 extends Fragment implements View.OnClickList
 
 
         if (Connection.isOnline(mContext)) {
+            zPDialog = new ZProgressHUD(getActivity());
+            zPDialog.show();
             String user_name = mSharedPreferencesUserInfo.getString(CommonConfig.USER_NAME, null);
             String phone = mSharedPreferencesUserInfo.getString(CommonConfig.USER_PH, null);
 
@@ -126,9 +134,9 @@ public class RegisterTermsFragment8 extends Fragment implements View.OnClickList
             String address_tlg_township_name = mSharedPreferencesUserInfo.getString(CommonConfig.USER_TLG_NAME, null);
 
             //TODO city field
-            String tlg_sate= mSharedPreferencesUserInfo.getString(CommonConfig.USER_STATE, null);
+            String tlg_sate = mSharedPreferencesUserInfo.getString(CommonConfig.USER_STATE, null);
             //TODO country
-            String tlg_country= mSharedPreferencesUserInfo.getString(CommonConfig.USER_COUNTRY, null);
+            String tlg_country = mSharedPreferencesUserInfo.getString(CommonConfig.USER_COUNTRY, null);
 
 
             String user_photo = mSharedPreferencesUserInfo.getString(CommonConfig.USER_UPLOAD_IMG_URL, null);
@@ -137,9 +145,9 @@ public class RegisterTermsFragment8 extends Fragment implements View.OnClickList
             //TODO remark group_id
 
             //TODO tlg user (istlgexit true and tlg address0
-            if(address_tlg_township_name != null){
+            if (address_tlg_township_name != null) {
                 isTlgExit = 1;//true shi
-            }else{
+            } else {
                 isTlgExit = 0;
             }
             //Log.e("<<Register>","==>"+user_name+"/"+ pwd+"/"+  phone+"/"+  user_photo+"/"+  isTlgExit+"/"+  address_tlg_township_name+"/"+  tlg_sate+"/"+ tlg_country );
@@ -189,22 +197,23 @@ public class RegisterTermsFragment8 extends Fragment implements View.OnClickList
                                     .addToBackStack(null)
                                     .addSharedElement(squareBlue, getString(R.string.register_next))
                                     .commit();
+                            zPDialog.dismissWithSuccess();
                         }
 
                         @Override
                         public void failure(RetrofitError error) {
-                            Log.e("==Register ERr=>","=="+error.getCause().toString());
+                            Log.e("==Register ERr=>", "==" + error.getCause().toString());
                             if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
-                                org.undp_iwomen.iwomen.utils.Utils.doToastEng(mContext, getResources().getString(R.string.open_internet_warning_eng));
+                                //org.undp_iwomen.iwomen.utils.Utils.doToastEng(mContext, getResources().getString(R.string.open_internet_warning_eng));
                             } else {
 
-                                org.undp_iwomen.iwomen.utils.Utils.doToastMM(mContext, getResources().getString(R.string.open_internet_warning_mm));
+                                //org.undp_iwomen.iwomen.utils.Utils.doToastMM(mContext, getResources().getString(R.string.open_internet_warning_mm));
                             }
+
+                            zPDialog.dismissWithSuccess();
                         }
                     }
             );
-
-
 
 
         } else {

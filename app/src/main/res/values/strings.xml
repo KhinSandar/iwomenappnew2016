@@ -369,7 +369,9 @@
 
     <string name="register_terms_body">Our privacy policy and terms of use   are accepted if you download this app. See More at Our Website
 </string>
-    <string name="register_terms_link">iwomenapp.com</string>
+
+    <string name="register_terms_link"> iwomenapp.org <a href="http://iwomenapp.org/"></a></string>
+
 
     <!-- string resources used in Event Detail -->
 <string name="large_sample_text">"A material metaphor is the unifying theory of a rationalized space and a system of motion."
@@ -661,6 +663,7 @@ Shirin Ebadi, J.D., was awarded the 2003 Nobel Peace Prize for her efforts to pr
     <string name="state_12">Mon </string>
     <string name="state_13"> Rakhine</string>
     <string name="state_14"> Shan</string>
+    <string name="state_15"> Nay Pyi Taw</string>
     <string name="state_1m"> ရန္ကုန္</string>
     <string name="state_2m">မႏၲေလး </string>
     <string name="state_3m"> မေကြး</string>
@@ -675,6 +678,7 @@ Shirin Ebadi, J.D., was awarded the 2003 Nobel Peace Prize for her efforts to pr
     <string name="state_12m">မြန္ </string>
     <string name="state_13m">ရခိုင္ </string>
     <string name="state_14m"> ရွမ္း</string>
+    <string name="state_15m"> ေနၿပည္ေတာ္</string>
 
 
 

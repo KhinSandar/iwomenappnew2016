@@ -32,6 +32,12 @@ private String updatedAt;
 @Expose
 private Object deletedAt;
 
+    public  Sticker (String stickerName , String stickerImgPath ){
+        this.stickerName = stickerName;
+        this.stickerImgPath  = stickerImgPath;
+
+    }
+
 /**
 * 
 * @return

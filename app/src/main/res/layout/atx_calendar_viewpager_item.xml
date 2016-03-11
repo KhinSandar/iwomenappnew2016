@@ -20,7 +20,7 @@
             android:background="@color/white"
             android:gravity="center"
             android:scaleType="fitXY"
-            android:src="@drawable/img_feb" />
+            android:src="@drawable/feb" />
 
         <TextView
             android:id="@+id/textView"

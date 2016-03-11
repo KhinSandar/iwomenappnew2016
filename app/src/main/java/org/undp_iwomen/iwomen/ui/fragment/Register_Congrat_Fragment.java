@@ -16,6 +16,7 @@ import android.webkit.WebViewClient;
 import android.widget.Button;
 
 import com.felipecsl.gifimageview.library.GifImageView;
+import com.thuongnh.zprogresshud.ZProgressHUD;
 
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.ui.activity.DrawerMainActivity;
@@ -37,6 +38,8 @@ public class Register_Congrat_Fragment extends Fragment implements View.OnClickL
     Button btnEnjoyApp;
 
     private GifImageView gifImageView;
+    private ZProgressHUD zPDialog;
+
 
     public static Register_Congrat_Fragment newInstance( ) {
 
@@ -75,6 +78,7 @@ public class Register_Congrat_Fragment extends Fragment implements View.OnClickL
 
         btnEnjoyApp = (Button) rootView.findViewById(R.id.Next);
 
+
         btnEnjoyApp.setOnClickListener(this);
 
 
@@ -95,16 +99,6 @@ public class Register_Congrat_Fragment extends Fragment implements View.OnClickL
         }
 
 
-        //Load from internet
-    /*new GifDataDownloader() {
-      @Override protected void onPostExecute(final byte[] bytes) {
-        gifImageView.setBytes(bytes);
-        gifImageView.startAnimation();
-        Log.d(TAG, "GIF width is " + gifImageView.getGifWidth());
-        Log.d(TAG, "GIF height is " + gifImageView.getGifHeight());
-      }
-    }.execute("http://katemobile.ru/tmp/sample3.gif");*/
-
 
     }
 
@@ -113,6 +107,10 @@ public class Register_Congrat_Fragment extends Fragment implements View.OnClickL
 
         switch (view.getId()) {
             case R.id.Next:
+                zPDialog = new ZProgressHUD(getActivity());
+                zPDialog.show();
+
+                zPDialog.dismissWithSuccess();
                 Intent i = new Intent(getActivity(), DrawerMainActivity.class);//DrawerMainActivity
                 startActivity(i);
                 getActivity().finish();

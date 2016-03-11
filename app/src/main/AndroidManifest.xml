@@ -283,15 +283,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.activity.DrawerMainActivity" />
         </activity>
-        <activity
-            android:name=".ui.activity.AboutUsmmActivity"
-            android:label="@string/title_activity_post_detail"
-            android:parentActivityName=".ui.activity.DrawerMainActivity"
-            android:screenOrientation="portrait">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.activity.DrawerMainActivity" />
-        </activity>
+
         <activity
             android:name=".ui.activity.SubResourceListActivity"
             android:label="@string/title_activity_post_detail"
