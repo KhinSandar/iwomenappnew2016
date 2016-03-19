@@ -233,7 +233,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
 
                 Intent intent = new Intent(getApplicationContext(), ProfileEditActivity.class);
 
-                intent.putExtra("UserId", user_obj_id);
+                intent.putExtra("UserId", user_id);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);

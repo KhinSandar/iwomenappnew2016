@@ -105,7 +105,7 @@
                 android:gravity="center_vertical"
                 android:paddingBottom="8dp"
                 android:paddingTop="8dp"
-                android:text="Click here to Upload Audio" />
+                android:text="@string/audio_record_btn_txt" />
 
             <TextView
                 android:id="@+id/new_post_video_upload_btn"
@@ -181,19 +181,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
-                android:text="OK"/>
-
+                android:text="OK"
+                android:textColor="@color/white"
+                android:background="@color/primary"
+                android:layout_margin="8dp"/>
+<!--
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="@color/black"/>
+                android:background="@color/black"/>-->
 
             <TextView
                 android:id="@+id/audio_record_dismiss_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
-                android:text="Cancel" />
+                android:layout_margin="8dp"
+                android:text="CANCEL"
+                android:textColor="@color/white"
+                android:background="@color/primary"/>
 
         </LinearLayout>
 

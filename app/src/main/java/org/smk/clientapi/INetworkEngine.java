@@ -28,6 +28,7 @@ import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
 import retrofit.http.Multipart;
 import retrofit.http.POST;
+import retrofit.http.PUT;
 import retrofit.http.Part;
 import retrofit.http.Path;
 import retrofit.http.Query;
@@ -130,16 +131,10 @@ public interface INetworkEngine {
             @Field("tlg_country") String country,
             Callback<User> callback);
 
-    @POST(CommonConfig.UPDATE_USER_URL)
+    @PUT(CommonConfig.UPDATE_USER_URL)
     void postUpdateUser(
             @Path("id") Integer id,
-            @Query("username") String name,
-            @Query("password") String pwd,
-            @Query("phoneNo") String ph,
             @Query("profileimage") String photo,
-            @Query("isTlgTownshipExit") String isTlg,
-            @Query("tlg_city_address") String tlg_city_address,// Role ?
-
             Callback<User> callback);
 
     ///api-v1/auth/login
