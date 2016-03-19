@@ -3,13 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:wheel="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
 
     <FrameLayout
         android:id="@+id/explore_grid_frame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <com.pnikosis.materialishprogress.ProgressWheel
             android:id="@+id/edit_profile_progress_wheel"
@@ -38,5 +38,13 @@
 
 
     </FrameLayout>
+    <org.undp_iwomen.iwomen.ui.widget.CustomButton
+        android:layout_below="@+id/explore_grid_frame"
+        android:id="@+id/edit_profile_txt_edit_next"
+        android:layout_marginTop="20dp"
+        style="@style/ParseLoginUI.Button.ThirdPartyLogin"
+        android:visibility="gone"
+        android:text="@string/edit_profile_btn_next_tlg_edit" />
+
 
 </RelativeLayout>

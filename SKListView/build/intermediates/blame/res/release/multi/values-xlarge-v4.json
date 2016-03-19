@@ -1,6 +1,10 @@
 [
     {
+<<<<<<< HEAD
         "outputFile": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/SKListView/build/intermediates/res/merged/release/values-xlarge-v4/values-xlarge-v4.xml",
+=======
+        "outputFile": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\res\\merged\\release\\values-xlarge-v4\\values-xlarge-v4.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
         "map": [
             {
                 "to": {
@@ -11,7 +15,11 @@
                     "endOffset": 127
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/SKListView/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.2/res/values-xlarge/values.xml",
+=======
+                    "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\values-xlarge\\values.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -30,7 +38,11 @@
                     "endOffset": 191
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/SKListView/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.2/res/values-xlarge/values.xml",
+=======
+                    "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\values-xlarge\\values.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 5,
                         "startColumn": 4,
@@ -49,7 +61,11 @@
                     "endOffset": 258
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/SKListView/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.2/res/values-xlarge/values.xml",
+=======
+                    "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\values-xlarge\\values.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 7,
                         "startColumn": 4,
@@ -68,7 +84,11 @@
                     "endOffset": 325
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/SKListView/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.2/res/values-xlarge/values.xml",
+=======
+                    "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\values-xlarge\\values.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 8,
                         "startColumn": 4,
@@ -87,7 +107,11 @@
                     "endOffset": 391
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/SKListView/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.2/res/values-xlarge/values.xml",
+=======
+                    "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\values-xlarge\\values.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 9,
                         "startColumn": 4,
@@ -106,7 +130,11 @@
                     "endOffset": 457
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/SKListView/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.2/res/values-xlarge/values.xml",
+=======
+                    "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\values-xlarge\\values.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 10,
                         "startColumn": 4,
@@ -125,7 +153,11 @@
                     "endOffset": 512
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/SKListView/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.2/res/values-xlarge/values.xml",
+=======
+                    "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\values-xlarge\\values.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 12,
                         "startColumn": 4,
@@ -138,7 +170,11 @@
         ]
     },
     {
+<<<<<<< HEAD
         "outputFile": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\res\\merged\\release\\values-xlarge-v4\\values-xlarge-v4.xml",
+=======
+        "outputFile": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/res/merged/release/values-xlarge-v4/values-xlarge-v4.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
         "map": [
             {
                 "to": {
@@ -149,7 +185,11 @@
                     "endOffset": 127
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\values-xlarge\\values.xml",
+=======
+                    "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.2/res/values-xlarge/values.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -168,7 +208,11 @@
                     "endOffset": 191
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\values-xlarge\\values.xml",
+=======
+                    "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.2/res/values-xlarge/values.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 5,
                         "startColumn": 4,
@@ -187,7 +231,11 @@
                     "endOffset": 258
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\values-xlarge\\values.xml",
+=======
+                    "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.2/res/values-xlarge/values.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 7,
                         "startColumn": 4,
@@ -206,7 +254,11 @@
                     "endOffset": 325
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\values-xlarge\\values.xml",
+=======
+                    "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.2/res/values-xlarge/values.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 8,
                         "startColumn": 4,
@@ -225,7 +277,11 @@
                     "endOffset": 391
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\values-xlarge\\values.xml",
+=======
+                    "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.2/res/values-xlarge/values.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 9,
                         "startColumn": 4,
@@ -244,7 +300,11 @@
                     "endOffset": 457
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\values-xlarge\\values.xml",
+=======
+                    "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.2/res/values-xlarge/values.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 10,
                         "startColumn": 4,
@@ -263,7 +323,11 @@
                     "endOffset": 512
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\values-xlarge\\values.xml",
+=======
+                    "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.2/res/values-xlarge/values.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 12,
                         "startColumn": 4,

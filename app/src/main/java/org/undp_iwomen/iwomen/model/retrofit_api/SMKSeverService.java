@@ -119,4 +119,8 @@ public interface SMKSeverService {
             @Field("postId") String postId,
             @Field("userId") String userId,
             Callback<LikeItem> callback);
+
+    @GET(CommonConfig.GET_ALL_AVATOR)
+    void getAllAvator(
+            Callback<String> callback);
 }

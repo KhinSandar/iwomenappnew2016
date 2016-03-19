@@ -47,7 +47,6 @@ public class SMKserverAPI {
     public SMKserverAPI(){
 
 
-
         OkHttpClient okHttpClient = new OkHttpClient();
         okHttpClient.setConnectTimeout(7000, TimeUnit.MILLISECONDS);
         okHttpClient.setReadTimeout(7000, TimeUnit.MILLISECONDS);
@@ -77,10 +76,7 @@ public class SMKserverAPI {
     }
 
 
-
-
     //.setRequestInterceptor(requestInterceptor)
-
 
     public static SMKserverAPI getInstance(){
         if(mInstance == null){

@@ -99,7 +99,6 @@ public class RegisterPhotoFragment7 extends Fragment implements View.OnClickList
     public static RegisterPhotoFragment7 newInstance(Sample sample) {
 
         Bundle args = new Bundle();
-
         args.putSerializable(EXTRA_SAMPLE, sample);
         RegisterPhotoFragment7 fragment = new RegisterPhotoFragment7();
         fragment.setArguments(args);
@@ -218,8 +217,7 @@ public class RegisterPhotoFragment7 extends Fragment implements View.OnClickList
             mProgressDialog.setMessage("Loading...");
             mProgressDialog.show();//{"isAllow": true}
 
-            /*final File photo = new File(crop_file_path);
-            TypedFile typedFile = new TypedFile("multipart/form-data", photo);*///croppedImageFile
+
             MultipartTypedOutput multipartTypedOutput = new MultipartTypedOutput();
             multipartTypedOutput.addPart("image", new TypedFile("image/png", new File(crop_file_path)));
 

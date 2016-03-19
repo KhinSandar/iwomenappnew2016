@@ -1,6 +1,10 @@
 [
     {
+<<<<<<< HEAD
         "outputFile": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\RecordingMediaFile\\build\\intermediates\\res\\merged\\release\\values-v22\\values-v22.xml",
+=======
+        "outputFile": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\RecordingMediaFile\\build\\intermediates\\res\\merged\\release\\values-v22\\values-v22.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
         "map": [
             {
                 "to": {
@@ -11,7 +15,11 @@
                     "endOffset": 125
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\RecordingMediaFile\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-v22\\values-v22.xml",
+=======
+                    "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\RecordingMediaFile\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-v22\\values-v22.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
@@ -30,7 +38,11 @@
                     "endOffset": 212
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\RecordingMediaFile\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-v22\\values-v22.xml",
+=======
+                    "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\RecordingMediaFile\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-v22\\values-v22.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 5,
                         "startColumn": 4,
@@ -50,7 +62,11 @@
                     "endOffset": 393
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\RecordingMediaFile\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-v22\\values-v22.xml",
+=======
+                    "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\RecordingMediaFile\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-v22\\values-v22.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 6,
                         "startColumn": 4,
@@ -71,7 +87,11 @@
                     "endOffset": 586
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\RecordingMediaFile\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-v22\\values-v22.xml",
+=======
+                    "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\RecordingMediaFile\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-v22\\values-v22.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 9,
                         "startColumn": 4,
@@ -85,7 +105,11 @@
         ]
     },
     {
+<<<<<<< HEAD
         "outputFile": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/RecordingMediaFile/build/intermediates/res/merged/release/values-v22/values-v22.xml",
+=======
+        "outputFile": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/RecordingMediaFile/build/intermediates/res/merged/release/values-v22/values-v22.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
         "map": [
             {
                 "to": {
@@ -96,7 +120,11 @@
                     "endOffset": 125
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/RecordingMediaFile/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values-v22/values-v22.xml",
+=======
+                    "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/RecordingMediaFile/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values-v22/values-v22.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
@@ -115,7 +143,11 @@
                     "endOffset": 212
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/RecordingMediaFile/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values-v22/values-v22.xml",
+=======
+                    "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/RecordingMediaFile/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values-v22/values-v22.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 5,
                         "startColumn": 4,
@@ -135,7 +167,11 @@
                     "endOffset": 393
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/RecordingMediaFile/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values-v22/values-v22.xml",
+=======
+                    "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/RecordingMediaFile/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values-v22/values-v22.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 6,
                         "startColumn": 4,
@@ -156,7 +192,11 @@
                     "endOffset": 586
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/RecordingMediaFile/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values-v22/values-v22.xml",
+=======
+                    "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/RecordingMediaFile/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values-v22/values-v22.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 9,
                         "startColumn": 4,

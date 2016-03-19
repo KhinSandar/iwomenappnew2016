@@ -130,5 +130,7 @@ public class CommonConfig {
 
     public static final String CREATE_NEW_WOMENPOST = "/api/v1/iwomenPosts";
 
+    public static final String GET_ALL_AVATOR = "/api/v1/avators";
+
 
 }

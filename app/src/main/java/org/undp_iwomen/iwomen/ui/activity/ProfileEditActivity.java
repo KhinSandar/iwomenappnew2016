@@ -22,7 +22,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.camera.CropImageIntentBuilder;
@@ -38,45 +37,44 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.smk.clientapi.NetworkEngine;
 import org.smk.iwomen.BaseActionBarActivity;
+import org.smk.model.PhotoUpload;
+import org.smk.model.User;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
-import org.undp_iwomen.iwomen.model.retrofit_api.UserPostAPI;
+import org.undp_iwomen.iwomen.model.retrofit_api.SMKserverStringConverterAPI;
 import org.undp_iwomen.iwomen.ui.adapter.EditProfileGridviewAdapter;
+import org.undp_iwomen.iwomen.ui.widget.CustomButton;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.ui.widget.WrappedGridView;
 import org.undp_iwomen.iwomen.utils.Connection;
 import org.undp_iwomen.iwomen.utils.Utils;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.util.ArrayList;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+import retrofit.mime.MultipartTypedOutput;
+import retrofit.mime.TypedFile;
 
 
 public class ProfileEditActivity extends BaseActionBarActivity implements ImageChooserListener {
 
 
     private CustomTextView textViewTitle;
-
-
     private RoundedImageView profileImg;
     private ProgressBar profileProgressbar;
-
     private EditProfileGridviewAdapter mAdapter;
     private ArrayList<String> listShopName;
     private ArrayList<String> listShopImg;
     private WrappedGridView gridView;
-
-
     private Context mContext;
     SharedPreferences sharePrefLanguageUtil;
     String strLang;
     private ProgressDialog mProgressDialog;
-
     String mstrUserId, mstrTitleMm, mstrContentEng;
     private SharedPreferences mSharedPreferencesUserInfo;
     private SharedPreferences.Editor mEditorUserInfo;
@@ -98,7 +96,7 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
     private static int REQUEST_CROP_PICTURE = 2;
 
     //After imagchose
-    private TextView txt_edit_next;
+    private CustomButton btn_edit_next;
     private Button btn_edit;
     private Button btn_cancel;
     private ImageView img_camera;
@@ -118,6 +116,7 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
     private static final int CAMERA = 0;
     private static final int GALLERY = 1;
 
+    private com.pnikosis.materialishprogress.ProgressWheel progress_wheel_gv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,29 +140,31 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
         }
 
         Intent i = getIntent();
-
         mstrUserId = i.getStringExtra("UserId");
 
         userprofile_Image_path = mSharedPreferencesUserInfo.getString(CommonConfig.USER_UPLOAD_IMG_URL, null);
-
 
         profileImg = (RoundedImageView) findViewById(R.id.edit_profile_profilePic_rounded);
         profileProgressbar = (ProgressBar) findViewById(R.id.edit_profile_progressBar_profile_item);
         profileImg.setAdjustViewBounds(true);
         profileImg.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
-        txt_edit_next = (TextView) findViewById(R.id.edit_profile_txt_edit_next);
+        btn_edit_next = (CustomButton) findViewById(R.id.edit_profile_txt_edit_next);
         btn_edit = (Button) findViewById(R.id.edit_profile_btn_save);
         btn_cancel = (Button) findViewById(R.id.edit_profile_btn_cancel);
         img_camera = (ImageView) findViewById(R.id.edit_profile_camera_icon);
 
+        progress_wheel_gv = (com.pnikosis.materialishprogress.ProgressWheel) findViewById(R.id.edit_profile_progress_wheel);
+
+        progress_wheel_gv.setVisibility(View.GONE);
 
         strLang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
 
-
+        //TODO invisible in Profile Register
+        btn_edit_next.setVisibility(View.VISIBLE);
         btn_cancel.setOnClickListener(clickListener);
         btn_edit.setOnClickListener(clickListener);
-        txt_edit_next.setOnClickListener(clickListener);
+        btn_edit_next.setOnClickListener(clickListener);
         img_camera.setOnClickListener(clickListener);
         profileImg.setOnClickListener(clickListener);
 
@@ -305,21 +306,16 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
             mProgressDialog.show();
 
 
-            UserPostAPI.getInstance().getService().getAllStickers(new Callback<String>() {
+            SMKserverStringConverterAPI.getInstance().getService().getAllAvator(new Callback<String>() {
                 @Override
                 public void success(String s, Response response) {
-
                     try {
                         listShopName.clear();
                         listShopImg.clear();
-                        JSONObject whole_body = new JSONObject(s);
-                        JSONArray result = whole_body.getJSONArray("results");
-
-                        for (int i = 0; i < result.length(); i++) {
-                            JSONObject each_object = result.getJSONObject(i);
-
+                        JSONArray whole_body_json_arr = new JSONArray(s);
+                        for (int i = 0; i < whole_body_json_arr.length(); i++) {
+                            JSONObject each_object = whole_body_json_arr.getJSONObject(i);
                             if (!each_object.isNull("objectId")) {
-
 
                                 listShopName.add(each_object.getString("objectId"));
 
@@ -327,32 +323,21 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
                                 listShopName.add("");
                             }
 
-                            if (!each_object.isNull("stickerImg")) {
+                            if (!each_object.isNull("avatorImg")) {
 
-
-                                JSONObject ObjjsonObject = each_object.getJSONObject("stickerImg");
-                                if (!ObjjsonObject.isNull("url")) {
-
-
-                                    listShopImg.add(ObjjsonObject.getString("url"));
-                                } else {
-                                    listShopImg.add("");
-                                }
-
+                                listShopImg.add(each_object.getString("avatorImg"));
 
                             } else {
                                 listShopImg.add("");
                             }
 
-
                         }
-
                         mProgressDialog.dismiss();
                         mAdapter = new EditProfileGridviewAdapter(mContext, listShopName, listShopImg);
                         // Set custom adapter to gridview
-
                         gridView.setExpanded(true);
                         gridView.setAdapter(mAdapter);
+
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -364,13 +349,11 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
                     mProgressDialog.dismiss();
                 }
             });
-        } else {
-            //Utils.doToast(mContext, "Internet Connection need!");
 
+        } else {
             if (strLang.equals(Utils.ENG_LANG)) {
                 Utils.doToastEng(mContext, getResources().getString(R.string.open_internet_warning));
             } else {
-
                 Utils.doToastMM(mContext, getResources().getString(R.string.open_internet_warning_mm));
             }
         }
@@ -389,62 +372,54 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
 
 
                     if (crop_file_path != null) {
-
+                        mProgressDialog.setMessage("Loading...");
                         mProgressDialog.show();
+                        MultipartTypedOutput multipartTypedOutput = new MultipartTypedOutput();
+                        multipartTypedOutput.addPart("image", new TypedFile("image/png", new File(crop_file_path)));
 
-                        File photo = new File(crop_file_path);
-                        FileInputStream fileInputStream = null;
 
+                        NetworkEngine.getInstance().postUserPhoto(multipartTypedOutput, new Callback<PhotoUpload>() {
+                            @Override
+                            public void success(PhotoUpload photoUpload, Response response) {
+                                Log.e("<<<<Success>>>", "===>" + photoUpload.getResizeUrl().get(2).toString());
 
-                        byte[] bFile = new byte[(int) photo.length()];
+                                mEditorUserInfo = mSharedPreferencesUserInfo.edit();
+                                mEditorUserInfo.putString(CommonConfig.USER_UPLOAD_IMG_NAME, photoUpload.getName());
 
-                        try {
-                            //convert file into array of bytes
-                            fileInputStream = new FileInputStream(photo);
-                            fileInputStream.read(bFile);
-                            fileInputStream.close();
+                                mEditorUserInfo.putString(CommonConfig.USER_UPLOAD_IMG_URL, photoUpload.getResizeUrl().get(2).toString());
+                                mEditorUserInfo.commit();
+                                updateUserInfo(photoUpload.getResizeUrl().get(2).toString());
 
-                            for (int i = 0; i < bFile.length; i++) {
-                                //System.out.print((char)bFile[i]);
                             }
 
+                            @Override
+                            public void failure(RetrofitError error) {
+                                Log.e("<<<<Fail>>>", "===>" + error.toString());
 
-                            //System.out.println("Done");
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            Log.e("Image Upload Sing up", "==>" + e.toString());
-                        }
-                        //TODO Parse api User profile image upload and
-                        /*mProgressDialog.dismiss();
+                                mProgressDialog.dismiss();
 
-                        Log.e("User Img Sticker", "==>" + userprofile_Image_path);
-                        mEditorUserInfo = mSharedPreferencesUserInfo.edit();
-                        mEditorUserInfo.putString(CommonConfig.USER_IMAGE_PATH, userprofile_Image_path);
-                        mEditorUserInfo.commit();
-                        startDrawerMainActivity();
-                        */
 
-                    } else { //TODO When user choose sticker case
+                                return;
+                            }
+                        });
+
+                    } else if (userprofile_Image_path != null && !userprofile_Image_path.isEmpty()) {
+                        mProgressDialog.setMessage("Loading...");
                         mProgressDialog.show();
-                        Log.e("User Img Sticker", "==>" + userprofile_Image_path);
-
-                        /*mProgressDialog.dismiss();
-
-                        Log.e("User Img Sticker", "==>" + userprofile_Image_path);
                         mEditorUserInfo = mSharedPreferencesUserInfo.edit();
-                        mEditorUserInfo.putString(CommonConfig.USER_IMAGE_PATH, userprofile_Image_path);
-                        mEditorUserInfo.commit();
-                        startDrawerMainActivity();*/
-                        if (userprofile_Image_path != null && !userprofile_Image_path.isEmpty()) {
-                            //TODO UPDATE PROFILE IMG PATH
-                        } else {
-                            mProgressDialog.dismiss();
-                            startDrawerMainActivity();
-                        }
 
+                        mEditorUserInfo.putString(CommonConfig.USER_UPLOAD_IMG_URL, userprofile_Image_path);
+                        mEditorUserInfo.commit();
+
+                        updateUserInfo(userprofile_Image_path);
+
+                    } else {
+                        SKToastMessage.showMessage(ProfileEditActivity.this, getResources().getString(R.string.choose_photo_eng), SKToastMessage.ERROR);
+                        //startDrawerMainActivity();
                     }
+
+
                 } else {
-                    //Utils.doToast(mContext, "Internet Connection need!");
 
                     if (strLang.equals(Utils.ENG_LANG)) {
                         Utils.doToastEng(mContext, getResources().getString(R.string.open_internet_warning_eng));
@@ -452,17 +427,14 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
 
                         Utils.doToastMM(mContext, getResources().getString(R.string.open_internet_warning_mm));
                     }
-
-
                 }
             }
             if (arg0 == btn_cancel) {
 
                 startDrawerMainActivity();
             }
-            if (arg0 == txt_edit_next) {
+            if (arg0 == btn_edit_next) {
                 /*Intent intent = new Intent(getApplicationContext(), ProfileEditTLGActivity.class);
-
                 intent.putExtra("UserId", mstrUserId);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -474,7 +446,6 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
             if (arg0 == img_camera || arg0 == profileImg) {
 
                 showPhotoChoice();
-
 
                 //TODO Material Dialog
                 /*if (strLang.equals(Utils.ENG_LANG)) {
@@ -538,6 +509,41 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
     /**
      * *****************Image Chooser***************
      */
+    private void updateUserInfo(final String user_img_path){
+        if (Connection.isOnline(mContext)) {
+            Log.e("<<UserID,img>>","==>"+ mstrUserId + user_img_path);
+            NetworkEngine.getInstance().postUpdateUser(Integer.parseInt(mstrUserId), user_img_path, new Callback<User>() {
+                @Override
+                public void success(User user, Response response) {
+
+                    if(mProgressDialog != null){
+                        mProgressDialog.dismiss();
+                    }
+                    startDrawerMainActivity();
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    if(mProgressDialog != null){
+                        mProgressDialog.dismiss();
+                    }
+
+                }
+            });
+
+
+        }else {
+
+            if (strLang.equals(Utils.ENG_LANG)) {
+                Utils.doToastEng(mContext, getResources().getString(R.string.open_internet_warning_eng));
+            } else {
+                Utils.doToastMM(mContext, getResources().getString(R.string.open_internet_warning_mm));
+            }
+
+        }
+    }
+
+
     @TargetApi(Build.VERSION_CODES.M)
     private void takePicture() {
 
@@ -569,15 +575,15 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
 
     private void showPhotoChoice() {
         AlertDialog.Builder builder = new AlertDialog.Builder(ProfileEditActivity.this);
-        CharSequence camera ;
-        CharSequence gallery ;
+        CharSequence camera;
+        CharSequence gallery;
 
         if (strLang.equals(Utils.ENG_LANG)) {
-             camera = getResources().getString(R.string.action_photo_camera);
-             gallery = getResources().getString(R.string.action_photo_gallery);
-        }else{
-             camera = getResources().getString(R.string.action_photo_camera_mm);
-             gallery = getResources().getString(R.string.action_photo_gallery_mm);
+            camera = getResources().getString(R.string.action_photo_camera);
+            gallery = getResources().getString(R.string.action_photo_gallery);
+        } else {
+            camera = getResources().getString(R.string.action_photo_camera_mm);
+            gallery = getResources().getString(R.string.action_photo_gallery_mm);
         }
         builder.setCancelable(true).
                 setItems(new CharSequence[]{camera, gallery},
