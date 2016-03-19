@@ -446,7 +446,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
             }
         });
 
-      sv.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
+        sv.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean queryTextFocused) {
                 if (!queryTextFocused) {

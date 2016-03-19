@@ -696,7 +696,7 @@ public class CompetitionSubmitAnswerActivity extends BaseActionBarActivity imple
 						}
 						get_checkbox_id++;
 					}
-				}
+				}	
 				if(competitionQuestion.getMultipleQuestion().get(i).getType().equals("radio")){
 					RadioGroup rdo_group = (RadioGroup) findViewById(competitionQuestion.getMultipleQuestion().get(i).getId()+get_radio_group_id);
 					RadioButton rdo_question = (RadioButton) findViewById(rdo_group.getCheckedRadioButtonId());
