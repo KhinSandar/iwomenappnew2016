@@ -1,42 +1,6 @@
 [
     {
-<<<<<<< HEAD
-        "outputFile": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/SKListView/build/intermediates/res/merged/release/values-w500dp-v13/values-w500dp-v13.xml",
-=======
-        "outputFile": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\res\\merged\\release\\values-w500dp-v13\\values-w500dp-v13.xml",
->>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
-        "map": [
-            {
-                "to": {
-                    "startLine": 2,
-                    "startColumn": 4,
-                    "startOffset": 55,
-                    "endColumn": 54,
-                    "endOffset": 105
-                },
-                "from": {
-<<<<<<< HEAD
-                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/SKListView/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.2/res/values-w500dp/values.xml",
-=======
-                    "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\values-w500dp\\values.xml",
->>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
-                    "position": {
-                        "startLine": 3,
-                        "startColumn": 4,
-                        "startOffset": 56,
-                        "endColumn": 54,
-                        "endOffset": 106
-                    }
-                }
-            }
-        ]
-    },
-    {
-<<<<<<< HEAD
-        "outputFile": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\res\\merged\\release\\values-w500dp-v13\\values-w500dp-v13.xml",
-=======
         "outputFile": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/res/merged/release/values-w500dp-v13/values-w500dp-v13.xml",
->>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
         "map": [
             {
                 "to": {
@@ -47,11 +11,7 @@
                     "endOffset": 105
                 },
                 "from": {
-<<<<<<< HEAD
-                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\values-w500dp\\values.xml",
-=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.2/res/values-w500dp/values.xml",
->>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,

@@ -754,7 +754,8 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
                             + serverResponseMessage);
                     Toast.makeText(getActivity(), serverResponseMessage, Toast.LENGTH_LONG).show();
 
-                    audio_file_id = uploadId;
+                    //audio_file_id = uploadId;
+                    audio_file_id = serverResponseMessage.replace("\"","");
 
                     mAudioFilePath = null;
                     checkProcessWhattoDo();

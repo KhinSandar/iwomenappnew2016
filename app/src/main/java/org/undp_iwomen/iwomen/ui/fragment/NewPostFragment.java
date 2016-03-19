@@ -730,7 +730,8 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
                             + serverResponseMessage);
                     Toast.makeText(getActivity(), serverResponseMessage, Toast.LENGTH_LONG).show();
 
-                    audio_file_id = uploadId;
+                    //TODO Audio streaming url upload
+                    audio_file_id = serverResponseMessage.replace("\"","");
 
                     mAudioFilePath = null;
                     checkProcessWhattoDo();

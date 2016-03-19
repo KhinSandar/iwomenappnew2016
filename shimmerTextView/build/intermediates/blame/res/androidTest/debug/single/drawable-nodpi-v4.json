@@ -1,18 +1,10 @@
 [
     {
-        "merged": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/shimmerTextView/build/intermediates/res/merged/androidTest/debug/drawable-nodpi-v4/mask.xml",
-        "source": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/shimmerTextView/build/intermediates/bundles/debug/res/drawable-nodpi-v4/mask.xml"
+        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/shimmerTextView/build/intermediates/res/merged/androidTest/debug/drawable-nodpi-v4/mask.xml",
+        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/shimmerTextView/build/intermediates/bundles/debug/res/drawable-nodpi-v4/mask.xml"
     },
     {
-        "merged": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/shimmerTextView/build/intermediates/res/merged/androidTest/debug/drawable-nodpi-v4/spot_mask.png",
-        "source": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/shimmerTextView/build/intermediates/bundles/debug/res/drawable-nodpi-v4/spot_mask.png"
-    },
-    {
-        "merged": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\shimmerTextView\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-nodpi-v4\\spot_mask.png",
-        "source": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\shimmerTextView\\build\\intermediates\\bundles\\debug\\res\\drawable-nodpi-v4\\spot_mask.png"
-    },
-    {
-        "merged": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\shimmerTextView\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-nodpi-v4\\mask.xml",
-        "source": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\shimmerTextView\\build\\intermediates\\bundles\\debug\\res\\drawable-nodpi-v4\\mask.xml"
+        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/shimmerTextView/build/intermediates/res/merged/androidTest/debug/drawable-nodpi-v4/spot_mask.png",
+        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/shimmerTextView/build/intermediates/bundles/debug/res/drawable-nodpi-v4/spot_mask.png"
     }
 ]
