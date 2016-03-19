@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<<<<<<< HEAD
+<merger version="3"><dataSet config="main"><source path="/Users/Admin/AndroidStudioProjects/iwomenappnew2016/RecordingMediaFile/src/main/jniLibs"/></dataSet><dataSet config="release"><source path="/Users/Admin/AndroidStudioProjects/iwomenappnew2016/RecordingMediaFile/build-types/release/jniLibs"/></dataSet></merger>
+=======
 <merger version="3"><dataSet config="main"><source path="/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/RecordingMediaFile/src/main/jniLibs"/></dataSet><dataSet config="release"><source path="/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/RecordingMediaFile/build-types/release/jniLibs"/></dataSet></merger>
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d

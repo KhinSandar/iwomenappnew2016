@@ -113,6 +113,7 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
 
 
     private final String CAMERA_PERMISSION = "android.permission.CAMERA";
+    private final String AUDIO_PERMISSION = "android.permission.RECORD_AUDIO";
     private SharedPreferences mSharedPreferencesUserInfo;
     private String uploadPhoto;
 
@@ -242,7 +243,18 @@ public class NewPostFragment extends Fragment implements View.OnClickListener, I
 
             case R.id.new_post_audio_upload_btn:
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    SKToastMessage.showMessage(getActivity(), getResources().getString(R.string.resource_coming_soon_eng), SKToastMessage.ERROR);
+
+                    if(!hasPermission(AUDIO_PERMISSION)){
+                        String[] perms= {AUDIO_PERMISSION};
+
+                        int permsRequestCode = 200;
+
+                        requestPermissions(perms, permsRequestCode);
+                    }else{
+                        performAudioRecord();
+                    }
+
+                    //SKToastMessage.showMessage(getActivity(), getResources().getString(R.string.resource_coming_soon_eng), SKToastMessage.ERROR);
                 } else {
                     performAudioRecord();
                 }

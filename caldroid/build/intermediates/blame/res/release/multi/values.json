@@ -1,6 +1,10 @@
 [
     {
+<<<<<<< HEAD
+        "outputFile": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/caldroid/build/intermediates/res/merged/release/values/values.xml",
+=======
         "outputFile": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/build/intermediates/res/merged/release/values/values.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
         "map": [
             {
                 "to": {
@@ -11,7 +15,11 @@
                     "endOffset": 110
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/caldroid/src/main/res/values/attrs.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/values/attrs.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 9,
                         "startColumn": 4,
@@ -30,7 +38,11 @@
                     "endOffset": 171
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/caldroid/src/main/res/values/attrs.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/values/attrs.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
@@ -49,7 +61,11 @@
                     "endOffset": 232
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/caldroid/src/main/res/values/attrs.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/values/attrs.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 6,
                         "startColumn": 4,
@@ -68,7 +84,11 @@
                     "endOffset": 294
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/caldroid/src/main/res/values/attrs.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/values/attrs.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 7,
                         "startColumn": 4,
@@ -87,7 +107,11 @@
                     "endOffset": 356
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/caldroid/src/main/res/values/attrs.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/values/attrs.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 5,
                         "startColumn": 4,
@@ -106,7 +130,11 @@
                     "endOffset": 418
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/caldroid/src/main/res/values/attrs.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/values/attrs.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 8,
                         "startColumn": 4,
@@ -125,7 +153,11 @@
                     "endOffset": 480
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/caldroid/src/main/res/values/attrs.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/values/attrs.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -144,7 +176,11 @@
                     "endOffset": 543
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/caldroid/src/main/res/values/attrs.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/values/attrs.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 10,
                         "startColumn": 4,
@@ -163,7 +199,11 @@
                     "endOffset": 587
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/caldroid/src/main/res/values/color.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/values/color.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 18,
                         "startColumn": 4,
@@ -182,7 +222,11 @@
                     "endOffset": 631
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/caldroid/src/main/res/values/color.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/values/color.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 19,
                         "startColumn": 4,
@@ -201,7 +245,11 @@
                     "endOffset": 680
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/caldroid/src/main/res/values/color.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/values/color.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
@@ -220,7 +268,11 @@
                     "endOffset": 732
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/caldroid/src/main/res/values/color.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/values/color.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 9,
                         "startColumn": 4,
@@ -239,7 +291,11 @@
                     "endOffset": 777
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/caldroid/src/main/res/values/color.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/values/color.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 8,
                         "startColumn": 4,
@@ -258,7 +314,11 @@
                     "endOffset": 837
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/caldroid/src/main/res/values/color.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/values/color.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 14,
                         "startColumn": 4,
@@ -277,7 +337,11 @@
                     "endOffset": 898
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/caldroid/src/main/res/values/color.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/values/color.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 12,
                         "startColumn": 4,
@@ -296,7 +360,11 @@
                     "endOffset": 951
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/caldroid/src/main/res/values/color.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/values/color.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 20,
                         "startColumn": 4,
@@ -315,7 +383,11 @@
                     "endOffset": 1004
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/caldroid/src/main/res/values/color.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/values/color.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 7,
                         "startColumn": 4,
@@ -334,7 +406,11 @@
                     "endOffset": 1056
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/caldroid/src/main/res/values/color.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/values/color.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 10,
                         "startColumn": 4,
@@ -353,7 +429,11 @@
                     "endOffset": 1110
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/caldroid/src/main/res/values/color.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/values/color.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 16,
                         "startColumn": 4,
@@ -372,7 +452,11 @@
                     "endOffset": 1167
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/caldroid/src/main/res/values/color.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/values/color.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 5,
                         "startColumn": 4,
@@ -391,7 +475,11 @@
                     "endOffset": 1216
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/caldroid/src/main/res/values/color.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/values/color.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -410,7 +498,11 @@
                     "endOffset": 1660
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/caldroid/src/main/res/values/strings.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/values/strings.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
@@ -430,7 +522,11 @@
                     "endOffset": 2388
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/caldroid/src/main/res/values/styles.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/values/styles.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
@@ -451,7 +547,11 @@
                     "endOffset": 2556
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/caldroid/src/main/res/values/styles.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/values/styles.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 19,
                         "startColumn": 4,
@@ -472,7 +572,11 @@
                     "endOffset": 2816
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/caldroid/src/main/res/values/styles.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/values/styles.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 13,
                         "startColumn": 4,
@@ -493,7 +597,11 @@
                     "endOffset": 3154
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/caldroid/src/main/res/values/styles.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/values/styles.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 54,
                         "startColumn": 4,
@@ -514,7 +622,11 @@
                     "endOffset": 3678
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/caldroid/src/main/res/values/styles.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/values/styles.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 77,
                         "startColumn": 4,
@@ -535,7 +647,11 @@
                     "endOffset": 3816
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/caldroid/src/main/res/values/styles.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/values/styles.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 85,
                         "startColumn": 4,
@@ -556,7 +672,11 @@
                     "endOffset": 4045
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/caldroid/src/main/res/values/styles.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/values/styles.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 97,
                         "startColumn": 4,
@@ -577,7 +697,11 @@
                     "endOffset": 4213
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/caldroid/src/main/res/values/styles.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/values/styles.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 93,
                         "startColumn": 4,
@@ -598,7 +722,11 @@
                     "endOffset": 4376
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/caldroid/src/main/res/values/styles.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/values/styles.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 89,
                         "startColumn": 4,
@@ -619,7 +747,11 @@
                     "endOffset": 4519
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/caldroid/src/main/res/values/styles.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/values/styles.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 102,
                         "startColumn": 4,
@@ -639,7 +771,11 @@
                     "endOffset": 4602
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/caldroid/src/main/res/values/styles.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/values/styles.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 106,
                         "startColumn": 4,
@@ -659,7 +795,11 @@
                     "endOffset": 5071
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/caldroid/src/main/res/values/styles.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/values/styles.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 44,
                         "startColumn": 4,
@@ -680,7 +820,11 @@
                     "endOffset": 5297
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/caldroid/src/main/res/values/styles.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/values/styles.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 24,
                         "startColumn": 4,
@@ -701,7 +845,11 @@
                     "endOffset": 5758
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/caldroid/src/main/res/values/styles.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/values/styles.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 34,
                         "startColumn": 4,
@@ -722,7 +870,11 @@
                     "endOffset": 5893
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/caldroid/src/main/res/values/styles.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/values/styles.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 62,
                         "startColumn": 4,
@@ -743,7 +895,11 @@
                     "endOffset": 6122
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/caldroid/src/main/res/values/styles.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/values/styles.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 29,
                         "startColumn": 4,
@@ -763,7 +919,11 @@
                     "endOffset": 6197
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/caldroid/src/main/res/values/styles.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/values/styles.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 66,
                         "startColumn": 4,
@@ -783,7 +943,11 @@
                     "endOffset": 6532
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/caldroid/src/main/res/values/styles.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/values/styles.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 68,
                         "startColumn": 4,
@@ -797,7 +961,11 @@
         ]
     },
     {
+<<<<<<< HEAD
+        "outputFile": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\build\\intermediates\\res\\merged\\release\\values\\values.xml",
+=======
         "outputFile": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\build\\intermediates\\res\\merged\\release\\values\\values.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
         "map": [
             {
                 "to": {
@@ -808,7 +976,11 @@
                     "endOffset": 110
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\attrs.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\attrs.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 9,
                         "startColumn": 4,
@@ -827,7 +999,11 @@
                     "endOffset": 171
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\attrs.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\attrs.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
@@ -846,7 +1022,11 @@
                     "endOffset": 232
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\attrs.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\attrs.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 6,
                         "startColumn": 4,
@@ -865,7 +1045,11 @@
                     "endOffset": 294
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\attrs.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\attrs.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 7,
                         "startColumn": 4,
@@ -884,7 +1068,11 @@
                     "endOffset": 356
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\attrs.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\attrs.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 5,
                         "startColumn": 4,
@@ -903,7 +1091,11 @@
                     "endOffset": 418
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\attrs.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\attrs.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 8,
                         "startColumn": 4,
@@ -922,7 +1114,11 @@
                     "endOffset": 480
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\attrs.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\attrs.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -941,7 +1137,11 @@
                     "endOffset": 543
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\attrs.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\attrs.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 10,
                         "startColumn": 4,
@@ -960,7 +1160,11 @@
                     "endOffset": 587
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\color.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\color.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 18,
                         "startColumn": 4,
@@ -979,7 +1183,11 @@
                     "endOffset": 631
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\color.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\color.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 19,
                         "startColumn": 4,
@@ -998,7 +1206,11 @@
                     "endOffset": 680
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\color.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\color.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
@@ -1017,7 +1229,11 @@
                     "endOffset": 732
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\color.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\color.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 9,
                         "startColumn": 4,
@@ -1036,7 +1252,11 @@
                     "endOffset": 777
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\color.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\color.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 8,
                         "startColumn": 4,
@@ -1055,7 +1275,11 @@
                     "endOffset": 837
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\color.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\color.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 14,
                         "startColumn": 4,
@@ -1074,7 +1298,11 @@
                     "endOffset": 898
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\color.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\color.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 12,
                         "startColumn": 4,
@@ -1093,7 +1321,11 @@
                     "endOffset": 951
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\color.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\color.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 20,
                         "startColumn": 4,
@@ -1112,7 +1344,11 @@
                     "endOffset": 1004
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\color.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\color.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 7,
                         "startColumn": 4,
@@ -1131,7 +1367,11 @@
                     "endOffset": 1056
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\color.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\color.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 10,
                         "startColumn": 4,
@@ -1150,7 +1390,11 @@
                     "endOffset": 1110
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\color.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\color.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 16,
                         "startColumn": 4,
@@ -1169,7 +1413,11 @@
                     "endOffset": 1167
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\color.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\color.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 5,
                         "startColumn": 4,
@@ -1188,7 +1436,11 @@
                     "endOffset": 1216
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\color.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\color.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -1207,7 +1459,11 @@
                     "endOffset": 1660
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\strings.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\strings.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
@@ -1227,7 +1483,11 @@
                     "endOffset": 2388
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\styles.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\styles.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
@@ -1248,7 +1508,11 @@
                     "endOffset": 2556
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\styles.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\styles.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 19,
                         "startColumn": 4,
@@ -1269,7 +1533,11 @@
                     "endOffset": 2816
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\styles.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\styles.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 13,
                         "startColumn": 4,
@@ -1290,7 +1558,11 @@
                     "endOffset": 3154
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\styles.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\styles.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 54,
                         "startColumn": 4,
@@ -1311,7 +1583,11 @@
                     "endOffset": 3678
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\styles.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\styles.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 77,
                         "startColumn": 4,
@@ -1332,7 +1608,11 @@
                     "endOffset": 3816
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\styles.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\styles.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 85,
                         "startColumn": 4,
@@ -1353,7 +1633,11 @@
                     "endOffset": 4045
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\styles.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\styles.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 97,
                         "startColumn": 4,
@@ -1374,7 +1658,11 @@
                     "endOffset": 4213
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\styles.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\styles.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 93,
                         "startColumn": 4,
@@ -1395,7 +1683,11 @@
                     "endOffset": 4376
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\styles.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\styles.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 89,
                         "startColumn": 4,
@@ -1416,7 +1708,11 @@
                     "endOffset": 4519
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\styles.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\styles.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 102,
                         "startColumn": 4,
@@ -1436,7 +1732,11 @@
                     "endOffset": 4602
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\styles.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\styles.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 106,
                         "startColumn": 4,
@@ -1456,7 +1756,11 @@
                     "endOffset": 5071
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\styles.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\styles.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 44,
                         "startColumn": 4,
@@ -1477,7 +1781,11 @@
                     "endOffset": 5297
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\styles.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\styles.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 24,
                         "startColumn": 4,
@@ -1498,7 +1806,11 @@
                     "endOffset": 5758
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\styles.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\styles.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 34,
                         "startColumn": 4,
@@ -1519,7 +1831,11 @@
                     "endOffset": 5893
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\styles.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\styles.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 62,
                         "startColumn": 4,
@@ -1540,7 +1856,11 @@
                     "endOffset": 6122
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\styles.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\styles.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 29,
                         "startColumn": 4,
@@ -1560,7 +1880,11 @@
                     "endOffset": 6197
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\styles.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\styles.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 66,
                         "startColumn": 4,
@@ -1580,7 +1904,11 @@
                     "endOffset": 6532
                 },
                 "from": {
+<<<<<<< HEAD
+                    "file": "/Users/Admin/AndroidStudioProjects/iwomenappnew2016/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\styles.xml",
+=======
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\values\\styles.xml",
+>>>>>>> acd63c8b2e630680d6fe7b49de96e281ae0de16d
                     "position": {
                         "startLine": 68,
                         "startColumn": 4,
