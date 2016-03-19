@@ -27,7 +27,6 @@ import android.widget.TextView;
 import com.facebook.FacebookSdk;
 import com.google.gson.Gson;
 import com.makeramen.RoundedImageView;
-import com.smk.skalertmessage.SKToastMessage;
 import com.smk.skconnectiondetector.SKConnectionDetector;
 import com.squareup.picasso.Picasso;
 
@@ -231,14 +230,14 @@ public class DrawerMainActivity extends BaseActionBarActivity {
             @Override
             public void onClick(View view) {
                 //org.undp_iwomen.iwomen.utils.Utils.doToastEng(getApplicationContext(), "On CLick" + user_obj_id);
-            /*
+
                 Intent intent = new Intent(getApplicationContext(), ProfileEditActivity.class);
 
                 intent.putExtra("UserId", user_obj_id);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);*/
-                SKToastMessage.showMessage(DrawerMainActivity.this, getResources().getString(R.string.resource_coming_soon_eng), SKToastMessage.ERROR);
+                startActivity(intent);
+                //SKToastMessage.showMessage(DrawerMainActivity.this, getResources().getString(R.string.resource_coming_soon_eng), SKToastMessage.ERROR);
 
 
             }

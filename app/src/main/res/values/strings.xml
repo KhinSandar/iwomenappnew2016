@@ -730,4 +730,23 @@ Shirin Ebadi, J.D., was awarded the 2003 Nobel Peace Prize for her efforts to pr
     <string name = "tlg_mdk_leader_role">MAY DOE KABAR BOARD MEMBER</string>
     <string name= "empty_talk_together">Be the first to write a post </string>
     <string name ="google_not_support">Your phone does not support Google Maps</string>
+
+    <string name="calendar_view_events_rember_day">Remember Day of a Woman</string>
+    <string name="calendar_view_events_create_btn">Create New Event</string>
+
+    <string name ="calendar_title">Title</string>
+    <string name ="calendar_desc">Description</string>
+    <string name ="calendar_loca">Location</string>
+    <string name ="calendar_start_date">Start Date</string>
+    <string name ="calendar_end_date">End Date</string>
+    <string name ="calendar_start_time">Start Time</string>
+    <string name ="calendar_end_time">End Time</string>
+
+
+    <string name="calendar_new_event">New Event</string>
+    <string name="calendar_detail">Event Detail</string>
+    <string name="calendar_create_event">Create Event</string>
+
+    <string name="action_photo_camera" translatable="false" >Take Photo</string>
+    <string name="action_photo_gallery" translatable="false" >Choose Existing</string>
 </resources>

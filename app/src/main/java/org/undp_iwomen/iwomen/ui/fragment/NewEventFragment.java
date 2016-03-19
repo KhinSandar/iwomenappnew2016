@@ -11,8 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 
 import com.smk.skconnectiondetector.SKConnectionDetector;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
@@ -23,6 +21,8 @@ import org.smk.clientapi.NetworkEngine;
 import org.smk.model.CalendarEvent;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
+import org.undp_iwomen.iwomen.ui.widget.CustomButton;
+import org.undp_iwomen.iwomen.ui.widget.CustomEditText;
 import org.undp_iwomen.iwomen.utils.Connection;
 import org.undp_iwomen.iwomen.utils.Utils;
 
@@ -55,14 +55,14 @@ public class NewEventFragment extends Fragment implements View.OnClickListener {
     private TextInputLayout mEndDateInputLayout;
     private TextInputLayout mEndTimeInputLayout;
 
-    private EditText mTitleEditText;
-    private EditText mDescriptionEditText;
-    private EditText mLocationEditText;
-    private EditText mStartDateEditText;
-    private EditText mEndDateEditText;
-    private EditText mStartTimeEditText;
-    private EditText mEndTimeEditText;
-    private Button mSaveButton;
+    private CustomEditText mTitleEditText;
+    private CustomEditText mDescriptionEditText;
+    private CustomEditText mLocationEditText;
+    private CustomEditText mStartDateEditText;
+    private CustomEditText mEndDateEditText;
+    private CustomEditText mStartTimeEditText;
+    private CustomEditText mEndTimeEditText;
+    private CustomButton mSaveButton;
 
     private Date mStartDate;
     private Date mEndDate;
@@ -113,14 +113,14 @@ public class NewEventFragment extends Fragment implements View.OnClickListener {
         mEndTimeInputLayout = (TextInputLayout)rootView.findViewById(R.id.new_event_end_time_input);
 
 
-        mTitleEditText = (EditText) rootView.findViewById(R.id.new_event_title);
-        mDescriptionEditText = (EditText) rootView.findViewById(R.id.new_event_description);
-        mLocationEditText = (EditText) rootView.findViewById(R.id.new_event_location);
-        mStartDateEditText = (EditText) rootView.findViewById(R.id.new_event_start_date);
-        mEndDateEditText = (EditText) rootView.findViewById(R.id.new_event_end_date);
-        mStartTimeEditText = (EditText) rootView.findViewById(R.id.new_event_start_time);
-        mEndTimeEditText = (EditText) rootView.findViewById(R.id.new_event_end_time);
-        mSaveButton = (Button) rootView.findViewById(R.id.new_event_save_button);
+        mTitleEditText = (CustomEditText) rootView.findViewById(R.id.new_event_title);
+        mDescriptionEditText = (CustomEditText) rootView.findViewById(R.id.new_event_description);
+        mLocationEditText = (CustomEditText) rootView.findViewById(R.id.new_event_location);
+        mStartDateEditText = (CustomEditText) rootView.findViewById(R.id.new_event_start_date);
+        mEndDateEditText = (CustomEditText) rootView.findViewById(R.id.new_event_end_date);
+        mStartTimeEditText = (CustomEditText) rootView.findViewById(R.id.new_event_start_time);
+        mEndTimeEditText = (CustomEditText) rootView.findViewById(R.id.new_event_end_time);
+        mSaveButton = (CustomButton) rootView.findViewById(R.id.new_event_save_button);
     }
 
     private void initViewsListeners() {

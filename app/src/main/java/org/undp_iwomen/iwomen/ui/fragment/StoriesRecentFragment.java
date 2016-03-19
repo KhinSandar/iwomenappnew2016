@@ -81,6 +81,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
     private LinearLayoutManager linearLayoutManager;
     private int paginater = 1;
     private StoriesRecentListAdapter stories;
+    private boolean isFirstLoading = true;
 
     public StoriesRecentFragment() {
         // Empty constructor required for fragment subclasses
@@ -1464,9 +1465,12 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
             NetworkEngine.getInstance().getIWomenPostByDateByPagination(paginater,"Recent", 1, new Callback<List<IWomenPost>>() {
                 @Override
                 public void success(List<IWomenPost> iWomenPosts, Response response) {
-                    if(zPDialog != null && zPDialog.isShowing()){
+                    // If user is arrive here first times
+                    if(isFirstLoading){
+                        isFirstLoading = false;
                         iWomenPostList.clear();
-                        zPDialog.dismissWithSuccess();
+                        if(zPDialog != null && zPDialog.isShowing())
+                            zPDialog.dismissWithSuccess();
                     }
                     iWomenPostList.addAll(iWomenPosts);
                     stories.notifyDataSetChanged();
@@ -1484,7 +1488,8 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
 
                 @Override
                 public void failure(RetrofitError error) {
-
+                    if(zPDialog != null && zPDialog.isShowing())
+                        zPDialog.dismissWithSuccess();
                 }
             });
 

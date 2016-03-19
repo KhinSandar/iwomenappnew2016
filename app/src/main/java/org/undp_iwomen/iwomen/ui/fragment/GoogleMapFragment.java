@@ -242,8 +242,6 @@ public class GoogleMapFragment extends Fragment {//
 
                     //if no permission, request permission
                     String[] perms = {Location_READ_PERMISSION};
-
-
                     requestPermissions(perms, LOCATION_REQUEST);
                     Log.e("<<<if>>>", "===>");
 

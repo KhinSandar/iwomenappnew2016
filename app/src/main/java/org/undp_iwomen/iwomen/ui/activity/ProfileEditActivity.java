@@ -1,12 +1,18 @@
 package org.undp_iwomen.iwomen.ui.activity;
 
+import android.annotation.TargetApi;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -26,6 +32,7 @@ import com.kbeanie.imagechooser.api.ChosenImages;
 import com.kbeanie.imagechooser.api.ImageChooserListener;
 import com.kbeanie.imagechooser.api.ImageChooserManager;
 import com.makeramen.RoundedImageView;
+import com.smk.skalertmessage.SKToastMessage;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -37,7 +44,7 @@ import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.model.retrofit_api.UserPostAPI;
 import org.undp_iwomen.iwomen.ui.adapter.EditProfileGridviewAdapter;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
-import org.undp_iwomen.iwomen.ui.widget.ExpandableHeightGridView;
+import org.undp_iwomen.iwomen.ui.widget.WrappedGridView;
 import org.undp_iwomen.iwomen.utils.Connection;
 import org.undp_iwomen.iwomen.utils.Utils;
 
@@ -62,7 +69,7 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
     private EditProfileGridviewAdapter mAdapter;
     private ArrayList<String> listShopName;
     private ArrayList<String> listShopImg;
-    private ExpandableHeightGridView gridView;
+    private WrappedGridView gridView;
 
 
     private Context mContext;
@@ -95,6 +102,21 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
     private Button btn_edit;
     private Button btn_cancel;
     private ImageView img_camera;
+
+    private final String CAMERA_PERMISSION = "android.permission.CAMERA";
+    boolean cameraPermissionAccepted = false;
+
+    private final String STORAGE_READ_PERMISSION = "android.permission.READ_EXTERNAL_STORAGE";
+    boolean storagePermissionAccepted = false;
+
+
+    //Try request code between 1 to 255
+    private static final int INITIAL_REQUEST = 1;
+    private static final int CAMERA_REQUEST = INITIAL_REQUEST + 2;
+    private static final int READ_EXTERNAL_STORAGE = INITIAL_REQUEST + 3;
+
+    private static final int CAMERA = 0;
+    private static final int GALLERY = 1;
 
 
     @Override
@@ -133,11 +155,10 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
         txt_edit_next = (TextView) findViewById(R.id.edit_profile_txt_edit_next);
         btn_edit = (Button) findViewById(R.id.edit_profile_btn_save);
         btn_cancel = (Button) findViewById(R.id.edit_profile_btn_cancel);
-        img_camera = (ImageView)findViewById(R.id.edit_profile_camera_icon);
+        img_camera = (ImageView) findViewById(R.id.edit_profile_camera_icon);
 
 
         strLang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
-
 
 
         btn_cancel.setOnClickListener(clickListener);
@@ -145,8 +166,6 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
         txt_edit_next.setOnClickListener(clickListener);
         img_camera.setOnClickListener(clickListener);
         profileImg.setOnClickListener(clickListener);
-
-
 
 
         if (strLang.equals(Utils.ENG_LANG)) {
@@ -164,9 +183,7 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
         }
 
         userprofile_Image_path = mSharedPreferencesUserInfo.getString(CommonConfig.USER_UPLOAD_IMG_URL, null);
-
-
-        if (userprofile_Image_path != null) {
+        if (userprofile_Image_path != null && userprofile_Image_path.length() != 0 && userprofile_Image_path.length() < 6) {
 
             try {
 
@@ -192,7 +209,7 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
             profileProgressbar.setVisibility(View.GONE);
         }
 
-        gridView = (ExpandableHeightGridView) findViewById(R.id.edit_profile_gv);
+        gridView = (WrappedGridView) findViewById(R.id.edit_profile_gv);
         /**********Ajust Layout Image size depend on screen at Explore ************/
         prepareList();
 
@@ -201,14 +218,11 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
         gridView.setExpanded(true);
 
 
-
-
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             public void onItemClick(AdapterView<?> arg0, View arg1, int position,
                                     long arg3) {
                 //Toast.makeText(mContext, mAdapter.getItem(position), Toast.LENGTH_SHORT).show();
-
                 //profileImg.setImageResource(listShopImg.get(position));
                 profileProgressbar.setVisibility(View.GONE);
 
@@ -365,6 +379,7 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
     }
 
     private View.OnClickListener clickListener = new View.OnClickListener() {
+        @TargetApi(Build.VERSION_CODES.M)
         @Override
         public void onClick(View arg0) {
             // TODO Auto-generated method stub
@@ -378,7 +393,6 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
                         mProgressDialog.show();
 
                         File photo = new File(crop_file_path);
-
                         FileInputStream fileInputStream = null;
 
 
@@ -446,16 +460,21 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
 
                 startDrawerMainActivity();
             }
-            if(arg0 == txt_edit_next){
-                Intent intent = new Intent(getApplicationContext(), ProfileEditTLGActivity.class);
+            if (arg0 == txt_edit_next) {
+                /*Intent intent = new Intent(getApplicationContext(), ProfileEditTLGActivity.class);
 
                 intent.putExtra("UserId", mstrUserId);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
+                startActivity(intent);*/
+                SKToastMessage.showMessage(ProfileEditActivity.this, getResources().getString(R.string.resource_coming_soon_eng), SKToastMessage.ERROR);
+
             }
 
-            if(arg0 == img_camera || arg0 == profileImg){
+            if (arg0 == img_camera || arg0 == profileImg) {
+
+                showPhotoChoice();
+
 
                 //TODO Material Dialog
                 /*if (strLang.equals(Utils.ENG_LANG)) {
@@ -519,20 +538,77 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
     /**
      * *****************Image Chooser***************
      */
+    @TargetApi(Build.VERSION_CODES.M)
     private void takePicture() {
-        chooserType = ChooserType.REQUEST_CAPTURE_PICTURE;
-        imageChooserManager = new ImageChooserManager(this,
-                ChooserType.REQUEST_CAPTURE_PICTURE, "myfolder", true);
-        imageChooserManager.setImageChooserListener(this);
+
         try {
             //progress_wheel.setVisibility(View.VISIBLE);
-            capture_filePath = imageChooserManager.choose();
+            if (!hasPermission(STORAGE_READ_PERMISSION)) {
+
+                //if no permission, request permission
+                String[] perms = {STORAGE_READ_PERMISSION};
+                int permsRequestCode = 200;
+                requestPermissions(perms, permsRequestCode);
+
+            } else {
+
+                chooserType = ChooserType.REQUEST_CAPTURE_PICTURE;
+                imageChooserManager = new ImageChooserManager(this, ChooserType.REQUEST_CAPTURE_PICTURE, "myfolder", true);
+                imageChooserManager.setImageChooserListener(this);
+                capture_filePath = imageChooserManager.choose();
+                //chooseImage();
+            }
+
 
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void showPhotoChoice() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(ProfileEditActivity.this);
+        CharSequence camera ;
+        CharSequence gallery ;
+
+        if (strLang.equals(Utils.ENG_LANG)) {
+             camera = getResources().getString(R.string.action_photo_camera);
+             gallery = getResources().getString(R.string.action_photo_gallery);
+        }else{
+             camera = getResources().getString(R.string.action_photo_camera_mm);
+             gallery = getResources().getString(R.string.action_photo_gallery_mm);
+        }
+        builder.setCancelable(true).
+                setItems(new CharSequence[]{camera, gallery},
+                        new DialogInterface.OnClickListener() {
+                            @TargetApi(Build.VERSION_CODES.M)
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                if (i == CAMERA) {
+                                    if (!hasPermission(CAMERA_PERMISSION)) {
+                                        //if no permission, request permission
+                                        String[] perms = {CAMERA_PERMISSION};
+                                        requestPermissions(perms, CAMERA_REQUEST);
+
+                                    } else {
+                                        takePicture();
+                                    }
+
+                                } else if (i == GALLERY) {
+                                    if (!hasPermission(STORAGE_READ_PERMISSION)) {
+                                        //if no permission, request permission
+                                        String[] perms = {STORAGE_READ_PERMISSION};
+                                        int permsRequestCode = 200;
+                                        requestPermissions(perms, permsRequestCode);
+
+                                    } else {
+                                        chooseImage();
+                                    }
+                                }
+                            }
+                        });
+        builder.show();
     }
 
     private void chooseImage() {
@@ -565,7 +641,6 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
         }
         if ((requestCode == REQUEST_CROP_PICTURE) && (resultCode == RESULT_OK)) {
             // When we are done cropping, display it in the ImageView.
-
             profileImg.setVisibility(View.VISIBLE);
             profileImg.setImageBitmap(BitmapFactory.decodeFile(croppedImageFile.getAbsolutePath()));
             //img_job.setMaxWidth(300);
@@ -573,16 +648,12 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
             crop_file_name = Uri.fromFile(croppedImageFile).getLastPathSegment().toString();
             crop_file_path = Uri.fromFile(croppedImageFile).getPath();
 
-
         }
-
 
         super.onActivityResult(requestCode, resultCode, data);
         //callbackManager.onActivityResult(requestCode, resultCode, data);
 
-
     }
-
 
     @Override
     public void onImageChosen(final ChosenImage image) {
@@ -596,10 +667,8 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
                     //textViewFile.setText(image.getFilePathOriginal());
                     croppedImageFile = new File(image.getFilePathOriginal());
 
-
                     // When the user is done picking a picture, let's start the CropImage Activity,
                     // setting the output image file and size to 200x200 pixels square.
-
 
                     Uri croppedImage = Uri.fromFile(croppedImageFile);
                     CropImageIntentBuilder cropImage = new CropImageIntentBuilder(512, 512, croppedImage);
@@ -660,5 +729,39 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
         public void onError() {
 
         }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+
+            case CAMERA_REQUEST:
+                cameraPermissionAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                if (cameraPermissionAccepted) {
+                    //TODO camera function
+                    takePicture();
+                }
+                break;
+
+            case 200:
+                storagePermissionAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                if (storagePermissionAccepted) {
+                    chooseImage();
+                }
+                break;
+
+        }
+    }
+
+
+    private boolean hasPermission(String permission) {
+
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
+            return (checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED);
+        } else {
+            return true;
+        }
+
+
     }
 }

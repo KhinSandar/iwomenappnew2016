@@ -20,12 +20,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <EditText
+            <org.undp_iwomen.iwomen.ui.widget.CustomEditText
                 android:id="@+id/new_event_title"
                 style="@style/NewEvent.EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Title"/>
+                android:hint="@string/calendar_title"/>
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -33,12 +33,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <EditText
+            <org.undp_iwomen.iwomen.ui.widget.CustomEditText
                 android:id="@+id/new_event_description"
                 style="@style/NewEvent.EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Description"/>
+                android:hint="@string/calendar_desc"/>
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -46,12 +46,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <EditText
+            <org.undp_iwomen.iwomen.ui.widget.CustomEditText
                 android:id="@+id/new_event_location"
                 style="@style/NewEvent.EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Location"/>
+                android:hint="@string/calendar_loca"/>
         </android.support.design.widget.TextInputLayout>
 
 
@@ -67,12 +67,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
 
-                <EditText
+                <org.undp_iwomen.iwomen.ui.widget.CustomEditText
                     android:id="@+id/new_event_start_date"
                     style="@style/NewEvent.EditText.ButtonStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Start Date"/>
+                    android:hint="@string/calendar_start_date"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -86,12 +86,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
 
-                <EditText
+                <org.undp_iwomen.iwomen.ui.widget.CustomEditText
                     android:id="@+id/new_event_end_date"
                     style="@style/NewEvent.EditText.ButtonStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="End Date"/>
+                    android:hint="@string/calendar_end_date"/>
             </android.support.design.widget.TextInputLayout>
 
         </LinearLayout>
@@ -108,12 +108,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
 
-                <EditText
+                <org.undp_iwomen.iwomen.ui.widget.CustomEditText
                     android:id="@+id/new_event_start_time"
                     style="@style/NewEvent.EditText.ButtonStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Start Time"
+                    android:hint="@string/calendar_start_time"
                     />
             </android.support.design.widget.TextInputLayout>
 
@@ -127,25 +127,25 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
 
-                <EditText
+                <org.undp_iwomen.iwomen.ui.widget.CustomEditText
                     android:id="@+id/new_event_end_time"
                     style="@style/NewEvent.EditText.ButtonStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="End Time"/>
+                    android:hint="@string/calendar_end_time"/>
             </android.support.design.widget.TextInputLayout>
 
         </LinearLayout>
 
     </LinearLayout>
 
-    <Button
+    <org.undp_iwomen.iwomen.ui.widget.CustomButton
         android:id="@+id/new_event_save_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@drawable/iwomen_primary_btn_borderless_material"
-        android:text="Save"
+        android:text="@string/competition_save"
         android:textColor="@color/white"/>
 
 </RelativeLayout>

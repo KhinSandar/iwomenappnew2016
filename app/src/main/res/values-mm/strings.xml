@@ -733,4 +733,20 @@ female-pilots-iaa1s
     <string name = "tlg_mdk_leader_role">ေမတိုု႕ကမာၻ ဦးေဆာင္ေကာ္မတီ</string>
     <string name= "empty_talk_together"> ပထမဆံုုး အၿဖစ္ပိုု ့စ္တင္ပါ </string>
     <string name ="google_not_support"></string>
+    <string name="calendar_view_events_rember_day">အမ်ိဳးသမီးမ်ား၏ ဂုုဏ္ၿပဳ အထိမ္းအမွတ္ေန ့ရက္မ်ား</string>
+    <string name="calendar_view_events_create_btn">အစည္းအေ၀းအသစ္တစ္ခုုၿပဳလုုပ္မည္</string>
+    <string name ="calendar_title">အစည္းအေ၀းေခါင္းစဥ္</string>
+    <string name ="calendar_desc">အစည္းအေ၀းအေၾကာင္းအရာ</string>
+    <string name ="calendar_loca">အစည္းအေ၀း ေနရာ</string>
+    <string name ="calendar_start_date">စတင္မည့္ေန ့</string>
+    <string name ="calendar_end_date">ၿပီးဆံုုးမည့္ေန ့</string>
+    <string name ="calendar_start_time">စတင္မည့္ အခ်ိန္</string>
+    <string name ="calendar_end_time">ၿပီးဆံုုးမည့္ အခ်ိန္</string>
+
+    <string name="calendar_new_event">အစည္အေ၀း အသစ္</string>
+    <string name="calendar_detail">အစည္းအေ၀းမွတ္တမ္း</string>
+    <string name="calendar_create_event">အစည္းအေ၀းမွတ္တမ္းၿပဳလုုပ္ၿခင္း</string>
+
+    <string name="action_photo_camera_mm" translatable="false">ဓာတ္ပံုုရိုုက္မည္</string>
+    <string name="action_photo_gallery_mm" translatable="false">ဓာတ္ပံုုေရြးမည္</string>
 </resources>
