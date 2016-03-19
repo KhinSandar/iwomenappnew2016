@@ -446,6 +446,16 @@
             android:name="org.youtube.Youtube_ReviewActivity"
             android:label="@string/title_activity_review"
             android:parentActivityName="org.youtube.Youtube_MainActivity"></activity>
+        <activity
+            android:name=".ui.activity.IWomenPostSearchActivity"
+            android:label="@string/title_activity_post_detail"
+            android:parentActivityName=".ui.activity.DrawerMainActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.activity.DrawerMainActivity" />
+        </activity>
 
     </application>
 

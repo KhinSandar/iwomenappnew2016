@@ -47,6 +47,7 @@ public class RegisterTlgFragment4 extends Fragment implements View.OnClickListen
     private SharedPreferences mSharedPreferencesUserInfo;
     private SharedPreferences.Editor mEditorUserInfo;
     private Button btn_next;
+    private Button btn_tlg_back;
     private ProgressDialog mProgressDialog;
     private Spinner spnTLG;
     private String tlgCityID, tlgCityName;
@@ -91,6 +92,7 @@ public class RegisterTlgFragment4 extends Fragment implements View.OnClickListen
         mSharedPreferencesUserInfo = getActivity().getSharedPreferences(CommonConfig.SHARE_PREFERENCE_USER_INFO, Context.MODE_PRIVATE);
 
         btn_next = (Button) view.findViewById(R.id.Next);
+        btn_tlg_back = (Button)view.findViewById(R.id.register_tlg_back_btn);
         spnTLG = (Spinner) view.findViewById(R.id.register_tlg_spn_township);
         btn_next.setOnClickListener(this);
 
