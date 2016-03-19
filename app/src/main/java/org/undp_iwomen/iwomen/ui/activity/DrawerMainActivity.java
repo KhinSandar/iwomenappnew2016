@@ -733,6 +733,8 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                                 layout_play_game.setVisibility(View.GONE);
                                 break;
                             default:
+                                if(arg0.getCause() != null)
+                                    Log.e("Competition: ", "Error:"+ arg0.getCause().toString());
                                 break;
                         }
                     }
@@ -742,6 +744,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                 public void success(final CompetitionQuestion arg0, Response arg1) {
                     // TODO Auto-generated method stub
                     layout_play_game.setVisibility(View.VISIBLE);
+                    Log.i("Competition : ", "Size = "+arg0.getCorrectAnswer().size());
                     if (arg0.getCorrectAnswer().size() == 0) {
                         img_play_game.setImageResource(R.drawable.sticker2);
                         btn_play_game.setText(getResources().getString(R.string.competition_play_game));
@@ -755,6 +758,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                         });
 
                     } else {
+                        Log.i("Competition : ", "Who is discover");
                         img_play_game.setImageResource(R.drawable.sticker1);
                         btn_play_game.setText(getResources().getString(R.string.competition_discover_winner));
                         btn_play_game.setOnClickListener(new View.OnClickListener() {
