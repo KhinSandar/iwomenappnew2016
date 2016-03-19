@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 
 import com.smk.skconnectiondetector.SKConnectionDetector;
@@ -23,6 +22,7 @@ import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.ui.activity.EventDetailActivity;
 import org.undp_iwomen.iwomen.ui.activity.NewEventActivity;
 import org.undp_iwomen.iwomen.ui.adapter.EventAdapter;
+import org.undp_iwomen.iwomen.ui.widget.CustomButton;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.utils.Connection;
 import org.undp_iwomen.iwomen.utils.Utils;
@@ -60,7 +60,7 @@ public class ViewEventsFragment extends Fragment {
 
     public ItemTouchHelper.Callback mCallback;
 
-    private Button mCreateEventButton;
+    private CustomButton mCreateEventButton;
 
     private CustomTextView txt_women_remember_day;
     private CustomTextView txt_date_title;
@@ -117,7 +117,7 @@ public class ViewEventsFragment extends Fragment {
         mEmptyView = rootView.findViewById(R.id.empty_events_view);
 
 
-        mCreateEventButton = (Button) rootView.findViewById(R.id.view_events_create_event_button);
+        mCreateEventButton = (CustomButton) rootView.findViewById(R.id.view_events_create_event_button);
         txt_women_remember_day = (CustomTextView) rootView.findViewById(R.id.view_events_women_day_txt);
         txt_date_title = (CustomTextView) rootView.findViewById(R.id.view_events_date_title);
 

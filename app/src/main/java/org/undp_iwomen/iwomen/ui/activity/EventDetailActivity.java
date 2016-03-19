@@ -4,25 +4,34 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 
 import org.smk.iwomen.BaseActionBarActivity;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.ui.fragment.EventDetailFragment;
+import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 
 public class EventDetailActivity extends BaseActionBarActivity {
-
+    private CustomTextView textViewTitle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_detail);
 
-        // Set up the tool bar
+        /**********Set up the ToolBar**************/
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
+        toolbar.setTitle("");
+
+        textViewTitle = (CustomTextView) toolbar.findViewById(R.id.title_action2);
+
+        if (toolbar != null) {
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
+        textViewTitle.setText(getResources().getString(R.string.calendar_detail));
+
+        /**********Set up the ToolBar**************/
 
         if(null == savedInstanceState){
             int type = getIntent().getIntExtra(EventDetailFragment.EXTRA_EVENT_TYPE, 0);

@@ -29,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
-            android:text="Remember Day of a Woman"
+            android:text="@string/calendar_view_events_rember_day"
             android:textColor="@color/white"/>
 
     </android.support.v7.widget.CardView>
@@ -64,12 +64,12 @@
         android:visibility="gone"
         android:text="No Event"/>
 
-    <Button
+    <org.undp_iwomen.iwomen.ui.widget.CustomButton
         android:id="@+id/view_events_create_event_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@drawable/iwomen_primary_btn_borderless_material"
-        android:text="Create New Event"
+        android:text="@string/calendar_view_events_create_btn"
         android:textColor="@color/white"/>
 </RelativeLayout>

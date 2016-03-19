@@ -6,16 +6,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.provider.BaseColumns;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.SearchView;
-import android.text.Spannable;
-import android.text.SpannableStringBuilder;
-import android.text.style.ImageSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -25,7 +20,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -81,6 +75,8 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
     private List<IWomenPost> iWomenPostList;
     private StoriesRecentListAdapter stories;
     private ZProgressHUD zPDialog;
+    private boolean isFirstLoading = true;
+
 
     public StoriesMostLikesFragment() {
         // Empty constructor required for fragment subclasses
@@ -1321,16 +1317,16 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
                 @Override
                 public void success(List<IWomenPost> iWomenPosts, Response response) {
                     // Only first REQUEST that visible
-                    if(zPDialog != null && zPDialog.isShowing()){
+                    if(isFirstLoading){
+                        isFirstLoading = false;
                         iWomenPostList.clear();
-                        zPDialog.dismissWithSuccess();
+                        if(zPDialog != null && zPDialog.isShowing())
+                            zPDialog.dismissWithSuccess();
                     }
 
                     iWomenPostList.addAll(iWomenPosts);
                     stories.notifyDataSetChanged();
-
                     StoreUtil.getInstance().saveTo("stories_most_like", iWomenPostList);
-                    
                     isLoading = false;
                     if(iWomenPosts.size() == 12){
                         skListView.setNextPage(true);
@@ -1344,6 +1340,8 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
 
                 @Override
                 public void failure(RetrofitError error) {
+                    if(zPDialog != null && zPDialog.isShowing())
+                        zPDialog.dismissWithSuccess();
                 }
             });
 

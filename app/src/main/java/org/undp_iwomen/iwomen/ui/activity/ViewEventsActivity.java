@@ -5,19 +5,20 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import org.smk.iwomen.BaseActionBarActivity;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.ui.fragment.ViewEventsFragment;
+import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 
 public class ViewEventsActivity extends BaseActionBarActivity {
 
     String str_date,calcuate_date;
     int imonth;
     Bundle bundle;
+    private CustomTextView textViewTitle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,11 +35,26 @@ public class ViewEventsActivity extends BaseActionBarActivity {
         bundle.putString("CalculateDate", calcuate_date);
         bundle.putInt("Month", imonth);
 
-        // Set up the actionbar
+        /*// Set up the actionbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
+        ab.setDisplayHomeAsUpEnabled(true);*/
+        /**********Set up the ToolBar**************/
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("");
+
+        textViewTitle = (CustomTextView) toolbar.findViewById(R.id.title_action2);
+
+        if (toolbar != null) {
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
+        textViewTitle.setText(getResources().getString(R.string.calendar_detail));
+
+        /**********Set up the ToolBar**************/
+
 
         if(null == savedInstanceState){
             ViewEventsFragment viewEventsFragment = new ViewEventsFragment();
