@@ -22,7 +22,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.camera.CropImageIntentBuilder;
@@ -41,8 +40,9 @@ import org.json.JSONObject;
 import org.smk.iwomen.BaseActionBarActivity;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
-import org.undp_iwomen.iwomen.model.retrofit_api.UserPostAPI;
+import org.undp_iwomen.iwomen.model.retrofit_api.SMKserverStringConverterAPI;
 import org.undp_iwomen.iwomen.ui.adapter.EditProfileGridviewAdapter;
+import org.undp_iwomen.iwomen.ui.widget.CustomButton;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.ui.widget.WrappedGridView;
 import org.undp_iwomen.iwomen.utils.Connection;
@@ -61,22 +61,16 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
 
 
     private CustomTextView textViewTitle;
-
-
     private RoundedImageView profileImg;
     private ProgressBar profileProgressbar;
-
     private EditProfileGridviewAdapter mAdapter;
     private ArrayList<String> listShopName;
     private ArrayList<String> listShopImg;
     private WrappedGridView gridView;
-
-
     private Context mContext;
     SharedPreferences sharePrefLanguageUtil;
     String strLang;
     private ProgressDialog mProgressDialog;
-
     String mstrUserId, mstrTitleMm, mstrContentEng;
     private SharedPreferences mSharedPreferencesUserInfo;
     private SharedPreferences.Editor mEditorUserInfo;
@@ -98,7 +92,7 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
     private static int REQUEST_CROP_PICTURE = 2;
 
     //After imagchose
-    private TextView txt_edit_next;
+    private CustomButton btn_edit_next;
     private Button btn_edit;
     private Button btn_cancel;
     private ImageView img_camera;
@@ -118,6 +112,7 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
     private static final int CAMERA = 0;
     private static final int GALLERY = 1;
 
+    private com.pnikosis.materialishprogress.ProgressWheel progress_wheel_gv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,18 +147,22 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
         profileImg.setAdjustViewBounds(true);
         profileImg.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
-        txt_edit_next = (TextView) findViewById(R.id.edit_profile_txt_edit_next);
+        btn_edit_next = (CustomButton) findViewById(R.id.edit_profile_txt_edit_next);
         btn_edit = (Button) findViewById(R.id.edit_profile_btn_save);
         btn_cancel = (Button) findViewById(R.id.edit_profile_btn_cancel);
         img_camera = (ImageView) findViewById(R.id.edit_profile_camera_icon);
 
+        progress_wheel_gv = (com.pnikosis.materialishprogress.ProgressWheel)findViewById(R.id.edit_profile_progress_wheel);
+
+        progress_wheel_gv.setVisibility(View.GONE);
 
         strLang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
 
-
+        //TODO invisible in Profile Register
+        btn_edit_next.setVisibility(View.VISIBLE);
         btn_cancel.setOnClickListener(clickListener);
         btn_edit.setOnClickListener(clickListener);
-        txt_edit_next.setOnClickListener(clickListener);
+        btn_edit_next.setOnClickListener(clickListener);
         img_camera.setOnClickListener(clickListener);
         profileImg.setOnClickListener(clickListener);
 
@@ -305,21 +304,16 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
             mProgressDialog.show();
 
 
-            UserPostAPI.getInstance().getService().getAllStickers(new Callback<String>() {
+            SMKserverStringConverterAPI.getInstance().getService().getAllAvator(new Callback<String>() {
                 @Override
                 public void success(String s, Response response) {
-
                     try {
                         listShopName.clear();
                         listShopImg.clear();
-                        JSONObject whole_body = new JSONObject(s);
-                        JSONArray result = whole_body.getJSONArray("results");
-
-                        for (int i = 0; i < result.length(); i++) {
-                            JSONObject each_object = result.getJSONObject(i);
-
+                        JSONArray whole_body_json_arr = new JSONArray(s);
+                        for (int i = 0; i < whole_body_json_arr.length(); i++) {
+                            JSONObject each_object = whole_body_json_arr.getJSONObject(i);
                             if (!each_object.isNull("objectId")) {
-
 
                                 listShopName.add(each_object.getString("objectId"));
 
@@ -327,32 +321,21 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
                                 listShopName.add("");
                             }
 
-                            if (!each_object.isNull("stickerImg")) {
+                            if (!each_object.isNull("avatorImg")) {
 
-
-                                JSONObject ObjjsonObject = each_object.getJSONObject("stickerImg");
-                                if (!ObjjsonObject.isNull("url")) {
-
-
-                                    listShopImg.add(ObjjsonObject.getString("url"));
-                                } else {
-                                    listShopImg.add("");
-                                }
-
+                                listShopImg.add(each_object.getString("avatorImg"));
 
                             } else {
                                 listShopImg.add("");
                             }
 
-
                         }
-
                         mProgressDialog.dismiss();
                         mAdapter = new EditProfileGridviewAdapter(mContext, listShopName, listShopImg);
                         // Set custom adapter to gridview
-
                         gridView.setExpanded(true);
                         gridView.setAdapter(mAdapter);
+
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -364,13 +347,11 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
                     mProgressDialog.dismiss();
                 }
             });
-        } else {
-            //Utils.doToast(mContext, "Internet Connection need!");
 
+        } else {
             if (strLang.equals(Utils.ENG_LANG)) {
                 Utils.doToastEng(mContext, getResources().getString(R.string.open_internet_warning));
             } else {
-
                 Utils.doToastMM(mContext, getResources().getString(R.string.open_internet_warning_mm));
             }
         }
@@ -460,7 +441,7 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
 
                 startDrawerMainActivity();
             }
-            if (arg0 == txt_edit_next) {
+            if (arg0 == btn_edit_next) {
                 /*Intent intent = new Intent(getApplicationContext(), ProfileEditTLGActivity.class);
 
                 intent.putExtra("UserId", mstrUserId);

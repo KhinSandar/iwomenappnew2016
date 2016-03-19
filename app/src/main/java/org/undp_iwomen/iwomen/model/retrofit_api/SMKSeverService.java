@@ -104,6 +104,14 @@ public interface SMKSeverService {
             //@Query("isAllow") Boolean isAllow,
             Callback<List<IWomenPost>> callback);
 
+    @GET(CommonConfig.GET_POST_BY_SEARCH)
+    void getPostBySearch(
+            @Query("page") int page,
+            @Query("isAllow") int isAllow,
+            @Query("category") String category,
+            @Query("keywords") String keywords,
+            Callback<List<IWomenPost>> callback);
+
 
     ///api-v1/auth/login
     @FormUrlEncoded
@@ -119,4 +127,8 @@ public interface SMKSeverService {
             @Field("postId") String postId,
             @Field("userId") String userId,
             Callback<LikeItem> callback);
+
+    @GET(CommonConfig.GET_ALL_AVATOR)
+    void getAllAvator(
+            Callback<String> callback);
 }

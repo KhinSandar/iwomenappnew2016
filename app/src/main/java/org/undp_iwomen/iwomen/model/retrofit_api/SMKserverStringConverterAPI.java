@@ -46,8 +46,6 @@ public class SMKserverStringConverterAPI {
 
     public SMKserverStringConverterAPI(){
 
-
-
         OkHttpClient okHttpClient = new OkHttpClient();
         okHttpClient.setConnectTimeout(7000, TimeUnit.MILLISECONDS);
         okHttpClient.setReadTimeout(7000, TimeUnit.MILLISECONDS);
@@ -76,11 +74,7 @@ public class SMKserverStringConverterAPI {
 
     }
 
-
-
-
     //.setRequestInterceptor(requestInterceptor)
-
 
     public static SMKserverStringConverterAPI getInstance(){
         if(mInstance == null){

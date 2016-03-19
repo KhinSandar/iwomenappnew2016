@@ -749,4 +749,5 @@ female-pilots-iaa1s
 
     <string name="action_photo_camera_mm" translatable="false">ဓာတ္ပံုုရိုုက္မည္</string>
     <string name="action_photo_gallery_mm" translatable="false">ဓာတ္ပံုုေရြးမည္</string>
+    <string name="search_hint">Search</string>
 </resources>

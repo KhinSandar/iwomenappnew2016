@@ -73,6 +73,10 @@ public class CommonConfig {
 
     public static final String GET_CALENDAR_EVENT = "/api/v1/calendars";
 
+    public static final String GET_IWOMEN_POST_BY_SEARCH = "/api/v1/searchIwomenPost";
+
+    public static final String GET_POST_BY_SEARCH = "/api/v1/searchPosts";
+
     public int getPostMaxCharacterCount () {
         int value = 140;
         return value;
@@ -129,6 +133,8 @@ public class CommonConfig {
     public static final String CREATE_NEW_POST = "/api/v1/posts";
 
     public static final String CREATE_NEW_WOMENPOST = "/api/v1/iwomenPosts";
+
+    public static final String GET_ALL_AVATOR = "/api/v1/avators";
 
 
 }

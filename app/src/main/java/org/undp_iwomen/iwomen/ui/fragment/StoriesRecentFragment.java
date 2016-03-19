@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.provider.BaseColumns;
 import android.support.design.widget.FloatingActionButton;
@@ -43,6 +44,7 @@ import org.undp_iwomen.iwomen.data.FeedItem;
 import org.undp_iwomen.iwomen.database.TableAndColumnsName;
 import org.undp_iwomen.iwomen.model.retrofit_api.UserPostAPI;
 import org.undp_iwomen.iwomen.provider.IwomenProviderData;
+import org.undp_iwomen.iwomen.ui.activity.IWomenPostSearchActivity;
 import org.undp_iwomen.iwomen.ui.activity.NewPostActivity;
 import org.undp_iwomen.iwomen.ui.activity.PostDetailActivity;
 import org.undp_iwomen.iwomen.ui.adapter.IWomenPostListByDateRecyclerViewAdapter;
@@ -61,7 +63,7 @@ import retrofit.client.Response;
 /**
  * Created by khinsandar on 7/29/15.
  */
-public class StoriesRecentFragment extends Fragment implements View.OnClickListener, SearchView.OnQueryTextListener {
+public class StoriesRecentFragment extends Fragment implements View.OnClickListener {
     public static final String ARG_MENU_INDEX = "index";
 
     private Context mContext;
@@ -82,6 +84,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
     private int paginater = 1;
     private StoriesRecentListAdapter stories;
     private boolean isFirstLoading = true;
+    private SearchView sv;
 
     public StoriesRecentFragment() {
         // Empty constructor required for fragment subclasses
@@ -386,74 +389,23 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
 
         }
 
-         /*final MenuItem item = menu.add(0, 12, 0, "Search");
-        //menu.removeItem(12);
-        item.setIcon(R.drawable.ic_action_search);
-        item.setShowAsAction(MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW
-                | MenuItem.SHOW_AS_ACTION_ALWAYS);
 
-
-       final SearchView sv = new SearchView(getActivity());//.getActionBar().getThemedContext()
-
-        //item.setActionView(sv);
-
-        SearchView.SearchAutoComplete searchAutoComplete = (SearchView.SearchAutoComplete) sv.findViewById(android.support.v7.appcompat.R.id.search_src_text);
-
-
-        //int searchPlateId = sv.getContext().getResources().getIdentifier("android:id/search_plate", null, null);
-        // Getting the 'search_plate' LinearLayout.
-        View searchPlate = sv.findViewById(android.support.v7.appcompat.R.id.search_plate);
-        // Setting background of 'search_plate' to earlier defined drawable.
-        searchPlate.setBackgroundResource(R.drawable.searchviewbackground);
-
-
-        sv.setSubmitButtonEnabled(false);
-        sv.setOnQueryTextListener(this);
-        *//*EditText et_search = (EditText) sv.findViewById(R.id.search_src_text);
-        et_search.setTextColor(Color.WHITE);*//*
-
-        *//*ImageView clearBtn = (ImageView) sv.findViewById(R.id.search_close_btn);
-        clearBtn.setImageResource(R.drawable.ic_action_cancel);*//*
-
-        ImageView close = (ImageView) sv.findViewById(android.support.v7.appcompat.R.id.search_close_btn);
-        close.setImageResource(R.drawable.ic_action_cancel);
-        close.setAlpha(192);
-
+        SearchView searchView = (SearchView) menu.findItem(R.id.action_menu_search).getActionView();
+        SearchView.SearchAutoComplete searchAutoComplete = (SearchView.SearchAutoComplete)searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
         searchAutoComplete.setHintTextColor(Color.WHITE);
         searchAutoComplete.setTextColor(Color.WHITE);
-
-        ImageView search_btn = (ImageView) sv.findViewById(R.id.search_button);
-        search_btn.setBackgroundResource(R.drawable.ic_action_search);
-
-        SpannableStringBuilder ssb = new SpannableStringBuilder("   ");
-        ssb.append("Search");
-        Drawable searchIcon = getActivity().getResources().getDrawable(R.drawable.ic_action_search);
-        int textSize = (int) (searchAutoComplete.getTextSize() * 1.25);
-        searchIcon.setBounds(0, 0, textSize, textSize);
-        ssb.setSpan(new ImageSpan(searchIcon), 1, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        searchAutoComplete.setHint(ssb);
-
-        *//*sv.setQueryHint(Html.fromHtml("<font color = #ffffff>" + getResources().getString(R.string.search_hint) + "</font>"));*//*
-
-
-        close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //index = 1;
-                setupAdapter();
-                sv.setIconified(true);
-                sv.setQuery("", false);
+        SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
+            public boolean onQueryTextChange(String newText) {
+                // this is your adapter that will be filtered
+                return true;
             }
-        });
 
-        sv.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean queryTextFocused) {
-                if (!queryTextFocused) {
-                    item.collapseActionView();
-                }
+            public boolean onQueryTextSubmit(String query) {
+                startActivity(new Intent(getActivity(), IWomenPostSearchActivity.class).putExtra("keywords", query));
+                return false;
             }
-        });*/
+        };
+        searchView.setOnQueryTextListener(queryTextListener);
     }
 
     @Override
@@ -462,10 +414,8 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
         int id = item.getItemId();
         switch (id) {
 
-            case R.id.action_refresh:
+            case R.id.action_search:
 
-                getIWomenPostByLimit();
-                return true;
             case R.id.action_rating:
                 showReviewDetailDialog();
                 return true;
@@ -580,8 +530,6 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
         cv.put(TableAndColumnsName.PostUtil.STATUS, "0");
         cv.put(TableAndColumnsName.PostUtil.CREATED_DATE, "Sun Aug 02 18:07:00 GMT+06:30 2015");
         cv.put(TableAndColumnsName.PostUtil.UPDATED_DATE, "Sun Aug 02 18:07:00 GMT+06:30 2015");
-
-        //Log.e("savePostLocal : ", "= = = = = = = : " + cv.toString());
 
         getActivity().getContentResolver().insert(IwomenProviderData.PostProvider.CONTETN_URI, cv);
 
@@ -1196,131 +1144,9 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
                     if (cursor != null && cursor.moveToFirst()) {
 
                         date = new Date(cursor.getString(cursor.getColumnIndex(TableAndColumnsName.PostUtil.CREATED_DATE)));
-                    /*First Row Id﹕ ==>5
-                    08-02 18:11:11.175  10088-10088/org.undp_iwomen.iwomen E/Date﹕ ==>Sun Aug 02 18:07:00 GMT+06:30 2015
-                    08-02 18:11:11.175  10088-10088/org.undp_iwomen.iwomen E/First Row Data﹕ ==>Sun Aug 02 18:07:00 GMT+06:30 2015*/
                         Log.e("First Row Id", "==>" + cursor.getString(cursor.getColumnIndex("_id")));
                         Log.e("Date", "==>" + date.toString());
                         Log.e("First Row Data", "==>" + cursor.getString(cursor.getColumnIndex(TableAndColumnsName.PostUtil.CREATED_DATE)));
-
-                        //TODO GET POST And Save in DB
-
-                        /*ParseQuery<Post> query = Post.getQuery();
-
-
-                        query.whereGreaterThan("postUploadedDate", date);
-                        //query.whereLessThan("likes",)
-                        query.whereEqualTo("isAllow", true);
-                        query.setLimit(3);
-
-                        query.orderByDescending("postUploadedDate"); //Latest date is first
-                        //query.orderByDescending("likes");
-                        query.findInBackground(new FindCallback<Post>() {
-                            @Override
-                            public void done(List<Post> postList, ParseException e) {
-                                if (e == null) {
-
-                                    for (Post post : postList) {
-                                        Log.e("Second time Data", "==>" + post.getObjectId());
-                                        final ContentValues cv = new ContentValues();
-                                        cv.put(TableAndColumnsName.PostUtil.POST_OBJ_ID, post.getObjectId());
-
-                                        if (post.get("title") != null) {
-
-                                            cv.put(TableAndColumnsName.PostUtil.POST_TITLE, post.getString("title"));
-                                        } else {
-                                            cv.put(TableAndColumnsName.PostUtil.POST_TITLE, "");
-
-                                        }
-
-                                        if (post.get("content") != null) {
-
-                                            cv.put(TableAndColumnsName.PostUtil.POST_CONTENT, post.getString("content"));
-
-                                        } else {
-                                            cv.put(TableAndColumnsName.PostUtil.POST_CONTENT, "");
-
-                                        }
-
-                                        cv.put(TableAndColumnsName.PostUtil.POST_LIKES, post.getNumber("likes").intValue());
-
-
-                                        if (post.get("image") != null) {
-
-                                            cv.put(TableAndColumnsName.PostUtil.POST_IMG_PATH, post.getParseFile("image").getUrl());
-                                        } else {
-                                            cv.put(TableAndColumnsName.PostUtil.POST_IMG_PATH, "");
-
-                                        }
-                                        cv.put(TableAndColumnsName.PostUtil.POST_CONTENT_TYPES, post.getString("contentType"));//
-
-                                        if (post.get("image") != null) {
-                                            cv.put(TableAndColumnsName.PostUtil.POST_CONTENT_USER_ID, post.getParseObject("userId").getObjectId());
-                                        } else {
-                                            cv.put(TableAndColumnsName.PostUtil.POST_CONTENT_USER_ID, "");
-                                        }
-
-                                        cv.put(TableAndColumnsName.PostUtil.POST_CONTENT_USER_NAME, post.getString("postUploadName"));
-
-                                        if (post.get("postUploadPersonImg") != null) {
-
-                                            cv.put(TableAndColumnsName.PostUtil.POST_CONTENT_USER_IMG_PATH, post.getParseFile("postUploadPersonImg").getUrl());
-
-                                        } else {
-                                            cv.put(TableAndColumnsName.PostUtil.POST_CONTENT_USER_IMG_PATH, "");
-
-                                        }
-                                        if (post.get("videoId") != null) {
-
-                                            cv.put(TableAndColumnsName.PostUtil.POST_CONTENT_VIDEO_ID, post.getString("videoId"));
-
-                                        } else {
-                                            cv.put(TableAndColumnsName.PostUtil.POST_CONTENT_VIDEO_ID, "");
-
-                                        }
-                                        if (post.get("suggest_section") != null) {
-
-                                            cv.put(TableAndColumnsName.PostUtil.POST_CONTENT_SUGGEST_TEXT, post.getString("suggest_section"));
-
-                                        } else {
-                                            cv.put(TableAndColumnsName.PostUtil.POST_CONTENT_SUGGEST_TEXT, "");
-
-                                        }
-                                        if (post.get("titleMm") != null) {
-
-                                            cv.put(TableAndColumnsName.PostUtil.POST_CONTENT_TITLE_MM, post.getString("titleMm"));
-
-                                        } else {
-                                            cv.put(TableAndColumnsName.PostUtil.POST_CONTENT_TITLE_MM, "");
-
-                                        }
-                                        if (post.get("content_mm") != null) {
-                                            cv.put(TableAndColumnsName.PostUtil.POST_CONTENT_MM, post.getString("content_mm"));
-                                        } else {
-                                            cv.put(TableAndColumnsName.PostUtil.POST_CONTENT_MM, "");
-
-                                        }
-
-                                        cv.put(TableAndColumnsName.PostUtil.LIKE_STATUS, "0");
-
-                                        cv.put(TableAndColumnsName.PostUtil.STATUS, "0");
-                                        cv.put(TableAndColumnsName.PostUtil.CREATED_DATE, post.get("postUploadedDate").toString());// post.get("postUploadedDate").toString() //post.getCreatedAt().toString()
-                                        cv.put(TableAndColumnsName.PostUtil.UPDATED_DATE, post.get("postUploadedDate").toString());
-
-                                        //Log.e("savePostLocal : ", "= = = = = = = : " + cv.toString());
-
-                                        getActivity().getContentResolver().insert(IwomenProviderData.PostProvider.CONTETN_URI, cv);
-
-                                    }
-                                    setupAdapter();
-
-                                } else {
-                                    Log.e("Post Get Err", "===>" + e.toString());
-
-                                }
-                            }
-                        });*/
-
 
                     }
                 }
@@ -1328,122 +1154,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
 
             } else {
 
-                //GET POST and save  AFTER INITIAL SAVE TIME
-                /*ParseQuery<Post> query = Post.getQuery();
-                //query.orderByDescending("createdAt"); //Latest date is first
-                query.orderByAscending("postUploadedDate");//Very first row Date is first
-                //query.orderByDescending("likes");//Most likes is first
-                query.whereEqualTo("isAllow", true);
-                query.setLimit(3);
-                query.findInBackground(new FindCallback<Post>() {
-                    @Override
-                    public void done(List<Post> postList, ParseException e) {
 
-                        if (e == null) {
-                            Log.e("Post sizes", "==>" + postList.size() + "/" + postList.get(0).toString());
-
-                            for (Post post : postList) {
-
-                                final ContentValues cv = new ContentValues();
-                                cv.put(TableAndColumnsName.PostUtil.POST_OBJ_ID, post.getObjectId());
-                                if (post.get("title") != null) {
-
-                                    cv.put(TableAndColumnsName.PostUtil.POST_TITLE, post.getString("title"));
-                                } else {
-                                    cv.put(TableAndColumnsName.PostUtil.POST_TITLE, "");
-
-                                }
-
-                                if (post.get("content") != null) {
-
-                                    cv.put(TableAndColumnsName.PostUtil.POST_CONTENT, post.getString("content"));
-
-                                } else {
-                                    cv.put(TableAndColumnsName.PostUtil.POST_CONTENT, "");
-
-                                }
-                                cv.put(TableAndColumnsName.PostUtil.POST_LIKES, post.getNumber("likes").intValue());
-
-                                if (post.get("image") != null) {
-
-                                    cv.put(TableAndColumnsName.PostUtil.POST_IMG_PATH, post.getParseFile("image").getUrl());
-                                } else {
-                                    cv.put(TableAndColumnsName.PostUtil.POST_IMG_PATH, "");
-
-                                }
-                                cv.put(TableAndColumnsName.PostUtil.POST_CONTENT_TYPES, post.getString("contentType"));//
-
-                                if (post.get("userId") != null) {
-                                    cv.put(TableAndColumnsName.PostUtil.POST_CONTENT_USER_ID, post.getParseObject("userId").getObjectId());
-                                } else {
-                                    cv.put(TableAndColumnsName.PostUtil.POST_CONTENT_USER_ID, "");
-                                }
-
-                                cv.put(TableAndColumnsName.PostUtil.POST_CONTENT_USER_NAME, post.getString("postUploadName"));
-
-                                if (post.get("postUploadPersonImg") != null) {
-
-                                    cv.put(TableAndColumnsName.PostUtil.POST_CONTENT_USER_IMG_PATH, post.getParseFile("postUploadPersonImg").getUrl());
-
-                                } else {
-                                    cv.put(TableAndColumnsName.PostUtil.POST_CONTENT_USER_IMG_PATH, "");
-
-                                }
-
-
-                                if (post.get("videoId") != null) {
-
-                                    cv.put(TableAndColumnsName.PostUtil.POST_CONTENT_VIDEO_ID, post.getString("videoId"));
-
-                                } else {
-                                    cv.put(TableAndColumnsName.PostUtil.POST_CONTENT_VIDEO_ID, "");
-
-                                }
-                                if (post.get("suggest_section") != null) {
-
-                                    cv.put(TableAndColumnsName.PostUtil.POST_CONTENT_SUGGEST_TEXT, post.getString("suggest_section"));
-
-                                } else {
-                                    cv.put(TableAndColumnsName.PostUtil.POST_CONTENT_SUGGEST_TEXT, "");
-
-                                }
-                                if (post.get("titleMm") != null) {
-
-                                    cv.put(TableAndColumnsName.PostUtil.POST_CONTENT_TITLE_MM, post.getString("titleMm"));
-
-                                } else {
-                                    cv.put(TableAndColumnsName.PostUtil.POST_CONTENT_TITLE_MM, "");
-
-                                }
-                                if (post.get("content_mm") != null) {
-                                    cv.put(TableAndColumnsName.PostUtil.POST_CONTENT_MM, post.getString("content_mm"));
-                                } else {
-                                    cv.put(TableAndColumnsName.PostUtil.POST_CONTENT_MM, "");
-
-                                }
-
-                                cv.put(TableAndColumnsName.PostUtil.LIKE_STATUS, "0");
-
-                                cv.put(TableAndColumnsName.PostUtil.STATUS, "0");
-                                cv.put(TableAndColumnsName.PostUtil.CREATED_DATE, post.get("postUploadedDate").toString());// post.get("postUploadedDate").toString() //post.getCreatedAt().toString()
-                                cv.put(TableAndColumnsName.PostUtil.UPDATED_DATE, post.get("postUploadedDate").toString());
-
-
-                                //Log.e("savePostLocal : ", "= = = = = = = : " + cv.toString());
-
-
-                                getActivity().getContentResolver().insert(IwomenProviderData.PostProvider.CONTETN_URI, cv);
-
-
-                            }
-                            setupAdapter();
-
-
-                        } else {
-                            Log.e("Post Get Err", "===>" + e.toString());
-                        }
-                    }
-                });*/
             }
 
         } else {
@@ -1541,28 +1252,6 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
                 break;
         }
 
-    }
-
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        Log.d("iWomen", query);
-        stories.filter(query);
-        return false;
-    }
-
-    @Override
-    public boolean onQueryTextChange(String s) {
-        /*if (s.equals("")) {
-            //index = 1;
-            setupAdapter();
-
-        }*/
-        Log.d("iWomen", s);
-        if(s != null && s.length() > 0)
-            stories.filter(s);
-        else
-            stories.notifyDataSetChanged();
-        return false;
     }
 }
 

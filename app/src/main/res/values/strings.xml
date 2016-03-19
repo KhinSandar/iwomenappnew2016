@@ -749,4 +749,5 @@ Shirin Ebadi, J.D., was awarded the 2003 Nobel Peace Prize for her efforts to pr
 
     <string name="action_photo_camera" translatable="false" >Take Photo</string>
     <string name="action_photo_gallery" translatable="false" >Choose Existing</string>
+    <string name="search_hint">Search</string>
 </resources>

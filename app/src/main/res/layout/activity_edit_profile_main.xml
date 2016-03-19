@@ -62,7 +62,7 @@
                 android:visibility="visible" />
         </FrameLayout>
 
-        <LinearLayout
+       <!-- <LinearLayout
             android:id="@+id/edit_profile_ly_next"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -81,7 +81,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/edit_profile_btn_next_tlg_edit" />
-        </LinearLayout>
+        </LinearLayout>-->
 
         <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
@@ -93,6 +93,7 @@
             <include layout="@layout/activity_edit_profile" />
 
         </ScrollView>
+
 
     </LinearLayout>
 

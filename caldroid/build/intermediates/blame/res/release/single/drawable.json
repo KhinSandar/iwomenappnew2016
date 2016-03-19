@@ -8,12 +8,12 @@
         "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\drawable\\red_border_dark.xml"
     },
     {
-        "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\build\\intermediates\\res\\merged\\release\\drawable\\left_arrow.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\drawable\\left_arrow.xml"
-    },
-    {
         "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\build\\intermediates\\res\\merged\\release\\drawable\\cell_bg_dark.xml",
         "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\drawable\\cell_bg_dark.xml"
+    },
+    {
+        "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\build\\intermediates\\res\\merged\\release\\drawable\\left_arrow.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\drawable\\left_arrow.xml"
     },
     {
         "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\build\\intermediates\\res\\merged\\release\\drawable\\red_border.xml",

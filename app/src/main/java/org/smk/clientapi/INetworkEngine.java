@@ -168,6 +168,13 @@ public interface INetworkEngine {
             @Query("isAllow") int isAllow,
             Callback<List<IWomenPost>> callback);
 
+    @GET(CommonConfig.GET_IWOMEN_POST_BY_SEARCH)
+    void getIWomenPostBySearch(
+            @Query("page") int page,
+            @Query("isAllow") int isAllow,
+            @Query("keywords") String keywords,
+            Callback<List<IWomenPost>> callback);
+
     @GET(CommonConfig.GET_CALENDDARE_EVENT_LIST_BY_DATE_URL)
     void getEventListByDate(
             @Query("date") String date,
