@@ -1,12 +1,16 @@
 package org.undp_iwomen.iwomen.ui.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 
+import com.google.gson.Gson;
 import com.smk.skconnectiondetector.SKConnectionDetector;
 import com.smk.sklistview.SKListView;
 import com.thuongnh.zprogresshud.ZProgressHUD;
@@ -39,11 +43,7 @@ public class IWomenPostSearchActivity extends BaseActionBarActivity {
     private SharedPreferences sharePrefLanguageUtil;
     private String mstr_lang;
     private CustomTextView textViewTitle;
-<<<<<<< HEAD
     private String keywords;
-=======
-    private String mstrKeyWords;
->>>>>>> e73d298cfdfedcf1b133b7fa0c4b8617090b0aff
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,18 +65,36 @@ public class IWomenPostSearchActivity extends BaseActionBarActivity {
         sharePrefLanguageUtil = getSharedPreferences(Utils.PREF_SETTING, Context.MODE_PRIVATE);
         mstr_lang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
 
-<<<<<<< HEAD
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){
             keywords = bundle.getString("keywords");
         }
 
-=======
->>>>>>> e73d298cfdfedcf1b133b7fa0c4b8617090b0aff
+
         skListView = (SKListView) findViewById(R.id.lst_search_stories);
         zPDialog = new ZProgressHUD(IWomenPostSearchActivity.this);
         zPDialog.show();
         getIWomenPostBySearch();
+
+        skListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                try {
+
+                    Intent intent = new Intent(mContext, PostDetailActivity.class);
+
+                    intent.putExtra("post_type", "iWomenPost");
+                    intent.putExtra("postObj", new Gson().toJson(parent.getAdapter().getItem(position)));
+
+                    //intent.putExtra("ImgUrl", mImgurl.get(getPosition()));
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    mContext.startActivity(intent);
+
+                } catch (ArrayIndexOutOfBoundsException e) {
+                }
+            }
+        });
     }
     private boolean isLoading = true;
     private SKListView.Callbacks skCallbacks = new SKListView.Callbacks() {

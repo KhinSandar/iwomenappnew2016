@@ -570,6 +570,8 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         img_social_no_ear_viber.setOnClickListener(this);
         img_social_audio.setOnClickListener(this);
         txt_social_share.setOnClickListener(this);
+        txt_player.setOnClickListener(this
+        );
         //mLikeAnimatedButton.setText(item.getLikes() + "");.setOnClickListener(this);
         /*ly_postdetail_audio.setOnClickListener(this);
         ly_postdetail_download.setOnClickListener(this);
@@ -1102,12 +1104,12 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                     userprofile_Image_path = "http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-7f0323bc-a862-4184-9e51-d55189fcab18-ic_launcher.png";
                 }
                 //Log.e("<<Comment>>","==>" +postType,postObjId, user_obj_id, user_name, stickerArrayList.get(position).getStickerImgPath()+""+ userprofile_Image_path+""+ cmt_text );
-                SMKserverAPI.getInstance().getService().postCommentByPostID(postType,postObjId, user_obj_id, user_name, stickerArrayList.get(position).getStickerImgPath(), userprofile_Image_path, cmt_text, new Callback<CommentItem>() {
+                SMKserverAPI.getInstance().getService().postCommentByPostID(postType, postObjId, user_obj_id, user_name, stickerArrayList.get(position).getStickerImgPath(), userprofile_Image_path, cmt_text, new Callback<CommentItem>() {
                     @Override
                     public void success(CommentItem calendarEvent, Response response) {
 
-                        txt_cmd_count.setText(calendarEvent.getCommentCount() +"");
-                        txt_social_no_ear_comment.setText(calendarEvent.getCommentCount() +"");
+                        txt_cmd_count.setText(calendarEvent.getCommentCount() + "");
+                        txt_social_no_ear_comment.setText(calendarEvent.getCommentCount() + "");
                         getCommentByPagination();
 
                     }
@@ -1988,11 +1990,32 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
                 break;
 
-            /*case R.id.postdetail_smile_img_upload:
-                //Utils.doToastEng(getApplicationContext(),"Smile");
-                //et_comment_frame.setVisibility(View.VISIBLE);
+            case R.id.postdetail_player_text:
+                if (mstrPostType.equalsIgnoreCase("Video")) {
+                    txt_player.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(mContext, YouTubeWebviewActivity.class);
 
-                break;*/
+                            if (mVideoId != null) {
+                                intent.putExtra("video_id", mVideoId);
+                            } else {
+                                intent.putExtra("video_id", "YOAu82xu8VY");
+                            }
+
+
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            mContext.startActivity(intent);
+
+
+                        }
+                    });
+                } else if (mstrPostType.equalsIgnoreCase("Audio")) {
+                    img_social_audio.performClick();
+                }
+
+                break;
             case R.id.social_viber:
 
                 try {
@@ -2058,8 +2081,8 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                             @Override
                             public void success(CommentItem calendarEvent, Response response) {
 
-                                txt_cmd_count.setText(calendarEvent.getCommentCount()+"");
-                                txt_social_no_ear_comment.setText(calendarEvent.getCommentCount() +"");
+                                txt_cmd_count.setText(calendarEvent.getCommentCount() + "");
+                                txt_social_no_ear_comment.setText(calendarEvent.getCommentCount() + "");
 
                                 //TODO Comment load again
                                 if (Connection.isOnline(mContext)) {
@@ -2188,15 +2211,18 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                 } else if (mstrPostType.equalsIgnoreCase("Audio")) {
 
                     /***********EPP functions **************/
-                    if (!isPlaying) {
+                    if (iWomenPost.getPostUploadName().equalsIgnoreCase("Wai Wai")) {
+                        //MediaPlayer mediaPlayer;
+                        if (!isPlaying) {
 
-                        mMedia = MediaPlayer.create(this, R.raw.wai_wai_audio);
+                            mMedia = MediaPlayer.create(this, R.raw.wai_wai_audio);
 
-                        mMedia.start();
+                            mMedia.start();
 
-                        isPlaying = true;
-                    } else {
-                        Utils.doToastEng(getApplicationContext(), "Is playing ");
+                            isPlaying = true;
+                        } else {
+                            Utils.doToastEng(getApplicationContext(), "Is playing ");
+                        }
                     }
 
                 }
@@ -2238,45 +2264,53 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                 break;
 
             case R.id.social_audio:
-                SKToastMessage.showMessage(PostDetailActivity.this, getResources().getString(R.string.resource_coming_soon_eng), SKToastMessage.ERROR);
+                if (mstrAudioFilePath.length() == 10 ) {
+                    SKToastMessage.showMessage(PostDetailActivity.this, getResources().getString(R.string.resource_coming_soon_eng), SKToastMessage.ERROR);
+                }
+
                 if (Connection.isOnline(getApplicationContext())) {
 
+                    Log.e("<<PostDetail>>","<<isPlay>>" + isPlaying);
                     //String url = "https://dl.dropboxusercontent.com/u/10281242/sample_audio.mp3"; //Default
                     if (mstrAudioFilePath != null && mstrAudioFilePath.length() > 20) {
-                        try{
-                            final MediaPlayer mediaPlayer = new MediaPlayer();
-                            // Set type to streaming
-                            mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                            // Listen for if the audio file can't be prepared
-                            mediaPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener() {
-                                @Override
-                                public boolean onError(MediaPlayer mp, int what, int extra) {
-                                    // ... react appropriately ...
-                                    // The MediaPlayer has moved to the Error state, must be reset!
-                                    return false;
+                        try {
+
+
+
+                                mMedia= new MediaPlayer();
+                                // Set type to streaming
+                                mMedia.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                                // Listen for if the audio file can't be prepared
+                                mMedia.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+                                    @Override
+                                    public boolean onError(MediaPlayer mp, int what, int extra) {
+                                        // ... react appropriately ...
+                                        // The MediaPlayer has moved to the Error state, must be reset!
+                                        return false;
+                                    }
+                                });
+                                // Attach to when audio file is prepared for playing
+                                mMedia.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                                    @Override
+                                    public void onPrepared(MediaPlayer mp) {
+                                        mMedia.start();
+                                    }
+                                });
+                                // Set the data source to the remote URL
+                                try {
+                                    mMedia.setDataSource(mstrAudioFilePath);
+                                } catch (IOException e) {
+                                    e.printStackTrace();
                                 }
-                            });
-                            // Attach to when audio file is prepared for playing
-                            mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                                @Override
-                                public void onPrepared(MediaPlayer mp) {
-                                    mediaPlayer.start();
-                                }
-                            });
-                            // Set the data source to the remote URL
-                            try {
-                                mediaPlayer.setDataSource(mstrAudioFilePath);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                            // Trigger an async preparation which will file listener when completed
-                            mediaPlayer.prepareAsync();
-                        }catch (NullPointerException e){
+                                // Trigger an async preparation which will file listener when completed
+                                mMedia.prepareAsync();
+                                isPlaying = true;
+
+                        } catch (NullPointerException e) {
 
                         }
 
                     }
-
 
 
                 } else {

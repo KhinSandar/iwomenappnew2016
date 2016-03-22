@@ -6,13 +6,13 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-    <Button
+    <org.undp_iwomen.iwomen.ui.widget.CustomButton
         android:id="@+id/new_post_upload_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@drawable/iwomen_primary_btn_borderless_material"
-        android:text="Upload Post"
+        android:text="@string/audio_upload_post"
         android:textColor="@color/white"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -69,21 +69,8 @@
             </FrameLayout>
 
 
-            <TextView
+            <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                 android:id="@+id/new_post_photo_upload_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/clickable_bg_white"
-                android:drawableLeft="@drawable/ic_take_photo"
-                android:drawablePadding="8dp"
-                android:gravity="center_vertical"
-                android:paddingBottom="8dp"
-                android:paddingTop="8dp"
-                android:text="Upload Photo"
-                android:textAllCaps="true" />
-
-            <TextView
-                android:id="@+id/new_post_photo_take_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/clickable_bg_white"
@@ -92,10 +79,23 @@
                 android:gravity="center_vertical"
                 android:paddingBottom="8dp"
                 android:paddingTop="8dp"
-                android:text="Take Photo"
+                android:text="@string/audio_upload_photo"
                 android:textAllCaps="true" />
 
-            <TextView
+            <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                android:id="@+id/new_post_photo_take_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/clickable_bg_white"
+                android:drawableLeft="@drawable/ic_take_photo"
+                android:drawablePadding="8dp"
+                android:gravity="center_vertical"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp"
+                android:text="@string/aduio_take_photo"
+                android:textAllCaps="true" />
+
+            <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                 android:id="@+id/new_post_audio_upload_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -107,7 +107,7 @@
                 android:paddingTop="8dp"
                 android:text="@string/audio_record_btn_txt" />
 
-            <TextView
+            <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                 android:id="@+id/new_post_video_upload_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -117,7 +117,7 @@
                 android:gravity="center_vertical"
                 android:paddingBottom="8dp"
                 android:paddingTop="8dp"
-                android:text="Click here to Upload Video" />
+                android:text="@string/audio_vid_file" />
 
         </LinearLayout>
 
@@ -157,7 +157,7 @@
                 app:progressBarThickness="10dp"
                 app:progressbarColor="@color/primary" />
 
-            <TextView
+            <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                 android:id="@+id/audio_record_progress_btn"
                 android:layout_width="105dp"
                 android:layout_height="105dp"
@@ -176,12 +176,12 @@
             android:layout_centerHorizontal="true"
             android:paddingLeft="24dp">
 
-            <TextView
+            <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                 android:id="@+id/audio_record_done_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
-                android:text="OK"
+                android:text="@string/ok"
                 android:textColor="@color/white"
                 android:background="@color/primary"
                 android:layout_margin="8dp"/>
@@ -191,13 +191,13 @@
                 android:layout_height="match_parent"
                 android:background="@color/black"/>-->
 
-            <TextView
+            <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                 android:id="@+id/audio_record_dismiss_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
                 android:layout_margin="8dp"
-                android:text="CANCEL"
+                android:text="@string/audio_cancel"
                 android:textColor="@color/white"
                 android:background="@color/primary"/>
 
