@@ -39,11 +39,7 @@ public class IWomenPostSearchActivity extends BaseActionBarActivity {
     private SharedPreferences sharePrefLanguageUtil;
     private String mstr_lang;
     private CustomTextView textViewTitle;
-<<<<<<< HEAD
     private String keywords;
-=======
-    private String mstrKeyWords;
->>>>>>> e73d298cfdfedcf1b133b7fa0c4b8617090b0aff
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,14 +61,10 @@ public class IWomenPostSearchActivity extends BaseActionBarActivity {
         sharePrefLanguageUtil = getSharedPreferences(Utils.PREF_SETTING, Context.MODE_PRIVATE);
         mstr_lang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
 
-<<<<<<< HEAD
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){
             keywords = bundle.getString("keywords");
         }
-
-=======
->>>>>>> e73d298cfdfedcf1b133b7fa0c4b8617090b0aff
         skListView = (SKListView) findViewById(R.id.lst_search_stories);
         zPDialog = new ZProgressHUD(IWomenPostSearchActivity.this);
         zPDialog.show();
