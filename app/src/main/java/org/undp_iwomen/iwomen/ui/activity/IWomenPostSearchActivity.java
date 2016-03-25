@@ -1,12 +1,16 @@
 package org.undp_iwomen.iwomen.ui.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 
+import com.google.gson.Gson;
 import com.smk.skconnectiondetector.SKConnectionDetector;
 import com.smk.sklistview.SKListView;
 import com.thuongnh.zprogresshud.ZProgressHUD;
@@ -65,10 +69,31 @@ public class IWomenPostSearchActivity extends BaseActionBarActivity {
         if(bundle != null){
             keywords = bundle.getString("keywords");
         }
+
         skListView = (SKListView) findViewById(R.id.lst_search_stories);
         zPDialog = new ZProgressHUD(IWomenPostSearchActivity.this);
         zPDialog.show();
         getIWomenPostBySearch();
+
+        skListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                try {
+
+                    Intent intent = new Intent(mContext, PostDetailActivity.class);
+
+                    intent.putExtra("post_type", "iWomenPost");
+                    intent.putExtra("postObj", new Gson().toJson(parent.getAdapter().getItem(position)));
+
+                    //intent.putExtra("ImgUrl", mImgurl.get(getPosition()));
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    mContext.startActivity(intent);
+
+                } catch (ArrayIndexOutOfBoundsException e) {
+                }
+            }
+        });
     }
     private boolean isLoading = true;
     private SKListView.Callbacks skCallbacks = new SKListView.Callbacks() {

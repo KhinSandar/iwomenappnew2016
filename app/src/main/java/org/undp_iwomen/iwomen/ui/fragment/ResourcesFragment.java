@@ -28,7 +28,6 @@ import com.thuongnh.zprogresshud.ZProgressHUD;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.smk.application.StoreUtil;
 import org.smk.clientapi.NetworkEngine;
 import org.smk.iwomen.BaseActionBarActivity;
 import org.smk.model.Rating;
@@ -69,6 +68,7 @@ public class ResourcesFragment extends Fragment {
     private int skipLimit = 0;
     private Menu menu;
     private ZProgressHUD zPDialog;
+    List<com.smk.model.ResourceItem> StorageresourceItems;
 
 
     public ResourcesFragment() {
@@ -133,11 +133,12 @@ public class ResourcesFragment extends Fragment {
         lvResouces.setNextPage(true);
         adapter.notifyDataSetChanged();
 
-        List<com.smk.model.ResourceItem> resourceItems = StoreUtil.getInstance().selectFrom("ResourcesList");
+        //StorageresourceItems = StoreUtil.getInstance().selectFrom("ResourcesList");
+        StorageresourceItems = (ArrayList<com.smk.model.ResourceItem>) storageUtil.ReadArrayListFromSD("ResourcesList");
         if (Connection.isOnline(mContext)){
             // Showing local data while loading from internet
-            if(resourceItems != null && resourceItems.size() > 0){
-                ResourceItems.addAll(resourceItems);
+            if(StorageresourceItems != null && StorageresourceItems.size() > 0){
+                ResourceItems.addAll(StorageresourceItems);
                 adapter.notifyDataSetChanged();
                 zPDialog = new ZProgressHUD(getActivity());
                 zPDialog.show();
@@ -145,10 +146,9 @@ public class ResourcesFragment extends Fragment {
             getResourceDataPaginationFromSever();
         }else{
             SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
-            List<com.smk.model.ResourceItem> resourceItems1 = StoreUtil.getInstance().selectFrom("ResourcesList");
-            if(resourceItems1 != null){
+            if(StorageresourceItems != null){
                 ResourceItems.clear();
-                ResourceItems.addAll(resourceItems1);
+                ResourceItems.addAll(StorageresourceItems);
                 adapter.notifyDataSetChanged();
             }
         }
@@ -209,7 +209,10 @@ public class ResourcesFragment extends Fragment {
                     ResourceItems.addAll(resourceItems);
                     adapter.notifyDataSetChanged();
                     isLoading = false;
-                    StoreUtil.getInstance().saveTo("ResourcesList", ResourceItems);
+                    //StoreUtil.getInstance().saveTo("ResourcesList", ResourceItems);
+                    final ArrayList<com.smk.model.ResourceItem> storagelist = new ArrayList<com.smk.model.ResourceItem>();
+                    storagelist.addAll(ResourceItems);
+                    storageUtil.SaveArrayListToSD("ResourcesList", storagelist);
                     if(ResourceItems.size() == 12){
                         lvResouces.setNextPage(true);
                         paginater++;
@@ -227,7 +230,9 @@ public class ResourcesFragment extends Fragment {
 
         }else {
             SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
-            List<com.smk.model.ResourceItem> iWomenPosts = StoreUtil.getInstance().selectFrom("ResourcesList");
+            //List<com.smk.model.ResourceItem> iWomenPosts = StoreUtil.getInstance().selectFrom("ResourcesList");
+            List<com.smk.model.ResourceItem> iWomenPosts = (ArrayList<com.smk.model.ResourceItem>) storageUtil.ReadArrayListFromSD("ResourcesList");
+
             if(iWomenPosts != null){
                 ResourceItems.clear();
                 ResourceItems.addAll(iWomenPosts);

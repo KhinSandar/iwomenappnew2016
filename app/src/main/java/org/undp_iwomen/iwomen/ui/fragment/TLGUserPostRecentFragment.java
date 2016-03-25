@@ -34,7 +34,6 @@ import com.thuongnh.zprogresshud.ZProgressHUD;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.smk.application.StoreUtil;
 import org.smk.clientapi.NetworkEngine;
 import org.smk.iwomen.BaseActionBarActivity;
 import org.smk.model.IWomenPost;
@@ -51,6 +50,7 @@ import org.undp_iwomen.iwomen.ui.activity.PostDetailActivity;
 import org.undp_iwomen.iwomen.ui.adapter.IWomenPostListByDateRecyclerViewAdapter;
 import org.undp_iwomen.iwomen.ui.adapter.StoriesRecentListAdapter;
 import org.undp_iwomen.iwomen.utils.Connection;
+import org.undp_iwomen.iwomen.utils.StorageUtil;
 import org.undp_iwomen.iwomen.utils.Utils;
 
 import java.util.ArrayList;
@@ -91,7 +91,8 @@ public class TLGUserPostRecentFragment extends Fragment implements View.OnClickL
     private SharedPreferences mSharedPreferencesUserInfo;
 
     private String user_name, user_obj_id, user_id, user_role, user_ph, register_msg, user_img_path;
-
+    private StorageUtil storageUtil;
+    List<IWomenPost> StoragePosts;
 
     public TLGUserPostRecentFragment() {
 
@@ -121,6 +122,7 @@ public class TLGUserPostRecentFragment extends Fragment implements View.OnClickL
     }
 
     private void init(View rootView) {
+        storageUtil = StorageUtil.getInstance(mContext);
         mSharedPreferencesUserInfo = getActivity().getSharedPreferences(CommonConfig.SHARE_PREFERENCE_USER_INFO, Context.MODE_PRIVATE);
 
         sharePrefLanguageUtil = getActivity().getSharedPreferences(Utils.PREF_SETTING, Context.MODE_PRIVATE);
@@ -159,11 +161,12 @@ public class TLGUserPostRecentFragment extends Fragment implements View.OnClickL
          */
         //Load data from local storage for no connection
         storage_arraylistname = "Post"+mCatID;
-        final List<IWomenPost> iWomenPosts = StoreUtil.getInstance().selectFrom(storage_arraylistname);
+        //StoragePosts = StoreUtil.getInstance().selectFrom(storage_arraylistname);
+        StoragePosts = (ArrayList<IWomenPost>) storageUtil.ReadArrayListFromSD(storage_arraylistname);
         if (Connection.isOnline(mContext)){
             // Showing local data while loading from internet
-            if(iWomenPosts != null && iWomenPosts.size() > 0){
-                iWomenPostList.addAll(iWomenPosts);
+            if(StoragePosts != null && StoragePosts.size() > 0){
+                iWomenPostList.addAll(StoragePosts);
                 stories.notifyDataSetChanged();
                 zPDialog = new ZProgressHUD(getActivity());
                 zPDialog.show();
@@ -173,9 +176,9 @@ public class TLGUserPostRecentFragment extends Fragment implements View.OnClickL
             getIWomenPostByPagination();
         }else{
             SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
-            if(iWomenPosts != null){
+            if(StoragePosts != null){
                 iWomenPostList.clear();
-                iWomenPostList.addAll(iWomenPosts);
+                iWomenPostList.addAll(StoragePosts);
                 stories.notifyDataSetChanged();
             }
         }
@@ -1427,7 +1430,10 @@ public class TLGUserPostRecentFragment extends Fragment implements View.OnClickL
                     }
                     iWomenPostList.addAll(iWomenPosts);
                     stories.notifyDataSetChanged();
-                    StoreUtil.getInstance().saveTo(storage_arraylistname, iWomenPostList);
+                    //StoreUtil.getInstance().saveTo(storage_arraylistname, iWomenPostList);
+                    final ArrayList<IWomenPost> storagelist = new ArrayList<IWomenPost>();
+                    storagelist.addAll(iWomenPostList);
+                    storageUtil.SaveArrayListToSD(storage_arraylistname, storagelist);
                     isLoading = false;
                     if (iWomenPosts.size() == 12) {
                         skListView.setNextPage(true);
@@ -1456,7 +1462,8 @@ public class TLGUserPostRecentFragment extends Fragment implements View.OnClickL
 
         } else {
             SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
-            List<IWomenPost> iWomenPosts = StoreUtil.getInstance().selectFrom(storage_arraylistname);
+            //List<IWomenPost> iWomenPosts = StoreUtil.getInstance().selectFrom(storage_arraylistname);
+            List<IWomenPost> iWomenPosts = (ArrayList<IWomenPost>) storageUtil.ReadArrayListFromSD(storage_arraylistname);
             if(iWomenPosts != null){
                 iWomenPostList.clear();
                 iWomenPostList.addAll(iWomenPosts);

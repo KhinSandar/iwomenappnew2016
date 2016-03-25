@@ -26,6 +26,8 @@ import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.google.gson.Gson;
 import com.smk.skconnectiondetector.SKConnectionDetector;
 import com.smk.sklistview.SKListView;
@@ -34,7 +36,6 @@ import com.thuongnh.zprogresshud.ZProgressHUD;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.smk.application.StoreUtil;
 import org.smk.clientapi.NetworkEngine;
 import org.smk.iwomen.BaseActionBarActivity;
 import org.smk.model.IWomenPost;
@@ -42,6 +43,7 @@ import org.smk.model.Rating;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.data.FeedItem;
 import org.undp_iwomen.iwomen.database.TableAndColumnsName;
+import org.undp_iwomen.iwomen.manager.MainApplication;
 import org.undp_iwomen.iwomen.model.retrofit_api.UserPostAPI;
 import org.undp_iwomen.iwomen.provider.IwomenProviderData;
 import org.undp_iwomen.iwomen.ui.activity.IWomenPostSearchActivity;
@@ -50,6 +52,7 @@ import org.undp_iwomen.iwomen.ui.activity.PostDetailActivity;
 import org.undp_iwomen.iwomen.ui.adapter.IWomenPostListByDateRecyclerViewAdapter;
 import org.undp_iwomen.iwomen.ui.adapter.StoriesRecentListAdapter;
 import org.undp_iwomen.iwomen.utils.Connection;
+import org.undp_iwomen.iwomen.utils.StorageUtil;
 import org.undp_iwomen.iwomen.utils.Utils;
 
 import java.util.ArrayList;
@@ -85,6 +88,8 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
     private StoriesRecentListAdapter stories;
     private boolean isFirstLoading = true;
     private SearchView sv;
+    List<IWomenPost> StorageiWomenPosts;
+    private StorageUtil storageUtil;
 
     public StoriesRecentFragment() {
         // Empty constructor required for fragment subclasses
@@ -94,6 +99,12 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
+        // Google Analytics
+        MainApplication application = (MainApplication) getActivity().getApplication();
+        Tracker mTracker = application.getDefaultTracker();
+        mTracker.setScreenName("StoriesRecentFragment");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
     @Override
@@ -114,6 +125,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
     }
 
     private void init(View rootView) {
+        storageUtil = StorageUtil.getInstance(mContext);
         sharePrefLanguageUtil = getActivity().getSharedPreferences(Utils.PREF_SETTING, Context.MODE_PRIVATE);
         mstr_lang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
 
@@ -166,11 +178,12 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
          * This is load data from local or server when connection is connected or not connected
          */
         //Load data from local storage for no connection
-        final List<IWomenPost> iWomenPosts = StoreUtil.getInstance().selectFrom("stories_recent");
+        //final List<IWomenPost> iWomenPosts = StoreUtil.getInstance().selectFrom("stories_recent");
+        StorageiWomenPosts = (ArrayList<IWomenPost>) storageUtil.ReadArrayListFromSD("stories_recent");
         if (Connection.isOnline(mContext)){
             // Showing local data while loading from internet
-            if(iWomenPosts != null && iWomenPosts.size() > 0){
-                iWomenPostList.addAll(iWomenPosts);
+            if(StorageiWomenPosts != null && StorageiWomenPosts.size() > 0){
+                iWomenPostList.addAll(StorageiWomenPosts);
                 stories.notifyDataSetChanged();
                 zPDialog = new ZProgressHUD(getActivity());
                 zPDialog.show();
@@ -180,9 +193,9 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
             getIWomenPostByPagination();
         }else{
             SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
-            if(iWomenPosts != null){
+            if(StorageiWomenPosts != null){
                 iWomenPostList.clear();
-                iWomenPostList.addAll(iWomenPosts);
+                iWomenPostList.addAll(StorageiWomenPosts);
                 stories.notifyDataSetChanged();
             }
         }
@@ -1185,7 +1198,10 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
                     }
                     iWomenPostList.addAll(iWomenPosts);
                     stories.notifyDataSetChanged();
-                    StoreUtil.getInstance().saveTo("stories_recent", iWomenPostList);
+                    //StoreUtil.getInstance().saveTo("stories_recent", iWomenPostList);
+                    final ArrayList<IWomenPost> storagelist = new ArrayList<IWomenPost>();
+                    storagelist.addAll(iWomenPostList);
+                    storageUtil.SaveArrayListToSD("stories_recent", storagelist);
                     isLoading = false;
                     if(iWomenPosts.size() == 12){
                         skListView.setNextPage(true);
@@ -1206,7 +1222,9 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
 
         } else {
             SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
-            List<IWomenPost> iWomenPosts = StoreUtil.getInstance().selectFrom("stories_recent");
+            //List<IWomenPost> iWomenPosts = StoreUtil.getInstance().selectFrom("stories_recent");
+            List<IWomenPost> iWomenPosts = (ArrayList<IWomenPost>) storageUtil.ReadArrayListFromSD("stories_recent");
+
             if(iWomenPosts != null){
                 iWomenPostList.clear();
                 iWomenPostList.addAll(iWomenPosts);

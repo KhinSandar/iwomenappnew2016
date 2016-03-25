@@ -56,8 +56,6 @@ public class UserPostAPI {
                 .setLogLevel(RestAdapter.LogLevel.FULL)
                 .setEndpoint(CommonConfig.BASE_URL)
                 .setRequestInterceptor(requestInterceptor)
-
-
                 .setClient(new OkClient(okHttpClient))
 
                 .setLog(new RestAdapter.Log() {

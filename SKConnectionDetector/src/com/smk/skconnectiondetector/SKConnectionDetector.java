@@ -63,7 +63,7 @@ public class SKConnectionDetector {
 			mView = View.inflate(_context, R.layout.vertical_toast, null);
 			break;
 		default:
-			mView = View.inflate(_context, R.layout.vertical_toast, null);
+			mView = View.inflate(_context, R.layout.horizontal_toast, null);
 			break;
 		}
 

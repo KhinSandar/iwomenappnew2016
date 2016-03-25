@@ -121,7 +121,7 @@
 
                 <com.algo.hha.emojiicon.EmojiconEditText
                     android:id="@+id/postdetail_et_comment_upload"
-                    android:layout_width="match_parent"
+                    android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="8dp"
@@ -130,6 +130,7 @@
                     android:paddingLeft="@dimen/activity_vertical_margin"
                     android:singleLine="false"
 
+
                     android:textColor="#fff"
                     android:textColorHint="#8fff" />
             </LinearLayout>
@@ -137,6 +138,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 android:gravity="right"
                 android:orientation="horizontal"
                 android:paddingRight="@dimen/activity_vertical_margin">

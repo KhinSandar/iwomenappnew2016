@@ -10,9 +10,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.makeramen.RoundedImageView;
-import org.smk.model.IWomenPost;
 import com.squareup.picasso.Picasso;
 
+import org.smk.model.IWomenPost;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.model.MyTypeFace;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
@@ -133,6 +133,7 @@ public class StoriesRecentListAdapter extends BaseAdapter {
 
 
         if (item.getPostUploadUserImgPath() != null && !item.getPostUploadUserImgPath().isEmpty()) {
+
             try {
                 holder.profilePictureView.setVisibility(View.GONE);
                 holder.profile.setVisibility(View.VISIBLE);
@@ -150,15 +151,24 @@ public class StoriesRecentListAdapter extends BaseAdapter {
                                 }
                             }
 
+                            @Override
+                            public void onError() {
+                                super.onError();
+                                if (this.progressBar != null) {
+                                    this.progressBar.setVisibility(View.GONE);
+                                }
+                            }
                         });
             } catch (OutOfMemoryError outOfMemoryError) {
                 outOfMemoryError.printStackTrace();
+                holder.profile_item_progressBar.setVisibility(View.GONE);
             }
         } else {
             holder.profilePictureView.setVisibility(View.GONE);
             holder.profile.setImageResource(R.drawable.blank_profile);
             holder.profile_item_progressBar.setVisibility(View.GONE);
         }
+
 
         //// Feed image
         if (item.getImage() != null && !item.getImage().isEmpty()) {
@@ -179,10 +189,18 @@ public class StoriesRecentListAdapter extends BaseAdapter {
                                     this.progressBar.setVisibility(View.VISIBLE);
                                 }
                             }
+                            @Override
+                            public void onError() {
+                                super.onError();
+                                if (this.progressBar != null) {
+                                    this.progressBar.setVisibility(View.GONE);
+                                }
+                            }
 
                         });
             } catch (OutOfMemoryError outOfMemoryError) {
                 outOfMemoryError.printStackTrace();
+                holder.feed_item_progressBar.setVisibility(View.GONE);
             }
         } else {
             holder.postIMg.setVisibility(View.GONE);

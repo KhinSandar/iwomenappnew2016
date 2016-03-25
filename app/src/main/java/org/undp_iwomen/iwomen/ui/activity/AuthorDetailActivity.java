@@ -194,7 +194,7 @@ public class AuthorDetailActivity extends BaseActionBarActivity {
         }
 
 
-        if (item.getAuthorImg() != null && item.getAuthorImg() != "") {
+        if (item.getAuthorImg() != null && item.getAuthorImg() != "" && item.getAuthorImg().length() != 0) {
 
             try {
 

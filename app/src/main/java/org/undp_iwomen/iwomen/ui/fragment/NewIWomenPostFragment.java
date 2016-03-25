@@ -22,7 +22,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alexbbb.uploadservice.MultipartUploadRequest;
@@ -44,8 +43,9 @@ import org.smk.model.PhotoUpload;
 import org.undp_iwomen.iwomen.BuildConfig;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
-import org.undp_iwomen.iwomen.ui.activity.MainActivity;
+import org.undp_iwomen.iwomen.ui.activity.DrawerMainActivity;
 import org.undp_iwomen.iwomen.ui.widget.CircleProgressBar;
+import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.ui.widget.ResizableImageView;
 import org.undp_iwomen.iwomen.utils.Utils;
 
@@ -68,14 +68,14 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
 
     public Button mPostBtn;
     public EditText et_postDesc;
-    public TextView take_photo_btn, upload_photo_btn, audio_upload_btn, video_upload_btn;
+    public CustomTextView take_photo_btn, upload_photo_btn, audio_upload_btn, video_upload_btn;
     public ProgressWheel progress_wheel;
 
-    public TextView audio_record_progress_btn;
+    public CustomTextView audio_record_progress_btn;
     public View audio_record_progress_view;
     public CircleProgressBar audio_record_progress_bar;
     public View background_audio_record_process;
-    public TextView audio_record_done_btn, audio_record_dismiss_btn;
+    public CustomTextView audio_record_done_btn, audio_record_dismiss_btn;
     public ResizableImageView selectedImage;
     public ProgressWheel selectedImg_progress_wheel;
 
@@ -123,6 +123,7 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
     private final String WRITE_PERMISSION = "android.permission.WRITE_EXTERNAL_STORAGE";
     private final String READ_PERMISSIOIN = "android.permission.WRITE_EXTERNAL_STORAGE";
     private final String PREPARE_AUDIO_PERMISSION = "android.permission.MODIFY_AUDIO_SETTINGS";
+    private final String STORAGE_READ_PERMISSION = "android.permission.READ_EXTERNAL_STORAGE";
 
     public NewIWomenPostFragment() {
     }
@@ -159,19 +160,19 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
 
     public void init(View rootView) {
 
-        take_photo_btn = (TextView) rootView.findViewById(R.id.new_post_photo_take_btn);
-        upload_photo_btn = (TextView) rootView.findViewById(R.id.new_post_photo_upload_btn);
-        audio_upload_btn = (TextView) rootView.findViewById(R.id.new_post_audio_upload_btn);
-        video_upload_btn = (TextView) rootView.findViewById(R.id.new_post_video_upload_btn);
+        take_photo_btn = (CustomTextView) rootView.findViewById(R.id.new_post_photo_take_btn);
+        upload_photo_btn = (CustomTextView) rootView.findViewById(R.id.new_post_photo_upload_btn);
+        audio_upload_btn = (CustomTextView) rootView.findViewById(R.id.new_post_audio_upload_btn);
+        video_upload_btn = (CustomTextView) rootView.findViewById(R.id.new_post_video_upload_btn);
         et_postDesc = (EditText) rootView.findViewById(R.id.new_post_description_text);
         mPostBtn = (Button) rootView.findViewById(R.id.new_post_upload_btn);
         progress_wheel = (ProgressWheel) rootView.findViewById(R.id.new_post_progress_wheel);
         selectedImage = (ResizableImageView) rootView.findViewById(R.id.new_post_selected_img);
         selectedImg_progress_wheel = (ProgressWheel) rootView.findViewById(R.id.new_post_photo_progress_wheel);
 
-        audio_record_done_btn = (TextView) rootView.findViewById(R.id.audio_record_done_btn);
-        audio_record_dismiss_btn = (TextView) rootView.findViewById(R.id.audio_record_dismiss_btn);
-        audio_record_progress_btn = (TextView) rootView.findViewById(R.id.audio_record_progress_btn);
+        audio_record_done_btn = (CustomTextView) rootView.findViewById(R.id.audio_record_done_btn);
+        audio_record_dismiss_btn = (CustomTextView) rootView.findViewById(R.id.audio_record_dismiss_btn);
+        audio_record_progress_btn = (CustomTextView) rootView.findViewById(R.id.audio_record_progress_btn);
         audio_record_progress_view = rootView.findViewById(R.id.audio_record_progress_view);
         audio_record_progress_bar = (CircleProgressBar) rootView.findViewById(R.id.audio_record_progressBar);
         background_audio_record_process = rootView.findViewById(R.id.background_audio_record);
@@ -219,10 +220,29 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
                 break;
 
             case R.id.new_post_photo_take_btn:
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    SKToastMessage.showMessage(getActivity(), getResources().getString(R.string.resource_coming_soon_eng), SKToastMessage.ERROR);
+                if (!hasPermission(CAMERA_PERMISSION)) {
+
+                    //if no permission, request permission
+                    String[] perms = {CAMERA_PERMISSION};
+
+                    int permsRequestCode = 200;
+
+                    requestPermissions(perms, permsRequestCode);
+
                 } else {
-                    takePicture();
+
+                    if (!hasPermission(STORAGE_READ_PERMISSION)) {
+
+                        //if no permission, request permission
+                        String[] perms = {STORAGE_READ_PERMISSION};
+
+                        int permsRequestCode = 200;
+
+
+                        requestPermissions(perms, permsRequestCode);
+                    }else {
+                        takePicture();
+                    }
                 }
                 break;
 
@@ -269,9 +289,9 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
             case R.id.audio_record_done_btn:
 
                 if(mAudioFilePath == null || !new File(mAudioFilePath).exists()) {
-                    SKToastMessage.showMessage(getActivity(), "You need to record audio!", SKToastMessage.WARNING);
+                    SKToastMessage.showMessage(getActivity(), getResources().getString(R.string.audio_record_warning_1), SKToastMessage.WARNING);
                 }else if(isRecording){
-                    SKToastMessage.showMessage(getActivity(), "You need to stop recording!", SKToastMessage.WARNING);
+                    SKToastMessage.showMessage(getActivity(), getResources().getString(R.string.audio_record_warning_2), SKToastMessage.WARNING);
                 }else {
 
                     onAudioRecordDoneClick();
@@ -317,7 +337,7 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
         } else {
 
             if(et_postDesc.getText().toString().isEmpty() && crop_file_path == null && mAudioFilePath == null){//this mean user doesn't choose nothing
-                SKToastMessage.showMessage(getActivity(), "To post, you need to add something!", SKToastMessage.WARNING);
+                SKToastMessage.showMessage(getActivity(), getResources().getString(R.string.audio_record_warning_post_something), SKToastMessage.WARNING);
             }else {
 
                 //we will post all data to server, if it's here, we assume all data is ready
@@ -387,7 +407,7 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
         }
 
         NetworkEngine.getInstance().postCreateWomenPost(
-                1, content,
+                0, content,
                 content_type,
                 content_mm,
                 postUploadName,
@@ -406,7 +426,7 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
     Callback<IWomenPost> createPostcallback = new Callback<IWomenPost>() {
         @Override
         public void success(IWomenPost iWomenPost, Response response) {
-            SKToastMessage.getInstance(getActivity()).showMessage(getActivity(), "Post Success", SKToastMessage.SUCCESS);
+            SKToastMessage.getInstance(getActivity()).showMessage(getActivity(),getResources().getString(R.string.audio_post_success), SKToastMessage.SUCCESS);
             getActivity().finish();
 
             progress_wheel.setVisibility(View.GONE);
@@ -414,7 +434,7 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
 
         @Override
         public void failure(RetrofitError error) {
-            SKToastMessage.getInstance(getActivity()).showMessage(getActivity(), "Error in Createing Post", SKToastMessage.ERROR);
+            SKToastMessage.getInstance(getActivity()).showMessage(getActivity(),getResources().getString(R.string.audio_post_error), SKToastMessage.ERROR);
 
             progress_wheel.setVisibility(View.GONE);
         }
@@ -442,11 +462,11 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
 
         if (mAudioFilePath == null || !new File(mAudioFilePath).exists()) {
             mStartRecording = true;
-            audio_record_progress_btn.setText("Tap and Talk");
+            audio_record_progress_btn.setText(R.string.audio_tap_talk);
             audio_record_progress_view.setVisibility(View.VISIBLE);
         } else {
             mStartRecording = false;
-            audio_record_progress_btn.setText("Replay");
+            audio_record_progress_btn.setText(R.string.audio_replay);
             audio_record_progress_view.setVisibility(View.VISIBLE);
         }
 
@@ -548,7 +568,7 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
 
                 long leftSec = TimeUnit.MILLISECONDS.toSeconds((long) timeRemaining);
                 if (leftSec == 0) {
-                    audio_record_progress_btn.setText("Replay");
+                    audio_record_progress_btn.setText(R.string.audio_replay);
                     onPlay(false);
                 } else {
                     audio_record_progress_btn.setText(String.format("%d sec left", leftSec));
@@ -618,7 +638,7 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
 
             onRecord(mStartRecording);
             if (mStartRecording) {
-                audio_record_progress_btn.setText("Stop");
+                audio_record_progress_btn.setText(R.string.audio_stop);
 
                 countDownTimer = getCountDown();
                 if (countDownTimer != null) {
@@ -631,11 +651,11 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
             } else {
 
 
-                if (audio_record_progress_btn.getText().equals("Replay")) {
-                    audio_record_progress_btn.setText("Stop");
+                if (audio_record_progress_btn.getText().equals("Replay") ||audio_record_progress_btn.getText().equals("အသံ\u107Fပန္နားေထာင္မည္") ) {
+                    audio_record_progress_btn.setText(R.string.audio_stop);
                     onPlay(true);
                 } else {
-                    audio_record_progress_btn.setText("Replay");
+                    audio_record_progress_btn.setText(R.string.audio_replay);
                     if (countDownTimer != null) {
                         countDownTimer.cancel();
                     }
@@ -656,7 +676,7 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
             }
 
             public void onFinish() {
-                audio_record_progress_btn.setText("Replay");
+                audio_record_progress_btn.setText(R.string.audio_replay);
                 audio_record_progress_bar.setProgress(audio_record_progress_bar.getProgress() + 1);
                 onRecord(false);
             }
@@ -692,7 +712,7 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
         final String fileToUploadPath = filePath;
         final String uploadID = UUID.randomUUID().toString();
         pgDialog = new ProgressDialog(getActivity());
-        pgDialog.setTitle("Your recording file is uploading");
+        pgDialog.setTitle(R.string.audio_file_uploading);
         pgDialog.setCancelable(false);
         pgDialog.setProgress(0);
         pgDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
@@ -718,12 +738,12 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
     private UploadNotificationConfig getNotificationConfig() {
         return new UploadNotificationConfig()
                 .setIcon(R.drawable.ic_launcher)
-                .setTitle(getString(R.string.app_name))
-                .setInProgressMessage("Your recording audio is uploading.")
-                .setCompletedMessage("Your recording audio was successfully uploaded.")
-                .setErrorMessage("Your audio file uploading is error.")
+                .setTitle(getResources().getString(R.string.app_name))
+                .setInProgressMessage(getResources().getString(R.string.audio_file_uploading))
+                .setCompletedMessage(getResources().getString(R.string.audio_file_success_uploaded))
+                .setErrorMessage(getResources().getString(R.string.audio_file_upload_err))
                 .setAutoClearOnSuccess(false)
-                .setClickIntent(new Intent(getActivity(), MainActivity.class))
+                .setClickIntent(new Intent(getActivity(), DrawerMainActivity.class))
                 .setClearOnAction(true)
                 .setRingToneEnabled(true);
     }
@@ -752,7 +772,7 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
                         pgDialog.dismiss();
                     Log.i(TAG, "Upload with ID " + uploadId + " is completed: " + serverResponseCode + ", "
                             + serverResponseMessage);
-                    Toast.makeText(getActivity(), serverResponseMessage, Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getActivity(), serverResponseMessage, Toast.LENGTH_LONG).show();
 
                     //audio_file_id = uploadId;
                     audio_file_id = serverResponseMessage.replace("\"","").replace("\\","");

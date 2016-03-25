@@ -79,7 +79,7 @@
     <string name="new_post_video_mm">ဗြီဒီယိုုဖိုုင္တင္ရန္ ႏွိပ္ေရြးပါ</string>
     <string name="new_post_video_eng">Click Here to Upload Video</string>
 
-    <string name="post_detail_comment_mm">မွတ္ ခ်က္ (သိုု ့မဟုုတ္) ေကာမန္ ့ေရးရန္</string>
+    <string name="post_detail_comment_mm">မွတ္ ခ်က္ (သိုု ့) ေကာမန္ ့ေရးရန္</string>
     <string name="post_detail_comment_eng">Enter your Comment</string>
 
     <string name="post_detail_share_post_mm">ရွဲမွ်ေ၀ပါသည္။</string>
@@ -113,7 +113,7 @@
     <string name="successfully_posted_post">Post ID: %1$s</string>
     <string name="error">Error</string>
     <string name="status_update">Updating status for %1$s at %2$s</string>
-    <string name="ok">OK</string>
+    <string name="ok">ေကာင္းမြန္သည္</string>
     <string name="post">Post</string>
     <string name="prompt_post">Post</string>
     <string name="error_dialog_title">Error!</string>
@@ -650,7 +650,7 @@ female-pilots-iaa1s
     <string name="title_leadership_tips">Leadership</string>
     <string name="title_leadership_lesson">Leadership Lesson</string>
     <string name="title_activity_sister_app_detail">Sister Apps</string>
-    <string name="title_activity_new_post">New Post</string>
+    <string name="title_activity_new_post">ပိုု ့စ္ အသစ္ တင္ရန္ </string>
     <string name="new_post_hint">Here you can ask question to other TLGs, ask for advice to other TLGs and share your livelihood skills with other TLGs, And of course you can also post your successful TLGs activities.</string>
     <string name="title_activity_gcm_notification_dialog"></string>
 
@@ -670,6 +670,7 @@ female-pilots-iaa1s
     <string name="state_12">Mon </string>
     <string name="state_13"> Rakhine</string>
     <string name="state_14"> Shan</string>
+    <string name="state_15"> Nay Pyi Taw</string>
     <string name="state_1m"> ရန္ကုန္</string>
     <string name="state_2m">မႏၲေလး </string>
     <string name="state_3m"> မေကြး</string>
@@ -684,6 +685,7 @@ female-pilots-iaa1s
     <string name="state_12m">မြန္ </string>
     <string name="state_13m">ရခိုင္ </string>
     <string name="state_14m"> ရွမ္း</string>
+    <string name="state_15m"> ေနၿပည္ေတာ္</string>
 
 
 
@@ -747,7 +749,33 @@ female-pilots-iaa1s
     <string name="calendar_detail">အစည္းအေ၀းမွတ္တမ္း</string>
     <string name="calendar_create_event">အစည္းအေ၀းမွတ္တမ္းၿပဳလုုပ္ၿခင္း</string>
 
-    <string name="action_photo_camera_mm" translatable="false">ဓာတ္ပံုုရိုုက္မည္</string>
-    <string name="action_photo_gallery_mm" translatable="false">ဓာတ္ပံုုေရြးမည္</string>
+
+    <string name="action_photo_camera"  >Take Photo</string>
+    <string name="action_photo_gallery"  >Choose Existing</string>
+    <string name="action_photo_camera_mm" >ဓာတ္ပံုုရိုုက္မည္</string>
+    <string name="action_photo_gallery_mm" >ဓာတ္ပံုုေရြးမည္</string>
     <string name="search_hint">Search</string>
+
+    <string name="audio_record_btn_txt" >အသံသြင္းရန္ႏွိပ္ပါ</string>
+    <string name="audio_record_done_btn_text">အသံသြင္းဖိုုင္ အဆင္ သင့္ ၿဖစ္ပါၿပီ</string>
+
+    <string name="audio_record_warning_1">အသံသြင္းဖိုုင္ပိုုစ္ ့တင္ရန္လိုုအပ္ပါသည္</string>
+    <string name="audio_record_warning_2">အသံသြင္းၿခင္းရပ္ပါရန္</string>
+
+    <string name="audio_record_warning_post_something">ပိုု ့စ္ အသစ္ တင္ရန္ တစ္ခုုခုု ေရးပါ</string>
+    <string name="audio_post_success">ပိုု ့စ္ အသစ္ ေအာင္ၿမင္စြာေရာက္ရွိပါသည္</string>
+    <string name="audio_post_error">ပိုု ့စ္ တင္ၿခင္းတစ္ခုုခုု မွားယြင္းေနပါသည္</string>
+    <string name="audio_tap_talk">အ၀ိုုင္းအတြင္း နွိပ္ပီး အသံသြင္းပါ</string>
+    <string name="audio_replay">အသံၿပန္နားေထာင္မည္</string>
+    <string name="audio_stop">အသံသြင္းရပ္မည္</string>
+    <string name="audio_file_uploading">အသံဖိုုင္ကိုု ေပးပိုု ့ေနပါသည္</string>
+    <string name="audio_file_success_uploaded">အသံဖိုုင္ေပးပိုု ့ၿခင္း ေအာင္ၿမင္စြာေရာက္ရွိပါသည္</string>
+    <string name="audio_file_upload_err">အသံဖိုုင္ေပးပိုု  ့ၿခင္းမေအာင္ၿမင္ပါ။</string>
+
+    <string name="audio_cancel">မေပးပိုု ့ေတာ့ပါ</string>
+
+    <string name="audio_upload_post">ပိုု ့စ္တင္ရန္</string>
+    <string name="audio_upload_photo">ဓာတ္ပံုုတင္ရန္</string>
+    <string name="aduio_take_photo">ဓာတ္ပံုုရိုုက္တင္ရန္</string>
+    <string name="audio_vid_file">ရုုပ္သံဗီြဒီယိုုဖိုုင္တင္ရန္</string>
 </resources>

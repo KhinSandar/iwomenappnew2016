@@ -142,6 +142,46 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
             }
         }
 
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+                                    long arg3) {
+
+
+
+                if (user_role.equalsIgnoreCase("User")) {
+                    if (CategoriesModelList.get(position).getName().equalsIgnoreCase("Archive")) {//position == 0 ||
+                        Utils.showPermissionDialog(getActivity());
+                    }
+                    else if (CategoriesModelList.get(position).getName().equalsIgnoreCase("Calendar")) {//position == 0 ||
+                        Intent i = new Intent(ctx, CalendarActivity.class);
+                        i.putExtra("CategoryName", CategoriesModelList.get(position).getName());//CategoryName
+                        startActivity(i);
+                    } else {
+                        Intent i = new Intent(ctx, TalkTogetherMainActivity.class);
+                        i.putExtra("CategoryName", CategoriesModelList.get(position).getName());//CategoryName
+                        //Log.e("<<Calender Cat IG>>","==>" + CategoriesModelList.get(position).getObjectId());
+                        i.putExtra("CategoryID", CategoriesModelList.get(position).getObjectId());//CategoryName
+                        startActivity(i);
+                    }
+                }else{
+                    if (CategoriesModelList.get(position).getName().equalsIgnoreCase("Calendar")) {//position == 0 ||
+                        Intent i = new Intent(ctx, CalendarActivity.class);
+                        i.putExtra("CategoryName", CategoriesModelList.get(position).getName());//CategoryName
+                        startActivity(i);
+                    } else {
+                        Intent i = new Intent(ctx, TalkTogetherMainActivity.class);
+                        i.putExtra("CategoryName", CategoriesModelList.get(position).getName());//CategoryName
+                        //Log.e("<<Calender Cat IG>>","==>" + CategoriesModelList.get(position).getObjectId());
+                        i.putExtra("CategoryID", CategoriesModelList.get(position).getObjectId());//CategoryName
+                        startActivity(i);
+                    }
+                }
+
+
+
+            }
+        });
 
 
 
@@ -201,46 +241,6 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
 
 
         }
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            public void onItemClick(AdapterView<?> arg0, View arg1, int position,
-                                    long arg3) {
-
-
-
-                if (user_role.equalsIgnoreCase("User")) {
-                    if (CategoriesModelList.get(position).getName().equalsIgnoreCase("Archive")) {//position == 0 ||
-                        Utils.showPermissionDialog(getActivity());
-                    }
-                    else if (CategoriesModelList.get(position).getName().equalsIgnoreCase("Calendar")) {//position == 0 ||
-                        Intent i = new Intent(ctx, CalendarActivity.class);
-                        i.putExtra("CategoryName", CategoriesModelList.get(position).getName());//CategoryName
-                        startActivity(i);
-                    } else {
-                        Intent i = new Intent(ctx, TalkTogetherMainActivity.class);
-                        i.putExtra("CategoryName", CategoriesModelList.get(position).getName());//CategoryName
-                        //Log.e("<<Calender Cat IG>>","==>" + CategoriesModelList.get(position).getObjectId());
-                        i.putExtra("CategoryID", CategoriesModelList.get(position).getObjectId());//CategoryName
-                        startActivity(i);
-                    }
-                }else{
-                    if (CategoriesModelList.get(position).getName().equalsIgnoreCase("Calendar")) {//position == 0 ||
-                        Intent i = new Intent(ctx, CalendarActivity.class);
-                        i.putExtra("CategoryName", CategoriesModelList.get(position).getName());//CategoryName
-                        startActivity(i);
-                    } else {
-                        Intent i = new Intent(ctx, TalkTogetherMainActivity.class);
-                        i.putExtra("CategoryName", CategoriesModelList.get(position).getName());//CategoryName
-                        //Log.e("<<Calender Cat IG>>","==>" + CategoriesModelList.get(position).getObjectId());
-                        i.putExtra("CategoryID", CategoriesModelList.get(position).getObjectId());//CategoryName
-                        startActivity(i);
-                    }
-                }
-
-
-
-            }
-        });
 
     }
 

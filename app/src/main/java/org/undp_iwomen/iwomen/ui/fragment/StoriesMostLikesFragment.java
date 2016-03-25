@@ -24,6 +24,8 @@ import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.google.gson.Gson;
 import com.smk.skconnectiondetector.SKConnectionDetector;
 import com.smk.sklistview.SKListView;
@@ -32,7 +34,6 @@ import com.thuongnh.zprogresshud.ZProgressHUD;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.smk.application.StoreUtil;
 import org.smk.clientapi.NetworkEngine;
 import org.smk.iwomen.BaseActionBarActivity;
 import org.smk.model.IWomenPost;
@@ -40,6 +41,7 @@ import org.smk.model.Rating;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.data.FeedItem;
 import org.undp_iwomen.iwomen.database.TableAndColumnsName;
+import org.undp_iwomen.iwomen.manager.MainApplication;
 import org.undp_iwomen.iwomen.model.retrofit_api.UserPostAPI;
 import org.undp_iwomen.iwomen.provider.IwomenProviderData;
 import org.undp_iwomen.iwomen.ui.activity.IWomenPostSearchActivity;
@@ -47,6 +49,7 @@ import org.undp_iwomen.iwomen.ui.activity.NewPostActivity;
 import org.undp_iwomen.iwomen.ui.activity.PostDetailActivity;
 import org.undp_iwomen.iwomen.ui.adapter.StoriesRecentListAdapter;
 import org.undp_iwomen.iwomen.utils.Connection;
+import org.undp_iwomen.iwomen.utils.StorageUtil;
 import org.undp_iwomen.iwomen.utils.Utils;
 
 import java.util.ArrayList;
@@ -75,9 +78,11 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
     private static Rating avgRatings;
     private int paginater = 1;
     private List<IWomenPost> iWomenPostList;
+    List<IWomenPost> StorageiWomenPosts;
     private StoriesRecentListAdapter stories;
     private ZProgressHUD zPDialog;
     private boolean isFirstLoading = true;
+    private StorageUtil storageUtil;
 
 
     public StoriesMostLikesFragment() {
@@ -88,6 +93,13 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
+        // Google Analytics
+        MainApplication application = (MainApplication) getActivity().getApplication();
+        Tracker mTracker = application.getDefaultTracker();
+        mTracker.setScreenName("StoriesMostLikesFragment");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+
     }
 
     @Override
@@ -111,6 +123,7 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
     }
 
     private void init(View rootView) {
+        storageUtil = StorageUtil.getInstance(mContext);
         sharePrefLanguageUtil = getActivity().getSharedPreferences(Utils.PREF_SETTING, Context.MODE_PRIVATE);
         mstr_lang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
         feedItems = new ArrayList<FeedItem>();
@@ -130,29 +143,33 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
          * This is load data from local or server when connection is connected or not connected
          */
         //Load data from local storage for no connection
-        List<IWomenPost> iWomenPosts = StoreUtil.getInstance().selectFrom("stories_most_like");
+        //StorageiWomenPosts = StoreUtil.getInstance().selectFrom("stories_most_like");
+        StorageiWomenPosts = (ArrayList<IWomenPost>) storageUtil.ReadArrayListFromSD("stories_most_like");
+
+        //Log.e("<< 1 --- connection>>","==>" + StorageiWomenPosts.size());
         if (Connection.isOnline(mContext)){
             // Showing local data while loading from internet
-            if(iWomenPosts != null && iWomenPosts.size() > 0){
-                iWomenPostList.addAll(iWomenPosts);
+
+            if(StorageiWomenPosts != null && StorageiWomenPosts.size() > 0){
+                Log.e("<<<connection>>","==>" + StorageiWomenPosts.size());
+                iWomenPostList.addAll(StorageiWomenPosts);
                 stories.notifyDataSetChanged();
                 zPDialog = new ZProgressHUD(getActivity());
             }
             getIWomenPostByPagination();
         }else{
+            //Log.e("<<No --- connection>>","==>" + iWomenPosts.size());
             SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
-            if(iWomenPosts != null){
+            if(StorageiWomenPosts != null){
+                Log.e("<<No --- connection>>","==>" + StorageiWomenPosts.size());
                 iWomenPostList.clear();
-                iWomenPostList.addAll(iWomenPosts);
+                iWomenPostList.addAll(StorageiWomenPosts);
                 stories.notifyDataSetChanged();
             }
         }
 
-
-        
-
         //When very start this fragment open , need to check db data
-        Cursor cursorMain = getActivity().getContentResolver().query(IwomenProviderData.PostProvider.CONTETN_URI, null, null, null, BaseColumns._ID + " DESC");
+        /*Cursor cursorMain = getActivity().getContentResolver().query(IwomenProviderData.PostProvider.CONTETN_URI, null, null, null, BaseColumns._ID + " DESC");
 
         if (cursorMain.getCount() > 0) {
             setupAdapter();
@@ -165,10 +182,8 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
 
             } else {
 
-
-
             }
-        }
+        }*/
 
         skListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -176,10 +191,8 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
                 try {
 
                     Intent intent = new Intent(mContext, PostDetailActivity.class);
-
                     intent.putExtra("post_type", "iWomenPost");
                     intent.putExtra("postObj", new Gson().toJson(parent.getAdapter().getItem(position)));
-
                     //intent.putExtra("ImgUrl", mImgurl.get(getPosition()));
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -334,14 +347,12 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
 
 
         inflater.inflate(R.menu.refresh_menu, menu);
-
         this.menu = menu;
         if(StoriesRecentFragment.avgRatings != null){
             this.menu.findItem(R.id.action_rating).setVisible(true);
             this.menu.findItem(R.id.action_rating).setIcon(BaseActionBarActivity.getRatingIcon(StoriesRecentFragment.avgRatings.getTotalRatings()));
 
         }
-
         SearchView searchView = (SearchView) menu.findItem(R.id.action_menu_search).getActionView();
         SearchView.SearchAutoComplete searchAutoComplete = (SearchView.SearchAutoComplete)searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
         searchAutoComplete.setHintTextColor(Color.WHITE);
@@ -369,7 +380,6 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
             case R.id.action_refresh:
                 //Utils.doToast(getActivity(), "do refresh");
                 //mProgressDialog.show();
-
                 //SetPostData();
                 //getPostDataOrderByLikesDate();
                 getIWomenPostByLimit();
@@ -385,7 +395,6 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
     public void getReview(){
 
         NetworkEngine.getInstance().getReview("Be Inspired", new Callback<Rating>() {
-
 
             @Override
             public void success(Rating arg0, Response response) {
@@ -420,7 +429,6 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
         txt_avg_ratings.setText(avgRatings.getTotalUsers() +" "+getResources().getString(R.string.str_total));
 
         final AlertDialog ad = alertDialog.show();
-
         btn_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1029,6 +1037,7 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
                 public void success(List<IWomenPost> iWomenPosts, Response response) {
                     // Only first REQUEST that visible
                     if(isFirstLoading){
+                        Log.e("<<<connection>>","==>isFirst Loading" + iWomenPosts.size());
                         isFirstLoading = false;
                         iWomenPostList.clear();
                         if(zPDialog != null && zPDialog.isShowing())
@@ -1037,7 +1046,10 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
 
                     iWomenPostList.addAll(iWomenPosts);
                     stories.notifyDataSetChanged();
-                    StoreUtil.getInstance().saveTo("stories_most_like", iWomenPostList);
+                    //StoreUtil.getInstance().saveTo("stories_most_like", iWomenPostList);
+                    final ArrayList<IWomenPost> storagelist = new ArrayList<IWomenPost>();
+                    storagelist.addAll(iWomenPostList);
+                    storageUtil.SaveArrayListToSD("stories_most_like", storagelist);
                     isLoading = false;
                     if(iWomenPosts.size() == 12){
                         skListView.setNextPage(true);
@@ -1058,7 +1070,9 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
 
         } else {
             SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
-            List<IWomenPost> iWomenPosts = StoreUtil.getInstance().selectFrom("stories_most_like");
+            //List<IWomenPost> iWomenPosts = StoreUtil.getInstance().selectFrom("stories_most_like");
+            List<IWomenPost> iWomenPosts = (ArrayList<IWomenPost>) storageUtil.ReadArrayListFromSD("stories_most_like");
+            //Log.e("<<<Adapter No connection>>","==>" + iWomenPosts.size());
             if(iWomenPosts != null){
                 iWomenPostList.clear();
                 iWomenPostList.addAll(iWomenPosts);
@@ -1092,14 +1106,8 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
 
         switch (v.getId()) {
             case R.id.post_news:
-
-                //Intent intent = new Intent(mContext, MainPhotoPostActivity.class);
                 Intent intent = new Intent(mContext, NewPostActivity.class);
-
                 startActivity(intent);
-                //startActivity(new Intent(getActivity(), MainPhotoPostActivity.class));
-
-
                 break;
         }
 

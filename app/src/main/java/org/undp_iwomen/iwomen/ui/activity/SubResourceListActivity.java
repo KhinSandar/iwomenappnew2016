@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,7 +14,6 @@ import com.smk.skconnectiondetector.SKConnectionDetector;
 import com.smk.sklistview.SKListView;
 import com.thuongnh.zprogresshud.ZProgressHUD;
 
-import org.smk.application.StoreUtil;
 import org.smk.iwomen.BaseActionBarActivity;
 import org.smk.model.SubResourceItem;
 import org.undp_iwomen.iwomen.R;
@@ -61,6 +59,7 @@ public class SubResourceListActivity extends BaseActionBarActivity {
     private String mTitleEng, mTitleMM;
 
     String storagelistname ;
+    List<org.smk.model.SubResourceItem> StoragesubResourceItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,11 +103,12 @@ public class SubResourceListActivity extends BaseActionBarActivity {
 
 
 
-        List<org.smk.model.SubResourceItem> subResourceItems = StoreUtil.getInstance().selectFrom(storagelistname);
+        //StoragesubResourceItems = StoreUtil.getInstance().selectFrom(storagelistname);
+        StoragesubResourceItems = (ArrayList<org.smk.model.SubResourceItem>) storageUtil.ReadArrayListFromSD(storagelistname);
         if (Connection.isOnline(mContext)){
             // Showing local data while loading from internet
-            if(subResourceItems != null && subResourceItems.size() > 0){
-                SubResourceItems.addAll(subResourceItems);
+            if(StoragesubResourceItems != null && StoragesubResourceItems.size() > 0){
+                SubResourceItems.addAll(StoragesubResourceItems);
                 mAdapter.notifyDataSetChanged();
                 zPDialog = new ZProgressHUD(this);
                 zPDialog.show();
@@ -116,10 +116,10 @@ public class SubResourceListActivity extends BaseActionBarActivity {
             getSubResourceDataFromSever(mResourceId);
         }else{
             SKConnectionDetector.getInstance(this).showErrorMessage();
-            List<org.smk.model.SubResourceItem> subResourceItems1 = StoreUtil.getInstance().selectFrom(storagelistname);
-            if(subResourceItems1 != null){
+
+            if(StoragesubResourceItems != null){
                 SubResourceItems.clear();
-                SubResourceItems.addAll(subResourceItems1);
+                SubResourceItems.addAll(StoragesubResourceItems);
                 mAdapter.notifyDataSetChanged();
             }
         }
@@ -199,7 +199,11 @@ public class SubResourceListActivity extends BaseActionBarActivity {
                     mAdapter.notifyDataSetChanged();
                     isLoading = false;
 
-                    StoreUtil.getInstance().saveTo(storagelistname, SubResourceItems);
+                    //StoreUtil.getInstance().saveTo(storagelistname, SubResourceItems);
+                    final ArrayList<SubResourceItem> storagelist = new ArrayList<SubResourceItem>();
+                    storagelist.addAll(SubResourceItems);
+                    storageUtil.SaveArrayListToSD(storagelistname, storagelist);
+
                     if(SubResourceItems.size() == 12){
                         lv.setNextPage(true);
                         paginater++;
@@ -207,23 +211,16 @@ public class SubResourceListActivity extends BaseActionBarActivity {
                         // If no more item
                         lv.setNextPage(false);
                     }
-
-                    Log.e("<<<SubResource List size>>>","==>"+SubResourceItems.size());
+                    //Log.e("<<<SubResource List size>>>","==>"+SubResourceItems.size());
                     if( SubResourceItems.size() == 0){
                         // If no more item
                         lv.setNextPage(false);
                         if (mstr_lang.equals(Utils.ENG_LANG)) {
                             Utils.doToastEng(mContext, getResources().getString(R.string.resource_coming_soon_eng));
                         } else {
-
                             Utils.doToastMM(mContext, getResources().getString(R.string.resource_coming_soon_mm));
                         }
-                        //zPDialog.dismissWithSuccess();
                     }
-
-
-
-
 
                 }
 
@@ -235,7 +232,7 @@ public class SubResourceListActivity extends BaseActionBarActivity {
 
         } else {
             SKConnectionDetector.getInstance(this).showErrorMessage();
-            List<org.smk.model.SubResourceItem> subResourceItems1 = StoreUtil.getInstance().selectFrom(storagelistname);
+            List<org.smk.model.SubResourceItem> subResourceItems1 = (ArrayList<org.smk.model.SubResourceItem>) storageUtil.ReadArrayListFromSD(storagelistname);
             if(subResourceItems1 != null){
                 SubResourceItems.clear();
                 SubResourceItems.addAll(subResourceItems1);
