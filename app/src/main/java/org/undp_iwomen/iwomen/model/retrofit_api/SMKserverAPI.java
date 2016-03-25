@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.squareup.okhttp.OkHttpClient;
 
+import org.smk.clientapi.GzippedClient;
 import org.undp_iwomen.iwomen.CommonConfig;
 
 import java.io.BufferedReader;
@@ -55,9 +56,8 @@ public class SMKserverAPI {
                 RestAdapter.Builder().setLogLevel(RestAdapter.LogLevel.BASIC)
                 .setLogLevel(RestAdapter.LogLevel.FULL)
                 .setEndpoint(CommonConfig.BASE_SMK_URL)
-
                 .setRequestInterceptor(requestInterceptor)
-                .setClient(new OkClient(okHttpClient))
+                .setClient(new GzippedClient(new OkClient(new OkHttpClient())))
 
                 .setLog(new RestAdapter.Log() {
                     @Override
