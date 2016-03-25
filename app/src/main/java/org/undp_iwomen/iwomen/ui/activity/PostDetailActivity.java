@@ -2173,9 +2173,28 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                         //MediaPlayer mediaPlayer;
                         if (!isPlaying) {
 
-                            mMedia = MediaPlayer.create(this, R.raw.wai_wai_audio);
-
-                            mMedia.start();
+                            /*mMedia = MediaPlayer.create(this, R.raw.wai_wai_audio);
+                            mMedia.start();*/
+                            if ( mMedia == null)
+                            {
+                                mMedia= MediaPlayer.create(PostDetailActivity.this, R.raw.wai_wai_audio);
+                                mMedia.setVolume(1.0f, 1.0f);
+                                mMedia.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                                    public void onPrepared(MediaPlayer arg0) {
+                                        Log.i("PLAYER", "Prepare completed");
+                                        mMedia.start();
+                                    }
+                                });
+                                return;
+                            }
+                            // Or just play
+                            if (mMedia.isPlaying()) {
+                                mMedia.pause();
+                            } else {
+                                mMedia.seekTo(0);
+                                ;
+                                mMedia.start();
+                            }
 
                             isPlaying = true;
                         } else {
@@ -2215,9 +2234,28 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                         //MediaPlayer mediaPlayer;
                         if (!isPlaying) {
 
-                            mMedia = MediaPlayer.create(this, R.raw.wai_wai_audio);
-
-                            mMedia.start();
+                            /*mMedia = MediaPlayer.create(this, R.raw.wai_wai_audio);
+                            mMedia.start();*/
+                            if ( mMedia == null)
+                            {
+                                mMedia= MediaPlayer.create(PostDetailActivity.this, R.raw.wai_wai_audio);
+                                mMedia.setVolume(1.0f, 1.0f);
+                                mMedia.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                                    public void onPrepared(MediaPlayer arg0) {
+                                        Log.i("PLAYER", "Prepare completed");
+                                        mMedia.start();
+                                    }
+                                });
+                                return;
+                            }
+                            // Or just play
+                            if (mMedia.isPlaying()) {
+                                mMedia.pause();
+                            } else {
+                                mMedia.seekTo(0);
+                                ;
+                                mMedia.start();
+                            }
 
                             isPlaying = true;
                         } else {

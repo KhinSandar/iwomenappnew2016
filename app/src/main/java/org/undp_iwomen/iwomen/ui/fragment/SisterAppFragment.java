@@ -30,7 +30,6 @@ import com.thuongnh.zprogresshud.ZProgressHUD;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.smk.application.StoreUtil;
 import org.smk.clientapi.NetworkEngine;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.model.Helper;
@@ -67,6 +66,7 @@ public class SisterAppFragment extends Fragment {
     private TextView txt_undp_link;
     private StorageUtil storageUtil;
     private ZProgressHUD zPDialog;
+    List<SisterAppItem> StoragesisterAppItems;
 
     //private ProgressDialog mProgressDialog;
 
@@ -127,11 +127,12 @@ public class SisterAppFragment extends Fragment {
         sisterAppListAdapter.notifyDataSetChanged();
 
 
-        List<SisterAppItem> sisterAppItems = StoreUtil.getInstance().selectFrom("SisterAppList");
+        //StoragesisterAppItems = StoreUtil.getInstance().selectFrom("SisterAppList");
+        StoragesisterAppItems = (ArrayList<SisterAppItem>) storageUtil.ReadArrayListFromSD("SisterAppList");
         if (Connection.isOnline(mContext)){
             // Showing local data while loading from internet
-            if(sisterAppItems != null && sisterAppItems.size() > 0){
-                sisterAppItemList.addAll(sisterAppItems);
+            if(StoragesisterAppItems != null && StoragesisterAppItems.size() > 0){
+                sisterAppItemList.addAll(StoragesisterAppItems);
                 sisterAppListAdapter.notifyDataSetChanged();
                 zPDialog = new ZProgressHUD(getActivity());
                 zPDialog.show();
@@ -139,9 +140,9 @@ public class SisterAppFragment extends Fragment {
             getSisterListPaginationFromSever();
         }else{
             SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
-            if(sisterAppItems != null){
+            if(StoragesisterAppItems != null){
                 sisterAppItemList.clear();
-                sisterAppItemList.addAll(sisterAppItems);
+                sisterAppItemList.addAll(StoragesisterAppItems);
                 sisterAppListAdapter.notifyDataSetChanged();
             }
         }
@@ -156,7 +157,6 @@ public class SisterAppFragment extends Fragment {
 
         txt_undp_link.setText("www.undpmyanmar.org");
         Linkify.addLinks(txt_undp_link, Linkify.WEB_URLS);
-
 
         /*sisterAppItemList = (ArrayList<SisterAppItem>) storageUtil.ReadArrayListFromSD("SisterAppArrayList");
         Log.e("sisterAppItemList size", "===>" + sisterAppItemList.size());
@@ -211,7 +211,10 @@ public class SisterAppFragment extends Fragment {
                     sisterAppListAdapter.notifyDataSetChanged();
                     progress.setVisibility(View.INVISIBLE);
                     isLoading = false;
-                    StoreUtil.getInstance().saveTo("SisterAppList", sisterAppItemList);
+                    //StoreUtil.getInstance().saveTo("SisterAppList", sisterAppItemList);
+                    final ArrayList<SisterAppItem> storagelist = new ArrayList<SisterAppItem>();
+                    storagelist.addAll(sisterAppItemList);
+                    storageUtil.SaveArrayListToSD("SisterAppList", storagelist);
                     if (sisterAppItems.size() == 12) {
                         lv_sister.setNextPage(true);
                         paginater++;
@@ -240,6 +243,12 @@ public class SisterAppFragment extends Fragment {
 
         }else {
             SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
+            List<SisterAppItem> storagelist = (ArrayList < SisterAppItem >) storageUtil.ReadArrayListFromSD("SisterAppList");
+            if(storagelist != null){
+                sisterAppItemList.clear();
+                sisterAppItemList.addAll(storagelist);
+                sisterAppListAdapter.notifyDataSetChanged();
+            }
         }
     }
 

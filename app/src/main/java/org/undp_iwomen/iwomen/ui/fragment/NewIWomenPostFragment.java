@@ -772,7 +772,7 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
                         pgDialog.dismiss();
                     Log.i(TAG, "Upload with ID " + uploadId + " is completed: " + serverResponseCode + ", "
                             + serverResponseMessage);
-                    Toast.makeText(getActivity(), serverResponseMessage, Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getActivity(), serverResponseMessage, Toast.LENGTH_LONG).show();
 
                     //audio_file_id = uploadId;
                     audio_file_id = serverResponseMessage.replace("\"","").replace("\\","");

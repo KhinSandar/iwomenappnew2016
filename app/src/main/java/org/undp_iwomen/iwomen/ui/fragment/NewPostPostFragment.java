@@ -22,7 +22,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.alexbbb.uploadservice.MultipartUploadRequest;
 import com.alexbbb.uploadservice.UploadNotificationConfig;
@@ -494,8 +493,8 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
             @Override
             public void run() {
                 progress_wheel.setVisibility(View.GONE);
-                Toast.makeText(getActivity().getApplicationContext(), reason,
-                        Toast.LENGTH_LONG).show();
+                //Toast.makeText(getActivity().getApplicationContext(), reason,
+                        //Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -774,7 +773,7 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
                         pgDialog.dismiss();
                     Log.i(TAG, "Upload with ID " + uploadId + " is completed: " + serverResponseCode + ", "
                             + serverResponseMessage);
-                    Toast.makeText(getActivity(), serverResponseMessage, Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getActivity(), serverResponseMessage, Toast.LENGTH_LONG).show();
 
                     //audio_file_id = uploadId;
                     audio_file_id = serverResponseMessage.replace("\"","").replace("\\","");
