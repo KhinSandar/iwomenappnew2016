@@ -54,6 +54,8 @@ import com.facebook.share.model.ShareContent;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareButton;
 import com.facebook.share.widget.ShareDialog;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.google.gson.Gson;
 import com.makeramen.RoundedImageView;
 import com.smk.model.CommentItem;
@@ -76,6 +78,7 @@ import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.data.FeedItem;
 import org.undp_iwomen.iwomen.database.TableAndColumnsName;
+import org.undp_iwomen.iwomen.manager.MainApplication;
 import org.undp_iwomen.iwomen.model.Helper;
 import org.undp_iwomen.iwomen.model.ISO8601Utils;
 import org.undp_iwomen.iwomen.model.MyTypeFace;
@@ -458,7 +461,11 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         postObjId = iWomenPost.getObjectId();
         mstrAudioFilePath = iWomenPost.getAudioFile();
 
-        //Log.e("<<<<PostID 22 at Detail>>>>","===>" + postType);
+        // Google Analytics
+        MainApplication application = (MainApplication) getApplication();
+        Tracker mTracker = application.getDefaultTracker();
+        mTracker.setScreenName("Post Detail ~ "+ iWomenPost.getTitle());
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
 
         //TODO for Comment
 

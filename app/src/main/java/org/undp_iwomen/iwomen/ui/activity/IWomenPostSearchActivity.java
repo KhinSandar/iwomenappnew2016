@@ -70,7 +70,6 @@ public class IWomenPostSearchActivity extends BaseActionBarActivity {
             keywords = bundle.getString("keywords");
         }
 
-
         skListView = (SKListView) findViewById(R.id.lst_search_stories);
         zPDialog = new ZProgressHUD(IWomenPostSearchActivity.this);
         zPDialog.show();

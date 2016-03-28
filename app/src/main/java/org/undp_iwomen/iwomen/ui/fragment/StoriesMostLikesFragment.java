@@ -24,6 +24,8 @@ import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.google.gson.Gson;
 import com.smk.skconnectiondetector.SKConnectionDetector;
 import com.smk.sklistview.SKListView;
@@ -39,6 +41,7 @@ import org.smk.model.Rating;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.data.FeedItem;
 import org.undp_iwomen.iwomen.database.TableAndColumnsName;
+import org.undp_iwomen.iwomen.manager.MainApplication;
 import org.undp_iwomen.iwomen.model.retrofit_api.UserPostAPI;
 import org.undp_iwomen.iwomen.provider.IwomenProviderData;
 import org.undp_iwomen.iwomen.ui.activity.IWomenPostSearchActivity;
@@ -90,6 +93,13 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
+        // Google Analytics
+        MainApplication application = (MainApplication) getActivity().getApplication();
+        Tracker mTracker = application.getDefaultTracker();
+        mTracker.setScreenName("StoriesMostLikesFragment");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+
     }
 
     @Override

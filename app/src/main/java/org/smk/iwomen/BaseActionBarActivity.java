@@ -50,7 +50,7 @@ public class BaseActionBarActivity extends AppCompatActivity{
 	private static boolean isCheckedVersion = false;
 	public Integer  UsageCount = 0;
 	public int versionCode = 0;
-	private Tracker mTracker;
+	public Tracker mTracker;
 	private ProgressDialog pgDialog;
 
 	@Override
