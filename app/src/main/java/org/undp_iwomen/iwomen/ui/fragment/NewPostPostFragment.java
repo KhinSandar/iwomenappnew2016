@@ -43,6 +43,7 @@ import org.undp_iwomen.iwomen.BuildConfig;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.ui.activity.DrawerMainActivity;
+import org.undp_iwomen.iwomen.ui.activity.TalkTogetherMainActivity;
 import org.undp_iwomen.iwomen.ui.widget.CircleProgressBar;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.ui.widget.ResizableImageView;
@@ -64,7 +65,7 @@ import retrofit.mime.TypedFile;
 public class NewPostPostFragment extends Fragment implements View.OnClickListener, ImageChooserListener {
 
     public static final String TAG = "New Post";
-    private static String cateId;
+    private static String cateId,cateName;
     public Button mPostBtn;
     public EditText et_postDesc;
     public CustomTextView take_photo_btn, upload_photo_btn, audio_upload_btn, video_upload_btn;
@@ -127,11 +128,12 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
     public NewPostPostFragment() {
     }
 
-    public static NewPostPostFragment newInstance(String categoryId) {
+    public static NewPostPostFragment newInstance(String categoryId , String catName) {
         NewPostPostFragment fragment = new NewPostPostFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         cateId = categoryId;
+        cateName = catName;
         return fragment;
     }
 
@@ -428,7 +430,17 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
         @Override
         public void success(IWomenPost iWomenPost, Response response) {
             SKToastMessage.getInstance(getActivity()).showMessage(getActivity(),getResources().getString(R.string.audio_post_success), SKToastMessage.SUCCESS);
-            getActivity().finish();
+            //getActivity().finish();
+
+            /*Intent i = new Intent(getActivity().getApplicationContext(), TalkTogetherMainActivity.class);
+            i.putExtra("CategoryName", CategoriesModelList.get(position).getName());//CategoryName
+            i.putExtra("CategoryID", CategoriesModelList.get(position).getObjectId());//CategoryName
+            startActivity(i);*/
+
+            Intent i = new Intent(getActivity().getApplicationContext(), TalkTogetherMainActivity.class);
+            i.putExtra("CategoryName", cateName);//CategoryName
+            i.putExtra("CategoryID", cateId);//CategoryName
+            startActivity(i);
 
             progress_wheel.setVisibility(View.GONE);
         }
