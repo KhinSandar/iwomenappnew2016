@@ -95,6 +95,7 @@ public class RegisterTlgFragment4 extends Fragment implements View.OnClickListen
         btn_tlg_back = (Button)view.findViewById(R.id.register_tlg_back_btn);
         spnTLG = (Spinner) view.findViewById(R.id.register_tlg_spn_township);
         btn_next.setOnClickListener(this);
+        btn_tlg_back.setOnClickListener(this);
 
         setEnglishFont();
 
@@ -206,18 +207,19 @@ public class RegisterTlgFragment4 extends Fragment implements View.OnClickListen
             case R.id.Next:
                 addNextFragment(btn_next, false);
                 break;
+            case R.id.register_tlg_back_btn:
+                getActivity().onBackPressed();
+                break;
         }
 
     }
 
     public void setEnglishFont() {
-
         // Set title bar
         ((RegisterMainActivity) getActivity()).textViewTitle.setText(R.string.register_township_title);
     }
 
     public void setMyanmarFont() {
-
         // Set title bar
         ((RegisterMainActivity) getActivity()).textViewTitle.setText(R.string.register_township_title);
     }

@@ -382,7 +382,7 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
                 //mProgressDialog.show();
                 //SetPostData();
                 //getPostDataOrderByLikesDate();
-                getIWomenPostByLimit();
+                //getIWomenPostByLimit();
                 return true;
             case R.id.action_rating:
                 showReviewDetailDialog();
@@ -1107,6 +1107,7 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
         switch (v.getId()) {
             case R.id.post_news:
                 Intent intent = new Intent(mContext, NewPostActivity.class);
+                intent.putExtra("PostType", "BeInspiredIwomenPost");
                 startActivity(intent);
                 break;
         }

@@ -1,5 +1,6 @@
 package org.undp_iwomen.iwomen.ui.activity;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -8,7 +9,9 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -81,6 +84,10 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
     private RadioButton rd_lang_en, rd_lang_mm_zawgyi, rd_lang_mm_uni, rd_lang_mm_default;
     private String lang;
     private ZProgressHUD dialog;
+    //PERMISSION FOR WRITE STORAGE SETTING FONTS (Marshmallow Android 6.0 and above)
+    private final String STORAGE_READ_PERMISSION = "android.permission.READ_EXTERNAL_STORAGE";
+    boolean storagePermissionAccepted = false;
+
 
 
     @Override
@@ -185,7 +192,7 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
             case R.id.parse_signup_button:
                 Intent i = new Intent(MainLoginActivity.this, RegisterMainActivity.class);//DrawerMainActivity
                 startActivity(i);
-                //finish();
+                finish();
                 break;
         }
     }
@@ -331,6 +338,7 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
         //Toast.makeText(MainLoginActivity.this, "Choose Lang" + lang, Toast.LENGTH_LONG).show();
 
         OnClickListener clickListener = new OnClickListener() {
+            @TargetApi(Build.VERSION_CODES.M)
             @Override
             public void onClick(DialogPlus dialog, View view) {
 
@@ -341,83 +349,119 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
 
                     case R.id.dialog_english_language:
 
-                        StoreUtil.getInstance().saveTo("fonts", "english");
-                        editor.putString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
-                        editor.commit();
+                        if (!hasPermission(STORAGE_READ_PERMISSION)) {
 
-                        String languageToLoad = "eng"; // your language
-                        Locale locale = new Locale(languageToLoad);
-                        Locale.setDefault(locale);
-                        Configuration config = new Configuration();
-                        config.locale = locale;
-                        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+                            //if no permission, request permission
+                            String[] perms = {STORAGE_READ_PERMISSION};
+                            int permsRequestCode = 200;
+                            requestPermissions(perms, permsRequestCode);
+
+                        } else {
 
 
-                        SharedPreferences.Editor fontEditor = getSharedPreferences("mLanguage", Activity.MODE_PRIVATE).edit();
-                        fontEditor.putString("lang", "eng");
-                        fontEditor.commit();
+                            StoreUtil.getInstance().saveTo("fonts", "english");
+                            editor.putString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
+                            editor.commit();
 
-                        setEnglishFont();
+                            String languageToLoad = "eng"; // your language
+                            Locale locale = new Locale(languageToLoad);
+                            Locale.setDefault(locale);
+                            Configuration config = new Configuration();
+                            config.locale = locale;
+                            getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+
+
+                            SharedPreferences.Editor fontEditor = getSharedPreferences("mLanguage", Activity.MODE_PRIVATE).edit();
+                            fontEditor.putString("lang", "eng");
+                            fontEditor.commit();
+
+                            setEnglishFont();
+                        }
                         break;
                     case R.id.dialog_mm_zawgyi_language:
 
+                        if (!hasPermission(STORAGE_READ_PERMISSION)) {
 
-                        StoreUtil.getInstance().saveTo("fonts", "zawgyione");
-                        editor.putString(Utils.PREF_SETTING_LANG, Utils.MM_LANG);
-                        editor.commit();
+                            //if no permission, request permission
+                            String[] perms = {STORAGE_READ_PERMISSION};
+                            int permsRequestCode = 200;
+                            requestPermissions(perms, permsRequestCode);
 
-                        String languageToLoadm = "mm"; // your language
-                        Locale localem = new Locale(languageToLoadm);
-                        Locale.setDefault(localem);
-                        Configuration configm = new Configuration();
-                        configm.locale = localem;
-                        getBaseContext().getResources().updateConfiguration(configm, getBaseContext().getResources().getDisplayMetrics());
+                        } else {
+                            StoreUtil.getInstance().saveTo("fonts", "zawgyione");
+                            editor.putString(Utils.PREF_SETTING_LANG, Utils.MM_LANG);
+                            editor.commit();
 
-                        SharedPreferences.Editor fontEditorMM = getSharedPreferences("mLanguage", Activity.MODE_PRIVATE).edit();
-                        fontEditorMM.putString("lang", "mm");
-                        fontEditorMM.commit();
+                            String languageToLoadm = "mm"; // your language
+                            Locale localem = new Locale(languageToLoadm);
+                            Locale.setDefault(localem);
+                            Configuration configm = new Configuration();
+                            configm.locale = localem;
+                            getBaseContext().getResources().updateConfiguration(configm, getBaseContext().getResources().getDisplayMetrics());
 
-                        setMyanmarFontZawgyi();
+                            SharedPreferences.Editor fontEditorMM = getSharedPreferences("mLanguage", Activity.MODE_PRIVATE).edit();
+                            fontEditorMM.putString("lang", "mm");
+                            fontEditorMM.commit();
+
+                            setMyanmarFontZawgyi();
+                        }
                         break;
                     case R.id.dialog_mm_unicode_language:
 
-                        StoreUtil.getInstance().saveTo("fonts", "myanmar3");
-                        editor.putString(Utils.PREF_SETTING_LANG, Utils.MM_LANG_UNI);
-                        editor.commit();
+                        if (!hasPermission(STORAGE_READ_PERMISSION)) {
 
-                        String languageToLoaduni = "mm"; // your language
-                        Locale localeuni = new Locale(languageToLoaduni);
-                        Locale.setDefault(localeuni);
-                        Configuration configuni = new Configuration();
-                        configuni.locale = localeuni;
-                        getBaseContext().getResources().updateConfiguration(configuni, getBaseContext().getResources().getDisplayMetrics());
+                            //if no permission, request permission
+                            String[] perms = {STORAGE_READ_PERMISSION};
+                            int permsRequestCode = 200;
+                            requestPermissions(perms, permsRequestCode);
 
-                        SharedPreferences.Editor fontEditorUni = getSharedPreferences("mLanguage", Activity.MODE_PRIVATE).edit();
-                        fontEditorUni.putString("lang", "mm");
-                        fontEditorUni.commit();
+                        } else {
+                            StoreUtil.getInstance().saveTo("fonts", "myanmar3");
+                            editor.putString(Utils.PREF_SETTING_LANG, Utils.MM_LANG_UNI);
+                            editor.commit();
 
-                        setMyanmarFontUni();
+                            String languageToLoaduni = "mm"; // your language
+                            Locale localeuni = new Locale(languageToLoaduni);
+                            Locale.setDefault(localeuni);
+                            Configuration configuni = new Configuration();
+                            configuni.locale = localeuni;
+                            getBaseContext().getResources().updateConfiguration(configuni, getBaseContext().getResources().getDisplayMetrics());
+
+                            SharedPreferences.Editor fontEditorUni = getSharedPreferences("mLanguage", Activity.MODE_PRIVATE).edit();
+                            fontEditorUni.putString("lang", "mm");
+                            fontEditorUni.commit();
+
+                            setMyanmarFontUni();
+                        }
                         break;
 
 
                     case R.id.dialog_mm_default_language:
+                        if (!hasPermission(STORAGE_READ_PERMISSION)) {
 
-                        StoreUtil.getInstance().saveTo("fonts", "default");
-                        editor.putString(Utils.PREF_SETTING_LANG, Utils.MM_LANG_DEFAULT);
-                        editor.commit();
+                            //if no permission, request permission
+                            String[] perms = {STORAGE_READ_PERMISSION};
+                            int permsRequestCode = 200;
+                            requestPermissions(perms, permsRequestCode);
 
-                        String languageToLoadDe = "mm"; // your language
-                        Locale localeDe = new Locale(languageToLoadDe);
-                        Locale.setDefault(localeDe);
-                        Configuration configDe = new Configuration();
-                        configDe.locale = localeDe;
-                        getBaseContext().getResources().updateConfiguration(configDe, getBaseContext().getResources().getDisplayMetrics());
+                        } else {
+                            StoreUtil.getInstance().saveTo("fonts", "default");
+                            editor.putString(Utils.PREF_SETTING_LANG, Utils.MM_LANG_DEFAULT);
+                            editor.commit();
 
-                        SharedPreferences.Editor fontEditorDe = getSharedPreferences("mLanguage", Activity.MODE_PRIVATE).edit();
-                        fontEditorDe.putString("lang", "mm");
-                        fontEditorDe.commit();
+                            String languageToLoadDe = "mm"; // your language
+                            Locale localeDe = new Locale(languageToLoadDe);
+                            Locale.setDefault(localeDe);
+                            Configuration configDe = new Configuration();
+                            configDe.locale = localeDe;
+                            getBaseContext().getResources().updateConfiguration(configDe, getBaseContext().getResources().getDisplayMetrics());
 
-                        setMyanmarFontDefault();
+                            SharedPreferences.Editor fontEditorDe = getSharedPreferences("mLanguage", Activity.MODE_PRIVATE).edit();
+                            fontEditorDe.putString("lang", "mm");
+                            fontEditorDe.commit();
+
+                            setMyanmarFontDefault();
+                        }
 
                         break;
                     case R.id.dialog_ok_btn:
@@ -609,5 +653,31 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
 
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+
+
+            case 200:
+                storagePermissionAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                if (storagePermissionAccepted) {
+                    //chooseImage();
+                    ShowLangDialog();
+                }
+                break;
+
+        }
+    }
+
+    private boolean hasPermission(String permission) {
+
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
+            return (checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED);
+        } else {
+            return true;
+        }
+
+
+    }
 
 }

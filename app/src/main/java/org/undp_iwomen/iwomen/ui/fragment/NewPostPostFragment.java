@@ -35,6 +35,7 @@ import com.kbeanie.imagechooser.api.ImageChooserManager;
 import com.pnikosis.materialishprogress.ProgressWheel;
 import com.smk.skalertmessage.SKToastMessage;
 import com.smk.skconnectiondetector.SKConnectionDetector;
+import com.thuongnh.zprogresshud.ZProgressHUD;
 
 import org.smk.clientapi.NetworkEngine;
 import org.smk.model.IWomenPost;
@@ -124,6 +125,7 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
     private final String READ_PERMISSIOIN = "android.permission.WRITE_EXTERNAL_STORAGE";
     private final String PREPARE_AUDIO_PERMISSION = "android.permission.MODIFY_AUDIO_SETTINGS";
     private final String STORAGE_READ_PERMISSION = "android.permission.READ_EXTERNAL_STORAGE";
+    private ZProgressHUD zPDialog;
 
     public NewPostPostFragment() {
     }
@@ -387,6 +389,10 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
     void performPostUpload() {
 
         progress_wheel.setVisibility(View.VISIBLE);
+        zPDialog = new ZProgressHUD(getActivity());
+        zPDialog.setCancelable(false);
+        zPDialog.show();
+
 
         String content = null, content_type = null, content_mm = null, postUploadName = null;
 
@@ -443,12 +449,15 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
             startActivity(i);
 
             progress_wheel.setVisibility(View.GONE);
+            if(zPDialog != null && zPDialog.isShowing()){
+                zPDialog.dismissWithSuccess();
+            }
+
         }
 
         @Override
         public void failure(RetrofitError error) {
             SKToastMessage.getInstance(getActivity()).showMessage(getActivity(),getResources().getString(R.string.audio_post_error), SKToastMessage.ERROR);
-
             progress_wheel.setVisibility(View.GONE);
         }
     };

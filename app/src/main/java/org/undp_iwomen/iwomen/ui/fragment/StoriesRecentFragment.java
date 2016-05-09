@@ -1262,7 +1262,6 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
 
                 //Intent intent = new Intent(mContext, MainPhotoPostActivity.class);
                 Intent intent = new Intent(mContext, NewPostActivity.class);
-
                 intent.putExtra("PostType", "BeInspiredIwomenPost");
                 startActivity(intent);
                 //Utils.doToastEng(mContext, "Coming Soon!");
