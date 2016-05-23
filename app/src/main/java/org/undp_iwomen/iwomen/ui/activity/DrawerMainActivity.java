@@ -50,6 +50,7 @@ import org.undp_iwomen.iwomen.ui.fragment.SettingsFragment;
 import org.undp_iwomen.iwomen.ui.fragment.SisterAppFragment;
 import org.undp_iwomen.iwomen.ui.fragment.TLGUserStoriesRecentFragment;
 import org.undp_iwomen.iwomen.ui.fragment.TalkTogetherCategoryFragment;
+import org.undp_iwomen.iwomen.ui.fragment.WinPrizesFragment;
 import org.undp_iwomen.iwomen.ui.widget.AnimateCustomTextView;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.utils.Connection;
@@ -106,6 +107,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
 
     String post_count;
     TextView menu_user_post_count;
+    TextView menu_setting;
 
     LinearLayout ly_menu_profile_area;
     private AnimateCustomTextView btn_play_game;
@@ -116,11 +118,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
     protected void onStart() {
         super.onStart();
 
-        /*if (currentUser != null) {
-            showProfileLoggedIn();
-        } else {
-            showProfileLoggedOut();
-        }*/
+
     }
 
     @Override
@@ -179,6 +177,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
         layout_play_game = (LinearLayout) findViewById(R.id.ly2);
         btn_play_game = (AnimateCustomTextView) findViewById(R.id.drawer_btn_take_challenge);
         img_play_game = (ImageView) findViewById(R.id.img_play_game);
+        menu_setting = (TextView)findViewById(R.id.menu_setting_name_txt);
 
         // set a custom shadow that overlays the main content when the drawer opens
         drawerLayoutt.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
@@ -258,6 +257,18 @@ public class DrawerMainActivity extends BaseActionBarActivity {
             }
         });
 
+        menu_setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), SettingActivity.class);
+                startActivity(intent);
+                //fragmentManager.beginTransaction().replace(R.id.content_frame, settingsFragment).commit();
+
+
+                setTitle(getResources().getString(R.string.menu8));
+            }
+        });
+
 
         run = new Runnable() {
             @Override
@@ -271,6 +282,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
 
             }
         };
+
 
 
     }
@@ -373,16 +385,18 @@ public class DrawerMainActivity extends BaseActionBarActivity {
         //TODO FONT DRAWERMAIN
         if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
             DrawerListName = new String[]
-                    {"Be Inspired", "Be Knowledgeable", "Be Together", "Talk Together", "Settings", "AboutUs", "Sister Apps"};
-
+                    //{getResources().getString(R.string.menu1), "Be Knowledgeable", "Be Together", "Talk Together", "Settings", "AboutUs", "Sister Apps"};
+                    {getResources().getString(R.string.menu1),getResources().getString(R.string.menu2),getResources().getString(R.string.menu3),getResources().getString(R.string.menu4)
+                    ,getResources().getString(R.string.menu5),getResources().getString(R.string.menu6),getResources().getString(R.string.menu7)};
             DrawerListIcon = new int[]
                     {R.drawable.ic_stories,
                             R.drawable.ic_resources,
                             R.drawable.be_together,
                             R.drawable.ic_talk_together,
-                            R.drawable.ic_setting,
+                            R.drawable.sister_app,//Win prize
+                            R.mipmap.sister_app_new,
                             R.drawable.about_us,
-                            R.drawable.sister_app};
+                    };
 
             drawer_adapter = new DrawerListViewAdapter(getApplicationContext(), DrawerListName, DrawerListIcon, mstr_lang);//mCategoriesTitles
                     /*mDrawerList.setAdapter(new ArrayAdapter<String>(this,
@@ -393,16 +407,19 @@ public class DrawerMainActivity extends BaseActionBarActivity {
             setListViewHeightBasedOnChildren(mDrawerList);
         } else if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.MM_LANG)) {
             DrawerListName = new String[]
-                    {"စိတ္ဓာတ္ခ\u103Cန္အား\u107Fဖည္ ့ရန္", "ဗဟုုသုုတရရန္", "ေပ\u102Bင္းစည္းေဆာင္ရ\u103Cက္ရန္", "ေမး\u107Fမန္းေဆ\u103Cးေ\u108F\u103Cးရန္", "\u107Fပင္ဆင္ရန္", "က\u103C\u103A\u108Fုုပ္တိုု ့အေ\u107Eကာင္း", " Sister Apps"};
+                   // {"စိတ္ဓာတ္ခ\u103Cန္အား\u107Fဖည္ ့ရန္", "ဗဟုုသုုတရရန္", "ေပ\u102Bင္းစည္းေဆာင္ရ\u103Cက္ရန္", "ေမး\u107Fမန္းေဆ\u103Cးေ\u108F\u103Cးရန္", "\u107Fပင္ဆင္ရန္", "က\u103C\u103A\u108Fုုပ္တိုု ့အေ\u107Eကာင္း", " Sister Apps"};
+                    {getResources().getString(R.string.menu1),getResources().getString(R.string.menu2),getResources().getString(R.string.menu3),getResources().getString(R.string.menu4)
+                            ,getResources().getString(R.string.menu5),getResources().getString(R.string.menu6),getResources().getString(R.string.menu7)};
 
             DrawerListIcon = new int[]
                     {R.drawable.ic_stories,
                             R.drawable.ic_resources,
                             R.drawable.be_together,
                             R.drawable.ic_talk_together,
-                            R.drawable.ic_setting,
+                            R.drawable.sister_app,
+                            R.mipmap.sister_app_new,
                             R.drawable.about_us,
-                            R.drawable.sister_app};
+                    };
 
             drawer_adapter = new DrawerListViewAdapter(getApplicationContext(), DrawerListName, DrawerListIcon, mstr_lang);//mCategoriesTitles
                     /*mDrawerList.setAdapter(new ArrayAdapter<String>(this,
@@ -413,16 +430,19 @@ public class DrawerMainActivity extends BaseActionBarActivity {
             setListViewHeightBasedOnChildren(mDrawerList);
         } else if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.MM_LANG_UNI)) {
             DrawerListName = new String[]
-                    {"စိတ္ဓာတ္ခ\u103Cန္အား\u107Fဖည္ ့ရန္", "ဗဟုုသုုတရရန္", "ေပ\u102Bင္းစည္းေဆာင္ရ\u103Cက္ရန္", "ေမး\u107Fမန္းေဆ\u103Cးေ\u108F\u103Cးရန္", "\u107Fပင္ဆင္ရန္", "က\u103C\u103A\u108Fုုပ္တိုု ့အေ\u107Eကာင္း", " Sister Apps"};
+                    //{"စိတ္ဓာတ္ခ\u103Cန္အား\u107Fဖည္ ့ရန္", "ဗဟုုသုုတရရန္", "ေပ\u102Bင္းစည္းေဆာင္ရ\u103Cက္ရန္", "ေမး\u107Fမန္းေဆ\u103Cးေ\u108F\u103Cးရန္", "\u107Fပင္ဆင္ရန္", "က\u103C\u103A\u108Fုုပ္တိုု ့အေ\u107Eကာင္း", " Sister Apps"};
+                    {getResources().getString(R.string.menu1),getResources().getString(R.string.menu2),getResources().getString(R.string.menu3),getResources().getString(R.string.menu4)
+                            ,getResources().getString(R.string.menu5),getResources().getString(R.string.menu6),getResources().getString(R.string.menu7)};
 
             DrawerListIcon = new int[]
                     {R.drawable.ic_stories,
                             R.drawable.ic_resources,
                             R.drawable.be_together,
                             R.drawable.ic_talk_together,
-                            R.drawable.ic_setting,
+                            R.drawable.sister_app,
+                            R.mipmap.sister_app_new,
                             R.drawable.about_us,
-                            R.drawable.sister_app};
+                            };
 
             drawer_adapter = new DrawerListViewAdapter(getApplicationContext(), DrawerListName, DrawerListIcon, mstr_lang);//mCategoriesTitles
                     /*mDrawerList.setAdapter(new ArrayAdapter<String>(this,
@@ -433,16 +453,19 @@ public class DrawerMainActivity extends BaseActionBarActivity {
             setListViewHeightBasedOnChildren(mDrawerList);
         } else if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.MM_LANG_DEFAULT)) {
             DrawerListName = new String[]
-                    {"စိတ္ဓာတ္ခ\u103Cန္အား\u107Fဖည္ ့ရန္", "ဗဟုုသုုတရရန္", "ေပ\u102Bင္းစည္းေဆာင္ရ\u103Cက္ရန္", "ေမး\u107Fမန္းေဆ\u103Cးေ\u108F\u103Cးရန္", "\u107Fပင္ဆင္ရန္", "က\u103C\u103A\u108Fုုပ္တိုု ့အေ\u107Eကာင္း", " Sister Apps"};
+                    //{"စိတ္ဓာတ္ခ\u103Cန္အား\u107Fဖည္ ့ရန္", "ဗဟုုသုုတရရန္", "ေပ\u102Bင္းစည္းေဆာင္ရ\u103Cက္ရန္", "ေမး\u107Fမန္းေဆ\u103Cးေ\u108F\u103Cးရန္", "\u107Fပင္ဆင္ရန္", "က\u103C\u103A\u108Fုုပ္တိုု ့အေ\u107Eကာင္း", " Sister Apps"};
+                    {getResources().getString(R.string.menu1),getResources().getString(R.string.menu2),getResources().getString(R.string.menu3),getResources().getString(R.string.menu4)
+                            ,getResources().getString(R.string.menu5),getResources().getString(R.string.menu6),getResources().getString(R.string.menu7)};
 
             DrawerListIcon = new int[]
                     {R.drawable.ic_stories,
                             R.drawable.ic_resources,
                             R.drawable.be_together,
                             R.drawable.ic_talk_together,
-                            R.drawable.ic_setting,
+                            R.drawable.sister_app,
+                            R.mipmap.sister_app_new,
                             R.drawable.about_us,
-                            R.drawable.sister_app};
+                    };
 
             // R.drawable.ic_community, R.drawable.ic_news
 
@@ -455,16 +478,19 @@ public class DrawerMainActivity extends BaseActionBarActivity {
             setListViewHeightBasedOnChildren(mDrawerList);
         } else {
             DrawerListName = new String[]
-                    {"စိတ္ဓာတ္ခ\u103Cန္အား\u107Fဖည္ ့ရန္", "ဗဟုုသုုတရရန္", "ေပ\u102Bင္းစည္းေဆာင္ရ\u103Cက္ရန္", "ေမး\u107Fမန္းေဆ\u103Cးေ\u108F\u103Cးရန္", "\u107Fပင္ဆင္ရန္", "က\u103C\u103A\u108Fုုပ္တိုု ့အေ\u107Eကာင္း", " Sister Apps"};
+                    //{"စိတ္ဓာတ္ခ\u103Cန္အား\u107Fဖည္ ့ရန္", "ဗဟုုသုုတရရန္", "ေပ\u102Bင္းစည္းေဆာင္ရ\u103Cက္ရန္", "ေမး\u107Fမန္းေဆ\u103Cးေ\u108F\u103Cးရန္", "\u107Fပင္ဆင္ရန္", "က\u103C\u103A\u108Fုုပ္တိုု ့အေ\u107Eကာင္း", " Sister Apps"};
+                    {getResources().getString(R.string.menu1),getResources().getString(R.string.menu2),getResources().getString(R.string.menu3),getResources().getString(R.string.menu4)
+                            ,getResources().getString(R.string.menu5),getResources().getString(R.string.menu6),getResources().getString(R.string.menu7)};
 
             DrawerListIcon = new int[]
                     {R.drawable.ic_stories,
                             R.drawable.ic_resources,
                             R.drawable.be_together,
                             R.drawable.ic_talk_together,
-                            R.drawable.ic_setting,
+                            R.drawable.sister_app,
+                            R.mipmap.sister_app_new,
                             R.drawable.about_us,
-                            R.drawable.sister_app};
+                    };
 
             drawer_adapter = new DrawerListViewAdapter(getApplicationContext(), DrawerListName, DrawerListIcon, mstr_lang);//mCategoriesTitles
                     /*mDrawerList.setAdapter(new ArrayAdapter<String>(this,
@@ -538,6 +564,9 @@ public class DrawerMainActivity extends BaseActionBarActivity {
         TLGUserStoriesRecentFragment tlgUserStoriesRecentFragment = new TLGUserStoriesRecentFragment();
 
         TalkTogetherCategoryFragment talkTogetherCategoryFragment = new TalkTogetherCategoryFragment();
+
+        //IntroFragment.newInstance(Color.parseColor("#4CAF50"), position);
+        WinPrizesFragment winPrizesFragment = new WinPrizesFragment();
         switch (position) {
             case 0://Categories 1
                 fragmentManager.beginTransaction().replace(R.id.content_frame, mainMaterialTab).commit();
@@ -557,16 +586,20 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                 fragmentManager.beginTransaction().replace(R.id.content_frame, talkTogetherCategoryFragment).commit();
                 setTitle(DrawerListName[position]);
                 break;
-            case 4:
 
-                Intent intent = new Intent(this, SettingActivity.class);
-                startActivity(intent);
-                //fragmentManager.beginTransaction().replace(R.id.content_frame, settingsFragment).commit();
+            case 4://Win Prize
 
-
+                fragmentManager.beginTransaction().replace(R.id.content_frame, winPrizesFragment.newInstance(10,0)).commit();
                 setTitle(DrawerListName[position]);
                 break;
-            case 5:
+            case 5:// sister App
+
+                fragmentManager.beginTransaction().replace(R.id.content_frame, sisterAppFragment).commit();
+                setTitle(DrawerListName[position]);
+
+
+                break;
+            case 6://About us
 
                 if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
 
@@ -580,11 +613,6 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                     intent2.putExtra("URL", "file:///android_asset/tos/About-Us-MM-v2.html");
                     startActivity(intent2);
                 }
-
-                break;
-            case 6:
-                fragmentManager.beginTransaction().replace(R.id.content_frame, sisterAppFragment).commit();
-                setTitle(DrawerListName[position]);
 
                 break;//Sister apps
         }

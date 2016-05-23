@@ -32,9 +32,7 @@ public final class CalendarViewPagerFragment extends Fragment {
     public static CalendarViewPagerFragment newInstance(int content) {
 
         CalendarViewPagerFragment fragment = new CalendarViewPagerFragment();
-
         fragment.mContent = content;
-
         return fragment;
     }
 
@@ -67,7 +65,6 @@ public final class CalendarViewPagerFragment extends Fragment {
 
 
         Context context = getActivity();
-
         View view = inflater.inflate(R.layout.atx_calendar_viewpager_item, null);
 
 

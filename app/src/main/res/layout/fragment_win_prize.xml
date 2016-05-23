@@ -1,0 +1,91 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/win_prize_ly_img"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="#fff">
+
+        <org.undp_iwomen.iwomen.ui.widget.ResizableImageView
+            android:id="@+id/win_prize_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/win_prize_own"
+            android:scaleType="fitCenter" />
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/ly_blank"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/win_prize_ly_img"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical">
+
+        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+
+            android:id="@+id/menu_setting_name_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@drawable/list_selector"
+            android:gravity="center"
+            android:minHeight="?android:attr/listPreferredItemHeightSmall"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="@string/win_prize_enter_code"
+            android:textAppearance="?android:attr/textAppearanceListItemSmall"
+            android:textColor="@drawable/list_text_selector"
+            android:textSize="24sp" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/register_fb_user_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
+
+            <org.undp_iwomen.iwomen.ui.widget.CustomEditText
+                android:id="@+id/win_prize_code_input"
+                style="@style/ParseLoginUI.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:gravity="center"
+                android:hint="####"
+                android:inputType="text"
+                android:nextFocusDown="@+id/register_fb_phone_number"
+                android:nextFocusForward="@+id/register_fb_phone_number"
+                android:textColor="@color/body_text_1"
+                android:textSize="15sp" />
+        </android.support.design.widget.TextInputLayout>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ly_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ly_blank"
+        android:layout_marginTop="20dp">
+
+        <org.undp_iwomen.iwomen.ui.widget.CustomButton
+            android:id="@+id/Next"
+            style="@style/ParseLoginUI.Button.SignUp"
+            android:layout_margin="16dp"
+            android:text="@string/competition_submit"
+            android:textSize="15sp"
+
+            />
+
+
+    </LinearLayout>
+
+</RelativeLayout>
