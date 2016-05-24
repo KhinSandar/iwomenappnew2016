@@ -74,7 +74,6 @@ public class DrawerMainActivity extends BaseActionBarActivity {
     private LinearLayout mDrawerLinearLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle actionBarDrawerToggle;
-
     private Toolbar toolbar;
 
     private String[] DrawerListName;
@@ -83,10 +82,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
     public CustomTextView textViewTitle;
     private TextView txt_user_name;
     private CustomTextView txt_sing_out;
-
     private static final int LOGIN_REQUEST = 0;
-
-
     private SharedPreferences mSharedPreferencesUserInfo;
     private SharedPreferences.Editor mEditorUserInfo;
     private String user_name, user_obj_id, user_id, user_ph, register_msg, user_img_path;
@@ -94,20 +90,18 @@ public class DrawerMainActivity extends BaseActionBarActivity {
     String mstr_lang;
     Runnable run;
     DrawerListViewAdapter drawer_adapter;
-
     //ProfilePictureView userProfilePicture;
     ProgressBar drawer_progressBar_profile_item;
-
-
     RoundedImageView drawer_profilePic_rounded;
     String userprofile_Image_path;
-
     String mstrUserfbId;
     SharePrefUtils sessionManager;
 
-    String post_count;
-    TextView menu_user_post_count;
-    TextView menu_setting;
+    String post_count , user_code, user_points,user_share_status;
+    TextView txt_menu_user_post_count;
+    TextView txt_menu_setting;
+    TextView txt_menu_user_points;
+    TextView txt_menu_user_code;
 
     LinearLayout ly_menu_profile_area;
     private AnimateCustomTextView btn_play_game;
@@ -170,14 +164,16 @@ public class DrawerMainActivity extends BaseActionBarActivity {
         mDrawerList = (ListView) findViewById(R.id.left_drawer_lv);
         txt_user_name = (TextView) findViewById(R.id.txt_user_name);
         txt_sing_out = (CustomTextView) findViewById(R.id.menu_sing_out);
-        menu_user_post_count = (TextView) findViewById(R.id.menu_user_post_count);
+        txt_menu_user_post_count = (TextView) findViewById(R.id.menu_user_post_count);
         ly_menu_profile_area = (LinearLayout) findViewById(R.id.menu_profile_area_ly);
         drawer_profilePic_rounded = (RoundedImageView) findViewById(R.id.drawer_profilePic_rounded);
         drawer_progressBar_profile_item = (ProgressBar) findViewById(R.id.drawer_progressBar_profile_item);
         layout_play_game = (LinearLayout) findViewById(R.id.ly2);
         btn_play_game = (AnimateCustomTextView) findViewById(R.id.drawer_btn_take_challenge);
         img_play_game = (ImageView) findViewById(R.id.img_play_game);
-        menu_setting = (TextView)findViewById(R.id.menu_setting_name_txt);
+        txt_menu_setting = (TextView)findViewById(R.id.menu_setting_name_txt);
+        txt_menu_user_points = (TextView)findViewById(R.id.drawer_point_txt) ;
+        txt_menu_user_code = (TextView)findViewById(R.id.menu_user_code);
 
         // set a custom shadow that overlays the main content when the drawer opens
         drawerLayoutt.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
@@ -200,6 +196,21 @@ public class DrawerMainActivity extends BaseActionBarActivity {
 
         user_id = mSharedPreferencesUserInfo.getString(CommonConfig.USER_ID, null);
         user_img_path = mSharedPreferencesUserInfo.getString(CommonConfig.USER_UPLOAD_IMG_URL, null);
+
+        user_code  = user_obj_id;
+
+        if (mSharedPreferencesUserInfo.getString(CommonConfig.USER_POINTS, null) == null) {
+            user_points = "0"; // initial no point condition
+        }else{
+            user_points  = mSharedPreferencesUserInfo.getString(CommonConfig.USER_POINTS, null);
+        }
+
+        if (mSharedPreferencesUserInfo.getString(CommonConfig.USER_SHARE_STATUS, null) == null) {
+            user_share_status = "0";// For didn't share  //initial no status condition
+        }else{
+            user_share_status = mSharedPreferencesUserInfo.getString(CommonConfig.USER_SHARE_STATUS, null);
+        }
+
         //TODO CHECK LOGIN OR NOT
         if (mSharedPreferencesUserInfo.getString(CommonConfig.USER_ROLE, null) == null) {
             startActivity(new Intent(this, MainLoginActivity.class));
@@ -210,6 +221,9 @@ public class DrawerMainActivity extends BaseActionBarActivity {
         setUserImg();
 
         txt_user_name.setText(user_name);
+        txt_menu_user_code.setText("Code - " + user_code);
+        txt_menu_user_points.setText(user_points);
+
 
 
         //TODO WHEN DRAWER ACTIVITY START CALLING for check
@@ -220,10 +234,9 @@ public class DrawerMainActivity extends BaseActionBarActivity {
             drawerLayoutt.openDrawer(mDrawerLinearLayout);
         }
 
-
+        //TODO USER POST COUNT and USER POINTS
         getUserPostCount();
         getCompetitionQuestion();
-
 
         ly_menu_profile_area.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -242,7 +255,6 @@ public class DrawerMainActivity extends BaseActionBarActivity {
             }
         });
 
-
         txt_sing_out.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -257,7 +269,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
             }
         });
 
-        menu_setting.setOnClickListener(new View.OnClickListener() {
+        txt_menu_setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), SettingActivity.class);
@@ -335,7 +347,9 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                 @Override
                 public void success(String s, Response response) {
                     post_count = s;
-                    menu_user_post_count.setText(post_count + " Post");
+                    txt_menu_user_post_count.setText(post_count + " Post");
+                    //TODO get User points too
+
                 }
 
                 @Override
@@ -357,6 +371,23 @@ public class DrawerMainActivity extends BaseActionBarActivity {
 
 
     }
+
+    //TODO Comment Count API
+    private void getUserPointsCount() {
+        if (Connection.isOnline(getApplicationContext())) {
+
+        }
+        else {
+
+            if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+                org.undp_iwomen.iwomen.utils.Utils.doToastEng(getApplicationContext(), getResources().getString(R.string.open_internet_warning_eng));
+            } else {
+
+                org.undp_iwomen.iwomen.utils.Utils.doToastMM(getApplicationContext(), getResources().getString(R.string.open_internet_warning_mm));
+            }
+        }
+    }
+
 
     public void setThemeToApp() {
         sharePrefLanguageUtil = getSharedPreferences(Utils.PREF_SETTING_LANG, MODE_PRIVATE);
@@ -589,7 +620,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
 
             case 4://Win Prize
 
-                fragmentManager.beginTransaction().replace(R.id.content_frame, winPrizesFragment.newInstance(10,0)).commit();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, winPrizesFragment.newInstance(10,user_share_status)).commit();
                 setTitle(DrawerListName[position]);
                 break;
             case 5:// sister App

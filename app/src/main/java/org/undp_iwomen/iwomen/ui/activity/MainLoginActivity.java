@@ -267,9 +267,12 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
                     mEditorUserInfo.putString(CommonConfig.USER_OBJ_ID, user.getObjectId());
                     mEditorUserInfo.putString(CommonConfig.USER_ROLE, user.getRole());
                     mEditorUserInfo.putString(CommonConfig.USER_UPLOAD_IMG_URL, user.getProfileimage());
-                    //Log.e("<<<User Role >>> ", "===>" + user.getRole());
                     mEditorUserInfo.putString(CommonConfig.USER_PH, user.getPhoneNo());
                     mEditorUserInfo.putString(CommonConfig.USER_ROLE,user.getRole() );
+
+                    mEditorUserInfo.putString(CommonConfig.USER_POINTS,user.getPoints().toString() );
+                    mEditorUserInfo.putString(CommonConfig.USER_SHARE_STATUS,user.getShared().toString() );
+
                     mEditorUserInfo.commit();
                     Intent i = new Intent(MainLoginActivity.this, DrawerMainActivity.class);//DrawerMainActivity
                     startActivity(i);

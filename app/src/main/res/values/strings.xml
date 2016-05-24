@@ -790,4 +790,6 @@ Shirin Ebadi, J.D., was awarded the 2003 Nobel Peace Prize for her efforts to pr
 
     <string name="menu8">Setting</string>
 
+    <string name="menu_sing_out">Sign Out</string>
+
 </resources>

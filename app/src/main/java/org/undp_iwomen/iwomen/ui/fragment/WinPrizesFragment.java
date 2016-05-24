@@ -13,13 +13,15 @@ public class WinPrizesFragment extends Fragment {
     private static final String POINT = "point";
     private static final String PAGE = "page";
 
-    private int mPoint, mPage;
+    private int mPoint;
+    private String mShareStatus;
 
-    public static WinPrizesFragment newInstance(int backgroundColor, int page) {
+
+    public static WinPrizesFragment newInstance(int point, String status) {
         WinPrizesFragment frag = new WinPrizesFragment();
         Bundle b = new Bundle();
-        b.putInt(POINT, backgroundColor);
-        b.putInt(PAGE, page);
+        b.putInt(POINT, point);
+        b.putString(PAGE, status);
         frag.setArguments(b);
         return frag;
     }
@@ -34,7 +36,7 @@ public class WinPrizesFragment extends Fragment {
 
         if (!getArguments().containsKey(PAGE))
             throw new RuntimeException("Fragment must contain a \"" + PAGE + "\" argument!");
-        mPage = getArguments().getInt(PAGE);
+        mShareStatus = getArguments().getString(PAGE);
     }
 
     @Override
@@ -42,8 +44,8 @@ public class WinPrizesFragment extends Fragment {
 
         // Select a layout based on the current page
         int layoutResId;
-        switch (mPage) {
-            case 0:
+        switch (mShareStatus) {
+            case "0":
                 layoutResId = R.layout.fragment_win_prize;
                 break;
             default:
@@ -54,7 +56,7 @@ public class WinPrizesFragment extends Fragment {
         View view = getActivity().getLayoutInflater().inflate(layoutResId, container, false);
 
         // Set the current page index as the View's tag (useful in the PageTransformer)
-        view.setTag(mPage);
+        view.setTag(Integer.parseInt("0"));
 
         return view;
     }
