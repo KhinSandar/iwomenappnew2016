@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class SqliteHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "IWOMENDB";
-    private static int DATABASE_VERSION = 3;
+    private static int DATABASE_VERSION = 4;
 
 
     public SqliteHelper(Context context) {

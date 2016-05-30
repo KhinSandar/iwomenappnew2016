@@ -779,6 +779,7 @@ female-pilots-iaa1s
     <string name="aduio_take_photo">ဓာတ္ပံုုရိုုက္တင္ရန္</string>
     <string name="audio_vid_file">ရုုပ္သံဗီြဒီယိုုဖိုုင္တင္ရန္</string>
 
+    <string name="win_prize_enter_code">သူငယ္ခ်င္း app ေပးသူ ၏ ကုတ္ ကိုရိုုက္ထည့္ပါ။</string>
 
     <string name="menu1">စိတ္ဓာတ္ခြန္အားျဖည့္ရန္</string>
     <string name="menu2">ဗဟုသုတရရန္</string>
@@ -805,6 +806,11 @@ female-pilots-iaa1s
     <string name="prize_visit_more">ဆုုမ်ားအေသးစိတ္ၾကည့္ရန္ <a href="https://www.facebook.com/iwomenApp"></a></string>
 
     <string name="points_prize">အမွတ္</string>
+
+    <string name="register_photo_greet">က်ား /မ  ေရြးခ်ယ္ပါ။ ?</string>
+
+    <string name="register_photo_f">မ</string>
+    <string name="register_photo_m">က်ား</string>
 
 
 </resources>

@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.android.camera.CropImageIntentBuilder;
@@ -41,6 +42,7 @@ import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.data.Sample;
 import org.undp_iwomen.iwomen.ui.activity.RegisterMainActivity;
 import org.undp_iwomen.iwomen.ui.adapter.StickerGridViewAdapter;
+import org.undp_iwomen.iwomen.ui.widget.CustomRadioButton;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -92,6 +94,10 @@ public class RegisterPhotoFragment7 extends Fragment implements View.OnClickList
     private com.pnikosis.materialishprogress.ProgressWheel progress_wheel_gv;
     String sticker_img_path;
 
+    private RadioGroup radioGender;
+    private CustomRadioButton rd_female, rd_male;
+    private String mGenderStatus;
+
 
 
 
@@ -134,6 +140,10 @@ public class RegisterPhotoFragment7 extends Fragment implements View.OnClickList
         mSharedPreferencesUserInfo = getActivity().getSharedPreferences(CommonConfig.SHARE_PREFERENCE_USER_INFO, Context.MODE_PRIVATE);
 
         btn_next = (Button) view.findViewById(R.id.Next);
+        radioGender = (RadioGroup) view.findViewById(R.id.register_photo_rdioGroup);
+
+        rd_female = (CustomRadioButton) view.findViewById(R.id.register_photo_female);
+        rd_male = (CustomRadioButton) view.findViewById(R.id.register_photo_male);
         register_profilePic_progressBar = (ProgressBar) view.findViewById(R.id.register_photo_profilePic_pgbar);
         register_profilePic_progressBar.setVisibility(View.GONE);
 
@@ -218,6 +228,14 @@ public class RegisterPhotoFragment7 extends Fragment implements View.OnClickList
             mProgressDialog.show();//{"isAllow": true}
 
 
+            if(rd_female.isChecked()){
+                mGenderStatus = "female";
+            }
+            if(rd_male.isChecked()){
+                mGenderStatus = "male";
+            }
+
+
             MultipartTypedOutput multipartTypedOutput = new MultipartTypedOutput();
             multipartTypedOutput.addPart("image", new TypedFile("image/png", new File(crop_file_path)));
 
@@ -233,6 +251,10 @@ public class RegisterPhotoFragment7 extends Fragment implements View.OnClickList
                     mEditorUserInfo.putString(CommonConfig.USER_UPLOAD_IMG_NAME, photoUpload.getName());
 
                     mEditorUserInfo.putString(CommonConfig.USER_UPLOAD_IMG_URL, photoUpload.getResizeUrl().get(2).toString());
+
+
+                    mEditorUserInfo.putString(CommonConfig.USER_GENDER,mGenderStatus );
+
                     mEditorUserInfo.commit();
                     RegisterTermsFragment8 registerTermsFragment8 = RegisterTermsFragment8.newInstance();
 
@@ -276,11 +298,19 @@ public class RegisterPhotoFragment7 extends Fragment implements View.OnClickList
 
         } else if(sticker_img_path != null){
 
+            if(rd_female.isChecked()){
+                mGenderStatus = "female";
+            }
+            if(rd_male.isChecked()){
+                mGenderStatus = "male";
+            }
+
             //TODO showtoast please upload image or choose image
             mEditorUserInfo = mSharedPreferencesUserInfo.edit();
             //mEditorUserInfo.putString(CommonConfig.USER_UPLOAD_IMG_NAME, photoUpload.getName());
 
             mEditorUserInfo.putString(CommonConfig.USER_UPLOAD_IMG_URL, sticker_img_path);
+            mEditorUserInfo.putString(CommonConfig.USER_GENDER,mGenderStatus );
             mEditorUserInfo.commit();
             RegisterTermsFragment8 registerTermsFragment8 = RegisterTermsFragment8.newInstance();
 

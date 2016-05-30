@@ -10,7 +10,6 @@ import android.widget.BaseAdapter;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.data.PrizePointsItem;
-import org.undp_iwomen.iwomen.model.MyTypeFace;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 
 import java.util.List;
@@ -77,13 +76,13 @@ public class WinPrizeListViewAdapter extends BaseAdapter {
         //LayoutInflater inflator = activity.getLayoutInflater();
 
         if (view == null) {
-
-            view= LayoutInflater.from(mContext).inflate(R.layout.win_prize_list_item, parent, false);
             vh = new ViewHolder();
+            view = inflater.inflate(R.layout.win_prize_list_item, null);//gridview_row //fra_browse_gridview_item
+
+            //view= LayoutInflater.from(mContext).inflate(R.layout.win_prize_list_item, parent, false);
 
             vh.txtPrize = (CustomTextView) view.findViewById(R.id.txt_item_prize);
             vh.txtPoint = (CustomTextView) view.findViewById(R.id.txt_item_points);
-
 
             view.setTag(vh);
         } else {
@@ -91,25 +90,21 @@ public class WinPrizeListViewAdapter extends BaseAdapter {
         }
 
         //Log.e("Data==","==>" +datalist.get(i).getPoint());
-       /* if (datalist.get(i).getPoint() != null ) {
-            vh.txtPoint.setText(datalist.get(i).getPoint());
+       if (datalist.get(i).getPoint() != null ) {
+            vh.txtPoint.setText(datalist.get(i).getPoint().toString()+ " Points");
         }
         if (datalist.get(i).getPrice() != null && !datalist.get(i).getPrice().isEmpty()) {
-            vh.txtPrize.setText(datalist.get(i).getPrice()) ;
+            vh.txtPrize.setText(datalist.get(i).getPrice().toString()+ " Prize") ;
         }
-*/
 
 
-
-        if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+        /*if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
             vh.txtPrize.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
 
         } else if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.MM_LANG)) {
             vh.txtPrize.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
 
-        }
-
-
+        }*/
         //holder.imgIcon.setImageResource(listicon[position]);
 
 

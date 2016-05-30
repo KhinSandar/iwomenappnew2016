@@ -27,7 +27,6 @@ import android.widget.TextView;
 import com.facebook.FacebookSdk;
 import com.google.gson.Gson;
 import com.makeramen.RoundedImageView;
-import com.smk.skconnectiondetector.SKConnectionDetector;
 import com.squareup.picasso.Picasso;
 
 import org.smk.application.StoreUtil;
@@ -625,7 +624,12 @@ public class DrawerMainActivity extends BaseActionBarActivity {
 
                 //fragmentManager.beginTransaction().replace(R.id.content_frame, winPrizesFragment.newInstance(Integer.parseInt(user_points),user_share_status)).commit();
 
-                fragmentManager.beginTransaction().replace(R.id.content_frame, winPrizesFragment.newInstance(10,user_share_status)).commit();
+                //fragmentManager.beginTransaction().replace(R.id.content_frame, winPrizesFragment.newInstance(10,user_share_status)).commit();
+                Intent i = new Intent(this, WinPrizeActivity.class);
+                //i.putExtra("point", "10");
+                i.putExtra("page",user_share_status );
+                startActivity(i);
+
                 setTitle(DrawerListName[position]);
                 break;
             case 5:// sister App

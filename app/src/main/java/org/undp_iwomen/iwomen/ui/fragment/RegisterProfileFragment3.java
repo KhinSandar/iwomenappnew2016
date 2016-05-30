@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.transition.ChangeBounds;
 import android.transition.Slide;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -112,16 +111,7 @@ public class RegisterProfileFragment3 extends Fragment implements  View.OnClickL
 
     private void addNextFragment( Button squareBlue, boolean overlap) {
 
-        Log.e("<<<<isCheck>>>>","---->" + rd_mm_yes.isChecked() +rd_mm_no.isChecked()+rd_tlg_yes.isChecked()+ rd_tlg_no.isChecked() );
-
-        //falsetruefalsetrue  mm_no tlg_no
-
-        /*final ProgressDialog dialog = new ProgressDialog(getActivity());
-        dialog.setMessage("Loading...");
-        dialog.show();*/
-
-
-
+        //Log.e("<<<<isCheck>>>>","---->" + rd_mm_yes.isChecked() +rd_mm_no.isChecked()+rd_tlg_yes.isChecked()+ rd_tlg_no.isChecked() );
 
 
 

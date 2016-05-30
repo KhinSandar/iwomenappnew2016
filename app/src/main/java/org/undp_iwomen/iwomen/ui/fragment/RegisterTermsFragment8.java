@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.text.util.Linkify;
 import android.transition.ChangeBounds;
 import android.transition.Slide;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -141,6 +140,8 @@ public class RegisterTermsFragment8 extends Fragment implements View.OnClickList
 
             String user_photo = mSharedPreferencesUserInfo.getString(CommonConfig.USER_UPLOAD_IMG_URL, null);
 
+            String user_gender =mSharedPreferencesUserInfo.getString(CommonConfig.USER_GENDER, null);
+
             //String user_role = "User";
             //TODO remark group_id
 
@@ -151,7 +152,7 @@ public class RegisterTermsFragment8 extends Fragment implements View.OnClickList
                 isTlgExit = 0;
             }
             //Log.e("<<Register>","==>"+user_name+"/"+ pwd+"/"+  phone+"/"+  user_photo+"/"+  isTlgExit+"/"+  address_tlg_township_name+"/"+  tlg_sate+"/"+ tlg_country );
-            NetworkEngine.getInstance().postCreateUser(user_name, pwd, phone, user_photo, isTlgExit, address_tlg_township_name, tlg_sate, tlg_country, new Callback<User>() {
+            NetworkEngine.getInstance().postCreateUser(user_name, pwd, phone, user_photo, isTlgExit,user_gender, address_tlg_township_name, tlg_sate, tlg_country, new Callback<User>() {
                         @Override
                         public void success(User user, Response response) {
                             mEditorUserInfo = mSharedPreferencesUserInfo.edit();
@@ -169,8 +170,8 @@ public class RegisterTermsFragment8 extends Fragment implements View.OnClickList
                             }
 
                             mEditorUserInfo.putString(CommonConfig.USER_UPLOAD_IMG_URL, user.getProfileimage());
-                            mEditorUserInfo.putString(CommonConfig.USER_POINTS,user.getPoints().toString() );
-                            mEditorUserInfo.putString(CommonConfig.USER_SHARE_STATUS,user.getShared().toString() );
+                            mEditorUserInfo.putString(CommonConfig.USER_POINTS,"0" );
+                            mEditorUserInfo.putString(CommonConfig.USER_SHARE_STATUS,"0" );
 
                             mEditorUserInfo.commit();
 
@@ -205,7 +206,7 @@ public class RegisterTermsFragment8 extends Fragment implements View.OnClickList
 
                         @Override
                         public void failure(RetrofitError error) {
-                            Log.e("==Register ERr=>", "==" + error.getCause().toString());
+                            //Log.e("==Register ERr=>", "==" + error.getCause().toString());
                             if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
                                 //org.undp_iwomen.iwomen.utils.Utils.doToastEng(mContext, getResources().getString(R.string.open_internet_warning_eng));
                             } else {

@@ -126,6 +126,7 @@ public interface INetworkEngine {
             @Field("phoneNo") String ph,
             @Field("profileimage") String photo,
             @Field("isTlgTownshipExit") int isTlg,
+            @Field("gender") String gender,
             @Field("tlg_city_address") String tlg_city_address,// Role ?
             @Field("tlg_city") String sate,
             @Field("tlg_country") String country,

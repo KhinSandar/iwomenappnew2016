@@ -803,4 +803,10 @@ Shirin Ebadi, J.D., was awarded the 2003 Nobel Peace Prize for her efforts to pr
     <string name="prize_congrat">Congratulations!</string>
 
     <string name="prize_visit_more">For more prizes visit: <a href="https://www.facebook.com/iwomenApp"></a></string>
+
+    <string name="register_photo_greet">Choose your gender ?</string>
+
+    <string name="register_photo_f">Female</string>
+    <string name="register_photo_m">Male</string>
+
 </resources>

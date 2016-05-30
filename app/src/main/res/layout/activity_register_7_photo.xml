@@ -14,7 +14,56 @@
 
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="50dp"
+        android:orientation="vertical">
 
+
+        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+            android:id="@+id/register_pro_greet2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:gravity="left"
+            android:text="@string/register_photo_greet"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <RadioGroup
+            android:id="@+id/register_photo_rdioGroup"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:orientation="horizontal">
+
+            <org.undp_iwomen.iwomen.ui.widget.CustomRadioButton
+                android:id="@+id/register_photo_female"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/register_photo_f" />
+
+            <org.undp_iwomen.iwomen.ui.widget.CustomRadioButton
+                android:id="@+id/register_photo_male"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:text="@string/register_photo_m" />
+
+
+        </RadioGroup>
+    </LinearLayout>
 
 
     <FrameLayout
