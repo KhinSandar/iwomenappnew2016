@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/GifImageViewlibrary/GifImageViewlibrary.iml" filepath="$PROJECT_DIR$/GifImageViewlibrary/GifImageViewlibrary.iml" />
-      <module fileurl="file://$PROJECT_DIR$/RecordingMediaFile/RecordingMediaFile.iml" filepath="$PROJECT_DIR$/RecordingMediaFile/RecordingMediaFile.iml" />
       <module fileurl="file://$PROJECT_DIR$/SKConnectionDetector/SKConnectionDetector.iml" filepath="$PROJECT_DIR$/SKConnectionDetector/SKConnectionDetector.iml" />
       <module fileurl="file://$PROJECT_DIR$/SKListView/SKListView.iml" filepath="$PROJECT_DIR$/SKListView/SKListView.iml" />
       <module fileurl="file://$PROJECT_DIR$/ZProgressHUD/ZProgressHUD.iml" filepath="$PROJECT_DIR$/ZProgressHUD/ZProgressHUD.iml" />

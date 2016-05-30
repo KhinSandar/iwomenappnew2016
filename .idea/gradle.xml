@@ -10,7 +10,6 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/GifImageViewlibrary" />
-            <option value="$PROJECT_DIR$/RecordingMediaFile" />
             <option value="$PROJECT_DIR$/SKConnectionDetector" />
             <option value="$PROJECT_DIR$/SKListView" />
             <option value="$PROJECT_DIR$/ZProgressHUD" />
@@ -26,7 +25,6 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/GifImageViewlibrary" />
-            <option value="$PROJECT_DIR$/RecordingMediaFile" />
             <option value="$PROJECT_DIR$/SKConnectionDetector" />
             <option value="$PROJECT_DIR$/SKListView" />
             <option value="$PROJECT_DIR$/ZProgressHUD" />
