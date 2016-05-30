@@ -13,8 +13,8 @@
 
         <org.undp_iwomen.iwomen.ui.widget.ResizableImageView
             android:id="@+id/take_tour_img_pager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
             android:adjustViewBounds="true"
             android:background="@color/white"
             android:gravity="center"
@@ -26,9 +26,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
+            android:gravity="right"
             android:text="New Text"
             android:visibility="visible" />
 
     </FrameLayout>
-
 </RelativeLayout>

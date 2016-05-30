@@ -359,7 +359,6 @@ public class MainPhotoIWomenPostFragment extends Fragment implements ImageChoose
                 videoUri = Uri.fromFile(mediaFile);
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, videoUri);
                 startActivityForResult(intent, AUDIO_CAPTURE);
-                //startActivityForResult(new Intent(getActivity(), AudioRecordingActivity.class), UPLOAD_AUDIO);
 
 
             }

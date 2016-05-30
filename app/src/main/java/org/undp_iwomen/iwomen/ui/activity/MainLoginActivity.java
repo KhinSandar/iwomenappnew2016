@@ -308,7 +308,7 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
             });
 
         } else {
-            SKConnectionDetector.getInstance(this).showErrorMessage();
+            //SKConnectionDetector.getInstance(this).showErrorMessage();
         }
     }
 

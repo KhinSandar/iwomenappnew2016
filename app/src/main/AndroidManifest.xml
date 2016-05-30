@@ -156,6 +156,16 @@
 
         </activity>
 
+        <activity android:name=".ui.activity.IntroActivity"
+            android:label="@string/app_name">
+            <!--<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
+
+        </activity>
+
         <!--
         Optionally, register AnalyticsReceiver and AnalyticsService to support background
         dispatching on non-Google Play devices
@@ -298,6 +308,16 @@
                 android:value=".ui.activity.DrawerMainActivity" />
         </activity>
         <activity
+            android:name=".ui.activity.WinPrizeActivity"
+            android:label="@string/title_activity_post_detail"
+            android:parentActivityName=".ui.activity.DrawerMainActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.activity.DrawerMainActivity" />
+        </activity>
+
+        <activity
             android:name=".ui.activity.SubResourceListActivity"
             android:label="@string/title_activity_post_detail"
             android:screenOrientation="portrait"
@@ -402,14 +422,6 @@
             android:label="@string/title_activity_game_over" />
         <!-- Declare the bundled CropImage Activity -->
         <activity android:name="com.android.camera.CropImage" />
-        <activity
-            android:name="org.smk.iwomen.AudioRecordingActivity"
-            android:label="@string/title_activity_audio_recording"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name="org.smk.iwomen.VideoRecordingActivity"
-            android:label="@string/title_activity_video_recording"
-            android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.activity.ViewEventsActivity"
             android:label="@string/title_view_events" />

@@ -795,7 +795,16 @@ female-pilots-iaa1s
     <string name="str_finished">ရၿပီး</string>
     <string name="str_next">ေရွ႕သို႕</string>
     <string name="str_already_submited">You are already submited answers.</string>
-    <string name="points_prize">ရမွတ္မ်ား</string>
+    <string name="code_share_sucess">ကုုတ္ ထည့္ၿခင္း အာင္ၿမင္ပါသည္။</string>
+
+    <string name="code_share_error">သင္ ကုတ္တစ္ခါ ၿဖည့္ ၿပီးသြားပီ ၿဖစ္ပါသည္။ (သိုု ့) အေကာင္ ့အေဟာင္းၿဖင့္ ကုုတ္ၿဖည့္ၿခင္း
+လုုပ္ၿပီးသြားပီၿဖစ္သည္။</string>
+
+
+    <string name="prize_congrat">ဂုုဏ္ယူပါတယ္</string>
+    <string name="prize_visit_more">ဆုုမ်ားအေသးစိတ္ၾကည့္ရန္ <a href="https://www.facebook.com/iwomenApp"></a></string>
+
+    <string name="points_prize">အမွတ္</string>
 
 
 </resources>

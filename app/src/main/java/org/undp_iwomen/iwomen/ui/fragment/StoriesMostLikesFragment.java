@@ -27,7 +27,6 @@ import android.widget.TextView;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.google.gson.Gson;
-import com.smk.skconnectiondetector.SKConnectionDetector;
 import com.smk.sklistview.SKListView;
 import com.thuongnh.zprogresshud.ZProgressHUD;
 
@@ -159,7 +158,7 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
             getIWomenPostByPagination();
         }else{
             //Log.e("<<No --- connection>>","==>" + iWomenPosts.size());
-            SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
+            //SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
             if(StorageiWomenPosts != null){
                 Log.e("<<No --- connection>>","==>" + StorageiWomenPosts.size());
                 iWomenPostList.clear();
@@ -1069,7 +1068,7 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
             });
 
         } else {
-            SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
+            //SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
             //List<IWomenPost> iWomenPosts = StoreUtil.getInstance().selectFrom("stories_most_like");
             List<IWomenPost> iWomenPosts = (ArrayList<IWomenPost>) storageUtil.ReadArrayListFromSD("stories_most_like");
             //Log.e("<<<Adapter No connection>>","==>" + iWomenPosts.size());

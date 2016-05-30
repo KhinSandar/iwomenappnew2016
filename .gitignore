@@ -5,4 +5,8 @@
 .DS_Store
 /build
 /captures
+<<<<<<< HEAD
 /RecordingMediaFile
+=======
+/RecordingMediaFile/*
+>>>>>>> 5a697536ad8b82f464e5564b91888d5c743db725

@@ -27,7 +27,6 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.smk.skalertmessage.SKToastMessage;
-import com.smk.skconnectiondetector.SKConnectionDetector;
 import com.smk.sklistview.SKListView;
 import com.thuongnh.zprogresshud.ZProgressHUD;
 
@@ -175,7 +174,7 @@ public class TLGUserPostRecentFragment extends Fragment implements View.OnClickL
             // iWomenPostList.clear();
             getIWomenPostByPagination();
         }else{
-            SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
+            //SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
             if(StoragePosts != null){
                 iWomenPostList.clear();
                 iWomenPostList.addAll(StoragePosts);
@@ -1461,7 +1460,7 @@ public class TLGUserPostRecentFragment extends Fragment implements View.OnClickL
             });
 
         } else {
-            SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
+            //SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
             //List<IWomenPost> iWomenPosts = StoreUtil.getInstance().selectFrom(storage_arraylistname);
             List<IWomenPost> iWomenPosts = (ArrayList<IWomenPost>) storageUtil.ReadArrayListFromSD(storage_arraylistname);
             if(iWomenPosts != null){
