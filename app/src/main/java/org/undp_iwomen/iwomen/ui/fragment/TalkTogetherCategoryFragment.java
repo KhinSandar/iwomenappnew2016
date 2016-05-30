@@ -230,7 +230,7 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
             CategoriesModelList = (ArrayList<Categories>) storageUtil.ReadArrayListFromSD("Categories");
 
             if (CategoriesModelList.size() > 0) {
-                mAdapter = new TalkTogetherGridViewAdapter(getActivity(), ctx, CategoriesModelList);
+                mAdapter = new TalkTogetherGridViewAdapter(getActivity(), ctx, CategoriesModelList, mstr_lang);
                 gridView.setAdapter(mAdapter);
             }
 
