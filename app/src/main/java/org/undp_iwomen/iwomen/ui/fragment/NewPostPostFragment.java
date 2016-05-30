@@ -125,7 +125,7 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
     public NewPostPostFragment() {
     }
 
-    public static NewPostPostFragment newInstance(String categoryId) {
+    public static NewPostPostFragment newInstance(String categoryId, String categoryName) {
         NewPostPostFragment fragment = new NewPostPostFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);

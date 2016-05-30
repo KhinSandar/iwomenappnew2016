@@ -168,6 +168,11 @@ public class RegisterTermsFragment8 extends Fragment implements View.OnClickList
                                 mEditorUserInfo.putString(CommonConfig.USER_EMAIL, user.getEmail());
                             }
 
+                            mEditorUserInfo.putString(CommonConfig.USER_UPLOAD_IMG_URL, user.getProfileimage());
+
+
+                            mEditorUserInfo.putString(CommonConfig.USER_POINTS,user.getPoints() != null ? user.getPoints().toString() : "0" );
+                            mEditorUserInfo.putString(CommonConfig.USER_SHARE_STATUS,user.getShared() != null ? user.getShared().toString() : "0" );
 
                             mEditorUserInfo.commit();
 

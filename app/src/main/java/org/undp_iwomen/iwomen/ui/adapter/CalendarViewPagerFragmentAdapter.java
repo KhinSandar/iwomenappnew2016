@@ -29,8 +29,6 @@ public class CalendarViewPagerFragmentAdapter extends FragmentPagerAdapter { //i
 
     }
 
-   
-
 		
     @Override
 	public Fragment getItem(int position) {
@@ -61,8 +59,7 @@ public class CalendarViewPagerFragmentAdapter extends FragmentPagerAdapter { //i
             notifyDataSetChanged();
         }
     }
-    
-    
+
     /************My Adapter Codes**************/
   
 

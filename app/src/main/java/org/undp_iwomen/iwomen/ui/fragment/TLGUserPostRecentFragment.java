@@ -1502,6 +1502,7 @@ public class TLGUserPostRecentFragment extends Fragment implements View.OnClickL
                 Intent intent = new Intent(mContext, NewPostActivity.class);
 
                 intent.putExtra("categoryId", mCatID);
+                intent.putExtra("categoryName", mstrCatName);
                 startActivity(intent);
                 //Utils.doToastEng(mContext, "Coming Soon!");
 

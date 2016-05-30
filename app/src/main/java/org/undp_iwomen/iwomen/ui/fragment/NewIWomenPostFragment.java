@@ -401,9 +401,9 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
         }
 
         if (audio_file_id != null) { //to check if user upload audio
-            content_type = "audio";
+            content_type = "Audio";
         } else { // user doesn't choose audio nor video
-            content_type = "letter";
+            content_type = "Letter";
         }
 
         NetworkEngine.getInstance().postCreateWomenPost(

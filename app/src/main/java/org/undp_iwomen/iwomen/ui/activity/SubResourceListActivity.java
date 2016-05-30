@@ -61,6 +61,7 @@ public class SubResourceListActivity extends BaseActionBarActivity {
     String storagelistname ;
     List<org.smk.model.SubResourceItem> StoragesubResourceItems;
 
+    private boolean isFirstLoading = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -184,21 +185,28 @@ public class SubResourceListActivity extends BaseActionBarActivity {
     };
     private void getSubResourceDataFromSever(final String id) {
         if (Connection.isOnline(mContext)) {
-
+            isLoading = true;
 
             SMKserverAPI.getInstance().getService().getSubResourceByResourceIDByPagination(paginater, id,1, new Callback<List<SubResourceItem>>() {
                 @Override
                 public void success(List<SubResourceItem> subResourceItems, Response response) {
                     // Only first REQUEST that visible
+
+                    if(isFirstLoading){
+                        isFirstLoading = false;
+                        SubResourceItems.clear();
+                        if(zPDialog != null && zPDialog.isShowing())
+                            zPDialog.dismissWithSuccess();
+                    }
+                    /* Old code ( it leading wrong when dismiss dialog and infite loading list
                     if(zPDialog != null && zPDialog.isShowing()){
                         SubResourceItems.clear();
                         zPDialog.dismissWithSuccess();
-                    }
+                    }*/
 
                     SubResourceItems.addAll(subResourceItems);
                     mAdapter.notifyDataSetChanged();
                     isLoading = false;
-
                     //StoreUtil.getInstance().saveTo(storagelistname, SubResourceItems);
                     final ArrayList<SubResourceItem> storagelist = new ArrayList<SubResourceItem>();
                     storagelist.addAll(SubResourceItems);

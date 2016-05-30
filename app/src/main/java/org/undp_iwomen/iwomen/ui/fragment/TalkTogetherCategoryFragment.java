@@ -133,9 +133,9 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
                 zPDialog.show();
             }
             LoadData();
-        }else{
+        } else {
             SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
-            if(categories != null){
+            if (categories != null) {
                 CategoriesModelList.clear();
                 CategoriesModelList.addAll(categories);
                 mAdapter.notifyDataSetChanged();
@@ -148,23 +148,20 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
                                     long arg3) {
 
 
-
                 if (user_role.equalsIgnoreCase("User")) {
                     if (CategoriesModelList.get(position).getName().equalsIgnoreCase("Archive")) {//position == 0 ||
                         Utils.showPermissionDialog(getActivity());
-                    }
-                    else if (CategoriesModelList.get(position).getName().equalsIgnoreCase("Calendar")) {//position == 0 ||
+                    } else if (CategoriesModelList.get(position).getName().equalsIgnoreCase("Calendar")) {//position == 0 ||
                         Intent i = new Intent(ctx, CalendarActivity.class);
                         i.putExtra("CategoryName", CategoriesModelList.get(position).getName());//CategoryName
                         startActivity(i);
                     } else {
                         Intent i = new Intent(ctx, TalkTogetherMainActivity.class);
                         i.putExtra("CategoryName", CategoriesModelList.get(position).getName());//CategoryName
-                        //Log.e("<<Calender Cat IG>>","==>" + CategoriesModelList.get(position).getObjectId());
                         i.putExtra("CategoryID", CategoriesModelList.get(position).getObjectId());//CategoryName
                         startActivity(i);
                     }
-                }else{
+                } else {
                     if (CategoriesModelList.get(position).getName().equalsIgnoreCase("Calendar")) {//position == 0 ||
                         Intent i = new Intent(ctx, CalendarActivity.class);
                         i.putExtra("CategoryName", CategoriesModelList.get(position).getName());//CategoryName
@@ -172,17 +169,14 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
                     } else {
                         Intent i = new Intent(ctx, TalkTogetherMainActivity.class);
                         i.putExtra("CategoryName", CategoriesModelList.get(position).getName());//CategoryName
-                        //Log.e("<<Calender Cat IG>>","==>" + CategoriesModelList.get(position).getObjectId());
                         i.putExtra("CategoryID", CategoriesModelList.get(position).getObjectId());//CategoryName
                         startActivity(i);
                     }
                 }
 
 
-
             }
         });
-
 
 
         return v;
@@ -200,7 +194,7 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
                 public void success(List<Categories> categories, Response response) {
                     //CategoriesModelList = new ArrayList<Categories>();
                     // Only first REQUEST that visible
-                    if(zPDialog != null && zPDialog.isShowing()){
+                    if (zPDialog != null && zPDialog.isShowing()) {
                         CategoriesModelList.clear();
                         zPDialog.dismissWithSuccess();
                     }
@@ -225,7 +219,6 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
 
                 }
             });
-
 
 
         } else {

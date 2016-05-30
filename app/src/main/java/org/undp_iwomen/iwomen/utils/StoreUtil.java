@@ -16,6 +16,8 @@ public class StoreUtil {
 	
 	private static StoreUtil instance;
 
+
+
 	public StoreUtil(){
 		IfExistFileDir();
 	}
@@ -134,4 +136,5 @@ public class StoreUtil {
 	      }
 		return t;
 	}
+
 }

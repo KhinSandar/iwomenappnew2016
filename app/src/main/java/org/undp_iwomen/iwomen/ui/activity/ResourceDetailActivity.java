@@ -13,12 +13,15 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.makeramen.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
 import org.smk.iwomen.BaseActionBarActivity;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
+import org.undp_iwomen.iwomen.manager.MainApplication;
 import org.undp_iwomen.iwomen.model.MyTypeFace;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.utils.Utils;
@@ -96,7 +99,11 @@ public class ResourceDetailActivity extends BaseActionBarActivity {
         lysocial = (LinearLayout)findViewById(R.id.tipdetail_ly_social);
 
 
-
+        // Google Analytics
+        MainApplication application = (MainApplication) getApplication();
+        Tracker mTracker = application.getDefaultTracker();
+        mTracker.setScreenName("Resource Detail ~ "+ mstrTitleEng);
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
 
 
         txtName.setVisibility(View.GONE);

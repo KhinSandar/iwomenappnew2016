@@ -56,8 +56,7 @@
 
                         </org.undp_iwomen.iwomen.ui.widget.ProfilePictureView>-->
 
-                        <com.makeramen.RoundedImageView
-                            xmlns:app="http://schemas.android.com/apk/res-auto"
+                        <com.makeramen.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                             android:id="@+id/drawer_profilePic_rounded"
                             android:layout_width="@dimen/feed_item_profile_pic"
                             android:layout_height="@dimen/feed_item_profile_pic"
@@ -85,37 +84,23 @@
                             android:layout_alignParentTop="true"
                             android:layout_gravity="left"
                             android:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/drawer_point_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom|right"
+                            android:background="@drawable/rounded_textview"
+                            android:gravity="center"
+                            android:text="20"
+                            android:textColor="@color/drawer_list_item_press" />
                     </FrameLayout>
-
-                    <!--<org.undp_iwomen.iwomen.ui.widget.ProfilePictureView
-                        android:id="@+id/profilePicture"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="left"
-                        android:padding="2dip"
-                        android:paddingLeft="16dip"
-
-
-                        android:visibility="visible"
-                        facebook:preset_size="small">
-
-                    </org.undp_iwomen.iwomen.ui.widget.ProfilePictureView>-->
-                    <!--
-                                        <com.mmplus.myanmadeals.model.RoundedImageView
-                                            android:id="@+id/img_profile"
-                                            android:layout_width="100dp"
-                                            android:layout_height="100dp"
-                                            android:scaleType="centerCrop"
-                                            android:layout_gravity="center"
-                                            android:background="@drawable/circle_frame"
-                                             />
-                    -->
 
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical|left"
                     android:orientation="horizontal">
@@ -134,23 +119,57 @@
                         android:textSize="10sp"
                         android:visibility="gone"
                          />-->
-
-
-                    <org.undp_iwomen.iwomen.ui.widget.CustomTextView
-                        android:id="@+id/txt_user_name"
-                        style="?attr/spinnerDropDownItemStyle"
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="right"
+                        android:gravity="left"
+                        android:orientation="horizontal"
+                        android:paddingRight="16dp">
 
-                        android:layout_marginTop="5dp"
-                        android:ellipsize="end"
-                        android:padding="2dip"
-                        android:paddingLeft="16dip"
 
-                        android:singleLine="true"
-                        android:text="Name"
-                        android:textSize="14sp"
-                        android:textColor="@color/white" />
+                        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                            android:id="@+id/txt_user_name"
+                            style="?attr/spinnerDropDownItemStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:layout_marginTop="5dp"
+                            android:ellipsize="end"
+                            android:padding="2dip"
+                            android:paddingLeft="16dip"
+
+                            android:singleLine="true"
+                            android:text="Name"
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="right"
+                        android:gravity="right"
+                        android:orientation="horizontal"
+                        android:paddingRight="16dp">
+
+
+                        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                            android:id="@+id/menu_sing_out"
+                            style="?attr/spinnerDropDownItemStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:layout_marginTop="5dp"
+                            android:ellipsize="end"
+                            android:padding="2dip"
+                            android:paddingLeft="16dip"
+
+                            android:singleLine="true"
+                            android:text="@string/menu_sing_out"
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -166,6 +185,29 @@
                         android:orientation="horizontal">
 
                         <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                            android:id="@+id/menu_user_code"
+                            style="?attr/spinnerDropDownItemStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:ellipsize="end"
+                            android:padding="2dip"
+                            android:paddingLeft="16dip"
+                            android:singleLine="true"
+                            android:text="Code-1234"
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
+
+                        <View
+                            android:layout_width="2dp"
+                            android:layout_height="14dp"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginRight="3dp"
+                            android:layout_marginTop="7dp"
+                            android:background="#fff"
+                            android:padding="10dp" />
+
+                        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                             android:id="@+id/menu_user_post_count"
                             style="?attr/spinnerDropDownItemStyle"
                             android:layout_width="wrap_content"
@@ -176,49 +218,8 @@
                             android:paddingLeft="16dip"
                             android:singleLine="true"
                             android:text="Post"
-                            android:textSize="14sp"
-                            android:textColor="@color/white" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right"
-                        android:gravity="right"
-                        android:orientation="horizontal"
-                        android:paddingRight="16dp">
-
-                        <!--<com.facebook.login.widget.LoginButton
-                            android:id="@+id/login_button2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginRight="16dip"
-                            android:layout_marginTop="5dp"
-
-                            android:gravity="center_horizontal"
-
-
-                            android:textSize="10sp"
-                            android:visibility="gone"
-                             />-->
-
-
-                        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
-                            android:id="@+id/menu_sing_out"
-                            style="?attr/spinnerDropDownItemStyle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-
-                            android:layout_marginTop="5dp"
-                            android:ellipsize="end"
-                            android:padding="2dip"
-                            android:paddingLeft="16dip"
-
-                            android:singleLine="true"
-                            android:text="Sign Out"
-                            android:textSize="14sp"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
                     </LinearLayout>
 
 
@@ -236,28 +237,28 @@
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/ly1"
             android:background="@drawable/compeition_bg"
-            android:visibility="gone"
             android:gravity="center_vertical"
+            android:orientation="horizontal"
             android:padding="16dp"
-            android:orientation="horizontal">
+            android:visibility="gone">
 
 
             <ImageView
+                android:id="@+id/img_play_game"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:src="@drawable/sticker2"
-                android:id="@+id/img_play_game" />
+                android:src="@drawable/sticker2" />
 
             <org.undp_iwomen.iwomen.ui.widget.AnimateCustomTextView
+                android:id="@+id/drawer_btn_take_challenge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:gravity="center"
                 android:text="New Button"
                 android:textColor="@color/competition_text_color"
                 android:textSize="18sp"
-                android:gravity="center"
-                android:background="@android:color/transparent"
-                app:reflectionColor="@color/competition_accent"
-                android:id="@+id/drawer_btn_take_challenge" />
+                app:reflectionColor="@color/competition_accent" />
 
         </LinearLayout>
 
@@ -327,6 +328,82 @@
 
 
                  </RelativeLayout>-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="150dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:orientation="vertical">
+
+                        <View
+                            android:layout_width="240dp"
+                            android:layout_height="2dp"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginRight="3dp"
+                            android:layout_marginTop="7dp"
+                            android:background="@color/drawer_text"
+                            android:padding="10dp" />
+
+                        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+                            android:layout_width="match_parent"
+                            android:layout_height="55dp"
+                            android:background="@color/list_background"
+                            android:baselineAligned="true">
+
+                            <ImageView
+                                android:id="@+id/menu_setting_icon"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_alignParentLeft="true"
+                                android:adjustViewBounds="true"
+                                android:paddingLeft="16dp"
+                                android:paddingTop="16dp"
+                                android:src="@drawable/ic_setting" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_alignTop="@+id/menu_setting_icon"
+                                android:layout_toRightOf="@+id/menu_setting_icon"
+                                android:gravity="center_vertical|left"
+                                android:orientation="vertical">
+
+                                <!--<org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                                    android:id="@+id/title"
+                                    style="?attr/spinnerDropDownItemStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ellipsize="end"
+                                    android:singleLine="true"
+                                    android:text="Feature Shop" />-->
+                                <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+
+                                    android:id="@+id/menu_setting_name_txt"
+
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="21dp"
+                                    android:background="@drawable/list_selector"
+
+                                    android:gravity="center_vertical"
+                                    android:minHeight="?android:attr/listPreferredItemHeightSmall"
+                                    android:paddingRight="16dp"
+                                    android:text="@string/menu8"
+                                    android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                                    android:textColor="@drawable/list_text_selector"
+                                    android:textSize="14sp" />
+                            </LinearLayout>
+                        </RelativeLayout>
+
+                    </LinearLayout>
+                </RelativeLayout>
 
             </LinearLayout>
 

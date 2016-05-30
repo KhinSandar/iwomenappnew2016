@@ -13,15 +13,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
-
-
 
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.data.Sample;
 import org.undp_iwomen.iwomen.ui.activity.RegisterMainActivity;
+import org.undp_iwomen.iwomen.ui.widget.CustomRadioButton;
 
 /**
  * Created by lgvalle on 05/09/15.
@@ -36,7 +34,7 @@ public class RegisterProfileFragment3 extends Fragment implements  View.OnClickL
     private SharedPreferences.Editor mEditorUserInfo;
     private Button btn_next;
     private RadioGroup radioGroupMM, radioGroupTlg;
-    private RadioButton rd_mm_yes, rd_mm_no, rd_tlg_yes, rd_tlg_no;
+    private CustomRadioButton rd_mm_yes, rd_mm_no, rd_tlg_yes, rd_tlg_no;
 
     public static RegisterProfileFragment3 newInstance(Sample sample) {
 
@@ -81,10 +79,10 @@ public class RegisterProfileFragment3 extends Fragment implements  View.OnClickL
         radioGroupMM = (RadioGroup) view.findViewById(R.id.register_pro_country_rdioGroup);
         radioGroupTlg = (RadioGroup) view.findViewById(R.id.register_pro_tlg_rdioGroup);
 
-        rd_mm_yes = (RadioButton) view.findViewById(R.id.register_pro_country_yes);
-        rd_mm_no = (RadioButton) view.findViewById(R.id.register_pro_country_no);
-        rd_tlg_yes = (RadioButton) view.findViewById(R.id.register_pro_tlg_yes);
-        rd_tlg_no = (RadioButton) view.findViewById(R.id.register_pro_tlg_no);
+        rd_mm_yes = (CustomRadioButton) view.findViewById(R.id.register_pro_country_yes);
+        rd_mm_no = (CustomRadioButton) view.findViewById(R.id.register_pro_country_no);
+        rd_tlg_yes = (CustomRadioButton) view.findViewById(R.id.register_pro_tlg_yes);
+        rd_tlg_no = (CustomRadioButton) view.findViewById(R.id.register_pro_tlg_no);
 
         setEnglishFont();
 

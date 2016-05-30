@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <FrameLayout
+        android:id="@+id/ly_take_tour_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:descendantFocusability="blocksDescendants"
+        android:orientation="horizontal">
+
+        <org.undp_iwomen.iwomen.ui.widget.ResizableImageView
+            android:id="@+id/take_tour_img_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:background="@color/white"
+            android:gravity="center"
+            android:scaleType="fitXY"
+            android:src="@drawable/feb" />
+
+        <TextView
+            android:id="@+id/take_tour_next_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:text="New Text"
+            android:visibility="visible" />
+
+    </FrameLayout>
+
+</RelativeLayout>

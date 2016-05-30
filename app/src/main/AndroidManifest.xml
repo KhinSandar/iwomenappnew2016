@@ -142,6 +142,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.activity.IntroActivity"
+            android:label="@string/app_name">
+
+            <!--
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            -->
+
+        </activity>
 
         <!--
         Optionally, register AnalyticsReceiver and AnalyticsService to support background
@@ -284,7 +297,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.activity.DrawerMainActivity" />
         </activity>
-
         <activity
             android:name=".ui.activity.SubResourceListActivity"
             android:label="@string/title_activity_post_detail"
@@ -311,7 +323,8 @@
         <activity
             android:name=".ui.activity.YouTubeWebviewActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/app_name"> <!-- Prevent Activity restart on such events (specially on orientation change) -->
+            android:label="@string/app_name">
+            <!-- Prevent Activity restart on such events (specially on orientation change) -->
 
         </activity>
         <activity
@@ -412,28 +425,26 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.activity.LeadershipTipsActivity"
-            android:label="@string/title_leadership_tips"></activity>
+            android:label="@string/title_leadership_tips" />
         <activity
             android:name=".ui.activity.LeadershipTipDetailActivity"
             android:label="@string/title_leadership_lesson" />
         <activity
             android:name=".ui.activity.SisterAppDetailActivity"
             android:label="@string/title_activity_sister_app_detail"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.activity.NewPostActivity"
             android:label="@string/title_activity_new_post"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name="org.smk.iwomen.GcmNotificationDialogActivity"
             android:label="@string/title_activity_gcm_notification_dialog"
-            android:theme="@style/Theme.Transparent"></activity>
-
+            android:theme="@style/Theme.Transparent" />
         <activity
             android:name="org.youtube.Youtube_MainActivity"
             android:configChanges="orientation|screenSize"
-            android:label="@string/app_name">
-        </activity>
+            android:label="@string/app_name"></activity>
 
         <service
             android:name="org.youtube.Youtube_UploadService"
@@ -442,11 +453,11 @@
         <activity
             android:name="org.youtube.Youtube_PlayActivity"
             android:label="@string/title_activity_play"
-            android:parentActivityName="org.youtube.Youtube_MainActivity"></activity>
+            android:parentActivityName="org.youtube.Youtube_MainActivity" />
         <activity
             android:name="org.youtube.Youtube_ReviewActivity"
             android:label="@string/title_activity_review"
-            android:parentActivityName="org.youtube.Youtube_MainActivity"></activity>
+            android:parentActivityName="org.youtube.Youtube_MainActivity" />
         <activity
             android:name=".ui.activity.IWomenPostSearchActivity"
             android:label="@string/title_activity_post_detail"
@@ -457,7 +468,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.activity.DrawerMainActivity" />
         </activity>
-
+        <activity android:name="org.smk.iwomen.TakeAndTourActivity"></activity>
     </application>
 
 </manifest>

@@ -66,6 +66,13 @@ public class User {
     @Expose
     private String role;
 
+    @SerializedName("points")
+    @Expose
+    private Integer points;
+    @SerializedName("shared")
+    @Expose
+    private Integer shared;
+
     /**
      *
      * @return
@@ -353,6 +360,47 @@ public class User {
     public void setUserImgPath(String userImgPath) {
         this.userImgPath = userImgPath;
     }
+
+
+    /**
+     *
+     * @return
+     * The points
+     */
+    public Integer getPoints() {
+        return points;
+    }
+
+    /**
+     *
+     * @param points
+     * The points
+     */
+    public void setPoints(Integer points) {
+        this.points = points;
+    }
+
+
+
+    /**
+     *
+     * @return
+     * The shared
+     */
+    public Integer getShared() {
+        return shared;
+    }
+
+    /**
+     *
+     * @param shared
+     * The shared
+     */
+    public void setShared(Integer shared) {
+        this.shared = shared;
+    }
+
+
 
     /**
      *

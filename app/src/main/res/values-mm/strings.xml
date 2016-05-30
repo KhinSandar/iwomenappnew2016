@@ -778,4 +778,23 @@ female-pilots-iaa1s
     <string name="audio_upload_photo">ဓာတ္ပံုုတင္ရန္</string>
     <string name="aduio_take_photo">ဓာတ္ပံုုရိုုက္တင္ရန္</string>
     <string name="audio_vid_file">ရုုပ္သံဗီြဒီယိုုဖိုုင္တင္ရန္</string>
+
+
+    <string name="menu1">စိတ္ဓာတ္ခြန္အားျဖည့္ရန္</string>
+    <string name="menu2">ဗဟုသုတရရန္</string>
+    <string name="menu3">ေပါင္းစည္းေဆာင္ရြက္ရန္</string>
+    <string name="menu4">ေမးျမန္းေဆြးေႏြးရန္</string>
+    <string name="menu5">ဆုရယူရန္ အမွတ္ရရန္</string>
+    <string name="menu6">Sister Apps</string>
+    <string name="menu7">ကြ်ႏု္ပ္တို.အေႀကာင္း</string>
+
+    <string name="menu8">ျပင္ဆင္ရန္</string>
+    <string name="menu_sing_out">ထြက္ရန္</string>
+    <string name="str_skip">ေက်ာ္မည္</string>
+    <string name="str_back">ေနာက္သို႕</string>
+    <string name="str_finished">ရၿပီး</string>
+    <string name="str_next">ေရွ႕သို႕</string>
+    <string name="str_already_submited">You are already submited answers.</string>
+
+
 </resources>
