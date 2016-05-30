@@ -1,74 +1,38 @@
 [
     {
-        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\res\\merged\\release\\color\\abc_primary_text_material_light.xml",
-        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\color\\abc_primary_text_material_light.xml"
+        "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\res\\merged\\release\\color\\abc_background_cache_hint_selector_material_dark.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\color\\abc_background_cache_hint_selector_material_dark.xml"
     },
     {
-        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\res\\merged\\release\\color\\abc_search_url_text.xml",
-        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\color\\abc_search_url_text.xml"
+        "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\res\\merged\\release\\color\\abc_background_cache_hint_selector_material_light.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\color\\abc_background_cache_hint_selector_material_light.xml"
     },
     {
-        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\res\\merged\\release\\color\\abc_background_cache_hint_selector_material_light.xml",
-        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\color\\abc_background_cache_hint_selector_material_light.xml"
+        "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\res\\merged\\release\\color\\abc_search_url_text.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\color\\abc_search_url_text.xml"
     },
     {
-        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/res/merged/release/color/abc_primary_text_material_dark.xml",
-        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.2/res/color/abc_primary_text_material_dark.xml"
+        "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\res\\merged\\release\\color\\abc_secondary_text_material_light.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\color\\abc_secondary_text_material_light.xml"
     },
     {
-        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\res\\merged\\release\\color\\abc_primary_text_material_dark.xml",
-        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\color\\abc_primary_text_material_dark.xml"
+        "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\res\\merged\\release\\color\\abc_primary_text_disable_only_material_light.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\color\\abc_primary_text_disable_only_material_light.xml"
     },
     {
-        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\res\\merged\\release\\color\\abc_secondary_text_material_light.xml",
-        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\color\\abc_secondary_text_material_light.xml"
+        "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\res\\merged\\release\\color\\abc_secondary_text_material_dark.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\color\\abc_secondary_text_material_dark.xml"
     },
     {
-        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/res/merged/release/color/abc_background_cache_hint_selector_material_light.xml",
-        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.2/res/color/abc_background_cache_hint_selector_material_light.xml"
+        "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\res\\merged\\release\\color\\abc_primary_text_disable_only_material_dark.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\color\\abc_primary_text_disable_only_material_dark.xml"
     },
     {
-        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/res/merged/release/color/abc_primary_text_material_light.xml",
-        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.2/res/color/abc_primary_text_material_light.xml"
+        "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\res\\merged\\release\\color\\abc_primary_text_material_dark.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\color\\abc_primary_text_material_dark.xml"
     },
     {
-        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/res/merged/release/color/abc_secondary_text_material_dark.xml",
-        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.2/res/color/abc_secondary_text_material_dark.xml"
-    },
-    {
-        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/res/merged/release/color/abc_background_cache_hint_selector_material_dark.xml",
-        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.2/res/color/abc_background_cache_hint_selector_material_dark.xml"
-    },
-    {
-        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\res\\merged\\release\\color\\abc_primary_text_disable_only_material_light.xml",
-        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\color\\abc_primary_text_disable_only_material_light.xml"
-    },
-    {
-        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/res/merged/release/color/abc_secondary_text_material_light.xml",
-        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.2/res/color/abc_secondary_text_material_light.xml"
-    },
-    {
-        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\res\\merged\\release\\color\\abc_primary_text_disable_only_material_dark.xml",
-        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\color\\abc_primary_text_disable_only_material_dark.xml"
-    },
-    {
-        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\res\\merged\\release\\color\\abc_secondary_text_material_dark.xml",
-        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\color\\abc_secondary_text_material_dark.xml"
-    },
-    {
-        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/res/merged/release/color/abc_primary_text_disable_only_material_dark.xml",
-        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.2/res/color/abc_primary_text_disable_only_material_dark.xml"
-    },
-    {
-        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/res/merged/release/color/abc_search_url_text.xml",
-        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.2/res/color/abc_search_url_text.xml"
-    },
-    {
-        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/res/merged/release/color/abc_primary_text_disable_only_material_light.xml",
-        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.2/res/color/abc_primary_text_disable_only_material_light.xml"
-    },
-    {
-        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\res\\merged\\release\\color\\abc_background_cache_hint_selector_material_dark.xml",
-        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\color\\abc_background_cache_hint_selector_material_dark.xml"
+        "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\res\\merged\\release\\color\\abc_primary_text_material_light.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\color\\abc_primary_text_material_light.xml"
     }
 ]

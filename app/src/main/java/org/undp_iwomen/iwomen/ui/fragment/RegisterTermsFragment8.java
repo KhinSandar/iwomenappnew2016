@@ -169,8 +169,6 @@ public class RegisterTermsFragment8 extends Fragment implements View.OnClickList
                             }
 
                             mEditorUserInfo.putString(CommonConfig.USER_UPLOAD_IMG_URL, user.getProfileimage());
-
-
                             mEditorUserInfo.putString(CommonConfig.USER_POINTS,user.getPoints().toString() );
                             mEditorUserInfo.putString(CommonConfig.USER_SHARE_STATUS,user.getShared().toString() );
 

@@ -1,4 +1,4 @@
-include ':app', ':library', ':emojiicon', ':RecordingMediaFile', ':GifImageViewlibrary', ':caldroid', ':SKConnectionDetector'
+include ':app', ':library', ':emojiicon', ':GifImageViewlibrary', ':caldroid', ':SKConnectionDetector'
 
 include ':sKAlertMessage'
 include ':ZProgressHUD'

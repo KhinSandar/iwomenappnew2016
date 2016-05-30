@@ -135,7 +135,6 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
                 zPDialog.show();
             }
             LoadData();
-        } else {
             //SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
             if (categories != null) {
                 CategoriesModelList.clear();

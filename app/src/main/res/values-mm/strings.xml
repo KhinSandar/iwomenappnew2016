@@ -790,6 +790,11 @@ female-pilots-iaa1s
 
     <string name="menu8">ျပင္ဆင္ရန္</string>
     <string name="menu_sing_out">ထြက္ရန္</string>
+    <string name="str_skip">ေက်ာ္မည္</string>
+    <string name="str_back">ေနာက္သို႕</string>
+    <string name="str_finished">ရၿပီး</string>
+    <string name="str_next">ေရွ႕သို႕</string>
+    <string name="str_already_submited">You are already submited answers.</string>
     <string name="code_share_sucess">ကုုတ္ ထည့္ၿခင္း အာင္ၿမင္ပါသည္။</string>
 
     <string name="code_share_error">သင္ ကုတ္တစ္ခါ ၿဖည့္ ၿပီးသြားပီ ၿဖစ္ပါသည္။ (သိုု ့) အေကာင္ ့အေဟာင္းၿဖင့္ ကုုတ္ၿဖည့္ၿခင္း

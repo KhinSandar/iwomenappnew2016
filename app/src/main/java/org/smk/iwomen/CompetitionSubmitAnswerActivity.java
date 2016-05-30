@@ -141,6 +141,12 @@ public class CompetitionSubmitAnswerActivity extends BaseActionBarActivity imple
 		btn_submit.setOnClickListener(clickListener);
 		btn_go_back.setOnClickListener(clickListener);
 
+        if(competitionQuestion.getUserCount() > 1){
+            btn_go_back.setVisibility(View.VISIBLE);
+        }else{
+            btn_go_back.setVisibility(View.GONE);
+        }
+
 		if(competitionQuestion.getMultipleQuestion() != null && competitionQuestion.getMultipleQuestion().size() > 0){
 			for(Question question: competitionQuestion.getMultipleQuestion()){
 				if(question.getType().equals("text")){
@@ -684,7 +690,8 @@ public class CompetitionSubmitAnswerActivity extends BaseActionBarActivity imple
 			for(int i=0; i<competitionQuestion.getMultipleQuestion().size(); i++){
 				if(competitionQuestion.getMultipleQuestion().get(i).getType().equals("text")){
 					EditText edt_question = (EditText) findViewById(competitionQuestion.getMultipleQuestion().get(i).getId()+get_text_id);
-					competitionQuestion.getMultipleQuestion().get(i).setAnswer(edt_question.getText().toString());
+                    if(edt_question.getText().length() > 0)
+					    competitionQuestion.getMultipleQuestion().get(i).setAnswer(edt_question.getText().toString());
 					get_text_id++;
 				}
 				if(competitionQuestion.getMultipleQuestion().get(i).getType().equals("checkbox")){
@@ -700,7 +707,8 @@ public class CompetitionSubmitAnswerActivity extends BaseActionBarActivity imple
 				if(competitionQuestion.getMultipleQuestion().get(i).getType().equals("radio")){
 					RadioGroup rdo_group = (RadioGroup) findViewById(competitionQuestion.getMultipleQuestion().get(i).getId()+get_radio_group_id);
 					RadioButton rdo_question = (RadioButton) findViewById(rdo_group.getCheckedRadioButtonId());
-					competitionQuestion.getMultipleQuestion().get(i).setAnswer(rdo_question.getText().toString());
+                    if(rdo_question != null && rdo_question.getText().length() > 0)
+					    competitionQuestion.getMultipleQuestion().get(i).setAnswer(rdo_question.getText().toString());
 					get_radio_group_id++;
 				}
 				if(competitionQuestion.getMultipleQuestion().get(i).getType().equals("image")){
@@ -723,7 +731,6 @@ public class CompetitionSubmitAnswerActivity extends BaseActionBarActivity imple
 			}
 		}
 
-		Log.i("Saved: ", competitionQuestion.getMultipleQuestion().toString());
 		StoreUtil.getInstance().saveTo("multipleQuestion_"+competitionQuestion.getId(),competitionQuestion.getMultipleQuestion());
 	}
 
@@ -760,14 +767,17 @@ public class CompetitionSubmitAnswerActivity extends BaseActionBarActivity imple
 		@Override
 		public void onClick(View arg0) {
 			// TODO Auto-generated method stub
-			if(arg0 == btn_save){
+			if(arg0 == btn_save && btn_save.isEnabled()){
 				saveData();
 				SKToastMessage.showMessage(CompetitionSubmitAnswerActivity.this, "Successfully saved", SKToastMessage.SUCCESS);
 
 			}
 			
-			if(arg0 == btn_submit){
-				postMutipleAnswer();
+			if(arg0 == btn_submit && btn_submit.isEnabled()){
+				if(AnswerList.getAnswers().size() == 0)
+					postMutipleAnswer();
+				else
+					SKToastMessage.showMessage(CompetitionSubmitAnswerActivity.this,getResources().getString(R.string.str_already_submited), SKToastMessage.SUCCESS);
 			}
 			if(arg0 == btn_go_back){
 				onBackPressed();

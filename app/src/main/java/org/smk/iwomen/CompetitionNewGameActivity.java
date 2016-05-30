@@ -16,6 +16,8 @@ import com.thuongnh.zprogresshud.ZProgressHUD;
 import org.smk.application.TimeSubtractionUtil;
 import org.smk.application.TimeSubtractionUtil.Callback;
 import org.smk.clientapi.NetworkEngine;
+import org.smk.model.Answer;
+import org.smk.model.AnswerList;
 import org.smk.model.CompetitionQuestion;
 import org.smk.model.GroupUser;
 import org.smk.model.GroupUserList;
@@ -124,7 +126,12 @@ public class CompetitionNewGameActivity extends BaseActionBarActivity {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				getCompetitionGroupUser();
+                if(competitionQuestion.getUserCount() > 1){
+                    getCompetitionGroupUser();
+                }else{
+                    getCompetitionAnswer();
+                }
+
 			}
 		});
 	}
@@ -148,6 +155,32 @@ public class CompetitionNewGameActivity extends BaseActionBarActivity {
 				bundle.putString("competition_group", new Gson().toJson(new GroupUserList(arg0)));
 				startActivity(new Intent(getApplicationContext(), CompetitionGroupUserActivity.class).putExtras(bundle));
 				dialog.dismissWithSuccess();
+			}
+		});
+	}
+
+	private void getCompetitionAnswer(){
+		dialog = new ZProgressHUD(this);
+		dialog.show();
+		NetworkEngine.getInstance().getUserAnswer(competitionQuestion.getGroupUserId(), new retrofit.Callback<List<Answer>>() {
+
+			@Override
+			public void success(List<Answer> arg0, Response arg1) {
+				// TODO Auto-generated method stub
+
+				Bundle bundle = new Bundle();
+				bundle.putInt("group_user_id", competitionQuestion.getGroupUserId());
+				bundle.putString("competition_question", new Gson().toJson(competitionQuestion));
+                bundle.putString("user_answer", new Gson().toJson(new AnswerList(arg0)));
+				startActivityForResult(new Intent(getApplicationContext(), CompetitionSubmitAnswerActivity.class).putExtras(bundle), 100);
+
+				dialog.dismissWithSuccess();
+			}
+
+			@Override
+			public void failure(RetrofitError arg0) {
+				// TODO Auto-generated method stub
+				dialog.dismissWithFailure();
 			}
 		});
 	}

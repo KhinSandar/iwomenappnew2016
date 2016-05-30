@@ -202,8 +202,6 @@ public class DrawerMainActivity extends BaseActionBarActivity {
         Log.e("<<USer Point>>","==>"+mSharedPreferencesUserInfo.getString(CommonConfig.USER_POINTS,null));
 
         Log.e("<<USer Status>>","==>"+mSharedPreferencesUserInfo.getString(CommonConfig.USER_SHARE_STATUS,null));
-
-
         if (mSharedPreferencesUserInfo.getString(CommonConfig.USER_POINTS, null) == null) {
             user_points = "0"; // initial no point condition
         }else{
@@ -627,17 +625,18 @@ public class DrawerMainActivity extends BaseActionBarActivity {
 
                 //fragmentManager.beginTransaction().replace(R.id.content_frame, winPrizesFragment.newInstance(Integer.parseInt(user_points),user_share_status)).commit();
 
-
-                Intent i = new Intent(getApplicationContext(), WinPrizeActivity.class);
+                fragmentManager.beginTransaction().replace(R.id.content_frame, winPrizesFragment.newInstance(10,user_share_status)).commit();
+                setTitle(DrawerListName[position]);
+                break;
+            case 5:// sister App
+                /*Intent i = new Intent(getApplicationContext(), WinPrizeActivity.class);
 
                 //i.putExtra("point", user_points);
                 i.putExtra("page",user_share_status );
 
                 startActivity(i);
                 setTitle(DrawerListName[position]);
-                break;
-            case 5:// sister App
-
+                break;*/
                 fragmentManager.beginTransaction().replace(R.id.content_frame, sisterAppFragment).commit();
                 setTitle(DrawerListName[position]);
 

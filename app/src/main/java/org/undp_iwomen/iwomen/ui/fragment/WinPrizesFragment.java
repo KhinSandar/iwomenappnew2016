@@ -1,5 +1,4 @@
 package org.undp_iwomen.iwomen.ui.fragment;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -33,7 +32,6 @@ public class WinPrizesFragment extends Fragment {
 
     private static final String POINT = "point";
     private static final String PAGE = "page";
-
     //private int mPoint;
     private String mShareStatus;
     private Context mContext;
@@ -52,7 +50,6 @@ public class WinPrizesFragment extends Fragment {
     private CustomTextView txt_points, txt_prize_thz_link;
 
 
-
     public static WinPrizesFragment newInstance(int point, String status) {
         WinPrizesFragment frag = new WinPrizesFragment();
         Bundle b = new Bundle();
@@ -65,7 +62,6 @@ public class WinPrizesFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         /*if (!getArguments().containsKey(POINT))
             throw new RuntimeException("Fragment must contain a \"" + POINT + "\" argument!");
         mPoint = getArguments().getInt(POINT);*/
@@ -113,14 +109,10 @@ public class WinPrizesFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
-
         // Set the background color of the root view to the color specified in newInstance()
         /*View background = view.findViewById(R.id.intro_background);
         background.setBackgroundColor(mBackgroundColor);*/
     }
-
     private void initViews(View rootView) {
 
         mContext = getActivity().getApplicationContext();
@@ -230,10 +222,5 @@ public class WinPrizesFragment extends Fragment {
             }
         }
     }
-
-
-
-
-
     
 }

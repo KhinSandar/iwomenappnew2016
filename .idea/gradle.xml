@@ -5,13 +5,11 @@
       <GradleProjectSettings>
         <option name="distributionType" value="LOCAL" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleHome" value="E:\Users\ToeLie\Downloads\Programs\android-studio-ide-143.2443734-windows\android-studio\gradle\gradle-2.10" />
-        <option name="gradleJvm" value="1.7" />
+        <option name="gradleHome" value="E:/Users/ToeLie/Downloads/Programs/android-studio-ide-143.2443734-windows/android-studio/gradle/gradle-2.10" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/GifImageViewlibrary" />
-            <option value="$PROJECT_DIR$/RecordingMediaFile" />
             <option value="$PROJECT_DIR$/SKConnectionDetector" />
             <option value="$PROJECT_DIR$/SKListView" />
             <option value="$PROJECT_DIR$/ZProgressHUD" />
@@ -27,7 +25,6 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/GifImageViewlibrary" />
-            <option value="$PROJECT_DIR$/RecordingMediaFile" />
             <option value="$PROJECT_DIR$/SKConnectionDetector" />
             <option value="$PROJECT_DIR$/SKListView" />
             <option value="$PROJECT_DIR$/ZProgressHUD" />

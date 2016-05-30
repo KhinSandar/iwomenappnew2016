@@ -681,7 +681,6 @@ Shirin Ebadi, J.D., was awarded the 2003 Nobel Peace Prize for her efforts to pr
     <string name="state_15m"> ေနၿပည္ေတာ္</string>
 
 
-
     <string name="button_authorize">Authorize</string>
     <string name="button_record">RECORD</string>
     <string name="button_pick">GALLERY</string>
@@ -725,35 +724,35 @@ Shirin Ebadi, J.D., was awarded the 2003 Nobel Peace Prize for her efforts to pr
     <string name="str_new_version">New Version</string>
     <string name="str_new_version_message">Do you download new version?</string>
 
-    <string name = "tlg_leader_role">TLG LEADER</string>
-    <string name = "tlg_normal_leader_role">MAY DOE KABAR  MEMBER</string>
-    <string name = "tlg_mdk_leader_role">MAY DOE KABAR BOARD MEMBER</string>
-    <string name= "empty_talk_together">Be the first to write a post </string>
-    <string name ="google_not_support">Your phone does not support Google Maps</string>
+    <string name="tlg_leader_role">TLG LEADER</string>
+    <string name="tlg_normal_leader_role">MAY DOE KABAR  MEMBER</string>
+    <string name="tlg_mdk_leader_role">MAY DOE KABAR BOARD MEMBER</string>
+    <string name="empty_talk_together">Be the first to write a post </string>
+    <string name="google_not_support">Your phone does not support Google Maps</string>
 
     <string name="calendar_view_events_rember_day">Remember Day of a Woman</string>
     <string name="calendar_view_events_create_btn">Create New Event</string>
 
-    <string name ="calendar_title">Title</string>
-    <string name ="calendar_desc">Description</string>
-    <string name ="calendar_loca">Location</string>
-    <string name ="calendar_start_date">Start Date</string>
-    <string name ="calendar_end_date">End Date</string>
-    <string name ="calendar_start_time">Start Time</string>
-    <string name ="calendar_end_time">End Time</string>
+    <string name="calendar_title">Title</string>
+    <string name="calendar_desc">Description</string>
+    <string name="calendar_loca">Location</string>
+    <string name="calendar_start_date">Start Date</string>
+    <string name="calendar_end_date">End Date</string>
+    <string name="calendar_start_time">Start Time</string>
+    <string name="calendar_end_time">End Time</string>
 
 
     <string name="calendar_new_event">New Event</string>
     <string name="calendar_detail">Event Detail</string>
     <string name="calendar_create_event">Create Event</string>
 
-    <string name="action_photo_camera"  >Take Photo</string>
-    <string name="action_photo_gallery"  >Choose Existing</string>
-    <string name="action_photo_camera_mm" >ဓာတ္ပံုုရိုုက္မည္</string>
-    <string name="action_photo_gallery_mm" >ဓာတ္ပံုုေရြးမည္</string>
+    <string name="action_photo_camera">Take Photo</string>
+    <string name="action_photo_gallery">Choose Existing</string>
+    <string name="action_photo_camera_mm">ဓာတ္ပံုုရိုုက္မည္</string>
+    <string name="action_photo_gallery_mm">ဓာတ္ပံုုေရြးမည္</string>
     <string name="search_hint">Search</string>
 
-    <string name="audio_record_btn_txt" >Click Here to Record Audio</string>
+    <string name="audio_record_btn_txt">Click Here to Record Audio</string>
     <string name="audio_record_done_btn_text">Your recorded Audio is ready</string>
 
     <string name="audio_record_warning_1">You need to record audio</string>
@@ -791,6 +790,12 @@ Shirin Ebadi, J.D., was awarded the 2003 Nobel Peace Prize for her efforts to pr
     <string name="menu8">Setting</string>
 
     <string name="menu_sing_out">Sign Out</string>
+    <string name="str_skip">Skip</string>
+    <string name="str_back">Back</string>
+    <string name="str_finished">Finish</string>
+    <string name="str_next">Next</string>
+    <string name="str_already_submited">You are already submited answers.</string>
+    <string name="points_prize">Points</string>
     <string name="code_share_sucess">Your friend code Successfully share.</string>
 
     <string name="code_share_error">You have been added code one time or you have been shared code with old accounts.</string>
@@ -798,7 +803,4 @@ Shirin Ebadi, J.D., was awarded the 2003 Nobel Peace Prize for her efforts to pr
     <string name="prize_congrat">Congratulations!</string>
 
     <string name="prize_visit_more">For more prizes visit: <a href="https://www.facebook.com/iwomenApp"></a></string>
-    <string name="points_prize">Points</string>
-
-
 </resources>
