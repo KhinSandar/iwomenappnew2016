@@ -15,7 +15,6 @@ import android.widget.GridView;
 
 import com.pnikosis.materialishprogress.ProgressWheel;
 import com.smk.model.Categories;
-import com.smk.skconnectiondetector.SKConnectionDetector;
 import com.thuongnh.zprogresshud.ZProgressHUD;
 
 import org.json.JSONArray;
