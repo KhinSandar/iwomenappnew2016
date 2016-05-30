@@ -18,6 +18,7 @@ import android.widget.Button;
 import com.felipecsl.gifimageview.library.GifImageView;
 import com.thuongnh.zprogresshud.ZProgressHUD;
 
+import org.smk.iwomen.TakeAndTourActivity;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.ui.activity.DrawerMainActivity;
 import org.undp_iwomen.iwomen.ui.activity.RegisterMainActivity;
@@ -39,6 +40,7 @@ public class Register_Congrat_Fragment extends Fragment implements View.OnClickL
 
     private GifImageView gifImageView;
     private ZProgressHUD zPDialog;
+    private Button btnTakeATour;
 
 
     public static Register_Congrat_Fragment newInstance( ) {
@@ -77,8 +79,10 @@ public class Register_Congrat_Fragment extends Fragment implements View.OnClickL
         gifImageView = (GifImageView) rootView.findViewById(R.id.register_gifImageView);
 
         btnEnjoyApp = (Button) rootView.findViewById(R.id.Next);
+        btnTakeATour = (Button) rootView.findViewById(R.id.register_take_tour);
 
 
+        btnTakeATour.setOnClickListener(this);
         btnEnjoyApp.setOnClickListener(this);
 
 
@@ -115,6 +119,10 @@ public class Register_Congrat_Fragment extends Fragment implements View.OnClickL
                 startActivity(i);
                 getActivity().finish();
                 break;
+            case R.id.register_take_tour:
+                startActivity(new Intent(getActivity(), TakeAndTourActivity.class));
+                break;
+
         }
     }
 

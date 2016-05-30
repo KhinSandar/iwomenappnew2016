@@ -74,7 +74,7 @@ public class SplashActivity extends BaseActionBarActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent i = new Intent(SplashActivity.this, TakeAndTourActivity.class);//DrawerMainActivity
+                Intent i = new Intent(SplashActivity.this, MainLoginActivity.class);//DrawerMainActivity
                 startActivity(i);
                 finish();
             }
