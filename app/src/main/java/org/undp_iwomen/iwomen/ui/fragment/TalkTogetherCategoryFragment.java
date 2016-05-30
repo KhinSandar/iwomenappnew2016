@@ -82,7 +82,8 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
 
     private SharedPreferences mSharedPreferencesUserInfo;
     private String user_name, user_obj_id, user_id, user_role, user_ph, register_msg, user_img_path;
-
+    SharedPreferences sharePrefLanguageUtil;
+    String mstr_lang;
 
     public TalkTogetherCategoryFragment() {
         // Empty constructor required for fragment subclasses
@@ -102,8 +103,10 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
         v = inflater.inflate(R.layout.fragment_talk_together_main, container, false);
         storageUtil = StorageUtil.getInstance(getActivity().getApplicationContext());
         mSharedPreferencesUserInfo = getActivity().getSharedPreferences(CommonConfig.SHARE_PREFERENCE_USER_INFO, Context.MODE_PRIVATE);
+        sharePrefLanguageUtil = getActivity().getSharedPreferences(Utils.PREF_SETTING, Context.MODE_PRIVATE);
 
         user_role = mSharedPreferencesUserInfo.getString(CommonConfig.USER_ROLE, null);
+        mstr_lang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
 
         /**********Ajust Layout Image size depend on screen at Explore ************/
         //prepareList();
@@ -120,7 +123,7 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
         gridView.setLoadingView(progress_wheel);
 
         CategoriesModelList = new ArrayList<>();
-        mAdapter = new TalkTogetherGridViewAdapter(getActivity(), ctx, CategoriesModelList);
+        mAdapter = new TalkTogetherGridViewAdapter(getActivity(), ctx, CategoriesModelList , mstr_lang);
         gridView.setAdapter(mAdapter);
 
 
@@ -202,11 +205,10 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
 
 
                     if (mAdapter == null) {
-                        mAdapter = new TalkTogetherGridViewAdapter(getActivity(), ctx, CategoriesModelList);
+                        mAdapter = new TalkTogetherGridViewAdapter(getActivity(), ctx, CategoriesModelList, mstr_lang);
 
                     }
                     storageUtil.SaveArrayListToSD("Categories", CategoriesModelList);
-
 
                     progress_wheel.setVisibility(View.GONE);
                     gridView.setAdapter(mAdapter);

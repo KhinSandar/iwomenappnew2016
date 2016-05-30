@@ -15,6 +15,8 @@ import com.smk.model.Categories;
 import com.squareup.picasso.Picasso;
 
 import org.undp_iwomen.iwomen.R;
+import org.undp_iwomen.iwomen.model.MyTypeFace;
+import org.undp_iwomen.iwomen.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,18 +43,23 @@ public class TalkTogetherGridViewAdapter extends BaseAdapter {
     public static final int VIEW_TYPE_ACTIVITY = 1;
 
 
+
     //private Activity activity;
 
     // Declare Variables
     Context mContext;
     LayoutInflater inflater;
+    String mstr_lang;
 
-    public TalkTogetherGridViewAdapter(Activity atx, Context context, ArrayList<Categories> catlist) { //
+
+    public TalkTogetherGridViewAdapter(Activity atx, Context context, ArrayList<Categories> catlist , String typeFaceName) { //
         super();
         mActivity = atx;
         mContext = context;
         inflater = LayoutInflater.from(mContext);
         //Log.e("BrowseGridviewAdapter Constructor", "" + listCountry.size() +listCountry.toString());
+        mstr_lang = typeFaceName;
+
         this.cat_data_list = catlist;
 
         //Log.e("BrowseGridviewAdapter Constructor", "" + listShopName.size() +listShopName.toString());
@@ -176,9 +183,20 @@ public class TalkTogetherGridViewAdapter extends BaseAdapter {
             holder = (ViewHolder) view.getTag();
         }
 
-        holder.txtCateName.setText(cat_data_list.get(position).getName());
 
-        //holder.txtCateName.setTypeface(DrawerMainActivity.faceNormal);
+        if (mstr_lang.equals(Utils.ENG_LANG)) {
+            holder.txtCateName.setText(cat_data_list.get(position).getName());
+            //holder.txtBodyText.setText(ResourceItems.get(position).getResourceText());
+            holder.txtCateName.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
+        }else if (mstr_lang.equals(Utils.MM_LANG)) {
+            holder.txtCateName.setText(cat_data_list.get(position).getNameMm());
+
+            holder.txtCateName.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
+
+        }else {//FOR Default and Custom
+            holder.txtCateName.setText(cat_data_list.get(position).getNameMm());
+        }
+
 
         if (cat_data_list.get(position).getImage() != null && !cat_data_list.get(position).getImage().isEmpty()) {
             try {
