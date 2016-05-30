@@ -80,6 +80,9 @@ public class CommonConfig {
     public static final String GET_IWOMEN_POST_BY_SEARCH = "/api/v1/searchIwomenPost";
 
     public static final String GET_POST_BY_SEARCH = "/api/v1/searchPosts";
+    public static final String CREATE_SHARE_FREIND_CODE = "";
+    public static final String GET_USER_BY_ID = "";
+    public static final String GET_PRIZE_POINT = "";
 
     public int getPostMaxCharacterCount () {
         int value = 140;

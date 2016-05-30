@@ -32,7 +32,7 @@
     <org.undp_iwomen.iwomen.ui.widget.CustomButton
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:text="Skip"
+        android:text="@string/str_skip"
         android:background="@android:color/transparent"
         android:id="@+id/btn_pre_user_guide"
         android:textColor="@color/white"
@@ -42,7 +42,7 @@
     <org.undp_iwomen.iwomen.ui.widget.CustomButton
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:text="Next"
+        android:text="@string/str_next"
         android:background="@android:color/transparent"
         android:id="@+id/btn_next_user_guide"
         android:textColor="@color/white"

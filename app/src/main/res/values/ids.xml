@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="win_prize_points" type="id" />
+    <item name="win_prize_share_link" type="id" />
+    <item name="win_prize_thz_share_btn" type="id" />
+    <item name="win_prize_lv" type="id" />
+</resources>
