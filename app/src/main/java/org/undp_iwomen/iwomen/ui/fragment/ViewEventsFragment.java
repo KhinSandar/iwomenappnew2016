@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.smk.skconnectiondetector.SKConnectionDetector;
 import com.thuongnh.zprogresshud.ZProgressHUD;
 
 import org.smk.clientapi.NetworkEngine;
@@ -35,7 +34,6 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 /**
- * Created by Toe Lie on 2/6/2016.
  */
 public class ViewEventsFragment extends Fragment {
 
@@ -203,7 +201,7 @@ public class ViewEventsFragment extends Fragment {
 
         } else {
 
-            SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
+            //SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
 
         }
     }

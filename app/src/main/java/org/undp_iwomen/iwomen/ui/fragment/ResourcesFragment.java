@@ -21,7 +21,6 @@ import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.smk.skconnectiondetector.SKConnectionDetector;
 import com.smk.sklistview.SKListView;
 import com.thuongnh.zprogresshud.ZProgressHUD;
 
@@ -145,7 +144,7 @@ public class ResourcesFragment extends Fragment {
             }
             getResourceDataPaginationFromSever();
         }else{
-            SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
+            //SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
             if(StorageresourceItems != null){
                 ResourceItems.clear();
                 ResourceItems.addAll(StorageresourceItems);
@@ -229,7 +228,7 @@ public class ResourcesFragment extends Fragment {
             });
 
         }else {
-            SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
+            //SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
             //List<com.smk.model.ResourceItem> iWomenPosts = StoreUtil.getInstance().selectFrom("ResourcesList");
             List<com.smk.model.ResourceItem> iWomenPosts = (ArrayList<com.smk.model.ResourceItem>) storageUtil.ReadArrayListFromSD("ResourcesList");
 

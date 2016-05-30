@@ -134,7 +134,7 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
             }
             LoadData();
         } else {
-            SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
+            //SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
             if (categories != null) {
                 CategoriesModelList.clear();
                 CategoriesModelList.addAll(categories);
@@ -224,7 +224,7 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
         } else {
 
 
-            SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
+            //SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
             CategoriesModelList = (ArrayList<Categories>) storageUtil.ReadArrayListFromSD("Categories");
 
             if (CategoriesModelList.size() > 0) {

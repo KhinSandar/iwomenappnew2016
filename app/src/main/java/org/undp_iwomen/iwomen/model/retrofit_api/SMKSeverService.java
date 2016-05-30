@@ -8,8 +8,11 @@ import org.smk.model.LikeItem;
 import org.smk.model.PhotoUpload;
 import org.smk.model.Sticker;
 import org.smk.model.SubResourceItem;
+import org.smk.model.TLGTownship;
+import org.smk.model.User;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.data.AuthorItem;
+import org.undp_iwomen.iwomen.data.PrizePointsItem;
 
 import java.util.List;
 
@@ -80,6 +83,11 @@ public interface SMKSeverService {
             @Query("isAllow") int isAllow,
             Callback<List<SubResourceItem>> callback);
 
+    @GET(CommonConfig.CREATE_TLG_PROFILE_URL)
+    void getTLGTownshipByPagination(
+            @Query("page") int page,
+            Callback<List<TLGTownship>> callback);
+
     @GET(CommonConfig.GET_CALENDAR_EVENT)
     void getCalendarEventDetailByDate(
             @Query("date") int page,
@@ -131,4 +139,22 @@ public interface SMKSeverService {
     @GET(CommonConfig.GET_ALL_AVATOR)
     void getAllAvator(
             Callback<String> callback);
+
+    @FormUrlEncoded
+    @POST(CommonConfig.CREATE_SHARE_FREIND_CODE)
+    void postShareUserObject(
+
+            @Field("user_id") int user_id,
+            @Field("share_objectId") String obj_id,
+            Callback<String> callback);
+
+    @GET(CommonConfig.GET_USER_BY_ID)
+    void getUserPoinsByID(
+            @Path("id") String id,
+            Callback<User> callback);
+
+    @GET(CommonConfig.GET_PRIZE_POINT)
+    void getPrizePoints(
+
+            Callback<List<PrizePointsItem>> callback);
 }

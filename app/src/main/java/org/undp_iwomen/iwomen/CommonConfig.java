@@ -141,4 +141,11 @@ public class CommonConfig {
     public static final String GET_ALL_AVATOR = "/api/v1/avators";
 
 
+    public static final String CREATE_SHARE_FREIND_CODE = "/api/v1/shareUsers";
+
+    public static final String GET_USER_BY_ID = "/api/v1/users/{id}";
+
+    public static final String GET_PRIZE_POINT= "/api/v1/pointPrices";
+
+
 }

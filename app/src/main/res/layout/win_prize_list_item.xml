@@ -1,0 +1,61 @@
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ly1"
+    android:layout_width="match_parent"
+    android:layout_height="55dp"
+    android:baselineAligned="true"
+    android:background="@color/list_background" >
+
+    <!--<ImageView
+        android:id="@+id/point_icon_img"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:adjustViewBounds="true"
+        android:paddingTop="16dp"
+        android:paddingLeft="16dp"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/ic_action_ic_location_red_24dp" />
+        android:layout_alignTop="@+id/point_icon_img"
+        android:layout_toRightOf="@+id/point_icon_img"-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical|center"
+        android:orientation="horizontal"
+        android:paddingLeft="16dp"
+        >
+
+        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+            android:id="@+id/txt_item_prize"
+            android:paddingRight="16dp"
+            android:layout_marginLeft="21dp"
+            android:textSize="18sp"
+            android:textColor="@drawable/list_text_selector"
+            android:background="@drawable/list_selector"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@string/points_prize" />
+        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+
+            android:id="@+id/txt_item_points"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceListItemSmall"
+            android:gravity="center_vertical"
+
+            android:paddingRight="16dp"
+            android:layout_marginLeft="21dp"
+            android:textSize="18sp"
+            android:text="@string/points_prize"
+            android:textColor="@drawable/list_text_selector"
+            android:background="@drawable/list_selector"
+            android:minHeight="?android:attr/listPreferredItemHeightSmall" />
+
+
+    </LinearLayout>
+</RelativeLayout>

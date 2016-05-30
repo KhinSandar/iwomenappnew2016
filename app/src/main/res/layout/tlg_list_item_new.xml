@@ -93,6 +93,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Title"
+                        android:textColor="@color/drawer_list_item_txt"
                         android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
                     <org.undp_iwomen.iwomen.ui.widget.CustomTextView
@@ -101,8 +102,9 @@
                         android:layout_height="wrap_content"
                         android:paddingTop="8dp"
                         android:text="By @author name"
+                        android:textColor="@color/drawer_list_item_txt"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                        android:textColor="?android:textColorSecondary" />
+                         />
 
                 </LinearLayout>
             </LinearLayout>
@@ -119,8 +121,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Change Theme"
-                    android:visibility="gone" />
+                    android:text="@string/tlg_group_address_eng"
+                    android:textColor="@color/drawer_list_item_txt"
+                    android:visibility="visible" />
 
                 <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                     android:id="@+id/sub_resouce_list_item_time"

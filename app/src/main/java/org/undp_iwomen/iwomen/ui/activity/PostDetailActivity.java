@@ -60,7 +60,6 @@ import com.google.gson.Gson;
 import com.makeramen.RoundedImageView;
 import com.smk.model.CommentItem;
 import com.smk.skalertmessage.SKToastMessage;
-import com.smk.skconnectiondetector.SKConnectionDetector;
 import com.smk.sklistview.SKListView;
 import com.squareup.picasso.Picasso;
 import com.thuongnh.zprogresshud.ZProgressHUD;
@@ -669,7 +668,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
             });
 
         } else {
-            SKConnectionDetector.getInstance(this).showErrorMessage();
+            //SKConnectionDetector.getInstance(this).showErrorMessage();
         }
     }
 
@@ -1039,7 +1038,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
             getCommentByPagination();
         } else {
-            SKConnectionDetector.getInstance(this).showErrorMessage();
+            //SKConnectionDetector.getInstance(this).showErrorMessage();
             if (comment != null) {
                 listComment.clear();
                 listComment.addAll(comment);
@@ -1076,7 +1075,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
 
         } else {
-            SKConnectionDetector.getInstance(this).showErrorMessage();
+            //SKConnectionDetector.getInstance(this).showErrorMessage();
             List<Sticker> stickers = StoreUtil.getInstance().selectFrom("StickersList");
             if (stickers.size() > 0) {
                 mAdapter = new StickerGridViewAdapter(this, mContext, stickers);
@@ -1307,7 +1306,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                 }
             });
         } else {
-            SKConnectionDetector.getInstance(this).showErrorMessage();
+            //SKConnectionDetector.getInstance(this).showErrorMessage();
         }
     }
 
@@ -2123,7 +2122,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                                         }
                                     });
                                 } else {
-                                    SKConnectionDetector.getInstance(PostDetailActivity.this).showErrorMessage();
+                                    //SKConnectionDetector.getInstance(PostDetailActivity.this).showErrorMessage();
                                 }
 
                             }
@@ -2359,7 +2358,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
 
                 } else {
-                    SKConnectionDetector.getInstance(this).showErrorMessage();
+                    //SKConnectionDetector.getInstance(this).showErrorMessage();
                 }
                 break;
 
@@ -2797,7 +2796,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         share.putExtra(Intent.EXTRA_HTML_TEXT, share_data);
 
 
-        startActivity(Intent.createChooser(share, "I Women Share link!"));
+        startActivity(Intent.createChooser(share, "iWomen App Share link!"));
     }
 
     //TODO FB SHARE

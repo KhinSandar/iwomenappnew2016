@@ -1221,7 +1221,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
             });
 
         } else {
-            SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
+            //SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
             //List<IWomenPost> iWomenPosts = StoreUtil.getInstance().selectFrom("stories_recent");
             List<IWomenPost> iWomenPosts = (ArrayList<IWomenPost>) storageUtil.ReadArrayListFromSD("stories_recent");
 

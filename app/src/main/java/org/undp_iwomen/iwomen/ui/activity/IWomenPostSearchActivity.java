@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.google.gson.Gson;
-import com.smk.skconnectiondetector.SKConnectionDetector;
 import com.smk.sklistview.SKListView;
 import com.thuongnh.zprogresshud.ZProgressHUD;
 
@@ -154,7 +153,7 @@ public class IWomenPostSearchActivity extends BaseActionBarActivity {
             });
 
         } else {
-            SKConnectionDetector.getInstance(IWomenPostSearchActivity.this).showErrorMessage();
+            //SKConnectionDetector.getInstance(IWomenPostSearchActivity.this).showErrorMessage();
             if(zPDialog != null && zPDialog.isShowing()) {
                 zPDialog.dismissWithSuccess();
             }

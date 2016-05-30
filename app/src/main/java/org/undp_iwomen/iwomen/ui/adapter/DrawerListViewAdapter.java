@@ -20,9 +20,7 @@ public class DrawerListViewAdapter extends BaseAdapter {
     private String[] listName = null;
     private int[] listicon = null;
 
-    //private Activity activity;
 
-    // Declare Variables
     Context mContext;
     LayoutInflater inflater;
     SharedPreferences sharePrefLanguageUtil;
@@ -38,8 +36,6 @@ public class DrawerListViewAdapter extends BaseAdapter {
         sharePrefLanguageUtil = mContext.getSharedPreferences(CommonConfig.SHARE_PREFERENCE_USER_INFO, Context.MODE_PRIVATE);
         mstr_lang = typefaceName;
 
-        //Log.e("BrowseGridviewAdapter Constructor", "" + listShopName.size() +listShopName.toString());
-        //this.activity = activity;
     }
 
 
@@ -100,11 +96,6 @@ public class DrawerListViewAdapter extends BaseAdapter {
 
 
         holder.imgIcon.setImageResource(listicon[position]);
-
-        //For transparent bg alpha 51=20% , 127=50% , 191=75% , 204 = 80%  ,229=90% , 242=95%
-        //holder.txtName.setBackgroundColor (Color.argb(229, 175, 42, 43));// Color.argb(0, 175, 42, 43)); // background transparency
-        //holder.txtName.setTextColor (Color.argb (255, 255, 255, 255));//Color.argb (0, 255, 255, 255)); // transparency of the text
-
 
         return view;
     }

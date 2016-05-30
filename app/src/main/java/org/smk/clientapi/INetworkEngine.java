@@ -147,7 +147,6 @@ public interface INetworkEngine {
 
     @GET(CommonConfig.CREATE_TLG_PROFILE_URL)
     void getTLGTownship(
-
             Callback<List<TLGTownship>> callback);
 
     @Multipart

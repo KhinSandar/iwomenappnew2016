@@ -10,7 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 
-import com.smk.skconnectiondetector.SKConnectionDetector;
 import com.smk.sklistview.SKListView;
 import com.thuongnh.zprogresshud.ZProgressHUD;
 
@@ -116,7 +115,7 @@ public class SubResourceListActivity extends BaseActionBarActivity {
             }
             getSubResourceDataFromSever(mResourceId);
         }else{
-            SKConnectionDetector.getInstance(this).showErrorMessage();
+            //SKConnectionDetector.getInstance(this).showErrorMessage();
 
             if(StoragesubResourceItems != null){
                 SubResourceItems.clear();
@@ -239,7 +238,7 @@ public class SubResourceListActivity extends BaseActionBarActivity {
             });
 
         } else {
-            SKConnectionDetector.getInstance(this).showErrorMessage();
+            //SKConnectionDetector.getInstance(this).showErrorMessage();
             List<org.smk.model.SubResourceItem> subResourceItems1 = (ArrayList<org.smk.model.SubResourceItem>) storageUtil.ReadArrayListFromSD(storagelistname);
             if(subResourceItems1 != null){
                 SubResourceItems.clear();
