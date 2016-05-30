@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="materialish-progress-1.2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../app/build/intermediates/exploded-aar/com.pnikosis/materialish-progress/1.2/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../app/build/intermediates/exploded-aar/com.pnikosis/materialish-progress/1.2/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.pnikosis/materialish-progress/1.2/9e597214a017acf043853c7d21cb475dda2f1f58/materialish-progress-1.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
