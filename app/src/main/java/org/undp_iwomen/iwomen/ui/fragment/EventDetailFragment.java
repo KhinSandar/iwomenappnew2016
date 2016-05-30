@@ -10,8 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.smk.skconnectiondetector.SKConnectionDetector;
-
 import org.smk.model.CalendarEvent;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.model.retrofit_api.SMKserverAPI;
@@ -166,7 +164,7 @@ public class EventDetailFragment extends Fragment {
 
             event_title.setText("Title");
         } else {
-            SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
+            //SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
 
         }
     }

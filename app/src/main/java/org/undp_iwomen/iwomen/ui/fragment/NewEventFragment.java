@@ -290,7 +290,7 @@ public class NewEventFragment extends Fragment implements View.OnClickListener {
             }
         }else {
 
-            SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
+            //SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
 
         }
     }

@@ -6,22 +6,20 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListView;
+
+import com.google.gson.Gson;
+import com.smk.sklistview.SKListView;
+import com.thuongnh.zprogresshud.ZProgressHUD;
 
 import org.smk.iwomen.BaseActionBarActivity;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.smk.model.TLGTownship;
 import org.undp_iwomen.iwomen.R;
-import org.undp_iwomen.iwomen.data.TlgProfileItem;
 import org.undp_iwomen.iwomen.model.MyTypeFace;
-import org.undp_iwomen.iwomen.model.retrofit_api.TlgProfileAPI;
+import org.undp_iwomen.iwomen.model.retrofit_api.SMKserverAPI;
 import org.undp_iwomen.iwomen.ui.adapter.TLGListViewAdapter;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.utils.Connection;
@@ -29,6 +27,7 @@ import org.undp_iwomen.iwomen.utils.StorageUtil;
 import org.undp_iwomen.iwomen.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -39,7 +38,7 @@ public class TLGListActivity extends BaseActionBarActivity {
 
 
     private CustomTextView textViewTitle;
-    private ListView lv;
+    private SKListView lv;
     private Context mContext;
 
     private String[] ListName;
@@ -50,14 +49,17 @@ public class TLGListActivity extends BaseActionBarActivity {
     SharedPreferences sharePrefLanguageUtil;
     String mstr_lang;
     private StorageUtil storageUtil;
-    private ArrayList<TlgProfileItem> tlgArraylist;
+    private ArrayList<TLGTownship> tlgArraylist;
+    private List<TLGTownship> StoragetlgArraylist;
 
     TLGListViewAdapter mAdapter;
     private ProgressDialog mProgressDialog;
     //private String mResourceId;
 
     private String mTitleEng, mTitleMM;
-
+    private ZProgressHUD zPDialog;
+    private boolean isFirstLoading = true;
+    private int paginater = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,9 +85,35 @@ public class TLGListActivity extends BaseActionBarActivity {
         mTitleMM = i.getStringExtra("TitleMM");
 
 
-        lv = (ListView) findViewById(R.id.sub_resource_list);
-
+        lv = (SKListView) findViewById(R.id.sub_resource_list);
         mstr_lang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
+
+        tlgArraylist = new ArrayList<TLGTownship>();
+        mAdapter = new TLGListViewAdapter(getApplicationContext(), tlgArraylist, mstr_lang);
+        lv.setAdapter(mAdapter);
+        lv.setCallbacks(skCallbacks);
+        lv.setNextPage(true);
+        mAdapter.notifyDataSetChanged();
+
+        StoragetlgArraylist = (ArrayList<TLGTownship>)storageUtil.ReadArrayListFromSD("TlgArrayList");
+        if (Connection.isOnline(mContext)){
+            // Showing local data while loading from internet
+            if(StoragetlgArraylist != null && StoragetlgArraylist.size() > 0){
+                tlgArraylist.addAll(StoragetlgArraylist);
+                mAdapter.notifyDataSetChanged();
+                zPDialog = new ZProgressHUD(this);
+                zPDialog.show();
+            }
+            getTLGListDataFromSever();
+        }else{
+            //SKConnectionDetector.getInstance(this).showErrorMessage();
+
+            if(StoragetlgArraylist != null){
+                tlgArraylist.clear();
+                tlgArraylist.addAll(StoragetlgArraylist);
+                mAdapter.notifyDataSetChanged();
+            }
+        }
 
         if (mstr_lang.equals(Utils.ENG_LANG)) {
             textViewTitle.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
@@ -96,21 +124,17 @@ public class TLGListActivity extends BaseActionBarActivity {
             textViewTitle.setText(R.string.betogether_title_mm);
 
         }
-        tlgArraylist = new ArrayList<TlgProfileItem>();
-        tlgArraylist = (ArrayList<TlgProfileItem>)storageUtil.ReadArrayListFromSD("TlgArrayList");
+
         //SubResourceItems = (ArrayList<SubResourceItem>) storageUtil.ReadArrayListFromSD("SubResourceArrayList" + mResourceId);
 
-        Log.e("Sub ResourceItems size", "===>" + tlgArraylist.size());
-
-        if (tlgArraylist.size() > 0) {
+        /*if (tlgArraylist.size() > 0) {
             mAdapter = new TLGListViewAdapter(getApplicationContext(), tlgArraylist, mstr_lang);
             lv.setAdapter(mAdapter);
             mAdapter.notifyDataSetChanged();
         } else {
 
             getTLGListDataFromSever();
-        }
-
+        }*/
 
 
 
@@ -118,121 +142,98 @@ public class TLGListActivity extends BaseActionBarActivity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
                 Intent intent = new Intent(mContext.getApplicationContext(), TlgProfileActivity.class);////DetailActivity
-                // Pass all data rank
-                intent.putExtra("TLGName", tlgArraylist.get(i).get_tlg_group_name());//(shopInfolist.get(position).getsShopName())
-                // Pass all data country
-                intent.putExtra("TLGAddress", tlgArraylist.get(i).get_tlg_group_address());//(shopInfolist.get(position).getsShopID())
-                // Pass all data population
-                intent.putExtra("TLGID", tlgArraylist.get(i).get_objectId());
 
-
+                intent.putExtra("tlgObj", new Gson().toJson(adapterView.getAdapter().getItem(i)));
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
+                startActivity(intent);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(intent);
             }
         });
 
 
     }
+    private boolean isLoading = true;
+    private SKListView.Callbacks skCallbacks = new SKListView.Callbacks() {
+        @Override
+        public void onScrollState(int scrollSate) {
+
+        }
+
+        @Override
+        public void onScrollChanged(int scrollY) {
+
+        }
+
+        @Override
+        public void onNextPageRequest() {
+            if(!isLoading){
+                getTLGListDataFromSever();
+            }
+        }
+    };
 
     private void getTLGListDataFromSever() {
         if (Connection.isOnline(mContext)) {
-           /* Double[][] Nearby = {{16.785231, 96.153374}, {16.785344, 96.15391},
-                    {16.779602, 96.151679}, {16.780424, 96.155562},
-                    {16.783177, 96.158373}, {16.782417, 96.158953}
-                    , {16.783988, 96.157011}, {16.783238, 96.155638}
-                    , {16.78292, 96.153095}};*/
+            isLoading = true;
 
-            //tlgList = new ArrayList<TlgProfileItem>();
-            TlgProfileAPI.getInstance().getService().getTlgProfileList(new Callback<String>() {
+            SMKserverAPI.getInstance().getService().getTLGTownshipByPagination(paginater, new Callback<List<TLGTownship>>() {
                 @Override
-                public void success(String s, Response response) {
-                    try {
+                public void success(List<TLGTownship> tlgTownships, Response response) {
 
-
-                        JSONObject whole_body = new JSONObject(s);
-                        JSONArray result = whole_body.getJSONArray("results");
+                    if (isFirstLoading) {
+                        isFirstLoading = false;
                         tlgArraylist.clear();
-                        for (int i = 0; i < result.length(); i++) {
-                            JSONObject each_object = result.getJSONObject(i);
+                        if (zPDialog != null && zPDialog.isShowing())
+                            zPDialog.dismissWithSuccess();
+                    }
+                    tlgArraylist.addAll(tlgTownships);
+                    mAdapter.notifyDataSetChanged();
+                    isLoading = false;
+                    //StoreUtil.getInstance().saveTo(storagelistname, SubResourceItems);
+                    final ArrayList<TLGTownship> storagelist = new ArrayList<TLGTownship>();
+                    storagelist.addAll(tlgArraylist);
+                    storageUtil.SaveArrayListToSD("TlgArrayList", storagelist);
 
-
-                            String _objectId;
-                            String _tlg_group_name;
-                            String _tlg_group_address;
-                            String _tlg_group_lat_address;
-                            String _tlg_group_lng_address;
-                            if (each_object.isNull("objectId")) {
-                                _objectId = "null";
-                            } else {
-                                _objectId = each_object.getString("objectId");
-                            }
-
-                            if (each_object.isNull("tlg_group_name")) {
-                                _tlg_group_name = "null";
-                            } else {
-                                _tlg_group_name = each_object.getString("tlg_group_name");
-                            }
-
-                            if (each_object.isNull("tlg_group_address")) {
-                                _tlg_group_address = "null";
-                            } else {
-                                _tlg_group_address = each_object.getString("tlg_group_address");
-                            }
-
-                            if (each_object.isNull("tlg_group_lat_address")) {
-                                _tlg_group_lat_address = "null";
-                            } else {
-                                _tlg_group_lat_address = each_object.getString("tlg_group_lat_address");
-                            }
-
-                            if (each_object.isNull("tlg_group_lng_address")) {
-                                _tlg_group_lng_address = "null";
-                            } else {
-                                _tlg_group_lng_address = each_object.getString("tlg_group_lng_address");
-                            }
-
-                            tlgArraylist.add(new TlgProfileItem(_objectId, _tlg_group_name, _tlg_group_address, _tlg_group_lat_address, _tlg_group_lng_address));
+                    if (tlgArraylist.size() == 31) {
+                        lv.setNextPage(true);
+                        paginater++;
+                    } else {
+                        // If no more item
+                        lv.setNextPage(false);
+                    }
+                    //Log.e("<<<SubResource List size>>>","==>"+SubResourceItems.size());
+                    if (tlgArraylist.size() == 0) {
+                        // If no more item
+                        lv.setNextPage(false);
+                        if (mstr_lang.equals(Utils.ENG_LANG)) {
+                            Utils.doToastEng(mContext, getResources().getString(R.string.resource_coming_soon_eng));
+                        } else {
+                            Utils.doToastMM(mContext, getResources().getString(R.string.resource_coming_soon_mm));
                         }
-
-                        Log.e("tlgList", "==>" + tlgArraylist.size());
-                        storageUtil.SaveArrayListToSD("TlgArrayList", tlgArraylist);
-
-                        mAdapter = new TLGListViewAdapter(mContext, tlgArraylist, mstr_lang);
-
-                        lv.setAdapter(mAdapter);
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        Log.e("JSONException", "==>" + e.toString());
-
-                    } catch (NullPointerException ex) {
-                        ex.printStackTrace();
-                        Log.e("NullPointerException", "==>" + ex.toString());
-
                     }
                 }
 
                 @Override
                 public void failure(RetrofitError error) {
-                    Log.e("RetrofitError", "==>" + error);
+
                 }
             });
 
-
-        } else {
-
-            if (mstr_lang.equals(Utils.ENG_LANG)) {
-                Utils.doToastEng(mContext, "Internet Connection need!");
-            } else {
-
-                Utils.doToastMM(mContext, getResources().getString(R.string.open_internet_warning_mm));
+        }else{
+            List<TLGTownship> tlgTownships = (ArrayList<TLGTownship>) storageUtil.ReadArrayListFromSD("TlgArrayList");
+            if(tlgTownships != null){
+                tlgArraylist.clear();
+                tlgArraylist.addAll(tlgTownships);
+                mAdapter.notifyDataSetChanged();
             }
         }
-    }
 
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -253,7 +254,6 @@ public class TLGListActivity extends BaseActionBarActivity {
                 getTLGListDataFromSever();
                 return true;
             case android.R.id.home:
-
                 finish();
                 return true;
 

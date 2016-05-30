@@ -23,7 +23,6 @@ import android.widget.TextView;
 
 import com.pnikosis.materialishprogress.ProgressWheel;
 import com.smk.model.SisterAppItem;
-import com.smk.skconnectiondetector.SKConnectionDetector;
 import com.smk.sklistview.SKListView;
 import com.thuongnh.zprogresshud.ZProgressHUD;
 
@@ -75,8 +74,7 @@ public class SisterAppFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         /*mProgressDialog = new ProgressDialog(getActivity());
-        mProgressDialog.setCancelable(false);
-*/
+        mProgressDialog.setCancelable(false);*/
     }
 
     @Override
@@ -139,7 +137,7 @@ public class SisterAppFragment extends Fragment {
             }
             getSisterListPaginationFromSever();
         }else{
-            SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
+            //SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
             if(StoragesisterAppItems != null){
                 sisterAppItemList.clear();
                 sisterAppItemList.addAll(StoragesisterAppItems);
@@ -242,7 +240,7 @@ public class SisterAppFragment extends Fragment {
             });
 
         }else {
-            SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
+            //SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
             List<SisterAppItem> storagelist = (ArrayList < SisterAppItem >) storageUtil.ReadArrayListFromSD("SisterAppList");
             if(storagelist != null){
                 sisterAppItemList.clear();

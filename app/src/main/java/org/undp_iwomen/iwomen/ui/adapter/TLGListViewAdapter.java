@@ -9,9 +9,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.makeramen.RoundedImageView;
+import com.squareup.picasso.Picasso;
 
+import org.smk.model.TLGTownship;
 import org.undp_iwomen.iwomen.R;
-import org.undp_iwomen.iwomen.data.TlgProfileItem;
 import org.undp_iwomen.iwomen.model.MyTypeFace;
 
 import java.util.List;
@@ -30,11 +31,11 @@ public class TLGListViewAdapter extends BaseAdapter
     //private Activity activity;
 
     // Declare Variables
-    private List<TlgProfileItem> SubResourceItems;
+    private List<TLGTownship> SubResourceItems;
     Context mContext;
     LayoutInflater inflater;
     String mstr_lang;
-    public TLGListViewAdapter(Context context, List<TlgProfileItem> resourceItems, String typeFaceName) { //
+    public TLGListViewAdapter(Context context, List<TLGTownship> resourceItems, String typeFaceName) { //
         super();
         mContext = context;
         inflater = LayoutInflater.from(mContext);
@@ -91,8 +92,6 @@ public class TLGListViewAdapter extends BaseAdapter
             holder.imgIcon = (RoundedImageView) view.findViewById(R.id.sub_resouce_list_item_img);
             holder.progressBar = (ProgressBar) view.findViewById(R.id.sub_resouce_list_item_progressBar);
 
-
-
             view.setTag(holder);
         }
         else
@@ -101,33 +100,52 @@ public class TLGListViewAdapter extends BaseAdapter
             holder = (ViewHolder) view.getTag();
         }
 
-        /*holder.txtAuthour.setText(listAuthorName[position]);
 
-        holder.txtName.setText(listName[position]);
-        holder.txtName.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
-
-        holder.txtTime.setText(listDate[position]);*/
 
         holder.txtAddress.setVisibility(View.VISIBLE);
         if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
-            holder.txtName.setText(SubResourceItems.get(position).get_tlg_group_name());
-
-            holder.txtAddress.setText(SubResourceItems.get(position).get_tlg_group_address());
+            holder.txtName.setText(SubResourceItems.get(position).getTlgGroupName());
+            holder.txtAddress.setText(SubResourceItems.get(position).getTlgGroupAddress());
             //holder.txtBodyText.setText(ResourceItems.get(position).getResourceText());
 
             holder.txtName.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
         }else{
-            holder.txtName.setText(SubResourceItems.get(position).get_tlg_group_name());
+            holder.txtName.setText(SubResourceItems.get(position).getTlgGroupNameMm());
             //holder.txtBodyText.setText(ResourceItems.get(position).getResourceText());
-            holder.txtAddress.setText(SubResourceItems.get(position).get_tlg_group_address());
+            holder.txtAddress.setText(SubResourceItems.get(position).getTlgGroupAddressMm());
 
             holder.txtName.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
 
         }
-        holder.imgIcon.setImageResource(R.drawable.place_holder);
-        holder.progressBar.setVisibility(View.GONE);
+        /*holder.imgIcon.setImageResource(R.drawable.place_holder);
+        holder.progressBar.setVisibility(View.GONE);*/
 
+        // Feed image
+        if (SubResourceItems.get(position).getTlgGroupLogo() != null && !SubResourceItems.get(position).getTlgGroupLogo().isEmpty()) {
+            try {
 
+                Picasso.with(mContext)
+                        .load(SubResourceItems.get(position).getTlgGroupLogo()) //"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
+                        .placeholder(R.drawable.place_holder)
+                        .error(R.drawable.place_holder)
+                        .into(holder.imgIcon, new ImageLoadedCallback(holder.progressBar) {
+                            @Override
+                            public void onSuccess() {
+                                if (this.progressBar != null) {
+                                    this.progressBar.setVisibility(View.GONE);
+                                } else {
+                                    this.progressBar.setVisibility(View.VISIBLE);
+                                }
+                            }
+
+                        });
+            } catch (OutOfMemoryError outOfMemoryError) {
+                outOfMemoryError.printStackTrace();
+            }
+        } else {
+            holder.imgIcon.setImageResource(R.drawable.place_holder);
+            holder.progressBar.setVisibility(View.GONE);
+        }
 
         return view;
     }

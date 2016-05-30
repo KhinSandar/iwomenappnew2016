@@ -100,7 +100,7 @@ public class CalendarActivity extends BaseActionBarActivity {
             });
 
         } else {
-            SKConnectionDetector.getInstance(CalendarActivity.this).showErrorMessage();
+            //SKConnectionDetector.getInstance(CalendarActivity.this).showErrorMessage();
         }
 
         /**********Get the Date From Server**************/

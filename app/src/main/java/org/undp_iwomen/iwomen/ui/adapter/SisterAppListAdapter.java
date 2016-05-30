@@ -60,7 +60,6 @@ public class SisterAppListAdapter extends BaseAdapter {
             vh.tv_download = (TextView) view.findViewById(R.id.sister_app_txt_download);
             vh.progressBar = (ProgressBar)view.findViewById(R.id.sister_app_logo_img_progress);
 
-
             view.setTag(vh);
 
         }else{
