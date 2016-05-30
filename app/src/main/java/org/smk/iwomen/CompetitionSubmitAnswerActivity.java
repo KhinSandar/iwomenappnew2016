@@ -760,13 +760,13 @@ public class CompetitionSubmitAnswerActivity extends BaseActionBarActivity imple
 		@Override
 		public void onClick(View arg0) {
 			// TODO Auto-generated method stub
-			if(arg0 == btn_save){
+			if(arg0 == btn_save && btn_save.isEnabled()){
 				saveData();
 				SKToastMessage.showMessage(CompetitionSubmitAnswerActivity.this, "Successfully saved", SKToastMessage.SUCCESS);
 
 			}
 			
-			if(arg0 == btn_submit){
+			if(arg0 == btn_submit && btn_submit.isEnabled()){
 				postMutipleAnswer();
 			}
 			if(arg0 == btn_go_back){

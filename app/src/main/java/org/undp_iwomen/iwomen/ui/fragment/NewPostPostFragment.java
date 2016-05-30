@@ -113,11 +113,9 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
     private boolean wasAudioRecord = false;
 
 
-    private final String CAMERA_PERMISSION = "android.permission.CAMERA";
     private SharedPreferences mSharedPreferencesUserInfo;
     private String uploadPhoto;
-
-
+    private final String CAMERA_PERMISSION = "android.permission.CAMERA";
     private final String AUDIO_PERMISSION = "android.permission.RECORD_AUDIO";
     private final String WRITE_PERMISSION = "android.permission.WRITE_EXTERNAL_STORAGE";
     private final String READ_PERMISSIOIN = "android.permission.WRITE_EXTERNAL_STORAGE";
