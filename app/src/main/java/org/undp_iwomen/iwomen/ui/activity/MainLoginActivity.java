@@ -28,7 +28,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,7 +37,6 @@ import com.orhanobut.dialogplus.OnClickListener;
 import com.orhanobut.dialogplus.OnItemClickListener;
 import com.orhanobut.dialogplus.ViewHolder;
 import com.smk.skalertmessage.SKToastMessage;
-import com.smk.skconnectiondetector.SKConnectionDetector;
 import com.thuongnh.zprogresshud.ZProgressHUD;
 
 import org.smk.clientapi.NetworkEngine;
@@ -48,6 +46,7 @@ import org.smk.model.User;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.model.MyTypeFace;
+import org.undp_iwomen.iwomen.ui.widget.CustomRadioButton;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.utils.Connection;
 import org.undp_iwomen.iwomen.utils.StoreUtil;
@@ -81,7 +80,7 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
 
     private TextView txtChangLanEng, txtChangLanMM;
     private Button btnOk;
-    private RadioButton rd_lang_en, rd_lang_mm_zawgyi, rd_lang_mm_uni, rd_lang_mm_default;
+    private CustomRadioButton rd_lang_en, rd_lang_mm_zawgyi, rd_lang_mm_uni, rd_lang_mm_default;
     private String lang;
     private ZProgressHUD dialog;
     //PERMISSION FOR WRITE STORAGE SETTING FONTS (Marshmallow Android 6.0 and above)
@@ -530,10 +529,10 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
         dialog.show();
 
         View view = dialog.getHolderView();
-        rd_lang_en = (RadioButton) view.findViewById(R.id.dialog_english_language);
-        rd_lang_mm_zawgyi = (RadioButton) view.findViewById(R.id.dialog_mm_zawgyi_language);
-        rd_lang_mm_uni = (RadioButton) view.findViewById(R.id.dialog_mm_unicode_language);
-        rd_lang_mm_default = (RadioButton) view.findViewById(R.id.dialog_mm_default_language);
+        rd_lang_en = (CustomRadioButton) view.findViewById(R.id.dialog_english_language);
+        rd_lang_mm_zawgyi = (CustomRadioButton) view.findViewById(R.id.dialog_mm_zawgyi_language);
+        rd_lang_mm_uni = (CustomRadioButton) view.findViewById(R.id.dialog_mm_unicode_language);
+        rd_lang_mm_default = (CustomRadioButton) view.findViewById(R.id.dialog_mm_default_language);
         if (lang.equals(Utils.ENG_LANG)) {
             rd_lang_en.setChecked(true);
 

@@ -199,14 +199,18 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
                         CategoriesModelList.clear();
                         zPDialog.dismissWithSuccess();
                     }
+                    isLoading = false;
                     CategoriesModelList.addAll(categories);
 
+                    final ArrayList<Categories> storageCategoryModelList = new ArrayList<Categories>();
+                    storageCategoryModelList.addAll(CategoriesModelList);
+                    storageUtil.SaveArrayListToSD("Categories", storageCategoryModelList);
 
                     if (mAdapter == null) {
                         mAdapter = new TalkTogetherGridViewAdapter(getActivity(), ctx, CategoriesModelList, mstr_lang);
 
                     }
-                    storageUtil.SaveArrayListToSD("Categories", CategoriesModelList);
+
 
                     progress_wheel.setVisibility(View.GONE);
                     gridView.setAdapter(mAdapter);
@@ -223,13 +227,17 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
 
         } else {
 
-
             //SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
-            CategoriesModelList = (ArrayList<Categories>) storageUtil.ReadArrayListFromSD("Categories");
+            List<Categories> categories = (ArrayList<Categories>) storageUtil.ReadArrayListFromSD("Categories");
+            //CategoriesModelList = (ArrayList<Categories>) storageUtil.ReadArrayListFromSD("Categories");
 
-            if (CategoriesModelList.size() > 0) {
-                mAdapter = new TalkTogetherGridViewAdapter(getActivity(), ctx, CategoriesModelList, mstr_lang);
-                gridView.setAdapter(mAdapter);
+            if (categories.size() > 0) {
+
+                CategoriesModelList.clear();
+                CategoriesModelList.addAll(categories);
+                mAdapter.notifyDataSetChanged();
+                //mAdapter = new TalkTogetherGridViewAdapter(getActivity(), ctx, CategoriesModelList, mstr_lang);
+                //gridView.setAdapter(mAdapter);
             }
 
 

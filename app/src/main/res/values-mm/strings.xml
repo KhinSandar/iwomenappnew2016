@@ -811,6 +811,9 @@ female-pilots-iaa1s
 
     <string name="register_photo_f">မ</string>
     <string name="register_photo_m">က်ား</string>
-
+    <string name="login_dialog_mm_zawgyi">ၿမန္မာေဇာ္ဂ်ီေဖာင့္</string>
+    <string name="login_dialog_mm_uni">ၿမန္မာ ယူနီကုုတ္ေဖာင့္</string>
+    <string name="login_dialog_eng">ENGLISH</string>
+    <string name="login_dialog_mm_deafult">ၿမန္မာစာ ပံုေသ</string>
 
 </resources>
