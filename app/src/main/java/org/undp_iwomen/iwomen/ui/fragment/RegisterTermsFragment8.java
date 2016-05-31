@@ -15,15 +15,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.smk.skalertmessage.SKToastMessage;
 import com.thuongnh.zprogresshud.ZProgressHUD;
 
 import org.smk.clientapi.NetworkEngine;
+import org.smk.iwomen.ResponseError;
 import org.smk.model.User;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.data.Sample;
 import org.undp_iwomen.iwomen.ui.activity.RegisterMainActivity;
 import org.undp_iwomen.iwomen.utils.Connection;
+import org.undp_iwomen.iwomen.utils.Utils;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -170,8 +173,10 @@ public class RegisterTermsFragment8 extends Fragment implements View.OnClickList
                             }
 
                             mEditorUserInfo.putString(CommonConfig.USER_UPLOAD_IMG_URL, user.getProfileimage());
-                            mEditorUserInfo.putString(CommonConfig.USER_POINTS,"0" );
-                            mEditorUserInfo.putString(CommonConfig.USER_SHARE_STATUS,"0" );
+                            /*mEditorUserInfo.putString(CommonConfig.USER_POINTS,"0" );
+                            mEditorUserInfo.putString(CommonConfig.USER_SHARE_STATUS,"0" );*/
+                            mEditorUserInfo.putString(CommonConfig.USER_POINTS,user.getPoints() != null ? user.getPoints().toString() : "0");
+                            mEditorUserInfo.putString(CommonConfig.USER_SHARE_STATUS,user.getShared() != null ? user.getShared().toString() : "0" );
 
                             mEditorUserInfo.commit();
 
@@ -205,16 +210,34 @@ public class RegisterTermsFragment8 extends Fragment implements View.OnClickList
                         }
 
                         @Override
-                        public void failure(RetrofitError error) {
+                        public void failure(RetrofitError arg0) {
                             //Log.e("==Register ERr=>", "==" + error.getCause().toString());
                             if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
                                 //org.undp_iwomen.iwomen.utils.Utils.doToastEng(mContext, getResources().getString(R.string.open_internet_warning_eng));
                             } else {
-
                                 //org.undp_iwomen.iwomen.utils.Utils.doToastMM(mContext, getResources().getString(R.string.open_internet_warning_mm));
                             }
 
-                            zPDialog.dismissWithSuccess();
+                            if(arg0.getResponse() != null){
+                                switch (arg0.getResponse().getStatus()) {
+                                    case 400:
+                                        try {
+                                            ResponseError error = (ResponseError) arg0.getBodyAs(ResponseError.class);
+                                            if (lang.equals(Utils.ENG_LANG)) {
+                                                SKToastMessage.showMessage(getActivity(), error.getError(), SKToastMessage.ERROR);
+                                            } else if (lang.equals(Utils.MM_LANG)) {
+                                                SKToastMessage.showMessage(getActivity(), error.getErrorMm(), SKToastMessage.ERROR);
+                                            }
+                                        }catch (Exception e){
+
+                                        }
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+
+                            zPDialog.dismissWithFailure();
                         }
                     }
             );
