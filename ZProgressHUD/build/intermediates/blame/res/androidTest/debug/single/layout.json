@@ -1,10 +1,14 @@
 [
     {
-        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/ZProgressHUD/build/intermediates/res/merged/androidTest/debug/layout/dialog_progress.xml",
-        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/ZProgressHUD/build/intermediates/bundles/debug/res/layout/dialog_progress.xml"
+        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\dialog_progress.xml",
+        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\bundles\\debug\\res\\layout\\dialog_progress.xml"
     },
     {
-        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\dialog_progress.xml",
-        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\bundles\\debug\\res\\layout\\dialog_progress.xml"
+        "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\dialog_progress.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\bundles\\debug\\res\\layout\\dialog_progress.xml"
+    },
+    {
+        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ZProgressHUD\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\dialog_progress.xml",
+        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ZProgressHUD\\build\\intermediates\\bundles\\debug\\res\\layout\\dialog_progress.xml"
     }
 ]

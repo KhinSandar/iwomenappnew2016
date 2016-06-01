@@ -8,8 +8,6 @@ import android.os.Handler;
 import android.view.MotionEvent;
 
 import org.smk.iwomen.BaseActionBarActivity;
-
-import org.smk.iwomen.TakeAndTourActivity;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.ui.widget.ProgressWheel;
@@ -74,6 +72,15 @@ public class SplashActivity extends BaseActionBarActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                /*Boolean take_tour = StoreUtil.getInstance().selectFrom("user_guide");
+                if(take_tour != null && take_tour){
+                    Intent i = new Intent(SplashActivity.this, MainLoginActivity.class);//DrawerMainActivity
+                    startActivity(i);
+                }else{
+                    Intent i = new Intent(SplashActivity.this, TakeAndTourActivity.class);
+                    startActivity(i);
+                }
+                */
                 Intent i = new Intent(SplashActivity.this, MainLoginActivity.class);//DrawerMainActivity
                 startActivity(i);
                 finish();

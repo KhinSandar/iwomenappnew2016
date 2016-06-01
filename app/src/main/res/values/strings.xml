@@ -790,10 +790,10 @@ Shirin Ebadi, J.D., was awarded the 2003 Nobel Peace Prize for her efforts to pr
     <string name="menu8">Setting</string>
 
     <string name="menu_sing_out">Sign Out</string>
-    <string name="str_skip">Skip</string>
-    <string name="str_back">Back</string>
-    <string name="str_finished">Finish</string>
-    <string name="str_next">Next</string>
+    <string name="str_skip">ေက်ာ္မည္</string>
+    <string name="str_back">ေနာက္သို႕</string>
+    <string name="str_finished">ရၿပီး</string>
+    <string name="str_next">ေရွ႕သို႕</string>
     <string name="str_already_submited">You are already submited answers.</string>
     <string name="points_prize">Points</string>
     <string name="code_share_sucess">Your friend code Successfully share.</string>

@@ -14,6 +14,7 @@ import org.smk.application.StoreUtil;
 import org.smk.fragment.UserGuideFragment;
 import org.smk.model.UserIntro;
 import org.undp_iwomen.iwomen.R;
+import org.undp_iwomen.iwomen.ui.activity.DrawerMainActivity;
 import org.undp_iwomen.iwomen.ui.activity.MainLoginActivity;
 
 import java.util.ArrayList;
@@ -83,8 +84,8 @@ public class TakeAndTourActivity extends AppCompatActivity {
             if(v == btn_nxt){
                 if(viewpager.getAdapter().getCount() - 1 == viewpager.getCurrentItem()){
                     StoreUtil.getInstance().saveTo("user_guide", true);
-                    startActivity(new Intent(getApplicationContext(), MainLoginActivity.class));
-                    finish();
+                    Intent i = new Intent(getApplicationContext(), DrawerMainActivity.class);//DrawerMainActivity
+                    startActivity(i);
                 }else{
                     viewpager.setCurrentItem(getItem(+1), true);
                 }
