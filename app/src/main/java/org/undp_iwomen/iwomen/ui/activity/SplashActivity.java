@@ -3,11 +3,16 @@ package org.undp_iwomen.iwomen.ui.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.view.MotionEvent;
 
+import org.smk.application.StoreUtil;
 import org.smk.iwomen.BaseActionBarActivity;
+import org.smk.iwomen.TakeAndTourActivity;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.ui.widget.ProgressWheel;
@@ -25,6 +30,8 @@ public class SplashActivity extends BaseActionBarActivity {
     private ProgressWheel mLoadingProgress;
     //private CustomTextView mNoInternetErrorTextView;
     private boolean isFetching = false;
+    private final String STORAGE_READ_PERMISSION = "android.permission.READ_EXTERNAL_STORAGE";
+    boolean storagePermissionAccepted = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +79,7 @@ public class SplashActivity extends BaseActionBarActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                /*Boolean take_tour = StoreUtil.getInstance().selectFrom("user_guide");
+                Boolean take_tour = StoreUtil.getInstance().selectFrom("user_guide");
                 if(take_tour != null && take_tour){
                     Intent i = new Intent(SplashActivity.this, MainLoginActivity.class);//DrawerMainActivity
                     startActivity(i);
@@ -80,11 +87,37 @@ public class SplashActivity extends BaseActionBarActivity {
                     Intent i = new Intent(SplashActivity.this, TakeAndTourActivity.class);
                     startActivity(i);
                 }
-                */
-                Intent i = new Intent(SplashActivity.this, MainLoginActivity.class);//DrawerMainActivity
-                startActivity(i);
+
+                /*Intent i = new Intent(SplashActivity.this, MainLoginActivity.class);//DrawerMainActivity
+                startActivity(i);*/
                 finish();
             }
         }, splashTimeOut);
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+
+
+            case 200:
+                storagePermissionAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                if (storagePermissionAccepted) {
+                    //chooseImage();
+                    //ShowLangDialog();
+                }
+                break;
+
+        }
+    }
+
+    private boolean hasPermission(String permission) {
+
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
+            return (checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED);
+        } else {
+            return true;
+        }
+
+
     }
 }

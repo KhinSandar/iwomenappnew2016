@@ -9,24 +9,42 @@
 
     android:paddingRight="16dp">
 
-    <org.undp_iwomen.iwomen.ui.widget.CustomTextView
-        android:id="@+id/dialog_language_setting_title"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="Change Language"
 
-        android:textColor="@android:color/white" />
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+            android:id="@+id/dialog_language_setting_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="@string/login_language_eng"
+
+            android:textColor="@android:color/white" />
+
+        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+            android:id="@+id/dialog_language_setting_title_mm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/login_language_mm"
+
+            android:textColor="@android:color/white" />
+    </LinearLayout>
 
     <RadioGroup
         android:id="@+id/dialog_language"
 
-        android:theme="@style/Theme.Iwomen.Radio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:checkedButton="@+id/dialog_english_language"
-        android:orientation="vertical">
+        android:checkedButton="@+id/dialog_mm_zawgyi_language"
+        android:orientation="vertical"
+        android:theme="@style/Theme.Iwomen.Radio">
 
         <org.undp_iwomen.iwomen.ui.widget.CustomRadioButton
             android:id="@+id/dialog_english_language"
@@ -40,6 +58,7 @@
             android:id="@+id/dialog_mm_zawgyi_language"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
             android:text="@string/login_dialog_mm_zawgyi"
             android:textColor="@android:color/white" />
 
@@ -47,10 +66,7 @@
             android:id="@+id/dialog_mm_unicode_language"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:text="@string/login_dialog_mm_uni"
-
-
             android:textColor="@android:color/white" />
 
         <org.undp_iwomen.iwomen.ui.widget.CustomRadioButton
@@ -58,7 +74,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/login_dialog_mm_deafult"
-
             android:textColor="@android:color/white" />
 
 

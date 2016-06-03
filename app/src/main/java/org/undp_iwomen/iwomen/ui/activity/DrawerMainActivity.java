@@ -96,7 +96,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
     String mstrUserfbId;
     SharePrefUtils sessionManager;
 
-    String post_count , user_code, user_points,user_share_status;
+    String post_count, user_code, user_points, user_share_status;
     TextView txt_menu_user_post_count;
     TextView txt_menu_setting;
     TextView txt_menu_user_points;
@@ -170,9 +170,9 @@ public class DrawerMainActivity extends BaseActionBarActivity {
         layout_play_game = (LinearLayout) findViewById(R.id.ly2);
         btn_play_game = (AnimateCustomTextView) findViewById(R.id.drawer_btn_take_challenge);
         img_play_game = (ImageView) findViewById(R.id.img_play_game);
-        txt_menu_setting = (TextView)findViewById(R.id.menu_setting_name_txt);
-        txt_menu_user_points = (TextView)findViewById(R.id.drawer_point_txt) ;
-        txt_menu_user_code = (TextView)findViewById(R.id.menu_user_code);
+        txt_menu_setting = (TextView) findViewById(R.id.menu_setting_name_txt);
+        txt_menu_user_points = (TextView) findViewById(R.id.drawer_point_txt);
+        txt_menu_user_code = (TextView) findViewById(R.id.menu_user_code);
 
         // set a custom shadow that overlays the main content when the drawer opens
         drawerLayoutt.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
@@ -196,20 +196,20 @@ public class DrawerMainActivity extends BaseActionBarActivity {
         user_id = mSharedPreferencesUserInfo.getString(CommonConfig.USER_ID, null);
         user_img_path = mSharedPreferencesUserInfo.getString(CommonConfig.USER_UPLOAD_IMG_URL, null);
 
-        user_code  = user_obj_id;
+        user_code = user_obj_id;
 
-        Log.e("<<USer Point>>","==>"+mSharedPreferencesUserInfo.getString(CommonConfig.USER_POINTS,null));
+        Log.e("<<USer Point>>", "==>" + mSharedPreferencesUserInfo.getString(CommonConfig.USER_POINTS, null));
 
-        Log.e("<<USer Status>>","==>"+mSharedPreferencesUserInfo.getString(CommonConfig.USER_SHARE_STATUS,null));
+        Log.e("<<USer Status>>", "==>" + mSharedPreferencesUserInfo.getString(CommonConfig.USER_SHARE_STATUS, null));
         if (mSharedPreferencesUserInfo.getString(CommonConfig.USER_POINTS, null) == null) {
             user_points = "0"; // initial no point condition
-        }else{
-            user_points  = mSharedPreferencesUserInfo.getString(CommonConfig.USER_POINTS, null);
+        } else {
+            user_points = mSharedPreferencesUserInfo.getString(CommonConfig.USER_POINTS, null);
         }
 
         if (mSharedPreferencesUserInfo.getString(CommonConfig.USER_SHARE_STATUS, null) == null) {
             user_share_status = "0";// For didn't share  //initial no status condition
-        }else{
+        } else {
             user_share_status = mSharedPreferencesUserInfo.getString(CommonConfig.USER_SHARE_STATUS, null);
         }
 
@@ -225,7 +225,6 @@ public class DrawerMainActivity extends BaseActionBarActivity {
         txt_user_name.setText(user_name);
         txt_menu_user_code.setText("Code - " + user_code);
         txt_menu_user_points.setText(user_points);
-
 
 
         //TODO WHEN DRAWER ACTIVITY START CALLING for check
@@ -296,7 +295,6 @@ public class DrawerMainActivity extends BaseActionBarActivity {
 
             }
         };
-
 
 
     }
@@ -378,8 +376,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
     private void getUserPointsCount() {
         if (Connection.isOnline(getApplicationContext())) {
 
-        }
-        else {
+        } else {
 
             if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
                 org.undp_iwomen.iwomen.utils.Utils.doToastEng(getApplicationContext(), getResources().getString(R.string.open_internet_warning_eng));
@@ -419,8 +416,8 @@ public class DrawerMainActivity extends BaseActionBarActivity {
         if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
             DrawerListName = new String[]
                     //{getResources().getString(R.string.menu1), "Be Knowledgeable", "Be Together", "Talk Together", "Settings", "AboutUs", "Sister Apps"};
-                    {getResources().getString(R.string.menu1),getResources().getString(R.string.menu2),getResources().getString(R.string.menu3),getResources().getString(R.string.menu4)
-                    ,getResources().getString(R.string.menu5),getResources().getString(R.string.menu6),getResources().getString(R.string.menu7)};
+                    {getResources().getString(R.string.menu1), getResources().getString(R.string.menu2), getResources().getString(R.string.menu3), getResources().getString(R.string.menu4)
+                            , getResources().getString(R.string.menu5), getResources().getString(R.string.menu6), getResources().getString(R.string.menu7), getResources().getString(R.string.menu8)};
             DrawerListIcon = new int[]
                     {R.drawable.ic_stories,
                             R.drawable.ic_resources,
@@ -429,6 +426,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                             R.drawable.sister_app,//Win prize
                             R.mipmap.sister_app_new,
                             R.drawable.about_us,
+                            R.drawable.ic_setting,
                     };
 
             drawer_adapter = new DrawerListViewAdapter(getApplicationContext(), DrawerListName, DrawerListIcon, mstr_lang);//mCategoriesTitles
@@ -440,9 +438,9 @@ public class DrawerMainActivity extends BaseActionBarActivity {
             setListViewHeightBasedOnChildren(mDrawerList);
         } else if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.MM_LANG)) {
             DrawerListName = new String[]
-                   // {"စိတ္ဓာတ္ခ\u103Cန္အား\u107Fဖည္ ့ရန္", "ဗဟုုသုုတရရန္", "ေပ\u102Bင္းစည္းေဆာင္ရ\u103Cက္ရန္", "ေမး\u107Fမန္းေဆ\u103Cးေ\u108F\u103Cးရန္", "\u107Fပင္ဆင္ရန္", "က\u103C\u103A\u108Fုုပ္တိုု ့အေ\u107Eကာင္း", " Sister Apps"};
-                    {getResources().getString(R.string.menu1),getResources().getString(R.string.menu2),getResources().getString(R.string.menu3),getResources().getString(R.string.menu4)
-                            ,getResources().getString(R.string.menu5),getResources().getString(R.string.menu6),getResources().getString(R.string.menu7)};
+                    // {"စိတ္ဓာတ္ခ\u103Cန္အား\u107Fဖည္ ့ရန္", "ဗဟုုသုုတရရန္", "ေပ\u102Bင္းစည္းေဆာင္ရ\u103Cက္ရန္", "ေမး\u107Fမန္းေဆ\u103Cးေ\u108F\u103Cးရန္", "\u107Fပင္ဆင္ရန္", "က\u103C\u103A\u108Fုုပ္တိုု ့အေ\u107Eကာင္း", " Sister Apps"};
+                    {getResources().getString(R.string.menu1), getResources().getString(R.string.menu2), getResources().getString(R.string.menu3), getResources().getString(R.string.menu4)
+                            , getResources().getString(R.string.menu5), getResources().getString(R.string.menu6), getResources().getString(R.string.menu7), getResources().getString(R.string.menu8)};
 
             DrawerListIcon = new int[]
                     {R.drawable.ic_stories,
@@ -452,6 +450,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                             R.drawable.sister_app,
                             R.mipmap.sister_app_new,
                             R.drawable.about_us,
+                            R.drawable.ic_setting,
                     };
 
             drawer_adapter = new DrawerListViewAdapter(getApplicationContext(), DrawerListName, DrawerListIcon, mstr_lang);//mCategoriesTitles
@@ -464,8 +463,8 @@ public class DrawerMainActivity extends BaseActionBarActivity {
         } else if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.MM_LANG_UNI)) {
             DrawerListName = new String[]
                     //{"စိတ္ဓာတ္ခ\u103Cန္အား\u107Fဖည္ ့ရန္", "ဗဟုုသုုတရရန္", "ေပ\u102Bင္းစည္းေဆာင္ရ\u103Cက္ရန္", "ေမး\u107Fမန္းေဆ\u103Cးေ\u108F\u103Cးရန္", "\u107Fပင္ဆင္ရန္", "က\u103C\u103A\u108Fုုပ္တိုု ့အေ\u107Eကာင္း", " Sister Apps"};
-                    {getResources().getString(R.string.menu1),getResources().getString(R.string.menu2),getResources().getString(R.string.menu3),getResources().getString(R.string.menu4)
-                            ,getResources().getString(R.string.menu5),getResources().getString(R.string.menu6),getResources().getString(R.string.menu7)};
+                    {getResources().getString(R.string.menu1), getResources().getString(R.string.menu2), getResources().getString(R.string.menu3), getResources().getString(R.string.menu4)
+                            , getResources().getString(R.string.menu5), getResources().getString(R.string.menu6), getResources().getString(R.string.menu7), getResources().getString(R.string.menu8)};
 
             DrawerListIcon = new int[]
                     {R.drawable.ic_stories,
@@ -475,7 +474,8 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                             R.drawable.sister_app,
                             R.mipmap.sister_app_new,
                             R.drawable.about_us,
-                            };
+                            R.drawable.ic_setting,
+                    };
 
             drawer_adapter = new DrawerListViewAdapter(getApplicationContext(), DrawerListName, DrawerListIcon, mstr_lang);//mCategoriesTitles
                     /*mDrawerList.setAdapter(new ArrayAdapter<String>(this,
@@ -487,8 +487,8 @@ public class DrawerMainActivity extends BaseActionBarActivity {
         } else if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.MM_LANG_DEFAULT)) {
             DrawerListName = new String[]
                     //{"စိတ္ဓာတ္ခ\u103Cန္အား\u107Fဖည္ ့ရန္", "ဗဟုုသုုတရရန္", "ေပ\u102Bင္းစည္းေဆာင္ရ\u103Cက္ရန္", "ေမး\u107Fမန္းေဆ\u103Cးေ\u108F\u103Cးရန္", "\u107Fပင္ဆင္ရန္", "က\u103C\u103A\u108Fုုပ္တိုု ့အေ\u107Eကာင္း", " Sister Apps"};
-                    {getResources().getString(R.string.menu1),getResources().getString(R.string.menu2),getResources().getString(R.string.menu3),getResources().getString(R.string.menu4)
-                            ,getResources().getString(R.string.menu5),getResources().getString(R.string.menu6),getResources().getString(R.string.menu7)};
+                    {getResources().getString(R.string.menu1), getResources().getString(R.string.menu2), getResources().getString(R.string.menu3), getResources().getString(R.string.menu4)
+                            , getResources().getString(R.string.menu5), getResources().getString(R.string.menu6), getResources().getString(R.string.menu7), getResources().getString(R.string.menu8)};
 
             DrawerListIcon = new int[]
                     {R.drawable.ic_stories,
@@ -498,6 +498,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                             R.drawable.sister_app,
                             R.mipmap.sister_app_new,
                             R.drawable.about_us,
+                            R.drawable.ic_setting,
                     };
 
             // R.drawable.ic_community, R.drawable.ic_news
@@ -512,8 +513,8 @@ public class DrawerMainActivity extends BaseActionBarActivity {
         } else {
             DrawerListName = new String[]
                     //{"စိတ္ဓာတ္ခ\u103Cန္အား\u107Fဖည္ ့ရန္", "ဗဟုုသုုတရရန္", "ေပ\u102Bင္းစည္းေဆာင္ရ\u103Cက္ရန္", "ေမး\u107Fမန္းေဆ\u103Cးေ\u108F\u103Cးရန္", "\u107Fပင္ဆင္ရန္", "က\u103C\u103A\u108Fုုပ္တိုု ့အေ\u107Eကာင္း", " Sister Apps"};
-                    {getResources().getString(R.string.menu1),getResources().getString(R.string.menu2),getResources().getString(R.string.menu3),getResources().getString(R.string.menu4)
-                            ,getResources().getString(R.string.menu5),getResources().getString(R.string.menu6),getResources().getString(R.string.menu7)};
+                    {getResources().getString(R.string.menu1), getResources().getString(R.string.menu2), getResources().getString(R.string.menu3), getResources().getString(R.string.menu4)
+                            , getResources().getString(R.string.menu5), getResources().getString(R.string.menu6), getResources().getString(R.string.menu7), getResources().getString(R.string.menu8)};
 
             DrawerListIcon = new int[]
                     {R.drawable.ic_stories,
@@ -523,6 +524,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                             R.drawable.sister_app,
                             R.mipmap.sister_app_new,
                             R.drawable.about_us,
+                            R.drawable.ic_setting,
                     };
 
             drawer_adapter = new DrawerListViewAdapter(getApplicationContext(), DrawerListName, DrawerListIcon, mstr_lang);//mCategoriesTitles
@@ -627,7 +629,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                 //fragmentManager.beginTransaction().replace(R.id.content_frame, winPrizesFragment.newInstance(10,user_share_status)).commit();
                 Intent i = new Intent(this, WinPrizeActivity.class);
                 //i.putExtra("point", "10");
-                i.putExtra("page",user_share_status );
+                i.putExtra("page", user_share_status);
                 startActivity(i);
 
                 setTitle(DrawerListName[position]);
@@ -660,6 +662,12 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                     intent2.putExtra("URL", "file:///android_asset/tos/About-Us-MM-v2.html");
                     startActivity(intent2);
                 }
+                break;
+            case 7:
+                Intent intent = new Intent(getApplicationContext(), SettingActivity.class);
+                startActivity(intent);
+                //fragmentManager.beginTransaction().replace(R.id.content_frame, settingsFragment).commit();
+                setTitle(getResources().getString(R.string.menu8));
 
                 break;//Sister apps
         }
@@ -807,8 +815,8 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                                 layout_play_game.setVisibility(View.GONE);
                                 break;
                             default:
-                                if(arg0.getCause() != null)
-                                    Log.e("Competition: ", "Error:"+ arg0.getCause().toString());
+                                if (arg0.getCause() != null)
+                                    Log.e("Competition: ", "Error:" + arg0.getCause().toString());
                                 break;
                         }
                     }
@@ -818,7 +826,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                 public void success(final CompetitionQuestion arg0, Response arg1) {
                     // TODO Auto-generated method stub
                     layout_play_game.setVisibility(View.VISIBLE);
-                    Log.i("Competition : ", "Size = "+arg0.getCorrectAnswer().size());
+                    Log.i("Competition : ", "Size = " + arg0.getCorrectAnswer().size());
                     if (arg0.getCorrectAnswer().size() == 0) {
                         img_play_game.setImageResource(R.drawable.sticker2);
                         btn_play_game.setText(getResources().getString(R.string.competition_play_game));
@@ -862,7 +870,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
             Log.i("Reviews", "Reviews :" + review);
             if (review == null && UsageCount != null && UsageCount > 3) {
                 showReviewDialog(user_obj_id);
-            } else if(UsageCount != null && UsageCount > 3 && feedback == null) {
+            } else if (UsageCount != null && UsageCount > 3 && feedback == null) {
                 showFeedBack(user_obj_id);
             } else {
                 finish();

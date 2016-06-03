@@ -100,7 +100,7 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
 
         ctx = getActivity().getApplicationContext();
         v = inflater.inflate(R.layout.fragment_talk_together_main, container, false);
-        storageUtil = StorageUtil.getInstance(getActivity().getApplicationContext());
+        storageUtil = StorageUtil.getInstance(ctx);
         mSharedPreferencesUserInfo = getActivity().getSharedPreferences(CommonConfig.SHARE_PREFERENCE_USER_INFO, Context.MODE_PRIVATE);
         sharePrefLanguageUtil = getActivity().getSharedPreferences(Utils.PREF_SETTING, Context.MODE_PRIVATE);
 
@@ -154,10 +154,12 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
                         Utils.showPermissionDialog(getActivity());
                     } else if (CategoriesModelList.get(position).getName().equalsIgnoreCase("Calendar")) {//position == 0 ||
                         Intent i = new Intent(ctx, CalendarActivity.class);
+                        i.putExtra("CategoryNameMM", CategoriesModelList.get(position).getNameMm());//CategoryName
                         i.putExtra("CategoryName", CategoriesModelList.get(position).getName());//CategoryName
                         startActivity(i);
                     } else {
                         Intent i = new Intent(ctx, TalkTogetherMainActivity.class);
+                        i.putExtra("CategoryNameMM", CategoriesModelList.get(position).getNameMm());//CategoryName
                         i.putExtra("CategoryName", CategoriesModelList.get(position).getName());//CategoryName
                         i.putExtra("CategoryID", CategoriesModelList.get(position).getObjectId());//CategoryName
                         startActivity(i);
@@ -165,10 +167,12 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
                 } else {
                     if (CategoriesModelList.get(position).getName().equalsIgnoreCase("Calendar")) {//position == 0 ||
                         Intent i = new Intent(ctx, CalendarActivity.class);
+                        i.putExtra("CategoryNameMM", CategoriesModelList.get(position).getNameMm());//CategoryName
                         i.putExtra("CategoryName", CategoriesModelList.get(position).getName());//CategoryName
                         startActivity(i);
                     } else {
                         Intent i = new Intent(ctx, TalkTogetherMainActivity.class);
+                        i.putExtra("CategoryNameMM", CategoriesModelList.get(position).getNameMm());//CategoryName
                         i.putExtra("CategoryName", CategoriesModelList.get(position).getName());//CategoryName
                         i.putExtra("CategoryID", CategoriesModelList.get(position).getObjectId());//CategoryName
                         startActivity(i);

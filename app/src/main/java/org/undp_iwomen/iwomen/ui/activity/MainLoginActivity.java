@@ -97,10 +97,9 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
         mSharedPreferencesUserInfo = getSharedPreferences(CommonConfig.SHARE_PREFERENCE_USER_INFO, Context.MODE_PRIVATE);
 
         CustomTextView textView1 = new CustomTextView(this);
-
         EditText editText = new EditText(this);
 
-        printHashKey();
+        //printHashKey();
 
         appLogo = (ImageView) findViewById(R.id.app_logo);
         usernameField = (EditText) findViewById(R.id.login_username_input);
@@ -345,7 +344,6 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
             public void onClick(DialogPlus dialog, View view) {
 
                 SharedPreferences.Editor editor = sharePrefLanguageUtil.edit();
-
 
                 switch (view.getId()) {
 
