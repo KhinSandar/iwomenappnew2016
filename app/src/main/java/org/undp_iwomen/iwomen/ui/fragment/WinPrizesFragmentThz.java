@@ -1,5 +1,6 @@
 package org.undp_iwomen.iwomen.ui.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -134,29 +135,38 @@ public class WinPrizesFragmentThz extends Fragment {
 
     private void getUserPointsCount() {
         if (Connection.isOnline(mContext)) {
+            Activity activity = getActivity();
+            if(activity != null) {
+                SMKserverAPI.getInstance().getService().getUserPoinsByID(user_id, new Callback<User>() {
+                    @Override
+                    public void success(User user, Response response) {
+                        Activity activity = getActivity();
+                        if (activity != null) {
 
-            SMKserverAPI.getInstance().getService().getUserPoinsByID(user_id, new Callback<User>() {
-                @Override
-                public void success(User user, Response response) {
+                            // etc ...
+                            if (user.getPoints() != null) {
+                                txt_points.setText(user.getPoints().toString() + getResources().getString(R.string.points_prize));
 
-                    if (user.getPoints() != null) {
-                        txt_points.setText(user.getPoints().toString() + getResources().getString(R.string.points_prize));
+                                mEditorUserInfo = mSharedPreferencesUserInfo.edit();
+                                mEditorUserInfo.putString(CommonConfig.USER_POINTS, user.getPoints().toString());
+                                mEditorUserInfo.commit();
+                            } else {
+                                //txt_points.setText("");
+                            }
 
-                        mEditorUserInfo = mSharedPreferencesUserInfo.edit();
-                        mEditorUserInfo.putString(CommonConfig.USER_POINTS,user.getPoints().toString());
-                        mEditorUserInfo.commit();
-                    } else {
-                        //txt_points.setText("");
+                            getPrizePointsCount();
+
+                        }
+
+
                     }
 
-                    getPrizePointsCount();
-                }
-                @Override
-                public void failure(RetrofitError error) {
+                    @Override
+                    public void failure(RetrofitError error) {
 
-                }
-            });
-
+                    }
+                });
+            }
         } else {
 
             /*if (lang.equals(Utils.ENG_LANG)) {

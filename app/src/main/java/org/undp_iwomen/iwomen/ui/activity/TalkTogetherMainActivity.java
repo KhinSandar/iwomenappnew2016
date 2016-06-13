@@ -10,6 +10,7 @@ import android.view.MenuItem;
 
 import org.smk.iwomen.BaseActionBarActivity;
 import org.undp_iwomen.iwomen.R;
+import org.undp_iwomen.iwomen.model.MyTypeFace;
 import org.undp_iwomen.iwomen.ui.fragment.TLGUserPostRecentFragment;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.utils.Utils;
@@ -20,7 +21,7 @@ public class TalkTogetherMainActivity extends BaseActionBarActivity {
     private CustomTextView textViewTitle;
     private Context mContext;
     SharedPreferences sharePrefLanguageUtil;
-    String strLang, mstrTitle , mCatID;
+    String strLang, mstrTitle ,mstrTileMM, mCatID;
     Bundle bundle;
 
     @Override
@@ -48,12 +49,22 @@ public class TalkTogetherMainActivity extends BaseActionBarActivity {
         Intent i = getIntent();
 
         mstrTitle = i.getStringExtra("CategoryName");
+        mstrTileMM =i.getStringExtra("CategoryNameMM");
         mCatID = i.getStringExtra("CategoryID");
 
-        textViewTitle.setText(mstrTitle);
+
+        if (strLang.equals(Utils.ENG_LANG)) {
+            textViewTitle.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
+            textViewTitle.setText(mstrTitle);
+        } else {//FOR Default and Custom
+            //textViewTitle.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
+            textViewTitle.setText(mstrTileMM);
+        }
+        //textViewTitle.setText(mstrTitle);
 
         bundle = new Bundle();
         bundle.putString("CategoryName", mstrTitle);
+        bundle.putString("CategoryNameMM", mstrTileMM);
         bundle.putString("CategoryID", mCatID);
 
 

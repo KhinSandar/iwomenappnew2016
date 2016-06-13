@@ -78,7 +78,7 @@ public class BaseActionBarActivity extends AppCompatActivity{
 			e.printStackTrace();
 		}
 
-		checkAPKVersion();
+		//checkAPKVersion();
 	}
 
 

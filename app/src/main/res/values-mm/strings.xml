@@ -811,9 +811,19 @@ female-pilots-iaa1s
 
     <string name="register_photo_f">မ</string>
     <string name="register_photo_m">က်ား</string>
-    <string name="login_dialog_mm_zawgyi">ၿမန္မာေဇာ္ဂ်ီေဖာင့္</string>
+
+    <string name="login_dialog_mm_zawgyi">ၿမန္မာေဇာ္ဂ်ီေဖာင့္ | Myanmar Zawgyi</string>
+    <string name="login_dialog_mm_uni">ၿမန္မာ ယူနီကုုတ္ေဖာင့္ |Myanmar Unicode</string>
+    <string name="login_dialog_eng">ENGLISH | အဂၤလိပ္ေဖာင့္ </string>
+    <string name="login_dialog_mm_deafult">ၿမန္မာစာ ပံုေသ | Myanmar Default</string>
+
+    <string name="version_new_yes">ဗားရွင္းအသစ္ရပါပီ</string>
+    <string name="version_new_no">ဗားရွင္း အသစ္မထြက္ေသးပါ</string>
+
+
+    <!--<string name="login_dialog_mm_zawgyi">ၿမန္မာေဇာ္ဂ်ီေဖာင့္</string>
     <string name="login_dialog_mm_uni">ၿမန္မာ ယူနီကုုတ္ေဖာင့္</string>
     <string name="login_dialog_eng">ENGLISH</string>
     <string name="login_dialog_mm_deafult">ၿမန္မာစာ ပံုေသ</string>
-
+-->
 </resources>
