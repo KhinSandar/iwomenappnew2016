@@ -110,6 +110,27 @@
                     android:paddingLeft="8dp"
                     android:text="@string/register_terms_link" />
             </LinearLayout>
+            <LinearLayout
+                android:id="@+id/sister_app_err_ly"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:padding="16dp">
+                <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                    android:id="@+id/register_terms_err"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:text="@string/register_name_duplicate_err"
+                    android:textSize="18sp"
+                    android:textColor="@color/red"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/register_pwd_ly"

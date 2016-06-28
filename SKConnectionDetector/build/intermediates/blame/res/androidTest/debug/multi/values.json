@@ -11,14 +11,7 @@
                     "endOffset": 123
                 },
                 "from": {
-                    "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKConnectionDetector/build/intermediates/bundles/debug/res/values/values.xml",
-                    "position": {
-                        "startLine": 2,
-                        "startColumn": 4,
-                        "startOffset": 55,
-                        "endColumn": 72,
-                        "endOffset": 123
-                    }
+                    "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKConnectionDetector/build/intermediates/bundles/debug/res/values/values.xml"
                 }
             },
             {
@@ -26,8 +19,8 @@
                     "startLine": 3,
                     "startColumn": 4,
                     "startOffset": 128,
-                    "endColumn": 76,
-                    "endOffset": 200
+                    "endColumn": 75,
+                    "endOffset": 199
                 },
                 "from": {
                     "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKConnectionDetector/build/intermediates/bundles/debug/res/values/values.xml",
@@ -35,8 +28,8 @@
                         "startLine": 3,
                         "startColumn": 4,
                         "startOffset": 128,
-                        "endColumn": 76,
-                        "endOffset": 200
+                        "endColumn": 75,
+                        "endOffset": 199
                     }
                 }
             },
@@ -44,19 +37,12 @@
                 "to": {
                     "startLine": 4,
                     "startColumn": 4,
-                    "startOffset": 205,
+                    "startOffset": 204,
                     "endColumn": 116,
-                    "endOffset": 317
+                    "endOffset": 316
                 },
                 "from": {
-                    "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKConnectionDetector/build/intermediates/bundles/debug/res/values/values.xml",
-                    "position": {
-                        "startLine": 4,
-                        "startColumn": 4,
-                        "startOffset": 205,
-                        "endColumn": 116,
-                        "endOffset": 317
-                    }
+                    "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKConnectionDetector/build/intermediates/bundles/debug/res/values/values.xml"
                 }
             }
         ]

@@ -1,6 +1,7 @@
 package org.undp_iwomen.iwomen.ui.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -44,7 +45,7 @@ public class RegisterTermsFragment8 extends Fragment implements View.OnClickList
     private SharedPreferences mSharedPreferencesUserInfo;
     private SharedPreferences.Editor mEditorUserInfo;
     private ZProgressHUD zPDialog;
-    private TextView txt_iwomen_link;
+    private TextView txt_iwomen_link , txt_reg_name_duplicate_err;
 
     private Button btn_next;
 
@@ -92,6 +93,7 @@ public class RegisterTermsFragment8 extends Fragment implements View.OnClickList
         btn_next.setOnClickListener(this);
 
         txt_iwomen_link = (TextView)view.findViewById(R.id.register_app_iwomen_txt);
+        txt_reg_name_duplicate_err = (TextView)view.findViewById(R.id.register_terms_err);
         txt_iwomen_link.setText("www.iwomenapp.org");
         Linkify.addLinks(txt_iwomen_link, Linkify.WEB_URLS);
 
@@ -222,12 +224,17 @@ public class RegisterTermsFragment8 extends Fragment implements View.OnClickList
                                 switch (arg0.getResponse().getStatus()) {
                                     case 400:
                                         try {
+                                            //txt_reg_name_duplicate_err.setVisibility(View.VISIBLE);
                                             ResponseError error = (ResponseError) arg0.getBodyAs(ResponseError.class);
                                             if (lang.equals(Utils.ENG_LANG)) {
                                                 SKToastMessage.showMessage(getActivity(), error.getError(), SKToastMessage.ERROR);
                                             } else if (lang.equals(Utils.MM_LANG)) {
                                                 SKToastMessage.showMessage(getActivity(), error.getErrorMm(), SKToastMessage.ERROR);
                                             }
+                                            Intent i = new Intent(getActivity(), RegisterMainActivity.class);//DrawerMainActivity
+                                            startActivity(i);
+                                            getActivity().finish();
+
                                         }catch (Exception e){
 
                                         }

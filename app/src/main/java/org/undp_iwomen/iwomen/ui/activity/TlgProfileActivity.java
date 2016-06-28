@@ -710,6 +710,33 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
                     String[] perms = {call_phone_READ_PERMISSION};
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                         requestPermissions(perms, CALL_REQUEST);
+                    } else {
+                        Log.e("<<<tlgLeaderPhno if else >>>", "===>" + tlgLeaderPhno);
+
+                        if (tlgLeaderPhno != null) {
+
+                            Intent callIntent = new Intent(Intent.ACTION_CALL);
+                            String ph = tlgLeaderPhno;
+                            callIntent.setData(Uri.parse("tel:" + Uri.encode(ph)));
+
+                            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                                Log.e("<<<tlgLeaderPhno if Consider calling >>>", "===>" + tlgLeaderPhno);
+
+                                // TODO: Consider calling
+                                //    ActivityCompat#requestPermissions
+                                // here to request the missing permissions, and then overriding
+                                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                //                                          int[] grantResults)
+                                // to handle the case where the user grants the permission. See the documentation
+                                // for ActivityCompat#requestPermissions for more details.
+                                startActivity(callIntent);
+
+                                //return;
+                            }
+                            startActivity(callIntent);
+                            //return;
+
+                        }
                     }
 
 
@@ -717,7 +744,13 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
                     // Check if we were successful in obtaining the map.
                     Log.e("<<<tlgLeaderPhno else >>>", "===>" + tlgLeaderPhno);
                     if (tlgLeaderPhno != null) {
-                        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+
+                        Intent callIntent = new Intent(Intent.ACTION_CALL);
+                        String ph = tlgLeaderPhno;
+                        callIntent.setData(Uri.parse("tel:" + Uri.encode(ph)));
+                        startActivity(callIntent);
+                        return;
+                        /*if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                             // TODO: Consider calling
                             //    ActivityCompat#requestPermissions
                             // here to request the missing permissions, and then overriding
@@ -731,7 +764,7 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
                             startActivity(callIntent);
                             return;
                         }
-
+                        */
                     }
                 }
 
