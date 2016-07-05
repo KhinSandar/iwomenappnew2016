@@ -280,6 +280,7 @@
 
     <string name="register_pro_greet1">သင္ျမန္မာႏုိင္ငံကလား</string>
     <string name="register_pro_greet2">သင္ကTLG/SRGအဖြဲ႕ဝင္ျဖစ္ပါသလား</string>
+    <string name="register_pro_greet3">သင္ အမ်ိဳးသမီး စြမ္းအားျမွင့္ အဖဲြ႕၀င္ ဟုတ္ပါသလား။</string>
 
     <string name="register_pro_yes">ဟုတ္ပါတယ္</string>
     <string name="register_pro_no">မဟုတ္ပါ</string>

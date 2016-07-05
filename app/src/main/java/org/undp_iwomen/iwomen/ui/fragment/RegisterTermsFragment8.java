@@ -147,6 +147,8 @@ public class RegisterTermsFragment8 extends Fragment implements View.OnClickList
 
             String user_gender =mSharedPreferencesUserInfo.getString(CommonConfig.USER_GENDER, null);
 
+            String isWorth = mSharedPreferencesUserInfo.getString(CommonConfig.USER_ISWORTH, null);
+
             //String user_role = "User";
             //TODO remark group_id
 
@@ -157,7 +159,7 @@ public class RegisterTermsFragment8 extends Fragment implements View.OnClickList
                 isTlgExit = 0;
             }
             //Log.e("<<Register>","==>"+user_name+"/"+ pwd+"/"+  phone+"/"+  user_photo+"/"+  isTlgExit+"/"+  address_tlg_township_name+"/"+  tlg_sate+"/"+ tlg_country );
-            NetworkEngine.getInstance().postCreateUser(user_name, pwd, phone, user_photo, isTlgExit,user_gender, address_tlg_township_name, tlg_sate, tlg_country, new Callback<User>() {
+            NetworkEngine.getInstance().postCreateUser(user_name, pwd, phone, user_photo, isTlgExit,isWorth,user_gender, address_tlg_township_name, tlg_sate, tlg_country, new Callback<User>() {
                         @Override
                         public void success(User user, Response response) {
                             mEditorUserInfo = mSharedPreferencesUserInfo.edit();

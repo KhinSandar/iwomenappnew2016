@@ -33,7 +33,7 @@ public class RegisterProfileFragment3 extends Fragment implements  View.OnClickL
     private SharedPreferences.Editor mEditorUserInfo;
     private Button btn_next;
     private RadioGroup radioGroupMM, radioGroupTlg;
-    private CustomRadioButton rd_mm_yes, rd_mm_no, rd_tlg_yes, rd_tlg_no;
+    private CustomRadioButton rd_mm_yes, rd_mm_no, rd_tlg_yes, rd_tlg_no , rd_worth_yes, rd_worth_no;
 
     public static RegisterProfileFragment3 newInstance(Sample sample) {
 
@@ -82,6 +82,8 @@ public class RegisterProfileFragment3 extends Fragment implements  View.OnClickL
         rd_mm_no = (CustomRadioButton) view.findViewById(R.id.register_pro_country_no);
         rd_tlg_yes = (CustomRadioButton) view.findViewById(R.id.register_pro_tlg_yes);
         rd_tlg_no = (CustomRadioButton) view.findViewById(R.id.register_pro_tlg_no);
+        rd_worth_yes = (CustomRadioButton)view.findViewById(R.id.register_pro_worth_yes) ;
+        rd_worth_no = (CustomRadioButton)view.findViewById(R.id.register_pro_worth_no) ;
 
         setEnglishFont();
 
@@ -139,6 +141,17 @@ public class RegisterProfileFragment3 extends Fragment implements  View.OnClickL
         registerTlgFragment4.setAllowReturnTransitionOverlap(overlap);
         registerTlgFragment4.setSharedElementEnterTransition(changeBoundsTransition);
 
+
+        mEditorUserInfo = mSharedPreferencesUserInfo.edit();
+
+        if(rd_worth_yes.isChecked()){
+            mEditorUserInfo.putString(CommonConfig.USER_ISWORTH, "true");
+
+        }else{
+            mEditorUserInfo.putString(CommonConfig.USER_ISWORTH, "false");
+
+        }
+        mEditorUserInfo.commit();
 
         if(rd_mm_yes.isChecked()){
 

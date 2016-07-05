@@ -138,6 +138,59 @@
 
 
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="50dp"
+                android:orientation="vertical">
+
+
+                <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                    android:id="@+id/register_pro_greet3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="8dp"
+                    android:gravity="left"
+                    android:text="@string/register_pro_greet3"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <RadioGroup
+                    android:id="@+id/register_pro_worth_rdioGroup"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:orientation="horizontal">
+
+                    <org.undp_iwomen.iwomen.ui.widget.CustomRadioButton
+                        android:id="@+id/register_pro_worth_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/register_pro_yes" />
+
+                    <org.undp_iwomen.iwomen.ui.widget.CustomRadioButton
+                        android:id="@+id/register_pro_worth_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50dp"
+                        android:checked="true"
+                        android:text="@string/register_pro_no" />
+
+
+                </RadioGroup>
+            </LinearLayout>
+
+
+
+            <LinearLayout
                 android:id="@+id/register_pwd_ly"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

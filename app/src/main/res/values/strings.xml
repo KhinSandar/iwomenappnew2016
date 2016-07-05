@@ -350,6 +350,7 @@
 
     <string name="register_pro_greet1">Are you From Myanmar ?</string>
     <string name="register_pro_greet2">Are you a TLG/SRG member ?</string>
+    <string name="register_pro_greet3">Are you a WORTH group member?</string>
 
     <string name="register_pro_yes">Yes</string>
     <string name="register_pro_no">No</string>
