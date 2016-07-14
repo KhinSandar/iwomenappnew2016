@@ -27,6 +27,7 @@ import android.widget.TextView;
 import com.facebook.FacebookSdk;
 import com.google.gson.Gson;
 import com.makeramen.RoundedImageView;
+import com.smk.skalertmessage.SKToastMessage;
 import com.squareup.picasso.Picasso;
 
 import org.smk.application.StoreUtil;
@@ -183,6 +184,17 @@ public class DrawerMainActivity extends BaseActionBarActivity {
         // enable ActionBar app icon to behave as action to toggle nav drawer
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+
+        img_play_game.setImageResource(R.drawable.sticker2);
+        btn_play_game.setText(getResources().getString(R.string.competition_not_game));
+        btn_play_game.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                SKToastMessage.showMessage(DrawerMainActivity.this, getResources().getString(R.string.str_game_not_started), SKToastMessage.INFO);
+            }
+        });
 
 
         // set up the drawer's list view with items and click listener
@@ -813,7 +825,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                             case 403:
                                 break;
                             case 400:
-                                layout_play_game.setVisibility(View.GONE);
+                                //layout_play_game.setVisibility(View.GONE);
                                 break;
                             default:
                                 if (arg0.getCause() != null)
@@ -829,7 +841,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                     // TODO Auto-generated method stub
                     layout_play_game.setVisibility(View.VISIBLE);
                     Log.i("Competition : ", "Size = " + arg0.getCorrectAnswer().size());
-                    if (arg0.getCorrectAnswer().size() == 0) {
+                    if (arg0 != null && arg0.getCorrectAnswer().size() == 0) {
                         img_play_game.setImageResource(R.drawable.sticker2);
                         btn_play_game.setText(getResources().getString(R.string.competition_play_game));
                         btn_play_game.setOnClickListener(new View.OnClickListener() {
@@ -841,7 +853,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                             }
                         });
 
-                    } else {
+                    } else if(arg0 != null && arg0.getCorrectAnswer().size() > 0) {
                         Log.i("Competition : ", "Who is discover");
                         img_play_game.setImageResource(R.drawable.sticker1);
                         btn_play_game.setText(getResources().getString(R.string.competition_discover_winner));
@@ -853,6 +865,18 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                                 startActivity(new Intent(getApplicationContext(), CompetitionWinnerGroupActivity.class).putExtra("competition_question", new Gson().toJson(arg0)));
                             }
                         });
+                    }else{
+                        img_play_game.setImageResource(R.drawable.sticker2);
+                        btn_play_game.setText(getResources().getString(R.string.competition_play_game));
+                        btn_play_game.setOnClickListener(new View.OnClickListener() {
+
+                            @Override
+                            public void onClick(View v) {
+                                // TODO Auto-generated method stub
+                                SKToastMessage.showMessage(DrawerMainActivity.this, getResources().getString(R.string.str_game_not_started), SKToastMessage.INFO);
+                            }
+                        });
+
 
                     }
                     getUserPointsCount();
