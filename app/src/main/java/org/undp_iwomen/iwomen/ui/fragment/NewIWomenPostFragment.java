@@ -209,6 +209,7 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.new_post_upload_btn:
+                Log.e("iWOmen Post Btn Click","===>");
 
                 if (SKConnectionDetector.getInstance(getActivity()).isConnectingToInternet()) {
                     checkProcessWhattoDo();
@@ -327,6 +328,7 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
 
     private void checkProcessWhattoDo() {
 
+        Log.e("iWOmen Post Btn Click","===>"+ crop_file_path);
 
 
         if (crop_file_path != null) {
@@ -348,6 +350,8 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
     }
 
     private void takePicture() {
+        Log.e("iWOmen Post Btn Click","===> take Picture "+ crop_file_path);
+
         chooserType = ChooserType.REQUEST_CAPTURE_PICTURE;
         imageChooserManager = new ImageChooserManager(this,
                 ChooserType.REQUEST_CAPTURE_PICTURE, "myfolder", true);
@@ -364,6 +368,8 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
     }
 
     private void chooseImage() {
+        Log.e("iWOmen Post Btn Click","===> Choose  Image"+ crop_file_path);
+
         chooserType = ChooserType.REQUEST_PICK_PICTURE;
         imageChooserManager = new ImageChooserManager(this,
                 ChooserType.REQUEST_PICK_PICTURE, "myfolder", true);
@@ -437,7 +443,9 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
             SKToastMessage.getInstance(getActivity()).showMessage(getActivity(),getResources().getString(R.string.audio_post_error), SKToastMessage.ERROR);
 
             progress_wheel.setVisibility(View.GONE);
+
         }
+
     };
 
 
@@ -825,6 +833,8 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
     }
 
     public void uploadImage() {
+        Log.e("iWOmen Post Btn Click","===> upload Image"+ crop_file_path);
+
         File photo = new File(crop_file_path);
         MultipartTypedOutput multipartTypedOutput = new MultipartTypedOutput();
         multipartTypedOutput.addPart("image", new TypedFile("image/png", photo));

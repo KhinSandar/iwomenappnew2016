@@ -38,6 +38,7 @@ import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.data.Sample;
 import org.undp_iwomen.iwomen.model.MyTypeFace;
 import org.undp_iwomen.iwomen.ui.activity.RegisterMainActivity;
+import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.utils.Utils;
 
 import java.security.MessageDigest;
@@ -57,6 +58,7 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
     private Button btn_next;
     private TextInputLayout mUserNameTextInputLayout;
     private TextInputLayout mMobileNoForNrcTextInputLayout;
+    private CustomTextView txtErrorDuplicateNameMsg;
 
     private EditText usernameField;
     private EditText mobileNoForNrcField;
@@ -66,6 +68,10 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
     private String user_fb_id, user_fb_email;
     private SharedPreferences mSharedPreferencesUserInfo;
     private SharedPreferences.Editor mEditorUserInfo;
+
+    private Boolean isError;
+
+
 
 
     public static RegisterLoginFragment1 newInstance(Sample sample) {
@@ -80,11 +86,15 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
 
     public static RegisterLoginFragment1 newInstance() {
 
-        Bundle args = new Bundle();
+        //Bundle args = new Bundle();
 
         //args.putSerializable(EXTRA_SAMPLE, sample);
+
+
         RegisterLoginFragment1 fragment = new RegisterLoginFragment1();
         //fragment.setArguments(args);
+
+
         return fragment;
     }
 
@@ -93,6 +103,11 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
 
+        /*if (!getArguments().containsKey(CommonConfig.DUPLICATE_ERROR))
+            throw new RuntimeException("Fragment must contain a \"" + "DuplicateErr" + "\" argument!");
+        isError = true;*/
+        //mPoint = getArguments().getInt(POINT);
+
     }
 
     @Override
@@ -100,6 +115,13 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
         View view = inflater.inflate(R.layout.activity_register_fblogin, container, false);
         //final Sample sample = (Sample) getArguments().getSerializable(EXTRA_SAMPLE);
         printHashKey();
+
+        Bundle bundleArgs = getArguments();
+        if (bundleArgs != null) {
+            isError = true;
+        }else{
+            isError = false;
+        }
         mContext = getActivity().getApplicationContext();
         sharePrefLanguageUtil = getActivity().getSharedPreferences(org.undp_iwomen.iwomen.utils.Utils.PREF_SETTING, Context.MODE_PRIVATE);
         lang = sharePrefLanguageUtil.getString(org.undp_iwomen.iwomen.utils.Utils.PREF_SETTING_LANG, org.undp_iwomen.iwomen.utils.Utils.ENG_LANG);
@@ -113,6 +135,15 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
         mMobileNoForNrcTextInputLayout = (TextInputLayout) view.findViewById(R.id.register_fb_phone_number);
         usernameField = (EditText) view.findViewById(R.id.register_fb_username_input);
         mobileNoForNrcField = (EditText) view.findViewById(R.id.register_fb_phone_number_input);
+        txtErrorDuplicateNameMsg = (CustomTextView)view.findViewById(R.id.register_fb_error_duplicate_msg);
+
+
+        if(isError){
+            txtErrorDuplicateNameMsg.setVisibility(View.VISIBLE);
+        }else{
+            txtErrorDuplicateNameMsg.setVisibility(View.GONE);
+        }
+
         try{
             loginButton = (LoginButton) view.findViewById(R.id.login_button);
             loginButton.setReadPermissions("public_profile", "email", "user_friends");

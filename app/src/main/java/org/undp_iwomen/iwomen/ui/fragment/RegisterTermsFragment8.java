@@ -1,7 +1,6 @@
 package org.undp_iwomen.iwomen.ui.fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -233,9 +232,46 @@ public class RegisterTermsFragment8 extends Fragment implements View.OnClickList
                                             } else if (lang.equals(Utils.MM_LANG)) {
                                                 SKToastMessage.showMessage(getActivity(), error.getErrorMm(), SKToastMessage.ERROR);
                                             }
-                                            Intent i = new Intent(getActivity(), RegisterMainActivity.class);//DrawerMainActivity
+
+                                            Slide slideTransition = null;
+                                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                                slideTransition = new Slide(Gravity.LEFT);
+                                                slideTransition.setDuration(getResources().getInteger(R.integer.anim_duration_long));
+
+                                            }
+                                            ChangeBounds changeBoundsTransition = null;
+                                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
+                                                changeBoundsTransition = new ChangeBounds();
+                                                changeBoundsTransition.setDuration(getResources().getInteger(R.integer.anim_duration_medium));
+
+                                            }
+                                            // Create fragment and define some of it transitions
+                                            RegisterLoginFragment1 loginFragment1 = new RegisterLoginFragment1();
+                                            loginFragment1.setReenterTransition(slideTransition);
+                                            loginFragment1.setExitTransition(slideTransition);
+                                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                                                loginFragment1.setSharedElementEnterTransition(new ChangeBounds());
+                                            }
+
+                                            loginFragment1.setEnterTransition(slideTransition);
+                                            loginFragment1.setAllowEnterTransitionOverlap(overlap);
+                                            loginFragment1.setAllowReturnTransitionOverlap(overlap);
+                                            loginFragment1.setSharedElementEnterTransition(changeBoundsTransition);
+
+                                            Bundle b = new Bundle();
+                                            b.putString(CommonConfig.DUPLICATE_ERROR,"Duplicat Error");
+                                            //b.putString(CommonConfig.TICKET_PAYMENT_STATUS, strPaymentStatus);
+                                            loginFragment1.setArguments(b);
+
+                                            getFragmentManager().beginTransaction()
+                                                    .replace(R.id.container, loginFragment1)
+                                                    .addToBackStack(null)
+                                                    .addSharedElement(squareBlue, getString(R.string.register_next))
+                                                    .commit();
+
+                                            /*Intent i = new Intent(getActivity(), RegisterMainActivity.class);//DrawerMainActivity
                                             startActivity(i);
-                                            getActivity().finish();
+                                            getActivity().finish();*/
 
                                         }catch (Exception e){
 

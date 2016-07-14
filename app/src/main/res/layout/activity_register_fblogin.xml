@@ -78,6 +78,17 @@
 
 
             </FrameLayout>
+            <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                android:id="@+id/register_fb_error_duplicate_msg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:gravity="center"
+                android:visibility="invisible"
+                android:text="@string/register_name_duplicate_err"
+                android:textSize="18sp"
+                android:textColor="@color/red_500"
+                android:textStyle="bold" />
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/register_fb_user_name"

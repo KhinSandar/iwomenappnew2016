@@ -212,6 +212,11 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
             case R.id.new_post_upload_btn:
 
                 if (SKConnectionDetector.getInstance(getActivity()).isConnectingToInternet()) {
+
+                    zPDialog = new ZProgressHUD(getActivity());
+                    zPDialog.setCancelable(false);
+                    zPDialog.show();
+
                     checkProcessWhattoDo();
                 } else {
                     SKToastMessage.getInstance(getActivity()).showMessage(getActivity(), "No Internet!", SKToastMessage.ERROR);
@@ -338,8 +343,13 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
         } else {
 
             if(et_postDesc.getText().toString().isEmpty() && crop_file_path == null && mAudioFilePath == null){//this mean user doesn't choose nothing
+                //progress_wheel.setVisibility(View.GONE);
+                if(zPDialog != null && zPDialog.isShowing()){
+                    zPDialog.dismissWithSuccess();
+                }
                 SKToastMessage.showMessage(getActivity(), getResources().getString(R.string.audio_record_warning_post_something), SKToastMessage.WARNING);
             }else {
+
 
                 //we will post all data to server, if it's here, we assume all data is ready
                 performPostUpload();
@@ -386,9 +396,9 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
     void performPostUpload() {
 
         progress_wheel.setVisibility(View.VISIBLE);
-        zPDialog = new ZProgressHUD(getActivity());
+        /*zPDialog = new ZProgressHUD(getActivity());
         zPDialog.setCancelable(false);
-        zPDialog.show();
+        zPDialog.show();*/
 
 
         String content = null, content_type = null, content_mm = null, postUploadName = null;
@@ -454,8 +464,12 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
 
         @Override
         public void failure(RetrofitError error) {
+            Log.e("New Post Post","===>p"+error.getMessage());
             SKToastMessage.getInstance(getActivity()).showMessage(getActivity(),getResources().getString(R.string.audio_post_error), SKToastMessage.ERROR);
             progress_wheel.setVisibility(View.GONE);
+            if(zPDialog != null && zPDialog.isShowing()){
+                zPDialog.dismissWithSuccess();
+            }
         }
     };
 
@@ -844,6 +858,7 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
     }
 
     public void uploadImage() {
+        //progress_wheel.setVisibility(View.VISIBLE);
         File photo = new File(crop_file_path);
         MultipartTypedOutput multipartTypedOutput = new MultipartTypedOutput();
         multipartTypedOutput.addPart("image", new TypedFile("image/png", photo));
