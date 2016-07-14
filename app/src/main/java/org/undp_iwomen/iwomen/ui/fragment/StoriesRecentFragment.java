@@ -443,11 +443,17 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
 
             @Override
             public void success(Rating arg0, Response response) {
-                if (menu != null && arg0.getTotalRatings() > 0) {
-                    menu.findItem(R.id.action_rating).setVisible(true);
-                    menu.findItem(R.id.action_rating).setIcon(BaseActionBarActivity.getRatingIcon(arg0.getTotalRatings()));
-                    avgRatings = arg0;
+
+                try{
+                    if (menu != null && arg0.getTotalRatings() > 0) {
+                        menu.findItem(R.id.action_rating).setVisible(true);
+                        menu.findItem(R.id.action_rating).setIcon(BaseActionBarActivity.getRatingIcon(arg0.getTotalRatings()));
+                        avgRatings = arg0;
+                    }
+                }catch (NullPointerException ex){
+                    ex.printStackTrace();
                 }
+
             }
 
             @Override
