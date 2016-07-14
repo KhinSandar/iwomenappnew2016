@@ -154,7 +154,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/ly_blank"
+            android:orientation="vertical"
             android:layout_marginTop="100dp">
+            <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                android:id="@+id/win_prize_share_suggest_link"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/list_selector"
+                android:gravity="left"
+                android:layout_marginLeft="16dp"
+                android:text="@string/win_prize_share_code_suggestion"
+                android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                android:textColor="@drawable/list_text_selector"
+                android:textSize="18sp" />
 
             <org.undp_iwomen.iwomen.ui.widget.CustomButton
                 android:id="@+id/win_prize_thz_share_btn"

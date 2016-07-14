@@ -161,7 +161,7 @@ public class WinPrizesFragment extends Fragment {
                 @Override
                 public void success(String s, Response response) {
                     zPDialog.dismissWithSuccess();
-                    Log.e("<<<WinPrize Success>>>","===>" + s);
+                    //Log.e("<<<WinPrize Success>>>","===>" + s);
 
                     if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
                         org.undp_iwomen.iwomen.utils.Utils.doToastEng(mContext, getResources().getString(R.string.code_share_sucess));
@@ -192,22 +192,61 @@ public class WinPrizesFragment extends Fragment {
                     Log.e("<<<WinPrize Err>>>","===>" + error.toString());
                     zPDialog.dismissWithSuccess();
 
-                    if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
-                        org.undp_iwomen.iwomen.utils.Utils.doToastEng(mContext, getResources().getString(R.string.code_share_error));
-                    } else {
+                    // TODO Auto-generated method stub
+                    if (error.getResponse() != null) {
+                        switch (error.getResponse().getStatus()) {
+                            case 403:
+                                //"The share object id has already been taken."
+                                if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+                                    org.undp_iwomen.iwomen.utils.Utils.doToastEng(mContext, getResources().getString(R.string.code_share_error));
+                                } else {
 
-                        org.undp_iwomen.iwomen.utils.Utils.doToastMM(mContext, getResources().getString(R.string.code_share_error));
+                                    org.undp_iwomen.iwomen.utils.Utils.doToastMM(mContext, getResources().getString(R.string.code_share_error));
+                                }
+                                mEditorUserInfo = mSharedPreferencesUserInfo.edit();
+                                mEditorUserInfo.putString(CommonConfig.USER_SHARE_STATUS, "1");
+                                mEditorUserInfo.commit();
+                                zPDialog.dismissWithSuccess();
+
+                                Intent i = new Intent(mContext, WinPrizeActivity.class);
+                                //i.putExtra("point", "10");
+                                i.putExtra("page","1" );
+                                startActivity(i);
+                                break;
+                            case 400:
+                                //"The selected share object id is invalid."
+                                mCodeTextInputLayout.setError(getResources().getString(R.string.win_prize_enter_wrong_code));
+
+                                if (lang.equals(Utils.ENG_LANG)) {
+                                    Utils.doToastEng(mContext, getResources().getString(R.string.win_prize_enter_wrong_code));
+                                } else if (lang.equals(Utils.MM_LANG)) {
+                                    Utils.doToastMM(mContext, getResources().getString(R.string.win_prize_enter_wrong_code));
+                                }
+                                zPDialog.dismissWithSuccess();
+
+
+                                break;
+                            default:
+                                if (error.getCause() != null)
+                                    Log.e("Win Prize: ", "Error:" + error.getCause().toString());
+
+                                /*mCodeTextInputLayout.setError(getResources().getString(R.string.win_prize_enter_code));
+
+                                if (lang.equals(Utils.ENG_LANG)) {
+                                    Utils.doToastEng(mContext, getResources().getString(R.string.win_prize_enter_code));
+                                } else if (lang.equals(Utils.MM_LANG)) {
+                                    Utils.doToastMM(mContext, getResources().getString(R.string.win_prize_enter_code));
+                                }
+                                zPDialog.dismissWithSuccess();*/
+
+
+                                break;
+                        }
                     }
 
-                    mEditorUserInfo = mSharedPreferencesUserInfo.edit();
-                    mEditorUserInfo.putString(CommonConfig.USER_SHARE_STATUS, "1");
-                    mEditorUserInfo.commit();
-                    zPDialog.dismissWithSuccess();
 
-                    Intent i = new Intent(mContext, WinPrizeActivity.class);
-                    //i.putExtra("point", "10");
-                    i.putExtra("page","1" );
-                    startActivity(i);
+
+
                 }
             });
 

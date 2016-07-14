@@ -122,8 +122,6 @@ public class GoogleMapFragment extends Fragment {//
         txtName = (CustomTextView) rootView.findViewById(R.id.map_mdk_name);
         txtAuthorTitle = (CustomTextView) rootView.findViewById(R.id.map_mdy_network);
         txtBody = (CustomTextView) rootView.findViewById(R.id.map_about_mdk);
-
-
         profileImg = (RoundedImageView) rootView.findViewById(R.id.map_profilePic_rounded);
         //profileProgressbar = (ProgressBar) rootView.findViewById(R.id.map_progressBar_profile_item);
         tlgArraylist = new ArrayList<TLGTownship>();
@@ -139,9 +137,8 @@ public class GoogleMapFragment extends Fragment {//
             fragmentManager.beginTransaction().replace(R.id.content_map_frame, beTogetherFragment).commit();
 
         } else {
-            Log.e("tlgArrSize", "" + tlgArraylist.size());
+            //Log.e("tlgArrSize 1", "" + tlgArraylist.size());
             setUpMapIfNeeded();
-
 
             mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
                 @Override
@@ -223,31 +220,29 @@ public class GoogleMapFragment extends Fragment {//
             // Do a null check to confirm that we have not already instantiated the map.
             if (mMap == null) {
                 // Try to obtain the map from the SupportMapFragment.
-                mMap = ((SupportMapFragment) getChildFragmentManager()
-                        .findFragmentById(R.id.tlg_map_detail)).getMap();
-
-                //check whether there is permission for READ_STORAGE_PERMISSION
-                /*else if (!hasPermission(READ_CONTACTS_PERMISSION)) {
-
-                    //if no permission, request permission
-                    String[] perms = {READ_CONTACTS_PERMISSION};
-
-
-
-                    requestPermissions(perms, CONTACTS_REQUEST);
-                    Log.e("<<<else if>>>", "===>");
-
-                }*/
                 if (!hasPermission(Location_READ_PERMISSION)) {
+                    mMap = ((SupportMapFragment) getChildFragmentManager()
+                            .findFragmentById(R.id.tlg_map_detail)).getMap();
 
-                    //if no permission, request permission
+
                     String[] perms = {Location_READ_PERMISSION};
-                    requestPermissions(perms, LOCATION_REQUEST);
-                    Log.e("<<<if>>>", "===>");
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        requestPermissions(perms, LOCATION_REQUEST);
+
+                    } else {
+                        mMap.setMyLocationEnabled(true);
+                        mMap.getUiSettings().setZoomControlsEnabled(true);
+
+                        if (mMap != null) {
+                            setUpMap();
+
+                        }
+                    }
 
                 } else {
-                    // Check if we were successful in obtaining the map.
-                    Log.e("<<<else>>>", "===>");
+                    mMap = ((SupportMapFragment) getChildFragmentManager()
+                            .findFragmentById(R.id.tlg_map_detail)).getMap();
+
                     mMap.setMyLocationEnabled(true);
                     mMap.getUiSettings().setZoomControlsEnabled(true);
                     if (mMap != null) {
@@ -257,6 +252,16 @@ public class GoogleMapFragment extends Fragment {//
                 }
 
 
+            } else {
+                mMap = ((SupportMapFragment) getChildFragmentManager()
+                        .findFragmentById(R.id.tlg_map_detail)).getMap();
+
+                mMap.setMyLocationEnabled(true);
+                mMap.getUiSettings().setZoomControlsEnabled(true);
+                if (mMap != null) {
+                    setUpMap();
+
+                }
             }
         }
     }
@@ -277,6 +282,7 @@ public class GoogleMapFragment extends Fragment {//
                 public void success(List<TLGTownship> tlgTownships, Response response) {
                     tlgArraylist.clear();
                     tlgArraylist.addAll(tlgTownships);
+                    //Log.e("tlgArrSize in api SetUpMap ", "" + tlgArraylist.size());
 
                     /*TLGTownshipSpinnerAdapter adapter = new TLGTownshipSpinnerAdapter((AppCompatActivity) getActivity(), tlgTownshipArrayList);
                     spnTLG.setAdapter(adapter);tlgTownshipArrayList.get(position).getId().toString();*/

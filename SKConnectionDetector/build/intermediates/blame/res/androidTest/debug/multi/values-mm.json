@@ -11,6 +11,7 @@
                     "endOffset": 124
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\SKConnectionDetector\\build\\intermediates\\bundles\\debug\\res\\values-mm\\values-mm.xml",
                     "position": {
                         "startLine": 2,
@@ -19,6 +20,9 @@
                         "endColumn": 73,
                         "endOffset": 124
                     }
+=======
+                    "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKConnectionDetector/build/intermediates/bundles/debug/res/values-mm/values-mm.xml"
+>>>>>>> 5a37cd4763c1023954b7cf38a2bf7d187df00580
                 }
             },
             {
@@ -26,8 +30,8 @@
                     "startLine": 3,
                     "startColumn": 4,
                     "startOffset": 129,
-                    "endColumn": 81,
-                    "endOffset": 206
+                    "endColumn": 122,
+                    "endOffset": 247
                 },
                 "from": {
                     "file": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\SKConnectionDetector\\build\\intermediates\\bundles\\debug\\res\\values-mm\\values-mm.xml",
@@ -35,8 +39,8 @@
                         "startLine": 3,
                         "startColumn": 4,
                         "startOffset": 129,
-                        "endColumn": 81,
-                        "endOffset": 206
+                        "endColumn": 122,
+                        "endOffset": 247
                     }
                 }
             },
@@ -44,11 +48,12 @@
                 "to": {
                     "startLine": 4,
                     "startColumn": 4,
-                    "startOffset": 211,
+                    "startOffset": 252,
                     "endColumn": 103,
-                    "endOffset": 310
+                    "endOffset": 351
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\SKConnectionDetector\\build\\intermediates\\bundles\\debug\\res\\values-mm\\values-mm.xml",
                     "position": {
                         "startLine": 4,
@@ -119,6 +124,9 @@
                         "endColumn": 103,
                         "endOffset": 310
                     }
+=======
+                    "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKConnectionDetector/build/intermediates/bundles/debug/res/values-mm/values-mm.xml"
+>>>>>>> 5a37cd4763c1023954b7cf38a2bf7d187df00580
                 }
             }
         ]

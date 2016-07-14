@@ -14,22 +14,31 @@
         android:layout_height="match_parent"
         android:background="@color/white">
 
-        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/win_prize_ly_img"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:orientation="horizontal"
             android:background="#fff">
 
             <org.undp_iwomen.iwomen.ui.widget.ResizableImageView
                 android:id="@+id/win_prize_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_gravity="left|center"
                 android:background="@drawable/win_prize_own"
                 android:scaleType="fitCenter" />
+            <org.undp_iwomen.iwomen.ui.widget.ResizableImageView
+                android:id="@+id/win_prize_menu_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center"
+                android:background="@drawable/win_prize_menu_img"
+                android:scaleType="fitCenter" />
 
-        </FrameLayout>
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/ly_blank"

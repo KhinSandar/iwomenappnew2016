@@ -27,10 +27,11 @@
     <string name="title_activity_about_us_mm">ကြ်ႏုုပ္တိုု ့အေၾကာင္း</string>
     <string name="title_activity_post_news">News</string>
 
-    <string name="open_internet_warning_eng">Internet Connection needed.</string>
+    <string name="open_internet_warning_eng">You can read offline.</string>
 
-    <string name="open_internet_warning">Internet Connection needed.</string>
-    <string name="open_internet_warning_mm">အင္တာနက္ ခ်ိတ္ဆက္မွုုဖြင္ ့ရန္လိုုအပ္ပါသည္။</string>
+    <string name="open_internet_warning">You can read offline.</string>
+    <string name="open_internet_warning_mm">အင္တာနက္ မသံုးဘဲ ပထမအၾကိမ္ဖြင့္ ထားသည္မ်ားကိုုဖတ္ရွုု ၍ ရႏိုင္ပါသည္။
+</string>
 
     <string name="loading_mm">ခဏေစာင့္ပါ ….</string>
     <string name="loading_eng">Loading...</string>
@@ -349,6 +350,7 @@
 
     <string name="register_pro_greet1">Are you From Myanmar ?</string>
     <string name="register_pro_greet2">Are you a TLG/SRG member ?</string>
+    <string name="register_pro_greet3">Are you a WORTH group member?</string>
 
     <string name="register_pro_yes">Yes</string>
     <string name="register_pro_no">No</string>
@@ -816,6 +818,12 @@ Shirin Ebadi, J.D., was awarded the 2003 Nobel Peace Prize for her efforts to pr
     <string name="version_new_yes">New Version Out</string>
     <string name="version_new_no">New Version Not available</string>
 
+    <string name="register_name_duplicate_err">The username is already exit.</string>
+
+
+    <string name="win_prize_enter_wrong_code">Your code is incorrect!</string>
+
+    <string name="win_prize_share_code_suggestion">To get your points click here to send your code to your friends.</string>
 
     <!--<string name="login_dialog_mm_zawgyi">ၿမန္မာေဇာ္ဂ်ီေဖာင့္</string>
     <string name="login_dialog_mm_uni">ၿမန္မာ ယူနီကုုတ္ေဖာင့္</string>

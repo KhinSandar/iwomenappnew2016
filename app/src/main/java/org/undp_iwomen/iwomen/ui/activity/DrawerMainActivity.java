@@ -37,8 +37,10 @@ import org.smk.iwomen.CompetitionNewGameActivity;
 import org.smk.iwomen.CompetitionWinnerGroupActivity;
 import org.smk.model.CompetitionQuestion;
 import org.smk.model.Review;
+import org.smk.model.User;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
+import org.undp_iwomen.iwomen.model.retrofit_api.SMKserverAPI;
 import org.undp_iwomen.iwomen.model.retrofit_api.SMKserverStringConverterAPI;
 import org.undp_iwomen.iwomen.ui.adapter.DrawerListViewAdapter;
 import org.undp_iwomen.iwomen.ui.fragment.BeTogetherFragment;
@@ -47,7 +49,6 @@ import org.undp_iwomen.iwomen.ui.fragment.MainMaterialTab;
 import org.undp_iwomen.iwomen.ui.fragment.ResourcesFragment;
 import org.undp_iwomen.iwomen.ui.fragment.SettingsFragment;
 import org.undp_iwomen.iwomen.ui.fragment.SisterAppFragment;
-import org.undp_iwomen.iwomen.ui.fragment.TLGUserStoriesRecentFragment;
 import org.undp_iwomen.iwomen.ui.fragment.TalkTogetherCategoryFragment;
 import org.undp_iwomen.iwomen.ui.fragment.WinPrizesFragment;
 import org.undp_iwomen.iwomen.ui.widget.AnimateCustomTextView;
@@ -373,7 +374,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
     }
 
     //TODO Comment Count API
-    private void getUserPointsCount() {
+    /*private void getUserPointsCount() {
         if (Connection.isOnline(getApplicationContext())) {
 
         } else {
@@ -385,7 +386,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                 org.undp_iwomen.iwomen.utils.Utils.doToastMM(getApplicationContext(), getResources().getString(R.string.open_internet_warning_mm));
             }
         }
-    }
+    }*/
 
 
     public void setThemeToApp() {
@@ -596,7 +597,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
 
         SisterAppFragment sisterAppFragment = new SisterAppFragment();
 
-        TLGUserStoriesRecentFragment tlgUserStoriesRecentFragment = new TLGUserStoriesRecentFragment();
+        //TLGUserStoriesRecentFragment tlgUserStoriesRecentFragment = new TLGUserStoriesRecentFragment();
 
         TalkTogetherCategoryFragment talkTogetherCategoryFragment = new TalkTogetherCategoryFragment();
 
@@ -820,6 +821,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                                 break;
                         }
                     }
+                    getUserPointsCount();
                 }
 
                 @Override
@@ -853,11 +855,60 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                         });
 
                     }
+                    getUserPointsCount();
                 }
             });
         } else {
 
             //SKConnectionDetector.getInstance(this).showErrorMessage();
+        }
+    }
+
+    private void getUserPointsCount() {
+        if (Connection.isOnline(this)) {
+            //Activity activity = getActivity();
+
+                SMKserverAPI.getInstance().getService().getUserPoinsByID(user_id, new Callback<User>() {
+                    @Override
+                    public void success(User user, Response response) {
+
+
+                            // etc ...
+                            if (user.getPoints() != null) {
+
+                                //Log.e("<<<<Drawer Main>>","User Point====>" + user.getPoints() + "/"+user.getShared());
+                                //txt_points.setText(user.getPoints().toString() + getResources().getString(R.string.points_prize));
+
+                                txt_menu_user_points.setText(user.getPoints().toString());
+                                user_share_status =user.getShared().toString();
+                                mEditorUserInfo = mSharedPreferencesUserInfo.edit();
+                                mEditorUserInfo.putString(CommonConfig.USER_POINTS, user.getPoints().toString());
+                                mEditorUserInfo.putString(CommonConfig.USER_SHARE_STATUS, user.getShared().toString());
+                                mEditorUserInfo.commit();
+                            } else {
+
+                            }
+
+                            //getPrizePointsCount();
+
+
+
+
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+
+                    }
+                });
+
+        } else {
+
+            /*if (lang.equals(Utils.ENG_LANG)) {
+                Utils.doToastEng(mContext, getResources().getString(R.string.open_internet_warning_eng));
+            } else {
+                Utils.doToastMM(mContext, getResources().getString(R.string.open_internet_warning_mm));
+            }*/
         }
     }
 

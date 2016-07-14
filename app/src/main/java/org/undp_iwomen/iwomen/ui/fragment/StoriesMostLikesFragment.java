@@ -27,6 +27,7 @@ import android.widget.TextView;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.google.gson.Gson;
+import com.smk.skconnectiondetector.SKConnectionDetector;
 import com.smk.sklistview.SKListView;
 import com.thuongnh.zprogresshud.ZProgressHUD;
 
@@ -150,7 +151,7 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
             // Showing local data while loading from internet
 
             if(StorageiWomenPosts != null && StorageiWomenPosts.size() > 0){
-                Log.e("<<<connection>>","==>" + StorageiWomenPosts.size());
+                //Log.e("<<<connection>>","==>" + StorageiWomenPosts.size());
                 iWomenPostList.addAll(StorageiWomenPosts);
                 stories.notifyDataSetChanged();
                 zPDialog = new ZProgressHUD(getActivity());
@@ -160,7 +161,7 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
             //Log.e("<<No --- connection>>","==>" + iWomenPosts.size());
             //SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
             if(StorageiWomenPosts != null){
-                Log.e("<<No --- connection>>","==>" + StorageiWomenPosts.size());
+                //Log.e("<<No --- connection>>","==>" + StorageiWomenPosts.size());
                 iWomenPostList.clear();
                 iWomenPostList.addAll(StorageiWomenPosts);
                 stories.notifyDataSetChanged();
@@ -1036,7 +1037,7 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
                 public void success(List<IWomenPost> iWomenPosts, Response response) {
                     // Only first REQUEST that visible
                     if(isFirstLoading){
-                        Log.e("<<<connection>>","==>isFirst Loading" + iWomenPosts.size());
+                        //Log.e("<<<connection>>","==>isFirst Loading" + iWomenPosts.size());
                         isFirstLoading = false;
                         iWomenPostList.clear();
                         if(zPDialog != null && zPDialog.isShowing())
@@ -1068,7 +1069,7 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
             });
 
         } else {
-            //SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
+            SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
             //List<IWomenPost> iWomenPosts = StoreUtil.getInstance().selectFrom("stories_most_like");
             List<IWomenPost> iWomenPosts = (ArrayList<IWomenPost>) storageUtil.ReadArrayListFromSD("stories_most_like");
             //Log.e("<<<Adapter No connection>>","==>" + iWomenPosts.size());

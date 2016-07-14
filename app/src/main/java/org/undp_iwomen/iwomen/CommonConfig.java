@@ -24,6 +24,8 @@ public class CommonConfig {
     public static final String USER_TLG_ID = "tlg_id";
     public static final String USER_TLG_NAME = "tlg_name";
 
+    public static final String USER_ISWORTH = "Isworth";
+
 
     public static final String USER_UPLOAD_IMG_NAME = "img_name";
     public static final String USER_UPLOAD_IMG_URL= "user_img_url";

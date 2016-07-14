@@ -27,8 +27,8 @@
     <string name="title_activity_about_us_mm">ကြ်ႏုုပ္တိုု ့အေၾကာင္း</string>
     <string name="title_activity_post_news">News</string>
 
-    <string name="open_internet_warning">အင္တာနက္ ခ်ိတ္ဆက္မွုုဖြင္ ့ရန္လိုုအပ္ပါသည္။</string>
-    <string name="open_internet_warning_mm">အင္တာနက္ ခ်ိတ္ဆက္မွုုဖြင္ ့ရန္လိုုအပ္ပါသည္။</string>
+    <string name="open_internet_warning">အင္တာနက္ မသံုးဘဲ ပထမအၾကိမ္ဖြင့္ ထားသည္မ်ားကိုုဖတ္ရွုု ၍ ရႏိုင္ပါသည္။</string>
+    <string name="open_internet_warning_mm">အင္တာနက္ မသံုးဘဲ ပထမအၾကိမ္ဖြင့္ ထားသည္မ်ားကိုုဖတ္ရွုု ၍ ရႏိုင္ပါသည္။</string>
 
     <string name="loading_mm">ခဏေစာင့္ပါ ….</string>
     <string name="loading_eng">Loading...</string>
@@ -280,6 +280,7 @@
 
     <string name="register_pro_greet1">သင္ျမန္မာႏုိင္ငံကလား</string>
     <string name="register_pro_greet2">သင္ကTLG/SRGအဖြဲ႕ဝင္ျဖစ္ပါသလား</string>
+    <string name="register_pro_greet3">သင္ အမ်ိဳးသမီး စြမ္းအားျမွင့္ အဖဲြ႕၀င္ ဟုတ္ပါသလား။</string>
 
     <string name="register_pro_yes">ဟုတ္ပါတယ္</string>
     <string name="register_pro_no">မဟုတ္ပါ</string>
@@ -820,7 +821,11 @@ female-pilots-iaa1s
     <string name="version_new_yes">ဗားရွင္းအသစ္ရပါပီ</string>
     <string name="version_new_no">ဗားရွင္း အသစ္မထြက္ေသးပါ</string>
 
+    <string name="register_name_duplicate_err">အမည္တူ ရွိေနပါသၿဖင့္ မိမိနာမယ္အေနာက္တြင္နံပါတ္စဥ္တပ္၍ အေကာင္ ့အသစ္ဖြင့္ႏိုုင္ပါသည္။ဥပမာ - ညိဳညိဳ၁၂၃၄</string>
 
+    <string name="win_prize_enter_wrong_code">သင္ရိုုက္ထည့္ေသာ ကုုတ္ မွားေနပါသည္။ ၿပန္စစ္ ထည့္ပါ။</string>
+
+    <string name="win_prize_share_code_suggestion">အမွတ္ရရန္ ဒီေနရာကိုု ႏွိပ္ပီး သင္ ့ကုတ္ကိုု မွ်ေ၀ႏိုင္ပါသည္။</string>
     <!--<string name="login_dialog_mm_zawgyi">ၿမန္မာေဇာ္ဂ်ီေဖာင့္</string>
     <string name="login_dialog_mm_uni">ၿမန္မာ ယူနီကုုတ္ေဖာင့္</string>
     <string name="login_dialog_eng">ENGLISH</string>
