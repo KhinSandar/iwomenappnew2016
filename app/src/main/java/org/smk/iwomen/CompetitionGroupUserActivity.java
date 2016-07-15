@@ -277,7 +277,6 @@ public class CompetitionGroupUserActivity extends BaseActionBarActivity {
 	}
 	
 	private float calculatePercentage(){
-		// Percentage = (Obtained score x 100) / Total Score
 		
 		float percentage = (competitionGroupUserList.getGroupUsers().get(0).getCurrentHasAnswer() * 100) / competitionGroupUserList.getGroupUsers().get(0).getTotalHasAnswer();
 		
