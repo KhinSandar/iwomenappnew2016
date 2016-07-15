@@ -94,7 +94,7 @@ public class WinPrizeListViewAdapter extends BaseAdapter {
             vh.txtPoint.setText(datalist.get(i).getPoint().toString()+ " Points");
         }
         if (datalist.get(i).getPrice() != null && !datalist.get(i).getPrice().isEmpty()) {
-            vh.txtPrize.setText(datalist.get(i).getPrice().toString()+ " Prize") ;
+            vh.txtPrize.setText(datalist.get(i).getPrice().toString()) ;
         }
 
 

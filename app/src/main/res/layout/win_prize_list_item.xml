@@ -25,6 +25,8 @@
         android:gravity="center_vertical|center"
         android:orientation="horizontal"
         android:paddingLeft="16dp"
+
+
         >
 
         <org.undp_iwomen.iwomen.ui.widget.CustomTextView
