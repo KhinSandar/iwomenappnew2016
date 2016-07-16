@@ -1,18 +1,10 @@
 [
     {
-        "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\calendar_next_arrow.png",
-        "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\drawable-hdpi\\calendar_next_arrow.png"
+        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/build/intermediates/res/merged/release/drawable-hdpi-v4/calendar_prev_arrow.png",
+        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/drawable-hdpi/calendar_prev_arrow.png"
     },
     {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\caldroid\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\calendar_next_arrow.png",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\caldroid\\src\\main\\res\\drawable-hdpi\\calendar_next_arrow.png"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\caldroid\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\calendar_prev_arrow.png",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\caldroid\\src\\main\\res\\drawable-hdpi\\calendar_prev_arrow.png"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\calendar_prev_arrow.png",
-        "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\caldroid\\src\\main\\res\\drawable-hdpi\\calendar_prev_arrow.png"
+        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/build/intermediates/res/merged/release/drawable-hdpi-v4/calendar_next_arrow.png",
+        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/drawable-hdpi/calendar_next_arrow.png"
     }
 ]
