@@ -2345,7 +2345,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                     }else{
                         //TODO Audio File Null case
                         // TODO Auto-generated method stub
-                        SKToastMessage.showMessage(PostDetailActivity.this, getResources().getString(R.string.audio_file_upload_err), SKToastMessage.INFO);
+                        SKToastMessage.showMessage(PostDetailActivity.this, getResources().getString(R.string.audio_not_availabe_msg), SKToastMessage.INFO);
 
 
                     }
