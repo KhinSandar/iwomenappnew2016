@@ -828,6 +828,7 @@ female-pilots-iaa1s
     <string name="win_prize_share_code_suggestion">အမွတ္ရရန္ ဒီေနရာကိုု ႏွိပ္ပီး သင္ ့ကုတ္ကိုု မွ်ေ၀ႏိုင္ပါသည္။</string>
     <string name="str_game_not_started">ဂိမ္းကို မစရေသးပါ... မၾကာမွီ လာပါမည္။</string>
     <string name="competition_not_game">ဂိမ္းကို မစရေသးပါ</string>
+    <string name="mayDoeKaBarFBPage">ေမတို႕ကမာၻ Page ကို Like လုပ္ပါ</string>
     <!--<string name="login_dialog_mm_zawgyi">ၿမန္မာေဇာ္ဂ်ီေဖာင့္</string>
     <string name="login_dialog_mm_uni">ၿမန္မာ ယူနီကုုတ္ေဖာင့္</string>
     <string name="login_dialog_eng">ENGLISH</string>

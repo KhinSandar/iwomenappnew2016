@@ -109,11 +109,10 @@
                 android:textSize="18sp" />-->
             <ListView
                 android:id="@+id/win_prize_lv"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/list_background"
                 android:layout_gravity="center"
-
                 android:choiceMode="singleChoice"
                 android:divider="@android:color/transparent"
                 android:dividerHeight="0dp" />

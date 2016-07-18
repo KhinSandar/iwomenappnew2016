@@ -111,6 +111,27 @@
                 />
 
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            >
+            <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/mayDoeKaBarFBPage"
+                android:textStyle="bold"
+                android:textSize="16sp"/>
+            <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:autoLink="web"
+                android:textSize="14sp"
+                android:text="https://www.facebook.com/MayDoeKabar/"/>
+        </LinearLayout>
         <FrameLayout
 
 
