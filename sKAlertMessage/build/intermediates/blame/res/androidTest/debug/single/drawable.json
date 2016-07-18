@@ -1,18 +1,18 @@
 [
     {
-        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/sKAlertMessage/build/intermediates/res/merged/androidTest/debug/drawable/sk_toast_message_selector_info.xml",
-        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/sKAlertMessage/build/intermediates/bundles/debug/res/drawable/sk_toast_message_selector_info.xml"
+        "merged": "D:\\iWomen\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\sk_toast_message_selector_error.xml",
+        "source": "D:\\iWomen\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\bundles\\debug\\res\\drawable\\sk_toast_message_selector_error.xml"
     },
     {
-        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/sKAlertMessage/build/intermediates/res/merged/androidTest/debug/drawable/sk_toast_message_selector_error.xml",
-        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/sKAlertMessage/build/intermediates/bundles/debug/res/drawable/sk_toast_message_selector_error.xml"
+        "merged": "D:\\iWomen\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\sk_toast_message_selector_warning.xml",
+        "source": "D:\\iWomen\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\bundles\\debug\\res\\drawable\\sk_toast_message_selector_warning.xml"
     },
     {
-        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/sKAlertMessage/build/intermediates/res/merged/androidTest/debug/drawable/sk_toast_message_selector_success.xml",
-        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/sKAlertMessage/build/intermediates/bundles/debug/res/drawable/sk_toast_message_selector_success.xml"
+        "merged": "D:\\iWomen\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\sk_toast_message_selector_success.xml",
+        "source": "D:\\iWomen\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\bundles\\debug\\res\\drawable\\sk_toast_message_selector_success.xml"
     },
     {
-        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/sKAlertMessage/build/intermediates/res/merged/androidTest/debug/drawable/sk_toast_message_selector_warning.xml",
-        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/sKAlertMessage/build/intermediates/bundles/debug/res/drawable/sk_toast_message_selector_warning.xml"
+        "merged": "D:\\iWomen\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\sk_toast_message_selector_info.xml",
+        "source": "D:\\iWomen\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\bundles\\debug\\res\\drawable\\sk_toast_message_selector_info.xml"
     }
 ]
