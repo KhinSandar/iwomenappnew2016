@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="D:\iWomen\iwomenappnew2016\SKConnectionDetector\src\main\shaders"/></dataSet><dataSet config="release"><source path="D:\iWomen\iwomenappnew2016\SKConnectionDetector\build-types\release\shaders"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKConnectionDetector/src/main/shaders"/></dataSet><dataSet config="release"><source path="/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKConnectionDetector/build-types/release/shaders"/></dataSet></merger>

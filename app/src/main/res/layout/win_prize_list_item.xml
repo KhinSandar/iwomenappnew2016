@@ -32,9 +32,9 @@
             android:layout_marginLeft="21dp"
             android:layout_weight="1"
             android:background="@drawable/list_selector"
-            android:ellipsize="end"
+
             android:paddingRight="16dp"
-            android:singleLine="true"
+            android:singleLine="false"
             android:text="@string/points_prize"
             android:textColor="@drawable/list_text_selector"
             android:textSize="18sp" />

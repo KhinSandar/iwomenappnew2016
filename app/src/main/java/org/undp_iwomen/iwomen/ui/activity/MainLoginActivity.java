@@ -249,13 +249,15 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
             }
 
 
-            dialog = new ZProgressHUD(this);
+            dialog = new ZProgressHUD(MainLoginActivity.this);
             dialog.show();
             NetworkEngine.getInstance().postLogin(username, pwd, new Callback<User>() {
                 @Override
                 public void success(User user, Response response) {
-                    //Log.e("<<< >>> ", "===>" + user.getEmail());
-                    dialog.dismissWithSuccess();
+                    Log.e("<<< >>> ", "===>" + user.toString() +"/" + dialog);
+                    if (dialog != null && dialog.isShowing()){
+                        dialog.dismissWithSuccess();
+                       }
 
                     mEditorUserInfo = mSharedPreferencesUserInfo.edit();
 
@@ -268,8 +270,20 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
                     mEditorUserInfo.putString(CommonConfig.USER_PH, user.getPhoneNo());
                     mEditorUserInfo.putString(CommonConfig.USER_ROLE,user.getRole() );
 
-                    mEditorUserInfo.putString(CommonConfig.USER_POINTS,user.getPoints().toString() );
-                    mEditorUserInfo.putString(CommonConfig.USER_SHARE_STATUS,user.getShared().toString() );
+                    if( user.getPoints()!= null){
+                        mEditorUserInfo.putString(CommonConfig.USER_POINTS,user.getPoints().toString() );
+
+                    }else{
+                        mEditorUserInfo.putString(CommonConfig.USER_POINTS,"0" );
+
+                    }
+                    if( user.getShared()!= null){
+                        mEditorUserInfo.putString(CommonConfig.USER_SHARE_STATUS,user.getShared().toString() );
+
+                    }else{
+                        mEditorUserInfo.putString(CommonConfig.USER_SHARE_STATUS,"0");
+
+                    }
 
                     mEditorUserInfo.commit();
                     Intent i = new Intent(MainLoginActivity.this, DrawerMainActivity.class);//DrawerMainActivity
