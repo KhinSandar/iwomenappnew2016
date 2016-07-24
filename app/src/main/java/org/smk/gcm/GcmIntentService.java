@@ -9,6 +9,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
+import android.os.Build;
 import android.support.v7.app.NotificationCompat;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -42,6 +43,10 @@ public class GcmIntentService extends IntentService {
 	protected void generateNotification(Context context, Intent message) {
 		if(message != null){
 			int icon = R.drawable.ic_launcher;
+			if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1){
+				icon = R.mipmap.ic_noti_launcher;
+			}
+
 			long when = System.currentTimeMillis();
 			NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
 			GcmMessage gcmMessage = new Gson().fromJson(message.getExtras().getString(GcmCommon.MESSAGE_KEY), GcmMessage.class);
@@ -59,7 +64,9 @@ public class GcmIntentService extends IntentService {
 			builder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
 			builder.setAutoCancel(true);
 			builder.setWhen(when);
-			builder.addAction(R.drawable.ic_launcher, "i-Women", intent);
+			builder.addAction(icon, "i-Women", intent);
+
+
 			if(gcmMessage.getImage() != null && gcmMessage.getMessage().length() > 0){
 				Bitmap bmURL=getBitmapFromURL(gcmMessage.getImage().replace(" ", "%20"));
 				if(bmURL!=null){

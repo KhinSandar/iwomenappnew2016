@@ -8,6 +8,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.media.AudioManager;
@@ -17,6 +18,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.BaseColumns;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
@@ -88,6 +90,7 @@ import org.undp_iwomen.iwomen.model.retrofit_api.UserPostAPI;
 import org.undp_iwomen.iwomen.provider.IwomenProviderData;
 import org.undp_iwomen.iwomen.ui.adapter.CommentAdapter;
 import org.undp_iwomen.iwomen.ui.adapter.StickerGridViewAdapter;
+import org.undp_iwomen.iwomen.ui.fragment.AudioVisualizerFragment;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.ui.widget.ProgressWheel;
 import org.undp_iwomen.iwomen.ui.widget.ResizableImageView;
@@ -247,6 +250,8 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
     private ImageView img_social_audio;
 
+    private final String RECORD_AUDIO = "android.permission.RECORD_AUDIO";
+    private final String WRITE_STORAGE = "android.permission.WRITE_EXTERNAL_STORAGE";
 
     //New UI
     ImageView img_social_facebook;
@@ -2176,11 +2181,15 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                     setVolumeControlStream(AudioManager.STREAM_ALARM);
 
                     if (iWomenPost.getPostUploadName().equalsIgnoreCase("Wai Wai")) {
+
+
+
+
                         //MediaPlayer mediaPlayer;
                         if (!isPlaying) {
 
-                            /*mMedia = MediaPlayer.create(this, R.raw.wai_wai_audio);
-                            mMedia.start();*/
+                            mMedia = MediaPlayer.create(this, R.raw.wai_wai_audio);
+                            mMedia.start();
                             if ( mMedia == null)
                             {
                                 mMedia= MediaPlayer.create(PostDetailActivity.this, R.raw.wai_wai_audio);
@@ -2312,47 +2321,32 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                     SKToastMessage.showMessage(PostDetailActivity.this, getResources().getString(R.string.resource_coming_soon_eng), SKToastMessage.ERROR);
                 }
 
+                if(!hasPermission(RECORD_AUDIO) || !hasPermission(WRITE_STORAGE)) {
+                    //if no permission, request permission
+                    String[] perms = {RECORD_AUDIO, WRITE_STORAGE};
+                    int permsRequestCode = 200;
+                    requestPermissions(perms, permsRequestCode);
+                    break;
+                }
+
                 if (Connection.isOnline(getApplicationContext())) {
 
-                    Log.e("<<PostDetail>>","<<isPlay>>" + isPlaying);
+
                     //String url = "https://dl.dropboxusercontent.com/u/10281242/sample_audio.mp3"; //Default
                     if (mstrAudioFilePath != null && mstrAudioFilePath.length() > 20) {
-                        try {
+
+
+                                Log.e("<<PostDetail>>","<<isPlay>>" + "show audio visualizer dialog");
+                                DialogFragment visualizerFragment = AudioVisualizerFragment.newInstance(mstrAudioFilePath);
+                                visualizerFragment.show(getSupportFragmentManager(), "AudioVisualizer");
 
 
 
-                                mMedia= new MediaPlayer();
-                                // Set type to streaming
-                                mMedia.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                                // Listen for if the audio file can't be prepared
-                                mMedia.setOnErrorListener(new MediaPlayer.OnErrorListener() {
-                                    @Override
-                                    public boolean onError(MediaPlayer mp, int what, int extra) {
-                                        // ... react appropriately ...
-                                        // The MediaPlayer has moved to the Error state, must be reset!
-                                        return false;
-                                    }
-                                });
-                                // Attach to when audio file is prepared for playing
-                                mMedia.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                                    @Override
-                                    public void onPrepared(MediaPlayer mp) {
-                                        mMedia.start();
-                                    }
-                                });
-                                // Set the data source to the remote URL
-                                try {
-                                    mMedia.setDataSource(mstrAudioFilePath);
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                                // Trigger an async preparation which will file listener when completed
-                                mMedia.prepareAsync();
-                                isPlaying = true;
+                    }else{
+                        //TODO Audio File Null case
+                        // TODO Auto-generated method stub
+                        SKToastMessage.showMessage(PostDetailActivity.this, getResources().getString(R.string.audio_not_availabe_msg), SKToastMessage.INFO);
 
-                        } catch (NullPointerException e) {
-
-                        }
 
                     }
 
@@ -2955,6 +2949,17 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
             pendingAction = action;
             handlePendingAction();
         }
+    }
+
+    private boolean hasPermission(String permission) {
+
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
+            return (checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED);
+        } else {
+            return true;
+        }
+
+
     }
 
 

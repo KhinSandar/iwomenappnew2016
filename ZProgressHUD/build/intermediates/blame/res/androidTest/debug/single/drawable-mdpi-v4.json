@@ -1,18 +1,10 @@
 [
     {
-        "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\success.png",
-        "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\success.png"
+        "merged": "D:\\iWomen\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\success.png",
+        "source": "D:\\iWomen\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\success.png"
     },
     {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ZProgressHUD\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\failure.png",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ZProgressHUD\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\failure.png"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\failure.png",
-        "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\failure.png"
-    },
-    {
-        "merged": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ZProgressHUD\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\success.png",
-        "source": "D:\\Users\\khinsandar\\Documents\\VipPro\\UNDP\\Application\\iwomen\\ZProgressHUD\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\success.png"
+        "merged": "D:\\iWomen\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\failure.png",
+        "source": "D:\\iWomen\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\failure.png"
     }
 ]
