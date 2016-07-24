@@ -1,7 +1,15 @@
 [
     {
+        "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\shimmerTextView\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-nodpi-v4\\mask.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\shimmerTextView\\build\\intermediates\\bundles\\debug\\res\\drawable-nodpi-v4\\mask.xml"
+    },
+    {
         "merged": "D:\\iWomen\\iwomenappnew2016\\shimmerTextView\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-nodpi-v4\\mask.xml",
         "source": "D:\\iWomen\\iwomenappnew2016\\shimmerTextView\\build\\intermediates\\bundles\\debug\\res\\drawable-nodpi-v4\\mask.xml"
+    },
+    {
+        "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\shimmerTextView\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-nodpi-v4\\spot_mask.png",
+        "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\shimmerTextView\\build\\intermediates\\bundles\\debug\\res\\drawable-nodpi-v4\\spot_mask.png"
     },
     {
         "merged": "D:\\iWomen\\iwomenappnew2016\\shimmerTextView\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-nodpi-v4\\spot_mask.png",
