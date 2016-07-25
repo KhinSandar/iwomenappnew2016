@@ -535,9 +535,6 @@
             android:paddingBottom="10dp" />
 
 
-
-
-
     </LinearLayout>
 
 </ScrollView>

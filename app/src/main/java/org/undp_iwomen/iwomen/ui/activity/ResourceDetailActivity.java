@@ -13,8 +13,10 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.facebook.share.widget.ShareButton;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
+import com.google.android.gms.plus.model.people.Person;
 import com.makeramen.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
@@ -25,9 +27,10 @@ import org.undp_iwomen.iwomen.manager.MainApplication;
 import org.undp_iwomen.iwomen.model.MyTypeFace;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.utils.Utils;
+import org.w3c.dom.Text;
 
 
-public class ResourceDetailActivity extends BaseActionBarActivity {
+public class ResourceDetailActivity extends BaseActionBarActivity implements View.OnClickListener {
 
 
     private CustomTextView textViewTitle;
@@ -48,6 +51,10 @@ public class ResourceDetailActivity extends BaseActionBarActivity {
 
     String mstrTitleEng, mstrTitleMm, mstrContentEng, mstrContentMm, mstrAuthorName , mstrAuthorId, mstrAuthorImgPath, mstrPostDate , mstrAuthorRoleMM, mstrAuthorRoleEng;
     String mstrSubResourceTitleEng, mstrSubResourceTitleMm;
+
+    private CustomTextView txtSocialShare;
+    private ShareButton social_fb_no_ear_shareButton;
+    private ImageView img_social_no_ear_share;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -139,8 +146,6 @@ public class ResourceDetailActivity extends BaseActionBarActivity {
 
         profileProgressbar.setVisibility(View.GONE);
 
-
-
         profileImg.setAdjustViewBounds(true);
         profileImg.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
@@ -196,9 +201,13 @@ public class ResourceDetailActivity extends BaseActionBarActivity {
             }
         });
 
+        txtSocialShare =(CustomTextView)findViewById(R.id.social_no_ear_share_txt);
+        txtSocialShare.setOnClickListener(this);
 
+        social_fb_no_ear_shareButton = (ShareButton) findViewById(R.id.social_no_ear_fb_share_button);
+        social_fb_no_ear_shareButton.setOnClickListener(this);
 
-
+        img_social_no_ear_share = (ImageView) findViewById(R.id.social_no_ear_share_img);
     }
 
     private void shareTextUrl() {
@@ -250,6 +259,25 @@ public class ResourceDetailActivity extends BaseActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.social_no_ear_share_txt:
+                shareTextUrl();
+                break;
+            case R.id.social_no_ear_fb_share_button:
+                social_fb_no_ear_shareButton.performClick();
+                break;
+            case R.id.social_no_ear_share_img:
+                img_social_no_ear_share.performClick();
+                break;
+        }
+
+
+
+    }
+
     private class ImageLoadedCallback implements com.squareup.picasso.Callback {
         ProgressBar progressBar;
 
