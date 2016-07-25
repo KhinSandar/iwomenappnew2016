@@ -201,9 +201,9 @@ public class DrawerMainActivity extends BaseActionBarActivity {
 
         user_code = user_obj_id;
 
-        Log.e("<<USer Point>>", "==>" + mSharedPreferencesUserInfo.getString(CommonConfig.USER_POINTS, null));
+        //Log.e("<<USer Point>>", "==>" + mSharedPreferencesUserInfo.getString(CommonConfig.USER_POINTS, null));
 
-        Log.e("<<USer Status>>", "==>" + mSharedPreferencesUserInfo.getString(CommonConfig.USER_SHARE_STATUS, null));
+        //Log.e("<<USer Status>>", "==>" + mSharedPreferencesUserInfo.getString(CommonConfig.USER_SHARE_STATUS, null));
         if (mSharedPreferencesUserInfo.getString(CommonConfig.USER_POINTS, null) == null) {
             user_points = "0"; // initial no point condition
         } else {
