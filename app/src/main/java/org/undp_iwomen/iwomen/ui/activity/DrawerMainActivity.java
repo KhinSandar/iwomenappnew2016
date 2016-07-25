@@ -36,6 +36,7 @@ import org.smk.gcm.GcmCommon;
 import org.smk.iwomen.BaseActionBarActivity;
 import org.smk.iwomen.CompetitionNewGameActivity;
 import org.smk.iwomen.CompetitionWinnerGroupActivity;
+import org.smk.iwomen.ResponseError;
 import org.smk.model.CompetitionQuestion;
 import org.smk.model.Review;
 import org.smk.model.User;
@@ -184,17 +185,6 @@ public class DrawerMainActivity extends BaseActionBarActivity {
         // enable ActionBar app icon to behave as action to toggle nav drawer
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-
-        img_play_game.setImageResource(R.drawable.sticker2);
-        btn_play_game.setText(getResources().getString(R.string.competition_not_game));
-        btn_play_game.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                SKToastMessage.showMessage(DrawerMainActivity.this, getResources().getString(R.string.str_game_not_started), SKToastMessage.INFO);
-            }
-        });
 
 
         // set up the drawer's list view with items and click listener
@@ -818,18 +808,36 @@ public class DrawerMainActivity extends BaseActionBarActivity {
             NetworkEngine.getInstance().getCompetitionQuestion("", user_id, new Callback<CompetitionQuestion>() {
 
                 @Override
-                public void failure(RetrofitError arg0) {
+                public void failure(final RetrofitError arg0) {
                     // TODO Auto-generated method stub
                     if (arg0.getResponse() != null) {
                         switch (arg0.getResponse().getStatus()) {
                             case 403:
+                                layout_play_game.setVisibility(View.VISIBLE);
+                                img_play_game.setImageResource(R.drawable.sticker2);
+                                btn_play_game.setText(getResources().getString(R.string.competition_play_game));
+                                btn_play_game.setOnClickListener(new View.OnClickListener() {
+
+                                    @Override
+                                    public void onClick(View v) {
+                                        // TODO Auto-generated method stub
+                                        try {
+                                            ResponseError error = (ResponseError) arg0.getBodyAs(ResponseError.class);
+                                            if (mstr_lang.equals(Utils.ENG_LANG)) {
+                                                SKToastMessage.showMessage(DrawerMainActivity.this, error.getError(), SKToastMessage.INFO);
+                                            } else if (mstr_lang.equals(Utils.MM_LANG)) {
+                                                SKToastMessage.showMessage(DrawerMainActivity.this, error.getErrorMm(), SKToastMessage.INFO);
+                                            }
+                                        }catch (Exception e){
+
+                                        }
+                                    }
+                                });
                                 break;
                             case 400:
-                                //layout_play_game.setVisibility(View.GONE);
+                                layout_play_game.setVisibility(View.GONE);
                                 break;
                             default:
-                                if (arg0.getCause() != null)
-                                    Log.e("Competition: ", "Error:" + arg0.getCause().toString());
                                 break;
                         }
                     }
@@ -865,19 +873,6 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                                 startActivity(new Intent(getApplicationContext(), CompetitionWinnerGroupActivity.class).putExtra("competition_question", new Gson().toJson(arg0)));
                             }
                         });
-                    }else{
-                        img_play_game.setImageResource(R.drawable.sticker2);
-                        btn_play_game.setText(getResources().getString(R.string.competition_play_game));
-                        btn_play_game.setOnClickListener(new View.OnClickListener() {
-
-                            @Override
-                            public void onClick(View v) {
-                                // TODO Auto-generated method stub
-                                SKToastMessage.showMessage(DrawerMainActivity.this, getResources().getString(R.string.str_game_not_started), SKToastMessage.INFO);
-                            }
-                        });
-
-
                     }
                     getUserPointsCount();
                 }
