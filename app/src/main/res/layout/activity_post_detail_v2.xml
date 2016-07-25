@@ -8,7 +8,6 @@
     android:background="@color/white"
     android:focusable="true"
     android:focusableInTouchMode="true"
-
     tools:context="org.undp_iwomen.iwomen.ui.activity.PostDetailActivity">
 
     <android.support.design.widget.CoordinatorLayout
@@ -129,8 +128,6 @@
                     android:hint="@string/post_detail_comment_eng"
                     android:paddingLeft="@dimen/activity_vertical_margin"
                     android:singleLine="false"
-
-
                     android:textColor="#fff"
                     android:textColorHint="#8fff" />
             </LinearLayout>

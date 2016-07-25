@@ -16,6 +16,7 @@
         "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\iWomen\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\round_spinner_fade_00.png"
     },
     {
+<<<<<<< HEAD
         "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/ZProgressHUD/build/intermediates/res/merged/androidTest/debug/drawable-hdpi-v4/round_spinner_fade_07.png",
         "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/ZProgressHUD/build/intermediates/bundles/debug/res/drawable-hdpi-v4/round_spinner_fade_07.png"
     },
@@ -26,6 +27,18 @@
     {
         "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\iWomen\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\round_spinner_fade_06.png",
         "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\iWomen\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\round_spinner_fade_06.png"
+=======
+        "merged": "D:\\iWomen\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\spinner_round_06.png",
+        "source": "D:\\iWomen\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\spinner_round_06.png"
+    },
+    {
+        "merged": "D:\\iWomen\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\spinner_round_10.png",
+        "source": "D:\\iWomen\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\spinner_round_10.png"
+    },
+    {
+        "merged": "D:\\iWomen\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\apple_round_spinner_04.png",
+        "source": "D:\\iWomen\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\apple_round_spinner_04.png"
+>>>>>>> e4df49d6a36a9211be3e5d55b36a6895468b3f55
     },
     {
         "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\iWomen\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\gear_spinner_06.png",
@@ -112,6 +125,7 @@
         "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/ZProgressHUD/build/intermediates/bundles/debug/res/drawable-hdpi-v4/round_spinner_fade_00.png"
     },
     {
+<<<<<<< HEAD
         "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\iWomen\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\spinner_round_10.png",
         "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\iWomen\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\spinner_round_10.png"
     },
@@ -126,14 +140,35 @@
     {
         "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\iWomen\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\gear_spinner_02.png",
         "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\iWomen\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\gear_spinner_02.png"
+=======
+        "merged": "D:\\iWomen\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\spinner_round_03.png",
+        "source": "D:\\iWomen\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\spinner_round_03.png"
+    },
+    {
+        "merged": "D:\\iWomen\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\spinner_round_05.png",
+        "source": "D:\\iWomen\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\spinner_round_05.png"
+    },
+    {
+        "merged": "D:\\iWomen\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\apple_round_spinner_07.png",
+        "source": "D:\\iWomen\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\apple_round_spinner_07.png"
+>>>>>>> e4df49d6a36a9211be3e5d55b36a6895468b3f55
     },
     {
         "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\iWomen\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\spinner_round_05.png",
         "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\iWomen\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\spinner_round_05.png"
     },
     {
+<<<<<<< HEAD
         "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\iWomen\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\spinner_round_08.png",
         "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\iWomen\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\spinner_round_08.png"
+=======
+        "merged": "D:\\iWomen\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\spinner_round_09.png",
+        "source": "D:\\iWomen\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\spinner_round_09.png"
+    },
+    {
+        "merged": "D:\\iWomen\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\apple_round_spinner_08.png",
+        "source": "D:\\iWomen\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\apple_round_spinner_08.png"
+>>>>>>> e4df49d6a36a9211be3e5d55b36a6895468b3f55
     },
     {
         "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\iWomen\\iwomenappnew2016\\ZProgressHUD\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\gear_spinner_07.png",

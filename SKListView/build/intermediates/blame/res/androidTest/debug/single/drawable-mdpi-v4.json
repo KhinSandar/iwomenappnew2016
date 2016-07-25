@@ -88,6 +88,7 @@
         "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.2/res/drawable-mdpi/abc_ic_commit_search_api_mtrl_alpha.png"
     },
     {
+<<<<<<< HEAD
         "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/res/merged/androidTest/debug/drawable-mdpi-v4/abc_textfield_activated_mtrl_alpha.9.png",
         "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.2/res/drawable-mdpi/abc_textfield_activated_mtrl_alpha.9.png"
     },
@@ -98,6 +99,18 @@
     {
         "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/res/merged/androidTest/debug/drawable-mdpi-v4/abc_ic_menu_moreoverflow_mtrl_alpha.png",
         "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.2/res/drawable-mdpi/abc_ic_menu_moreoverflow_mtrl_alpha.png"
+=======
+        "merged": "D:\\iWomen\\iwomenappnew2016\\SKListView\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png",
+        "source": "D:\\iWomen\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\drawable-mdpi\\abc_tab_indicator_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "D:\\iWomen\\iwomenappnew2016\\SKListView\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\abc_popup_background_mtrl_mult.9.png",
+        "source": "D:\\iWomen\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\drawable-mdpi\\abc_popup_background_mtrl_mult.9.png"
+    },
+    {
+        "merged": "D:\\iWomen\\iwomenappnew2016\\SKListView\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\abc_ic_ab_back_mtrl_am_alpha.png",
+        "source": "D:\\iWomen\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\drawable-mdpi\\abc_ic_ab_back_mtrl_am_alpha.png"
+>>>>>>> e4df49d6a36a9211be3e5d55b36a6895468b3f55
     },
     {
         "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/res/merged/androidTest/debug/drawable-mdpi-v4/abc_btn_check_to_on_mtrl_015.png",
