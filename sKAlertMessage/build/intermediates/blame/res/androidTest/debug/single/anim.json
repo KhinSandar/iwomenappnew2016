@@ -1,10 +1,18 @@
 [
     {
-        "merged": "D:\\iWomen\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\top_in.xml",
-        "source": "D:\\iWomen\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\bundles\\debug\\res\\anim\\top_in.xml"
+        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/sKAlertMessage/build/intermediates/res/merged/androidTest/debug/anim/top_in.xml",
+        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/sKAlertMessage/build/intermediates/bundles/debug/res/anim/top_in.xml"
     },
     {
-        "merged": "D:\\iWomen\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\top_out.xml",
-        "source": "D:\\iWomen\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\bundles\\debug\\res\\anim\\top_out.xml"
+        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\iWomen\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\top_out.xml",
+        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\iWomen\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\bundles\\debug\\res\\anim\\top_out.xml"
+    },
+    {
+        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/sKAlertMessage/build/intermediates/res/merged/androidTest/debug/anim/top_out.xml",
+        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/sKAlertMessage/build/intermediates/bundles/debug/res/anim/top_out.xml"
+    },
+    {
+        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\iWomen\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\top_in.xml",
+        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\iWomen\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\bundles\\debug\\res\\anim\\top_in.xml"
     }
 ]

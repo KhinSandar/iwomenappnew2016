@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "D:\\iWomen\\iwomenappnew2016\\SKConnectionDetector\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-mm\\values-mm.xml",
+        "outputFile": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\iWomen\\iwomenappnew2016\\SKConnectionDetector\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-mm\\values-mm.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,7 @@
                     "endOffset": 124
                 },
                 "from": {
-                    "file": "D:\\iWomen\\iwomenappnew2016\\SKConnectionDetector\\build\\intermediates\\bundles\\debug\\res\\values-mm\\values-mm.xml",
+                    "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\iWomen\\iwomenappnew2016\\SKConnectionDetector\\build\\intermediates\\bundles\\debug\\res\\values-mm\\values-mm.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
@@ -30,7 +30,7 @@
                     "endOffset": 247
                 },
                 "from": {
-                    "file": "D:\\iWomen\\iwomenappnew2016\\SKConnectionDetector\\build\\intermediates\\bundles\\debug\\res\\values-mm\\values-mm.xml",
+                    "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\iWomen\\iwomenappnew2016\\SKConnectionDetector\\build\\intermediates\\bundles\\debug\\res\\values-mm\\values-mm.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -49,7 +49,69 @@
                     "endOffset": 351
                 },
                 "from": {
-                    "file": "D:\\iWomen\\iwomenappnew2016\\SKConnectionDetector\\build\\intermediates\\bundles\\debug\\res\\values-mm\\values-mm.xml",
+                    "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\iWomen\\iwomenappnew2016\\SKConnectionDetector\\build\\intermediates\\bundles\\debug\\res\\values-mm\\values-mm.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 252,
+                        "endColumn": 103,
+                        "endOffset": 351
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "outputFile": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKConnectionDetector/build/intermediates/res/merged/androidTest/debug/values-mm/values-mm.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 73,
+                    "endOffset": 124
+                },
+                "from": {
+                    "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKConnectionDetector/build/intermediates/bundles/debug/res/values-mm/values-mm.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endColumn": 73,
+                        "endOffset": 124
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 129,
+                    "endColumn": 122,
+                    "endOffset": 247
+                },
+                "from": {
+                    "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKConnectionDetector/build/intermediates/bundles/debug/res/values-mm/values-mm.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 129,
+                        "endColumn": 122,
+                        "endOffset": 247
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 4,
+                    "startColumn": 4,
+                    "startOffset": 252,
+                    "endColumn": 103,
+                    "endOffset": 351
+                },
+                "from": {
+                    "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKConnectionDetector/build/intermediates/bundles/debug/res/values-mm/values-mm.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
