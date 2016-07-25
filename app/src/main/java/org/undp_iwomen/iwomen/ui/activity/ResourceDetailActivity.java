@@ -3,8 +3,11 @@ package org.undp_iwomen.iwomen.ui.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareButton;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
@@ -53,8 +57,13 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
     String mstrSubResourceTitleEng, mstrSubResourceTitleMm;
 
     private CustomTextView txtSocialShare;
-    private ShareButton social_fb_no_ear_shareButton;
+    private ShareButton shareButton;
     private ImageView img_social_no_ear_share;
+
+
+    String share_data;
+    String share_img_url_data;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,6 +114,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
 
         lysocial = (LinearLayout)findViewById(R.id.tipdetail_ly_social);
 
+        txtBody.setMovementMethod(LinkMovementMethod.getInstance());
 
         // Google Analytics
         MainApplication application = (MainApplication) getApplication();
@@ -201,13 +211,18 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
             }
         });
 
+
         txtSocialShare =(CustomTextView)findViewById(R.id.social_no_ear_share_txt);
         txtSocialShare.setOnClickListener(this);
 
-        social_fb_no_ear_shareButton = (ShareButton) findViewById(R.id.social_no_ear_fb_share_button);
-        social_fb_no_ear_shareButton.setOnClickListener(this);
+        shareButton = (ShareButton) findViewById(R.id.social_no_ear_fb_share_button);
 
         img_social_no_ear_share = (ImageView) findViewById(R.id.social_no_ear_share_img);
+        img_social_no_ear_share.setOnClickListener(this);
+
+        shareButton.setShareContent(getLinkContent());
+
+
     }
 
     private void shareTextUrl() {
@@ -232,6 +247,32 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
 
 
         startActivity(Intent.createChooser(share, "I Women Share link!"));
+    }
+
+    private ShareLinkContent getLinkContent() {
+
+        if (txtBody.getText().length() > 20) {
+            share_data = txtBody.getText().toString().substring(0, 20) + " ...";
+        } else {
+            share_data = txtBody.getText().toString();
+        }
+
+        if (share_img_url_data != null) {
+            return new ShareLinkContent.Builder()
+
+                    .setContentTitle(txtName.getText().toString())
+                    .setContentUrl(Uri.parse(CommonConfig.SHARE_URL))
+                    .setImageUrl(Uri.parse(share_img_url_data))
+                    .setContentDescription(share_data)
+                    .build();
+        } else {
+            return new ShareLinkContent.Builder()
+
+                    .setContentTitle(txtName.getText().toString())
+                    .setContentUrl(Uri.parse(CommonConfig.SHARE_URL))
+                    .setContentDescription(share_data)
+                    .build();
+        }
     }
 
     @Override
@@ -266,11 +307,9 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
             case R.id.social_no_ear_share_txt:
                 shareTextUrl();
                 break;
-            case R.id.social_no_ear_fb_share_button:
-                social_fb_no_ear_shareButton.performClick();
-                break;
             case R.id.social_no_ear_share_img:
-                img_social_no_ear_share.performClick();
+
+                shareButton.performClick();
                 break;
         }
 

@@ -96,12 +96,12 @@
         "source": "D:\\iWomen\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\drawable-hdpi\\abc_btn_radio_to_on_mtrl_000.png"
     },
     {
-        "merged": "D:\\iWomen\\iwomenappnew2016\\SKListView\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\abc_switch_track_mtrl_alpha.9.png",
-        "source": "D:\\iWomen\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\drawable-hdpi\\abc_switch_track_mtrl_alpha.9.png"
-    },
-    {
         "merged": "D:\\iWomen\\iwomenappnew2016\\SKListView\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\abc_ic_voice_search_api_mtrl_alpha.png",
         "source": "D:\\iWomen\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\drawable-hdpi\\abc_ic_voice_search_api_mtrl_alpha.png"
+    },
+    {
+        "merged": "D:\\iWomen\\iwomenappnew2016\\SKListView\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\abc_switch_track_mtrl_alpha.9.png",
+        "source": "D:\\iWomen\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\drawable-hdpi\\abc_switch_track_mtrl_alpha.9.png"
     },
     {
         "merged": "D:\\iWomen\\iwomenappnew2016\\SKListView\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\abc_textfield_activated_mtrl_alpha.9.png",

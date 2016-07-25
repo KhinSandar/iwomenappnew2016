@@ -1,11 +1,11 @@
 [
     {
-        "merged": "D:\\iWomen\\iwomenappnew2016\\caldroid\\build\\intermediates\\res\\merged\\debug\\drawable\\right_arrow.xml",
-        "source": "D:\\iWomen\\iwomenappnew2016\\caldroid\\src\\main\\res\\drawable\\right_arrow.xml"
-    },
-    {
         "merged": "D:\\iWomen\\iwomenappnew2016\\caldroid\\build\\intermediates\\res\\merged\\debug\\drawable\\red_border_gray_bg.xml",
         "source": "D:\\iWomen\\iwomenappnew2016\\caldroid\\src\\main\\res\\drawable\\red_border_gray_bg.xml"
+    },
+    {
+        "merged": "D:\\iWomen\\iwomenappnew2016\\caldroid\\build\\intermediates\\res\\merged\\debug\\drawable\\right_arrow.xml",
+        "source": "D:\\iWomen\\iwomenappnew2016\\caldroid\\src\\main\\res\\drawable\\right_arrow.xml"
     },
     {
         "merged": "D:\\iWomen\\iwomenappnew2016\\caldroid\\build\\intermediates\\res\\merged\\debug\\drawable\\cell_bg_dark.xml",

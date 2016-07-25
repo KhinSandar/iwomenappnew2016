@@ -150,7 +150,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
             return;// add this to prevent from doing unnecessary stuffs
         }
 
-        //getFacebookHashKey();
+       // getFacebookHashKey();
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
 

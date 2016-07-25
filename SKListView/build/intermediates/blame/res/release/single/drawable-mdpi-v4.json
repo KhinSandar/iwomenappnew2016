@@ -56,12 +56,12 @@
         "source": "D:\\iWomen\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\drawable-mdpi\\abc_list_pressed_holo_light.9.png"
     },
     {
-        "merged": "D:\\iWomen\\iwomenappnew2016\\SKListView\\build\\intermediates\\res\\merged\\release\\drawable-mdpi-v4\\abc_btn_switch_to_on_mtrl_00012.9.png",
-        "source": "D:\\iWomen\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\drawable-mdpi\\abc_btn_switch_to_on_mtrl_00012.9.png"
-    },
-    {
         "merged": "D:\\iWomen\\iwomenappnew2016\\SKListView\\build\\intermediates\\res\\merged\\release\\drawable-mdpi-v4\\abc_ab_share_pack_holo_light.9.png",
         "source": "D:\\iWomen\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\drawable-mdpi\\abc_ab_share_pack_holo_light.9.png"
+    },
+    {
+        "merged": "D:\\iWomen\\iwomenappnew2016\\SKListView\\build\\intermediates\\res\\merged\\release\\drawable-mdpi-v4\\abc_btn_switch_to_on_mtrl_00012.9.png",
+        "source": "D:\\iWomen\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\drawable-mdpi\\abc_btn_switch_to_on_mtrl_00012.9.png"
     },
     {
         "merged": "D:\\iWomen\\iwomenappnew2016\\SKListView\\build\\intermediates\\res\\merged\\release\\drawable-mdpi-v4\\abc_btn_radio_to_on_mtrl_015.png",
