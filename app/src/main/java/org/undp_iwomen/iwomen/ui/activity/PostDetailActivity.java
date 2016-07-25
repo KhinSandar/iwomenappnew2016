@@ -252,6 +252,10 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
     private final String RECORD_AUDIO = "android.permission.RECORD_AUDIO";
     private final String WRITE_STORAGE = "android.permission.WRITE_EXTERNAL_STORAGE";
+    private final String STORAGE_READ_PERMISSION = "android.permission.READ_EXTERNAL_STORAGE";
+    private final String PREPARE_AUDIO_PERMISSION = "android.permission.MODIFY_AUDIO_SETTINGS";
+
+
 
     //New UI
     ImageView img_social_facebook;
@@ -2321,9 +2325,9 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                     SKToastMessage.showMessage(PostDetailActivity.this, getResources().getString(R.string.resource_coming_soon_eng), SKToastMessage.ERROR);
                 }
 
-                if(!hasPermission(RECORD_AUDIO) || !hasPermission(WRITE_STORAGE)) {
+                if(!hasPermission(RECORD_AUDIO) || !hasPermission(WRITE_STORAGE)|| !hasPermission(STORAGE_READ_PERMISSION)|| !hasPermission(PREPARE_AUDIO_PERMISSION)) {
                     //if no permission, request permission
-                    String[] perms = {RECORD_AUDIO, WRITE_STORAGE};
+                    String[] perms = {RECORD_AUDIO, WRITE_STORAGE, STORAGE_READ_PERMISSION, PREPARE_AUDIO_PERMISSION};
                     int permsRequestCode = 200;
                     requestPermissions(perms, permsRequestCode);
                     break;
@@ -2336,7 +2340,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                     if (mstrAudioFilePath != null && mstrAudioFilePath.length() > 20) {
 
 
-                                Log.e("<<PostDetail>>","<<isPlay>>" + "show audio visualizer dialog");
+                                Log.e("<<PostDetail>>","<<isPlay>>" + "show audio visualizer dialog"+ mstrAudioFilePath);
                                 DialogFragment visualizerFragment = AudioVisualizerFragment.newInstance(mstrAudioFilePath);
                                 visualizerFragment.show(getSupportFragmentManager(), "AudioVisualizer");
 

@@ -1,6 +1,10 @@
 [
     {
-        "merged": "D:\\iWomen\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\sk_toast_message_delete.png",
-        "source": "D:\\iWomen\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\sk_toast_message_delete.png"
+        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\iWomen\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\sk_toast_message_delete.png",
+        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\iWomen\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\sk_toast_message_delete.png"
+    },
+    {
+        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/sKAlertMessage/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi-v4/sk_toast_message_delete.png",
+        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/sKAlertMessage/build/intermediates/bundles/debug/res/drawable-xhdpi-v4/sk_toast_message_delete.png"
     }
 ]

@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="D:\iWomen\iwomenappnew2016\shimmerTextView\src\main\jniLibs"/></dataSet><dataSet config="debug"><source path="D:\iWomen\iwomenappnew2016\shimmerTextView\src\debug\jniLibs"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/shimmerTextView/src/main/jniLibs"/></dataSet><dataSet config="debug"><source path="/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/shimmerTextView/src/debug/jniLibs"/></dataSet></merger>
