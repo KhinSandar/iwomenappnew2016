@@ -68,12 +68,12 @@
         "source": "D:\\iWomen\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\layout\\abc_screen_toolbar.xml"
     },
     {
-        "merged": "D:\\iWomen\\iwomenappnew2016\\SKListView\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_simple.xml",
-        "source": "D:\\iWomen\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\layout\\abc_screen_simple.xml"
-    },
-    {
         "merged": "D:\\iWomen\\iwomenappnew2016\\SKListView\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view_list_item.xml",
         "source": "D:\\iWomen\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\layout\\abc_activity_chooser_view_list_item.xml"
+    },
+    {
+        "merged": "D:\\iWomen\\iwomenappnew2016\\SKListView\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_simple.xml",
+        "source": "D:\\iWomen\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\layout\\abc_screen_simple.xml"
     },
     {
         "merged": "D:\\iWomen\\iwomenappnew2016\\SKListView\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_bar.xml",
