@@ -1,29 +1,5 @@
 [
     {
-        "outputFile": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\iWomen\\iwomenappnew2016\\SKListView\\build\\intermediates\\res\\merged\\debug\\values-port\\values-port.xml",
-        "map": [
-            {
-                "to": {
-                    "startLine": 2,
-                    "startColumn": 4,
-                    "startOffset": 55,
-                    "endColumn": 55,
-                    "endOffset": 106
-                },
-                "from": {
-                    "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\iWomen\\iwomenappnew2016\\SKListView\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.2\\res\\values-port\\values.xml",
-                    "position": {
-                        "startLine": 3,
-                        "startColumn": 4,
-                        "startOffset": 56,
-                        "endColumn": 55,
-                        "endOffset": 107
-                    }
-                }
-            }
-        ]
-    },
-    {
         "outputFile": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/res/merged/debug/values-port/values-port.xml",
         "map": [
             {
