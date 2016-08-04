@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/build/intermediates/res/merged/release/values-v14/values-v14.xml",
+        "outputFile": "D:\\iWomen\\iwomenappnew2016\\caldroid\\build\\intermediates\\res\\merged\\release\\values-v14\\values-v14.xml",
         "map": [
             {
                 "to": {
@@ -12,33 +12,7 @@
                     "endOffset": 201
                 },
                 "from": {
-                    "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/values-v14/styles.xml",
-                    "position": {
-                        "startLine": 7,
-                        "startColumn": 4,
-                        "startOffset": 220,
-                        "endLine": 9,
-                        "endColumn": 12,
-                        "endOffset": 366
-                    }
-                }
-            }
-        ]
-    },
-    {
-        "outputFile": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\iWomen\\iwomenappnew2016\\caldroid\\build\\intermediates\\res\\merged\\release\\values-v14\\values-v14.xml",
-        "map": [
-            {
-                "to": {
-                    "startLine": 2,
-                    "startColumn": 4,
-                    "startOffset": 55,
-                    "endLine": 4,
-                    "endColumn": 12,
-                    "endOffset": 201
-                },
-                "from": {
-                    "file": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/D:\\iWomen\\iwomenappnew2016\\caldroid\\src\\main\\res\\values-v14\\styles.xml",
+                    "file": "D:\\iWomen\\iwomenappnew2016\\caldroid\\src\\main\\res\\values-v14\\styles.xml",
                     "position": {
                         "startLine": 7,
                         "startColumn": 4,

@@ -107,7 +107,9 @@
                 android:lineSpacingExtra="1.5sp"
                 android:text="Dear Moe Moe, \n\nAlternative text is text associated with an image that serves the same purpose and conveys the same essential information as the image.Alternative text is text associated with an image that serves the same purpose and conveys the same essential information as the image."
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textColor="?android:textColorSecondary" />
+                android:textColor="?android:textColorSecondary"
+                android:autoLink="web"
+                />
 
             <RelativeLayout
                 android:layout_width="match_parent"

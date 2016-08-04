@@ -116,7 +116,9 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         android:text="@string/large_sample_text"
         android:textColor="@color/text_sub_head_color"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:autoLink="web"
+        android:lineSpacingExtra="6sp"/>
 
 
     <LinearLayout
