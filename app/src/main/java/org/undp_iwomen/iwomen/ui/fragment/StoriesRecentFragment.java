@@ -51,6 +51,7 @@ import org.undp_iwomen.iwomen.ui.activity.NewPostActivity;
 import org.undp_iwomen.iwomen.ui.activity.PostDetailActivity;
 import org.undp_iwomen.iwomen.ui.adapter.IWomenPostListByDateRecyclerViewAdapter;
 import org.undp_iwomen.iwomen.ui.adapter.StoriesRecentListAdapter;
+import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.utils.Connection;
 import org.undp_iwomen.iwomen.utils.StorageUtil;
 import org.undp_iwomen.iwomen.utils.Utils;
@@ -90,6 +91,8 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
     private SearchView sv;
     List<IWomenPost> StorageiWomenPosts;
     private StorageUtil storageUtil;
+
+    private CustomTextView sp_content_title;
 
     public StoriesRecentFragment() {
         // Empty constructor required for fragment subclasses
@@ -179,6 +182,23 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
          */
         //Load data from local storage for no connection
         //final List<IWomenPost> iWomenPosts = StoreUtil.getInstance().selectFrom("stories_recent");
+
+        //Add Header View
+        //LayoutInflater inflater = getLayoutInflater();
+        /*LayoutInflater inflater = (LayoutInflater) getActivity().getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        ViewGroup header = (ViewGroup)inflater.inflate(R.layout.special_content_stories_list_item, skListView, false);
+        header.setBackgroundColor(getResources().getColor(R.color.white));
+*/
+
+        final LayoutInflater layoutInflater = getActivity().getLayoutInflater();
+
+        View header = layoutInflater.inflate(R.layout.special_content_stories_list_item, null);
+        sp_content_title = (CustomTextView)header.findViewById(R.id.sp_content_txtPostTitle);
+
+        sp_content_title.setText("Title");
+        skListView.addHeaderView(header, null, false);
+
+
         StorageiWomenPosts = (ArrayList<IWomenPost>) storageUtil.ReadArrayListFromSD("stories_recent");
         if (Connection.isOnline(mContext)){
             // Showing local data while loading from internet
@@ -224,6 +244,8 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
         });
 
     }
+
+
 
     private void setupAdapter() {
 
@@ -1216,6 +1238,16 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
                         // If no more item
                         skListView.setNextPage(false);
                     }
+
+                    /*if (iWomenPosts.size() > 0) {
+
+                        View padding = new View(getActivity().getApplicationContext());
+                        padding.setMinimumHeight(20);
+                        skListView.addFooterView(padding);
+                        Helper.getListViewSize(skListView);
+                    }*/
+
+                    //skListView.addHeaderView();
 
                 }
 

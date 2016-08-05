@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/sp_content_card_view"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="3dp"
+        android:layout_marginLeft="@dimen/feed_item_margin"
+        android:layout_marginRight="@dimen/feed_item_margin"
+
+        android:layout_marginTop="@dimen/feed_item_margin"
+        android:orientation="vertical"
+
+        card_view:cardCornerRadius="4dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:gravity="bottom"
+            android:background="@color/white"
+
+            android:paddingBottom="5dp">
+
+            <FrameLayout
+                android:id="@+id/sp_content_head_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <org.undp_iwomen.iwomen.ui.widget.ResizableImageView
+                    android:id="@+id/sp_content_postImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/feed_item_post_pic_height"
+                    android:background="@drawable/bg_sample"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/bg_sample"
+                    android:visibility="visible" />
+
+                <ProgressBar
+                    android:id="@+id/sp_content_feed_item_progressBar"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+
+                    android:layout_gravity="center"
+                    android:visibility="visible" />
+
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|bottom"
+                    android:background="#8CE91E63"
+                    android:orientation="horizontal"><!-- 33 20% CC 80%-->
+                    <ImageView
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#0000"
+                        android:clickable="false"
+                        android:gravity="left"
+                        android:src="@drawable/ic_star_filled" />
+
+                    <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#0000"
+                        android:clickable="false"
+                        android:text="Done"
+                        android:textColor="@color/white"
+
+                        android:textSize="@dimen/feed_item_profile_name" />
+
+                </LinearLayout>
+
+
+            </FrameLayout>
+
+            <LinearLayout
+
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/sp_content_head_img"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/feed_item_padding_left_right"
+                android:paddingTop="@dimen/feed_item_padding_top_bottom">
+
+                <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                    android:id="@+id/sp_content_txtPostTitle"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_activity_beinspired_new_post_eng"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/feed_item_profile_name"
+                    android:textStyle="bold" />
+
+                <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                    android:id="@+id/sp_content_txtContent"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxEms="30"
+                    android:maxLines="3"
+                    android:paddingTop="@dimen/feed_item_padding_top_bottom"
+                    android:text="@string/app_name"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="@dimen/feed_item_timestamp" />
+
+                <include
+                    layout="@layout/separator"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginRight="@dimen/feed_item_padding_left_right"
+                    android:layout_marginTop="8dp"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <!--<org.undp_iwomen.iwomen.ui.widget.ProfilePictureView
+                        android:id="@+id/profilePic_item"
+                        android:layout_width="@dimen/feed_item_profile_pic"
+                        android:layout_height="@dimen/feed_item_profile_pic"
+
+                        android:layout_marginLeft="@dimen/keyline_1"
+
+                        android:scaleType="fitCenter"></org.undp_iwomen.iwomen.ui.widget.ProfilePictureView>-->
+                    <FrameLayout
+                        android:layout_width="@dimen/feed_item_profile_pic"
+                        android:layout_height="@dimen/feed_item_profile_pic">
+
+                        <org.undp_iwomen.iwomen.ui.widget.ProfilePictureView
+                            android:id="@+id/profilePic"
+                            android:layout_width="@dimen/feed_item_profile_pic"
+                            android:layout_height="@dimen/feed_item_profile_pic"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/place_holder"
+                            android:visibility="gone"></org.undp_iwomen.iwomen.ui.widget.ProfilePictureView>
+
+                        <com.makeramen.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/profilePic_rounded"
+                            android:layout_width="@dimen/feed_item_profile_pic"
+                            android:layout_height="@dimen/feed_item_profile_pic"
+
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/blank_profile"
+                            android:visibility="visible"
+                            app:riv_border_color="#333333"
+                            app:riv_border_width="0dip"
+                            app:riv_corner_radius="30dip"
+                            app:riv_mutate_background="true"
+                            app:riv_oval="true"></com.makeramen.RoundedImageView>
+
+                        <ProgressBar
+                            android:id="@+id/sp_content_progressBar_profile_item"
+                            style="?android:attr/progressBarStyle"
+                            android:layout_width="@dimen/feed_item_profile_pic"
+                            android:layout_height="@dimen/feed_item_profile_pic"
+
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_gravity="left"
+                            android:visibility="visible" />
+                    </FrameLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="@dimen/feed_item_profile_pic"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingLeft="@dimen/feed_item_profile_info_padd">
+
+                        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                            android:id="@+id/sp_content_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="left"
+                            android:text="@string/tlg_group_name_eng"
+                            android:textColor="@color/secondary_text"
+                            android:textSize="@dimen/feed_item_profile_name"
+                            android:textStyle="bold" />
+
+                        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                            android:id="@+id/sp_content_timestamp"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="right"
+                            android:paddingRight="@dimen/keyline_1"
+                            android:text="Jun 22,2014"
+                            android:textColor="@color/timestamp"
+                            android:textSize="@dimen/feed_item_timestamp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

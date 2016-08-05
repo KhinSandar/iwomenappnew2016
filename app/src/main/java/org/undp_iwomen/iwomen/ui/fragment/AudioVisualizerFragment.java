@@ -74,19 +74,21 @@ public class AudioVisualizerFragment extends DialogFragment {
 
                 if(mAudioControl.getText().equals("Play")){
                     if (mPlayer != null) {
-                        mVisualizer.release();
-                        mPlayer.release();
-                        mPlayer = null;
+                        mPlayer.start();
+                        //setupVisualizerFxAndUI();
+                        mVisualizer.setEnabled(true);
+                    }else{
+                        initMediaPlayer();
                     }
-                    initMediaPlayer();
+                    mAudioControl.setText("Pause");
+
                 }
                 else if(mAudioControl.getText().equals("Loading...")){
 
                 }else{//Pause State
                     if (mPlayer != null) {
-                        mVisualizer.release();
-                        mPlayer.release();
-                        mPlayer = null;
+                        mPlayer.pause();
+                        mVisualizer.setEnabled(false);
                     }
                     mAudioControl.setText("Play");
                 }
@@ -98,7 +100,7 @@ public class AudioVisualizerFragment extends DialogFragment {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 if(fromUser && mPlayer != null){
-                    mPlayer.seekTo(progress);
+                    mPlayer.seekTo(progress*1000);
                 }
             }
 
@@ -143,7 +145,7 @@ public class AudioVisualizerFragment extends DialogFragment {
                 mSeekbar.setMax(mPlayer.getDuration() / 1000);
                 mSeekbar.setProgress(0);
 
-                mAudioControl.setText("Stop");
+                mAudioControl.setText("Pause");
 
                 final Handler mHandler = new Handler();
 
