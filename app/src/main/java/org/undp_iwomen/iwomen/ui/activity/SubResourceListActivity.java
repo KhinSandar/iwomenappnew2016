@@ -159,6 +159,7 @@ public class SubResourceListActivity extends BaseActionBarActivity {
                 //intent.putExtra("ImgUrl", mImgurl.get(getPosition()));
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("likeCount",SubResourceItems.get(i).getLikes());
 
                 intent.putExtra("post_type", "subResourcePost");
                 intent.putExtra("postObj", new Gson().toJson(adapterView.getAdapter().getItem(i)));
@@ -207,7 +208,10 @@ public class SubResourceListActivity extends BaseActionBarActivity {
                         SubResourceItems.clear();
                         zPDialog.dismissWithSuccess();
                     }*/
-                    Log.e("SubResour---->>>",subResourceItems.get(0).toString());
+                  /* for(int i=0; i < subResourceItems.size(); i++){
+                        Log.e("SubResource---->>>"," "+subResourceItems.get(i).toString());
+                    }*/
+
 
                     SubResourceItems.addAll(subResourceItems);
                     mAdapter.notifyDataSetChanged();

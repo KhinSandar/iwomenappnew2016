@@ -253,7 +253,7 @@
 
     <!-- Register Login Hint-->
     <string name="register_name_hint">အမည္</string>
-    <string name="register_ph_hint">ဖုုန္း နံပါတ္</string>
+    <string name="register_ph_hint">ဖုန္းနံပါတ္အမွန္ရိုက္ထည့္ပါ မဟုတ္လွ်င္ဆုရရွိမည္မဟုတ္ပါ္</string>
 
 
     <string name="register_title">အမည္</string>

@@ -102,6 +102,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:text="Body text "
+            android:lineSpacingExtra="6sp"
             android:autoLink="web" />
 
         </LinearLayout>

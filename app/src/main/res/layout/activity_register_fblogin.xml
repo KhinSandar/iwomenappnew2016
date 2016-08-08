@@ -123,11 +123,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif"
-
                     android:hint="@string/register_ph_hint"
-
                     android:inputType="phone"
-                    android:maxLength="15"
                     android:nextFocusDown="@+id/register_fb_next_button"
                     android:nextFocusForward="@+id/register_fb_next_button"
                     android:selectAllOnFocus="true"

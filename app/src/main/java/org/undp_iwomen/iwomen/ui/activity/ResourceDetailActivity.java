@@ -261,7 +261,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
         mSocialNoEarLikeAnimatedButton = (AnimatedButton) findViewById(R.id.social_no_ear_like_animated_button);
         mSocialNoEarLikeAnimatedButton.setEnabled(true);
 
-        txt_social_no_ear_like_counts = (TextView) findViewById(R.id.social_no_ear_like_txt);
+        //txt_social_no_ear_like_counts = (TextView) findViewById(R.id.social_no_ear_like_animated_button);
 
         //TODO id
         Intent intent = getIntent();
@@ -270,13 +270,14 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
         if (bundle != null) {
             subResouceItemObj = new Gson().fromJson(bundle.getString("postObj"), SubResourceItem.class);
         }
+        Log.e("SubResource---->>>"," "+subResouceItemObj.getLikes().toString());
         postType = i.getStringExtra("post_type");
         postId = subResouceItemObj.getId().toString();// i.getStringExtra("post_id");
         postObjId = subResouceItemObj.getObjectId();
         if(subResouceItemObj.getLikes() != null){
-            txt_social_no_ear_like_counts.setText(String.valueOf(subResouceItemObj.getLikes()));
+            mSocialNoEarLikeAnimatedButton.setText(subResouceItemObj.getLikes().toString());
         }else{
-            txt_social_no_ear_like_counts.setText("0");
+            mSocialNoEarLikeAnimatedButton.setText("0");
         }
 
         mSocialNoEarLikeAnimatedButton.setCallbackListener(new AnimatedButton.Callbacks() {
@@ -292,10 +293,8 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
                         SMKserverAPI.getInstance().getService().postiWomenResourceLike(postId, user_id, new Callback<LikeItem>() {
                             @Override
                             public void success(LikeItem item, Response response) {
-                                Log.i("Like >>>>",String.valueOf(subResouceItemObj.getLikes())+1);
-                                txt_social_no_ear_like_counts.setText(String.valueOf(subResouceItemObj.getLikes() + 1));
-                                mSocialNoEarLikeAnimatedButton.setText(String.valueOf(subResouceItemObj.getLikes() + 1));
 
+                                mSocialNoEarLikeAnimatedButton.setText(String.valueOf(subResouceItemObj.getLikes() + 1));
                                 mSocialNoEarLikeAnimatedButton.setEnabled(false);
                                 mSocialNoEarLikeAnimatedButton.setOnClickListener(ResourceDetailActivity.this);
 
@@ -312,9 +311,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
                             @Override
                             public void success(LikeItem item, Response response) {
 
-                                txt_social_no_ear_like_counts.setText(String.valueOf(subResouceItemObj.getLikes() + 1));
                                 mSocialNoEarLikeAnimatedButton.setText(String.valueOf(subResouceItemObj.getLikes() + 1));
-
                                 mSocialNoEarLikeAnimatedButton.setEnabled(false);
                                 mSocialNoEarLikeAnimatedButton.setOnClickListener(ResourceDetailActivity.this);
 
