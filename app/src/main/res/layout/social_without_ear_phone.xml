@@ -14,7 +14,7 @@
         android:layout_weight="1"
         app:src="@drawable/ic_heart_rate_off_18dp"
         app:srcChecked="@drawable/ic_heart_rate_on_18dp"
-        app:text="0" />
+        app:text="2" />
 
     <TextView
         android:id="@+id/social_no_ear_like_txt"
