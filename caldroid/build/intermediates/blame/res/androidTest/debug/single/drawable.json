@@ -24,12 +24,12 @@
         "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/build/intermediates/bundles/debug/res/drawable/disable_cell.xml"
     },
     {
-        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/build/intermediates/res/merged/androidTest/debug/drawable/right_arrow.xml",
-        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/build/intermediates/bundles/debug/res/drawable/right_arrow.xml"
-    },
-    {
         "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/build/intermediates/res/merged/androidTest/debug/drawable/red_border_gray_bg.xml",
         "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/build/intermediates/bundles/debug/res/drawable/red_border_gray_bg.xml"
+    },
+    {
+        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/build/intermediates/res/merged/androidTest/debug/drawable/right_arrow.xml",
+        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/build/intermediates/bundles/debug/res/drawable/right_arrow.xml"
     },
     {
         "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/build/intermediates/res/merged/androidTest/debug/drawable/red_border.xml",

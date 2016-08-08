@@ -24,6 +24,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.style.URLSpan;
+import android.text.util.Linkify;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -444,18 +445,19 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
         //TODO Social With No earing
         txt_social_no_ear_like = (TextView) findViewById(R.id.social_no_ear_like_txt);
-        mSocialNoEarLikeAnimatedButton = (AnimatedButton) findViewById(R.id.social_no_ear_like_animated_button);
+
         txt_social_no_ear_comment = (TextView) findViewById(R.id.social_no_ear_comment_txt);
         txt_social_no_ear_share = (TextView) findViewById(R.id.social_no_ear_share_txt);
         img_social_no_ear_fb = (ImageView) findViewById(R.id.social_no_ear_share_img);
         img_social_no_ear_viber = (ImageView) findViewById(R.id.social_no_ear_viber_img);
         img_social_audio = (ImageView) findViewById(R.id.social_audio);
+        mSocialNoEarLikeAnimatedButton = (AnimatedButton)findViewById(R.id.social_no_ear_like_animated_button);
 
         strLang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
 
         mLikeAnimatedButton = (AnimatedButton) findViewById(R.id.postdetail_like_animated_button);
         mLikeAnimatedButton.setEnabled(true);
-        mSocialNoEarLikeAnimatedButton.setEnabled(true);
+       mSocialNoEarLikeAnimatedButton.setEnabled(true);
 
         //TODO id
         Intent i = getIntent();
@@ -791,6 +793,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
             //post_timestamp.setText(item.getCreated_at());
             mPostTile.setText(item.getTitle());
             post_content.setText(item.getContent());
+            Linkify.addLinks(post_content, Linkify.WEB_URLS);
             et_comment.setHint(R.string.post_detail_comment_eng);
 
             txt_like_count.setText(item.getLikes() + "");
@@ -2032,6 +2035,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
                 break;
             case R.id.social_viber:
+                Log.i("Social Viber:","");
 
                 try {
                     Intent intent = new Intent("android.intent.action.VIEW");

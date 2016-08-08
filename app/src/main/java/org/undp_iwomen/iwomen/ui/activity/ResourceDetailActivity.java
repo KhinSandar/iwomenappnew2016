@@ -1,13 +1,16 @@
 package org.undp_iwomen.iwomen.ui.activity;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,23 +18,44 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareButton;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.google.android.gms.plus.model.people.Person;
+import com.google.gson.Gson;
 import com.makeramen.RoundedImageView;
+import com.smk.model.CommentItem;
 import com.squareup.picasso.Picasso;
+import com.thuongnh.zprogresshud.ZProgressHUD;
 
+import org.smk.application.StoreUtil;
 import org.smk.iwomen.BaseActionBarActivity;
+import org.smk.model.IWomenPost;
+import org.smk.model.LikeItem;
+import org.smk.model.SubResourceItem;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.manager.MainApplication;
 import org.undp_iwomen.iwomen.model.MyTypeFace;
+import org.undp_iwomen.iwomen.model.retrofit_api.SMKserverAPI;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
+import org.undp_iwomen.iwomen.ui.widget.animatedbutton.AnimatedButton;
+import org.undp_iwomen.iwomen.utils.Connection;
 import org.undp_iwomen.iwomen.utils.Utils;
 import org.w3c.dom.Text;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 
 public class ResourceDetailActivity extends BaseActionBarActivity implements View.OnClickListener {
@@ -63,7 +87,13 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
 
     String share_data;
     String share_img_url_data;
-
+    private AnimatedButton mSocialNoEarLikeAnimatedButton;
+    private SubResourceItem subResouceItemObj;
+    private String postId, postObjId, like_status, postType;
+    private String user_name, user_obj_id, user_ph, user_id,userprofile_Image_path;
+    private SharedPreferences mSharedPreferencesUserInfo;
+    private TextView txt_social_no_ear_like_counts;
+    private ImageView img_viber_share;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,13 +144,18 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
 
         lysocial = (LinearLayout)findViewById(R.id.tipdetail_ly_social);
 
-        txtBody.setMovementMethod(LinkMovementMethod.getInstance());
-
         // Google Analytics
         MainApplication application = (MainApplication) getApplication();
         Tracker mTracker = application.getDefaultTracker();
         mTracker.setScreenName("Resource Detail ~ "+ mstrTitleEng);
         mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+
+        mSharedPreferencesUserInfo = getSharedPreferences(CommonConfig.SHARE_PREFERENCE_USER_INFO, Context.MODE_PRIVATE);
+
+        user_name = mSharedPreferencesUserInfo.getString(CommonConfig.USER_NAME, null);
+        user_obj_id = mSharedPreferencesUserInfo.getString(CommonConfig.USER_OBJ_ID, null);
+        user_id = mSharedPreferencesUserInfo.getString(CommonConfig.USER_ID, null);
+        userprofile_Image_path = mSharedPreferencesUserInfo.getString(CommonConfig.USER_UPLOAD_IMG_URL, null);
 
 
         txtName.setVisibility(View.GONE);
@@ -130,6 +165,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
 
             textViewTitle.setText(mstrTitleEng);
             txtBody.setText(mstrContentEng);
+            Linkify.addLinks(txtBody, Linkify.WEB_URLS);
             txtName.setText(mstrSubResourceTitleEng);
 
             textViewTitle.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
@@ -210,20 +246,95 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
                 }
             }
         });
-
+        img_viber_share = (ImageView) findViewById(R.id.social_no_ear_viber_img);
+        img_viber_share.setOnClickListener(this);
 
         txtSocialShare =(CustomTextView)findViewById(R.id.social_no_ear_share_txt);
         txtSocialShare.setOnClickListener(this);
 
         shareButton = (ShareButton) findViewById(R.id.social_no_ear_fb_share_button);
+        shareButton.setShareContent(getLinkContent());
 
         img_social_no_ear_share = (ImageView) findViewById(R.id.social_no_ear_share_img);
         img_social_no_ear_share.setOnClickListener(this);
 
-        shareButton.setShareContent(getLinkContent());
+        mSocialNoEarLikeAnimatedButton = (AnimatedButton) findViewById(R.id.social_no_ear_like_animated_button);
+        mSocialNoEarLikeAnimatedButton.setEnabled(true);
+
+        txt_social_no_ear_like_counts = (TextView) findViewById(R.id.social_no_ear_like_txt);
+
+        //TODO id
+        Intent intent = getIntent();
+
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            subResouceItemObj = new Gson().fromJson(bundle.getString("postObj"), SubResourceItem.class);
+        }
+        postType = i.getStringExtra("post_type");
+        postId = subResouceItemObj.getId().toString();// i.getStringExtra("post_id");
+        postObjId = subResouceItemObj.getObjectId();
+        if(subResouceItemObj.getLikes() != null){
+            txt_social_no_ear_like_counts.setText(String.valueOf(subResouceItemObj.getLikes()));
+        }else{
+            txt_social_no_ear_like_counts.setText("0");
+        }
+
+        mSocialNoEarLikeAnimatedButton.setCallbackListener(new AnimatedButton.Callbacks() {
+            @Override
+            public void onClick() {
+                {
+
+                    if (postType.equalsIgnoreCase("subResourcePost")) {
+
+                        //Check status
+
+                        //
+                        SMKserverAPI.getInstance().getService().postiWomenResourceLike(postId, user_id, new Callback<LikeItem>() {
+                            @Override
+                            public void success(LikeItem item, Response response) {
+                                Log.i("Like >>>>",String.valueOf(subResouceItemObj.getLikes())+1);
+                                txt_social_no_ear_like_counts.setText(String.valueOf(subResouceItemObj.getLikes() + 1));
+                                mSocialNoEarLikeAnimatedButton.setText(String.valueOf(subResouceItemObj.getLikes() + 1));
+
+                                mSocialNoEarLikeAnimatedButton.setEnabled(false);
+                                mSocialNoEarLikeAnimatedButton.setOnClickListener(ResourceDetailActivity.this);
+
+                            }
+
+                            @Override
+                            public void failure(RetrofitError error) {
+
+                            }
+                        });
+
+                    } else {
+                        SMKserverAPI.getInstance().getService().postPostsLike(postId, user_id, new Callback<LikeItem>() {
+                            @Override
+                            public void success(LikeItem item, Response response) {
+
+                                txt_social_no_ear_like_counts.setText(String.valueOf(subResouceItemObj.getLikes() + 1));
+                                mSocialNoEarLikeAnimatedButton.setText(String.valueOf(subResouceItemObj.getLikes() + 1));
+
+                                mSocialNoEarLikeAnimatedButton.setEnabled(false);
+                                mSocialNoEarLikeAnimatedButton.setOnClickListener(ResourceDetailActivity.this);
+
+                            }
+
+                            @Override
+                            public void failure(RetrofitError error) {
+
+                            }
+                        });
+                    }
+                }
+
+            }
+        });
 
 
     }
+
+
 
     private void shareTextUrl() {
         Intent share = new Intent(Intent.ACTION_SEND);
@@ -304,12 +415,48 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            case R.id.social_no_ear_like_animated_button:
+                if (Connection.isOnline(getApplicationContext())) {
+
+
+                } else {
+                    if (strLang.equals(Utils.ENG_LANG)) {
+                        Utils.doToastEng(getApplicationContext(), getResources().getString(R.string.open_internet_warning));
+                    } else {
+
+                        Utils.doToastMM(getApplicationContext(), getResources().getString(R.string.open_internet_warning_mm));
+                    }
+                }
+
+                break;
             case R.id.social_no_ear_share_txt:
                 shareTextUrl();
                 break;
             case R.id.social_no_ear_share_img:
-
                 shareButton.performClick();
+                break;
+            case R.id.social_no_ear_viber_img:
+
+                try {
+                    Intent intent = new Intent("android.intent.action.VIEW");
+                    intent.setClassName("com.viber.voip", "com.viber.voip.WelcomeActivity");
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    //FLAG_ACTIVITY_NEW_TASK
+                    //intent.setData(uri);
+                    if (txtBody.getText().length() > 20) {
+                        share_data = txtBody.getText().toString().substring(0, 12) + " ...";
+                    } else {
+                        share_data = txtBody.getText().toString();
+                    }
+                    intent.putExtra(Intent.EXTRA_SUBJECT, share_data + "...");//Title Of The Post
+                    intent.putExtra(Intent.EXTRA_TEXT, CommonConfig.SHARE_URL);
+                    intent.setType("text/plain");
+                    getApplicationContext().startActivity(intent);
+                    Log.i("Resource Detail","Viber Complete");
+                } catch (ActivityNotFoundException ex) {
+                    Log.i("Social Viber",""+ex);
+                }
                 break;
         }
 

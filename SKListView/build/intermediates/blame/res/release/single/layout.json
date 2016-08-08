@@ -84,12 +84,12 @@
         "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/res/layout/loading_bottom.xml"
     },
     {
-        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/res/merged/release/layout/abc_action_bar_title_item.xml",
-        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.2/res/layout/abc_action_bar_title_item.xml"
-    },
-    {
         "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/res/merged/release/layout/support_simple_spinner_dropdown_item.xml",
         "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.2/res/layout/support_simple_spinner_dropdown_item.xml"
+    },
+    {
+        "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/res/merged/release/layout/abc_action_bar_title_item.xml",
+        "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.2/res/layout/abc_action_bar_title_item.xml"
     },
     {
         "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/SKListView/build/intermediates/res/merged/release/layout/abc_search_dropdown_item_icons_2line.xml",

@@ -27,7 +27,7 @@
         android:id="@+id/social_no_ear_comment_txt"
         style="@style/PostDetailIconStyle"
         android:drawableLeft="@drawable/ic_comment"
-        android:text="12" />
+        android:text="0" />
 
     <org.undp_iwomen.iwomen.ui.widget.CustomTextView
         android:id="@+id/social_no_ear_share_txt"
