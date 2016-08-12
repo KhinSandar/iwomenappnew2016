@@ -6,6 +6,7 @@ import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.support.design.widget.TabLayout;
 import android.util.Log;
 
 import org.undp_iwomen.iwomen.CommonConfig;
@@ -33,6 +34,7 @@ public class IwomenProvider extends ContentProvider {
     private final int RESOURCE = 4001;
     private final int SUBRESOURCE = 4002;
     private final int SISTERAPP = 4003;
+    private final int SUB_RESOURCE_DETAIL = 4004;
 
     private UriMatcher matcher = buildMatcher();
 
@@ -67,6 +69,8 @@ public class IwomenProvider extends ContentProvider {
                 return IwomenProviderData.SubResourceProvider.CONTENT_TYPE;
             case SISTERAPP:
                 return IwomenProviderData.SisterAppProvider.CONTENT_TYPE;
+            case SUB_RESOURCE_DETAIL:
+                return IwomenProviderData.SubResourceDetailProvider.CONTENT_TYPE;
 
             default:
                 throw new UnsupportedOperationException(" = = = Unknow Uri : " + uri);
@@ -167,6 +171,12 @@ public class IwomenProvider extends ContentProvider {
                 }
                 return IwomenProviderData.SisterAppProvider.buildContentUri(contentValues.getAsString(TableAndColumnsName.SisterAppUtil.SISTER_APP_OBJ_ID));
 
+            case SUB_RESOURCE_DETAIL:
+                id = db.insert(TableAndColumnsName.TableNames.SUBRESOURCEDETAIL, null, contentValues);
+                if (id > 0) {
+                    Log.e(uri.toString(), " SUB_RESOURCE_DETAIL complete insert :>  " + id);
+                }
+                return IwomenProviderData.SubResourceDetailProvider.buildContentUri(contentValues.getAsString(TableAndColumnsName.SubResourceDetailUtil.SUB_RESOURCE_ID));
             default:
                 throw new UnsupportedOperationException("Unknown Uri : " + uri);
 
@@ -228,6 +238,7 @@ public class IwomenProvider extends ContentProvider {
         matcher.addURI(CommonConfig.AUTHORITY, "resource", RESOURCE);
         matcher.addURI(CommonConfig.AUTHORITY, "sub_resource", SUBRESOURCE);
         matcher.addURI(CommonConfig.AUTHORITY, "sisterapp", SISTERAPP);
+        matcher.addURI(CommonConfig.AUTHORITY, "sub_resource_detail", SUB_RESOURCE_DETAIL);
 
         return matcher;
     }
@@ -254,6 +265,8 @@ public class IwomenProvider extends ContentProvider {
                 return sb.table(TableAndColumnsName.TableNames.SUBRESOURCE);
             case SISTERAPP:
                 return sb.table(TableAndColumnsName.TableNames.SISTERAPP);
+            case SUB_RESOURCE_DETAIL:
+                return sb.table(TableAndColumnsName.TableNames.SUBRESOURCEDETAIL);
 
 
             default:

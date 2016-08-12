@@ -151,7 +151,7 @@ public class CommonConfig {
 
     public static final String GET_PRIZE_POINT= "/api/v1/pointPrices";
 
-    public static final String POST_IWOMEN_RESOURCE_LIKE = "/api/v1/resourceLikes";
+    public static final String POST_IWOMEN_SUBRESOURCE_DETAIL_LIKES = "/api/v1/subResourceDetailLikes";
 
 
 }

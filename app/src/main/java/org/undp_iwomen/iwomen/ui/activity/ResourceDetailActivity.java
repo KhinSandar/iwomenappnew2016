@@ -1,11 +1,16 @@
 package org.undp_iwomen.iwomen.ui.activity;
 
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.BaseColumns;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.method.LinkMovementMethod;
@@ -14,12 +19,16 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.algo.hha.emojiicon.EmojiconEditText;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareButton;
 import com.google.android.gms.analytics.HitBuilders;
@@ -32,16 +41,24 @@ import com.squareup.picasso.Picasso;
 import com.thuongnh.zprogresshud.ZProgressHUD;
 
 import org.smk.application.StoreUtil;
+import org.smk.clientapi.NetworkEngine;
 import org.smk.iwomen.BaseActionBarActivity;
 import org.smk.model.IWomenPost;
 import org.smk.model.LikeItem;
+import org.smk.model.Sticker;
 import org.smk.model.SubResourceItem;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.manager.MainApplication;
+import org.undp_iwomen.iwomen.model.Helper;
 import org.undp_iwomen.iwomen.model.MyTypeFace;
 import org.undp_iwomen.iwomen.model.retrofit_api.SMKserverAPI;
+import org.undp_iwomen.iwomen.model.retrofit_api.SMKserverStringConverterAPI;
+import org.undp_iwomen.iwomen.provider.IwomenProviderData;
+import org.undp_iwomen.iwomen.ui.adapter.CommentAdapter;
+import org.undp_iwomen.iwomen.ui.adapter.StickerGridViewAdapter;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
+import org.undp_iwomen.iwomen.ui.widget.ProgressWheel;
 import org.undp_iwomen.iwomen.ui.widget.animatedbutton.AnimatedButton;
 import org.undp_iwomen.iwomen.utils.Connection;
 import org.undp_iwomen.iwomen.utils.Utils;
@@ -49,6 +66,7 @@ import org.w3c.dom.Text;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -94,6 +112,22 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
     private SharedPreferences mSharedPreferencesUserInfo;
     private TextView txt_social_no_ear_like_counts;
     private ImageView img_viber_share;
+
+    private Cursor cursorMain;
+    public ImageView emojiIconToggle;
+    //Sticker
+    public RoundedImageView stickerImg;
+    private LinearLayout ly_sticker_holder;
+    private EmojiconEditText et_comment;
+    private ImageView img_comment_submit;
+    private boolean alreadySticker = false;
+
+    //TODO Comment
+    ListView listView_Comment;
+    private int paginater = 1;
+    private List<com.smk.model.CommentItem> listComment;
+    private CommentAdapter adapter;
+    private ProgressWheel progressWheel_comment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -246,6 +280,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
                 }
             }
         });
+        //Linn Wah
         img_viber_share = (ImageView) findViewById(R.id.social_no_ear_viber_img);
         img_viber_share.setOnClickListener(this);
 
@@ -261,11 +296,6 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
         mSocialNoEarLikeAnimatedButton = (AnimatedButton) findViewById(R.id.social_no_ear_like_animated_button);
         mSocialNoEarLikeAnimatedButton.setEnabled(true);
 
-        //txt_social_no_ear_like_counts = (TextView) findViewById(R.id.social_no_ear_like_animated_button);
-
-        //TODO id
-        Intent intent = getIntent();
-
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             subResouceItemObj = new Gson().fromJson(bundle.getString("postObj"), SubResourceItem.class);
@@ -274,6 +304,16 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
         postType = i.getStringExtra("post_type");
         postId = subResouceItemObj.getId().toString();// i.getStringExtra("post_id");
         postObjId = subResouceItemObj.getObjectId();
+
+         cursorMain = getContentResolver().query(IwomenProviderData.SubResourceDetailProvider.CONTETNT_URI, null, "sub_resource_id = ? AND user_id = ?", new String[]{ postId,user_id },null );
+
+         Log.e("Cursor Count >>>>"," " + cursorMain.getCount());
+        if(cursorMain.getCount() > 0){
+            Toast.makeText(ResourceDetailActivity.this, "Already Like", Toast.LENGTH_SHORT).show();
+            mSocialNoEarLikeAnimatedButton.setEnabled(false);
+            String sqLiteLikeCount = cursorMain.getString(cursorMain.getColumnIndex("like_count"));
+            Log.e("Like Count >>>>"," " + sqLiteLikeCount);
+        }
         if(subResouceItemObj.getLikes() != null){
             mSocialNoEarLikeAnimatedButton.setText(subResouceItemObj.getLikes().toString());
         }else{
@@ -285,35 +325,16 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
             public void onClick() {
                 {
 
-                    if (postType.equalsIgnoreCase("subResourcePost")) {
-
-                        //Check status
-
-                        //
-                        SMKserverAPI.getInstance().getService().postiWomenResourceLike(postId, user_id, new Callback<LikeItem>() {
+                        SMKserverStringConverterAPI.getInstance().getService().postiWomenSubResourceDetailLikes(postId, user_id, new Callback<String>() {
                             @Override
-                            public void success(LikeItem item, Response response) {
-
-                                mSocialNoEarLikeAnimatedButton.setText(String.valueOf(subResouceItemObj.getLikes() + 1));
+                            public void success(String item, Response response) {
+                                Log.e("ResourceLike>>",item);
+                                mSocialNoEarLikeAnimatedButton.setEnabled(false);
+                                mSocialNoEarLikeAnimatedButton.setText(item);
                                 mSocialNoEarLikeAnimatedButton.setEnabled(false);
                                 mSocialNoEarLikeAnimatedButton.setOnClickListener(ResourceDetailActivity.this);
+                                saveLikeStatusToSQLite(postId,user_id,item);
 
-                            }
-
-                            @Override
-                            public void failure(RetrofitError error) {
-
-                            }
-                        });
-
-                    } else {
-                        SMKserverAPI.getInstance().getService().postPostsLike(postId, user_id, new Callback<LikeItem>() {
-                            @Override
-                            public void success(LikeItem item, Response response) {
-
-                                mSocialNoEarLikeAnimatedButton.setText(String.valueOf(subResouceItemObj.getLikes() + 1));
-                                mSocialNoEarLikeAnimatedButton.setEnabled(false);
-                                mSocialNoEarLikeAnimatedButton.setOnClickListener(ResourceDetailActivity.this);
 
                             }
 
@@ -323,14 +344,71 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
                             }
                         });
                     }
-                }
 
-            }
+                }
         });
 
+       /* listView_Comment = (ListView) findViewById(R.id.postdetail_comment_listview);
+        progressWheel_comment = (ProgressWheel) findViewById(R.id.postdetail_progress_wheel_comment);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            listView_Comment.setNestedScrollingEnabled(true);
+        }
+
+        listComment = new ArrayList<>();
+        adapter = new CommentAdapter(ResourceDetailActivity.this, listComment);
+        listView_Comment.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+        getCommentByPagination();*/
 
     }
+    public void getCommentByPagination() {
+        if (Connection.isOnline(mContext)) {
+            progressWheel_comment.setVisibility(View.VISIBLE);
+            //TODO BY POST ID
 
+            NetworkEngine.getInstance().getCommentlistByPostIDByPagination(paginater, postObjId, new Callback<List<com.smk.model.CommentItem>>() {
+                @Override
+                public void success(List<com.smk.model.CommentItem> commentItems, Response response) {
+
+                    listComment = new ArrayList<>();
+                    listComment.addAll(commentItems);
+                    adapter = new CommentAdapter(ResourceDetailActivity.this, listComment);
+                    listView_Comment.setAdapter(adapter);
+
+                    progressWheel_comment.setVisibility(View.INVISIBLE);
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        listView_Comment.setNestedScrollingEnabled(true);
+                    } else {
+
+                    }
+                    Helper.getListViewSize(listView_Comment);
+
+                    StoreUtil.getInstance().saveTo("commentlist", listComment);
+                    //TODO get sticker for comment
+                   /* if (!alreadySticker)
+                       LoadStickerData();*/
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    progressWheel_comment.setVisibility(View.INVISIBLE);
+                }
+            });
+        } else {
+            //SKConnectionDetector.getInstance(this).showErrorMessage();
+        }
+    }
+
+    private void saveLikeStatusToSQLite(String postId, String user_id, String item) {
+        ContentValues cv = new ContentValues();
+        cv.put("sub_resource_id",postId);
+        cv.put("user_id",user_id);
+        cv.put("like_count",item);
+        cv.put("status","1");
+        getContentResolver().insert(IwomenProviderData.SubResourceDetailProvider.CONTETNT_URI, cv);
+    }
 
 
     private void shareTextUrl() {
@@ -418,10 +496,10 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
 
                 } else {
                     if (strLang.equals(Utils.ENG_LANG)) {
-                        Utils.doToastEng(getApplicationContext(), getResources().getString(R.string.open_internet_warning));
+                        Utils.doToastEng(getApplicationContext(), getResources().getString(R.string.no_connection));
                     } else {
 
-                        Utils.doToastMM(getApplicationContext(), getResources().getString(R.string.open_internet_warning_mm));
+                        Utils.doToastMM(getApplicationContext(), getResources().getString(R.string.no_connection_mm));
                     }
                 }
 

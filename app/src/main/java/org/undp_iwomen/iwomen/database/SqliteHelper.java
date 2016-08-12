@@ -28,6 +28,7 @@ public class SqliteHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(TableAndColumnsName.ResourceUtil.CREATE_RESOURCE_TABLE);
         sqLiteDatabase.execSQL(TableAndColumnsName.SubResourceUtil.CREATE_SUB_RESOURCE_TABLE);
         sqLiteDatabase.execSQL(TableAndColumnsName.SisterAppUtil.CREATE_SISTERAPP_TABLE);
+        sqLiteDatabase.execSQL(TableAndColumnsName.SubResourceDetailUtil.CREATE_SUB_RESOURCE_DETAIL);
 
     }
 
@@ -44,6 +45,7 @@ public class SqliteHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("Drop Table If Exists " + TableAndColumnsName.TableNames.SUBRESOURCE);
 
         sqLiteDatabase.execSQL("Drop Table If Exists " + TableAndColumnsName.TableNames.SISTERAPP);
+        sqLiteDatabase.execSQL("Drop Table If Exists " + TableAndColumnsName.TableNames.SUBRESOURCEDETAIL);
 
     }
 
