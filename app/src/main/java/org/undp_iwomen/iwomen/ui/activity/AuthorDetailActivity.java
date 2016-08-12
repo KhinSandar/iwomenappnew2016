@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.util.Linkify;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -168,10 +169,12 @@ public class AuthorDetailActivity extends BaseActionBarActivity {
 
             txtAuthorTitle.setText(item.getAuthorTitleEng());
             txtBody.setText(item.getAuthorInfoEng());
+            Linkify.addLinks(txtBody, Linkify.WEB_URLS);
 
         } else {
             txtAuthorTitle.setText(item.getAuthorTitleMM());
             txtBody.setText(item.getAuthorInfoMM());
+            Linkify.addLinks(txtBody, Linkify.WEB_URLS);
         }
 
         if(item.getOrganizationName()!= null && item.getOrganizationNameMm() != null && item.getOrganizationNameMm() != ""
@@ -224,7 +227,7 @@ public class AuthorDetailActivity extends BaseActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.refresh_menu, menu);
+        getMenuInflater().inflate(R.menu.authordetail_refresh_menu, menu);
         return true;
     }
 

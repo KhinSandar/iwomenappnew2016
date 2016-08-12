@@ -146,5 +146,7 @@
     <color name="theme_window_background">#fff</color>
     <color name ="text_sub_head_color">#444444</color>
 
+    <color name="week_special">#f48eb1</color>
+
 
 </resources>

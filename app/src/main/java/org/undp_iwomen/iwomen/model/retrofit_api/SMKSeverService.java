@@ -1,6 +1,7 @@
 package org.undp_iwomen.iwomen.model.retrofit_api;
 
 import com.smk.model.CommentItem;
+import com.smk.model.ResourceItem;
 
 import org.smk.model.CalendarEvent;
 import org.smk.model.IWomenPost;
@@ -130,6 +131,13 @@ public interface SMKSeverService {
             Callback<LikeItem> callback);
 
     @FormUrlEncoded
+    @POST(CommonConfig.POST_IWOMEN_RESOURCE_LIKE)
+    void postiWomenResourceLike(
+            @Field("postId") String postId,
+            @Field("userId") String userId,
+            Callback<LikeItem> callback);
+
+    @FormUrlEncoded
     @POST(CommonConfig.POST_POSTS_LIKE)
     void postPostsLike(
             @Field("postId") String postId,
@@ -157,4 +165,14 @@ public interface SMKSeverService {
     void getPrizePoints(
 
             Callback<List<PrizePointsItem>> callback);
+
+    @GET(CommonConfig.GET_WEEKLY_CONTENT_IWOMENPOST)
+    void getWeeklyContentiWomenPost(
+            Callback<IWomenPost> iWomenPostCallback
+    );
+
+    @GET(CommonConfig.GET_WEEKLY_CONTENT_RESOURCE)
+    void getWeeklyContentResource(
+            Callback<ResourceItem> iWomenPostCallback
+    );
 }

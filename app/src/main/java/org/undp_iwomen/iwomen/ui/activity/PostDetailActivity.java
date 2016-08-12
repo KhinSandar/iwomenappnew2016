@@ -1,5 +1,6 @@
 package org.undp_iwomen.iwomen.ui.activity;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -24,6 +25,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.style.URLSpan;
+import android.text.util.Linkify;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -100,7 +102,6 @@ import org.undp_iwomen.iwomen.utils.Connection;
 import org.undp_iwomen.iwomen.utils.StorageUtil;
 import org.undp_iwomen.iwomen.utils.Utils;
 
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
@@ -124,8 +125,8 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     TextView post_img_path;
     TextView post_content_type;
     TextView post_content_user_id;
-    TextView post_content_user_name;
-    TextView post_content_user_role;
+    CustomTextView post_content_user_name;
+    CustomTextView post_content_user_role;
     CustomTextView post_content_user_more_id;
     TextView post_content_posted_date;
     LinearLayout post_content_user_role_ly;
@@ -252,6 +253,9 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
     private final String RECORD_AUDIO = "android.permission.RECORD_AUDIO";
     private final String WRITE_STORAGE = "android.permission.WRITE_EXTERNAL_STORAGE";
+    private final String STORAGE_READ_PERMISSION = "android.permission.READ_EXTERNAL_STORAGE";
+    private final String PREPARE_AUDIO_PERMISSION = "android.permission.MODIFY_AUDIO_SETTINGS";
+
 
     //New UI
     ImageView img_social_facebook;
@@ -381,9 +385,9 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         profile = (RoundedImageView) findViewById(R.id.postdetail_profilePic_rounded);
         mPostTile = (CustomTextView) findViewById(R.id.postdetail_title);
         post_content = (CustomTextView) findViewById(R.id.postdetail_content);
-        post_content_user_name = (TextView) findViewById(R.id.postdetail_content_username);
+        post_content_user_name = (CustomTextView) findViewById(R.id.postdetail_content_username);
         post_content_posted_date = (TextView) findViewById(R.id.postdetail_content_posted_date);
-        post_content_user_role = (TextView) findViewById(R.id.postdetail_content_user_role);
+        post_content_user_role = (CustomTextView) findViewById(R.id.postdetail_content_user_role);
         post_content_user_more_id = (CustomTextView) findViewById(R.id.postdetail_content_user_role_more);
         post_content_user_role_ly = (LinearLayout) findViewById(R.id.postdetail_content_role_more_ly);
 
@@ -440,12 +444,13 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
         //TODO Social With No earing
         txt_social_no_ear_like = (TextView) findViewById(R.id.social_no_ear_like_txt);
-        mSocialNoEarLikeAnimatedButton = (AnimatedButton) findViewById(R.id.social_no_ear_like_animated_button);
+
         txt_social_no_ear_comment = (TextView) findViewById(R.id.social_no_ear_comment_txt);
         txt_social_no_ear_share = (TextView) findViewById(R.id.social_no_ear_share_txt);
         img_social_no_ear_fb = (ImageView) findViewById(R.id.social_no_ear_share_img);
         img_social_no_ear_viber = (ImageView) findViewById(R.id.social_no_ear_viber_img);
         img_social_audio = (ImageView) findViewById(R.id.social_audio);
+        mSocialNoEarLikeAnimatedButton = (AnimatedButton) findViewById(R.id.social_no_ear_like_animated_button);
 
         strLang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
 
@@ -468,7 +473,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         // Google Analytics
         MainApplication application = (MainApplication) getApplication();
         Tracker mTracker = application.getDefaultTracker();
-        mTracker.setScreenName("Post Detail ~ "+ iWomenPost.getTitle());
+        mTracker.setScreenName("Post Detail ~ " + iWomenPost.getTitle());
         mTracker.send(new HitBuilders.ScreenViewBuilder().build());
 
         //TODO for Comment
@@ -684,7 +689,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
         post_content_user_name.setText(item.getPostUploadName());
 
-        post_content_user_role.setText(item.getPostAuthorRole());
+
 
         authorID = item.getAuthorId();
 
@@ -714,7 +719,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
         try {
             Date timedate = format.parse(item.getPostUploadedDate());
-            post_content_posted_date.setText("Posted on " + sdf.format(timedate));
+            post_content_posted_date.setText(sdf.format(timedate));
 
         } catch (ParseException e) {
             e.printStackTrace();
@@ -743,6 +748,8 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
         //TODO TableColumnUpdate 10 data set show in UI
         if (strLang.equals(Utils.ENG_LANG)) {
+
+            post_content_user_role.setText(item.getPostAuthorRole());
             postdetail_username.setTypeface(MyTypeFace.get(getApplicationContext(), MyTypeFace.NORMAL));
 
 
@@ -787,6 +794,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
             //post_timestamp.setText(item.getCreated_at());
             mPostTile.setText(item.getTitle());
             post_content.setText(item.getContent());
+            Linkify.addLinks(post_content, Linkify.WEB_URLS);
             et_comment.setHint(R.string.post_detail_comment_eng);
 
             txt_like_count.setText(item.getLikes() + "");
@@ -834,6 +842,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
         } else {
             // If Language Myanmar case
+            post_content_user_role.setText(item.getPostAuthorRoleMm());
             postdetail_username.setTypeface(MyTypeFace.get(getApplicationContext(), MyTypeFace.ZAWGYI));
 
             if (item.getContentType().equalsIgnoreCase("Letter")) {
@@ -1534,7 +1543,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         try {
             Date timedate = ISO8601Utils.parse(item.getCreated_at().toString(), pp);
 
-            post_content_posted_date.setText("Posted on " + sdf.format(timedate));
+            post_content_posted_date.setText(sdf.format(timedate));
         } catch (java.text.ParseException e) {
             e.printStackTrace();
         }
@@ -1982,6 +1991,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         return super.onOptionsItemSelected(item);
     }
 
+    @TargetApi(Build.VERSION_CODES.M)
     @Override
     public void onClick(View view) {
 
@@ -2028,6 +2038,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
                 break;
             case R.id.social_viber:
+                Log.i("Social Viber:", "");
 
                 try {
                     Intent intent = new Intent("android.intent.action.VIEW");
@@ -2183,16 +2194,13 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                     if (iWomenPost.getPostUploadName().equalsIgnoreCase("Wai Wai")) {
 
 
-
-
                         //MediaPlayer mediaPlayer;
                         if (!isPlaying) {
 
                             mMedia = MediaPlayer.create(this, R.raw.wai_wai_audio);
                             mMedia.start();
-                            if ( mMedia == null)
-                            {
-                                mMedia= MediaPlayer.create(PostDetailActivity.this, R.raw.wai_wai_audio);
+                            if (mMedia == null) {
+                                mMedia = MediaPlayer.create(PostDetailActivity.this, R.raw.wai_wai_audio);
                                 mMedia.setVolume(1.0f, 1.0f);
                                 mMedia.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                                     public void onPrepared(MediaPlayer arg0) {
@@ -2251,9 +2259,8 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
                             /*mMedia = MediaPlayer.create(this, R.raw.wai_wai_audio);
                             mMedia.start();*/
-                            if ( mMedia == null)
-                            {
-                                mMedia= MediaPlayer.create(PostDetailActivity.this, R.raw.wai_wai_audio);
+                            if (mMedia == null) {
+                                mMedia = MediaPlayer.create(PostDetailActivity.this, R.raw.wai_wai_audio);
                                 mMedia.setVolume(1.0f, 1.0f);
                                 mMedia.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                                     public void onPrepared(MediaPlayer arg0) {
@@ -2317,13 +2324,13 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                 break;
 
             case R.id.social_audio:
-                if (mstrAudioFilePath.length() == 10 ) {
+                if (mstrAudioFilePath.length() == 10) {
                     SKToastMessage.showMessage(PostDetailActivity.this, getResources().getString(R.string.resource_coming_soon_eng), SKToastMessage.ERROR);
                 }
 
-                if(!hasPermission(RECORD_AUDIO) || !hasPermission(WRITE_STORAGE)) {
+                if (!hasPermission(RECORD_AUDIO) || !hasPermission(WRITE_STORAGE) || !hasPermission(STORAGE_READ_PERMISSION) || !hasPermission(PREPARE_AUDIO_PERMISSION)) {
                     //if no permission, request permission
-                    String[] perms = {RECORD_AUDIO, WRITE_STORAGE};
+                    String[] perms = {RECORD_AUDIO, WRITE_STORAGE, STORAGE_READ_PERMISSION, PREPARE_AUDIO_PERMISSION};
                     int permsRequestCode = 200;
                     requestPermissions(perms, permsRequestCode);
                     break;
@@ -2336,13 +2343,12 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                     if (mstrAudioFilePath != null && mstrAudioFilePath.length() > 20) {
 
 
-                                Log.e("<<PostDetail>>","<<isPlay>>" + "show audio visualizer dialog");
-                                DialogFragment visualizerFragment = AudioVisualizerFragment.newInstance(mstrAudioFilePath);
-                                visualizerFragment.show(getSupportFragmentManager(), "AudioVisualizer");
+                        Log.e("<<PostDetail>>", "<<isPlay>>" + "show audio visualizer dialog" + mstrAudioFilePath);
+                        DialogFragment visualizerFragment = AudioVisualizerFragment.newInstance(mstrAudioFilePath);
+                        visualizerFragment.show(getSupportFragmentManager(), "AudioVisualizer");
 
 
-
-                    }else{
+                    } else {
                         //TODO Audio File Null case
                         // TODO Auto-generated method stub
                         SKToastMessage.showMessage(PostDetailActivity.this, getResources().getString(R.string.audio_not_availabe_msg), SKToastMessage.INFO);

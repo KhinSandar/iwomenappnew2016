@@ -18,10 +18,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.makeramen.RoundedImageView;
 import com.smk.sklistview.SKListView;
+import com.squareup.picasso.Picasso;
 import com.thuongnh.zprogresshud.ZProgressHUD;
 
 import org.json.JSONArray;
@@ -30,13 +35,16 @@ import org.json.JSONObject;
 import org.smk.clientapi.NetworkEngine;
 import org.smk.iwomen.BaseActionBarActivity;
 import org.smk.model.Rating;
+import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.data.ResourceItem;
 import org.undp_iwomen.iwomen.database.TableAndColumnsName;
 import org.undp_iwomen.iwomen.model.retrofit_api.ResourceAPI;
+import org.undp_iwomen.iwomen.model.retrofit_api.SMKserverAPI;
 import org.undp_iwomen.iwomen.provider.IwomenProviderData;
 import org.undp_iwomen.iwomen.ui.activity.SubResourceListActivity;
 import org.undp_iwomen.iwomen.ui.adapter.ResourcesListViewAdapter;
+import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.utils.Connection;
 import org.undp_iwomen.iwomen.utils.StorageUtil;
 import org.undp_iwomen.iwomen.utils.Utils;
@@ -47,6 +55,8 @@ import java.util.List;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 
 /**
@@ -68,6 +78,15 @@ public class ResourcesFragment extends Fragment {
     private Menu menu;
     private ZProgressHUD zPDialog;
     List<com.smk.model.ResourceItem> StorageresourceItems;
+    public CustomTextView sp_txtName;
+    public RoundedImageView sp_imgIcon;
+    public ProgressBar sp_progressBar;
+
+    private SharedPreferences mSharedPreferencesUserInfo;
+    private SharedPreferences.Editor mEditorUserInfo;
+
+    private String Resourcce_json;
+    private com.smk.model.ResourceItem StorageResourcePostObj;
 
 
     public ResourcesFragment() {
@@ -122,6 +141,7 @@ public class ResourcesFragment extends Fragment {
 
     private void init(View rootView) {
         sharePrefLanguageUtil = getActivity().getSharedPreferences(Utils.PREF_SETTING, Context.MODE_PRIVATE);
+        mSharedPreferencesUserInfo = getActivity().getSharedPreferences(CommonConfig.SHARE_PREFERENCE_USER_INFO, Context.MODE_PRIVATE);
 
         ResourceItems = new ArrayList<>();
         lvResouces = (SKListView) rootView.findViewById(R.id.resource_lv);
@@ -131,6 +151,35 @@ public class ResourcesFragment extends Fragment {
         lvResouces.setCallbacks(skCallbacks);
         lvResouces.setNextPage(true);
         adapter.notifyDataSetChanged();
+
+
+        //Header
+        final LayoutInflater layoutInflater = getActivity().getLayoutInflater();
+
+        View header = layoutInflater.inflate(R.layout.special_content_resources_list_item_view, null);
+        sp_txtName= (CustomTextView)header.findViewById(R.id.sp_resource_item_name);
+        sp_imgIcon = (RoundedImageView) header.findViewById(R.id.sp_resouce_list_item_img);
+        sp_progressBar = (ProgressBar) header.findViewById(R.id.sp_resouce_list_item_progressBar);
+        lvResouces.addHeaderView(header);
+
+        getWeeklyResourcePost();
+
+        header.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, SubResourceListActivity.class);
+
+                Gson gson = new Gson();
+                Resourcce_json = mSharedPreferencesUserInfo.getString(CommonConfig.RESOURCE_ID, null);
+                StorageResourcePostObj  = gson.fromJson(Resourcce_json, com.smk.model.ResourceItem.class);
+                intent.putExtra("ResourceId", StorageResourcePostObj.getObjectId());
+                intent.putExtra("TitleEng", StorageResourcePostObj.getResourceTitleEng());
+                intent.putExtra("TitleMM", StorageResourcePostObj.getResourceTitleMm());
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(intent);
+            }
+        });
 
         //StorageresourceItems = StoreUtil.getInstance().selectFrom("ResourcesList");
         StorageresourceItems = (ArrayList<com.smk.model.ResourceItem>) storageUtil.ReadArrayListFromSD("ResourcesList");
@@ -191,6 +240,82 @@ public class ResourcesFragment extends Fragment {
 
     }
 
+    private void getWeeklyResourcePost() {
+        if (Connection.isOnline(getApplicationContext())) {
+
+            SMKserverAPI.getInstance().getService().getWeeklyContentResource(new Callback<com.smk.model.ResourceItem>() {
+                @Override
+                public void success(com.smk.model.ResourceItem item, Response response) {
+
+                    SetWeeklySpecialResource(item);
+                    mEditorUserInfo = mSharedPreferencesUserInfo.edit();
+                    // convert User object user to JSON format
+                    Gson gson = new Gson();
+                    Resourcce_json = gson.toJson(item);
+                    // store in SharedPreferences
+                    //String id =  "" +  item.getId(); // get storage key
+                    mEditorUserInfo.putString(CommonConfig.RESOURCE_ID, Resourcce_json);
+                    mEditorUserInfo.commit();
+
+
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+
+                }
+            });
+        } else {
+            // do the reverse operation
+            Gson gson = new Gson();
+            Resourcce_json = mSharedPreferencesUserInfo.getString(CommonConfig.RESOURCE_ID, null);
+            StorageResourcePostObj  = gson.fromJson(Resourcce_json, com.smk.model.ResourceItem.class);
+
+            SetWeeklySpecialResource(StorageResourcePostObj);
+
+
+
+
+        }
+    }
+
+    private void SetWeeklySpecialResource(com.smk.model.ResourceItem item){
+        if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+            sp_txtName.setText(item.getResourceTitleEng());
+        }else{//FOR ALL MM FONT
+            sp_txtName.setText(item.getResourceTitleMm());
+
+        }
+
+        sp_imgIcon.setAdjustViewBounds(true);
+        sp_imgIcon.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        if(item.getAuthorImgPath() != null && !item.getAuthorImgPath().isEmpty()) {
+
+            try {
+
+                Picasso.with(mContext)
+                        .load(item.getAuthorImgPath()) //"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
+                        .placeholder(R.drawable.blank_profile)
+                        .error(R.drawable.blank_profile)
+                        .into(sp_imgIcon, new ImageLoadedCallback(sp_progressBar) {
+                            @Override
+                            public void onSuccess() {
+                                if (this.progressBar != null) {
+                                    this.progressBar.setVisibility(View.GONE);
+                                } else {
+                                    this.progressBar.setVisibility(View.VISIBLE);
+                                }
+                            }
+
+                        });
+            } catch (OutOfMemoryError outOfMemoryError) {
+                outOfMemoryError.printStackTrace();
+            }
+        }else{
+            sp_progressBar.setVisibility(View.GONE);
+        }
+
+    }
 
     private void getResourceDataPaginationFromSever() {
         if (Connection.isOnline(mContext)) {
@@ -603,6 +728,24 @@ public class ResourcesFragment extends Fragment {
             ratingOfDesc = getResources().getString(R.string.str_excellent);
         }
         return ratingOfDesc;
+    }
+
+    private class ImageLoadedCallback implements com.squareup.picasso.Callback {
+        ProgressBar progressBar;
+
+        public ImageLoadedCallback(ProgressBar progBar) {
+            progressBar = progBar;
+        }
+
+        @Override
+        public void onSuccess() {
+
+        }
+
+        @Override
+        public void onError() {
+
+        }
     }
 
 

@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 
+import com.google.gson.Gson;
 import com.smk.sklistview.SKListView;
 import com.thuongnh.zprogresshud.ZProgressHUD;
 
@@ -157,6 +159,10 @@ public class SubResourceListActivity extends BaseActionBarActivity {
                 //intent.putExtra("ImgUrl", mImgurl.get(getPosition()));
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("likeCount",SubResourceItems.get(i).getLikes());
+
+                intent.putExtra("post_type", "subResourcePost");
+                intent.putExtra("postObj", new Gson().toJson(adapterView.getAdapter().getItem(i)));
                 mContext.startActivity(intent);
             }
         });
@@ -202,6 +208,10 @@ public class SubResourceListActivity extends BaseActionBarActivity {
                         SubResourceItems.clear();
                         zPDialog.dismissWithSuccess();
                     }*/
+                  /* for(int i=0; i < subResourceItems.size(); i++){
+                        Log.e("SubResource---->>>"," "+subResourceItems.get(i).toString());
+                    }*/
+
 
                     SubResourceItems.addAll(subResourceItems);
                     mAdapter.notifyDataSetChanged();

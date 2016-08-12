@@ -60,6 +60,29 @@ public class SubResourceItem implements Serializable {
     @SerializedName("author")
     @Expose
     private AuthorItem author;
+    @SerializedName("comment_count")
+    @Expose
+    private Integer commentCount;
+
+    public Integer getLikes() {
+        return likes;
+    }
+
+    public void setLikes(Integer likes) {
+        this.likes = likes;
+    }
+
+    public Integer getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(Integer commentCount) {
+        this.commentCount = commentCount;
+    }
+
+    @SerializedName("likes")
+    @Expose
+    private Integer likes;
 
     /**
      *

@@ -14,7 +14,7 @@
         android:layout_weight="1"
         app:src="@drawable/ic_heart_rate_off_18dp"
         app:srcChecked="@drawable/ic_heart_rate_on_18dp"
-        app:text="0" />
+        app:text="2" />
 
     <TextView
         android:id="@+id/social_no_ear_like_txt"
@@ -27,7 +27,7 @@
         android:id="@+id/social_no_ear_comment_txt"
         style="@style/PostDetailIconStyle"
         android:drawableLeft="@drawable/ic_comment"
-        android:text="12" />
+        android:text="0" />
 
     <org.undp_iwomen.iwomen.ui.widget.CustomTextView
         android:id="@+id/social_no_ear_share_txt"
