@@ -23,14 +23,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.google.gson.Gson;
+import com.makeramen.RoundedImageView;
 import com.smk.skconnectiondetector.SKConnectionDetector;
 import com.smk.sklistview.SKListView;
+import com.squareup.picasso.Picasso;
 import com.thuongnh.zprogresshud.ZProgressHUD;
 
 import org.json.JSONArray;
@@ -40,10 +44,12 @@ import org.smk.clientapi.NetworkEngine;
 import org.smk.iwomen.BaseActionBarActivity;
 import org.smk.model.IWomenPost;
 import org.smk.model.Rating;
+import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.data.FeedItem;
 import org.undp_iwomen.iwomen.database.TableAndColumnsName;
 import org.undp_iwomen.iwomen.manager.MainApplication;
+import org.undp_iwomen.iwomen.model.retrofit_api.SMKserverAPI;
 import org.undp_iwomen.iwomen.model.retrofit_api.UserPostAPI;
 import org.undp_iwomen.iwomen.provider.IwomenProviderData;
 import org.undp_iwomen.iwomen.ui.activity.IWomenPostSearchActivity;
@@ -52,17 +58,23 @@ import org.undp_iwomen.iwomen.ui.activity.PostDetailActivity;
 import org.undp_iwomen.iwomen.ui.adapter.IWomenPostListByDateRecyclerViewAdapter;
 import org.undp_iwomen.iwomen.ui.adapter.StoriesRecentListAdapter;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
+import org.undp_iwomen.iwomen.ui.widget.ResizableImageView;
 import org.undp_iwomen.iwomen.utils.Connection;
 import org.undp_iwomen.iwomen.utils.StorageUtil;
 import org.undp_iwomen.iwomen.utils.Utils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 /**
  * Created by khinsandar on 7/29/15.
@@ -92,7 +104,16 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
     List<IWomenPost> StorageiWomenPosts;
     private StorageUtil storageUtil;
 
-    private CustomTextView sp_content_title;
+    private CustomTextView sp_content_title, sp_content_body, sp_content_author_name ,sp_content_date ;
+    private ResizableImageView sp_content_img;
+    private RoundedImageView sp_content_author_profile;
+    private  ProgressBar sp_content_img_progress , sp_content_profile_progress;
+
+    private SharedPreferences mSharedPreferencesUserInfo;
+    private SharedPreferences.Editor mEditorUserInfo;
+
+    private String iWomen_json;
+    private IWomenPost StorageiWomenPostObj;
 
     public StoriesRecentFragment() {
         // Empty constructor required for fragment subclasses
@@ -131,6 +152,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
         storageUtil = StorageUtil.getInstance(mContext);
         sharePrefLanguageUtil = getActivity().getSharedPreferences(Utils.PREF_SETTING, Context.MODE_PRIVATE);
         mstr_lang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
+        mSharedPreferencesUserInfo = getActivity().getSharedPreferences(CommonConfig.SHARE_PREFERENCE_USER_INFO, Context.MODE_PRIVATE);
 
         feedItems = new ArrayList<FeedItem>();
         skListView = (SKListView) rootView.findViewById(R.id.lst_stories);
@@ -188,16 +210,45 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
         /*LayoutInflater inflater = (LayoutInflater) getActivity().getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         ViewGroup header = (ViewGroup)inflater.inflate(R.layout.special_content_stories_list_item, skListView, false);
         header.setBackgroundColor(getResources().getColor(R.color.white));
-*/
+        */
 
         final LayoutInflater layoutInflater = getActivity().getLayoutInflater();
 
         View header = layoutInflater.inflate(R.layout.special_content_stories_list_item, null);
         sp_content_title = (CustomTextView)header.findViewById(R.id.sp_content_txtPostTitle);
+        sp_content_body = (CustomTextView)header.findViewById(R.id.sp_content_txtContent);
+        sp_content_date= (CustomTextView)header.findViewById(R.id.sp_content_timestamp);
+        sp_content_author_name = (CustomTextView)header.findViewById(R.id.sp_content_name);
 
-        sp_content_title.setText("Title");
+        sp_content_img = (ResizableImageView)header.findViewById(R.id.sp_content_postImg);
+        sp_content_author_profile = (RoundedImageView)header.findViewById(R.id.sp_content_profilePic_rounded);
+
+        sp_content_img_progress = (ProgressBar) header.findViewById(R.id.sp_content_feed_item_progressBar);
+        sp_content_profile_progress = (ProgressBar) header.findViewById(R.id.sp_content_progressBar_profile_item);
+
+
         skListView.addHeaderView(header, null, false);
 
+        getWeeklyIWomenPost();
+
+        header.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, PostDetailActivity.class);
+
+                intent.putExtra("post_type", "iWomenPost");
+                // do the reverse operation
+                Gson gson = new Gson();
+                iWomen_json = mSharedPreferencesUserInfo.getString(CommonConfig.IWOMEN_ID, null);
+                StorageiWomenPostObj  = gson.fromJson(iWomen_json, IWomenPost.class);
+                intent.putExtra("postObj", new Gson().toJson(StorageiWomenPostObj));
+
+                //intent.putExtra("ImgUrl", mImgurl.get(getPosition()));
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(intent);
+            }
+        });
 
         StorageiWomenPosts = (ArrayList<IWomenPost>) storageUtil.ReadArrayListFromSD("stories_recent");
         if (Connection.isOnline(mContext)){
@@ -220,21 +271,15 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
             }
         }
 
-
         //setupAdapter();
-
 
         skListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 try {
                     Intent intent = new Intent(mContext, PostDetailActivity.class);
-
-                    //intent.putExtra("post_id", feedItems.get(position).getPost_obj_id());
                     intent.putExtra("post_type", "iWomenPost");
                     intent.putExtra("postObj", new Gson().toJson(parent.getAdapter().getItem(position)));
-
-                    //intent.putExtra("ImgUrl", mImgurl.get(getPosition()));
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     mContext.startActivity(intent);
@@ -243,6 +288,155 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
             }
         });
 
+    }
+
+    private void getWeeklyIWomenPost() {
+        if (Connection.isOnline(getApplicationContext())) {
+
+            SMKserverAPI.getInstance().getService().getWeeklyContentiWomenPost(new Callback<IWomenPost>() {
+                @Override
+                public void success(IWomenPost item, Response response) {
+
+                    SetWeeklySpecialContentItem(item);
+                    mEditorUserInfo = mSharedPreferencesUserInfo.edit();
+                    // convert User object user to JSON format
+                    Gson gson = new Gson();
+                    iWomen_json = gson.toJson(item);
+                    // store in SharedPreferences
+                    //String id =  "" +  item.getId(); // get storage key
+                    mEditorUserInfo.putString(CommonConfig.IWOMEN_ID, iWomen_json);
+                    mEditorUserInfo.commit();
+
+
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+
+                }
+            });
+        } else {
+            // do the reverse operation
+            Gson gson = new Gson();
+            iWomen_json = mSharedPreferencesUserInfo.getString(CommonConfig.IWOMEN_ID, null);
+            StorageiWomenPostObj  = gson.fromJson(iWomen_json, IWomenPost.class);
+
+            SetWeeklySpecialContentItem(StorageiWomenPostObj);
+
+
+
+
+        }
+    }
+
+    private void SetWeeklySpecialContentItem(IWomenPost item){
+        if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+            sp_content_title.setText(item.getTitle());
+            sp_content_body.setText(item.getContent());
+            sp_content_author_name.setText(item.getPostUploadName());
+
+            //sp_content_title.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
+            //sp_content_body.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
+
+        } else  {//FOR ALL MM FONTS
+            sp_content_title.setText(item.getTitleMm());
+            sp_content_body.setText(item.getContentMm());
+            sp_content_author_name.setText(item.getPostUploadName());
+
+
+        }
+        sp_content_author_profile.setAdjustViewBounds(true);
+        sp_content_author_profile.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.US);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy");
+        //2015-09-16T13:46:34.875Z
+        //Sun Jun 22 18:32:00 GMT+06:30 2014
+        //Log.e("Stories Post Adapter==","Date===>" + item.getCreated_at());
+        try {
+            Date timedate = format.parse(item.getPostUploadedDate());
+            sp_content_date.setText(sdf.format(timedate));
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+        if (item.getPostUploadUserImgPath() != null && !item.getPostUploadUserImgPath().isEmpty()) {
+
+            try {
+
+                sp_content_author_profile.setVisibility(View.VISIBLE);
+                Picasso.with(mContext)
+                        .load(item.getPostUploadUserImgPath()) //"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
+                        .placeholder(R.drawable.blank_profile)
+                        .error(R.drawable.blank_profile)
+                        .into(sp_content_author_profile, new ImageLoadedCallback(sp_content_profile_progress) {
+                            @Override
+                            public void onSuccess() {
+                                if (this.progressBar != null) {
+                                    this.progressBar.setVisibility(View.GONE);
+                                } else {
+                                    this.progressBar.setVisibility(View.VISIBLE);
+                                }
+                            }
+
+                            @Override
+                            public void onError() {
+                                super.onError();
+                                if (this.progressBar != null) {
+                                    this.progressBar.setVisibility(View.GONE);
+                                }
+                            }
+                        });
+            } catch (OutOfMemoryError outOfMemoryError) {
+                outOfMemoryError.printStackTrace();
+                sp_content_profile_progress.setVisibility(View.GONE);
+            }
+        } else {
+
+            sp_content_author_profile.setImageResource(R.drawable.blank_profile);
+            sp_content_profile_progress.setVisibility(View.GONE);
+        }
+
+
+        //// Feed image
+        if (item.getImage() != null && !item.getImage().isEmpty()) {
+            try {
+                sp_content_img.setVisibility(View.VISIBLE);
+                sp_content_img_progress.setVisibility(View.VISIBLE);
+
+                Picasso.with(mContext)
+                        .load(item.getImage()) //"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
+                        .placeholder(R.drawable.place_holder)
+                        .error(R.drawable.place_holder)
+                        .into(sp_content_img, new ImageLoadedCallback(sp_content_img_progress) {
+                            @Override
+                            public void onSuccess() {
+                                if (this.progressBar != null) {
+                                    this.progressBar.setVisibility(View.GONE);
+                                } else {
+                                    this.progressBar.setVisibility(View.VISIBLE);
+                                }
+                            }
+                            @Override
+                            public void onError() {
+                                super.onError();
+                                if (this.progressBar != null) {
+                                    this.progressBar.setVisibility(View.GONE);
+                                }
+                            }
+
+                        });
+            } catch (OutOfMemoryError outOfMemoryError) {
+                outOfMemoryError.printStackTrace();
+                sp_content_img_progress.setVisibility(View.GONE);
+            }
+        } else {
+            sp_content_img.setVisibility(View.GONE);
+            sp_content_img_progress.setVisibility(View.GONE);
+        }
     }
 
 
@@ -1307,6 +1501,23 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
                 break;
         }
 
+    }
+    private class ImageLoadedCallback implements com.squareup.picasso.Callback {
+        ProgressBar progressBar;
+
+        public ImageLoadedCallback(ProgressBar progBar) {
+            progressBar = progBar;
+        }
+
+        @Override
+        public void onSuccess() {
+
+        }
+
+        @Override
+        public void onError() {
+
+        }
     }
 }
 

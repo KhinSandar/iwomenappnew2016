@@ -787,9 +787,20 @@ Shirin Ebadi, J.D., was awarded the 2003 Nobel Peace Prize for her efforts to pr
     <string name="menu5">Win Prizes</string>
     <string name="menu6">Sister Apps</string>
     <string name="menu7">AboutUs</string>
-
-
     <string name="menu8">Setting</string>
+
+
+    <string name="menu1_mm">စိတ္ဓာတ္ခြန္အားျဖည့္ရန္</string>
+    <string name="menu2_mm">ဗဟုသုတရရန္</string>
+    <string name="menu3_mm">ေပါင္းစည္းေဆာင္ရြက္ရန္</string>
+    <string name="menu4_mm">ေမးျမန္းေဆြးေႏြးရန္</string>
+    <string name="menu5_mm">ဆုရယူရန္ အမွတ္ရရန္</string>
+    <string name="menu6_mm">Sister Apps</string>
+    <string name="menu7_mm">ကြ်ႏု္ပ္တို.အေႀကာင္း</string>
+    <string name="menu8_mm">ျပင္ဆင္ရန္</string>
+    <string name="menu_sing_out_mm">ထြက္ရန္</string>
+
+
 
     <string name="menu_sing_out">Sign Out</string>
     <string name="str_skip">ေက်ာ္မည္</string>
@@ -828,6 +839,8 @@ Shirin Ebadi, J.D., was awarded the 2003 Nobel Peace Prize for her efforts to pr
     <string name="competition_not_game">Game is not started</string>
     <string name="mayDoeKaBarFBPage">Like May Doe Kabar Network on Facebook</string>
     <string name="audio_not_availabe_msg">This audio file is not available yet !</string>
+
+    <string name="weekly_special_be_inspired">Topic Of the Month</string>
 
     <!--<string name="login_dialog_mm_zawgyi">ၿမန္မာေဇာ္ဂ်ီေဖာင့္</string>
     <string name="login_dialog_mm_uni">ၿမန္မာ ယူနီကုုတ္ေဖာင့္</string>

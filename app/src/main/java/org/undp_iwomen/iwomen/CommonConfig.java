@@ -25,6 +25,8 @@ public class CommonConfig {
     public static final String USER_TLG_NAME = "tlg_name";
 
     public static final String USER_ISWORTH = "Isworth";
+    public static final String IWOMEN_ID = "objID";
+    public static final String RESOURCE_ID = "resource_objID";
 
 
     public static final String USER_UPLOAD_IMG_NAME = "img_name";
@@ -152,6 +154,11 @@ public class CommonConfig {
     public static final String GET_PRIZE_POINT= "/api/v1/pointPrices";
 
     public static final String POST_IWOMEN_RESOURCE_LIKE = "/api/v1/resourceLikes";
+
+    public static final String GET_WEEKLY_CONTENT_IWOMENPOST ="/api/v1/iwomenPost/weekContent";
+
+    public static final String GET_WEEKLY_CONTENT_RESOURCE ="/api/v1/resourcesWeekContents";
+
 
 
 }

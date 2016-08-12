@@ -12,7 +12,6 @@
         "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/drawable/cell_bg.xml"
     },
     {
-<<<<<<< HEAD
         "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/build/intermediates/res/merged/release/drawable/red_border.xml",
         "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/drawable/red_border.xml"
     },
@@ -23,18 +22,6 @@
     {
         "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/build/intermediates/res/merged/release/drawable/right_arrow.xml",
         "source": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/src/main/res/drawable/right_arrow.xml"
-=======
-        "merged": "D:\\iWomen\\iwomenappnew2016\\caldroid\\build\\intermediates\\res\\merged\\release\\drawable\\red_border_dark.xml",
-        "source": "D:\\iWomen\\iwomenappnew2016\\caldroid\\src\\main\\res\\drawable\\red_border_dark.xml"
-    },
-    {
-        "merged": "D:\\iWomen\\iwomenappnew2016\\caldroid\\build\\intermediates\\res\\merged\\release\\drawable\\disabled_cell_dark.xml",
-        "source": "D:\\iWomen\\iwomenappnew2016\\caldroid\\src\\main\\res\\drawable\\disabled_cell_dark.xml"
-    },
-    {
-        "merged": "D:\\iWomen\\iwomenappnew2016\\caldroid\\build\\intermediates\\res\\merged\\release\\drawable\\red_border_gray_bg.xml",
-        "source": "D:\\iWomen\\iwomenappnew2016\\caldroid\\src\\main\\res\\drawable\\red_border_gray_bg.xml"
->>>>>>> 40dcdc0871237674064bf3849ea9c9dd770dfbdf
     },
     {
         "merged": "/Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/caldroid/build/intermediates/res/merged/release/drawable/red_border_gray_bg.xml",

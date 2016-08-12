@@ -76,9 +76,9 @@
                         android:layout_height="wrap_content"
                         android:background="#0000"
                         android:clickable="false"
-                        android:text="Done"
+                        android:text="@string/weekly_special_be_inspired"
                         android:textColor="@color/white"
-
+                        android:textAllCaps="false"
                         android:textSize="@dimen/feed_item_profile_name" />
 
                 </LinearLayout>
@@ -152,7 +152,7 @@
                             android:visibility="gone"></org.undp_iwomen.iwomen.ui.widget.ProfilePictureView>
 
                         <com.makeramen.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                            android:id="@+id/profilePic_rounded"
+                            android:id="@+id/sp_content_profilePic_rounded"
                             android:layout_width="@dimen/feed_item_profile_pic"
                             android:layout_height="@dimen/feed_item_profile_pic"
 
