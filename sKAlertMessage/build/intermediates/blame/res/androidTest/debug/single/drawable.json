@@ -1,9 +1,5 @@
 [
     {
-        "merged": "D:\\iWomen\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\sk_toast_message_selector_error.xml",
-        "source": "D:\\iWomen\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\bundles\\debug\\res\\drawable\\sk_toast_message_selector_error.xml"
-    },
-    {
         "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\sk_toast_message_selector_error.xml",
         "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\bundles\\debug\\res\\drawable\\sk_toast_message_selector_error.xml"
     },
@@ -12,20 +8,8 @@
         "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\bundles\\debug\\res\\drawable\\sk_toast_message_selector_warning.xml"
     },
     {
-        "merged": "D:\\iWomen\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\sk_toast_message_selector_warning.xml",
-        "source": "D:\\iWomen\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\bundles\\debug\\res\\drawable\\sk_toast_message_selector_warning.xml"
-    },
-    {
-        "merged": "D:\\iWomen\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\sk_toast_message_selector_success.xml",
-        "source": "D:\\iWomen\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\bundles\\debug\\res\\drawable\\sk_toast_message_selector_success.xml"
-    },
-    {
         "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\sk_toast_message_selector_success.xml",
         "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\bundles\\debug\\res\\drawable\\sk_toast_message_selector_success.xml"
-    },
-    {
-        "merged": "D:\\iWomen\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\sk_toast_message_selector_info.xml",
-        "source": "D:\\iWomen\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\bundles\\debug\\res\\drawable\\sk_toast_message_selector_info.xml"
     },
     {
         "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\sk_toast_message_selector_info.xml",

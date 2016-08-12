@@ -1,27 +1,7 @@
 [
     {
-        "merged": "D:\\iWomen\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\sk_message_warning.xml",
-        "source": "D:\\iWomen\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\bundles\\debug\\res\\layout\\sk_message_warning.xml"
-    },
-    {
-        "merged": "D:\\iWomen\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\sk_message_success.xml",
-        "source": "D:\\iWomen\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\bundles\\debug\\res\\layout\\sk_message_success.xml"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\sk_message_error.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\bundles\\debug\\res\\layout\\sk_message_error.xml"
-    },
-    {
         "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\sk_message_info.xml",
         "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\bundles\\debug\\res\\layout\\sk_message_info.xml"
-    },
-    {
-        "merged": "D:\\iWomen\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\sk_message_info.xml",
-        "source": "D:\\iWomen\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\bundles\\debug\\res\\layout\\sk_message_info.xml"
-    },
-    {
-        "merged": "D:\\iWomen\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\sk_message_error.xml",
-        "source": "D:\\iWomen\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\bundles\\debug\\res\\layout\\sk_message_error.xml"
     },
     {
         "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\sk_toast_message_success.xml",
@@ -32,32 +12,20 @@
         "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\bundles\\debug\\res\\layout\\sk_toast_message_error.xml"
     },
     {
-        "merged": "D:\\iWomen\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\sk_toast_message_error.xml",
-        "source": "D:\\iWomen\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\bundles\\debug\\res\\layout\\sk_toast_message_error.xml"
+        "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\sk_message_error.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\bundles\\debug\\res\\layout\\sk_message_error.xml"
     },
     {
         "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\sk_message_warning.xml",
         "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\bundles\\debug\\res\\layout\\sk_message_warning.xml"
     },
     {
-        "merged": "D:\\iWomen\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\sk_toast_message_warning.xml",
-        "source": "D:\\iWomen\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\bundles\\debug\\res\\layout\\sk_toast_message_warning.xml"
-    },
-    {
-        "merged": "D:\\iWomen\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\sk_toast_message_success.xml",
-        "source": "D:\\iWomen\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\bundles\\debug\\res\\layout\\sk_toast_message_success.xml"
+        "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\sk_message_success.xml",
+        "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\bundles\\debug\\res\\layout\\sk_message_success.xml"
     },
     {
         "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\sk_toast_message_warning.xml",
         "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\bundles\\debug\\res\\layout\\sk_toast_message_warning.xml"
-    },
-    {
-        "merged": "D:\\iWomen\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\sk_toast_message_info.xml",
-        "source": "D:\\iWomen\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\bundles\\debug\\res\\layout\\sk_toast_message_info.xml"
-    },
-    {
-        "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\sk_message_success.xml",
-        "source": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\bundles\\debug\\res\\layout\\sk_message_success.xml"
     },
     {
         "merged": "D:\\Android\\@Android Studio\\iwomenapp\\iwomenappnew2016\\sKAlertMessage\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\sk_toast_message_info.xml",
