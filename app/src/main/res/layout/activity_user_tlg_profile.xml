@@ -135,12 +135,28 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp">
+                <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                    android:id="@+id/tlg_about_mdk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="@string/may_doe_kabar"
+                    />
 
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingLeft="10dp"
+                android:visibility="gone"
                 android:paddingRight="10dp">
 
                 <org.undp_iwomen.iwomen.ui.widget.CustomTextView
@@ -372,6 +388,7 @@
                         <FrameLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:visibility="gone"
                             android:paddingLeft="16dp">
 
                             <ImageView

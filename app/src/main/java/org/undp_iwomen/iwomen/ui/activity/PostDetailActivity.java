@@ -159,7 +159,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     private TextView txt_player;
     private TextView txt_download;
 
-    private ResizableImageView img_credit_logo;
+    private RoundedImageView img_credit_logo;
     private TextView txt_credit_link;
     private ProgressBar progressBar_credit;
     private LinearLayout ly_credit;
@@ -433,7 +433,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         txt_lbl_share_post = (CustomTextView) findViewById(R.id.postdetail_share_post_lbl);*/
 
         img_credit_icon_img = (ImageView) findViewById(R.id.postdetail_credit_pic_rounded);
-        img_credit_logo = (ResizableImageView) findViewById(R.id.postdetail_credit_img);
+        img_credit_logo = (RoundedImageView) findViewById(R.id.postdetail_credit_img);
         txt_credit_link = (TextView) findViewById(R.id.postdetail_credit_link);
         progressBar_credit = (ProgressBar) findViewById(R.id.postdetail_credit_progress);
         ly_credit = (LinearLayout) findViewById(R.id.postdetail_ly_credit);
@@ -685,6 +685,10 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     private void setPostItem(final IWomenPost item) {
         profile.setAdjustViewBounds(true);
         profile.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
+
+        img_credit_logo.setAdjustViewBounds(true);
+        img_credit_logo.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
 
         post_content_user_name.setText(item.getPostUploadName());
