@@ -269,7 +269,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
                 mContext.startActivity(intent);
             }
         });
-        lysocial.setOnClickListener(new View.OnClickListener() {
+        /*lysocial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (strLang.equals(Utils.ENG_LANG)) {
@@ -279,7 +279,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
                     Utils.doToastMM(mContext, getResources().getString(R.string.resource_coming_soon_mm));
                 }
             }
-        });
+        });*/
         //Linn Wah
         img_viber_share = (ImageView) findViewById(R.id.social_no_ear_viber_img);
         img_viber_share.setOnClickListener(this);
@@ -304,8 +304,8 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
         postType = i.getStringExtra("post_type");
         postId = subResouceItemObj.getId().toString();// i.getStringExtra("post_id");
         postObjId = subResouceItemObj.getObjectId();
-
-         cursorMain = getContentResolver().query(IwomenProviderData.SubResourceDetailProvider.CONTETNT_URI, null, "sub_resource_id = ? AND user_id = ?", new String[]{ postId,user_id },null );
+         //temp for SQLite
+        /* cursorMain = getContentResolver().query(IwomenProviderData.SubResourceDetailProvider.CONTETNT_URI, null, "sub_resource_id = ? AND user_id = ?", new String[]{ postId,user_id },null );
 
          Log.e("Cursor Count >>>>"," " + cursorMain.getCount());
         if(cursorMain.getCount() > 0){
@@ -313,7 +313,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
             mSocialNoEarLikeAnimatedButton.setEnabled(false);
             String sqLiteLikeCount = cursorMain.getString(cursorMain.getColumnIndex("like_count"));
             Log.e("Like Count >>>>"," " + sqLiteLikeCount);
-        }
+        }*/
         if(subResouceItemObj.getLikes() != null){
             mSocialNoEarLikeAnimatedButton.setText(subResouceItemObj.getLikes().toString());
         }else{

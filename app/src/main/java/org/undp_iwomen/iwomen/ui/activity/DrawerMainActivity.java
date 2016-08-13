@@ -442,8 +442,8 @@ public class DrawerMainActivity extends BaseActionBarActivity {
         } else if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.MM_LANG)) {
             DrawerListName = new String[]
                     // {"စိတ္ဓာတ္ခ\u103Cန္အား\u107Fဖည္ ့ရန္", "ဗဟုုသုုတရရန္", "ေပ\u102Bင္းစည္းေဆာင္ရ\u103Cက္ရန္", "ေမး\u107Fမန္းေဆ\u103Cးေ\u108F\u103Cးရန္", "\u107Fပင္ဆင္ရန္", "က\u103C\u103A\u108Fုုပ္တိုု ့အေ\u107Eကာင္း", " Sister Apps"};
-                    {getResources().getString(R.string.menu1), getResources().getString(R.string.menu2), getResources().getString(R.string.menu3), getResources().getString(R.string.menu4)
-                            , getResources().getString(R.string.menu5), getResources().getString(R.string.menu6), getResources().getString(R.string.menu7), getResources().getString(R.string.menu8)};
+                    {getResources().getString(R.string.menu1_mm), getResources().getString(R.string.menu2_mm), getResources().getString(R.string.menu3_mm), getResources().getString(R.string.menu4_mm)
+                            , getResources().getString(R.string.menu5_mm), getResources().getString(R.string.menu6_mm), getResources().getString(R.string.menu7_mm), getResources().getString(R.string.menu8_mm)};
 
             DrawerListIcon = new int[]
                     {R.drawable.ic_stories,
@@ -466,8 +466,8 @@ public class DrawerMainActivity extends BaseActionBarActivity {
         } else if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.MM_LANG_UNI)) {
             DrawerListName = new String[]
                     //{"စိတ္ဓာတ္ခ\u103Cန္အား\u107Fဖည္ ့ရန္", "ဗဟုုသုုတရရန္", "ေပ\u102Bင္းစည္းေဆာင္ရ\u103Cက္ရန္", "ေမး\u107Fမန္းေဆ\u103Cးေ\u108F\u103Cးရန္", "\u107Fပင္ဆင္ရန္", "က\u103C\u103A\u108Fုုပ္တိုု ့အေ\u107Eကာင္း", " Sister Apps"};
-                    {getResources().getString(R.string.menu1), getResources().getString(R.string.menu2), getResources().getString(R.string.menu3), getResources().getString(R.string.menu4)
-                            , getResources().getString(R.string.menu5), getResources().getString(R.string.menu6), getResources().getString(R.string.menu7), getResources().getString(R.string.menu8)};
+                    {getResources().getString(R.string.menu1_mm), getResources().getString(R.string.menu2_mm), getResources().getString(R.string.menu3_mm), getResources().getString(R.string.menu4_mm)
+                            , getResources().getString(R.string.menu5_mm), getResources().getString(R.string.menu6_mm), getResources().getString(R.string.menu7_mm), getResources().getString(R.string.menu8_mm)};
 
             DrawerListIcon = new int[]
                     {R.drawable.ic_stories,
@@ -490,8 +490,8 @@ public class DrawerMainActivity extends BaseActionBarActivity {
         } else if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.MM_LANG_DEFAULT)) {
             DrawerListName = new String[]
                     //{"စိတ္ဓာတ္ခ\u103Cန္အား\u107Fဖည္ ့ရန္", "ဗဟုုသုုတရရန္", "ေပ\u102Bင္းစည္းေဆာင္ရ\u103Cက္ရန္", "ေမး\u107Fမန္းေဆ\u103Cးေ\u108F\u103Cးရန္", "\u107Fပင္ဆင္ရန္", "က\u103C\u103A\u108Fုုပ္တိုု ့အေ\u107Eကာင္း", " Sister Apps"};
-                    {getResources().getString(R.string.menu1), getResources().getString(R.string.menu2), getResources().getString(R.string.menu3), getResources().getString(R.string.menu4)
-                            , getResources().getString(R.string.menu5), getResources().getString(R.string.menu6), getResources().getString(R.string.menu7), getResources().getString(R.string.menu8)};
+                    {getResources().getString(R.string.menu1_mm), getResources().getString(R.string.menu2_mm), getResources().getString(R.string.menu3_mm), getResources().getString(R.string.menu4_mm)
+                            , getResources().getString(R.string.menu5_mm), getResources().getString(R.string.menu6_mm), getResources().getString(R.string.menu7_mm), getResources().getString(R.string.menu8_mm)};
 
             DrawerListIcon = new int[]
                     {R.drawable.ic_stories,
@@ -516,8 +516,8 @@ public class DrawerMainActivity extends BaseActionBarActivity {
         } else {
             DrawerListName = new String[]
                     //{"စိတ္ဓာတ္ခ\u103Cန္အား\u107Fဖည္ ့ရန္", "ဗဟုုသုုတရရန္", "ေပ\u102Bင္းစည္းေဆာင္ရ\u103Cက္ရန္", "ေမး\u107Fမန္းေဆ\u103Cးေ\u108F\u103Cးရန္", "\u107Fပင္ဆင္ရန္", "က\u103C\u103A\u108Fုုပ္တိုု ့အေ\u107Eကာင္း", " Sister Apps"};
-                    {getResources().getString(R.string.menu1), getResources().getString(R.string.menu2), getResources().getString(R.string.menu3), getResources().getString(R.string.menu4)
-                            , getResources().getString(R.string.menu5), getResources().getString(R.string.menu6), getResources().getString(R.string.menu7), getResources().getString(R.string.menu8)};
+                    {getResources().getString(R.string.menu1_mm), getResources().getString(R.string.menu2_mm), getResources().getString(R.string.menu3_mm), getResources().getString(R.string.menu4_mm)
+                            , getResources().getString(R.string.menu5_mm), getResources().getString(R.string.menu6_mm), getResources().getString(R.string.menu7_mm), getResources().getString(R.string.menu8_mm)};
 
             DrawerListIcon = new int[]
                     {R.drawable.ic_stories,

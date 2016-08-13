@@ -119,8 +119,9 @@
 
                 <FrameLayout
                     android:id="@+id/postdetail_credit_pic_rounded_frame"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:visibility="gone"
                     android:layout_marginLeft="4dp">
 
                     <ImageView
@@ -135,8 +136,8 @@
                     android:id="@+id/postdetail_credit_img_frame"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="4dp"
-                    android:layout_toRightOf="@+id/postdetail_credit_pic_rounded_frame">
+                    android:layout_marginRight="8dp"
+                    >
 
                     <org.undp_iwomen.iwomen.ui.widget.ResizableImageView
                         android:id="@+id/postdetail_credit_img"
@@ -158,14 +159,14 @@
 
                 </FrameLayout>
 
-                <TextView
+                <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                     android:id="@+id/postdetail_credit_link"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center_vertical"
+                    android:paddingLeft="10dp"
                     android:layout_toRightOf="@+id/postdetail_credit_img_frame"
-                    android:paddingLeft="4dp"
                     android:text="Create to Great Women Speak Out" />
 
             </RelativeLayout>
@@ -181,10 +182,22 @@
                     android:layout_marginRight="8dp">
 
                     <com.makeramen.RoundedImageView
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
                         android:id="@+id/postdetail_profilePic_rounded"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/sample_circle" />
+                        android:layout_width="@dimen/feed_item_profile_pic"
+                        android:layout_height="@dimen/feed_item_profile_pic"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/blank_profile"
+                        android:visibility="visible"
+                        app:riv_border_color="#333333"
+                        app:riv_border_width="0dip"
+                        app:riv_corner_radius="30dip"
+                        app:riv_mutate_background="true"
+                        app:riv_oval="true"
+                         />
 
                     <ProgressBar
                         android:id="@+id/postdetail_progressBar_profile_item"
@@ -199,7 +212,7 @@
                         android:visibility="visible" />
                 </FrameLayout>
 
-                <TextView
+                <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                     android:id="@+id/postdetail_content_username"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -207,7 +220,7 @@
                     android:text="Hter Hter"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
-                <TextView
+                <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                     android:id="@+id/postdetail_content_user_role"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

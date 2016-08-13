@@ -789,9 +789,23 @@ female-pilots-iaa1s
     <string name="menu5">ဆုရယူရန္ အမွတ္ရရန္</string>
     <string name="menu6">Sister Apps</string>
     <string name="menu7">ကြ်ႏု္ပ္တို.အေႀကာင္း</string>
-
     <string name="menu8">ျပင္ဆင္ရန္</string>
+
+
+
     <string name="menu_sing_out">ထြက္ရန္</string>
+
+
+    <string name="menu1_mm">စိတ္ဓာတ္ခြန္အားျဖည့္ရန္</string>
+    <string name="menu2_mm">ဗဟုသုတရရန္</string>
+    <string name="menu3_mm">ေပါင္းစည္းေဆာင္ရြက္ရန္</string>
+    <string name="menu4_mm">ေမးျမန္းေဆြးေႏြးရန္</string>
+    <string name="menu5_mm">ဆုရယူရန္ အမွတ္ရရန္</string>
+    <string name="menu6_mm">Sister Apps</string>
+    <string name="menu7_mm">ကြ်ႏု္ပ္တို.အေႀကာင္း</string>
+    <string name="menu8_mm">ျပင္ဆင္ရန္</string>
+    <string name="menu_sing_out_mm">ထြက္ရန္</string>
+
     <string name="str_skip">ေက်ာ္မည္</string>
     <string name="str_back">ေနာက္သို႕</string>
     <string name="str_finished">ရၿပီး</string>
@@ -831,7 +845,11 @@ female-pilots-iaa1s
     <string name="mayDoeKaBarFBPage">ေမတို႕ကမာၻ Page ကို Like လုပ္ပါ</string>
 
     <string name="audio_not_availabe_msg">ယခု အသံဖိုင္ မရွိေသးပါ ။</string>
+
     <string name="no_connection_mm">အင္တာနက္မဖြင့္ထားပါ</string>
+
+    <string name="weekly_special_be_inspired">ယခု လ အတြက္ အထူးၿခားဆံုး အေၾကာင္းအရာ</string>
+
     <!--<string name="login_dialog_mm_zawgyi">ၿမန္မာေဇာ္ဂ်ီေဖာင့္</string>
     <string name="login_dialog_mm_uni">ၿမန္မာ ယူနီကုုတ္ေဖာင့္</string>
     <string name="login_dialog_eng">ENGLISH</string>
