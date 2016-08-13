@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="sk_connection_internet_problem">Network Error</string>
-    <string name="sk_connection_no_internet">You can read offline.</string>
-    <string name="sk_connection_no_internet_desc">\"Please check your connectivity settings and try again\"</string>
-</resources>

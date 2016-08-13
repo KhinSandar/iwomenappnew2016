@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="sk_connection_internet_problem">အင္တာနက္ ျပႆနာ</string>
-    <string name="sk_connection_no_internet">အင္တာနက္ မသံုးဘဲ ပထမအၾကိမ္ဖြင့္ ထားသည္မ်ားကိုုဖတ္ရွုု ၍ ရႏိုင္ပါသည္။</string>
-    <string name="sk_connection_no_internet_desc">\"အင္တာနက္ ခ်ိတ္ဆက္မႈ ဖြင့္ရန္ လိုအပ္ပါသည္\"</string>
-</resources>
