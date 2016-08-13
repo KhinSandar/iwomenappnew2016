@@ -157,7 +157,7 @@
     <string name="tlg_leader_name_mm">လွစန္းေထြး</string>
     <string name="tlg_leader_name_un">လှစန်းထွေး</string>
 
-    <string name="tlg_leader_role_eng">TLG Leader</string>
+    <string name="tlg_leader_role_eng">Women Leaders</string>
     <string name="tlg_leader_role_mm">အဖြဲ ့ေခါင္းေဆာင္</string>
     <string name="tlg_leader_role_un">အဖွဲ့ခေါင်းဆောင်</string>
 
@@ -165,7 +165,7 @@
     <string name="tlg_who_we_r_mm">အဖြဲ ့အေၾကာင္း</string>
     <string name="tlg_who_we_r_un">အဖွဲ့အကြောင်း</string>
 
-    <string name="tlg_member_lbl_eng">TLG Member</string>
+    <string name="tlg_member_lbl_eng">Women Leader</string>
     <string name="tlg_member_lbl_mm">ၿမိဳ ့နယ္ဦးေဆာင္အဖြဲ ့ </string>
     <string name="tlg_member_lbl_un">မြို့နယ်ဦးဆောင်အဖွဲ့ </string>
 
@@ -173,7 +173,7 @@
     <string name="tlg_member_txt_mm">၁၅</string>
     <string name="tlg_member_txt_un">၁၅</string>
 
-    <string name="tlg_srg_member_lbl_eng">SRG Member</string>
+    <string name="tlg_srg_member_lbl_eng">Women Members</string>
     <string name="tlg_srg_member_lbl_mm">စိတ္တူ ကိုုယ္တူအဖြဲ ့</string>
     <string name="tlg_srg_member_lbl_un">စိတ်တူ ကိုယ်တူအဖွဲ</string>
 

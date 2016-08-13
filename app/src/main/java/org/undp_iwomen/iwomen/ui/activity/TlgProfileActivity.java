@@ -74,6 +74,8 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
     private ProgressBar profile_item_progressBar;
     private RoundedImageView tlgLogoImg;
     private ProgressBar logo_progressBar;
+    private CustomTextView txtBody;
+
 
     String tlgName;
     String tlgAddress;
@@ -162,6 +164,7 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
         logo_progressBar = (ProgressBar) findViewById(R.id.tlg_group_logo_progressBar_profile_item);
 
         txt_bod_name = (CustomTextView) findViewById(R.id.tlg_leader_profile_bod_username);
+        txtBody = (CustomTextView) findViewById(R.id.tlg_about_mdk);
 
 
         img_tlg_ph_no.setOnClickListener(this);
@@ -186,7 +189,7 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
         txt_tlg_leader_role_lbl.setText("");
         txt_tlg_info_who_we_are_lbl.setText(R.string.tlg_who_we_r_eng);
 
-        txt_tlg_member_lbl.setText(R.string.tlg_member_lbl_eng);
+        txt_tlg_member_lbl.setText(R.string.tlg_member_lbl_eng);//TLG Member
         txt_tlg_member_txt.setText("");
 
         txt_tlg_srg_member_lbl.setText(R.string.tlg_srg_member_lbl_eng);
@@ -703,7 +706,7 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
                 //                                          int[] grantResults)
                 // to handle the case where the user grants the permission. See the documentation
                 // for ActivityCompat#requestPermissions for more details.
-                Log.e("<<<tlgLeaderPhno above if >>>", "===>" + tlgLeaderPhno);
+                //Log.e("<<<tlgLeaderPhno above if >>>", "===>" + tlgLeaderPhno);
                 if (!hasPermission(call_phone_READ_PERMISSION)) {
 
                     //if no permission, request permission
@@ -711,7 +714,7 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                         requestPermissions(perms, CALL_REQUEST);
                     } else {
-                        Log.e("<<<tlgLeaderPhno if else >>>", "===>" + tlgLeaderPhno);
+                        //Log.e("<<<tlgLeaderPhno if else >>>", "===>" + tlgLeaderPhno);
 
                         if (tlgLeaderPhno != null) {
 
@@ -720,7 +723,7 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
                             callIntent.setData(Uri.parse("tel:" + Uri.encode(ph)));
 
                             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                                Log.e("<<<tlgLeaderPhno if Consider calling >>>", "===>" + tlgLeaderPhno);
+                                //Log.e("<<<tlgLeaderPhno if Consider calling >>>", "===>" + tlgLeaderPhno);
 
                                 // TODO: Consider calling
                                 //    ActivityCompat#requestPermissions
@@ -742,7 +745,7 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
 
                 } else {
                     // Check if we were successful in obtaining the map.
-                    Log.e("<<<tlgLeaderPhno else >>>", "===>" + tlgLeaderPhno);
+                    //Log.e("<<<tlgLeaderPhno else >>>", "===>" + tlgLeaderPhno);
                     if (tlgLeaderPhno != null) {
 
                         Intent callIntent = new Intent(Intent.ACTION_CALL);
