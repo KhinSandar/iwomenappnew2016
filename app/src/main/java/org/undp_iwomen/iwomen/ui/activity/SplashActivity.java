@@ -1,5 +1,7 @@
 package org.undp_iwomen.iwomen.ui.activity;
 
+import android.Manifest;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -7,8 +9,8 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.view.MotionEvent;
+
+import com.smk.skalertmessage.SKToastMessage;
 
 import org.smk.application.StoreUtil;
 import org.smk.iwomen.BaseActionBarActivity;
@@ -21,6 +23,7 @@ import org.undp_iwomen.iwomen.utils.SharePrefUtils;
 
 public class SplashActivity extends BaseActionBarActivity {
     private static final String LOG_TAG = SplashActivity.class.getSimpleName();
+    private static final int PERMISSION_REQUEST = 10002;
 
     SharePrefUtils sharePrefUtils;
 
@@ -30,9 +33,14 @@ public class SplashActivity extends BaseActionBarActivity {
     private ProgressWheel mLoadingProgress;
     //private CustomTextView mNoInternetErrorTextView;
     private boolean isFetching = false;
-    private final String STORAGE_READ_PERMISSION = "android.permission.READ_EXTERNAL_STORAGE";
+    private final String STORAGE_WRITE_PERMISSION = Manifest.permission.WRITE_EXTERNAL_STORAGE;
+    private final String STORAGE_READ_PERMISSION = Manifest.permission.READ_EXTERNAL_STORAGE;
+    private static final String CAMERA = Manifest.permission.CAMERA;
+    private static final String RECORD_AUDIO = Manifest.permission.RECORD_AUDIO;
+    private static final String MODIFY_AUDIO_SETTINGS = Manifest.permission.MODIFY_AUDIO_SETTINGS;
     boolean storagePermissionAccepted = false;
 
+    @TargetApi(Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,10 +52,15 @@ public class SplashActivity extends BaseActionBarActivity {
         mLoadingProgress = (ProgressWheel) findViewById(R.id.splash_loading);
         //mNoInternetErrorTextView = (CustomTextView) findViewById(R.id.no_internet_error_loading);
 
+        if (!hasPermission(STORAGE_READ_PERMISSION) || !hasPermission(STORAGE_WRITE_PERMISSION) || !hasPermission(CAMERA) || !hasPermission(RECORD_AUDIO) || !hasPermission(MODIFY_AUDIO_SETTINGS)) {
+            requestPermissions(new String[]{STORAGE_READ_PERMISSION, STORAGE_WRITE_PERMISSION, CAMERA, RECORD_AUDIO, MODIFY_AUDIO_SETTINGS}, PERMISSION_REQUEST);
+            return;
+        }
+
         doFetching();
     }
 
-    @Override
+    /*@Override
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
@@ -55,7 +68,7 @@ public class SplashActivity extends BaseActionBarActivity {
                 return true;
         }
         return super.onTouchEvent(event);
-    }
+    }*/
 
     private void doFetching() {
 
@@ -94,30 +107,26 @@ public class SplashActivity extends BaseActionBarActivity {
             }
         }, splashTimeOut);
     }
+
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
-
-
-            case 200:
-                storagePermissionAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-                if (storagePermissionAccepted) {
-                    //chooseImage();
-                    //ShowLangDialog();
+            case PERMISSION_REQUEST: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    doFetching();
+                } else {
+                    SKToastMessage.showMessage(SplashActivity.this, "The app was not allowed to write to your storage. Hence, it cannot function properly. Please consider granting it this permission", SKToastMessage.ERROR);
                 }
-                break;
-
+            }
         }
     }
 
     private boolean hasPermission(String permission) {
-
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
             return (checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED);
         } else {
             return true;
         }
-
-
     }
 }
