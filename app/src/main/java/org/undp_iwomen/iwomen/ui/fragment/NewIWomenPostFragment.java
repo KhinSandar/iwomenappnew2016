@@ -53,6 +53,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -412,6 +416,12 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
             content_type = "Letter";
         }
 
+        // Get the date today using Calendar object.
+        Date today = Calendar.getInstance().getTime();
+        Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String sTodayDate = formatter.format(today);
+
+
         NetworkEngine.getInstance().postCreateWomenPost(
                 0, content,
                 content_type,
@@ -420,9 +430,9 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
                 null,
                 null,
                 uploadPhoto,
-                null,
+                sTodayDate,
                 login_user_id,
-                "videoid",
+                null,
                 audio_file_id,
                 postuploadImagePath,
                 createPostcallback);
