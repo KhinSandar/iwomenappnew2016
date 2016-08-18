@@ -86,49 +86,68 @@ public class StoriesRecentListAdapter extends BaseAdapter {
         holder.profile.setAdjustViewBounds(true);
         holder.profile.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.US);
+        SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy");
+        try {
+            Date timedate = format.parse(item.getPostUploadedDate());
+
+            String dateformat= sdf.format(timedate);//M08 11, 2016
+            String regex = "[0-9]+";
+
+            String prefixDate= dateformat.substring(1,3);
+            if(prefixDate.matches(regex)){//if equal with number
+                if(prefixDate.equals( "01")){
+                    holder.post_timestamp.setText("Jan" +dateformat.substring(3,dateformat.length()));
+                }else if(prefixDate.equals("02")){
+                    holder.post_timestamp.setText("Feb" +dateformat.substring(3,dateformat.length()));
+                }else if(prefixDate.equals("03")){
+                    holder.post_timestamp.setText("Mar" +dateformat.substring(3,dateformat.length()));
+                }else if(prefixDate.equals("04")){
+                    holder.post_timestamp.setText("Apr" +dateformat.substring(3,dateformat.length()));
+                }else if(prefixDate.equals("05")){
+                    holder.post_timestamp.setText("May" +dateformat.substring(3,dateformat.length()));
+                }else if(prefixDate.equals("06")){
+                    holder.post_timestamp.setText("Jun" +dateformat.substring(3,dateformat.length()));
+                }else if(prefixDate.equals("07")){
+                    holder.post_timestamp.setText("Jul" +dateformat.substring(3,dateformat.length()));
+                }else if(prefixDate.equals("08")){
+                    holder.post_timestamp.setText("Aug" +dateformat.substring(3,dateformat.length()));
+                }else if(prefixDate.equals("09")){
+                    holder.post_timestamp.setText("Sep" +dateformat.substring(3,dateformat.length()));
+                }else if(prefixDate.equals("10")){
+                    holder.post_timestamp.setText("Oct" +dateformat.substring(3,dateformat.length()));
+                }else if(prefixDate.equals("11")){
+                    holder.post_timestamp.setText("Nov" +dateformat.substring(3,dateformat.length()));
+                }else if(prefixDate.equals("12")){
+                    holder.post_timestamp.setText("Dec" +dateformat.substring(3,dateformat.length()));
+                }
+
+            }else{
+                //Log.e("Date==>prefix not match" , prefixDate);
+                holder.post_timestamp.setText(dateformat);
+            }
+
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+        //if(holder.post_timestamp.getText().)
         //holder.mPostTile.setText(item.getPost_title());
         if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
             holder.mPostTile.setText(item.getTitle());
             holder.post_content.setText(item.getContent());
             holder.post_content_user_name.setText(item.getPostUploadName());
-
             holder.mPostTile.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
             holder.post_content.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
+
 
         } else  {//FOR ALL MM FONTS
             holder.mPostTile.setText(item.getTitleMm());
             holder.post_content.setText(item.getContentMm());
             holder.post_content_user_name.setText(item.getPostUploadName());
 
-
-        }
-
-
-        /*SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy");
-        ParsePosition pp = new ParsePosition(0);
-        try {
-            Date timedate = ISO8601Utils.parse(item.getCreatedAt().toString(), pp);
-
-            holder.post_timestamp.setText(sdf.format(timedate));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }*/
-
-        //2016-02-05 17:56:36 (SMK SERVER)
-        //        Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.US);
-        SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy");
-        //2015-09-16T13:46:34.875Z
-        //Sun Jun 22 18:32:00 GMT+06:30 2014
-        try {
-            Date timedate = format.parse(item.getPostUploadedDate());
-            holder.post_timestamp.setText(sdf.format(timedate));
-
-
-        } catch (ParseException e) {
-            e.printStackTrace();
         }
 
 
@@ -168,7 +187,6 @@ public class StoriesRecentListAdapter extends BaseAdapter {
             holder.profile.setImageResource(R.drawable.blank_profile);
             holder.profile_item_progressBar.setVisibility(View.GONE);
         }
-
 
         //// Feed image
         if (item.getImage() != null && !item.getImage().isEmpty()) {
@@ -227,6 +245,20 @@ public class StoriesRecentListAdapter extends BaseAdapter {
 
         }
     }
+    public static boolean isValidFormat(String format, String value) {
+        Date date = null;
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat(format);
+            date = sdf.parse(value);
+            if (!value.equals(sdf.format(date))) {
+                date = null;
+            }
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        }
+        return date != null;
+    }
+
 
     static class ViewHolder {
         CustomTextView mPostTile;

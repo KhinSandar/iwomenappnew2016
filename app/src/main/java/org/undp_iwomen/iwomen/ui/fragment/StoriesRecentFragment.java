@@ -104,10 +104,10 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
     List<IWomenPost> StorageiWomenPosts;
     private StorageUtil storageUtil;
 
-    private CustomTextView sp_content_title, sp_content_body, sp_content_author_name ,sp_content_date ;
+    private CustomTextView sp_content_title, sp_content_body, sp_content_author_name, sp_content_date;
     private ResizableImageView sp_content_img;
     private RoundedImageView sp_content_author_profile;
-    private  ProgressBar sp_content_img_progress , sp_content_profile_progress;
+    private ProgressBar sp_content_img_progress, sp_content_profile_progress;
 
     private SharedPreferences mSharedPreferencesUserInfo;
     private SharedPreferences.Editor mEditorUserInfo;
@@ -215,13 +215,13 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
         final LayoutInflater layoutInflater = getActivity().getLayoutInflater();
 
         View header = layoutInflater.inflate(R.layout.special_content_stories_list_item, null);
-        sp_content_title = (CustomTextView)header.findViewById(R.id.sp_content_txtPostTitle);
-        sp_content_body = (CustomTextView)header.findViewById(R.id.sp_content_txtContent);
-        sp_content_date= (CustomTextView)header.findViewById(R.id.sp_content_timestamp);
-        sp_content_author_name = (CustomTextView)header.findViewById(R.id.sp_content_name);
+        sp_content_title = (CustomTextView) header.findViewById(R.id.sp_content_txtPostTitle);
+        sp_content_body = (CustomTextView) header.findViewById(R.id.sp_content_txtContent);
+        sp_content_date = (CustomTextView) header.findViewById(R.id.sp_content_timestamp);
+        sp_content_author_name = (CustomTextView) header.findViewById(R.id.sp_content_name);
 
-        sp_content_img = (ResizableImageView)header.findViewById(R.id.sp_content_postImg);
-        sp_content_author_profile = (RoundedImageView)header.findViewById(R.id.sp_content_profilePic_rounded);
+        sp_content_img = (ResizableImageView) header.findViewById(R.id.sp_content_postImg);
+        sp_content_author_profile = (RoundedImageView) header.findViewById(R.id.sp_content_profilePic_rounded);
 
         sp_content_img_progress = (ProgressBar) header.findViewById(R.id.sp_content_feed_item_progressBar);
         sp_content_profile_progress = (ProgressBar) header.findViewById(R.id.sp_content_progressBar_profile_item);
@@ -240,7 +240,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
                 // do the reverse operation
                 Gson gson = new Gson();
                 iWomen_json = mSharedPreferencesUserInfo.getString(CommonConfig.IWOMEN_ID, null);
-                StorageiWomenPostObj  = gson.fromJson(iWomen_json, IWomenPost.class);
+                StorageiWomenPostObj = gson.fromJson(iWomen_json, IWomenPost.class);
                 intent.putExtra("postObj", new Gson().toJson(StorageiWomenPostObj));
 
                 //intent.putExtra("ImgUrl", mImgurl.get(getPosition()));
@@ -251,9 +251,9 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
         });
 
         StorageiWomenPosts = (ArrayList<IWomenPost>) storageUtil.ReadArrayListFromSD("stories_recent");
-        if (Connection.isOnline(mContext)){
+        if (Connection.isOnline(mContext)) {
             // Showing local data while loading from internet
-            if(StorageiWomenPosts != null && StorageiWomenPosts.size() > 0){
+            if (StorageiWomenPosts != null && StorageiWomenPosts.size() > 0) {
                 iWomenPostList.addAll(StorageiWomenPosts);
                 stories.notifyDataSetChanged();
                 zPDialog = new ZProgressHUD(getActivity());
@@ -262,9 +262,9 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
             // Clear local data when connected to internet
             // iWomenPostList.clear();
             getIWomenPostByPagination();
-        }else{
+        } else {
             SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
-            if(StorageiWomenPosts != null){
+            if (StorageiWomenPosts != null) {
                 iWomenPostList.clear();
                 iWomenPostList.addAll(StorageiWomenPosts);
                 stories.notifyDataSetChanged();
@@ -283,7 +283,8 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     mContext.startActivity(intent);
-                } catch (ArrayIndexOutOfBoundsException e){}
+                } catch (ArrayIndexOutOfBoundsException e) {
+                }
 
             }
         });
@@ -319,17 +320,15 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
             // do the reverse operation
             Gson gson = new Gson();
             iWomen_json = mSharedPreferencesUserInfo.getString(CommonConfig.IWOMEN_ID, null);
-            StorageiWomenPostObj  = gson.fromJson(iWomen_json, IWomenPost.class);
+            StorageiWomenPostObj = gson.fromJson(iWomen_json, IWomenPost.class);
 
             SetWeeklySpecialContentItem(StorageiWomenPostObj);
-
-
 
 
         }
     }
 
-    private void SetWeeklySpecialContentItem(IWomenPost item){
+    private void SetWeeklySpecialContentItem(IWomenPost item) {
         if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
             sp_content_title.setText(item.getTitle());
             sp_content_body.setText(item.getContent());
@@ -338,7 +337,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
             //sp_content_title.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
             //sp_content_body.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
 
-        } else  {//FOR ALL MM FONTS
+        } else {//FOR ALL MM FONTS
             sp_content_title.setText(item.getTitleMm());
             sp_content_body.setText(item.getContentMm());
             sp_content_author_name.setText(item.getPostUploadName());
@@ -356,12 +355,45 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
         //Log.e("Stories Post Adapter==","Date===>" + item.getCreated_at());
         try {
             Date timedate = format.parse(item.getPostUploadedDate());
-            sp_content_date.setText(sdf.format(timedate));
+
+            String dateformat = sdf.format(timedate);//M08 11, 2016
+            String regex = "[0-9]+";
+
+            String prefixDate = dateformat.substring(1, 3);
+            if (prefixDate.matches(regex)) {//if equal with number
+                if (prefixDate.equals("01")) {
+                    sp_content_date.setText("Jan" + dateformat.substring(3, dateformat.length()));
+                } else if (prefixDate.equals("02")) {
+                    sp_content_date.setText("Feb" + dateformat.substring(3, dateformat.length()));
+                } else if (prefixDate.equals("03")) {
+                    sp_content_date.setText("Mar" + dateformat.substring(3, dateformat.length()));
+                } else if (prefixDate.equals("04")) {
+                    sp_content_date.setText("Apr" + dateformat.substring(3, dateformat.length()));
+                } else if (prefixDate.equals("05")) {
+                    sp_content_date.setText("May" + dateformat.substring(3, dateformat.length()));
+                } else if (prefixDate.equals("06")) {
+                    sp_content_date.setText("Jun" + dateformat.substring(3, dateformat.length()));
+                } else if (prefixDate.equals("07")) {
+                    sp_content_date.setText("Jul" + dateformat.substring(3, dateformat.length()));
+                } else if (prefixDate.equals("08")) {
+                    sp_content_date.setText("Aug" + dateformat.substring(3, dateformat.length()));
+                } else if (prefixDate.equals("09")) {
+                    sp_content_date.setText("Sep" + dateformat.substring(3, dateformat.length()));
+                } else if (prefixDate.equals("10")) {
+                    sp_content_date.setText("Oct" + dateformat.substring(3, dateformat.length()));
+                } else if (prefixDate.equals("11")) {
+                    sp_content_date.setText("Nov" + dateformat.substring(3, dateformat.length()));
+                } else if (prefixDate.equals("12")) {
+                    sp_content_date.setText("Dec" + dateformat.substring(3, dateformat.length()));
+                }
+
+            } else {
+                sp_content_date.setText(dateformat);
+            }
 
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
 
         if (item.getPostUploadUserImgPath() != null && !item.getPostUploadUserImgPath().isEmpty()) {
 
@@ -420,6 +452,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
                                     this.progressBar.setVisibility(View.VISIBLE);
                                 }
                             }
+
                             @Override
                             public void onError() {
                                 super.onError();
@@ -438,7 +471,6 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
             sp_content_img_progress.setVisibility(View.GONE);
         }
     }
-
 
 
     private void setupAdapter() {
@@ -620,7 +652,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
 
 
         SearchView searchView = (SearchView) menu.findItem(R.id.action_menu_search).getActionView();
-        SearchView.SearchAutoComplete searchAutoComplete = (SearchView.SearchAutoComplete)searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+        SearchView.SearchAutoComplete searchAutoComplete = (SearchView.SearchAutoComplete) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
         searchAutoComplete.setHintTextColor(Color.WHITE);
         searchAutoComplete.setTextColor(Color.WHITE);
         SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
@@ -660,13 +692,13 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
             @Override
             public void success(Rating arg0, Response response) {
 
-                try{
+                try {
                     if (menu != null && arg0.getTotalRatings() > 0) {
                         menu.findItem(R.id.action_rating).setVisible(true);
                         menu.findItem(R.id.action_rating).setIcon(BaseActionBarActivity.getRatingIcon(arg0.getTotalRatings()));
                         avgRatings = arg0;
                     }
-                }catch (NullPointerException ex){
+                } catch (NullPointerException ex) {
                     ex.printStackTrace();
                 }
 
@@ -694,7 +726,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
         txt_total_rating.setText(avgRatings.getTotalRatings() + "");
         avg_ratings.setRating(avgRatings.getTotalRatings().floatValue());
         txt_rating_desc.setText(getRatingDesc(avgRatings.getTotalRatings()));
-        txt_avg_ratings.setText(avgRatings.getTotalUsers() +" "+ getResources().getString(R.string.str_total));
+        txt_avg_ratings.setText(avgRatings.getTotalUsers() + " " + getResources().getString(R.string.str_total));
 
         final AlertDialog ad = alertDialog.show();
 
@@ -706,21 +738,21 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
         });
     }
 
-    public String getRatingDesc(Double ratings){
+    public String getRatingDesc(Double ratings) {
         String ratingOfDesc = "";
-        if(ratings >0 && ratings <= 1.5){
+        if (ratings > 0 && ratings <= 1.5) {
             ratingOfDesc = getResources().getString(R.string.str_poor);
         }
-        if(ratings >1.5 && ratings <= 2.5){
+        if (ratings > 1.5 && ratings <= 2.5) {
             ratingOfDesc = getResources().getString(R.string.str_fair);
         }
-        if(ratings >2.5 && ratings <= 3.5){
+        if (ratings > 2.5 && ratings <= 3.5) {
             ratingOfDesc = getResources().getString(R.string.str_good);
         }
-        if(ratings >3.5 && ratings <= 4.5){
+        if (ratings > 3.5 && ratings <= 4.5) {
             ratingOfDesc = getString(R.string.str_very_good);
         }
-        if(ratings >4.5) {
+        if (ratings > 4.5) {
             ratingOfDesc = getResources().getString(R.string.str_excellent);
         }
         return ratingOfDesc;
@@ -1060,7 +1092,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
 
 
             } else {
-                
+
                 //Log.e("First Time Offset Range Count", "==>" + offsetlimit + "/" + skipLimit);//where={"isAllow": true}
 
                 String sCondition = "{\"isAllow\": true}";
@@ -1331,13 +1363,13 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
                             Log.e("JSON err", "==>" + e.toString());
                         }
 
-                        
+
                     }
 
                     @Override
                     public void failure(RetrofitError error) {
                         Log.e("error", "==" + error);
-                        
+
                     }
                 });
 
@@ -1408,14 +1440,14 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
     private void getIWomenPostByPagination() {
         if (Connection.isOnline(mContext)) {
             isLoading = true;
-            NetworkEngine.getInstance().getIWomenPostByDateByPagination(paginater,"Recent", 1, new Callback<List<IWomenPost>>() {
+            NetworkEngine.getInstance().getIWomenPostByDateByPagination(paginater, "Recent", 1, new Callback<List<IWomenPost>>() {
                 @Override
                 public void success(List<IWomenPost> iWomenPosts, Response response) {
                     // If user is arrive here first times
-                    if(isFirstLoading){
+                    if (isFirstLoading) {
                         isFirstLoading = false;
                         iWomenPostList.clear();
-                        if(zPDialog != null && zPDialog.isShowing())
+                        if (zPDialog != null && zPDialog.isShowing())
                             zPDialog.dismissWithSuccess();
                     }
                     iWomenPostList.addAll(iWomenPosts);
@@ -1425,10 +1457,10 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
                     storagelist.addAll(iWomenPostList);
                     storageUtil.SaveArrayListToSD("stories_recent", storagelist);
                     isLoading = false;
-                    if(iWomenPosts.size() == 12){
+                    if (iWomenPosts.size() == 12) {
                         skListView.setNextPage(true);
                         paginater++;
-                    }else{
+                    } else {
                         // If no more item
                         skListView.setNextPage(false);
                     }
@@ -1447,7 +1479,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
 
                 @Override
                 public void failure(RetrofitError error) {
-                    if(zPDialog != null && zPDialog.isShowing())
+                    if (zPDialog != null && zPDialog.isShowing())
                         zPDialog.dismissWithSuccess();
                 }
             });
@@ -1457,7 +1489,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
             //List<IWomenPost> iWomenPosts = StoreUtil.getInstance().selectFrom("stories_recent");
             List<IWomenPost> iWomenPosts = (ArrayList<IWomenPost>) storageUtil.ReadArrayListFromSD("stories_recent");
 
-            if(iWomenPosts != null){
+            if (iWomenPosts != null) {
                 iWomenPostList.clear();
                 iWomenPostList.addAll(iWomenPosts);
                 stories.notifyDataSetChanged();
@@ -1480,7 +1512,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
 
         @Override
         public void onNextPageRequest() {
-            if(!isLoading){
+            if (!isLoading) {
                 getIWomenPostByPagination();
             }
         }
@@ -1502,6 +1534,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
         }
 
     }
+
     private class ImageLoadedCallback implements com.squareup.picasso.Callback {
         ProgressBar progressBar;
 
