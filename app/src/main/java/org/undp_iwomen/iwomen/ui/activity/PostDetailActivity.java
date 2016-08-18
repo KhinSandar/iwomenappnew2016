@@ -888,6 +888,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
             post_content.setText(item.getContentMm());
             et_comment.setHint(R.string.post_detail_comment_mm);
 
+
             et_comment.setTypeface(MyTypeFace.get(this, MyTypeFace.ZAWGYI));
 
             //TODO
@@ -938,6 +939,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
             mPostTile.setTypeface(MyTypeFace.get(this, MyTypeFace.ZAWGYI));
             post_content.setTypeface(MyTypeFace.get(this, MyTypeFace.ZAWGYI));
             post_suggest_text.setTypeface(MyTypeFace.get(this, MyTypeFace.ZAWGYI));*/
+
         }
 
 

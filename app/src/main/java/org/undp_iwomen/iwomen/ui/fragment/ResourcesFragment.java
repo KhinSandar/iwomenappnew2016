@@ -224,12 +224,10 @@ public class ResourcesFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-
                 Intent intent = new Intent(mContext, SubResourceListActivity.class);
-
-                intent.putExtra("ResourceId", ResourceItems.get(i).getObjectId());
-                intent.putExtra("TitleEng", ResourceItems.get(i).getResourceTitleEng());
-                intent.putExtra("TitleMM", ResourceItems.get(i).getResourceTitleMm());
+                intent.putExtra("ResourceId", ResourceItems.get(i-1).getObjectId());  //Linn Edited
+                intent.putExtra("TitleEng", ResourceItems.get(i-1).getResourceTitleEng());
+                intent.putExtra("TitleMM", ResourceItems.get(i-1).getResourceTitleMm());
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(intent);

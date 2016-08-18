@@ -1,6 +1,7 @@
 package org.undp_iwomen.iwomen.ui.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -124,10 +125,12 @@ public class StoriesRecentListAdapter extends BaseAdapter {
         //Sun Jun 22 18:32:00 GMT+06:30 2014
         //Log.e("Stories Post Adapter==","Date===>" + item.getCreated_at());
         try {
+            Log.e("Date Format>>>>",item.getPostUploadedDate());
             Date timedate = format.parse(item.getPostUploadedDate());
             holder.post_timestamp.setText(sdf.format(timedate));
 
         } catch (ParseException e) {
+            Log.e("Catch>>>>",e.getMessage());
             e.printStackTrace();
         }
 
