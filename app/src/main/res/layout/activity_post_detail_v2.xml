@@ -129,7 +129,8 @@
                     android:paddingLeft="@dimen/activity_vertical_margin"
                     android:singleLine="false"
                     android:textColor="#fff"
-                    android:textColorHint="#8fff" />
+                    android:textColorHint="#8fff"
+                    android:textSize="12sp"/>
             </LinearLayout>
 
             <LinearLayout

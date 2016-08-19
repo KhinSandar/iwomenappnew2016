@@ -40,10 +40,3 @@ gradle.properties
 
 gradlew
 
-# SMK libraries
-SKConnectionDetector/
-SKListView/
-ZProgressHUD/
-caldroid/
-sKAlertMessage/
-shimmerTextView/

@@ -845,7 +845,11 @@ female-pilots-iaa1s
     <string name="mayDoeKaBarFBPage">ေမတို႕ကမာၻ Page ကို Like လုပ္ပါ</string>
 
     <string name="audio_not_availabe_msg">ယခု အသံဖိုင္ မရွိေသးပါ ။</string>
+
+    <string name="no_connection_mm">အင္တာနက္မဖြင့္ထားပါ</string>
+
     <string name="weekly_special_be_inspired">ယခု လ အတြက္ အထူးၿခားဆံုး အေၾကာင္းအရာ</string>
+
     <!--<string name="login_dialog_mm_zawgyi">ၿမန္မာေဇာ္ဂ်ီေဖာင့္</string>
     <string name="login_dialog_mm_uni">ၿမန္မာ ယူနီကုုတ္ေဖာင့္</string>
     <string name="login_dialog_eng">ENGLISH</string>

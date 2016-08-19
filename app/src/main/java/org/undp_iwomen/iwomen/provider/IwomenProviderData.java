@@ -24,6 +24,7 @@ public class IwomenProviderData {
     private static final String  RESOURCE_PATH = "resource";
     private static final String  SUB_RESOURCE_PATH = "sub_resource";
     private static final String  SISTERAPP_PATH = "sisterapp";
+    private static final String  SUB_RESOURCE_DETAIL_PATH = "sub_resource_detail";
 
 
 
@@ -115,6 +116,20 @@ public class IwomenProviderData {
 
         public static Uri buildContentUri(String id){
             return CONTETN_URI.buildUpon().appendPath(id).build();
+        }
+
+
+
+
+    }
+
+    public static class SubResourceDetailProvider implements TableAndColumnsName.SubResourceDetailUtil{
+        public static final Uri CONTETNT_URI = BASE_CONTENT_URI.buildUpon().appendEncodedPath(SUB_RESOURCE_DETAIL_PATH).build();
+
+        public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.org.undp_iwomen.sub_resource_detail";
+
+        public static Uri buildContentUri(String id){
+            return CONTETNT_URI.buildUpon().appendPath(id).build();
         }
 
 

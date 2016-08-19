@@ -131,11 +131,11 @@ public interface SMKSeverService {
             Callback<LikeItem> callback);
 
     @FormUrlEncoded
-    @POST(CommonConfig.POST_IWOMEN_RESOURCE_LIKE)
-    void postiWomenResourceLike(
+    @POST(CommonConfig.POST_IWOMEN_SUBRESOURCE_DETAIL_LIKES)
+    void postiWomenSubResourceDetailLikes(
             @Field("postId") String postId,
             @Field("userId") String userId,
-            Callback<LikeItem> callback);
+            Callback<String> callback);
 
     @FormUrlEncoded
     @POST(CommonConfig.POST_POSTS_LIKE)

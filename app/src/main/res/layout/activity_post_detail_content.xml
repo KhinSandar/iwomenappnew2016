@@ -327,7 +327,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:visibility="gone"
-                    android:text="Posted on 21 Aug 2015"
+                    android:text=" 21 Aug 2015"
                     android:textStyle="bold" />
 
 

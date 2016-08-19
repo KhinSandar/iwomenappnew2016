@@ -20,6 +20,8 @@ public class TableAndColumnsName {
         String SUBRESOURCE= "sub_resource";
         String SISTERAPP= "sisterapp";
 
+        String SUBRESOURCEDETAIL= "sub_resource_detail";
+
         String PROJECT_USER = "project_user";
         String FORM = "form";
     }
@@ -45,6 +47,25 @@ public class TableAndColumnsName {
                 STATUS + " Text Not Null," +
                 CREATED_DATE + " Date Not Null," +
                 UPDATED_DATE + " Date Not Null);";
+
+    }
+
+    public interface SubResourceDetailUtil{
+        String SUB_RESOURCE_ID ="sub_resource_id";
+        String USER_ID ="user_id";
+        String LIKE_COUNT = "like_count";
+        String STATUS = "status";
+
+
+
+        String CREATE_SUB_RESOURCE_DETAIL = "Create Table If Not Exists " + TableNames.SUBRESOURCEDETAIL + "(" +
+                BaseColumns._ID + " Integer Primary Key Autoincrement," +
+
+                SUB_RESOURCE_ID + " Text Not Null," +
+                USER_ID + " Text Not Null," +
+                LIKE_COUNT + " Text Not Null," +
+                STATUS + " Text Not Null);" ;
+
 
     }
 

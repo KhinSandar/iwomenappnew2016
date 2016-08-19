@@ -839,6 +839,7 @@ Shirin Ebadi, J.D., was awarded the 2003 Nobel Peace Prize for her efforts to pr
     <string name="competition_not_game">Game is not started</string>
     <string name="mayDoeKaBarFBPage">Like May Doe Kabar Network on Facebook</string>
     <string name="audio_not_availabe_msg">This audio file is not available yet !</string>
+    <string name="no_connection">No Internet Connection</string>
 
     <string name="weekly_special_be_inspired">Topic Of the Month</string>
 
