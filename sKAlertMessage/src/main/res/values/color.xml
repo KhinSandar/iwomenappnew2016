@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <color name="br_warning">#FBEED5</color>
+    <color name="bg_warning">#FCF8E3</color>
+    <color name="txt_warning">#C09853</color>
+    
+    <color name="br_success">#D6E9C6</color>
+    <color name="bg_success">#DFF0D8</color>
+    <color name="txt_success">#468847</color>
+    
+    <color name="br_info">#BCE8F1</color>
+    <color name="bg_info">#D9EDF7</color>
+    <color name="txt_info">#3A87AD</color>
+    
+    <color name="br_error">#EED3D7</color>
+    <color name="bg_error">#F2DEDE</color>
+    <color name="txt_error">#B94A48</color>
+    
+</resources>
