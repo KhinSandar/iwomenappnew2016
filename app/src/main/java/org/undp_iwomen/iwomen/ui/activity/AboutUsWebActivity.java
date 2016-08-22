@@ -167,7 +167,14 @@ public class AboutUsWebActivity extends BaseActionBarActivity {
                 }
             }
         });
-        txt_version.setText("Current Version Name "+ mversionName);
+
+        if (strLang.equals(Utils.ENG_LANG)) {
+            txt_version.setText(R.string.current_version+ mversionName);
+
+        }else{
+            txt_version.setText(R.string.current_version_mm+ mversionName);
+
+        }
         txt_new_version.setVisibility(View.GONE);
         checkAPKVersion();
         /*TextView text = new TextView(mContext);

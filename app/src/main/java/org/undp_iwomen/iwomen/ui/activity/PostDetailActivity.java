@@ -257,6 +257,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     private final String PREPARE_AUDIO_PERMISSION = "android.permission.MODIFY_AUDIO_SETTINGS";
 
 
+
     //New UI
     ImageView img_social_facebook;
     private FacebookCallback<Sharer.Result> shareCallback = new FacebookCallback<Sharer.Result>() {

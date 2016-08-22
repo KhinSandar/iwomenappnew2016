@@ -340,7 +340,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
         } else {//FOR ALL MM FONTS
             sp_content_title.setText(item.getTitleMm());
             sp_content_body.setText(item.getContentMm());
-            sp_content_author_name.setText(item.getPostUploadName());
+            sp_content_author_name.setText(item.getPostUploadNameMM());
 
 
         }
