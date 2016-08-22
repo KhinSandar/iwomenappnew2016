@@ -5,637 +5,538 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class IWomenPost implements Serializable{
+public class IWomenPost implements Serializable {
 
-@SerializedName("id")
-@Expose
-private Integer id;
-@SerializedName("objectId")
-@Expose
-private String objectId;
-@SerializedName("audioFile")
-@Expose
-private String audioFile;
-@SerializedName("authorId")
-@Expose
-private String authorId;
-@SerializedName("comment_count")
-@Expose
-private Integer commentCount;
-@SerializedName("content")
-@Expose
-private String content;
-@SerializedName("contentType")
-@Expose
-private String contentType;
-@SerializedName("content_mm")
-@Expose
-private String contentMm;
-@SerializedName("credit_link")
-@Expose
-private String creditLink;
-@SerializedName("credit_link_mm")
-@Expose
-private String creditLinkMm;
-@SerializedName("credit_logo_url")
-@Expose
-private String creditLogoUrl;
-@SerializedName("credit_name")
-@Expose
-private String creditName;
-@SerializedName("image")
-@Expose
-private String image;
-@SerializedName("isAllow")
-@Expose
-private Boolean isAllow;
-@SerializedName("likes")
-@Expose
-private Integer likes;
-@SerializedName("postUploadName")
-@Expose
-private String postUploadName;
-@SerializedName("postUploadPersonImg")
-@Expose
-private String postUploadPersonImg;
-@SerializedName("postUploadUserImgPath")
-@Expose
-private String postUploadUserImgPath;
-@SerializedName("postUploadedDate")
-@Expose
-private String postUploadedDate;
-@SerializedName("post_author_role")
-@Expose
-private String postAuthorRole;
-@SerializedName("post_author_role_mm")
-@Expose
-private String postAuthorRoleMm;
-@SerializedName("share_count")
-@Expose
-private Integer shareCount;
-@SerializedName("suggest_section_eng")
-@Expose
-private String suggestSectionEng;
-@SerializedName("title")
-@Expose
-private String title;
-@SerializedName("titleMm")
-@Expose
-private String titleMm;
-@SerializedName("userId")
-@Expose
-private String userId;
-@SerializedName("videoId")
-@Expose
-private String videoId;
-@SerializedName("created_at")
-@Expose
-private String createdAt;
-@SerializedName("updated_at")
-@Expose
-private String updatedAt;
-@SerializedName("deleted_at")
-@Expose
-private String deletedAt;
+    @SerializedName("id")
+    @Expose
+    private Integer id;
+    @SerializedName("objectId")
+    @Expose
+    private String objectId;
+    @SerializedName("audioFile")
+    @Expose
+    private String audioFile;
+    @SerializedName("authorId")
+    @Expose
+    private String authorId;
+    @SerializedName("comment_count")
+    @Expose
+    private Integer commentCount;
+    @SerializedName("content")
+    @Expose
+    private String content;
+    @SerializedName("contentType")
+    @Expose
+    private String contentType;
+    @SerializedName("content_mm")
+    @Expose
+    private String contentMm;
+    @SerializedName("credit_link")
+    @Expose
+    private String creditLink;
+    @SerializedName("credit_link_mm")
+    @Expose
+    private String creditLinkMm;
+    @SerializedName("credit_logo_url")
+    @Expose
+    private String creditLogoUrl;
+    @SerializedName("credit_name")
+    @Expose
+    private String creditName;
+    @SerializedName("image")
+    @Expose
+    private String image;
+    @SerializedName("isAllow")
+    @Expose
+    private Boolean isAllow;
+    @SerializedName("likes")
+    @Expose
+    private Integer likes;
+    @SerializedName("postUploadName")
+    @Expose
+    private String postUploadName;
+    @SerializedName("postUploadNameMM")
+    @Expose
+    private String postUploadNameMM;
 
-/**
-* 
-* @return
-* The id
-*/
-public Integer getId() {
-return id;
-}
+    @SerializedName("postUploadPersonImg")
+    @Expose
+    private String postUploadPersonImg;
+    @SerializedName("postUploadUserImgPath")
+    @Expose
+    private String postUploadUserImgPath;
+    @SerializedName("postUploadedDate")
+    @Expose
+    private String postUploadedDate;
+    @SerializedName("post_author_role")
+    @Expose
+    private String postAuthorRole;
+    @SerializedName("post_author_role_mm")
+    @Expose
+    private String postAuthorRoleMm;
+    @SerializedName("share_count")
+    @Expose
+    private Integer shareCount;
+    @SerializedName("suggest_section_eng")
+    @Expose
+    private String suggestSectionEng;
+    @SerializedName("title")
+    @Expose
+    private String title;
+    @SerializedName("titleMm")
+    @Expose
+    private String titleMm;
+    @SerializedName("userId")
+    @Expose
+    private String userId;
+    @SerializedName("videoId")
+    @Expose
+    private String videoId;
+    @SerializedName("created_at")
+    @Expose
+    private String createdAt;
+    @SerializedName("updated_at")
+    @Expose
+    private String updatedAt;
+    @SerializedName("deleted_at")
+    @Expose
+    private String deletedAt;
 
-/**
-* 
-* @param id
-* The id
-*/
-public void setId(Integer id) {
-this.id = id;
-}
+    /**
+     * @return The id
+     */
+    public Integer getId() {
+        return id;
+    }
 
-/**
-* 
-* @return
-* The objectId
-*/
-public String getObjectId() {
-return objectId;
-}
+    /**
+     * @param id The id
+     */
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-/**
-* 
-* @param objectId
-* The objectId
-*/
-public void setObjectId(String objectId) {
-this.objectId = objectId;
-}
+    /**
+     * @return The objectId
+     */
+    public String getObjectId() {
+        return objectId;
+    }
 
-/**
-* 
-* @return
-* The audioFile
-*/
-public String getAudioFile() {
-return audioFile;
-}
+    /**
+     * @param objectId The objectId
+     */
+    public void setObjectId(String objectId) {
+        this.objectId = objectId;
+    }
 
-/**
-* 
-* @param audioFile
-* The audioFile
-*/
-public void setAudioFile(String audioFile) {
-this.audioFile = audioFile;
-}
+    /**
+     * @return The audioFile
+     */
+    public String getAudioFile() {
+        return audioFile;
+    }
 
-/**
-* 
-* @return
-* The authorId
-*/
-public String getAuthorId() {
-return authorId;
-}
+    /**
+     * @param audioFile The audioFile
+     */
+    public void setAudioFile(String audioFile) {
+        this.audioFile = audioFile;
+    }
 
-/**
-* 
-* @param authorId
-* The authorId
-*/
-public void setAuthorId(String authorId) {
-this.authorId = authorId;
-}
+    /**
+     * @return The authorId
+     */
+    public String getAuthorId() {
+        return authorId;
+    }
 
-/**
-* 
-* @return
-* The commentCount
-*/
-public Integer getCommentCount() {
-return commentCount;
-}
+    /**
+     * @param authorId The authorId
+     */
+    public void setAuthorId(String authorId) {
+        this.authorId = authorId;
+    }
 
-/**
-* 
-* @param commentCount
-* The comment_count
-*/
-public void setCommentCount(Integer commentCount) {
-this.commentCount = commentCount;
-}
+    /**
+     * @return The commentCount
+     */
+    public Integer getCommentCount() {
+        return commentCount;
+    }
 
-/**
-* 
-* @return
-* The content
-*/
-public String getContent() {
-return content;
-}
+    /**
+     * @param commentCount The comment_count
+     */
+    public void setCommentCount(Integer commentCount) {
+        this.commentCount = commentCount;
+    }
 
-/**
-* 
-* @param content
-* The content
-*/
-public void setContent(String content) {
-this.content = content;
-}
+    /**
+     * @return The content
+     */
+    public String getContent() {
+        return content;
+    }
 
-/**
-* 
-* @return
-* The contentType
-*/
-public String getContentType() {
-return contentType;
-}
+    /**
+     * @param content The content
+     */
+    public void setContent(String content) {
+        this.content = content;
+    }
 
-/**
-* 
-* @param contentType
-* The contentType
-*/
-public void setContentType(String contentType) {
-this.contentType = contentType;
-}
+    /**
+     * @return The contentType
+     */
+    public String getContentType() {
+        return contentType;
+    }
 
-/**
-* 
-* @return
-* The contentMm
-*/
-public String getContentMm() {
-return contentMm;
-}
+    /**
+     * @param contentType The contentType
+     */
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
+    }
 
-/**
-* 
-* @param contentMm
-* The content_mm
-*/
-public void setContentMm(String contentMm) {
-this.contentMm = contentMm;
-}
+    /**
+     * @return The contentMm
+     */
+    public String getContentMm() {
+        return contentMm;
+    }
 
-/**
-* 
-* @return
-* The creditLink
-*/
-public String getCreditLink() {
-return creditLink;
-}
+    /**
+     * @param contentMm The content_mm
+     */
+    public void setContentMm(String contentMm) {
+        this.contentMm = contentMm;
+    }
 
-/**
-* 
-* @param creditLink
-* The credit_link
-*/
-public void setCreditLink(String creditLink) {
-this.creditLink = creditLink;
-}
+    /**
+     * @return The creditLink
+     */
+    public String getCreditLink() {
+        return creditLink;
+    }
 
-/**
-* 
-* @return
-* The creditLinkMm
-*/
-public String getCreditLinkMm() {
-return creditLinkMm;
-}
+    /**
+     * @param creditLink The credit_link
+     */
+    public void setCreditLink(String creditLink) {
+        this.creditLink = creditLink;
+    }
 
-/**
-* 
-* @param creditLinkMm
-* The credit_link_mm
-*/
-public void setCreditLinkMm(String creditLinkMm) {
-this.creditLinkMm = creditLinkMm;
-}
+    /**
+     * @return The creditLinkMm
+     */
+    public String getCreditLinkMm() {
+        return creditLinkMm;
+    }
 
-/**
-* 
-* @return
-* The creditLogoUrl
-*/
-public String getCreditLogoUrl() {
-return creditLogoUrl;
-}
+    /**
+     * @param creditLinkMm The credit_link_mm
+     */
+    public void setCreditLinkMm(String creditLinkMm) {
+        this.creditLinkMm = creditLinkMm;
+    }
 
-/**
-* 
-* @param creditLogoUrl
-* The credit_logo_url
-*/
-public void setCreditLogoUrl(String creditLogoUrl) {
-this.creditLogoUrl = creditLogoUrl;
-}
+    /**
+     * @return The creditLogoUrl
+     */
+    public String getCreditLogoUrl() {
+        return creditLogoUrl;
+    }
 
-/**
-* 
-* @return
-* The creditName
-*/
-public String getCreditName() {
-return creditName;
-}
+    /**
+     * @param creditLogoUrl The credit_logo_url
+     */
+    public void setCreditLogoUrl(String creditLogoUrl) {
+        this.creditLogoUrl = creditLogoUrl;
+    }
 
-/**
-* 
-* @param creditName
-* The credit_name
-*/
-public void setCreditName(String creditName) {
-this.creditName = creditName;
-}
+    /**
+     * @return The creditName
+     */
+    public String getCreditName() {
+        return creditName;
+    }
 
-/**
-* 
-* @return
-* The image
-*/
-public String getImage() {
-return image;
-}
+    /**
+     * @param creditName The credit_name
+     */
+    public void setCreditName(String creditName) {
+        this.creditName = creditName;
+    }
 
-/**
-* 
-* @param image
-* The image
-*/
-public void setImage(String image) {
-this.image = image;
-}
+    /**
+     * @return The image
+     */
+    public String getImage() {
+        return image;
+    }
 
-/**
-* 
-* @return
-* The isAllow
-*/
-public Boolean getIsAllow() {
-return isAllow;
-}
+    /**
+     * @param image The image
+     */
+    public void setImage(String image) {
+        this.image = image;
+    }
 
-/**
-* 
-* @param isAllow
-* The isAllow
-*/
-public void setIsAllow(Boolean isAllow) {
-this.isAllow = isAllow;
-}
+    /**
+     * @return The isAllow
+     */
+    public Boolean getIsAllow() {
+        return isAllow;
+    }
 
-/**
-* 
-* @return
-* The likes
-*/
-public Integer getLikes() {
-return likes;
-}
+    /**
+     * @param isAllow The isAllow
+     */
+    public void setIsAllow(Boolean isAllow) {
+        this.isAllow = isAllow;
+    }
 
-/**
-* 
-* @param likes
-* The likes
-*/
-public void setLikes(Integer likes) {
-this.likes = likes;
-}
+    /**
+     * @return The likes
+     */
+    public Integer getLikes() {
+        return likes;
+    }
 
-/**
-* 
-* @return
-* The postUploadName
-*/
-public String getPostUploadName() {
-return postUploadName;
-}
+    /**
+     * @param likes The likes
+     */
+    public void setLikes(Integer likes) {
+        this.likes = likes;
+    }
 
-/**
-* 
-* @param postUploadName
-* The postUploadName
-*/
-public void setPostUploadName(String postUploadName) {
-this.postUploadName = postUploadName;
-}
+    /**
+     * @return The postUploadName
+     */
+    public String getPostUploadName() {
+        return postUploadName;
+    }
 
-/**
-* 
-* @return
-* The postUploadPersonImg
-*/
-public String getPostUploadPersonImg() {
-return postUploadPersonImg;
-}
+    /**
+     * @param postUploadName The postUploadName
+     */
+    public void setPostUploadName(String postUploadName) {
+        this.postUploadName = postUploadName;
+    }
+    /**
+     *
+     * @return
+     * The postUploadNameMM
+     */
+    public String getPostUploadNameMM() {
+        return postUploadNameMM;
+    }
 
-/**
-* 
-* @param postUploadPersonImg
-* The postUploadPersonImg
-*/
-public void setPostUploadPersonImg(String postUploadPersonImg) {
-this.postUploadPersonImg = postUploadPersonImg;
-}
+    /**
+     *
+     * @param postUploadNameMM
+     * The postUploadNameMM
+     */
+    public void setPostUploadNameMM(String postUploadNameMM) {
+        this.postUploadNameMM = postUploadNameMM;
+    }
 
-/**
-* 
-* @return
-* The postUploadUserImgPath
-*/
-public String getPostUploadUserImgPath() {
-return postUploadUserImgPath;
-}
+    /**
+     * @return The postUploadPersonImg
+     */
+    public String getPostUploadPersonImg() {
+        return postUploadPersonImg;
+    }
 
-/**
-* 
-* @param postUploadUserImgPath
-* The postUploadUserImgPath
-*/
-public void setPostUploadUserImgPath(String postUploadUserImgPath) {
-this.postUploadUserImgPath = postUploadUserImgPath;
-}
+    /**
+     * @param postUploadPersonImg The postUploadPersonImg
+     */
+    public void setPostUploadPersonImg(String postUploadPersonImg) {
+        this.postUploadPersonImg = postUploadPersonImg;
+    }
 
-/**
-* 
-* @return
-* The postUploadedDate
-*/
-public String getPostUploadedDate() {
-return postUploadedDate;
-}
+    /**
+     * @return The postUploadUserImgPath
+     */
+    public String getPostUploadUserImgPath() {
+        return postUploadUserImgPath;
+    }
 
-/**
-* 
-* @param postUploadedDate
-* The postUploadedDate
-*/
-public void setPostUploadedDate(String postUploadedDate) {
-this.postUploadedDate = postUploadedDate;
-}
+    /**
+     * @param postUploadUserImgPath The postUploadUserImgPath
+     */
+    public void setPostUploadUserImgPath(String postUploadUserImgPath) {
+        this.postUploadUserImgPath = postUploadUserImgPath;
+    }
 
-/**
-* 
-* @return
-* The postAuthorRole
-*/
-public String getPostAuthorRole() {
-return postAuthorRole;
-}
+    /**
+     * @return The postUploadedDate
+     */
+    public String getPostUploadedDate() {
+        return postUploadedDate;
+    }
 
-/**
-* 
-* @param postAuthorRole
-* The post_author_role
-*/
-public void setPostAuthorRole(String postAuthorRole) {
-this.postAuthorRole = postAuthorRole;
-}
+    /**
+     * @param postUploadedDate The postUploadedDate
+     */
+    public void setPostUploadedDate(String postUploadedDate) {
+        this.postUploadedDate = postUploadedDate;
+    }
 
-/**
-* 
-* @return
-* The postAuthorRoleMm
-*/
-public String getPostAuthorRoleMm() {
-return postAuthorRoleMm;
-}
+    /**
+     * @return The postAuthorRole
+     */
+    public String getPostAuthorRole() {
+        return postAuthorRole;
+    }
 
-/**
-* 
-* @param postAuthorRoleMm
-* The post_author_role_mm
-*/
-public void setPostAuthorRoleMm(String postAuthorRoleMm) {
-this.postAuthorRoleMm = postAuthorRoleMm;
-}
+    /**
+     * @param postAuthorRole The post_author_role
+     */
+    public void setPostAuthorRole(String postAuthorRole) {
+        this.postAuthorRole = postAuthorRole;
+    }
 
-/**
-* 
-* @return
-* The shareCount
-*/
-public Integer getShareCount() {
-return shareCount;
-}
+    /**
+     * @return The postAuthorRoleMm
+     */
+    public String getPostAuthorRoleMm() {
+        return postAuthorRoleMm;
+    }
 
-/**
-* 
-* @param shareCount
-* The share_count
-*/
-public void setShareCount(Integer shareCount) {
-this.shareCount = shareCount;
-}
+    /**
+     * @param postAuthorRoleMm The post_author_role_mm
+     */
+    public void setPostAuthorRoleMm(String postAuthorRoleMm) {
+        this.postAuthorRoleMm = postAuthorRoleMm;
+    }
 
-/**
-* 
-* @return
-* The suggestSectionEng
-*/
-public String getSuggestSectionEng() {
-return suggestSectionEng;
-}
+    /**
+     * @return The shareCount
+     */
+    public Integer getShareCount() {
+        return shareCount;
+    }
 
-/**
-* 
-* @param suggestSectionEng
-* The suggest_section_eng
-*/
-public void setSuggestSectionEng(String suggestSectionEng) {
-this.suggestSectionEng = suggestSectionEng;
-}
+    /**
+     * @param shareCount The share_count
+     */
+    public void setShareCount(Integer shareCount) {
+        this.shareCount = shareCount;
+    }
 
-/**
-* 
-* @return
-* The title
-*/
-public String getTitle() {
-return title;
-}
+    /**
+     * @return The suggestSectionEng
+     */
+    public String getSuggestSectionEng() {
+        return suggestSectionEng;
+    }
 
-/**
-* 
-* @param title
-* The title
-*/
-public void setTitle(String title) {
-this.title = title;
-}
+    /**
+     * @param suggestSectionEng The suggest_section_eng
+     */
+    public void setSuggestSectionEng(String suggestSectionEng) {
+        this.suggestSectionEng = suggestSectionEng;
+    }
 
-/**
-* 
-* @return
-* The titleMm
-*/
-public String getTitleMm() {
-return titleMm;
-}
+    /**
+     * @return The title
+     */
+    public String getTitle() {
+        return title;
+    }
 
-/**
-* 
-* @param titleMm
-* The titleMm
-*/
-public void setTitleMm(String titleMm) {
-this.titleMm = titleMm;
-}
+    /**
+     * @param title The title
+     */
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-/**
-* 
-* @return
-* The userId
-*/
-public String getUserId() {
-return userId;
-}
+    /**
+     * @return The titleMm
+     */
+    public String getTitleMm() {
+        return titleMm;
+    }
 
-/**
-* 
-* @param userId
-* The userId
-*/
-public void setUserId(String userId) {
-this.userId = userId;
-}
+    /**
+     * @param titleMm The titleMm
+     */
+    public void setTitleMm(String titleMm) {
+        this.titleMm = titleMm;
+    }
 
-/**
-* 
-* @return
-* The videoId
-*/
-public String getVideoId() {
-return videoId;
-}
+    /**
+     * @return The userId
+     */
+    public String getUserId() {
+        return userId;
+    }
 
-/**
-* 
-* @param videoId
-* The videoId
-*/
-public void setVideoId(String videoId) {
-this.videoId = videoId;
-}
+    /**
+     * @param userId The userId
+     */
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
-/**
-* 
-* @return
-* The createdAt
-*/
-public String getCreatedAt() {
-return createdAt;
-}
+    /**
+     * @return The videoId
+     */
+    public String getVideoId() {
+        return videoId;
+    }
 
-/**
-* 
-* @param createdAt
-* The created_at
-*/
-public void setCreatedAt(String createdAt) {
-this.createdAt = createdAt;
-}
+    /**
+     * @param videoId The videoId
+     */
+    public void setVideoId(String videoId) {
+        this.videoId = videoId;
+    }
 
-/**
-* 
-* @return
-* The updatedAt
-*/
-public String getUpdatedAt() {
-return updatedAt;
-}
+    /**
+     * @return The createdAt
+     */
+    public String getCreatedAt() {
+        return createdAt;
+    }
 
-/**
-* 
-* @param updatedAt
-* The updated_at
-*/
-public void setUpdatedAt(String updatedAt) {
-this.updatedAt = updatedAt;
-}
+    /**
+     * @param createdAt The created_at
+     */
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
 
-/**
-* 
-* @return
-* The deletedAt
-*/
-public String getDeletedAt() {
-return deletedAt;
-}
+    /**
+     * @return The updatedAt
+     */
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
 
-/**
-* 
-* @param deletedAt
-* The deleted_at
-*/
-public void setDeletedAt(String deletedAt) {
-this.deletedAt = deletedAt;
-}
+    /**
+     * @param updatedAt The updated_at
+     */
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    /**
+     * @return The deletedAt
+     */
+    public String getDeletedAt() {
+        return deletedAt;
+    }
+
+    /**
+     * @param deletedAt The deleted_at
+     */
+    public void setDeletedAt(String deletedAt) {
+        this.deletedAt = deletedAt;
+    }
 
 }

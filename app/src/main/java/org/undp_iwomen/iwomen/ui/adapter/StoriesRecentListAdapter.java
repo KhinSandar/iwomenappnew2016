@@ -146,7 +146,7 @@ public class StoriesRecentListAdapter extends BaseAdapter {
         } else  {//FOR ALL MM FONTS
             holder.mPostTile.setText(item.getTitleMm());
             holder.post_content.setText(item.getContentMm());
-            holder.post_content_user_name.setText(item.getPostUploadName());
+            holder.post_content_user_name.setText(item.getPostUploadNameMM());
 
         }
 

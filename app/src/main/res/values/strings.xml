@@ -472,7 +472,7 @@
         <item>International Day for the Elimination of Violence against Women\n</item>
         <item>Tawakkol Karman receives Nobel Peace Prize\n</item>
     </string-array>
-    <string name="post_detail_more">more &gt;&gt;</string>
+    <string name="post_detail_more">More &gt;&gt;</string>
     <string name="calendar_name">Calendar</string>
 
     <string name="large_text">
@@ -844,9 +844,13 @@ Shirin Ebadi, J.D., was awarded the 2003 Nobel Peace Prize for her efforts to pr
 
     <string name="weekly_special_be_inspired">Topic Of the Month</string>
 
+
     <!--<string name="login_dialog_mm_zawgyi">ၿမန္မာေဇာ္ဂ်ီေဖာင့္</string>
     <string name="login_dialog_mm_uni">ၿမန္မာ ယူနီကုုတ္ေဖာင့္</string>
     <string name="login_dialog_eng">ENGLISH အဂၤလိပ္ေဖာင့္ </string>
     <string name="login_dialog_mm_deafult">ၿမန္မာစာ ပံုေသ</string>-->
+    <string name="tlg_profile">In your area women are helping each other in many ways: saving and lending together, learning about technology, improving their business skills, trading products with each other, learning how to become women leaders in the community, learning about education opportunities, learning about health and nutrition, traveling together to workshops in Yangon to meet women from many other countries, making friends, helping each other to become more successful in daily life.
+Make many new friends, contact your local May Doe Kabar/TLG group. See number below.
+</string>
 
 </resources>
