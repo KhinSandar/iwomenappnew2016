@@ -257,6 +257,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     private final String PREPARE_AUDIO_PERMISSION = "android.permission.MODIFY_AUDIO_SETTINGS";
 
 
+
     //New UI
     ImageView img_social_facebook;
     private FacebookCallback<Sharer.Result> shareCallback = new FacebookCallback<Sharer.Result>() {
@@ -691,7 +692,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         img_credit_logo.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
 
-        post_content_user_name.setText(item.getPostUploadName());
+
 
 
 
@@ -717,13 +718,60 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         }
 
 
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.US);
+        /*SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.US);
 
         SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy");
 
         try {
             Date timedate = format.parse(item.getPostUploadedDate());
             post_content_posted_date.setText(sdf.format(timedate));
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }*/
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.US);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy");
+        //2015-09-16T13:46:34.875Z
+        //Sun Jun 22 18:32:00 GMT+06:30 2014
+        //Log.e("Stories Post Adapter==","Date===>" + item.getCreated_at());
+        try {
+            Date timedate = format.parse(item.getPostUploadedDate());
+
+            String dateformat = sdf.format(timedate);//M08 11, 2016
+            String regex = "[0-9]+";
+
+            String prefixDate = dateformat.substring(1, 3);
+            if (prefixDate.matches(regex)) {//if equal with number
+                if (prefixDate.equals("01")) {
+                    post_content_posted_date.setText("Jan" + dateformat.substring(3, dateformat.length()));
+                } else if (prefixDate.equals("02")) {
+                    post_content_posted_date.setText("Feb" + dateformat.substring(3, dateformat.length()));
+                } else if (prefixDate.equals("03")) {
+                    post_content_posted_date.setText("Mar" + dateformat.substring(3, dateformat.length()));
+                } else if (prefixDate.equals("04")) {
+                    post_content_posted_date.setText("Apr" + dateformat.substring(3, dateformat.length()));
+                } else if (prefixDate.equals("05")) {
+                    post_content_posted_date.setText("May" + dateformat.substring(3, dateformat.length()));
+                } else if (prefixDate.equals("06")) {
+                    post_content_posted_date.setText("Jun" + dateformat.substring(3, dateformat.length()));
+                } else if (prefixDate.equals("07")) {
+                    post_content_posted_date.setText("Jul" + dateformat.substring(3, dateformat.length()));
+                } else if (prefixDate.equals("08")) {
+                    post_content_posted_date.setText("Aug" + dateformat.substring(3, dateformat.length()));
+                } else if (prefixDate.equals("09")) {
+                    post_content_posted_date.setText("Sep" + dateformat.substring(3, dateformat.length()));
+                } else if (prefixDate.equals("10")) {
+                    post_content_posted_date.setText("Oct" + dateformat.substring(3, dateformat.length()));
+                } else if (prefixDate.equals("11")) {
+                    post_content_posted_date.setText("Nov" + dateformat.substring(3, dateformat.length()));
+                } else if (prefixDate.equals("12")) {
+                    post_content_posted_date.setText("Dec" + dateformat.substring(3, dateformat.length()));
+                }
+
+            } else {
+                post_content_posted_date.setText(dateformat);
+            }
 
         } catch (ParseException e) {
             e.printStackTrace();
@@ -752,7 +800,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
         //TODO TableColumnUpdate 10 data set show in UI
         if (strLang.equals(Utils.ENG_LANG)) {
-
+            post_content_user_name.setText(item.getPostUploadName());
             post_content_user_role.setText(item.getPostAuthorRole());
             postdetail_username.setTypeface(MyTypeFace.get(getApplicationContext(), MyTypeFace.NORMAL));
 
@@ -846,6 +894,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
         } else {
             // If Language Myanmar case
+            post_content_user_name.setText(item.getPostUploadNameMM());
             post_content_user_role.setText(item.getPostAuthorRoleMm());
             postdetail_username.setTypeface(MyTypeFace.get(getApplicationContext(), MyTypeFace.ZAWGYI));
 

@@ -165,7 +165,7 @@
     <string name="tlg_who_we_r_mm">အဖြဲ ့အေၾကာင္း</string>
     <string name="tlg_who_we_r_un">အဖွဲ့အကြောင်း</string>
 
-    <string name="tlg_member_lbl_eng">Women Leader</string>
+    <string name="tlg_member_lbl_eng">Women Township Leading Groups</string>
     <string name="tlg_member_lbl_mm">ၿမိဳ ့နယ္ဦးေဆာင္အဖြဲ ့ </string>
     <string name="tlg_member_lbl_un">မြို့နယ်ဦးဆောင်အဖွဲ့ </string>
 
@@ -173,7 +173,7 @@
     <string name="tlg_member_txt_mm">၁၅</string>
     <string name="tlg_member_txt_un">၁၅</string>
 
-    <string name="tlg_srg_member_lbl_eng">Women Members</string>
+    <string name="tlg_srg_member_lbl_eng">Women Self-Reliant Groups</string>
     <string name="tlg_srg_member_lbl_mm">စိတ္တူ ကိုုယ္တူအဖြဲ ့</string>
     <string name="tlg_srg_member_lbl_un">စိတ်တူ ကိုယ်တူအဖွဲ</string>
 
@@ -472,7 +472,7 @@
         <item>International Day for the Elimination of Violence against Women\n</item>
         <item>Tawakkol Karman receives Nobel Peace Prize\n</item>
     </string-array>
-    <string name="post_detail_more">more &gt;&gt;</string>
+    <string name="post_detail_more">More &gt;&gt;</string>
     <string name="calendar_name">Calendar</string>
 
     <string name="large_text">
@@ -726,9 +726,9 @@ Shirin Ebadi, J.D., was awarded the 2003 Nobel Peace Prize for her efforts to pr
     <string name="str_new_version">New Version</string>
     <string name="str_new_version_message">Do you download new version?</string>
 
-    <string name="tlg_leader_role">TLG LEADER</string>
-    <string name="tlg_normal_leader_role">MAY DOE KABAR  MEMBER</string>
-    <string name="tlg_mdk_leader_role">MAY DOE KABAR BOARD MEMBER</string>
+    <string name="tlg_leader_role">TLG Leader</string>
+    <string name="tlg_normal_leader_role">May Doe Kabar Member</string>
+    <string name="tlg_mdk_leader_role">May Doe Kabar Board Member</string>
     <string name="empty_talk_together">Be the first to write a post </string>
     <string name="google_not_support">Your phone does not support Google Maps</string>
 
@@ -844,9 +844,15 @@ Shirin Ebadi, J.D., was awarded the 2003 Nobel Peace Prize for her efforts to pr
 
     <string name="weekly_special_be_inspired">Topic Of the Month</string>
 
+
     <!--<string name="login_dialog_mm_zawgyi">ၿမန္မာေဇာ္ဂ်ီေဖာင့္</string>
     <string name="login_dialog_mm_uni">ၿမန္မာ ယူနီကုုတ္ေဖာင့္</string>
     <string name="login_dialog_eng">ENGLISH အဂၤလိပ္ေဖာင့္ </string>
     <string name="login_dialog_mm_deafult">ၿမန္မာစာ ပံုေသ</string>-->
+    <string name="tlg_profile">In your area women are helping each other in many ways: saving and lending together, learning about technology, improving their business skills, trading products with each other, learning how to become women leaders in the community, learning about education opportunities, learning about health and nutrition, traveling together to workshops in Yangon to meet women from many other countries, making friends, helping each other to become more successful in daily life.
+Make many new friends, contact your local May Doe Kabar/TLG group. See number below.
+</string>
 
+    <string name="current_version">Current Version Name</string>
+    <string name="current_version_mm">ယခု လက္ရွိ ေဆာ့၀ဲလ္ ဗားရွင္း</string>
 </resources>

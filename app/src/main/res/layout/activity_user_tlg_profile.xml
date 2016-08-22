@@ -84,7 +84,7 @@
                         android:singleLine="false"
 
                         android:text="May Doe Arr Man"
-                        android:textSize="18sp"
+                        android:textSize="15sp"
                         android:textStyle="bold" />
 
                     <org.undp_iwomen.iwomen.ui.widget.CustomTextView
@@ -93,11 +93,13 @@
                         android:layout_height="wrap_content"
                         android:paddingTop="8dp"
                         android:text="KyeitLet, Ayeyarwady"
-                        android:textSize="14sp" />
+                        android:textSize="13sp" />
 
                 </LinearLayout>
 
                 <FrameLayout
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_vertical_margin"
                     android:layout_width="100dp"
                     android:layout_height="100dp">
 
@@ -147,7 +149,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:text="@string/may_doe_kabar"
+                    android:text="@string/tlg_profile"
+                    android:textSize="13sp"
                     />
 
             </LinearLayout>
@@ -182,7 +185,7 @@
                     android:layout_height="wrap_content"
                     android:text="TLG Member"
                     android:textColor="@color/primary"
-                    android:textSize="18sp" />
+                    android:textSize="15sp" />
 
                 <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                     android:id="@+id/tlg_member_txt"
@@ -190,7 +193,7 @@
                     android:layout_height="wrap_content"
                     android:paddingTop="8dp"
                     android:text="25"
-                    android:textSize="18sp" />
+                    android:textSize="13sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -206,7 +209,7 @@
                     android:text="SRG Member"
                     android:textColor="@color/primary"
 
-                    android:textSize="18sp" />
+                    android:textSize="15sp" />
 
                 <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                     android:id="@+id/tlg_srg_txt"
@@ -216,7 +219,7 @@
                     android:paddingTop="8dp"
 
                     android:text="25"
-                    android:textSize="18sp" />
+                    android:textSize="13sp" />
 
             </LinearLayout>
 
@@ -233,7 +236,7 @@
                     android:text="Key Acitvities"
 
                     android:textColor="@color/primary"
-                    android:textSize="18sp" />
+                    android:textSize="15sp" />
 
                 <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                     android:id="@+id/tlg_key_acitvity_txt"
@@ -242,7 +245,7 @@
                     android:paddingTop="8dp"
 
                     android:text="..."
-                    android:textSize="18sp" />
+                    android:textSize="13sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -258,7 +261,7 @@
                     android:text="Key Skills"
 
                     android:textColor="@color/primary"
-                    android:textSize="18sp" />
+                    android:textSize="15sp" />
 
                 <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                     android:id="@+id/tlg_key_skill_txt"
@@ -267,7 +270,7 @@
                     android:text="......"
                     android:paddingTop="8dp"
 
-                    android:textSize="18sp" />
+                    android:textSize="13sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -325,7 +328,7 @@
                         android:layout_height="match_parent"
                         android:text="Hla San Htwae"
 
-                        android:textSize="18sp"
+                        android:textSize="15sp"
                         android:textStyle="bold" />
 
                     <org.undp_iwomen.iwomen.ui.widget.CustomTextView
@@ -334,7 +337,7 @@
                         android:layout_height="match_parent"
                         android:text="TLG Leader"
                         android:paddingTop="8dp"
-                        android:textSize="14sp"
+                        android:textSize="13sp"
                         android:textStyle="normal" />
                     <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                         android:id="@+id/tlg_leader_profile_bod_username"
@@ -342,7 +345,7 @@
                         android:layout_height="match_parent"
                         android:text="BOD leader"
                         android:paddingTop="8dp"
-                        android:textSize="14sp"
+                        android:textSize="13sp"
                         android:textStyle="normal" />
 
                     <LinearLayout
