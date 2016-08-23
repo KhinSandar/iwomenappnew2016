@@ -675,9 +675,13 @@ public class ResourcesFragment extends Fragment {
 
             @Override
             public void success(Rating arg0, Response response) {
-                menu.findItem(R.id.action_rating).setVisible(true);
-                menu.findItem(R.id.action_rating).setIcon(BaseActionBarActivity.getRatingIcon(arg0.getTotalRatings()));
-                avgRatings = arg0;
+                try {
+                    menu.findItem(R.id.action_rating).setVisible(true);
+                    menu.findItem(R.id.action_rating).setIcon(BaseActionBarActivity.getRatingIcon(arg0.getTotalRatings()));
+                    avgRatings = arg0;
+                }catch (NullPointerException ex){
+                    ex.printStackTrace();
+                }
             }
 
             @Override
