@@ -633,8 +633,10 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
         }
         if (item.getTlgLeaderImg() != null && !item.getTlgLeaderImg().isEmpty()) {
             try {
-
+                leaderProfileImg.setAdjustViewBounds(true);
+                leaderProfileImg.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 profile_item_progressBar.setVisibility(View.VISIBLE);
+
 
                 Picasso.with(mContext)
                         .load(item.getTlgLeaderImg()) //"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1

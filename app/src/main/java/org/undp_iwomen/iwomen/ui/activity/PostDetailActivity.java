@@ -2437,7 +2437,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
 
 
                         Log.e("<<PostDetail>>", "<<isPlay>>" + "show audio visualizer dialog" + mstrAudioFilePath);
-                        DialogFragment visualizerFragment = AudioVisualizerFragment.newInstance(mstrAudioFilePath);
+                        DialogFragment visualizerFragment = AudioVisualizerFragment.newInstance(mstrAudioFilePath, mstr_lang);
                         visualizerFragment.show(getSupportFragmentManager(), "AudioVisualizer");
 
 

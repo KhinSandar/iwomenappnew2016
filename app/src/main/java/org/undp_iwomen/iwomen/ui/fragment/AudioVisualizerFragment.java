@@ -1,5 +1,6 @@
 package org.undp_iwomen.iwomen.ui.fragment;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -12,9 +13,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SeekBar;
-import android.widget.TextView;
 
 import org.undp_iwomen.iwomen.R;
+import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.ui.widget.VisualizerView;
 
 import java.io.IOException;
@@ -26,19 +27,23 @@ import java.io.IOException;
 public class AudioVisualizerFragment extends DialogFragment {
 
     public static final String AUDIO_URL_KEY = "audio_streaming_url";
+    public static final String AUDIO_LANG = "audio_lang";
 
     MediaPlayer mPlayer;
     private VisualizerView mVisualizerView;
     private Visualizer mVisualizer;
     private SeekBar mSeekbar;
-    private TextView mAudioControl;
+    private CustomTextView mAudioControl;
 
-    String mAudioUrl;
+    String mstrPlay, mstrPlayMM, mstrLoading, mstrLoadingMM, mstrPause, mstrPauseMM;
 
-    public static DialogFragment newInstance(String audioUrl){
+    String mAudioUrl, mstr_lang;
+
+    public static DialogFragment newInstance(String audioUrl, String lang) {
         AudioVisualizerFragment audioVisualizerFragment = new AudioVisualizerFragment();
         Bundle bundle = new Bundle();
         bundle.putString(AUDIO_URL_KEY, audioUrl);
+        bundle.putString(AUDIO_LANG, lang);
         audioVisualizerFragment.setArguments(bundle);
 
         return audioVisualizerFragment;
@@ -58,6 +63,7 @@ public class AudioVisualizerFragment extends DialogFragment {
         }
 
         mAudioUrl = bundle.getString(AUDIO_URL_KEY);
+        mstr_lang = bundle.getString(AUDIO_LANG);
         if(mAudioUrl == null){
             dismiss();
         }
@@ -66,13 +72,27 @@ public class AudioVisualizerFragment extends DialogFragment {
 
         mVisualizerView = (VisualizerView) view.findViewById(R.id.audio_visualizer);
         mSeekbar = (SeekBar) view.findViewById(R.id.audio_seekbar);
-        mAudioControl = (TextView) view.findViewById(R.id.audio_control);
+        mAudioControl = (CustomTextView) view.findViewById(R.id.audio_control);
+
+
+        Activity activity = getActivity();
+        if (isAdded() && activity != null) {
+            mstrPlay = getResources().getString(R.string.audio_play);
+            mstrPlayMM = getResources().getString(R.string.audio_play_mm);
+            mstrLoading = getResources().getString(R.string.audio_loading);
+            mstrLoadingMM = getResources().getString(R.string.audio_loading_mm);
+            mstrPause = getResources().getString(R.string.audio_pause);
+            mstrPauseMM = getResources().getString(R.string.audio_pause_mm);
+        }
+
+
 
         mAudioControl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(mAudioControl.getText().equals("Play")){
+
+                if(mAudioControl.getText().equals(mstrPlay) || mAudioControl.getText().equals(mstrPlayMM)){
                     if (mPlayer != null) {
                         mPlayer.start();
                         //setupVisualizerFxAndUI();
@@ -80,17 +100,26 @@ public class AudioVisualizerFragment extends DialogFragment {
                     }else{
                         initMediaPlayer();
                     }
-                    mAudioControl.setText("Pause");
+                    //mAudioControl.setText("Pause");
+                    if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+                        mAudioControl.setText(getResources().getString(R.string.audio_pause));//Play
+                    }else{
+                        mAudioControl.setText(getResources().getString(R.string.audio_pause_mm));//
+                    }
 
                 }
-                else if(mAudioControl.getText().equals("Loading...")){
+                else if(mAudioControl.getText().equals(mstrLoading) ||mAudioControl.getText().equals(mstrLoadingMM)){
 
                 }else{//Pause State
                     if (mPlayer != null) {
                         mPlayer.pause();
                         mVisualizer.setEnabled(false);
                     }
-                    mAudioControl.setText("Play");
+                    if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+                        mAudioControl.setText(getResources().getString(R.string.audio_play));//Play
+                    }else{
+                        mAudioControl.setText(getResources().getString(R.string.audio_play_mm));//
+                    }
                 }
 
             }
@@ -122,7 +151,12 @@ public class AudioVisualizerFragment extends DialogFragment {
 
     public void initMediaPlayer(){
 
-        mAudioControl.setText("Loading...");
+        if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+            mAudioControl.setText(mstrLoading);//"Loading..."
+
+        }else{
+            mAudioControl.setText(mstrLoadingMM);
+        }
 
         mPlayer = new MediaPlayer();
         // Set type to streaming
@@ -145,7 +179,14 @@ public class AudioVisualizerFragment extends DialogFragment {
                 mSeekbar.setMax(mPlayer.getDuration() / 1000);
                 mSeekbar.setProgress(0);
 
-                mAudioControl.setText("Pause");
+                //mAudioControl.setText("Pause");
+                if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+                    mAudioControl.setText(mstrPause);//"Loading..."
+
+                }else{
+                    mAudioControl.setText(mstrPauseMM);
+                }
+
 
                 final Handler mHandler = new Handler();
 
@@ -180,8 +221,12 @@ public class AudioVisualizerFragment extends DialogFragment {
             @Override
             public void onCompletion(MediaPlayer mp) {
                 mVisualizer.setEnabled(false);
-                mAudioControl.setText("Play");
-
+                //mAudioControl.setText("Play");
+                if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+                    mAudioControl.setText(mstrPlay);//Play
+                }else{
+                    mAudioControl.setText(mstrPlayMM);//
+                }
                 if (mPlayer != null) {
                     mVisualizer.release();
                     mPlayer.release();

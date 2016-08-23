@@ -162,12 +162,12 @@
     <string name="tlg_srg_member_txt_mm">၆၈၈</string>
     <string name="tlg_srg_member_txt_eng">688</string>
 
-    <string name="tlg_key_activity_lbl_mm">အဓိက လုုပ္ငန္းစဥ္မ်ား</string>
+    <string name="tlg_key_activity_lbl_mm">အဖြဲ လုုပ္ငန္းစဥ္မ်ား</string>
     <string name="tlg_key_activity_lbl_eng">Key Activities</string>
     <string name="tlg_key_activity_txt_mm">အပင္ဆိုုက္ၿခင္း ၊ ဆပ္ၿပာဆီၿပဳလုုပ္ၿခင္း</string>
     <string name="tlg_key_activity_txt_eng">Planting Trees and Making soap </string>
 
-    <string name="tlg_key_skill_lbl_mm">အသက္ေမြး ၀မ္းေၾကာင္းဆိုုင္ရာ ကြ်မ္းက်င္မွုု</string>
+    <string name="tlg_key_skill_lbl_mm">က်မ တို ့သင္ယူခ်င္ေသာ အတတ္ပညာမ်ား</string>
     <string name="tlg_key_skill_lbl_eng">Key Skills</string>
     <string name="tlg_key_skill_txt_mm">စာရင္းအင္းစီမံခန္ ့ခြဲမွုုပညာ</string>
     <string name="tlg_key_skill_txt_eng">Statics and Management</string>
@@ -865,5 +865,13 @@ female-pilots-iaa1s
 -->
 
     <string name="weekly_special_be_inspired_mm">ယခု လ အတြက္ အထူးၿခားဆံုး အေၾကာင္းအရာ</string>
+    <string name="audio_loading">ခဏေစာင္ ့ပါ...</string>
+    <string name="audio_play">နားေထာင္ပါ</string>
+    <string name="audio_pause">ခဏရပ္မည္</string>
+
+    <string name="audio_loading_mm">ခဏေစာင္ ့ပါ...</string>
+    <string name="audio_play_mm">နားေထာင္ပါ</string>
+    <string name="audio_pause_mm">ခဏရပ္မည္</string>
+
 
 </resources>

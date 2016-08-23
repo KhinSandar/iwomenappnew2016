@@ -511,7 +511,7 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
      */
     private void updateUserInfo(final String user_img_path){
         if (Connection.isOnline(mContext)) {
-            Log.e("<<UserID,img>>","==>"+ mstrUserId + user_img_path);
+            //Log.e("<<UserID,img>>","==>"+ mstrUserId + user_img_path);
             NetworkEngine.getInstance().postUpdateUser(Integer.parseInt(mstrUserId), user_img_path, new Callback<User>() {
                 @Override
                 public void success(User user, Response response) {
@@ -520,6 +520,7 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
                         mProgressDialog.dismiss();
                     }
                     startDrawerMainActivity();
+                    Log.e("<<updateUserInfo S>>","==>"+ mstrUserId + user_img_path);
                 }
 
                 @Override
@@ -527,6 +528,7 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
                     if(mProgressDialog != null){
                         mProgressDialog.dismiss();
                     }
+                    Log.e("<<updateUserInfo Fail>>","==>"+ mstrUserId + user_img_path);
 
                 }
             });

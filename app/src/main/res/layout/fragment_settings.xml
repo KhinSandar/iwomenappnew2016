@@ -26,7 +26,7 @@
             android:layout_margin="16dp"
             android:orientation="vertical">
 
-            <RadioButton
+            <org.undp_iwomen.iwomen.ui.widget.CustomRadioButton
                 android:id="@+id/settings_english_language"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
 
                 />
 
-            <RadioButton
+            <org.undp_iwomen.iwomen.ui.widget.CustomRadioButton
                 android:id="@+id/settings_mm_zawgyi_language"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
                 android:textSize="13sp"
                 android:textColor="@color/secondary_text"
                 />
-            <RadioButton
+            <org.undp_iwomen.iwomen.ui.widget.CustomRadioButton
                 android:id="@+id/settings_mm_unicode_language"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
                 android:textColor="@color/secondary_text"
                 />
 
-            <RadioButton
+            <org.undp_iwomen.iwomen.ui.widget.CustomRadioButton
                 android:id="@+id/settings_mm_default_language"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -66,7 +66,7 @@
 
             <!-- New Coming Soon-->
 
-            <RadioButton
+            <org.undp_iwomen.iwomen.ui.widget.CustomRadioButton
                 android:id="@+id/settings_ethic_shan_language"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -76,7 +76,7 @@
                 android:textColor="@color/secondary_text"
                 />
 
-            <RadioButton
+            <org.undp_iwomen.iwomen.ui.widget.CustomRadioButton
                 android:id="@+id/settings_ethic_mon_language"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

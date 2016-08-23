@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <TextView
+    <org.undp_iwomen.iwomen.ui.widget.CustomTextView
         android:id="@+id/audio_control"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

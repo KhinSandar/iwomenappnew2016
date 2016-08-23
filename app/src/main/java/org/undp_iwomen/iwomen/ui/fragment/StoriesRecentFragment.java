@@ -334,14 +334,22 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
             sp_content_title.setText(item.getTitle());
             sp_content_body.setText(item.getContent());
             sp_content_author_name.setText(item.getPostUploadName());
-            sp_content_topic_of_month_title.setText(getResources().getString(R.string.weekly_special_be_inspired));
+            Activity activity = getActivity();
+            if (isAdded() && activity != null) {
+                sp_content_topic_of_month_title.setText(getResources().getString(R.string.weekly_special_be_inspired));
+
+            }
+
 
 
         } else {//FOR ALL MM FONTS
             sp_content_title.setText(item.getTitleMm());
             sp_content_body.setText(item.getContentMm());
             sp_content_author_name.setText(item.getPostUploadNameMM());
-            sp_content_topic_of_month_title.setText(getResources().getString(R.string.weekly_special_be_inspired_mm));
+            Activity activity = getActivity();
+            if (isAdded() && activity != null) {
+                sp_content_topic_of_month_title.setText(getResources().getString(R.string.weekly_special_be_inspired_mm));
+            }
 
 
         }

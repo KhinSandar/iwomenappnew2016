@@ -24,6 +24,7 @@ import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.model.FontConverter;
 import org.undp_iwomen.iwomen.model.MyTypeFace;
 import org.undp_iwomen.iwomen.ui.activity.SettingActivity;
+import org.undp_iwomen.iwomen.ui.widget.CustomRadioButton;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.utils.StoreUtil;
 import org.undp_iwomen.iwomen.utils.Utils;
@@ -38,7 +39,7 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
     private RadioGroup radioLanguageGroup;
     private RadioButton radioLanguageButton;
 
-    RadioButton rd_lang_en, rd_lang_mm_zawgyi, rd_lang_mm_uni, rd_lang_mm_default ,rd_shan, rd_mon;
+    CustomRadioButton rd_lang_en, rd_lang_mm_zawgyi, rd_lang_mm_uni, rd_lang_mm_default ,rd_shan, rd_mon;
     SharedPreferences sharePrefLanguageUtil;
 
 
@@ -76,12 +77,12 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
 
         sharePrefLanguageUtil = getActivity().getSharedPreferences(Utils.PREF_SETTING, Context.MODE_PRIVATE);
         radioLanguageGroup = (RadioGroup) rootView.findViewById(R.id.settings_language);
-        rd_lang_en = (RadioButton) rootView.findViewById(R.id.settings_english_language);
-        rd_lang_mm_zawgyi = (RadioButton) rootView.findViewById(R.id.settings_mm_zawgyi_language);
-        rd_lang_mm_uni = (RadioButton) rootView.findViewById(R.id.settings_mm_unicode_language);
-        rd_lang_mm_default = (RadioButton) rootView.findViewById(R.id.settings_mm_default_language);
-        rd_shan = (RadioButton) rootView.findViewById(R.id.settings_ethic_shan_language);
-        rd_mon = (RadioButton) rootView.findViewById(R.id.settings_ethic_mon_language);
+        rd_lang_en = (CustomRadioButton) rootView.findViewById(R.id.settings_english_language);
+        rd_lang_mm_zawgyi = (CustomRadioButton) rootView.findViewById(R.id.settings_mm_zawgyi_language);
+        rd_lang_mm_uni = (CustomRadioButton) rootView.findViewById(R.id.settings_mm_unicode_language);
+        rd_lang_mm_default = (CustomRadioButton) rootView.findViewById(R.id.settings_mm_default_language);
+        rd_shan = (CustomRadioButton) rootView.findViewById(R.id.settings_ethic_shan_language);
+        rd_mon = (CustomRadioButton) rootView.findViewById(R.id.settings_ethic_mon_language);
         settings_language_setting_title = (CustomTextView)rootView.findViewById(R.id.settings_language_setting_title);
         settings_changeTheme = (CustomTextView)rootView.findViewById(R.id.settings_changeTheme);
         chk_settings_getnotification = (CheckBox)rootView.findViewById(R.id.settings_getnotification);
