@@ -72,6 +72,7 @@
 
                     <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                         style="?android:attr/buttonBarButtonStyle"
+                        android:id="@+id/sp_content_topic_of_month_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="#0000"
