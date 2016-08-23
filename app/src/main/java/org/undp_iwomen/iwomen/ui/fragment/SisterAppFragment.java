@@ -142,6 +142,7 @@ public class SisterAppFragment extends Fragment {
                 sisterAppItemList.clear();
                 sisterAppItemList.addAll(StoragesisterAppItems);
                 sisterAppListAdapter.notifyDataSetChanged();
+                Helper.getListViewSize(lv_sister);
             }
         }
 
@@ -246,6 +247,7 @@ public class SisterAppFragment extends Fragment {
                 sisterAppItemList.clear();
                 sisterAppItemList.addAll(storagelist);
                 sisterAppListAdapter.notifyDataSetChanged();
+                Helper.getListViewSize(lv_sister);
             }
         }
     }

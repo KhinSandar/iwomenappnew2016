@@ -395,82 +395,90 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        if (Connection.isOnline(mContext)) {
 
-        if (item.getPostUploadUserImgPath() != null && !item.getPostUploadUserImgPath().isEmpty()) {
+            if (item.getPostUploadUserImgPath() != null && !item.getPostUploadUserImgPath().isEmpty()) {
 
-            try {
+                try {
 
-                sp_content_author_profile.setVisibility(View.VISIBLE);
-                Picasso.with(mContext)
-                        .load(item.getPostUploadUserImgPath()) //"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
-                        .placeholder(R.drawable.blank_profile)
-                        .error(R.drawable.blank_profile)
-                        .into(sp_content_author_profile, new ImageLoadedCallback(sp_content_profile_progress) {
-                            @Override
-                            public void onSuccess() {
-                                if (this.progressBar != null) {
-                                    this.progressBar.setVisibility(View.GONE);
-                                } else {
-                                    this.progressBar.setVisibility(View.VISIBLE);
+                    sp_content_author_profile.setVisibility(View.VISIBLE);
+                    Picasso.with(mContext)
+                            .load(item.getPostUploadUserImgPath()) //"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
+                            .placeholder(R.drawable.blank_profile)
+                            .error(R.drawable.blank_profile)
+                            .into(sp_content_author_profile, new ImageLoadedCallback(sp_content_profile_progress) {
+                                @Override
+                                public void onSuccess() {
+                                    if (this.progressBar != null) {
+                                        this.progressBar.setVisibility(View.GONE);
+                                    } else {
+                                        this.progressBar.setVisibility(View.VISIBLE);
+                                    }
                                 }
-                            }
 
-                            @Override
-                            public void onError() {
-                                super.onError();
-                                if (this.progressBar != null) {
-                                    this.progressBar.setVisibility(View.GONE);
+                                @Override
+                                public void onError() {
+                                    super.onError();
+                                    if (this.progressBar != null) {
+                                        this.progressBar.setVisibility(View.GONE);
+                                    }
                                 }
-                            }
-                        });
-            } catch (OutOfMemoryError outOfMemoryError) {
-                outOfMemoryError.printStackTrace();
+                            });
+                } catch (OutOfMemoryError outOfMemoryError) {
+                    outOfMemoryError.printStackTrace();
+                    sp_content_profile_progress.setVisibility(View.GONE);
+                }
+            } else {
+
+                sp_content_author_profile.setImageResource(R.drawable.blank_profile);
                 sp_content_profile_progress.setVisibility(View.GONE);
             }
-        } else {
-
-            sp_content_author_profile.setImageResource(R.drawable.blank_profile);
-            sp_content_profile_progress.setVisibility(View.GONE);
-        }
 
 
-        //// Feed image
-        if (item.getImage() != null && !item.getImage().isEmpty()) {
-            try {
-                sp_content_img.setVisibility(View.VISIBLE);
-                sp_content_img_progress.setVisibility(View.VISIBLE);
+            //// Feed image
+            if (item.getImage() != null && !item.getImage().isEmpty()) {
+                try {
+                    sp_content_img.setVisibility(View.VISIBLE);
+                    sp_content_img_progress.setVisibility(View.VISIBLE);
 
-                Picasso.with(mContext)
-                        .load(item.getImage()) //"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
-                        .placeholder(R.drawable.place_holder)
-                        .error(R.drawable.place_holder)
-                        .into(sp_content_img, new ImageLoadedCallback(sp_content_img_progress) {
-                            @Override
-                            public void onSuccess() {
-                                if (this.progressBar != null) {
-                                    this.progressBar.setVisibility(View.GONE);
-                                } else {
-                                    this.progressBar.setVisibility(View.VISIBLE);
+                    Picasso.with(mContext)
+                            .load(item.getImage()) //"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
+                            .placeholder(R.drawable.place_holder)
+                            .error(R.drawable.place_holder)
+                            .into(sp_content_img, new ImageLoadedCallback(sp_content_img_progress) {
+                                @Override
+                                public void onSuccess() {
+                                    if (this.progressBar != null) {
+                                        this.progressBar.setVisibility(View.GONE);
+                                    } else {
+                                        this.progressBar.setVisibility(View.VISIBLE);
+                                    }
                                 }
-                            }
 
-                            @Override
-                            public void onError() {
-                                super.onError();
-                                if (this.progressBar != null) {
-                                    this.progressBar.setVisibility(View.GONE);
+                                @Override
+                                public void onError() {
+                                    super.onError();
+                                    if (this.progressBar != null) {
+                                        this.progressBar.setVisibility(View.GONE);
+                                    }
                                 }
-                            }
 
-                        });
-            } catch (OutOfMemoryError outOfMemoryError) {
-                outOfMemoryError.printStackTrace();
+                            });
+                } catch (OutOfMemoryError outOfMemoryError) {
+                    outOfMemoryError.printStackTrace();
+                    sp_content_img_progress.setVisibility(View.GONE);
+                }
+            } else {
+                sp_content_img.setVisibility(View.GONE);
                 sp_content_img_progress.setVisibility(View.GONE);
             }
         } else {
+            sp_content_author_profile.setImageResource(R.drawable.blank_profile);
+            sp_content_profile_progress.setVisibility(View.GONE);
             sp_content_img.setVisibility(View.GONE);
             sp_content_img_progress.setVisibility(View.GONE);
         }
+
     }
 
 

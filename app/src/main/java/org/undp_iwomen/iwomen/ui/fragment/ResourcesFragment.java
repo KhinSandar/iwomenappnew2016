@@ -78,7 +78,7 @@ public class ResourcesFragment extends Fragment {
     private Menu menu;
     private ZProgressHUD zPDialog;
     List<com.smk.model.ResourceItem> StorageresourceItems;
-    public CustomTextView sp_txtName;
+    public CustomTextView sp_txtName, sp_title_txt;
     public RoundedImageView sp_imgIcon;
     public ProgressBar sp_progressBar;
 
@@ -133,7 +133,7 @@ public class ResourcesFragment extends Fragment {
 
         @Override
         public void onNextPageRequest() {
-            if(!isLoading){
+            if (!isLoading) {
                 getResourceDataPaginationFromSever();
             }
         }
@@ -146,7 +146,7 @@ public class ResourcesFragment extends Fragment {
         ResourceItems = new ArrayList<>();
         lvResouces = (SKListView) rootView.findViewById(R.id.resource_lv);
         mstr_lang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
-        adapter = new ResourcesListViewAdapter(getActivity(),ResourceItems, mstr_lang);
+        adapter = new ResourcesListViewAdapter(getActivity(), ResourceItems, mstr_lang);
         lvResouces.setAdapter(adapter);
         lvResouces.setCallbacks(skCallbacks);
         lvResouces.setNextPage(true);
@@ -157,7 +157,8 @@ public class ResourcesFragment extends Fragment {
         final LayoutInflater layoutInflater = getActivity().getLayoutInflater();
 
         View header = layoutInflater.inflate(R.layout.special_content_resources_list_item_view, null);
-        sp_txtName= (CustomTextView)header.findViewById(R.id.sp_resource_item_name);
+        sp_txtName = (CustomTextView) header.findViewById(R.id.sp_resource_item_name);
+        sp_title_txt = (CustomTextView) header.findViewById(R.id.sp_topic_title);
         sp_imgIcon = (RoundedImageView) header.findViewById(R.id.sp_resouce_list_item_img);
         sp_progressBar = (ProgressBar) header.findViewById(R.id.sp_resouce_list_item_progressBar);
         lvResouces.addHeaderView(header);
@@ -171,7 +172,7 @@ public class ResourcesFragment extends Fragment {
 
                 Gson gson = new Gson();
                 Resourcce_json = mSharedPreferencesUserInfo.getString(CommonConfig.RESOURCE_ID, null);
-                StorageResourcePostObj  = gson.fromJson(Resourcce_json, com.smk.model.ResourceItem.class);
+                StorageResourcePostObj = gson.fromJson(Resourcce_json, com.smk.model.ResourceItem.class);
                 intent.putExtra("ResourceId", StorageResourcePostObj.getObjectId());
                 intent.putExtra("TitleEng", StorageResourcePostObj.getResourceTitleEng());
                 intent.putExtra("TitleMM", StorageResourcePostObj.getResourceTitleMm());
@@ -183,18 +184,18 @@ public class ResourcesFragment extends Fragment {
 
         //StorageresourceItems = StoreUtil.getInstance().selectFrom("ResourcesList");
         StorageresourceItems = (ArrayList<com.smk.model.ResourceItem>) storageUtil.ReadArrayListFromSD("ResourcesList");
-        if (Connection.isOnline(mContext)){
+        if (Connection.isOnline(mContext)) {
             // Showing local data while loading from internet
-            if(StorageresourceItems != null && StorageresourceItems.size() > 0){
+            if (StorageresourceItems != null && StorageresourceItems.size() > 0) {
                 ResourceItems.addAll(StorageresourceItems);
                 adapter.notifyDataSetChanged();
                 zPDialog = new ZProgressHUD(getActivity());
                 zPDialog.show();
             }
             getResourceDataPaginationFromSever();
-        }else{
+        } else {
             //SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
-            if(StorageresourceItems != null){
+            if (StorageresourceItems != null) {
                 ResourceItems.clear();
                 ResourceItems.addAll(StorageresourceItems);
                 adapter.notifyDataSetChanged();
@@ -225,9 +226,9 @@ public class ResourcesFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 Intent intent = new Intent(mContext, SubResourceListActivity.class);
-                intent.putExtra("ResourceId", ResourceItems.get(i-1).getObjectId());  //Linn Edited
-                intent.putExtra("TitleEng", ResourceItems.get(i-1).getResourceTitleEng());
-                intent.putExtra("TitleMM", ResourceItems.get(i-1).getResourceTitleMm());
+                intent.putExtra("ResourceId", ResourceItems.get(i - 1).getObjectId());  //Linn Edited
+                intent.putExtra("TitleEng", ResourceItems.get(i - 1).getResourceTitleEng());
+                intent.putExtra("TitleMM", ResourceItems.get(i - 1).getResourceTitleMm());
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(intent);
@@ -267,49 +268,55 @@ public class ResourcesFragment extends Fragment {
             // do the reverse operation
             Gson gson = new Gson();
             Resourcce_json = mSharedPreferencesUserInfo.getString(CommonConfig.RESOURCE_ID, null);
-            StorageResourcePostObj  = gson.fromJson(Resourcce_json, com.smk.model.ResourceItem.class);
+            StorageResourcePostObj = gson.fromJson(Resourcce_json, com.smk.model.ResourceItem.class);
 
             SetWeeklySpecialResource(StorageResourcePostObj);
-
-
 
 
         }
     }
 
-    private void SetWeeklySpecialResource(com.smk.model.ResourceItem item){
+    private void SetWeeklySpecialResource(com.smk.model.ResourceItem item) {
         if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
             sp_txtName.setText(item.getResourceTitleEng());
-        }else{//FOR ALL MM FONT
+            sp_title_txt.setText(getResources().getString(R.string.weekly_special_be_inspired));
+        } else {//FOR ALL MM FONT
             sp_txtName.setText(item.getResourceTitleMm());
+            sp_title_txt.setText(getResources().getString(R.string.weekly_special_be_inspired_mm));
+
 
         }
 
         sp_imgIcon.setAdjustViewBounds(true);
         sp_imgIcon.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        if(item.getAuthorImgPath() != null && !item.getAuthorImgPath().isEmpty()) {
+        if (Connection.isOnline(mContext)) {
 
-            try {
+            if (item.getAuthorImgPath() != null && !item.getAuthorImgPath().isEmpty()) {
 
-                Picasso.with(mContext)
-                        .load(item.getAuthorImgPath()) //"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
-                        .placeholder(R.drawable.blank_profile)
-                        .error(R.drawable.blank_profile)
-                        .into(sp_imgIcon, new ImageLoadedCallback(sp_progressBar) {
-                            @Override
-                            public void onSuccess() {
-                                if (this.progressBar != null) {
-                                    this.progressBar.setVisibility(View.GONE);
-                                } else {
-                                    this.progressBar.setVisibility(View.VISIBLE);
+                try {
+
+                    Picasso.with(mContext)
+                            .load(item.getAuthorImgPath()) //"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
+                            .placeholder(R.drawable.blank_profile)
+                            .error(R.drawable.blank_profile)
+                            .into(sp_imgIcon, new ImageLoadedCallback(sp_progressBar) {
+                                @Override
+                                public void onSuccess() {
+                                    if (this.progressBar != null) {
+                                        this.progressBar.setVisibility(View.GONE);
+                                    } else {
+                                        this.progressBar.setVisibility(View.VISIBLE);
+                                    }
                                 }
-                            }
 
-                        });
-            } catch (OutOfMemoryError outOfMemoryError) {
-                outOfMemoryError.printStackTrace();
+                            });
+                } catch (OutOfMemoryError outOfMemoryError) {
+                    outOfMemoryError.printStackTrace();
+                }
+            } else {
+                sp_progressBar.setVisibility(View.GONE);
             }
-        }else{
+        } else {
             sp_progressBar.setVisibility(View.GONE);
         }
 
@@ -319,12 +326,12 @@ public class ResourcesFragment extends Fragment {
         if (Connection.isOnline(mContext)) {
 
             isLoading = true;
-            NetworkEngine.getInstance().getResourceByPagination(paginater,1, new Callback<List<com.smk.model.ResourceItem>>() {
+            NetworkEngine.getInstance().getResourceByPagination(paginater, 1, new Callback<List<com.smk.model.ResourceItem>>() {
                 @Override
                 public void success(List<com.smk.model.ResourceItem> resourceItems, Response response) {
 
                     // Only first REQUEST that visible
-                    if(zPDialog != null && zPDialog.isShowing()){
+                    if (zPDialog != null && zPDialog.isShowing()) {
                         ResourceItems.clear();
                         zPDialog.dismissWithSuccess();
                     }
@@ -335,10 +342,10 @@ public class ResourcesFragment extends Fragment {
                     final ArrayList<com.smk.model.ResourceItem> storagelist = new ArrayList<com.smk.model.ResourceItem>();
                     storagelist.addAll(ResourceItems);
                     storageUtil.SaveArrayListToSD("ResourcesList", storagelist);
-                    if(ResourceItems.size() == 12){
+                    if (ResourceItems.size() == 12) {
                         lvResouces.setNextPage(true);
                         paginater++;
-                    }else{
+                    } else {
                         // If no more item
                         lvResouces.setNextPage(false);
                     }
@@ -350,12 +357,12 @@ public class ResourcesFragment extends Fragment {
                 }
             });
 
-        }else {
+        } else {
             //SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
             //List<com.smk.model.ResourceItem> iWomenPosts = StoreUtil.getInstance().selectFrom("ResourcesList");
             List<com.smk.model.ResourceItem> iWomenPosts = (ArrayList<com.smk.model.ResourceItem>) storageUtil.ReadArrayListFromSD("ResourcesList");
 
-            if(iWomenPosts != null){
+            if (iWomenPosts != null) {
                 ResourceItems.clear();
                 ResourceItems.addAll(iWomenPosts);
                 adapter.notifyDataSetChanged();
@@ -693,10 +700,10 @@ public class ResourcesFragment extends Fragment {
 
 
         txt_avg_title.setText(getResources().getString(R.string.str_overall_rating_be_knowledgeable));
-        txt_total_rating.setText(avgRatings.getTotalRatings()+"");
+        txt_total_rating.setText(avgRatings.getTotalRatings() + "");
         avg_ratings.setRating(avgRatings.getTotalRatings().floatValue());
         txt_rating_desc.setText(getRatingDesc(avgRatings.getTotalRatings()));
-        txt_avg_ratings.setText(avgRatings.getTotalUsers()+" "+getResources().getString(R.string.str_total));
+        txt_avg_ratings.setText(avgRatings.getTotalUsers() + " " + getResources().getString(R.string.str_total));
 
         final AlertDialog ad = alertDialog.show();
 
@@ -708,21 +715,21 @@ public class ResourcesFragment extends Fragment {
         });
     }
 
-    public String getRatingDesc(Double ratings){
+    public String getRatingDesc(Double ratings) {
         String ratingOfDesc = "";
-        if(ratings >0 && ratings <= 1.5){
+        if (ratings > 0 && ratings <= 1.5) {
             ratingOfDesc = getResources().getString(R.string.str_poor);
         }
-        if(ratings >1.5 && ratings <= 2.5){
+        if (ratings > 1.5 && ratings <= 2.5) {
             ratingOfDesc = getResources().getString(R.string.str_fair);
         }
-        if(ratings >2.5 && ratings <= 3.5){
+        if (ratings > 2.5 && ratings <= 3.5) {
             ratingOfDesc = getResources().getString(R.string.str_good);
         }
-        if(ratings >3.5 && ratings <= 4.5){
+        if (ratings > 3.5 && ratings <= 4.5) {
             ratingOfDesc = getString(R.string.str_very_good);
         }
-        if(ratings >4.5) {
+        if (ratings > 4.5) {
             ratingOfDesc = getResources().getString(R.string.str_excellent);
         }
         return ratingOfDesc;
@@ -745,7 +752,6 @@ public class ResourcesFragment extends Fragment {
 
         }
     }
-
 
 
 }

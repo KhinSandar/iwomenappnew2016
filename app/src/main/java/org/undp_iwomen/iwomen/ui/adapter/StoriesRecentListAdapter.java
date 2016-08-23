@@ -37,7 +37,7 @@ public class StoriesRecentListAdapter extends BaseAdapter {
     private String mstr_lang;
     private ArrayList<IWomenPost> arraylist;
 
-    public StoriesRecentListAdapter(Context ctx, List<IWomenPost> list, String typeFaceName){
+    public StoriesRecentListAdapter(Context ctx, List<IWomenPost> list, String typeFaceName) {
         mInflater = LayoutInflater.from(ctx);
         this.mContext = ctx;
         this.list = list;
@@ -46,6 +46,7 @@ public class StoriesRecentListAdapter extends BaseAdapter {
         this.arraylist.addAll(list);
 
     }
+
     @Override
     public int getCount() {
         return list.size();
@@ -78,11 +79,11 @@ public class StoriesRecentListAdapter extends BaseAdapter {
             holder.postIMg = (ResizableImageView) convertView.findViewById(R.id.postImg);
             holder.profilePictureView = (org.undp_iwomen.iwomen.ui.widget.ProfilePictureView) convertView.findViewById(R.id.profilePic);
             convertView.setTag(holder);
-        }else{
+        } else {
             holder = (ViewHolder) convertView.getTag();
         }
         IWomenPost item = getItem(position);
-        
+
         holder.profile.setAdjustViewBounds(true);
         holder.profile.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
@@ -91,38 +92,38 @@ public class StoriesRecentListAdapter extends BaseAdapter {
         try {
             Date timedate = format.parse(item.getPostUploadedDate());
 
-            String dateformat= sdf.format(timedate);//M08 11, 2016
+            String dateformat = sdf.format(timedate);//M08 11, 2016
             String regex = "[0-9]+";
 
-            String prefixDate= dateformat.substring(1,3);
-            if(prefixDate.matches(regex)){//if equal with number
-                if(prefixDate.equals( "01")){
-                    holder.post_timestamp.setText("Jan" +dateformat.substring(3,dateformat.length()));
-                }else if(prefixDate.equals("02")){
-                    holder.post_timestamp.setText("Feb" +dateformat.substring(3,dateformat.length()));
-                }else if(prefixDate.equals("03")){
-                    holder.post_timestamp.setText("Mar" +dateformat.substring(3,dateformat.length()));
-                }else if(prefixDate.equals("04")){
-                    holder.post_timestamp.setText("Apr" +dateformat.substring(3,dateformat.length()));
-                }else if(prefixDate.equals("05")){
-                    holder.post_timestamp.setText("May" +dateformat.substring(3,dateformat.length()));
-                }else if(prefixDate.equals("06")){
-                    holder.post_timestamp.setText("Jun" +dateformat.substring(3,dateformat.length()));
-                }else if(prefixDate.equals("07")){
-                    holder.post_timestamp.setText("Jul" +dateformat.substring(3,dateformat.length()));
-                }else if(prefixDate.equals("08")){
-                    holder.post_timestamp.setText("Aug" +dateformat.substring(3,dateformat.length()));
-                }else if(prefixDate.equals("09")){
-                    holder.post_timestamp.setText("Sep" +dateformat.substring(3,dateformat.length()));
-                }else if(prefixDate.equals("10")){
-                    holder.post_timestamp.setText("Oct" +dateformat.substring(3,dateformat.length()));
-                }else if(prefixDate.equals("11")){
-                    holder.post_timestamp.setText("Nov" +dateformat.substring(3,dateformat.length()));
-                }else if(prefixDate.equals("12")){
-                    holder.post_timestamp.setText("Dec" +dateformat.substring(3,dateformat.length()));
+            String prefixDate = dateformat.substring(1, 3);
+            if (prefixDate.matches(regex)) {//if equal with number
+                if (prefixDate.equals("01")) {
+                    holder.post_timestamp.setText("Jan" + dateformat.substring(3, dateformat.length()));
+                } else if (prefixDate.equals("02")) {
+                    holder.post_timestamp.setText("Feb" + dateformat.substring(3, dateformat.length()));
+                } else if (prefixDate.equals("03")) {
+                    holder.post_timestamp.setText("Mar" + dateformat.substring(3, dateformat.length()));
+                } else if (prefixDate.equals("04")) {
+                    holder.post_timestamp.setText("Apr" + dateformat.substring(3, dateformat.length()));
+                } else if (prefixDate.equals("05")) {
+                    holder.post_timestamp.setText("May" + dateformat.substring(3, dateformat.length()));
+                } else if (prefixDate.equals("06")) {
+                    holder.post_timestamp.setText("Jun" + dateformat.substring(3, dateformat.length()));
+                } else if (prefixDate.equals("07")) {
+                    holder.post_timestamp.setText("Jul" + dateformat.substring(3, dateformat.length()));
+                } else if (prefixDate.equals("08")) {
+                    holder.post_timestamp.setText("Aug" + dateformat.substring(3, dateformat.length()));
+                } else if (prefixDate.equals("09")) {
+                    holder.post_timestamp.setText("Sep" + dateformat.substring(3, dateformat.length()));
+                } else if (prefixDate.equals("10")) {
+                    holder.post_timestamp.setText("Oct" + dateformat.substring(3, dateformat.length()));
+                } else if (prefixDate.equals("11")) {
+                    holder.post_timestamp.setText("Nov" + dateformat.substring(3, dateformat.length()));
+                } else if (prefixDate.equals("12")) {
+                    holder.post_timestamp.setText("Dec" + dateformat.substring(3, dateformat.length()));
                 }
 
-            }else{
+            } else {
                 //Log.e("Date==>prefix not match" , prefixDate);
                 holder.post_timestamp.setText(dateformat);
             }
@@ -143,7 +144,7 @@ public class StoriesRecentListAdapter extends BaseAdapter {
             holder.post_content.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
 
 
-        } else  {//FOR ALL MM FONTS
+        } else {//FOR ALL MM FONTS
             holder.mPostTile.setText(item.getTitleMm());
             holder.post_content.setText(item.getContentMm());
             holder.post_content_user_name.setText(item.getPostUploadNameMM());
@@ -207,6 +208,7 @@ public class StoriesRecentListAdapter extends BaseAdapter {
                                     this.progressBar.setVisibility(View.VISIBLE);
                                 }
                             }
+
                             @Override
                             public void onError() {
                                 super.onError();
@@ -224,6 +226,7 @@ public class StoriesRecentListAdapter extends BaseAdapter {
             holder.postIMg.setVisibility(View.GONE);
             holder.feed_item_progressBar.setVisibility(View.GONE);
         }
+
 
         return convertView;
     }
@@ -245,6 +248,7 @@ public class StoriesRecentListAdapter extends BaseAdapter {
 
         }
     }
+
     public static boolean isValidFormat(String format, String value) {
         Date date = null;
         try {
@@ -285,7 +289,7 @@ public class StoriesRecentListAdapter extends BaseAdapter {
             list.addAll(arraylist);
         } else {
             for (IWomenPost fi : arraylist) {
-                if (fi.getTitle().toLowerCase(Locale.getDefault()).contains(charText) || fi.getTitleMm().toLowerCase(Locale.getDefault()).contains(charText)|| fi.getPostUploadName().toLowerCase(Locale.getDefault()).contains(charText)|| fi.getContent().toLowerCase(Locale.getDefault()).contains(charText) || fi.getContentMm().toLowerCase(Locale.getDefault()).contains(charText)) {
+                if (fi.getTitle().toLowerCase(Locale.getDefault()).contains(charText) || fi.getTitleMm().toLowerCase(Locale.getDefault()).contains(charText) || fi.getPostUploadName().toLowerCase(Locale.getDefault()).contains(charText) || fi.getContent().toLowerCase(Locale.getDefault()).contains(charText) || fi.getContentMm().toLowerCase(Locale.getDefault()).contains(charText)) {
                     list.add(fi);
                 }
             }

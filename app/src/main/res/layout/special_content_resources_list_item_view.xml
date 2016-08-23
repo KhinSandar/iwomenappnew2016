@@ -28,6 +28,7 @@
 
         <org.undp_iwomen.iwomen.ui.widget.CustomTextView
             style="?android:attr/buttonBarButtonStyle"
+            android:id="@+id/sp_topic_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#0000"
