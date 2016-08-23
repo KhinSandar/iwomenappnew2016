@@ -855,4 +855,7 @@ Make many new friends, contact your local May Doe Kabar/TLG group. See number be
 
     <string name="current_version">Current Version Name</string>
     <string name="current_version_mm">ယခု လက္ရွိ ေဆာ့၀ဲလ္ ဗားရွင္း</string>
+    <string name="post_detail_read_more">More &gt;&gt;</string>
+    <string name="post_detail_read_more_mm"> ပိုုိမိုုဖတ္ရွဳရန္ &gt;&gt; </string>
+
 </resources>

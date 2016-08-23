@@ -894,6 +894,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
         } else {
             // If Language Myanmar case
+
             post_content_user_name.setText(item.getPostUploadNameMM());
             post_content_user_role.setText(item.getPostAuthorRoleMm());
             postdetail_username.setTypeface(MyTypeFace.get(getApplicationContext(), MyTypeFace.ZAWGYI));
@@ -1608,6 +1609,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         mVideoId = item.getPost_content_video_id();
         //TODO TableColumnUpdate 10 data set show in UI
         if (strLang.equals(Utils.ENG_LANG)) {
+            post_content_user_more_id.setText(R.string.post_detail_read_more);
             postdetail_username.setTypeface(MyTypeFace.get(getApplicationContext(), MyTypeFace.NORMAL));
 
 
@@ -1695,6 +1697,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
             }
 
         } else {
+            post_content_user_more_id.setText(R.string.post_detail_read_more_mm);
             postdetail_username.setTypeface(MyTypeFace.get(getApplicationContext(), MyTypeFace.ZAWGYI));
 
             if (item.getPost_content_type().equalsIgnoreCase("Letter")) {
