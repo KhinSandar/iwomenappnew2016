@@ -604,8 +604,8 @@
 
     <string name="calendar_permission">You need to have admin rights to see this.</string>
 
-    <string name="ethic_shan">SHAN LANGUAGE</string>
-    <string name="ethic_mon">MON LANGUAGE</string>
+    <string name="ethic_shan">ရွမ္း | Shan Language</string>
+    <string name="ethic_mon">မြန္ | Mon Language</string>
 
     <string name="organization_title">Organization Detail</string>
 
@@ -823,7 +823,7 @@ Shirin Ebadi, J.D., was awarded the 2003 Nobel Peace Prize for her efforts to pr
     <string name="register_photo_m">Male</string>
     <string name="login_dialog_mm_zawgyi">ၿမန္မာေဇာ္ဂ်ီေဖာင့္ | Myanmar Zawgyi</string>
     <string name="login_dialog_mm_uni">ၿမန္မာ ယူနီကုုတ္ေဖာင့္ |Myanmar Unicode</string>
-    <string name="login_dialog_eng">ENGLISH | အဂၤလိပ္ေဖာင့္ </string>
+    <string name="login_dialog_eng">English | အဂၤလိပ္ေဖာင့္ </string>
     <string name="login_dialog_mm_deafult">ၿမန္မာစာ ပံုေသ | Myanmar Default</string>
 
     <string name="version_new_yes">New Version Out</string>
@@ -853,9 +853,13 @@ Shirin Ebadi, J.D., was awarded the 2003 Nobel Peace Prize for her efforts to pr
 Make many new friends, contact your local May Doe Kabar/TLG group. See number below.
 </string>
 
-    <string name="current_version">Current Version Name</string>
+    <string name="current_version">Current Version Number </string>
     <string name="current_version_mm">ယခု လက္ရွိ ေဆာ့၀ဲလ္ ဗားရွင္း</string>
+
     <string name="post_detail_read_more">More &gt;&gt;</string>
     <string name="post_detail_read_more_mm"> ပိုုိမိုုဖတ္ရွဳရန္ &gt;&gt; </string>
+
+    <string name="weekly_special_be_inspired_mm">ယခု လ အတြက္ အထူးၿခားဆံုး အေၾကာင္းအရာ</string>
+
 
 </resources>

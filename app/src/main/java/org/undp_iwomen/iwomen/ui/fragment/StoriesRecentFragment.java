@@ -104,7 +104,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
     List<IWomenPost> StorageiWomenPosts;
     private StorageUtil storageUtil;
 
-    private CustomTextView sp_content_title, sp_content_body, sp_content_author_name, sp_content_date;
+    private CustomTextView sp_content_topic_of_month_title, sp_content_title, sp_content_body, sp_content_author_name, sp_content_date;
     private ResizableImageView sp_content_img;
     private RoundedImageView sp_content_author_profile;
     private ProgressBar sp_content_img_progress, sp_content_profile_progress;
@@ -216,6 +216,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
 
         View header = layoutInflater.inflate(R.layout.special_content_stories_list_item, null);
         sp_content_title = (CustomTextView) header.findViewById(R.id.sp_content_txtPostTitle);
+        sp_content_topic_of_month_title = (CustomTextView) header.findViewById(R.id.sp_content_topic_of_month_title);
         sp_content_body = (CustomTextView) header.findViewById(R.id.sp_content_txtContent);
         sp_content_date = (CustomTextView) header.findViewById(R.id.sp_content_timestamp);
         sp_content_author_name = (CustomTextView) header.findViewById(R.id.sp_content_name);
@@ -333,14 +334,14 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
             sp_content_title.setText(item.getTitle());
             sp_content_body.setText(item.getContent());
             sp_content_author_name.setText(item.getPostUploadName());
+            sp_content_topic_of_month_title.setText(getResources().getString(R.string.weekly_special_be_inspired));
 
-            //sp_content_title.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
-            //sp_content_body.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
 
         } else {//FOR ALL MM FONTS
             sp_content_title.setText(item.getTitleMm());
             sp_content_body.setText(item.getContentMm());
             sp_content_author_name.setText(item.getPostUploadNameMM());
+            sp_content_topic_of_month_title.setText(getResources().getString(R.string.weekly_special_be_inspired_mm));
 
 
         }

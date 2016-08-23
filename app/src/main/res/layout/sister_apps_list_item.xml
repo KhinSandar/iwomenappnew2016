@@ -55,7 +55,7 @@
         android:layout_toRightOf="@id/sister_app_fy"
         android:paddingTop="8dp"
         android:text="Bindez"
-        android:textColor="@color/black"
+        android:textColor="@color/secondary_text"
         android:textSize="22sp"
 
         android:textStyle="bold" />

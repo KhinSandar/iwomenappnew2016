@@ -32,6 +32,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -116,7 +117,7 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class PostDetailActivity extends BaseActionBarActivity implements View.OnClickListener {
+public class PostDetailActivity extends BaseActionBarActivity implements AbsListView.OnScrollListener, View.OnClickListener {
 
     CustomTextView mPostTile;
 
@@ -196,6 +197,8 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     private AnimatedButton mSocialNoEarLikeAnimatedButton;
     private ImageView img_credit_icon_img;
 
+
+
     private enum PendingAction {
         NONE,
         POST_PHOTO,
@@ -213,10 +216,10 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     //TODO for sticker grid show up
     private StickerGridViewAdapter mAdapter;
     private WrappedGridView gridView;
-    private List<Sticker> stickerArrayList;
+    private ArrayList<Sticker> stickerArrayList;
     private int sticker_paginater = 1;
     private com.pnikosis.materialishprogress.ProgressWheel progress_wheel;
-    private StorageUtil storageUtil;
+    //private StorageUtil storageUtil;
 
 
     private ShareDialog shareDialog;
@@ -255,6 +258,9 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     private final String WRITE_STORAGE = "android.permission.WRITE_EXTERNAL_STORAGE";
     private final String STORAGE_READ_PERMISSION = "android.permission.READ_EXTERNAL_STORAGE";
     private final String PREPARE_AUDIO_PERMISSION = "android.permission.MODIFY_AUDIO_SETTINGS";
+
+    private StorageUtil storageUtil;
+    private boolean mHasRequestedMore;
 
 
 
@@ -320,6 +326,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         super.onCreate(savedInstanceState);
 
         mContext = getApplicationContext();
+        storageUtil = StorageUtil.getInstance(getApplicationContext());
 
 
         mProgressDialog = new ProgressDialog(PostDetailActivity.this);
@@ -357,7 +364,10 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         progress_wheel.setRimColor(Color.LTGRAY);
         gridView.setLoadingView(progress_wheel);
 
-        storageUtil = StorageUtil.getInstance(getApplicationContext());
+        gridView.setOnScrollListener(this);
+        //gridView.setOnItemClickListener(this);
+
+        //storageUtil = StorageUtil.getInstance(getApplicationContext());
 
 
     }
@@ -1120,22 +1130,43 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
     public void LoadStickerData() {
         if (Connection.isOnline(getApplicationContext())) {
 
+            if (sticker_paginater == 1) {
+                stickerArrayList = new ArrayList<Sticker>();
+            }
             SMKserverAPI.getInstance().getService().getStickersByPagination(sticker_paginater, new Callback<List<Sticker>>() {
                 @Override
                 public void success(List<Sticker> stickers, Response response) {
                     alreadySticker = true;
-                    stickerArrayList = new ArrayList<Sticker>();
+                    //stickerArrayList = new ArrayList<Sticker>();
                     stickerArrayList.addAll(stickers);
-                    if (mAdapter == null) {
+                    /* if (mAdapter == null) {
                         mAdapter = new StickerGridViewAdapter(PostDetailActivity.this, mContext, stickerArrayList);
 
+                    }*/
+                    if (stickerArrayList.size() > 0) {
+                        gridView.setVisibility(View.VISIBLE);
+
+                        if (sticker_paginater <= 1) {
+                            //storageUtil.SaveArrayListToSD("StickersList", stickerArrayList);
+                            mAdapter = new StickerGridViewAdapter(PostDetailActivity.this, mContext, stickerArrayList);
+                            progress_wheel.setVisibility(View.GONE);
+                            //progressBar.setVisibility(View.GONE);
+                            gridView.setAdapter(mAdapter);
+                        } else {
+                            mAdapter.notifyDataSetChanged();
+                        }
+
                     }
+                    sticker_paginater++;
+
+                    mHasRequestedMore = false;
+
                     //sticker_paginater++;
                     progress_wheel.setVisibility(View.GONE);
                     gridView.setAdapter(mAdapter);
-                    StoreUtil.getInstance().saveTo("StickersList", stickerArrayList);
                     mAdapter.notifyDataSetChanged();
                 }
+
 
                 @Override
                 public void failure(RetrofitError error) {
@@ -1146,20 +1177,20 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
         } else {
             //SKConnectionDetector.getInstance(this).showErrorMessage();
-            List<Sticker> stickers = StoreUtil.getInstance().selectFrom("StickersList");
-            if (stickers.size() > 0) {
-                mAdapter = new StickerGridViewAdapter(this, mContext, stickers);
+            //List<Sticker> stickers = StoreUtil.getInstance().selectFrom("StickersList");
+            ArrayList<Sticker> stickers_storgae  = (ArrayList<Sticker>)storageUtil.ReadArrayListFromSD("StickersList");
+            Log.e("NoInternetStorgaeList","==>" + stickers_storgae.size());
+            if (stickers_storgae.size() > 0) {
+                mAdapter = new StickerGridViewAdapter(this, mContext, stickers_storgae);
                 gridView.setAdapter(mAdapter);
             }
 
-            //mAdapter.notifyDataSetChanged();
         }
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             public void onItemClick(AdapterView<?> arg0, View arg1, int position,
                                     long arg3) {
                 //Toast.makeText(mContext, mAdapter.getItem(position), Toast.LENGTH_SHORT).show();
-
                 //popup.dismiss();
                 ly_sticker_holder.setVisibility(View.GONE);
                 InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
@@ -1333,6 +1364,8 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
 
                 ly_sticker_holder.setVisibility(View.VISIBLE);
 
+
+
             }
         });
     }
@@ -1376,6 +1409,8 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
                 }
             });
         } else {
+            if (!alreadySticker)
+                LoadStickerData();
             //SKConnectionDetector.getInstance(this).showErrorMessage();
         }
     }
@@ -3024,6 +3059,30 @@ public class PostDetailActivity extends BaseActionBarActivity implements View.On
         }
 
 
+    }
+
+    @Override
+    public void onScrollStateChanged(AbsListView absListView, int i) {
+        //Log.d(TAG, "onScrollStateChanged:" + scrollState);
+    }
+
+    @Override
+    public void onScroll(AbsListView absListView, int i, int i1, int i2) {
+        if (!mHasRequestedMore) {
+            int lastInScreen = i + i1;
+            //Log.i("count limit", "12"  + "last n Screen " +lastInScreen + String.valueOf(sticker_paginater));
+            if (lastInScreen >= i2 && sticker_paginater <= 12 && sticker_paginater != -1) {
+                //Log.d(TAG, "onScroll lastInScreen - so load more");
+                //gridView.addFooterView(footer);
+                mHasRequestedMore = true;
+                progress_wheel.setVisibility(View.VISIBLE);
+                //new BackgroundAsyncTask(getActivity()).execute();
+                LoadStickerData();
+                /*AsyncControlClass asyncControlClass = new AsyncControlClass(getActivity());
+                asyncControlClass.execute();
+*/
+            }
+        }
     }
 
 

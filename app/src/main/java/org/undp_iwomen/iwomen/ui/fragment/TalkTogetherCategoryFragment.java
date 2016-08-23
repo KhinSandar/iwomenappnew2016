@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -122,7 +123,7 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
         gridView.setLoadingView(progress_wheel);
 
         CategoriesModelList = new ArrayList<>();
-        mAdapter = new TalkTogetherGridViewAdapter(getActivity(), ctx, CategoriesModelList , mstr_lang);
+        mAdapter = new TalkTogetherGridViewAdapter(getActivity(), ctx, CategoriesModelList, mstr_lang);
         gridView.setAdapter(mAdapter);
 
 
@@ -135,7 +136,8 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
                 zPDialog.show();
             }
             LoadData();
-            //SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
+
+        } else {
             if (categories != null) {
                 CategoriesModelList.clear();
                 CategoriesModelList.addAll(categories);
@@ -234,6 +236,7 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
             //SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
             List<Categories> categories = (ArrayList<Categories>) storageUtil.ReadArrayListFromSD("Categories");
             //CategoriesModelList = (ArrayList<Categories>) storageUtil.ReadArrayListFromSD("Categories");
+            Log.e("NoInterntCategoryList", "==>" + categories.size());
 
             if (categories.size() > 0) {
 

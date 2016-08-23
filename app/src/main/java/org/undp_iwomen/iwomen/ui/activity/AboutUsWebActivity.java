@@ -169,10 +169,10 @@ public class AboutUsWebActivity extends BaseActionBarActivity {
         });
 
         if (strLang.equals(Utils.ENG_LANG)) {
-            txt_version.setText(R.string.current_version+ mversionName);
+            txt_version.setText(getResources().getString(R.string.current_version) +" " + mversionName);
 
         }else{
-            txt_version.setText(R.string.current_version_mm+ mversionName);
+            txt_version.setText(getResources().getString(R.string.current_version_mm)+ " " + mversionName);
 
         }
         txt_new_version.setVisibility(View.GONE);

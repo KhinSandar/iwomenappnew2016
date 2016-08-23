@@ -370,8 +370,8 @@ iWomen App နွင့္ပက္သက္သည့္ နည္းပညာ �
     <string name="share">ရွဲရန္</string>
     <string name="calendar_permission">သင့္အေကာင့္သည္ခြင့္ၿပဳခ်က္ရွိမွၾကည့္ႏိုုင္ပါမည္။</string>
 
-    <string name="ethic_shan">ရွမ္း </string>
-    <string name="ethic_mon"> မြန္</string>
+    <string name="ethic_shan">ရွမ္း | Shan Language </string>
+    <string name="ethic_mon"> မြန္ | Mon Language</string>
     <string name="organization_title"> အဖြဲ ့အစည္းအမည္</string>
 
 
@@ -829,7 +829,7 @@ female-pilots-iaa1s
 
     <string name="login_dialog_mm_zawgyi">ၿမန္မာေဇာ္ဂ်ီေဖာင့္ | Myanmar Zawgyi</string>
     <string name="login_dialog_mm_uni">ၿမန္မာ ယူနီကုုတ္ေဖာင့္ |Myanmar Unicode</string>
-    <string name="login_dialog_eng">ENGLISH | အဂၤလိပ္ေဖာင့္ </string>
+    <string name="login_dialog_eng">English | အဂၤလိပ္ေဖာင့္ </string>
     <string name="login_dialog_mm_deafult">ၿမန္မာစာ ပံုေသ | Myanmar Default</string>
 
     <string name="version_new_yes">ဗားရွင္းအသစ္ရပါပီ</string>
@@ -853,7 +853,7 @@ female-pilots-iaa1s
     <string name="no_connection">အင္တာနက္မဖြင့္ထားပါ</string>
     <string name="tlg_profile">အဲဒီအမ်ိဳးသမီးေတြဟာနည္းလမ္းေပါင္းမ်ားစြာနဲ႕ တစ္ဦးကို တစ္ဦး အကူအညီေပးေနၾကတာကို သင္ သိပါရဲ႕လား။ အတူတကြ ေငြစုေငြေခ်းလုပ္ၾကတယ္။ နည္းပညာေတြအေၾကာင္း ေလ့လာၾကတယ္။ စီးပြားေရးပညာေတြ သင္ယူၿပီး ထုတ္ကုန္ပစၥည္းေတြကို အခ်င္းခ်င္းေရာင္း၀ယ္ၾကတယ္။ ရပ္ထဲရြာထဲမွာ အမ်ိဳးသမီးေခါင္းေဆာင္ေတြ ျဖစ္လာေအာင္ သင္ယူေလ့လာေနၾကတယ္။ ပညာေရးအခြင့္အလမ္းေတြကို ေလ့လာၾကတယ္။ က်န္းမာေရးနဲ႕ အစာအာဟာရေတြအေၾကာင္း ေလ့လာၾကတယ္။ အလုပ္ရံုေဆြးေႏြးပဲြ ေတြကို တက္ဖို႔ ရန္ကုန္ကို အတူတကြ သြားေရာက္ၾကၿပီး အဲဒီမွာတျခားႏိုင္ငံေပါင္းမ်ားစြာက အမ်ိဳးသမီးေတြနဲ႕ ေတြ႕ဆံုေနၾကပါတယ္။ မိတ္ေဆြသစ္ေတြဖဲြ႕ၿပီး တစ္ဦးကိုတစ္ဦး ကူညီေဖးမရင္းနဲ႕ ေန႕စဥ္ဘ၀မွာ ေအာင္ျမင္မႈေတြ ပိုၿပီး ရရွိဖို႔ ႀကိဳးစားေနၾကတယ္ေလ။ သင္လည္း မိတ္ေဆြသစ္ေတြမ်ားမ်ားဖြဲ႔ၿပီး ဖဲြ႕မိမိေဒသကေမတို႔ကမာၻအမ်ိဳးသမီးအဖဲြ႕နဲ႕ဆက္သြယ္ပါလို႔ တိုက္တြန္း လိုက္ပါရေစ။ ဆက္သြယ္ရမယ့္ နံပါတ္ေတြ ေအာက္မွာ ေဖာ္ျပထားပါတယ္။</string>
 
-    <string name="current_version">Current Version Name</string>
+    <string name="current_version">Current Version Number </string>
     <string name="current_version_mm">ယခု လက္ရွိ ေဆာ့၀ဲလ္ ဗားရွင္း</string>
     <string name="post_detail_read_more">More &gt;&gt;</string>
     <string name="post_detail_read_more_mm"> ပိုုိမိုုဖတ္ရွဳရန္ &gt;&gt; </string>
@@ -863,4 +863,7 @@ female-pilots-iaa1s
     <string name="login_dialog_eng">ENGLISH</string>
     <string name="login_dialog_mm_deafult">ၿမန္မာစာ ပံုေသ</string>
 -->
+
+    <string name="weekly_special_be_inspired_mm">ယခု လ အတြက္ အထူးၿခားဆံုး အေၾကာင္းအရာ</string>
+
 </resources>

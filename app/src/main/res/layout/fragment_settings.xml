@@ -14,7 +14,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:title="Change Language" />
+            android:textSize="16sp"
+            android:textColor="@color/secondary_text"
+            />
 
         <RadioGroup
             android:id="@+id/settings_language"
@@ -29,25 +31,38 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                android:text="ENGLISH" />
+                android:text="@string/login_dialog_eng"
+                android:textSize="13sp"
+                android:textColor="@color/secondary_text"
+
+                />
 
             <RadioButton
                 android:id="@+id/settings_mm_zawgyi_language"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="MYANMAR ZAWGYI" />
+                android:text="@string/login_dialog_mm_zawgyi"
+                android:textSize="13sp"
+                android:textColor="@color/secondary_text"
+                />
             <RadioButton
                 android:id="@+id/settings_mm_unicode_language"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                android:text="MYANMAR UNICODE" />
+                android:text="@string/login_dialog_mm_uni"
+                android:textSize="13sp"
+                android:textColor="@color/secondary_text"
+                />
 
             <RadioButton
                 android:id="@+id/settings_mm_default_language"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="DEFAULT" />
+                android:text="@string/login_dialog_mm_deafult"
+                android:textSize="13sp"
+                android:textColor="@color/secondary_text"
+                />
 
             <!-- New Coming Soon-->
 
@@ -56,13 +71,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                android:text="@string/ethic_shan" />
+                android:text="@string/ethic_shan"
+                android:textSize="13sp"
+                android:textColor="@color/secondary_text"
+                />
 
             <RadioButton
                 android:id="@+id/settings_ethic_mon_language"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/ethic_mon" />
+                android:text="@string/ethic_mon"
+                android:textSize="13sp"
+                android:textColor="@color/secondary_text"/>
 
         </RadioGroup>
 
@@ -70,6 +90,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_margin="16dp"
+            android:visibility="gone"
             android:background="#c3c3c3" />
 
         <CheckBox
@@ -77,6 +98,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            android:visibility="gone"
             android:text="Get Notification" />
 
 
@@ -84,6 +106,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_margin="16dp"
+            android:visibility="gone"
             android:background="#c3c3c3" />
 
         <org.undp_iwomen.iwomen.ui.widget.CustomTextView
@@ -141,6 +164,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_margin="16dp"
+
             android:background="#c3c3c3" />
 
 
