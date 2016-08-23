@@ -36,8 +36,8 @@ android {
         release {
             keyAlias 'iwomen'
             keyPassword 'iwomen'
-            storeFile file('/Users/khinsandar/Documents/VipPro/UNDP/Application/KeyFile/iwomen.jks')
-            //storeFile file('D:/iWomen/iwomenappnew2016/iwomen.jks')
+            //storeFile file('/Users/khinsandar/Documents/VipPro/UNDP/Application/KeyFile/iwomen.jks')
+            storeFile file('D:/iWomen/iwomenappnew2016/iwomen.jks')
             storePassword 'undp2015'
         }
     }

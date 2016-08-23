@@ -5,7 +5,9 @@
     android:layout_height="wrap_content"
 
     android:minHeight="80dp"
-    android:background="@color/week_special">
+    android:background="@color/week_special"
+
+    >
 
     <LinearLayout
 
@@ -50,7 +52,6 @@
     <LinearLayout
 
         android:layout_marginTop="8dp"
-
         android:layout_below="@+id/sp_view"
         android:id="@+id/ly_list_head"
         android:layout_width="match_parent"
@@ -98,7 +99,8 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_gravity="left"
-                android:visibility="visible" />
+                android:visibility="visible"
+                android:indeterminate="false" />
         </FrameLayout>
 
         <LinearLayout

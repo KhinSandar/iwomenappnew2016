@@ -855,6 +855,9 @@ female-pilots-iaa1s
 
     <string name="current_version">Current Version Number </string>
     <string name="current_version_mm">ယခု လက္ရွိ ေဆာ့၀ဲလ္ ဗားရွင္း</string>
+    <string name="post_detail_read_more">More &gt;&gt;</string>
+    <string name="post_detail_read_more_mm"> ပိုုိမိုုဖတ္ရွဳရန္ &gt;&gt; </string>
+
     <!--<string name="login_dialog_mm_zawgyi">ၿမန္မာေဇာ္ဂ်ီေဖာင့္</string>
     <string name="login_dialog_mm_uni">ၿမန္မာ ယူနီကုုတ္ေဖာင့္</string>
     <string name="login_dialog_eng">ENGLISH</string>
