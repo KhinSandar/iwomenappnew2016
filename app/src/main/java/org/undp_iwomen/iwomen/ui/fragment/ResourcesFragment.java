@@ -142,17 +142,8 @@ public class ResourcesFragment extends Fragment {
     private void init(View rootView) {
         sharePrefLanguageUtil = getActivity().getSharedPreferences(Utils.PREF_SETTING, Context.MODE_PRIVATE);
         mSharedPreferencesUserInfo = getActivity().getSharedPreferences(CommonConfig.SHARE_PREFERENCE_USER_INFO, Context.MODE_PRIVATE);
-
-        ResourceItems = new ArrayList<>();
         lvResouces = (SKListView) rootView.findViewById(R.id.resource_lv);
         mstr_lang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
-        adapter = new ResourcesListViewAdapter(getActivity(), ResourceItems, mstr_lang);
-        lvResouces.setAdapter(adapter);
-        lvResouces.setCallbacks(skCallbacks);
-        lvResouces.setNextPage(true);
-        adapter.notifyDataSetChanged();
-
-
         //Header
         final LayoutInflater layoutInflater = getActivity().getLayoutInflater();
 
@@ -161,9 +152,23 @@ public class ResourcesFragment extends Fragment {
         sp_title_txt = (CustomTextView) header.findViewById(R.id.sp_topic_title);
         sp_imgIcon = (RoundedImageView) header.findViewById(R.id.sp_resouce_list_item_img);
         sp_progressBar = (ProgressBar) header.findViewById(R.id.sp_resouce_list_item_progressBar);
-        lvResouces.addHeaderView(header);
 
+        sp_txtName.setText("");
+        sp_title_txt.setText("");
+
+        //Need to add before set Adapter
+        lvResouces.addHeaderView(header);
         getWeeklyResourcePost();
+
+
+        ResourceItems = new ArrayList<>();
+
+        adapter = new ResourcesListViewAdapter(getActivity(), ResourceItems, mstr_lang);
+        lvResouces.setAdapter(adapter);
+        lvResouces.setCallbacks(skCallbacks);
+        lvResouces.setNextPage(true);
+        adapter.notifyDataSetChanged();
+
 
         header.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -289,32 +294,27 @@ public class ResourcesFragment extends Fragment {
 
         sp_imgIcon.setAdjustViewBounds(true);
         sp_imgIcon.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        if (Connection.isOnline(mContext)) {
+        if (item.getAuthorImgPath() != null && !item.getAuthorImgPath().isEmpty()) {
 
-            if (item.getAuthorImgPath() != null && !item.getAuthorImgPath().isEmpty()) {
+            try {
 
-                try {
-
-                    Picasso.with(mContext)
-                            .load(item.getAuthorImgPath()) //"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
-                            .placeholder(R.drawable.blank_profile)
-                            .error(R.drawable.blank_profile)
-                            .into(sp_imgIcon, new ImageLoadedCallback(sp_progressBar) {
-                                @Override
-                                public void onSuccess() {
-                                    if (this.progressBar != null) {
-                                        this.progressBar.setVisibility(View.GONE);
-                                    } else {
-                                        this.progressBar.setVisibility(View.VISIBLE);
-                                    }
+                Picasso.with(mContext)
+                        .load(item.getAuthorImgPath()) //"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
+                        .placeholder(R.drawable.blank_profile)
+                        .error(R.drawable.blank_profile)
+                        .into(sp_imgIcon, new ImageLoadedCallback(sp_progressBar) {
+                            @Override
+                            public void onSuccess() {
+                                if (this.progressBar != null) {
+                                    this.progressBar.setVisibility(View.GONE);
+                                } else {
+                                    this.progressBar.setVisibility(View.VISIBLE);
                                 }
+                            }
 
-                            });
-                } catch (OutOfMemoryError outOfMemoryError) {
-                    outOfMemoryError.printStackTrace();
-                }
-            } else {
-                sp_progressBar.setVisibility(View.GONE);
+                        });
+            } catch (OutOfMemoryError outOfMemoryError) {
+                outOfMemoryError.printStackTrace();
             }
         } else {
             sp_progressBar.setVisibility(View.GONE);
@@ -679,7 +679,7 @@ public class ResourcesFragment extends Fragment {
                     menu.findItem(R.id.action_rating).setVisible(true);
                     menu.findItem(R.id.action_rating).setIcon(BaseActionBarActivity.getRatingIcon(arg0.getTotalRatings()));
                     avgRatings = arg0;
-                }catch (NullPointerException ex){
+                } catch (NullPointerException ex) {
                     ex.printStackTrace();
                 }
             }

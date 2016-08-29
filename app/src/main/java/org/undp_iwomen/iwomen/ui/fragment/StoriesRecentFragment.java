@@ -114,6 +114,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
 
     private String iWomen_json;
     private IWomenPost StorageiWomenPostObj;
+    View header;
 
     public StoriesRecentFragment() {
         // Empty constructor required for fragment subclasses
@@ -156,79 +157,36 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
 
         feedItems = new ArrayList<FeedItem>();
         skListView = (SKListView) rootView.findViewById(R.id.lst_stories);
-
-        iWomenPostList = new ArrayList<>();
-        stories = new StoriesRecentListAdapter(getActivity(), iWomenPostList, mstr_lang);
-        skListView.setAdapter(stories);
-        skListView.setCallbacks(skCallbacks);
-        skListView.setNextPage(true);
-        final Activity parentActivity = getActivity();
-
         fab = (FloatingActionButton) rootView.findViewById(R.id.post_news);
         fab.setOnClickListener(this);
 
-        //When very start this fragment open , need to check db data
-        /*Cursor cursorMain = getActivity().getContentResolver().query(IwomenProviderData.PostProvider.CONTETN_URI, null, null, null, BaseColumns._ID + " DESC");
-
-        if (cursorMain.getCount() > 0) {
-            setupAdapter();
-
-
-        } else {
-
-            if (Connection.isOnline(getActivity())) {
-                //getPostDataOrderByLikesDate();
-                getIWomenPostByLimit();
-            } else {
-                //scrollview.setVisibility(View.INVISIBLE);
-                //connectionerrorview.setVisibility(View.VISIBLE);
-                //            product_arrayList = (ArrayList<ProductsModel>) storageUtil.ReadArrayListFromSD("HomeProductsList");
-
-                progress.setVisibility(View.INVISIBLE);
-                    *//* Toast.makeText(getActivity().getApplicationContext(),
-                    "Please Open Internet Connection!",
-                    Toast.LENGTH_LONG).show();*//*
-                if (mstr_lang.equals(Utils.ENG_LANG)) {
-                    Utils.doToastEng(mContext, "Internet Connection need!");
-                } else {
-
-                    Utils.doToastMM(mContext, getActivity().getResources().getString(R.string.open_internet_warning_mm));
-                }
-
-
-            }
-        }*/
-
-        /*
-         * This is load data from local or server when connection is connected or not connected
-         */
-        //Load data from local storage for no connection
-        //final List<IWomenPost> iWomenPosts = StoreUtil.getInstance().selectFrom("stories_recent");
-
-        //Add Header View
-        //LayoutInflater inflater = getLayoutInflater();
-        /*LayoutInflater inflater = (LayoutInflater) getActivity().getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        ViewGroup header = (ViewGroup)inflater.inflate(R.layout.special_content_stories_list_item, skListView, false);
-        header.setBackgroundColor(getResources().getColor(R.color.white));
-        */
 
         final LayoutInflater layoutInflater = getActivity().getLayoutInflater();
-
-        View header = layoutInflater.inflate(R.layout.special_content_stories_list_item, null);
+        header = layoutInflater.inflate(R.layout.special_content_stories_list_item, null);
         sp_content_title = (CustomTextView) header.findViewById(R.id.sp_content_txtPostTitle);
         sp_content_topic_of_month_title = (CustomTextView) header.findViewById(R.id.sp_content_topic_of_month_title);
         sp_content_body = (CustomTextView) header.findViewById(R.id.sp_content_txtContent);
         sp_content_date = (CustomTextView) header.findViewById(R.id.sp_content_timestamp);
         sp_content_author_name = (CustomTextView) header.findViewById(R.id.sp_content_name);
-
         sp_content_img = (ResizableImageView) header.findViewById(R.id.sp_content_postImg);
         sp_content_author_profile = (RoundedImageView) header.findViewById(R.id.sp_content_profilePic_rounded);
-
         sp_content_img_progress = (ProgressBar) header.findViewById(R.id.sp_content_feed_item_progressBar);
         sp_content_profile_progress = (ProgressBar) header.findViewById(R.id.sp_content_progressBar_profile_item);
 
-
+        //Need to add before set Adapter
+        /*Note: When first introduced, this method could only be called before setting the adapter with setAdapter(ListAdapter). Starting with KITKAT, this method may be called at any time. If the ListView's adapter does not extend HeaderViewListAdapter, it will be wrapped with a supporting instance of WrapperListAdapter.
+        */
         skListView.addHeaderView(header, null, false);
+
+        iWomenPostList = new ArrayList<>();
+        stories = new StoriesRecentListAdapter(getActivity(), iWomenPostList, mstr_lang);
+
+        skListView.setAdapter(stories);
+        skListView.setCallbacks(skCallbacks);
+        skListView.setNextPage(true);
+        final Activity parentActivity = getActivity();
+
+
 
         getWeeklyIWomenPost();
 
@@ -268,6 +226,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
             if (StorageiWomenPosts != null) {
                 iWomenPostList.clear();
                 iWomenPostList.addAll(StorageiWomenPosts);
+
                 stories.notifyDataSetChanged();
             }
         }
@@ -341,7 +300,6 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
             }
 
 
-
         } else {//FOR ALL MM FONTS
             sp_content_title.setText(item.getTitleMm());
             sp_content_body.setText(item.getContentMm());
@@ -403,89 +361,88 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        if (Connection.isOnline(mContext)) {
 
-            if (item.getPostUploadUserImgPath() != null && !item.getPostUploadUserImgPath().isEmpty()) {
+        if (item.getPostUploadUserImgPath() != null && !item.getPostUploadUserImgPath().isEmpty()) {
 
-                try {
+            try {
 
-                    sp_content_author_profile.setVisibility(View.VISIBLE);
-                    Picasso.with(mContext)
-                            .load(item.getPostUploadUserImgPath()) //"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
-                            .placeholder(R.drawable.blank_profile)
-                            .error(R.drawable.blank_profile)
-                            .into(sp_content_author_profile, new ImageLoadedCallback(sp_content_profile_progress) {
-                                @Override
-                                public void onSuccess() {
-                                    if (this.progressBar != null) {
-                                        this.progressBar.setVisibility(View.GONE);
-                                    } else {
-                                        this.progressBar.setVisibility(View.VISIBLE);
-                                    }
+                sp_content_author_profile.setVisibility(View.VISIBLE);
+                Picasso.with(mContext)
+                        .load(item.getPostUploadUserImgPath()) //"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
+                        .placeholder(R.drawable.blank_profile)
+                        .error(R.drawable.blank_profile)
+                        .into(sp_content_author_profile, new ImageLoadedCallback(sp_content_profile_progress) {
+                            @Override
+                            public void onSuccess() {
+                                if (this.progressBar != null) {
+                                    this.progressBar.setVisibility(View.GONE);
+                                } else {
+                                    this.progressBar.setVisibility(View.VISIBLE);
                                 }
+                            }
 
-                                @Override
-                                public void onError() {
-                                    super.onError();
-                                    if (this.progressBar != null) {
-                                        this.progressBar.setVisibility(View.GONE);
-                                    }
+                            @Override
+                            public void onError() {
+                                super.onError();
+                                if (this.progressBar != null) {
+                                    this.progressBar.setVisibility(View.GONE);
                                 }
-                            });
-                } catch (OutOfMemoryError outOfMemoryError) {
-                    outOfMemoryError.printStackTrace();
-                    sp_content_profile_progress.setVisibility(View.GONE);
-                }
-            } else {
-
-                sp_content_author_profile.setImageResource(R.drawable.blank_profile);
+                            }
+                        });
+            } catch (OutOfMemoryError outOfMemoryError) {
+                outOfMemoryError.printStackTrace();
                 sp_content_profile_progress.setVisibility(View.GONE);
             }
+        } else {
+
+            sp_content_author_profile.setImageResource(R.drawable.blank_profile);
+            sp_content_profile_progress.setVisibility(View.GONE);
+        }
 
 
-            //// Feed image
-            if (item.getImage() != null && !item.getImage().isEmpty()) {
-                try {
-                    sp_content_img.setVisibility(View.VISIBLE);
-                    sp_content_img_progress.setVisibility(View.VISIBLE);
+        //// Feed image
+        if (item.getImage() != null && !item.getImage().isEmpty()) {
+            try {
+                sp_content_img.setVisibility(View.VISIBLE);
+                sp_content_img_progress.setVisibility(View.VISIBLE);
 
-                    Picasso.with(mContext)
-                            .load(item.getImage()) //"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
-                            .placeholder(R.drawable.place_holder)
-                            .error(R.drawable.place_holder)
-                            .into(sp_content_img, new ImageLoadedCallback(sp_content_img_progress) {
-                                @Override
-                                public void onSuccess() {
-                                    if (this.progressBar != null) {
-                                        this.progressBar.setVisibility(View.GONE);
-                                    } else {
-                                        this.progressBar.setVisibility(View.VISIBLE);
-                                    }
+                Picasso.with(mContext)
+                        .load(item.getImage()) //"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
+                        .placeholder(R.drawable.place_holder)
+                        .error(R.drawable.place_holder)
+                        .into(sp_content_img, new ImageLoadedCallback(sp_content_img_progress) {
+                            @Override
+                            public void onSuccess() {
+                                if (this.progressBar != null) {
+                                    this.progressBar.setVisibility(View.GONE);
+                                } else {
+                                    this.progressBar.setVisibility(View.VISIBLE);
                                 }
+                            }
 
-                                @Override
-                                public void onError() {
-                                    super.onError();
-                                    if (this.progressBar != null) {
-                                        this.progressBar.setVisibility(View.GONE);
-                                    }
+                            @Override
+                            public void onError() {
+                                super.onError();
+                                if (this.progressBar != null) {
+                                    this.progressBar.setVisibility(View.GONE);
                                 }
+                            }
 
-                            });
-                } catch (OutOfMemoryError outOfMemoryError) {
-                    outOfMemoryError.printStackTrace();
-                    sp_content_img_progress.setVisibility(View.GONE);
-                }
-            } else {
-                sp_content_img.setVisibility(View.GONE);
+                        });
+            } catch (OutOfMemoryError outOfMemoryError) {
+                outOfMemoryError.printStackTrace();
                 sp_content_img_progress.setVisibility(View.GONE);
             }
         } else {
+            sp_content_img.setVisibility(View.GONE);
+            sp_content_img_progress.setVisibility(View.GONE);
+        }
+        /*else {
             sp_content_author_profile.setImageResource(R.drawable.blank_profile);
             sp_content_profile_progress.setVisibility(View.GONE);
             sp_content_img.setVisibility(View.GONE);
             sp_content_img_progress.setVisibility(View.GONE);
-        }
+        }*/
 
     }
 
@@ -1468,6 +1425,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
                             zPDialog.dismissWithSuccess();
                     }
                     iWomenPostList.addAll(iWomenPosts);
+                    //skListView.addHeaderView(header, null, false);
                     stories.notifyDataSetChanged();
                     //StoreUtil.getInstance().saveTo("stories_recent", iWomenPostList);
                     final ArrayList<IWomenPost> storagelist = new ArrayList<IWomenPost>();
@@ -1509,6 +1467,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
             if (iWomenPosts != null) {
                 iWomenPostList.clear();
                 iWomenPostList.addAll(iWomenPosts);
+                //skListView.addHeaderView(header, null, false);
                 stories.notifyDataSetChanged();
             }
         }
@@ -1569,5 +1528,12 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
 
         }
     }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        skListView.setAdapter(null);
+    }
+
 }
 
