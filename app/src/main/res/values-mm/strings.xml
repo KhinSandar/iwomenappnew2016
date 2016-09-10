@@ -873,5 +873,14 @@ female-pilots-iaa1s
     <string name="audio_play_mm">နားေထာင္ပါ</string>
     <string name="audio_pause_mm">ခဏရပ္မည္</string>
 
+    <string name="post_detail_like_btn_category">Post Detail</string>
+    <string name="post_detail_like_btn_action">Like Action</string>
+    <string name="post_detail_like_btn_lbl">Post Detail Likes Label</string>
+
+    <string name="post_detail_share_btn_action">Share Action</string>
+    <string name="post_detail_share_btn_lbl">Post Detail Share Label</string>
+
+    <string name="post_detail_share_fb_btn_action">Share fb Action</string>
+    <string name="post_detail_share_fb_btn_lbl">Post Detail Share fb Label</string>
 
 </resources>

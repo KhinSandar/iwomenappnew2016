@@ -7,12 +7,15 @@ import android.util.Log;
 import com.alexbbb.uploadservice.UploadService;
 import com.facebook.FacebookSdk;
 import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.Logger;
 import com.google.android.gms.analytics.Tracker;
 import com.path.android.jobqueue.JobManager;
 import com.path.android.jobqueue.config.Configuration;
 import com.path.android.jobqueue.log.CustomLogger;
 
 import org.undp_iwomen.iwomen.R;
+
+import java.util.HashMap;
 
 
 /**
@@ -27,6 +30,9 @@ public class MainApplication extends MultiDexApplication {
     }
 
     private Tracker mTracker;
+    // The following line should be changed to include the correct property id.
+    private static final String PROPERTY_ID = "UA-74721352-1";
+
 
     /**
      * Gets the default {@link Tracker} for this {@link Application}.
@@ -40,7 +46,23 @@ public class MainApplication extends MultiDexApplication {
         }
         return mTracker;
     }
+    HashMap<TrackerName, Tracker> mTrackers = new HashMap<TrackerName, Tracker>();
 
+
+    public synchronized Tracker getTracker(TrackerName trackerId) {
+        if (!mTrackers.containsKey(trackerId)) {
+
+            GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
+            analytics.getLogger().setLogLevel(Logger.LogLevel.VERBOSE);
+            Tracker t = (trackerId == TrackerName.APP_TRACKER) ? analytics.newTracker(PROPERTY_ID)
+                    : (trackerId == TrackerName.GLOBAL_TRACKER) ? analytics.newTracker(
+                    R.xml.global_tracker)
+                    : analytics.newTracker(R.xml.ecommerce_tracker);
+            t.enableAdvertisingIdCollection(true);
+            mTrackers.put(trackerId, t);
+        }
+        return mTrackers.get(trackerId);
+    }
     @Override
     public void onCreate() {
         super.onCreate();
@@ -83,6 +105,12 @@ public class MainApplication extends MultiDexApplication {
     public JobManager getJobManager() {
         return jobManager;
     }
+    public enum TrackerName {
+        APP_TRACKER, // Tracker used only in this app.
+        GLOBAL_TRACKER, // Tracker used by all the apps from a company. eg: roll-up tracking.
+        ECOMMERCE_TRACKER, // Tracker used by all ecommerce transactions from a company.
+    }
+
 
     public static MainApplication getInstance() {
         if(instance == null){
