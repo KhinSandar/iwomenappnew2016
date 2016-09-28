@@ -880,4 +880,6 @@ Make many new friends, contact your local May Doe Kabar/TLG group. See number be
     <string name="post_detail_share_fb_btn_action">Share fb Action</string>
     <string name="post_detail_share_fb_btn_lbl">Share fb Label</string>
 
+    <string name="game_save">Save Successfully</string>
+
 </resources>

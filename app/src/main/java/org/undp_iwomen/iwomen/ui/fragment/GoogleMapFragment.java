@@ -432,9 +432,15 @@ public class GoogleMapFragment extends Fragment {//
 
             @Override
             public void success(Rating arg0, Response response) {
-                menu.findItem(R.id.action_rating).setVisible(true);
-                menu.findItem(R.id.action_rating).setIcon(BaseActionBarActivity.getRatingIcon(arg0.getTotalRatings()));
-                avgRatings = arg0;
+                try{
+                    menu.findItem(R.id.action_rating).setVisible(true);
+                    menu.findItem(R.id.action_rating).setIcon(BaseActionBarActivity.getRatingIcon(arg0.getTotalRatings()));
+                    avgRatings = arg0;
+                }catch (NullPointerException ex){
+                    /*Attempt to invoke interface method 'android.view.MenuItem android.view.MenuItem.setVisible(boolean)' on a null object reference
+                    at org.undp_iwomen.iwomen.ui.fragment.GoogleMapFragment$3.success(GoogleMapFragment.java:435)*/
+                }
+
             }
 
             @Override

@@ -810,7 +810,7 @@ female-pilots-iaa1s
     <string name="str_back">ေနာက္သို႕</string>
     <string name="str_finished">ရၿပီး</string>
     <string name="str_next">ေရွ႕သို႕</string>
-    <string name="str_already_submited">You are already submited answers.</string>
+    <string name="str_already_submited">သင္ ့အေၿဖေပးပိုုၿပီး ေရာက္ရွီ ၿပီး ၿဖစ္ပါသည္။</string>
     <string name="code_share_sucess">ကုုတ္ ထည့္ၿခင္း အာင္ၿမင္ပါသည္။</string>
 
     <string name="code_share_error">သင္ ကုတ္တစ္ခါ ၿဖည့္ ၿပီးသြားပီ ၿဖစ္ပါသည္။ (သိုု ့) အေကာင္ ့အေဟာင္းၿဖင့္ ကုုတ္ၿဖည့္ၿခင္း
@@ -882,5 +882,8 @@ female-pilots-iaa1s
 
     <string name="post_detail_share_fb_btn_action">Share fb Action</string>
     <string name="post_detail_share_fb_btn_lbl">Post Detail Share fb Label</string>
+
+    <string name="game_save">အေၿဖ ကိုု သိမ္း လိုုက္ပါပီ။</string>
+
 
 </resources>

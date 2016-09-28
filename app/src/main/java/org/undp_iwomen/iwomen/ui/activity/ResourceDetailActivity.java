@@ -320,7 +320,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
 
                             @Override
                             public void failure(RetrofitError error) {
-
+                                Log.e("ResourceLike Fail>>",error.toString());
                             }
                         });
                     }

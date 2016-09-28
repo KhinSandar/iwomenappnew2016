@@ -506,6 +506,8 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
                         SMKserverAPI.getInstance().getService().postIWomenPostLike(postId, user_id, new Callback<LikeItem>() {
                             @Override
                             public void success(LikeItem item, Response response) {
+                                Log.e("PostDetailLike>>",item.toString());
+
                                 mLikeAnimatedButton.setEnabled(false);
                                 mLikeAnimatedButton.setText(String.valueOf(iWomenPost.getLikes() + 1));
                                 mLikeAnimatedButton.setOnClickListener(PostDetailActivity.this);
@@ -519,6 +521,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
 
                             @Override
                             public void failure(RetrofitError error) {
+                                Log.e("PostDetailLike Fail>>",error.toString());
 
                             }
                         });
@@ -953,28 +956,10 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
             txt_lbl_share_post.setText(item.getShareCount() + R.string.post_detail_share_post_mm);
             */
 
-            if (item.getCreditName() != null && !item.getCreditName().isEmpty()) {
-                txt_credit_link.setText("Credit to " + item.getCreditName());
+            if (item.getCreditNameMm() != null && !item.getCreditNameMm().isEmpty()) {
 
                 txt_credit_link.setVisibility(View.VISIBLE);
-                /*Pattern pattern = Pattern.compile("[a-zA-Z]+");
-                Linkify.addLinks(txt_credit_link,pattern, item.getCredit_link_eng());*/
-
-
-                /*txt_credit_link.setText(
-                        Html.fromHtml(
-                                "<a href=" + item.getCredit_link_mm() + ">" + "Credit to " + item.getCredit_name()+" < / a > "));
-                txt_credit_link.setMovementMethod(LinkMovementMethod.getInstance());
-                stripUnderlines(txt_credit_link);*/
-                /*String value = "<html> Credit to " + item.getCredit_name() + "<font color=#9e9e9e><b><a href=\""+ item.getCredit_link_mm() +"\"></a></b></font> </html>";
-                Spannable spannedText = (Spannable)
-                        Html.fromHtml(value);
-                txt_credit_link.setMovementMethod(LinkMovementMethod.getInstance());
-
-                Spannable processedText = removeUnderlines(spannedText);
-                txt_credit_link.setText(processedText);*/
-
-                txt_credit_link.setText("Credit to " + item.getCreditName());
+                txt_credit_link.setText("Credit to " + item.getCreditNameMm());
                 if (item.getCreditLinkMm() != null && !item.getCreditLinkMm().isEmpty()) {
                     txt_credit_link.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -992,13 +977,8 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
             } else {
                 txt_credit_link.setVisibility(View.GONE);
             }
-            /*et_comment.setTypeface(MyTypeFace.get(this, MyTypeFace.ZAWGYI));
-            mPostTile.setTypeface(MyTypeFace.get(this, MyTypeFace.ZAWGYI));
-            post_content.setTypeface(MyTypeFace.get(this, MyTypeFace.ZAWGYI));
-            post_suggest_text.setTypeface(MyTypeFace.get(this, MyTypeFace.ZAWGYI));*/
 
         }
-
 
         //TODO check Like Local Value
         /*if (like_status.equalsIgnoreCase("0")) {

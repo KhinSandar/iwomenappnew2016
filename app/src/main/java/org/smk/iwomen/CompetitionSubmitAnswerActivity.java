@@ -769,7 +769,7 @@ public class CompetitionSubmitAnswerActivity extends BaseActionBarActivity imple
 			// TODO Auto-generated method stub
 			if(arg0 == btn_save && btn_save.isEnabled()){
 				saveData();
-				SKToastMessage.showMessage(CompetitionSubmitAnswerActivity.this, "Successfully saved", SKToastMessage.SUCCESS);
+				SKToastMessage.showMessage(CompetitionSubmitAnswerActivity.this,getResources().getString(R.string.game_save), SKToastMessage.SUCCESS);// "Successfully saved"
 
 			}
 			
