@@ -282,7 +282,9 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
             iWomen_json = mSharedPreferencesUserInfo.getString(CommonConfig.IWOMEN_ID, null);
             StorageiWomenPostObj = gson.fromJson(iWomen_json, IWomenPost.class);
 
-            SetWeeklySpecialContentItem(StorageiWomenPostObj);
+            if(StorageiWomenPostObj != null) {
+                SetWeeklySpecialContentItem(StorageiWomenPostObj);
+            }
 
 
         }

@@ -1,5 +1,7 @@
 package org.undp_iwomen.iwomen.ui.activity;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
@@ -37,11 +40,13 @@ import org.smk.iwomen.BaseActionBarActivity;
 import org.smk.iwomen.CompetitionNewGameActivity;
 import org.smk.iwomen.CompetitionWinnerGroupActivity;
 import org.smk.iwomen.ResponseError;
+import org.smk.model.APKVersion;
 import org.smk.model.CompetitionQuestion;
 import org.smk.model.Review;
 import org.smk.model.User;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
+import org.undp_iwomen.iwomen.model.DownloadFileFromURL;
 import org.undp_iwomen.iwomen.model.retrofit_api.SMKserverAPI;
 import org.undp_iwomen.iwomen.model.retrofit_api.SMKserverStringConverterAPI;
 import org.undp_iwomen.iwomen.ui.adapter.DrawerListViewAdapter;
@@ -109,6 +114,9 @@ public class DrawerMainActivity extends BaseActionBarActivity {
     private AnimateCustomTextView btn_play_game;
     private LinearLayout layout_play_game;
     private ImageView img_play_game;
+    public int mversionCode = 0;
+    public String mversionName ;
+
 
     @Override
     protected void onStart() {
@@ -420,7 +428,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
             DrawerListName = new String[]
                     //{getResources().getString(R.string.menu1), "Be Knowledgeable", "Be Together", "Talk Together", "Settings", "AboutUs", "Sister Apps"};
                     {getResources().getString(R.string.menu1), getResources().getString(R.string.menu2), getResources().getString(R.string.menu3), getResources().getString(R.string.menu4)
-                            , getResources().getString(R.string.menu5), getResources().getString(R.string.menu6), getResources().getString(R.string.menu7), getResources().getString(R.string.menu8)};
+                            , getResources().getString(R.string.menu5), getResources().getString(R.string.menu6), getResources().getString(R.string.menu7), getResources().getString(R.string.menu8),getResources().getString(R.string.menu9)};
             DrawerListIcon = new int[]
                     {R.drawable.ic_stories,
                             R.drawable.ic_resources,
@@ -429,6 +437,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                             R.drawable.sister_app,//Win prize
                             R.mipmap.sister_app_new,
                             R.drawable.about_us,
+                            R.drawable.ic_setting,
                             R.drawable.ic_setting,
                     };
 
@@ -443,7 +452,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
             DrawerListName = new String[]
                     // {"စိတ္ဓာတ္ခ\u103Cန္အား\u107Fဖည္ ့ရန္", "ဗဟုုသုုတရရန္", "ေပ\u102Bင္းစည္းေဆာင္ရ\u103Cက္ရန္", "ေမး\u107Fမန္းေဆ\u103Cးေ\u108F\u103Cးရန္", "\u107Fပင္ဆင္ရန္", "က\u103C\u103A\u108Fုုပ္တိုု ့အေ\u107Eကာင္း", " Sister Apps"};
                     {getResources().getString(R.string.menu1_mm), getResources().getString(R.string.menu2_mm), getResources().getString(R.string.menu3_mm), getResources().getString(R.string.menu4_mm)
-                            , getResources().getString(R.string.menu5_mm), getResources().getString(R.string.menu6_mm), getResources().getString(R.string.menu7_mm), getResources().getString(R.string.menu8_mm)};
+                            , getResources().getString(R.string.menu5_mm), getResources().getString(R.string.menu6_mm), getResources().getString(R.string.menu7_mm), getResources().getString(R.string.menu8_mm),getResources().getString(R.string.menu9_mm)};
 
             DrawerListIcon = new int[]
                     {R.drawable.ic_stories,
@@ -453,6 +462,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                             R.drawable.sister_app,
                             R.mipmap.sister_app_new,
                             R.drawable.about_us,
+                            R.drawable.ic_setting,
                             R.drawable.ic_setting,
                     };
 
@@ -467,7 +477,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
             DrawerListName = new String[]
                     //{"စိတ္ဓာတ္ခ\u103Cန္အား\u107Fဖည္ ့ရန္", "ဗဟုုသုုတရရန္", "ေပ\u102Bင္းစည္းေဆာင္ရ\u103Cက္ရန္", "ေမး\u107Fမန္းေဆ\u103Cးေ\u108F\u103Cးရန္", "\u107Fပင္ဆင္ရန္", "က\u103C\u103A\u108Fုုပ္တိုု ့အေ\u107Eကာင္း", " Sister Apps"};
                     {getResources().getString(R.string.menu1_mm), getResources().getString(R.string.menu2_mm), getResources().getString(R.string.menu3_mm), getResources().getString(R.string.menu4_mm)
-                            , getResources().getString(R.string.menu5_mm), getResources().getString(R.string.menu6_mm), getResources().getString(R.string.menu7_mm), getResources().getString(R.string.menu8_mm)};
+                            , getResources().getString(R.string.menu5_mm), getResources().getString(R.string.menu6_mm), getResources().getString(R.string.menu7_mm), getResources().getString(R.string.menu8_mm),getResources().getString(R.string.menu9_mm)};
 
             DrawerListIcon = new int[]
                     {R.drawable.ic_stories,
@@ -491,7 +501,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
             DrawerListName = new String[]
                     //{"စိတ္ဓာတ္ခ\u103Cန္အား\u107Fဖည္ ့ရန္", "ဗဟုုသုုတရရန္", "ေပ\u102Bင္းစည္းေဆာင္ရ\u103Cက္ရန္", "ေမး\u107Fမန္းေဆ\u103Cးေ\u108F\u103Cးရန္", "\u107Fပင္ဆင္ရန္", "က\u103C\u103A\u108Fုုပ္တိုု ့အေ\u107Eကာင္း", " Sister Apps"};
                     {getResources().getString(R.string.menu1_mm), getResources().getString(R.string.menu2_mm), getResources().getString(R.string.menu3_mm), getResources().getString(R.string.menu4_mm)
-                            , getResources().getString(R.string.menu5_mm), getResources().getString(R.string.menu6_mm), getResources().getString(R.string.menu7_mm), getResources().getString(R.string.menu8_mm)};
+                            , getResources().getString(R.string.menu5_mm), getResources().getString(R.string.menu6_mm), getResources().getString(R.string.menu7_mm), getResources().getString(R.string.menu8_mm),getResources().getString(R.string.menu9_mm)};
 
             DrawerListIcon = new int[]
                     {R.drawable.ic_stories,
@@ -502,6 +512,8 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                             R.mipmap.sister_app_new,
                             R.drawable.about_us,
                             R.drawable.ic_setting,
+                            R.drawable.ic_setting,
+
                     };
 
             // R.drawable.ic_community, R.drawable.ic_news
@@ -517,7 +529,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
             DrawerListName = new String[]
                     //{"စိတ္ဓာတ္ခ\u103Cန္အား\u107Fဖည္ ့ရန္", "ဗဟုုသုုတရရန္", "ေပ\u102Bင္းစည္းေဆာင္ရ\u103Cက္ရန္", "ေမး\u107Fမန္းေဆ\u103Cးေ\u108F\u103Cးရန္", "\u107Fပင္ဆင္ရန္", "က\u103C\u103A\u108Fုုပ္တိုု ့အေ\u107Eကာင္း", " Sister Apps"};
                     {getResources().getString(R.string.menu1_mm), getResources().getString(R.string.menu2_mm), getResources().getString(R.string.menu3_mm), getResources().getString(R.string.menu4_mm)
-                            , getResources().getString(R.string.menu5_mm), getResources().getString(R.string.menu6_mm), getResources().getString(R.string.menu7_mm), getResources().getString(R.string.menu8_mm)};
+                            , getResources().getString(R.string.menu5_mm), getResources().getString(R.string.menu6_mm), getResources().getString(R.string.menu7_mm), getResources().getString(R.string.menu8_mm), getResources().getString(R.string.menu9_mm)};
 
             DrawerListIcon = new int[]
                     {R.drawable.ic_stories,
@@ -527,6 +539,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                             R.drawable.sister_app,
                             R.mipmap.sister_app_new,
                             R.drawable.about_us,
+                            R.drawable.ic_setting,
                             R.drawable.ic_setting,
                     };
 
@@ -671,6 +684,26 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                 startActivity(intent);
                 //fragmentManager.beginTransaction().replace(R.id.content_frame, settingsFragment).commit();
                 setTitle(getResources().getString(R.string.menu8));
+
+                break;//Sister apps
+
+            case 8:
+
+                // TODO it is for non application market.
+                try {
+                    mversionCode = getPackageManager().getPackageInfo(getPackageName(), 0).versionCode;
+                    mversionName = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+                }catch (PackageManager.NameNotFoundException e){
+
+                }
+
+
+                checkAPKVersion();
+
+                //new DownloadFileFromURL(DrawerMainActivity.this).execute(CommonConfig.GET_APK_DOWNLOAD_URL);
+
+
+
 
                 break;//Sister apps
         }
@@ -948,5 +981,91 @@ public class DrawerMainActivity extends BaseActionBarActivity {
         } else {
             finish();
         }
+    }
+
+    private void checkAPKVersion() {
+        if (Connection.isOnline(getApplicationContext())) {
+            NetworkEngine.getInstance().getAPKVersion("", new Callback<APKVersion>() {
+                @Override
+                public void success(final APKVersion arg0, Response arg1) {
+                    // TODO Auto-generated method stub
+                    try {
+                        if (arg0 != null) {
+                            if (arg0.getVersionId() > mversionCode) {
+                                showVersionDialog(DrawerMainActivity.this ,true );
+
+                            }else{
+                                showVersionDialog(DrawerMainActivity.this ,false );
+                            }
+                        }
+                    } catch (NullPointerException ex) {
+                        //ex.printStackTrace();
+                    }
+                }
+                @Override
+                public void failure(RetrofitError arg0) {
+                    // TODO Auto-generated method stub
+
+                }
+            });
+        }else {
+
+            if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+                org.undp_iwomen.iwomen.utils.Utils.doToastEng(getApplicationContext(), getResources().getString(R.string.no_connection));
+            } else {
+
+                org.undp_iwomen.iwomen.utils.Utils.doToastMM(getApplicationContext(), getResources().getString(R.string.no_connection_mm));
+            }
+        }
+
+    }
+    public static void showVersionDialog(final Activity activity , Boolean isAvalibale) {
+
+
+        final Dialog alertDialog = new Dialog(activity);
+        View convertView = View.inflate(activity, R.layout.custom_update_version_dialog, null);
+
+        CustomTextView mtext = (CustomTextView) convertView.findViewById(R.id.dialog_version_content);
+        Button btn_ok = (Button) convertView.findViewById(R.id.version_dialog_btn_ok);
+        Button btn_no = (Button) convertView.findViewById(R.id.version_dialog_btn_no);
+        alertDialog.setContentView(convertView);
+        alertDialog.show();
+
+        if(isAvalibale){
+            mtext.setText(activity.getResources().getString(R.string.version_new_yes));
+            btn_no.setVisibility(View.VISIBLE);
+            btn_ok.setVisibility(View.VISIBLE);
+
+
+        }else{
+            mtext.setText(activity.getResources().getString(R.string.version_new_no));
+            btn_ok.setVisibility(View.INVISIBLE);
+
+            btn_no.setVisibility(View.VISIBLE);
+            btn_no.setText(activity.getResources().getString(R.string.ok));
+            //btn_no.setVisibility(View.INVISIBLE);
+
+        }
+
+        btn_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                alertDialog.dismiss();
+                new DownloadFileFromURL(activity).execute(CommonConfig.GET_APK_DOWNLOAD_URL);
+
+
+
+            }
+        });
+        btn_no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //finish();
+                alertDialog.dismiss();
+
+            }
+        });
     }
 }

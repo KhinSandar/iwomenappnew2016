@@ -103,7 +103,6 @@ public class SubResourceListViewAdapter extends BaseAdapter
         if (mstr_lang.equals(Utils.ENG_LANG)) {
             holder.txtName.setText(SubResourceItems.get(position).getSubResourceTitleEng());
 
-            //holder.txtBodyText.setText(ResourceItems.get(position).getResourceText());
 
             holder.txtName.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
         }else if (mstr_lang.equals(Utils.MM_LANG)) {

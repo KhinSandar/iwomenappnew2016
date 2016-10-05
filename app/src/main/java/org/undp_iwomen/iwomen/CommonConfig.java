@@ -159,6 +159,8 @@ public class CommonConfig {
 
     public static final String GET_WEEKLY_CONTENT_RESOURCE ="/api/v1/resourcesWeekContents";
 
+    public static final String GET_APK_DOWNLOAD_URL ="http://api.iwomenapp.org/apk/iwomen.apk";
+
 
 
 }

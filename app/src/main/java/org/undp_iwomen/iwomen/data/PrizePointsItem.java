@@ -19,6 +19,9 @@ public class PrizePointsItem implements Serializable {
     @SerializedName("price")
     @Expose
     private String price;
+    @SerializedName("price_mm")
+    @Expose
+    private String priceMm;
     @SerializedName("created_at")
     @Expose
     private String createdAt;
@@ -81,6 +84,23 @@ public class PrizePointsItem implements Serializable {
      */
     public void setPrice(String price) {
         this.price = price;
+    }
+    /**
+     *
+     * @return
+     * The priceMm
+     */
+    public String getPriceMm() {
+        return priceMm;
+    }
+
+    /**
+     *
+     * @param priceMm
+     * The price_mm
+     */
+    public void setPriceMm(String priceMm) {
+        this.priceMm = priceMm;
     }
 
     /**

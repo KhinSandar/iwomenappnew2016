@@ -291,10 +291,10 @@ public class RegisterTermsFragment8 extends Fragment implements View.OnClickList
         } else {
 
             if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
-                org.undp_iwomen.iwomen.utils.Utils.doToastEng(mContext, getResources().getString(R.string.open_internet_warning_eng));
+                org.undp_iwomen.iwomen.utils.Utils.doToastEng(mContext, getResources().getString(R.string.no_connection));
             } else {
 
-                org.undp_iwomen.iwomen.utils.Utils.doToastMM(mContext, getResources().getString(R.string.open_internet_warning_mm));
+                org.undp_iwomen.iwomen.utils.Utils.doToastMM(mContext, getResources().getString(R.string.no_connection_mm));
             }
         }
     }

@@ -274,8 +274,10 @@ public class ResourcesFragment extends Fragment {
             Gson gson = new Gson();
             Resourcce_json = mSharedPreferencesUserInfo.getString(CommonConfig.RESOURCE_ID, null);
             StorageResourcePostObj = gson.fromJson(Resourcce_json, com.smk.model.ResourceItem.class);
+            if (StorageResourcePostObj != null) {
+                SetWeeklySpecialResource(StorageResourcePostObj);
 
-            SetWeeklySpecialResource(StorageResourcePostObj);
+            }
 
 
         }
@@ -283,10 +285,17 @@ public class ResourcesFragment extends Fragment {
 
     private void SetWeeklySpecialResource(com.smk.model.ResourceItem item) {
         if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
-            sp_txtName.setText(item.getResourceTitleEng());
+            //When there is no internet , first time they didn't fetch data , it can be null
+            if (item.getResourceTitleEng() != null ) {
+                sp_txtName.setText(item.getResourceTitleEng());
+            }
             sp_title_txt.setText(getResources().getString(R.string.weekly_special_be_inspired));
+
         } else {//FOR ALL MM FONT
-            sp_txtName.setText(item.getResourceTitleMm());
+            if (item.getResourceTitleEng() != null ) {
+                sp_txtName.setText(item.getResourceTitleMm());
+
+            }
             sp_title_txt.setText(getResources().getString(R.string.weekly_special_be_inspired_mm));
 
 

@@ -34,7 +34,6 @@
             android:background="@drawable/list_selector"
 
             android:paddingRight="16dp"
-            android:singleLine="false"
             android:text="@string/points_prize"
             android:textColor="@drawable/list_text_selector"
             android:textSize="18sp" />

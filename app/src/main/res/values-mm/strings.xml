@@ -790,7 +790,7 @@ female-pilots-iaa1s
     <string name="menu6">Sister Apps</string>
     <string name="menu7">ကြ်ႏု္ပ္တို.အေႀကာင္း</string>
     <string name="menu8">ျပင္ဆင္ရန္</string>
-
+    <string name="menu9">ဗားရွင္းစစ္ရန္</string>
 
 
     <string name="menu_sing_out">ထြက္ရန္</string>
@@ -805,6 +805,8 @@ female-pilots-iaa1s
     <string name="menu7_mm">ကြ်ႏု္ပ္တို.အေႀကာင္း</string>
     <string name="menu8_mm">ျပင္ဆင္ရန္</string>
     <string name="menu_sing_out_mm">ထြက္ရန္</string>
+    <string name="menu9_mm">ဗားရွင္းစစ္ရန္</string>
+
 
     <string name="str_skip">ေက်ာ္မည္</string>
     <string name="str_back">ေနာက္သို႕</string>
@@ -884,6 +886,10 @@ female-pilots-iaa1s
     <string name="post_detail_share_fb_btn_lbl">Post Detail Share fb Label</string>
 
     <string name="game_save">အေၿဖ ကိုု သိမ္း လိုုက္ပါပီ။</string>
+    <string name="version_yes">ၿပဳလုပ္မည္။</string>
+    <string name="version_no">မၿပဳလုပ္ပါ။</string>
+
+    <string name="version_download">ဗားရွင္းအသစ္ေဒါင္းလုပ္ ဆြဲေနပါသည္။ ခဏေစာင့္ပါ..</string>
 
 
 </resources>

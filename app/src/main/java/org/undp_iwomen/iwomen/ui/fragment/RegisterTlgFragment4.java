@@ -146,10 +146,10 @@ public class RegisterTlgFragment4 extends Fragment implements View.OnClickListen
             mProgressDialog.dismiss();
 
             if (lang.equals(Utils.ENG_LANG)) {
-                Utils.doToastEng(mContext, getResources().getString(R.string.open_internet_warning_eng));
+                Utils.doToastEng(mContext, getResources().getString(R.string.no_connection));
             } else if (lang.equals(Utils.MM_LANG)) {
 
-                Utils.doToastMM(mContext, getResources().getString(R.string.open_internet_warning_mm));
+                Utils.doToastMM(mContext, getResources().getString(R.string.no_connection_mm));
             } else {
 
 
