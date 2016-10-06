@@ -49,6 +49,7 @@
                 android:layout_gravity="bottom"
                 android:layout_marginLeft="16dp"
                 android:gravity="left"
+                android:visibility="gone"
                 android:text="@string/version_new_yes"
                 android:textColor="@color/red_500"
                 android:textSize="18sp"

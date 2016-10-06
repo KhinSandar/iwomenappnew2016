@@ -830,8 +830,8 @@ Shirin Ebadi, J.D., was awarded the 2003 Nobel Peace Prize for her efforts to pr
     <string name="login_dialog_eng">English | အဂၤလိပ္ေဖာင့္ </string>
     <string name="login_dialog_mm_deafult">ၿမန္မာစာ ပံုေသ | Myanmar Default</string>
 
-    <string name="version_new_yes">New Version Out</string>
-    <string name="version_new_no">New Version Not Available</string>
+    <string name="version_new_yes">Install the updated version.</string>
+    <string name="version_new_no">Your version is already up to date.</string>
 
     <string name="register_name_duplicate_err">This username already exists. Please choose another username.</string>
 
@@ -890,5 +890,6 @@ Make many new friends, contact your local May Doe Kabar/TLG group. See number be
     <string name="version_no">No</string>
 
     <string name="version_download">Downloading file. Please wait…</string>
+    <string name="version_download_title">iWomen App</string>
 
 </resources>

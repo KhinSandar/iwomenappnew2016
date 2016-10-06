@@ -176,7 +176,7 @@ public class AboutUsWebActivity extends BaseActionBarActivity {
 
         }
         txt_new_version.setVisibility(View.GONE);
-        checkAPKVersion();
+        //checkAPKVersion();
         /*TextView text = new TextView(mContext);
         text.setText(String.valueOf(versionCode));
         text.setLayoutParams(new LinearLayoutCompat.LayoutParams(LinearLayoutCompat.LayoutParams.FILL_PARENT, LinearLayoutCompat.LayoutParams.WRAP_CONTENT));

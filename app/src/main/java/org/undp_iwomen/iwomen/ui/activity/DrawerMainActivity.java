@@ -438,7 +438,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                             R.mipmap.sister_app_new,
                             R.drawable.about_us,
                             R.drawable.ic_setting,
-                            R.drawable.ic_setting,
+                            R.mipmap.ic_menu_update,
                     };
 
             drawer_adapter = new DrawerListViewAdapter(getApplicationContext(), DrawerListName, DrawerListIcon, mstr_lang);//mCategoriesTitles
@@ -463,7 +463,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                             R.mipmap.sister_app_new,
                             R.drawable.about_us,
                             R.drawable.ic_setting,
-                            R.drawable.ic_setting,
+                            R.mipmap.ic_menu_update,
                     };
 
             drawer_adapter = new DrawerListViewAdapter(getApplicationContext(), DrawerListName, DrawerListIcon, mstr_lang);//mCategoriesTitles
@@ -487,7 +487,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                             R.drawable.sister_app,
                             R.mipmap.sister_app_new,
                             R.drawable.about_us,
-                            R.drawable.ic_setting,
+                            R.mipmap.ic_menu_update,
                     };
 
             drawer_adapter = new DrawerListViewAdapter(getApplicationContext(), DrawerListName, DrawerListIcon, mstr_lang);//mCategoriesTitles
@@ -512,7 +512,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                             R.mipmap.sister_app_new,
                             R.drawable.about_us,
                             R.drawable.ic_setting,
-                            R.drawable.ic_setting,
+                            R.mipmap.ic_menu_update,
 
                     };
 
@@ -540,7 +540,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                             R.mipmap.sister_app_new,
                             R.drawable.about_us,
                             R.drawable.ic_setting,
-                            R.drawable.ic_setting,
+                            R.mipmap.ic_menu_update,
                     };
 
             drawer_adapter = new DrawerListViewAdapter(getApplicationContext(), DrawerListName, DrawerListIcon, mstr_lang);//mCategoriesTitles
