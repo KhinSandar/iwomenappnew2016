@@ -161,7 +161,8 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
         // Google Analytics
         MainApplication application = (MainApplication) getApplication();
         Tracker mTracker = application.getDefaultTracker();
-        mTracker.setScreenName("Resource Detail ~ "+ mstrTitleEng);
+        //Update Tracking name in Oct 25 after version 1.7 release
+        mTracker.setScreenName("Resource Detail ~ "+  mstrTitleEng + ">" +mstrSubResourceTitleEng);
         mTracker.send(new HitBuilders.ScreenViewBuilder().build());
 
         mSharedPreferencesUserInfo = getSharedPreferences(CommonConfig.SHARE_PREFERENCE_USER_INFO, Context.MODE_PRIVATE);

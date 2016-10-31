@@ -187,7 +187,6 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
         final Activity parentActivity = getActivity();
 
 
-
         getWeeklyIWomenPost();
 
         header.setOnClickListener(new View.OnClickListener() {
@@ -258,7 +257,11 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
                 @Override
                 public void success(IWomenPost item, Response response) {
 
+
+
+
                     SetWeeklySpecialContentItem(item);
+
                     mEditorUserInfo = mSharedPreferencesUserInfo.edit();
                     // convert User object user to JSON format
                     Gson gson = new Gson();
@@ -282,7 +285,7 @@ public class StoriesRecentFragment extends Fragment implements View.OnClickListe
             iWomen_json = mSharedPreferencesUserInfo.getString(CommonConfig.IWOMEN_ID, null);
             StorageiWomenPostObj = gson.fromJson(iWomen_json, IWomenPost.class);
 
-            if(StorageiWomenPostObj != null) {
+            if (StorageiWomenPostObj != null) {
                 SetWeeklySpecialContentItem(StorageiWomenPostObj);
             }
 
