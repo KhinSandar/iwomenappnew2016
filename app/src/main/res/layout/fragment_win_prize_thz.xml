@@ -71,7 +71,7 @@
         <LinearLayout
             android:id="@+id/ly_blank"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_below="@+id/ly_cong"
             android:layout_marginTop="20dp"
             android:orientation="vertical">
@@ -110,7 +110,7 @@
             <ListView
                 android:id="@+id/win_prize_lv"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:background="@color/list_background"
                 android:layout_gravity="center"
                 android:choiceMode="singleChoice"
@@ -126,7 +126,7 @@
             android:layout_below="@+id/ly_blank"
             android:orientation="vertical"
             android:layout_margin="20dp"
-            android:layout_marginTop="20dp">
+            >
 
             <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                 android:id="@+id/win_prize_thz_link"

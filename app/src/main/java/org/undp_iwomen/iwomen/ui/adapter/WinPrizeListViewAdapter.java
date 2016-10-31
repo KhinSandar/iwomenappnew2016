@@ -10,7 +10,9 @@ import android.widget.BaseAdapter;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.data.PrizePointsItem;
+import org.undp_iwomen.iwomen.model.MyTypeFace;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
+import org.undp_iwomen.iwomen.utils.Utils;
 
 import java.util.List;
 
@@ -93,19 +95,26 @@ public class WinPrizeListViewAdapter extends BaseAdapter {
        if (datalist.get(i).getPoint() != null ) {
             vh.txtPoint.setText(datalist.get(i).getPoint().toString()+ " Points");
         }
-        if (datalist.get(i).getPrice() != null && !datalist.get(i).getPrice().isEmpty()) {
-            vh.txtPrize.setText(datalist.get(i).getPrice().toString()) ;
+
+        if (mstr_lang.equals(Utils.ENG_LANG)) {
+            if (datalist.get(i).getPrice() != null && !datalist.get(i).getPrice().isEmpty()) {
+                vh.txtPrize.setText(datalist.get(i).getPrice().toString()) ;
+                vh.txtPrize.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
+            }
+
+        }else if (mstr_lang.equals(Utils.MM_LANG)) {
+            if (datalist.get(i).getPrice() != null && !datalist.get(i).getPrice().isEmpty()) {
+                vh.txtPrize.setText(datalist.get(i).getPriceMm().toString()) ;
+                vh.txtPrize.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
+            }
+
         }
+        else{//FOR Default and Custom
+            if (datalist.get(i).getPrice() != null && !datalist.get(i).getPrice().isEmpty()) {
+                vh.txtPrize.setText(datalist.get(i).getPriceMm().toString()) ;
+            }
 
-
-        /*if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
-            vh.txtPrize.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
-
-        } else if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.MM_LANG)) {
-            vh.txtPrize.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
-
-        }*/
-        //holder.imgIcon.setImageResource(listicon[position]);
+        }
 
 
         return view;

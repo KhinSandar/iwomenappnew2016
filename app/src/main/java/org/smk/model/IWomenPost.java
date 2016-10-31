@@ -43,6 +43,9 @@ public class IWomenPost implements Serializable {
     @SerializedName("credit_name")
     @Expose
     private String creditName;
+    @SerializedName("credit_name_mm")
+    @Expose
+    private String creditNameMm;
     @SerializedName("image")
     @Expose
     private String image;
@@ -268,6 +271,23 @@ public class IWomenPost implements Serializable {
      */
     public void setCreditName(String creditName) {
         this.creditName = creditName;
+    }
+    /**
+     *
+     * @return
+     * The creditNameMm
+     */
+    public String getCreditNameMm() {
+        return creditNameMm;
+    }
+
+    /**
+     *
+     * @param creditNameMm
+     * The credit_name_mm
+     */
+    public void setCreditNameMm(String creditNameMm) {
+        this.creditNameMm = creditNameMm;
     }
 
     /**

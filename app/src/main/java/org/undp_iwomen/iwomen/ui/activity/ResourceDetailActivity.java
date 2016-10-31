@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,6 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.algo.hha.emojiicon.EmojiconEditText;
 import com.facebook.share.model.ShareLinkContent;
@@ -91,7 +94,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
     private String user_name, user_obj_id, user_ph, user_id,userprofile_Image_path;
     private SharedPreferences mSharedPreferencesUserInfo;
     private TextView txt_social_no_ear_like_counts;
-    private ImageView img_viber_share;
+    private ImageView img_viber_share,img__social_audio;
 
     private Cursor cursorMain;
     public ImageView emojiIconToggle;
@@ -276,6 +279,8 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
         mSocialNoEarLikeAnimatedButton = (AnimatedButton) findViewById(R.id.social_no_ear_like_animated_button);
         mSocialNoEarLikeAnimatedButton.setEnabled(true);
 
+        img__social_audio = (ImageView) findViewById(R.id.social_no_ear_earphone_img);
+        img__social_audio.setEnabled(true);
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             subResouceItemObj = new Gson().fromJson(bundle.getString("postObj"), SubResourceItem.class);
@@ -320,12 +325,21 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
 
                             @Override
                             public void failure(RetrofitError error) {
-
+                                Log.e("ResourceLike Fail>>",error.toString());
                             }
                         });
                     }
 
                 }
+        });
+        img__social_audio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(),"Click on BeKnowledgable Audio",Toast.LENGTH_LONG).show();
+
+
+            }
+
         });
 
        /* listView_Comment = (ListView) findViewById(R.id.postdetail_comment_listview);

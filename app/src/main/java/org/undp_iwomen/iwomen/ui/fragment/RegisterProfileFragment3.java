@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 
 import org.undp_iwomen.iwomen.CommonConfig;
@@ -34,6 +35,7 @@ public class RegisterProfileFragment3 extends Fragment implements  View.OnClickL
     private Button btn_next;
     private RadioGroup radioGroupMM, radioGroupTlg;
     private CustomRadioButton rd_mm_yes, rd_mm_no, rd_tlg_yes, rd_tlg_no , rd_worth_yes, rd_worth_no;
+    private LinearLayout ly_pact;
 
     public static RegisterProfileFragment3 newInstance(Sample sample) {
 
@@ -84,8 +86,19 @@ public class RegisterProfileFragment3 extends Fragment implements  View.OnClickL
         rd_tlg_no = (CustomRadioButton) view.findViewById(R.id.register_pro_tlg_no);
         rd_worth_yes = (CustomRadioButton)view.findViewById(R.id.register_pro_worth_yes) ;
         rd_worth_no = (CustomRadioButton)view.findViewById(R.id.register_pro_worth_no) ;
+        ly_pact = (LinearLayout) view.findViewById(R.id.pact_layout);
 
         setEnglishFont();
+
+
+
+        rd_mm_yes.setOnClickListener(this);
+        rd_mm_no.setOnClickListener(this);
+        rd_tlg_yes.setOnClickListener(this);
+        rd_tlg_no.setOnClickListener(this);
+        ly_pact.setVisibility(View.INVISIBLE);
+
+
 
         return view;
     }
@@ -198,6 +211,27 @@ public class RegisterProfileFragment3 extends Fragment implements  View.OnClickL
             case R.id.Next:
                 addNextFragment(btn_next, false);
                 break;
+            case R.id.register_pro_tlg_yes:
+                if(rd_tlg_yes.isChecked()){
+                    ly_pact.setVisibility(View.INVISIBLE);
+
+                    rd_worth_no.isChecked();//For again press when appear view
+
+                }else{
+                    ly_pact.setVisibility(View.VISIBLE);
+                }
+                break;
+            case R.id.register_pro_tlg_no:
+                if(rd_tlg_yes.isChecked()){
+                    ly_pact.setVisibility(View.INVISIBLE);
+
+                    rd_worth_no.isChecked();//For again press when appear view
+
+                }else{
+                    ly_pact.setVisibility(View.VISIBLE);
+                }
+                break;
+
         }
 
     }

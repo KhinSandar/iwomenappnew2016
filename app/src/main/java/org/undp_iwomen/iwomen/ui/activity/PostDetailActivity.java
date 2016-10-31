@@ -198,7 +198,6 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
     private ImageView img_credit_icon_img;
 
 
-
     private enum PendingAction {
         NONE,
         POST_PHOTO,
@@ -261,7 +260,6 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
 
     private StorageUtil storageUtil;
     private boolean mHasRequestedMore;
-
 
 
     //New UI
@@ -481,13 +479,16 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
         postObjId = iWomenPost.getObjectId();
         mstrAudioFilePath = iWomenPost.getAudioFile();
 
-        // Google Analytics
+
+
+        /***************************************
+         * Goolge Analytics Tracking
+         *****************************************/
         MainApplication application = (MainApplication) getApplication();
         Tracker mTracker = application.getDefaultTracker();
         mTracker.setScreenName("Post Detail ~ " + iWomenPost.getTitle());
         mTracker.send(new HitBuilders.ScreenViewBuilder().build());
 
-        //TODO for Comment
 
 
         mLikeAnimatedButton.setCallbackListener(new AnimatedButton.Callbacks() {
@@ -505,6 +506,8 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
                         SMKserverAPI.getInstance().getService().postIWomenPostLike(postId, user_id, new Callback<LikeItem>() {
                             @Override
                             public void success(LikeItem item, Response response) {
+                                Log.e("PostDetailLike>>",item.toString());
+
                                 mLikeAnimatedButton.setEnabled(false);
                                 mLikeAnimatedButton.setText(String.valueOf(iWomenPost.getLikes() + 1));
                                 mLikeAnimatedButton.setOnClickListener(PostDetailActivity.this);
@@ -518,6 +521,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
 
                             @Override
                             public void failure(RetrofitError error) {
+                                Log.e("PostDetailLike Fail>>",error.toString());
 
                             }
                         });
@@ -700,10 +704,6 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
 
         img_credit_logo.setAdjustViewBounds(true);
         img_credit_logo.setScaleType(ImageView.ScaleType.CENTER_CROP);
-
-
-
-
 
 
         authorID = item.getAuthorId();
@@ -956,28 +956,10 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
             txt_lbl_share_post.setText(item.getShareCount() + R.string.post_detail_share_post_mm);
             */
 
-            if (item.getCreditName() != null && !item.getCreditName().isEmpty()) {
-                txt_credit_link.setText("Credit to " + item.getCreditName());
+            if (item.getCreditNameMm() != null && !item.getCreditNameMm().isEmpty()) {
 
                 txt_credit_link.setVisibility(View.VISIBLE);
-                /*Pattern pattern = Pattern.compile("[a-zA-Z]+");
-                Linkify.addLinks(txt_credit_link,pattern, item.getCredit_link_eng());*/
-
-
-                /*txt_credit_link.setText(
-                        Html.fromHtml(
-                                "<a href=" + item.getCredit_link_mm() + ">" + "Credit to " + item.getCredit_name()+" < / a > "));
-                txt_credit_link.setMovementMethod(LinkMovementMethod.getInstance());
-                stripUnderlines(txt_credit_link);*/
-                /*String value = "<html> Credit to " + item.getCredit_name() + "<font color=#9e9e9e><b><a href=\""+ item.getCredit_link_mm() +"\"></a></b></font> </html>";
-                Spannable spannedText = (Spannable)
-                        Html.fromHtml(value);
-                txt_credit_link.setMovementMethod(LinkMovementMethod.getInstance());
-
-                Spannable processedText = removeUnderlines(spannedText);
-                txt_credit_link.setText(processedText);*/
-
-                txt_credit_link.setText("Credit to " + item.getCreditName());
+                txt_credit_link.setText("Credit to " + item.getCreditNameMm());
                 if (item.getCreditLinkMm() != null && !item.getCreditLinkMm().isEmpty()) {
                     txt_credit_link.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -995,13 +977,8 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
             } else {
                 txt_credit_link.setVisibility(View.GONE);
             }
-            /*et_comment.setTypeface(MyTypeFace.get(this, MyTypeFace.ZAWGYI));
-            mPostTile.setTypeface(MyTypeFace.get(this, MyTypeFace.ZAWGYI));
-            post_content.setTypeface(MyTypeFace.get(this, MyTypeFace.ZAWGYI));
-            post_suggest_text.setTypeface(MyTypeFace.get(this, MyTypeFace.ZAWGYI));*/
 
         }
-
 
         //TODO check Like Local Value
         /*if (like_status.equalsIgnoreCase("0")) {
@@ -1178,8 +1155,8 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
         } else {
             //SKConnectionDetector.getInstance(this).showErrorMessage();
             //List<Sticker> stickers = StoreUtil.getInstance().selectFrom("StickersList");
-            ArrayList<Sticker> stickers_storgae  = (ArrayList<Sticker>)storageUtil.ReadArrayListFromSD("StickersList");
-            Log.e("NoInternetStorgaeList","==>" + stickers_storgae.size());
+            ArrayList<Sticker> stickers_storgae = (ArrayList<Sticker>) storageUtil.ReadArrayListFromSD("StickersList");
+            Log.e("NoInternetStorgaeList", "==>" + stickers_storgae.size());
             if (stickers_storgae.size() > 0) {
                 mAdapter = new StickerGridViewAdapter(this, mContext, stickers_storgae);
                 gridView.setAdapter(mAdapter);
@@ -1363,7 +1340,6 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
                 et_comment.dispatchKeyEvent(event);
 
                 ly_sticker_holder.setVisibility(View.VISIBLE);
-
 
 
             }
@@ -2102,6 +2078,17 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
                     }
                 }
 
+                /***************************************
+                 * Goolge Analytics Tracking
+                 *****************************************/
+                //setupEvent(view, R.id.postdetail_like_animated_button, R.string.post_detail_like_btn_category,R.string.post_detail_like_btn_action,R.string.post_detail_like_btn_lbl);
+                Tracker t = ((MainApplication) getApplication()).getTracker(MainApplication.TrackerName.APP_TRACKER);
+                // Build and send an Event.
+                t.send(new HitBuilders.EventBuilder()
+                        .setCategory(getString(R.string.post_detail_like_btn_category)+iWomenPost.getTitle())
+                        .setAction(getString(R.string.post_detail_like_btn_action))
+                        .setLabel(getString(R.string.post_detail_like_btn_lbl) + iWomenPost.getTitle())
+                        .build());
                 break;
 
             case R.id.postdetail_player_text:
@@ -2162,6 +2149,19 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
                     _param.put("objectId", postId);
 
                     //TODO Google Analytics
+                    /***************************************
+                     * Goolge Analytics Tracking
+                     *****************************************/
+                    //setupEvent(view, R.id.postdetail_share_button, R.string.post_detail_like_btn_category,R.string.post_detail_share_btn_action,R.string.post_detail_share_btn_lbl);
+                    Tracker t1 = ((MainApplication) getApplication()).getTracker(MainApplication.TrackerName.APP_TRACKER);
+                    // Build and send an Event.
+                    t1.send(new HitBuilders.EventBuilder()
+                            .setCategory(getString(R.string.post_detail_like_btn_category) +iWomenPost.getTitle())
+                            .setAction(getString(R.string.post_detail_share_btn_action))
+                            .setLabel(getString(R.string.post_detail_share_btn_lbl) + iWomenPost.getTitle())
+                            .build());
+
+
 
                 }
 
@@ -2183,6 +2183,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
                     } else {
 
                         mProgressDialog.show();
+                        et_comment.setText(" "); //clear cmt after posting
                         // Utils.doToastEng(getApplicationContext(), "Comment");
                         //TODO Comment Post
 
@@ -2403,6 +2404,18 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
                 shareTextUrl();
                 break;
             case R.id.social_facebook:
+                /***************************************
+                 * Goolge Analytics Tracking
+                 *****************************************/
+                //setupEvent(view, R.id.social_facebook, R.string.post_detail_like_btn_category,R.string.post_detail_share_fb_btn_action,R.string.post_detail_share_btn_lbl);
+                Tracker t1 = ((MainApplication) getApplication()).getTracker(MainApplication.TrackerName.APP_TRACKER);
+                // Build and send an Event.
+                t1.send(new HitBuilders.EventBuilder()
+                        .setCategory(getString(R.string.post_detail_like_btn_category)+iWomenPost.getTitle())
+                        .setAction(getString(R.string.post_detail_share_fb_btn_action))
+                        .setLabel(getString(R.string.post_detail_share_btn_lbl) + iWomenPost.getTitle())
+                        .build());
+
                 shareButton.performClick();
                 break;
             case R.id.social_no_ear_share_txt:
@@ -3080,10 +3093,32 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
                 LoadStickerData();
                 /*AsyncControlClass asyncControlClass = new AsyncControlClass(getActivity());
                 asyncControlClass.execute();
-*/
+                */
             }
         }
     }
+
+    /***************************************
+     * Goolge Analytics Tracking
+     *****************************************/
+
+    /*private void setupEvent(View v, int buttonId, final int categoryId, final int actionId,
+                            final int labelId) {
+        final Button pageviewButton = (Button) v.findViewById(buttonId);
+        pageviewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Tracker t = ((MainApplication) getApplication()).getTracker(MainApplication.TrackerName.APP_TRACKER);
+                // Build and send an Event.
+                t.send(new HitBuilders.EventBuilder()
+                        .setCategory(getString(categoryId))
+                        .setAction(getString(actionId))
+                        .setLabel(getString(labelId) + iWomenPost.getTitle())
+                        .build());
+            }
+        });
+    }*/
 
 
 }

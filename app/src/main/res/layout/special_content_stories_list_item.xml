@@ -40,7 +40,7 @@
                     android:layout_height="@dimen/feed_item_post_pic_height"
                     android:background="@drawable/bg_sample"
                     android:scaleType="fitXY"
-                    android:src="@drawable/bg_sample"
+                    android:src="@drawable/place_holder"
                     android:visibility="visible" />
 
                 <ProgressBar
@@ -101,7 +101,7 @@
                     android:id="@+id/sp_content_txtPostTitle"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/title_activity_beinspired_new_post_eng"
+                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="@dimen/feed_item_profile_name"
                     android:textStyle="bold" />
@@ -114,7 +114,7 @@
                     android:maxEms="30"
                     android:maxLines="3"
                     android:paddingTop="@dimen/feed_item_padding_top_bottom"
-                    android:text="@string/app_name"
+
                     android:textColor="@color/secondary_text"
                     android:textSize="@dimen/feed_item_timestamp" />
 
@@ -195,7 +195,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="left"
-                            android:text="@string/tlg_group_name_eng"
                             android:textColor="@color/secondary_text"
                             android:textSize="@dimen/feed_item_profile_name"
                             android:textStyle="bold" />
@@ -206,7 +205,6 @@
                             android:layout_height="wrap_content"
                             android:gravity="right"
                             android:paddingRight="@dimen/keyline_1"
-                            android:text="Jun 22,2014"
                             android:textColor="@color/timestamp"
                             android:textSize="@dimen/feed_item_timestamp" />
                     </LinearLayout>

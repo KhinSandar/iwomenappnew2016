@@ -4,14 +4,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/toast_vertical_border"
     android:gravity="center"
-    android:orientation="vertical" >
-
-
-
-
-
-
-
+    android:orientation="vertical">
 
 
     <TextView
@@ -20,7 +13,6 @@
         android:layout_gravity="center_vertical"
         android:layout_marginTop="10dp"
         android:drawablePadding="10dp"
-        android:drawableTop="@drawable/no_internet"
         android:gravity="center_vertical|center_horizontal"
         android:paddingLeft="10dp"
         android:text="@string/sk_connection_internet_problem"
@@ -28,17 +20,6 @@
         android:textSize="18dp"
         android:textStyle="bold"
         android:typeface="sans" />
-
-
-
-
-
-
-
-
-
-
-
 
 
     <TextView

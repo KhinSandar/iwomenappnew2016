@@ -176,7 +176,7 @@ public class AboutUsWebActivity extends BaseActionBarActivity {
 
         }
         txt_new_version.setVisibility(View.GONE);
-        checkAPKVersion();
+        //checkAPKVersion();
         /*TextView text = new TextView(mContext);
         text.setText(String.valueOf(versionCode));
         text.setLayoutParams(new LinearLayoutCompat.LayoutParams(LinearLayoutCompat.LayoutParams.FILL_PARENT, LinearLayoutCompat.LayoutParams.WRAP_CONTENT));
@@ -189,18 +189,12 @@ public class AboutUsWebActivity extends BaseActionBarActivity {
 
     private void checkAPKVersion() {
         if (Connection.isOnline(getApplicationContext())) {
-
-
             NetworkEngine.getInstance().getAPKVersion("", new Callback<APKVersion>() {
-
                 @Override
                 public void success(final APKVersion arg0, Response arg1) {
                     // TODO Auto-generated method stub
                     try {
-
-
                         if (arg0 != null) {
-
                             if (arg0.getVersionId() > mversionCode) {
                                 txt_new_version.setVisibility(View.VISIBLE);
                                 txt_new_version.setText(R.string.version_new_yes + arg0.getVersionId());
@@ -213,13 +207,10 @@ public class AboutUsWebActivity extends BaseActionBarActivity {
                     } catch (NullPointerException ex) {
                         //ex.printStackTrace();
                     }
-
                 }
-
                 @Override
                 public void failure(RetrofitError arg0) {
                     // TODO Auto-generated method stub
-
                     txt_new_version.setVisibility(View.GONE);
 
                 }
@@ -243,3 +234,21 @@ public class AboutUsWebActivity extends BaseActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
