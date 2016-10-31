@@ -487,6 +487,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                             R.drawable.sister_app,
                             R.mipmap.sister_app_new,
                             R.drawable.about_us,
+                            R.drawable.ic_setting,
                             R.mipmap.ic_menu_update,
                     };
 
@@ -860,6 +861,9 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                                                 SKToastMessage.showMessage(DrawerMainActivity.this, error.getError(), SKToastMessage.INFO);
                                             } else if (mstr_lang.equals(Utils.MM_LANG)) {
                                                 SKToastMessage.showMessage(DrawerMainActivity.this, error.getErrorMm(), SKToastMessage.INFO);
+                                            }else{
+                                                SKToastMessage.showMessage(DrawerMainActivity.this, error.getErrorMm(), SKToastMessage.INFO);
+
                                             }
                                         }catch (Exception e){
 
@@ -911,6 +915,21 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                 }
             });
         } else {
+
+            layout_play_game.setVisibility(View.VISIBLE);
+            btn_play_game.setText(getResources().getString(R.string.competition_play_game));
+
+            layout_play_game.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+                        org.undp_iwomen.iwomen.utils.Utils.doToastEng(getApplicationContext(), getResources().getString(R.string.no_connection));
+                    } else {
+
+                        org.undp_iwomen.iwomen.utils.Utils.doToastMM(getApplicationContext(), getResources().getString(R.string.no_connection_mm));
+                    }
+                }
+            });
 
             //SKConnectionDetector.getInstance(this).showErrorMessage();
         }
