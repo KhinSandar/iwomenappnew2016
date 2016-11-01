@@ -54,7 +54,6 @@ public class CommentAdapter extends BaseAdapter {
         if(view == null){
             LayoutInflater inflater = mActivity.getLayoutInflater();
             view = inflater.inflate(R.layout.custom_comment_layout, viewGroup, false);
-
             vh = new ViewHolder();
             vh.pictureView = (RoundedImageView) view.findViewById(R.id.custom_comment_profilepicture);
             vh.tv_name = (TextView) view.findViewById(R.id.custom_comment_name);

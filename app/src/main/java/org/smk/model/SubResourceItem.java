@@ -63,6 +63,11 @@ public class SubResourceItem implements Serializable {
     @SerializedName("comment_count")
     @Expose
     private Integer commentCount;
+    @SerializedName("audioFile")
+    @Expose
+    private String audioFile;
+
+
 
     public Integer getLikes() {
         return likes;
@@ -137,6 +142,21 @@ public class SubResourceItem implements Serializable {
     public void setAuthorId(String authorId) {
         this.authorId = authorId;
     }
+
+    /**
+     * @return The audioFile
+     */
+    public String getAudioFile() {
+        return audioFile;
+    }
+
+    /**
+     * @param audioFile The audioFile
+     */
+    public void setAudioFile(String audioFile) {
+        this.audioFile = audioFile;
+    }
+
 
     /**
      *

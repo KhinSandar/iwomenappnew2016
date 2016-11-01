@@ -55,6 +55,7 @@ public class NewPostActivity extends BaseActionBarActivity {
                 initFragment(NewPostPostFragment.newInstance(categoryId , categoryName));
             else
                 initFragment(NewIWomenPostFragment.newInstance());
+
         }
     }
 
@@ -63,10 +64,12 @@ public class NewPostActivity extends BaseActionBarActivity {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.add(R.id.contentFrame, newPostFragment);
         transaction.commit();
+
     }
 
     @Override
     public boolean onSupportNavigateUp() {
+        finish();
         super.onBackPressed();
         return true;
     }

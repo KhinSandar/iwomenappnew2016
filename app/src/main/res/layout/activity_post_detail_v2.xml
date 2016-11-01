@@ -10,89 +10,6 @@
     android:focusableInTouchMode="true"
     tools:context="org.undp_iwomen.iwomen.ui.activity.PostDetailActivity">
 
-    <android.support.design.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
-
-        <android.support.design.widget.AppBarLayout
-            android:id="@+id/app_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fitsSystemWindows="true"
-            android:theme="@style/AppTheme.AppBarOverlay">
-
-            <android.support.design.widget.CollapsingToolbarLayout
-                android:id="@+id/toolbar_layout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fitsSystemWindows="true"
-                app:contentScrim="?attr/colorPrimary"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed">
-
-                <FrameLayout
-                    android:id="@+id/head_img"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <!--<org.undp_iwomen.iwomen.ui.widget.ResizableImageView
-                        android:id="@+id/postdetail_content_img"
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/feed_item_post_pic_height"
-                        android:background="@drawable/bg_sample"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/bg_sample"
-                        android:visibility="visible"
-                        app:layout_collapseMode="parallax"
-                        app:layout_collapseParallaxMultiplier="0.7" />-->
-                    <org.undp_iwomen.iwomen.ui.widget.ResizableImageView
-                        android:id="@+id/postdetail_content_img"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/bg_sample"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/bg_sample"
-                        android:visibility="visible"
-                        app:layout_collapseMode="parallax"
-                        app:layout_collapseParallaxMultiplier="0.7" />
-
-                    <ProgressBar
-                        android:id="@+id/postdetail_feed_item_progressBar"
-                        style="?android:attr/progressBarStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_centerVertical="true"
-
-                        android:layout_gravity="center"
-                        android:visibility="visible" />
-
-                    <ImageView
-                        android:id="@+id/postdeail_video_icon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_centerVertical="true"
-                        android:layout_gravity="center"
-                        android:src="@drawable/videoplay"
-                        android:visibility="visible" />
-
-                </FrameLayout>
-
-                <android.support.v7.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    app:layout_collapseMode="pin"
-                    app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-            </android.support.design.widget.CollapsingToolbarLayout>
-        </android.support.design.widget.AppBarLayout>
-
-        <include layout="@layout/content_post_detail_v2" />
-
-    </android.support.design.widget.CoordinatorLayout>
-
 
     <!-- Comment EditTextArea -->
     <LinearLayout
@@ -231,6 +148,89 @@
 
 
     </LinearLayout>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/toolbar_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                app:contentScrim="?attr/colorPrimary"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                <FrameLayout
+                    android:id="@+id/head_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <!--<org.undp_iwomen.iwomen.ui.widget.ResizableImageView
+                        android:id="@+id/postdetail_content_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/feed_item_post_pic_height"
+                        android:background="@drawable/bg_sample"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/bg_sample"
+                        android:visibility="visible"
+                        app:layout_collapseMode="parallax"
+                        app:layout_collapseParallaxMultiplier="0.7" />-->
+                    <org.undp_iwomen.iwomen.ui.widget.ResizableImageView
+                        android:id="@+id/postdetail_content_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_sample"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/bg_sample"
+                        android:visibility="visible"
+                        app:layout_collapseMode="parallax"
+                        app:layout_collapseParallaxMultiplier="0.7" />
+
+                    <ProgressBar
+                        android:id="@+id/postdetail_feed_item_progressBar"
+                        style="?android:attr/progressBarStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+
+                        android:layout_gravity="center"
+                        android:visibility="visible" />
+
+                    <ImageView
+                        android:id="@+id/postdeail_video_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:src="@drawable/videoplay"
+                        android:visibility="visible" />
+
+                </FrameLayout>
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:layout_collapseMode="pin"
+                    app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+            </android.support.design.widget.CollapsingToolbarLayout>
+        </android.support.design.widget.AppBarLayout>
+
+        <include layout="@layout/content_post_detail_v2" />
+
+    </android.support.design.widget.CoordinatorLayout>
 
 
 </FrameLayout>

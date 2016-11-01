@@ -446,6 +446,7 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
             getActivity().finish();
 
             progress_wheel.setVisibility(View.GONE);
+
         }
 
         @Override
@@ -867,6 +868,11 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
                 return;
             }
         });
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 
 }

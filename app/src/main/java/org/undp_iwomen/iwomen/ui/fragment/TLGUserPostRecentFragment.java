@@ -1503,6 +1503,7 @@ public class TLGUserPostRecentFragment extends Fragment implements View.OnClickL
                 intent.putExtra("categoryId", mCatID);
                 intent.putExtra("categoryName", mstrCatName);
                 startActivity(intent);
+
                 //Utils.doToastEng(mContext, "Coming Soon!");
 
                 break;
@@ -1521,11 +1522,12 @@ public class TLGUserPostRecentFragment extends Fragment implements View.OnClickL
     public boolean onQueryTextChange(String s) {
 
         Log.d("iWomen", s);
-        if(s != null && s.length() > 0)
+        if (s != null && s.length() > 0)
             stories.filter(s);
         else
             stories.notifyDataSetChanged();
         return false;
     }
+
 }
 

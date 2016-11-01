@@ -1,16 +1,19 @@
 package org.undp_iwomen.iwomen.ui.activity;
 
+import android.annotation.TargetApi;
 import android.content.ActivityNotFoundException;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.Toolbar;
 import android.text.util.Linkify;
 import android.util.Log;
@@ -31,6 +34,7 @@ import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.google.gson.Gson;
 import com.makeramen.RoundedImageView;
+import com.smk.skalertmessage.SKToastMessage;
 import com.squareup.picasso.Picasso;
 
 import org.smk.application.StoreUtil;
@@ -45,6 +49,7 @@ import org.undp_iwomen.iwomen.model.MyTypeFace;
 import org.undp_iwomen.iwomen.model.retrofit_api.SMKserverStringConverterAPI;
 import org.undp_iwomen.iwomen.provider.IwomenProviderData;
 import org.undp_iwomen.iwomen.ui.adapter.CommentAdapter;
+import org.undp_iwomen.iwomen.ui.fragment.AudioVisualizerFragment;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.ui.widget.ProgressWheel;
 import org.undp_iwomen.iwomen.ui.widget.animatedbutton.AnimatedButton;
@@ -76,6 +81,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
     private Context mContext;
     SharedPreferences sharePrefLanguageUtil;
     String strLang;
+    String mstrAudioFilePath ;
 
 
     String mstrTitleEng, mstrTitleMm, mstrContentEng, mstrContentMm, mstrAuthorName , mstrAuthorId, mstrAuthorImgPath, mstrPostDate , mstrAuthorRoleMM, mstrAuthorRoleEng;
@@ -111,6 +117,11 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
     private List<com.smk.model.CommentItem> listComment;
     private CommentAdapter adapter;
     private ProgressWheel progressWheel_comment;
+    private final String RECORD_AUDIO = "android.permission.RECORD_AUDIO";
+    private final String WRITE_STORAGE = "android.permission.WRITE_EXTERNAL_STORAGE";
+    private final String STORAGE_READ_PERMISSION = "android.permission.READ_EXTERNAL_STORAGE";
+    private final String PREPARE_AUDIO_PERMISSION = "android.permission.MODIFY_AUDIO_SETTINGS";
+    private String mstr_lang;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -290,6 +301,9 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
         postType = i.getStringExtra("post_type");
         postId = subResouceItemObj.getId().toString();// i.getStringExtra("post_id");
         postObjId = subResouceItemObj.getObjectId();
+        mstrAudioFilePath = subResouceItemObj.getAudioFile();
+        mstr_lang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
+
          //temp for SQLite
         /* cursorMain = getContentResolver().query(IwomenProviderData.SubResourceDetailProvider.CONTETNT_URI, null, "sub_resource_id = ? AND user_id = ?", new String[]{ postId,user_id },null );
 
@@ -333,11 +347,47 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
 
                 }
         });
+
         img__social_audio.setOnClickListener(new View.OnClickListener() {
+            @TargetApi(Build.VERSION_CODES.M)
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"Click on BeKnowledgable Audio",Toast.LENGTH_LONG).show();
+                // for Audio Streaming
 
+               if (mstrAudioFilePath.length() == 10) {
+                    SKToastMessage.showMessage(ResourceDetailActivity.this, getResources().getString(R.string.resource_coming_soon_eng), SKToastMessage.ERROR);
+                }
+
+                if (!hasPermission(RECORD_AUDIO) || !hasPermission(WRITE_STORAGE) || !hasPermission(STORAGE_READ_PERMISSION) || !hasPermission(PREPARE_AUDIO_PERMISSION)) {
+                    //if no permission, request permission
+                    String[] perms = {RECORD_AUDIO, WRITE_STORAGE, STORAGE_READ_PERMISSION, PREPARE_AUDIO_PERMISSION};
+                    int permsRequestCode = 200;
+                    requestPermissions(perms, permsRequestCode);
+
+                }
+
+                if (Connection.isOnline(getApplicationContext())) {
+
+                    //String url = "https://dl.dropboxusercontent.com/u/10281242/sample_audio.mp3"; //Default
+                    if (mstrAudioFilePath != null && mstrAudioFilePath.length() > 20) {
+
+                        Log.e("<<ResourceDetail>>", "<<isPlay>>" + "show audio visualizer dialog" + mstrAudioFilePath);
+                        DialogFragment visualizerFragment = AudioVisualizerFragment.newInstance(mstrAudioFilePath, mstr_lang);
+                        visualizerFragment.show(getSupportFragmentManager(), "AudioVisualizer");
+
+
+                    } else {
+                        //TODO Audio File Null case
+                        // TODO Auto-generated method stub
+                        SKToastMessage.showMessage(ResourceDetailActivity.this, getResources().getString(R.string.audio_not_availabe_msg), SKToastMessage.INFO);
+
+
+                    }
+
+
+                } else {
+                    //SKConnectionDetector.getInstance(this).showErrorMessage();
+                }
 
             }
 
@@ -355,6 +405,17 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
         listView_Comment.setAdapter(adapter);
         adapter.notifyDataSetChanged();
         getCommentByPagination();*/
+
+    }
+
+    private boolean hasPermission(String permission) {
+
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
+            return (checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED);
+        } else {
+            return true;
+        }
+
 
     }
     public void getCommentByPagination() {
