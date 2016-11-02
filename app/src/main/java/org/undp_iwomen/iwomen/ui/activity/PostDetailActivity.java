@@ -40,6 +40,7 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.algo.hha.emojiicon.EmojiconEditText;
 import com.algo.hha.emojiicon.EmojiconGridView;
@@ -664,6 +665,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
             @Override
             public void afterTextChanged(Editable s) {
                 //et_comment_frame.setVisibility(View.GONE);
+
 
             }
         });
@@ -2227,6 +2229,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
                     } else {
 
                         mProgressDialog.show();
+                        //clear cmt after posting
                         // Utils.doToastEng(getApplicationContext(), "Comment");
                         //TODO Comment Post
 
@@ -2240,6 +2243,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
                             @Override
                             public void success(CommentItem calendarEvent, Response response) {
 
+                                et_comment.setText(" ");  // clear commment after success //Linn Wah
                                 txt_cmd_count.setText(calendarEvent.getCommentCount() + "");
                                 txt_social_no_ear_comment.setText(calendarEvent.getCommentCount() + "");
 
@@ -2361,7 +2365,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
                             //Utils.doToastEng(getApplicationContext(), "Is playing ");
                         }
                     } else {
-
+                        Toast.makeText(getApplicationContext(),"Playing Audio",Toast.LENGTH_LONG).show();
                         img_social_audio.performClick();
                     }
 

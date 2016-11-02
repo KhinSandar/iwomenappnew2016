@@ -8,6 +8,9 @@ buildscript {
     dependencies {
         // replace with the current version of the Android plugin
         //classpath 'com.android.tools.build:gradle:2.1.0'
+
+        classpath 'com.android.tools.build:gradle:2.2.2'
+
         classpath 'com.android.tools.build:gradle:2.2.0'
 
         // Since Android's Gradle plugin 0.11, you have to use android-apt >= 1.3
