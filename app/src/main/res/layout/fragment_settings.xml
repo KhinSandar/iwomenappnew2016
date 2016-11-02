@@ -80,7 +80,7 @@
                 android:id="@+id/settings_ethic_mon_language"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/ethic_mon"
+                android:text="@string/ethic_chin"
                 android:textSize="13sp"
                 android:textColor="@color/secondary_text"/>
 
