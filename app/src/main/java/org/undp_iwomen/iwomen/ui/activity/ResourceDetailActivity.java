@@ -8,8 +8,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -25,7 +23,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.algo.hha.emojiicon.EmojiconEditText;
 import com.facebook.share.model.ShareLinkContent;
@@ -84,7 +81,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
     String mstrAudioFilePath ;
 
 
-    String mstrTitleEng, mstrTitleMm, mstrContentEng, mstrContentMm, mstrAuthorName , mstrAuthorId, mstrAuthorImgPath, mstrPostDate , mstrAuthorRoleMM, mstrAuthorRoleEng;
+    String mstrTitleEng, mstrTitleMm, mstrContentEng, mstrContentMm, mstrAuthorName ,mstrAuthorNameMM, mstrAuthorId, mstrAuthorImgPath, mstrPostDate , mstrAuthorRoleMM, mstrAuthorRoleEng;
     String mstrSubResourceTitleEng, mstrSubResourceTitleMm;
 
     private CustomTextView txtSocialShare;
@@ -121,7 +118,6 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
     private final String WRITE_STORAGE = "android.permission.WRITE_EXTERNAL_STORAGE";
     private final String STORAGE_READ_PERMISSION = "android.permission.READ_EXTERNAL_STORAGE";
     private final String PREPARE_AUDIO_PERMISSION = "android.permission.MODIFY_AUDIO_SETTINGS";
-    private String mstr_lang;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -152,6 +148,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
         mstrContentEng = i.getStringExtra("ContentEng");
         mstrContentMm = i.getStringExtra("ContentMM");
         mstrAuthorName = i.getStringExtra("AuthorName");
+        mstrAuthorNameMM = i.getStringExtra("AuthorNameMM");
         mstrAuthorRoleEng= i.getStringExtra("AuthorTitleEng");
         mstrAuthorRoleMM= i.getStringExtra("AuthorTitleMM");
         mstrAuthorId = i.getStringExtra("AuthorId");
@@ -201,17 +198,36 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
 
             txtAuthorRole.setText(mstrAuthorRoleEng);
 
+            profileName.setText(mstrAuthorName);
+
+
+
             txtName.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
             txtBody.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
-        }else //FOR ALl MM FONT
-        {
+        }else if (strLang.equals(Utils.MM_LANG)) {
+            profileName.setText(mstrAuthorNameMM);
+
             textViewTitle.setText(mstrTitleMm);
             txtBody.setText(mstrContentMm);
             txtName.setText(mstrSubResourceTitleMm);
             txtAuthorRole.setText(mstrAuthorRoleMM);
+
+            profileName.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
+            textViewTitle.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
+            txtName.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
+            txtBody.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
+            txtAuthorRole.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
+
+        } else {//FOR ALl MM FONT
+
+            profileName.setText(mstrAuthorNameMM);
+
+            textViewTitle.setText(mstrTitleMm);
+            txtBody.setText(mstrContentMm);
+            txtName.setText(mstrSubResourceTitleMm);
+            txtAuthorRole.setText(mstrAuthorRoleMM);
+
             //textViewTitle.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
-
-
             //txtName.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
             //txtBody.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
 
@@ -251,7 +267,6 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
         }
 
         //profileImg.setImageResource(R.drawable.astrid);
-        profileName.setText(mstrAuthorName);
 
         txtMore.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -302,7 +317,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
         postId = subResouceItemObj.getId().toString();// i.getStringExtra("post_id");
         postObjId = subResouceItemObj.getObjectId();
         mstrAudioFilePath = subResouceItemObj.getAudioFile();
-        mstr_lang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
+        //strLang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
 
          //temp for SQLite
         /* cursorMain = getContentResolver().query(IwomenProviderData.SubResourceDetailProvider.CONTETNT_URI, null, "sub_resource_id = ? AND user_id = ?", new String[]{ postId,user_id },null );
@@ -372,7 +387,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
                     if (mstrAudioFilePath != null && mstrAudioFilePath.length() > 20) {
 
                         Log.e("<<ResourceDetail>>", "<<isPlay>>" + "show audio visualizer dialog" + mstrAudioFilePath);
-                        DialogFragment visualizerFragment = AudioVisualizerFragment.newInstance(mstrAudioFilePath, mstr_lang);
+                        DialogFragment visualizerFragment = AudioVisualizerFragment.newInstance(mstrAudioFilePath, strLang);
                         visualizerFragment.show(getSupportFragmentManager(), "AudioVisualizer");
 
 

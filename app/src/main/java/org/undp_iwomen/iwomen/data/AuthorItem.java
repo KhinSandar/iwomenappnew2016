@@ -37,6 +37,9 @@ public class AuthorItem implements Serializable{
     @SerializedName("authorName")
     @Expose
     private String authorName;
+    @SerializedName("authorNameMM")
+    @Expose
+    private String authorNameMM;
     @SerializedName("authorTitleEng")
     @Expose
     private String authorTitleEng;
@@ -198,6 +201,24 @@ public class AuthorItem implements Serializable{
      */
     public void setAuthorName(String authorName) {
         this.authorName = authorName;
+    }
+
+    /**
+     *
+     * @return
+     * The authorNameMM
+     */
+    public String getAuthorNameMM() {
+        return authorNameMM;
+    }
+
+    /**
+     *
+     * @param authorNameMM
+     * The authorNameMM
+     */
+    public void setAuthorNameMM(String authorNameMM) {
+        this.authorNameMM = authorNameMM;
     }
 
     /**

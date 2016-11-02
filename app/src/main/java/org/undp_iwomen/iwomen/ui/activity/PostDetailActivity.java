@@ -721,8 +721,9 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
                 public void success(String s, Response response) {
                     Log.e("PostDetail","Reply==>" + s.toString());
 
+                    Boolean isReturnTrue = Boolean.valueOf(s.toString());
 
-                    if(Boolean.parseBoolean(s.toString())){//s.toString() == "true" || s.equalsIgnoreCase("true") || s.equals("true")
+                    if(!isReturnTrue){//s.toString() == "true" || s.equalsIgnoreCase("true") || s.equals("true")
                         Log.e("PostDetail","==>" + s.toString());
                         mLikeAnimatedButton.setEnabled(false);
                         mLikeAnimatedButton.setClickable(false);
