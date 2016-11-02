@@ -893,4 +893,7 @@ Make many new friends, contact your local May Doe Kabar/TLG group. See number be
     <string name="version_download">Downloading file. Please wait…</string>
     <string name="version_download_title">iWomen App</string>
 
+    <string name="iWomenPost_Like">You already like this post</string>
+    <string name="iWomenPost_Like_mm">သင္ လိုုက္ခ္  ႏွိပ္ပီး သြားပါပီ။</string>
+
 </resources>

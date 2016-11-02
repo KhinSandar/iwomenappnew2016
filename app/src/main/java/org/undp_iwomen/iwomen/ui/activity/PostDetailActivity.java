@@ -198,7 +198,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
     private boolean alreadySticker = false;
     private AnimatedButton mSocialNoEarLikeAnimatedButton;
     private ImageView img_credit_icon_img;
-
+    String mstrReturn, mstrPostReturn;
 
 
     private enum PendingAction {
@@ -486,8 +486,6 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
         mstrAudioFilePath = iWomenPost.getAudioFile();
 
 
-
-
         /***************************************
          * Goolge Analytics Tracking
          *****************************************/
@@ -495,7 +493,6 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
         Tracker mTracker = application.getDefaultTracker();
         mTracker.setScreenName("Post Detail ~ " + iWomenPost.getTitle());
         mTracker.send(new HitBuilders.ScreenViewBuilder().build());
-
 
 
         mLikeAnimatedButton.setCallbackListener(new AnimatedButton.Callbacks() {
@@ -507,55 +504,73 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
                         if (postType.equalsIgnoreCase("iWomenPost")) {
 
                             //Check status
+                            if (mstrReturn.equals("false") || mstrReturn.equalsIgnoreCase("false")) {
+                                //
+                                SMKserverAPI.getInstance().getService().postIWomenPostLike(postId, user_id, new Callback<LikeItem>() {
+                                    @Override
+                                    public void success(LikeItem item, Response response) {
+                                        Log.e("PostDetailLike>>", item.toString());
 
-                            //
-                            SMKserverAPI.getInstance().getService().postIWomenPostLike(postId, user_id, new Callback<LikeItem>() {
-                                @Override
-                                public void success(LikeItem item, Response response) {
-                                    Log.e("PostDetailLike>>", item.toString());
+                                        mLikeAnimatedButton.setEnabled(false);
+                                        mLikeAnimatedButton.setText(String.valueOf(iWomenPost.getLikes() + 1));
+                                        mLikeAnimatedButton.setOnClickListener(PostDetailActivity.this);
 
-                                    mLikeAnimatedButton.setEnabled(false);
-                                    mLikeAnimatedButton.setText(String.valueOf(iWomenPost.getLikes() + 1));
-                                    mLikeAnimatedButton.setOnClickListener(PostDetailActivity.this);
+                                        txt_social_no_ear_like.setText(String.valueOf(iWomenPost.getLikes() + 1));
+                                        mSocialNoEarLikeAnimatedButton.setText(String.valueOf(iWomenPost.getLikes() + 1));
 
-                                    txt_social_no_ear_like.setText(String.valueOf(iWomenPost.getLikes() + 1));
-                                    mSocialNoEarLikeAnimatedButton.setText(String.valueOf(iWomenPost.getLikes() + 1));
+                                        mSocialNoEarLikeAnimatedButton.setEnabled(false);
+                                        mSocialNoEarLikeAnimatedButton.setOnClickListener(PostDetailActivity.this);
+                                    }
 
-                                    mSocialNoEarLikeAnimatedButton.setEnabled(false);
-                                    mSocialNoEarLikeAnimatedButton.setOnClickListener(PostDetailActivity.this);
+                                    @Override
+                                    public void failure(RetrofitError error) {
+                                        Log.e("PostDetailLike Fail>>", error.toString());
+
+                                    }
+                                });
+                            } else {
+                                if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+                                    org.undp_iwomen.iwomen.utils.Utils.doToastEng(mContext, getResources().getString(R.string.iWomenPost_Like));
+                                } else {
+
+                                    org.undp_iwomen.iwomen.utils.Utils.doToastMM(mContext, getResources().getString(R.string.iWomenPost_Like_mm));
                                 }
-
-                                @Override
-                                public void failure(RetrofitError error) {
-                                    Log.e("PostDetailLike Fail>>", error.toString());
-
-                                }
-                            });
+                            }
 
                         } else {
-                            SMKserverAPI.getInstance().getService().postPostsLike(postId, user_id, new Callback<LikeItem>() {
-                                @Override
-                                public void success(LikeItem item, Response response) {
+                            //Check status
+                            if (mstrPostReturn.equals("false") || mstrPostReturn.equalsIgnoreCase("false")) {
+                                SMKserverAPI.getInstance().getService().postPostsLike(postId, user_id, new Callback<LikeItem>() {
+                                    @Override
+                                    public void success(LikeItem item, Response response) {
 
-                                    mLikeAnimatedButton.setEnabled(false);
-                                    mLikeAnimatedButton.setText(String.valueOf(iWomenPost.getLikes() + 1));
-                                    mLikeAnimatedButton.setOnClickListener(PostDetailActivity.this);
-                                    txt_social_no_ear_like.setText(String.valueOf(iWomenPost.getLikes() + 1));
-                                    mSocialNoEarLikeAnimatedButton.setText(String.valueOf(iWomenPost.getLikes() + 1));
+                                        mLikeAnimatedButton.setEnabled(false);
+                                        mLikeAnimatedButton.setText(String.valueOf(iWomenPost.getLikes() + 1));
+                                        mLikeAnimatedButton.setOnClickListener(PostDetailActivity.this);
+                                        txt_social_no_ear_like.setText(String.valueOf(iWomenPost.getLikes() + 1));
+                                        mSocialNoEarLikeAnimatedButton.setText(String.valueOf(iWomenPost.getLikes() + 1));
 
-                                    mSocialNoEarLikeAnimatedButton.setEnabled(false);
-                                    mSocialNoEarLikeAnimatedButton.setOnClickListener(PostDetailActivity.this);
+                                        mSocialNoEarLikeAnimatedButton.setEnabled(false);
+                                        mSocialNoEarLikeAnimatedButton.setOnClickListener(PostDetailActivity.this);
 
+                                    }
+
+                                    @Override
+                                    public void failure(RetrofitError error) {
+
+                                    }
+                                });
+                            }else {
+                                if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+                                    org.undp_iwomen.iwomen.utils.Utils.doToastEng(mContext, getResources().getString(R.string.iWomenPost_Like));
+                                } else {
+                                    org.undp_iwomen.iwomen.utils.Utils.doToastMM(mContext, getResources().getString(R.string.iWomenPost_Like_mm));
                                 }
+                            }
 
-                                @Override
-                                public void failure(RetrofitError error) {
-
-                                }
-                            });
                         }
                     }
-                }else{
+                } else {
                     if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
                         org.undp_iwomen.iwomen.utils.Utils.doToastEng(mContext, getResources().getString(R.string.no_connection));
                     } else {
@@ -714,40 +729,77 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
         }
     }
 
-    private void checkPostLikeStatus(){
+    private void checkPostLikeStatus() {
         if (Connection.isOnline(getApplicationContext())) {
-            SMKserverStringConverterAPI.getInstance().getService().postCheckiWomenPostLike(postId, user_id, new Callback<String>() {
-                @Override
-                public void success(String s, Response response) {
-                    Log.e("PostDetail","Reply==>" + s.toString());
 
-                    boolean isReturnTrue = Boolean.parseBoolean(s.toString());
-                    String mstrReturn = s.toString();
-                    Log.e("PostDetail","b4 ==>" + mstrReturn);
+            if (postType.equalsIgnoreCase("iWomenPost")) {
+                SMKserverStringConverterAPI.getInstance().getService().postCheckiWomenPostLike(postId, user_id, new Callback<String>() {
+                    @Override
+                    public void success(String s, Response response) {
+                        mstrReturn = s.toString().trim();
 
-                    if(mstrReturn == "true" || mstrReturn.equalsIgnoreCase("true") || mstrReturn.equals("true")){//s.toString() == "true" || s.equalsIgnoreCase("true") || s.equals("true")
-                        Log.e("PostDetail","==>" + s.toString());
-                        mLikeAnimatedButton.setEnabled(false);
-                        mLikeAnimatedButton.setClickable(false);
-                        mLikeAnimatedButton.setmCheckedDrawable();
+                        if (mstrReturn.equals("true") || mstrReturn.equalsIgnoreCase("true")) {//s.toString() == "true" || s.equalsIgnoreCase("true") || s.equals("true")
+                            mLikeAnimatedButton.setEnabled(false);
+                            mLikeAnimatedButton.setClickable(false);
+                            mLikeAnimatedButton.setmCheckedDrawable();
 
-                    }else{
-                        Log.e("PostDetail","No case==>" + s.toString());
-                        mLikeAnimatedButton.setEnabled(false);
-                        mLikeAnimatedButton.setClickable(false);
-                        mLikeAnimatedButton.setmCheckedDrawable();
+                            mSocialNoEarLikeAnimatedButton.setClickable(false);
+                            mSocialNoEarLikeAnimatedButton.setmCheckedDrawable();
+
+                        } else {
+                            mLikeAnimatedButton.setEnabled(true);
+                            mLikeAnimatedButton.setClickable(true);
+
+                            mSocialNoEarLikeAnimatedButton.setEnabled(true);
+                            mSocialNoEarLikeAnimatedButton.setClickable(true);
 
 
+
+                        }
                     }
-                }
-                @Override
-                public void failure(RetrofitError error) {
-                    Log.e("PostDetail","Nocase ==>" + error.toString());
-                }
-            });
-        }else{
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                        //Log.e("PostDetail", "Nocase ==>" + error.toString());
+                    }
+                });
+            } else {
+
+                SMKserverStringConverterAPI.getInstance().getService().postCheckPostLike(postId, user_id, new Callback<String>() {
+                    @Override
+                    public void success(String s, Response response) {
+                        mstrPostReturn = s.toString().trim();
+
+                        if (mstrPostReturn.equals("true") || mstrPostReturn.equalsIgnoreCase("true")) {//s.toString() == "true" || s.equalsIgnoreCase("true") || s.equals("true")
+                            //Log.e("PostDetail","==>" + s.toString());
+                            mLikeAnimatedButton.setEnabled(false);
+                            mLikeAnimatedButton.setClickable(false);
+                            mLikeAnimatedButton.setmCheckedDrawable();
+
+                            mSocialNoEarLikeAnimatedButton.setClickable(false);
+                            mSocialNoEarLikeAnimatedButton.setmCheckedDrawable();
+
+                        } else {
+                            mLikeAnimatedButton.setEnabled(true);
+                            mLikeAnimatedButton.setClickable(true);
+                            //mLikeAnimatedButton.setmCheckedDrawable();
+                            mSocialNoEarLikeAnimatedButton.setEnabled(true);
+                            mSocialNoEarLikeAnimatedButton.setClickable(true);
+
+                        }
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                        //Log.e("PostDetail", "Nocase ==>" + error.toString());
+                    }
+                });
+
+            }
+        } else {
         }
     }
+
     private void setPostItem(final IWomenPost item) {
         profile.setAdjustViewBounds(true);
         profile.setScaleType(ImageView.ScaleType.CENTER_CROP);
@@ -2134,7 +2186,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
                 Tracker t = ((MainApplication) getApplication()).getTracker(MainApplication.TrackerName.APP_TRACKER);
                 // Build and send an Event.
                 t.send(new HitBuilders.EventBuilder()
-                        .setCategory(getString(R.string.post_detail_like_btn_category)+iWomenPost.getTitle())
+                        .setCategory(getString(R.string.post_detail_like_btn_category) + iWomenPost.getTitle())
                         .setAction(getString(R.string.post_detail_like_btn_action))
                         .setLabel(getString(R.string.post_detail_like_btn_lbl) + iWomenPost.getTitle())
                         .build());
@@ -2205,11 +2257,10 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
                     Tracker t1 = ((MainApplication) getApplication()).getTracker(MainApplication.TrackerName.APP_TRACKER);
                     // Build and send an Event.
                     t1.send(new HitBuilders.EventBuilder()
-                            .setCategory(getString(R.string.post_detail_like_btn_category) +iWomenPost.getTitle())
+                            .setCategory(getString(R.string.post_detail_like_btn_category) + iWomenPost.getTitle())
                             .setAction(getString(R.string.post_detail_share_btn_action))
                             .setLabel(getString(R.string.post_detail_share_btn_lbl) + iWomenPost.getTitle())
                             .build());
-
 
 
                 }
@@ -2368,7 +2419,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
                             //Utils.doToastEng(getApplicationContext(), "Is playing ");
                         }
                     } else {
-                        Toast.makeText(getApplicationContext(),"Playing Audio",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Playing Audio", Toast.LENGTH_LONG).show();
                         img_social_audio.performClick();
                     }
 
@@ -2461,7 +2512,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
                 Tracker t1 = ((MainApplication) getApplication()).getTracker(MainApplication.TrackerName.APP_TRACKER);
                 // Build and send an Event.
                 t1.send(new HitBuilders.EventBuilder()
-                        .setCategory(getString(R.string.post_detail_like_btn_category)+iWomenPost.getTitle())
+                        .setCategory(getString(R.string.post_detail_like_btn_category) + iWomenPost.getTitle())
                         .setAction(getString(R.string.post_detail_share_fb_btn_action))
                         .setLabel(getString(R.string.post_detail_share_btn_lbl) + iWomenPost.getTitle())
                         .build());
