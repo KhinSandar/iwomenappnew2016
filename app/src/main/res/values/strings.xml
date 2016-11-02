@@ -174,7 +174,7 @@
     <string name="tlg_member_txt_mm">၁၅</string>
     <string name="tlg_member_txt_un">၁၅</string>
 
-    <string name="tlg_srg_member_lbl_eng">Women Self-Reliant Groups</string>
+    <string name="tlg_srg_member_lbl_eng">Women Self-Reliant Group Members</string>
     <string name="tlg_srg_member_lbl_mm">စိတ္တူ ကိုုယ္တူအဖြဲ ့</string>
     <string name="tlg_srg_member_lbl_un">စိတ်တူ ကိုယ်တူအဖွဲ</string>
 
@@ -608,6 +608,7 @@
     <string name="ethic_shan">ရွမ္း | Shan Language</string>
     <string name="ethic_mon">မြန္ | Mon Language</string>
 
+    <string name="ethic_chin"> ခ်င္း | Chin Language</string>
     <string name="organization_title">Organization Detail</string>
 
     <string name="jan_des">2010: As the first female pilots in Burma, two women, after completing commercial pilot courses from Malaysia, have begun operating flights as co-pilots with Air Bagan.

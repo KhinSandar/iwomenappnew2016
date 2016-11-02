@@ -19,6 +19,7 @@ import com.squareup.picasso.Picasso;
 import org.smk.iwomen.BaseActionBarActivity;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.data.AuthorItem;
+import org.undp_iwomen.iwomen.model.MyTypeFace;
 import org.undp_iwomen.iwomen.model.retrofit_api.SMKserverAPI;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.utils.Connection;
@@ -193,7 +194,22 @@ public class AuthorDetailActivity extends BaseActionBarActivity {
 
         }else{
             //Common
-            txtName.setText(item.getAuthorName());
+            if (strLang.equals(Utils.ENG_LANG)) {
+                txtName.setText(item.getAuthorName());
+                txtName.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
+
+            }else if (strLang.equals(Utils.MM_LANG)) {
+                txtName.setText(item.getAuthorNameMM());
+                txtName.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
+
+            }else if (strLang.equals(Utils.MM_LANG_UNI)) {
+                txtName.setText(item.getAuthorNameMM());
+                txtName.setTypeface(MyTypeFace.get(mContext, MyTypeFace.UNI));
+
+            }else{
+                txtName.setText(item.getAuthorNameMM());
+
+            }
         }
 
 

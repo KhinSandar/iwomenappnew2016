@@ -157,8 +157,8 @@
     <string name="tlg_member_txt_mm">၁၅</string>
     <string name="tlg_member_txt_eng">15</string>
 
-    <string name="tlg_srg_member_lbl_mm">စိတ္တူ ကိုုယ္တူအဖြဲ ့</string>
-    <string name="tlg_srg_member_lbl_eng">SRG Member</string>
+    <string name="tlg_srg_member_lbl_mm">စိတ္တူ ကိုုယ္တူအဖြဲ ့၀င္မ်ား</string>
+    <string name="tlg_srg_member_lbl_eng">စိတ္တူ ကိုုယ္တူအဖြဲ ့၀င္မ်ား</string>
     <string name="tlg_srg_member_txt_mm">၆၈၈</string>
     <string name="tlg_srg_member_txt_eng">688</string>
 
@@ -372,6 +372,8 @@ iWomen App နွင့္ပက္သက္သည့္ နည္းပညာ �
 
     <string name="ethic_shan">ရွမ္း | Shan Language </string>
     <string name="ethic_mon"> မြန္ | Mon Language</string>
+    <string name="ethic_chin"> ခ်င္း | Chin Language</string>
+
     <string name="organization_title"> အဖြဲ ့အစည္းအမည္</string>
 
 

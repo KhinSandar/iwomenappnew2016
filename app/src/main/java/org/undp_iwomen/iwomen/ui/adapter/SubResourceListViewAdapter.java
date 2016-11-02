@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.model.MyTypeFace;
@@ -61,7 +60,7 @@ public class SubResourceListViewAdapter extends BaseAdapter
 
     public static class ViewHolder
     {
-        public TextView txtAuthour;
+        public CustomTextView txtAuthour;
         public CustomTextView txtName;
         //public TextView txtTime;
         /*public RoundedImageView imgIcon;
@@ -84,7 +83,7 @@ public class SubResourceListViewAdapter extends BaseAdapter
             holder.imgIcon = (ImageView) view.findViewById(R.id.sub_resource_icon);*/
 
 
-            holder.txtAuthour = (TextView)view.findViewById(R.id.sub_resouce_list_item_author);
+            holder.txtAuthour = (CustomTextView) view.findViewById(R.id.sub_resouce_list_item_author);
             holder.txtName= (CustomTextView)view.findViewById(R.id.sub_resouce_list_item_title);
 
 
@@ -102,19 +101,34 @@ public class SubResourceListViewAdapter extends BaseAdapter
 
         if (mstr_lang.equals(Utils.ENG_LANG)) {
             holder.txtName.setText(SubResourceItems.get(position).getSubResourceTitleEng());
-
+            holder.txtAuthour.setText(SubResourceItems.get(position).getAuthorName());
 
             holder.txtName.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
+            holder.txtAuthour.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
+
         }else if (mstr_lang.equals(Utils.MM_LANG)) {
             holder.txtName.setText(SubResourceItems.get(position).getSubResourceTitleMm());
-            //holder.txtBodyText.setText(ResourceItems.get(position).getResourceText());
+            holder.txtAuthour.setText(SubResourceItems.get(position).getAuthorNameMM());
+
 
             holder.txtName.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
+            holder.txtAuthour.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
+
+
+        }else if (mstr_lang.equals(Utils.MM_LANG_UNI)) {
+            holder.txtName.setText(SubResourceItems.get(position).getSubResourceTitleMm());
+            holder.txtAuthour.setText(SubResourceItems.get(position).getAuthorNameMM());
+
+
+            holder.txtName.setTypeface(MyTypeFace.get(mContext, MyTypeFace.UNI));
+            holder.txtAuthour.setTypeface(MyTypeFace.get(mContext, MyTypeFace.UNI));
+
 
         }else {//FOR Default and Custom
             holder.txtName.setText(SubResourceItems.get(position).getSubResourceTitleMm());
+            holder.txtAuthour.setText(SubResourceItems.get(position).getAuthorNameMM());
+
         }
-        holder.txtAuthour.setText(SubResourceItems.get(position).getAuthorName());
 
         /*if(SubResourceItems.get(position).getIcon_img_url() != null && !SubResourceItems.get(position).getIcon_img_url().isEmpty()) {
 

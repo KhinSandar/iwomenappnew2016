@@ -90,6 +90,7 @@ import org.undp_iwomen.iwomen.model.MyTypeFace;
 import org.undp_iwomen.iwomen.model.TextWatcherAdapter;
 import org.undp_iwomen.iwomen.model.URLSpanNoUnderline;
 import org.undp_iwomen.iwomen.model.retrofit_api.SMKserverAPI;
+import org.undp_iwomen.iwomen.model.retrofit_api.SMKserverStringConverterAPI;
 import org.undp_iwomen.iwomen.model.retrofit_api.UserPostAPI;
 import org.undp_iwomen.iwomen.provider.IwomenProviderData;
 import org.undp_iwomen.iwomen.ui.adapter.CommentAdapter;
@@ -199,6 +200,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
     private ImageView img_credit_icon_img;
 
 
+
     private enum PendingAction {
         NONE,
         POST_PHOTO,
@@ -261,6 +263,8 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
 
     private StorageUtil storageUtil;
     private boolean mHasRequestedMore;
+
+    //private boolean mLikeCheckiWomenPost, mLikeCheckPost;
 
 
     //New UI
@@ -464,6 +468,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
 
         strLang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
 
+
         mLikeAnimatedButton = (AnimatedButton) findViewById(R.id.postdetail_like_animated_button);
         mLikeAnimatedButton.setEnabled(true);
         mSocialNoEarLikeAnimatedButton.setEnabled(true);
@@ -482,6 +487,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
 
 
 
+
         /***************************************
          * Goolge Analytics Tracking
          *****************************************/
@@ -495,61 +501,70 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
         mLikeAnimatedButton.setCallbackListener(new AnimatedButton.Callbacks() {
             @Override
             public void onClick() {
+                if (Connection.isOnline(getApplicationContext())) {
 
+                    if (mLikeAnimatedButton.isEnabled()) {
+                        if (postType.equalsIgnoreCase("iWomenPost")) {
 
-                if (mLikeAnimatedButton.isEnabled()) {
-                    if (postType.equalsIgnoreCase("iWomenPost")) {
+                            //Check status
 
-                        //Check status
+                            //
+                            SMKserverAPI.getInstance().getService().postIWomenPostLike(postId, user_id, new Callback<LikeItem>() {
+                                @Override
+                                public void success(LikeItem item, Response response) {
+                                    Log.e("PostDetailLike>>", item.toString());
 
+                                    mLikeAnimatedButton.setEnabled(false);
+                                    mLikeAnimatedButton.setText(String.valueOf(iWomenPost.getLikes() + 1));
+                                    mLikeAnimatedButton.setOnClickListener(PostDetailActivity.this);
 
-                        //
-                        SMKserverAPI.getInstance().getService().postIWomenPostLike(postId, user_id, new Callback<LikeItem>() {
-                            @Override
-                            public void success(LikeItem item, Response response) {
-                                Log.e("PostDetailLike>>",item.toString());
+                                    txt_social_no_ear_like.setText(String.valueOf(iWomenPost.getLikes() + 1));
+                                    mSocialNoEarLikeAnimatedButton.setText(String.valueOf(iWomenPost.getLikes() + 1));
 
-                                mLikeAnimatedButton.setEnabled(false);
-                                mLikeAnimatedButton.setText(String.valueOf(iWomenPost.getLikes() + 1));
-                                mLikeAnimatedButton.setOnClickListener(PostDetailActivity.this);
+                                    mSocialNoEarLikeAnimatedButton.setEnabled(false);
+                                    mSocialNoEarLikeAnimatedButton.setOnClickListener(PostDetailActivity.this);
+                                }
 
-                                txt_social_no_ear_like.setText(String.valueOf(iWomenPost.getLikes() + 1));
-                                mSocialNoEarLikeAnimatedButton.setText(String.valueOf(iWomenPost.getLikes() + 1));
+                                @Override
+                                public void failure(RetrofitError error) {
+                                    Log.e("PostDetailLike Fail>>", error.toString());
 
-                                mSocialNoEarLikeAnimatedButton.setEnabled(false);
-                                mSocialNoEarLikeAnimatedButton.setOnClickListener(PostDetailActivity.this);
-                            }
+                                }
+                            });
 
-                            @Override
-                            public void failure(RetrofitError error) {
-                                Log.e("PostDetailLike Fail>>",error.toString());
+                        } else {
+                            SMKserverAPI.getInstance().getService().postPostsLike(postId, user_id, new Callback<LikeItem>() {
+                                @Override
+                                public void success(LikeItem item, Response response) {
 
-                            }
-                        });
+                                    mLikeAnimatedButton.setEnabled(false);
+                                    mLikeAnimatedButton.setText(String.valueOf(iWomenPost.getLikes() + 1));
+                                    mLikeAnimatedButton.setOnClickListener(PostDetailActivity.this);
+                                    txt_social_no_ear_like.setText(String.valueOf(iWomenPost.getLikes() + 1));
+                                    mSocialNoEarLikeAnimatedButton.setText(String.valueOf(iWomenPost.getLikes() + 1));
 
+                                    mSocialNoEarLikeAnimatedButton.setEnabled(false);
+                                    mSocialNoEarLikeAnimatedButton.setOnClickListener(PostDetailActivity.this);
+
+                                }
+
+                                @Override
+                                public void failure(RetrofitError error) {
+
+                                }
+                            });
+                        }
+                    }
+                }else{
+                    if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+                        org.undp_iwomen.iwomen.utils.Utils.doToastEng(mContext, getResources().getString(R.string.no_connection));
                     } else {
-                        SMKserverAPI.getInstance().getService().postPostsLike(postId, user_id, new Callback<LikeItem>() {
-                            @Override
-                            public void success(LikeItem item, Response response) {
 
-                                mLikeAnimatedButton.setEnabled(false);
-                                mLikeAnimatedButton.setText(String.valueOf(iWomenPost.getLikes() + 1));
-                                mLikeAnimatedButton.setOnClickListener(PostDetailActivity.this);
-                                txt_social_no_ear_like.setText(String.valueOf(iWomenPost.getLikes() + 1));
-                                mSocialNoEarLikeAnimatedButton.setText(String.valueOf(iWomenPost.getLikes() + 1));
-
-                                mSocialNoEarLikeAnimatedButton.setEnabled(false);
-                                mSocialNoEarLikeAnimatedButton.setOnClickListener(PostDetailActivity.this);
-
-                            }
-
-                            @Override
-                            public void failure(RetrofitError error) {
-
-                            }
-                        });
+                        org.undp_iwomen.iwomen.utils.Utils.doToastMM(mContext, getResources().getString(R.string.no_connection_mm));
                     }
                 }
+
+
             }
         });
 
@@ -570,7 +585,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
         listView_Comment.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
-
+        checkPostLikeStatus();
         setPostItem(iWomenPost);
         /*if (postId != null) {
 
@@ -699,14 +714,46 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
         }
     }
 
+    private void checkPostLikeStatus(){
+        if (Connection.isOnline(getApplicationContext())) {
+            SMKserverStringConverterAPI.getInstance().getService().postCheckiWomenPostLike(postId, user_id, new Callback<String>() {
+                @Override
+                public void success(String s, Response response) {
+                    Log.e("PostDetail","Reply==>" + s.toString());
+
+                    boolean isReturnTrue = Boolean.parseBoolean(s.toString());
+                    String mstrReturn = s.toString();
+                    Log.e("PostDetail","b4 ==>" + mstrReturn);
+
+                    if(mstrReturn == "true" || mstrReturn.equalsIgnoreCase("true") || mstrReturn.equals("true")){//s.toString() == "true" || s.equalsIgnoreCase("true") || s.equals("true")
+                        Log.e("PostDetail","==>" + s.toString());
+                        mLikeAnimatedButton.setEnabled(false);
+                        mLikeAnimatedButton.setClickable(false);
+                        mLikeAnimatedButton.setmCheckedDrawable();
+
+                    }else{
+                        Log.e("PostDetail","No case==>" + s.toString());
+                        mLikeAnimatedButton.setEnabled(false);
+                        mLikeAnimatedButton.setClickable(false);
+                        mLikeAnimatedButton.setmCheckedDrawable();
+
+
+                    }
+                }
+                @Override
+                public void failure(RetrofitError error) {
+                    Log.e("PostDetail","Nocase ==>" + error.toString());
+                }
+            });
+        }else{
+        }
+    }
     private void setPostItem(final IWomenPost item) {
         profile.setAdjustViewBounds(true);
         profile.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
-
         img_credit_logo.setAdjustViewBounds(true);
         img_credit_logo.setScaleType(ImageView.ScaleType.CENTER_CROP);
-
 
         authorID = item.getAuthorId();
 

@@ -161,6 +161,8 @@ public class CommonConfig {
 
     public static final String GET_APK_DOWNLOAD_URL ="http://api.iwomenapp.org/apk/iwomen.apk";
 
+    public static final String GET_CHECK_IWOMENPOST_LIKE ="/api/v1/iwomenPost/like/check";
+
 
 
 }

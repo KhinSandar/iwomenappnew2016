@@ -175,4 +175,10 @@ public interface SMKSeverService {
     void getWeeklyContentResource(
             Callback<ResourceItem> iWomenPostCallback
     );
+    @FormUrlEncoded
+    @POST(CommonConfig.GET_CHECK_IWOMENPOST_LIKE)
+    void postCheckiWomenPostLike(
+            @Field("postId") String postId,
+            @Field("userId") String userId,
+            Callback<String> callback);
 }

@@ -15,6 +15,11 @@ public class SubResourceItem implements Serializable {
     @SerializedName("authorName")
     @Expose
     private String authorName;
+    @SerializedName("authorNameMM")
+    @Expose
+    private String authorNameMM;
+
+
     @SerializedName("author_id")
     @Expose
     private String authorId;
@@ -123,6 +128,24 @@ public class SubResourceItem implements Serializable {
      */
     public void setAuthorName(String authorName) {
         this.authorName = authorName;
+    }
+
+    /**
+     *
+     * @return
+     * The authorNameMM
+     */
+    public String getAuthorNameMM() {
+        return authorNameMM;
+    }
+
+    /**
+     *
+     * @param authorNameMM
+     * The authorNameMM
+     */
+    public void setAuthorNameMM(String authorNameMM) {
+        this.authorNameMM = authorNameMM;
     }
 
     /**

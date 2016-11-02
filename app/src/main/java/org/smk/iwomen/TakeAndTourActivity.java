@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 
 import org.smk.application.StoreUtil;
 import org.smk.fragment.UserGuideFragment;
@@ -16,6 +15,7 @@ import org.smk.model.UserIntro;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.ui.activity.DrawerMainActivity;
 import org.undp_iwomen.iwomen.ui.activity.MainLoginActivity;
+import org.undp_iwomen.iwomen.ui.widget.CustomButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +25,8 @@ import me.relex.circleindicator.CircleIndicator;
 public class TakeAndTourActivity extends AppCompatActivity {
 
     private ArrayList<UserIntro> intro_list;
-    private Button btn_nxt;
-    private Button btn_pre;
+    private CustomButton btn_nxt;
+    private CustomButton btn_pre;
     private ViewPager viewpager;
 
     @Override
@@ -36,8 +36,8 @@ public class TakeAndTourActivity extends AppCompatActivity {
 
         viewpager = (ViewPager) findViewById(R.id.fragment_quick_start);
         CircleIndicator indicator = (CircleIndicator) findViewById(R.id.quick_start_indicator);
-        btn_pre = (Button) findViewById(R.id.btn_pre_user_guide);
-        btn_nxt = (Button) findViewById(R.id.btn_next_user_guide);
+        btn_pre = (CustomButton) findViewById(R.id.btn_pre_user_guide);
+        btn_nxt = (CustomButton) findViewById(R.id.btn_next_user_guide);
 
         btn_nxt.setOnClickListener(clickListener);
         btn_pre.setOnClickListener(clickListener);

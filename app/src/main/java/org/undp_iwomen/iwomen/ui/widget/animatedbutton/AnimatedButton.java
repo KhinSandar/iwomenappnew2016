@@ -205,4 +205,13 @@ public class AnimatedButton extends FrameLayout implements View.OnClickListener 
     public void setText(String text){
         mTextView.setText(text);
     }
+    public void setmCheckedDrawable(){
+        mIcon.setImageDrawable(mCheckedDrawable);
+        setPressed(false);
+        if (mAnimatorSet != null) {
+            mAnimatorSet.cancel();
+        }
+
+
+    }
 }

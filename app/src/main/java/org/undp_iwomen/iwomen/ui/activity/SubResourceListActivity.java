@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -149,6 +148,8 @@ public class SubResourceListActivity extends BaseActionBarActivity {
                 intent.putExtra("ContentEng", SubResourceItems.get(i).getSubResouceContentEng());
                 intent.putExtra("ContentMM", SubResourceItems.get(i).getSubResouceContentMm());
                 intent.putExtra("AuthorName", SubResourceItems.get(i).getAuthorName());
+                intent.putExtra("AuthorNameMM", SubResourceItems.get(i).getAuthorNameMM());
+
                 intent.putExtra("AuthorTitleEng", SubResourceItems.get(i).getAuthor().getAuthorTitleEng());
                 intent.putExtra("AuthorTitleMM", SubResourceItems.get(i).getAuthor().getAuthorTitleMM());
 
