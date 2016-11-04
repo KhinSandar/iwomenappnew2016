@@ -893,6 +893,11 @@ female-pilots-iaa1s
 
     <string name="version_download">ဗားရွင္းအသစ္ေဒါင္းလုပ္ ဆြဲေနပါသည္။ ခဏေစာင့္ပါ..</string>
     <string name="version_download_title">iWomen App</string>
+    <string name="iWomenPost_Like">You already like this post</string>
+    <string name="iWomenPost_Like_mm">သင္ လိုုက္ခ္  ႏွိပ္ပီး သြားပါပီ။</string>
 
+    <string name="Code_copy">Text Copied to Clipboard! </string>
+    <string name="Code_copy_mm">သင္ ့ကုုတ္ကိုု ေကာ္ပီ ကူး လိုုက္ပါပီ။မက္ေဆ့ တြင္ Paste ( ေပ့စ္)လုုပ္ပီး
+ေပးပို ့ ႏိုင္ပါသည္။</string>
 
 </resources>

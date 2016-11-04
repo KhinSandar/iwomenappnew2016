@@ -181,4 +181,10 @@ public interface SMKSeverService {
             @Field("postId") String postId,
             @Field("userId") String userId,
             Callback<String> callback);
+    @FormUrlEncoded
+    @POST(CommonConfig.GET_CHECK_POST_LIKE)
+    void postCheckPostLike(
+            @Field("postId") String postId,
+            @Field("userId") String userId,
+            Callback<String> callback);
 }

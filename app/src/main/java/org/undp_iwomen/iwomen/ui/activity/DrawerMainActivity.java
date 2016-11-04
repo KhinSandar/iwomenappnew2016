@@ -2,6 +2,8 @@ package org.undp_iwomen.iwomen.ui.activity;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -116,6 +118,10 @@ public class DrawerMainActivity extends BaseActionBarActivity {
     private ImageView img_play_game;
     public int mversionCode = 0;
     public String mversionName ;
+
+    //Copied User Code for share
+    private ClipboardManager myClipboard;
+    private ClipData myClip;
 
 
     @Override
@@ -292,7 +298,23 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                 setTitle(getResources().getString(R.string.menu8));
             }
         });
+        myClipboard = (ClipboardManager)getSystemService(CLIPBOARD_SERVICE);
+        txt_menu_user_code.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                myClip = ClipData.newPlainText("text", user_code);
+                myClipboard.setPrimaryClip(myClip);
+
+                if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+                    org.undp_iwomen.iwomen.utils.Utils.doToastEng(getApplicationContext(), getResources().getString(R.string.Code_copy));
+                } else {
+
+                    org.undp_iwomen.iwomen.utils.Utils.doToastMM(getApplicationContext(), getResources().getString(R.string.Code_copy_mm));
+                }
+
+            }
+        });
 
         run = new Runnable() {
             @Override

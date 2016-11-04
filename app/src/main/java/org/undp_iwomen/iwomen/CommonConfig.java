@@ -163,6 +163,8 @@ public class CommonConfig {
 
     public static final String GET_CHECK_IWOMENPOST_LIKE ="/api/v1/iwomenPost/like/check";
 
+    public static final String GET_CHECK_POST_LIKE ="/api/v1/post/like/check";
+
 
 
 }
