@@ -9,7 +9,8 @@
     android:layout_height="match_parent"
     android:layout_gravity="start"
     android:background="@color/list_background"
-    android:clickable="true">
+    android:clickable="true"
+    android:baselineAligned="false">
 
     <RelativeLayout
         android:layout_width="240dp"
@@ -26,7 +27,8 @@
             android:background="@color/drawer_list_item_press"
             android:baselineAligned="true"
             android:orientation="horizontal"
-            android:paddingBottom="30dp"
+            android:paddingLeft="8dp"
+            android:paddingBottom="10dp"
             android:paddingTop="20dp">
 
 
@@ -35,7 +37,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center_vertical|left"
                 android:orientation="vertical"
-                android:paddingLeft="16dip">
+                >
 
                 <LinearLayout
                     android:id="@+id/menu_profile_area_ly"
@@ -44,7 +46,9 @@
 
                     <FrameLayout
                         android:layout_width="@dimen/feed_item_profile_pic"
-                        android:layout_height="@dimen/feed_item_profile_pic">
+                        android:layout_height="@dimen/feed_item_profile_pic"
+                        android:layout_marginLeft="8dp"
+                        >
 
                         <!--<org.undp_iwomen.iwomen.ui.widget.ProfilePictureView
                             android:id="@+id/profilePicture"
@@ -103,7 +107,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical|left"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:paddingTop="8dp">
 
                     <!--<com.facebook.login.widget.LoginButton
                         android:id="@+id/login_button2"
@@ -134,12 +139,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
 
+                            android:gravity="left"
                             android:layout_marginTop="5dp"
                             android:ellipsize="end"
-                            android:padding="2dip"
-                            android:paddingLeft="16dip"
 
-                            android:singleLine="true"
                             android:text="Name"
                             android:textColor="@color/white"
                             android:textSize="14sp" />
@@ -181,8 +184,7 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:orientation="horizontal">
+                        android:layout_gravity="left">
 
                         <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                             android:id="@+id/menu_user_code"
@@ -191,9 +193,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:ellipsize="end"
-                            android:padding="2dip"
-                            android:paddingLeft="16dip"
-                            android:singleLine="true"
                             android:text="Code-1234"
                             android:textColor="@color/white"
                             android:textSize="14sp" />
@@ -205,7 +204,8 @@
                             android:layout_marginRight="3dp"
                             android:layout_marginTop="7dp"
                             android:background="#fff"
-                            android:padding="10dp" />
+                            android:paddingLeft="10dp"
+                            android:paddingRight="5dp"/>
 
                         <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                             android:id="@+id/menu_user_post_count"
