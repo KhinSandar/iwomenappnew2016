@@ -18,7 +18,6 @@ import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Switch;
-import android.widget.Toast;
 
 import com.smk.skalertmessage.SKToastMessage;
 
@@ -200,7 +199,7 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
             mEditorUserInfo.putBoolean(CommonConfig.WILL_SHOW_NOTIFICATION, false);
             mEditorUserInfo.commit();
 
-            Toast.makeText(getContext(),"before close",Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getContext(),"before close",Toast.LENGTH_SHORT).show();
 
 
         }

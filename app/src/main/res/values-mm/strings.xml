@@ -900,4 +900,7 @@ female-pilots-iaa1s
     <string name="Code_copy_mm">သင္ ့ကုုတ္ကိုု ေကာ္ပီ ကူး လိုုက္ပါပီ။မက္ေဆ့ တြင္ Paste ( ေပ့စ္)လုုပ္ပီး
 ေပးပို ့ ႏိုင္ပါသည္။</string>
 
+    <string name="coming_soon_cmt">Coming Soon</string>
+    <string name="coming_soon_cmt_mm">မၾကာမီေဖာ္ၿပေပးပါမည္</string>
+
 </resources>

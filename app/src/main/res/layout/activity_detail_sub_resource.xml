@@ -1,17 +1,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@android:color/white"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
 
-    <include layout="@layout/toolbar"/>
+    <include layout="@layout/toolbar" />
 
 
     <View
         android:layout_width="match_parent"
         android:layout_height="5dp"
-        android:background="@drawable/toolbar_dropshawdow"/>
-    <include layout="@layout/fragment_leadership_tip_detail"/>
+        android:background="@drawable/toolbar_dropshawdow" />
 
+    <include layout="@layout/fragment_leadership_tip_detail" />
 
 </LinearLayout>

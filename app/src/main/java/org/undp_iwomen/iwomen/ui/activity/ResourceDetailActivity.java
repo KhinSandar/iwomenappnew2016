@@ -23,6 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.algo.hha.emojiicon.EmojiconEditText;
 import com.facebook.share.model.ShareLinkContent;
@@ -31,8 +32,10 @@ import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.google.gson.Gson;
 import com.makeramen.RoundedImageView;
+import com.smk.model.CommentItem;
 import com.smk.skalertmessage.SKToastMessage;
 import com.squareup.picasso.Picasso;
+import com.thuongnh.zprogresshud.ZProgressHUD;
 
 import org.smk.application.StoreUtil;
 import org.smk.clientapi.NetworkEngine;
@@ -96,7 +99,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
     private String postId, postObjId, like_status, postType;
     private String user_name, user_obj_id, user_ph, user_id,userprofile_Image_path;
     private SharedPreferences mSharedPreferencesUserInfo;
-    private TextView txt_social_no_ear_like_counts;
+    private TextView txt_social_no_ear_like_counts,txt_social_cmt;
     private ImageView img_viber_share,img__social_audio;
 
     private Cursor cursorMain;
@@ -118,6 +121,11 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
     private final String WRITE_STORAGE = "android.permission.WRITE_EXTERNAL_STORAGE";
     private final String STORAGE_READ_PERMISSION = "android.permission.READ_EXTERNAL_STORAGE";
     private final String PREPARE_AUDIO_PERMISSION = "android.permission.MODIFY_AUDIO_SETTINGS";
+
+    private ProgressBar feed_item_progressBar;
+    private ProgressBar profile_item_progressBar;
+    private RoundedImageView profile;
+    CustomTextView post_content_user_name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -291,6 +299,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
             }
         });*/
         //Linn Wah
+        listView_Comment = (ListView) findViewById(R.id.postdetail_comment_listview);
         img_viber_share = (ImageView) findViewById(R.id.social_no_ear_viber_img);
         img_viber_share.setOnClickListener(this);
 
@@ -305,6 +314,31 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
 
         mSocialNoEarLikeAnimatedButton = (AnimatedButton) findViewById(R.id.social_no_ear_like_animated_button);
         mSocialNoEarLikeAnimatedButton.setEnabled(true);
+
+
+        txt_social_cmt = (TextView)findViewById(R.id.social_no_ear_comment_txt);
+
+
+
+        /*profile_item_progressBar = (ProgressBar) findViewById(R.id.postdetail_progressBar_profile_item);
+        profile = (RoundedImageView) findViewById(R.id.postdetail_profilePic_rounded);
+        post_content_user_name = (CustomTextView) findViewById(R.id.postdetail_content_username);*/ //Linn Wah After UI Out
+
+       // progressWheel_comment = (ProgressWheel) findViewById(R.id.postdetail_progress_wheel_comment);
+
+        txt_social_cmt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (strLang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+                    org.undp_iwomen.iwomen.utils.Utils.doToastEng(getApplicationContext(), getResources().getString(R.string.coming_soon_cmt));
+                } else {
+
+                    org.undp_iwomen.iwomen.utils.Utils.doToastMM(getApplicationContext(), getResources().getString(R.string.coming_soon_cmt_mm));
+                }
+
+            }
+        });
 
         img__social_audio = (ImageView) findViewById(R.id.social_no_ear_earphone_img);
         img__social_audio.setEnabled(true);
@@ -408,20 +442,92 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
 
         });
 
-       /* listView_Comment = (ListView) findViewById(R.id.postdetail_comment_listview);
-        progressWheel_comment = (ProgressWheel) findViewById(R.id.postdetail_progress_wheel_comment);
+        //getCommentByPagination();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            listView_Comment.setNestedScrollingEnabled(true);
+        //LinnWah AfterUI out
+
+       /* post_content_user_name.setText(subResouceItemObj.getAuthorName());
+        if (mstrAuthorImgPath != null && !mstrAuthorImgPath.isEmpty()) {
+            try {
+                //profilePictureView.setVisibility(View.GONE);
+                profile.setVisibility(View.VISIBLE);
+                Picasso.with(this)
+                        .load(subResouceItemObj.getAuthorImgUrl()) //"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
+                        .placeholder(R.drawable.blank_profile)
+                        .error(R.drawable.blank_profile)
+                        .into(profile, new ImageLoadedCallback(profile_item_progressBar) {
+                            @Override
+                            public void onSuccess() {
+                                if (this.progressBar != null) {
+                                    this.progressBar.setVisibility(View.GONE);
+                                } else {
+                                    this.progressBar.setVisibility(View.VISIBLE);
+                                }
+                            }
+
+                        });
+            } catch (OutOfMemoryError outOfMemoryError) {
+                outOfMemoryError.printStackTrace();
+            }
+        } else {
+
+            profile.setImageResource(R.drawable.blank_profile);
+            profile_item_progressBar.setVisibility(View.GONE);
         }
 
-        listComment = new ArrayList<>();
-        adapter = new CommentAdapter(ResourceDetailActivity.this, listComment);
-        listView_Comment.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-        getCommentByPagination();*/
+*/
+        // Feed image
+      /*  if (item.getImage() != null && !item.getImage().isEmpty()) {
+            try {
+                postIMg.setVisibility(View.VISIBLE);
+                feed_item_progressBar.setVisibility(View.VISIBLE);
+                share_img_url_data = item.getImage();
+                Picasso.with(this)
+                        .load(item.getImage()) //"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
+                        .placeholder(R.drawable.place_holder)
+                        .error(R.drawable.place_holder)
+                        .into(postIMg, new PostDetailActivity.ImageLoadedCallback(feed_item_progressBar) {
+                            @Override
+                            public void onSuccess() {
+                                if (this.progressBar != null) {
+                                    this.progressBar.setVisibility(View.GONE);
+                                } else {
+                                    this.progressBar.setVisibility(View.VISIBLE);
+                                }
+                            }
 
+                        });
+            } catch (OutOfMemoryError outOfMemoryError) {
+                outOfMemoryError.printStackTrace();
+            }
+        } else {
+            postIMg.setVisibility(View.GONE);
+            feed_item_progressBar.setVisibility(View.GONE);
+        }*/
+
+
+        /*final List<com.smk.model.CommentItem> comment = StoreUtil.getInstance().selectFrom("commentlist");
+        if (Connection.isOnline(mContext)) {
+            // Showing local data while loading from internet
+            if (comment != null && comment.size() > 0) {
+                listComment.addAll(comment);
+                adapter.notifyDataSetChanged();
+                zPDialog = new ZProgressHUD(this);
+                zPDialog.show();
+            }
+
+            getCommentByPagination();
+        } else {
+            //SKConnectionDetector.getInstance(this).showErrorMessage();
+            if (comment != null) {
+                listComment.clear();
+                listComment.addAll(comment);
+                adapter.notifyDataSetChanged();
+            }
+        }*/
     }
+
+
 
     private boolean hasPermission(String permission) {
 
@@ -435,10 +541,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
     }
     public void getCommentByPagination() {
         if (Connection.isOnline(mContext)) {
-            progressWheel_comment.setVisibility(View.VISIBLE);
-            //TODO BY POST ID
-
-            NetworkEngine.getInstance().getCommentlistByPostIDByPagination(paginater, postObjId, new Callback<List<com.smk.model.CommentItem>>() {
+            NetworkEngine.getInstance().getCommentlistByPostIDByPagination(paginater, "tJG4qymeU8", new Callback<List<com.smk.model.CommentItem>>() {
                 @Override
                 public void success(List<com.smk.model.CommentItem> commentItems, Response response) {
 
@@ -470,6 +573,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
         } else {
             //SKConnectionDetector.getInstance(this).showErrorMessage();
         }
+
     }
 
     private void saveLikeStatusToSQLite(String postId, String user_id, String item) {
