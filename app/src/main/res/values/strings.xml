@@ -14,7 +14,7 @@
     <string name="action_settings_mm">ၿပင္ဆင္မည္</string>
     <string name="title_action_settings_eng">Language Settings</string>
     <string name="title_action_settings_mm">ဘာသာ စကားေၿပာင္းရန္</string>
-    <string name="title_notrification_eng">Get Notification</string>
+    <string name="title_notrification_eng">Get Notification  </string>
     <string name="title_notrification_mm">အသိေပးအေၾကာင္းၾကားစာလက္ခံရန္</string>
 
     <string name="title_change_theme_eng">Change Theme</string>
@@ -900,4 +900,6 @@ Make many new friends, contact your local May Doe Kabar/TLG group. See number be
     <string name="Code_copy">Text Copied to Clipboard! </string>
     <string name="Code_copy_mm">သင္ ့ကုုတ္ကိုု ေကာ္ပီ ကူး လိုုက္ပါပီ။မက္ေဆ့ တြင္ Paste ( ေပ့စ္)လုုပ္ပီး
 ေပးပို ့ ႏိုင္ပါသည္။</string>
+
+
 </resources>

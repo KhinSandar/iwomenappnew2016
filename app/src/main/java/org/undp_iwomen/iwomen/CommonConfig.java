@@ -33,6 +33,7 @@ public class CommonConfig {
     public static final String USER_UPLOAD_IMG_URL= "user_img_url";
 
     public static final String USER_ROLE = "user_role";
+    public static final String WILL_SHOW_NOTIFICATION = "show_noti";
 
     public static final String USER_CODE = "user_code";
     public static final String USER_POINTS = "user_points";
