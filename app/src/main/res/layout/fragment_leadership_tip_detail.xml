@@ -132,7 +132,9 @@
         </LinearLayout>
 
 
-       <!-- <include layout="@layout/content_resource_detail_comment" />-->
+       <!-- <include layout="@layout/content_resource_detail_comment_list" />-->
+
     </LinearLayout>
+
 
 </ScrollView>
