@@ -126,7 +126,7 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
         mSharedPreferencesUserInfo = getSharedPreferences(CommonConfig.SHARE_PREFERENCE_USER_INFO, Context.MODE_PRIVATE);
 
         mProgressDialog = new ProgressDialog(ProfileEditActivity.this);
-        mProgressDialog.setCancelable(false);
+        mProgressDialog.setCancelable(true);
 
         mContext = getApplicationContext();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -434,12 +434,12 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
                 startDrawerMainActivity();
             }
             if (arg0 == btn_edit_next) {
-                /*Intent intent = new Intent(getApplicationContext(), ProfileEditTLGActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ProfileEditTLGActivity.class);
                 intent.putExtra("UserId", mstrUserId);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);*/
-                SKToastMessage.showMessage(ProfileEditActivity.this, getResources().getString(R.string.resource_coming_soon_eng), SKToastMessage.ERROR);
+                startActivity(intent);
+                //SKToastMessage.showMessage(ProfileEditActivity.this, getResources().getString(R.string.resource_coming_soon_eng), SKToastMessage.ERROR);
 
             }
 
@@ -520,7 +520,7 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
                         mProgressDialog.dismiss();
                     }
                     startDrawerMainActivity();
-                    Log.e("<<updateUserInfo S>>","==>"+ mstrUserId + user_img_path);
+                    //Log.e("<<updateUserInfo S>>","==>"+ mstrUserId + user_img_path);
                 }
 
                 @Override
@@ -528,7 +528,7 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
                     if(mProgressDialog != null){
                         mProgressDialog.dismiss();
                     }
-                    Log.e("<<updateUserInfo Fail>>","==>"+ mstrUserId + user_img_path);
+                    //Log.e("<<updateUserInfo Fail>>","==>"+ mstrUserId + user_img_path);
 
                 }
             });

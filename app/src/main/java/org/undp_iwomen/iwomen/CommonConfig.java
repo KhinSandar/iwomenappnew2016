@@ -166,6 +166,9 @@ public class CommonConfig {
 
     public static final String GET_CHECK_POST_LIKE ="/api/v1/post/like/check";
 
+    public static final String UPDATE_USER_PHONE_URL = "/api/v1/users/{id}";
+
+
 
 
 }

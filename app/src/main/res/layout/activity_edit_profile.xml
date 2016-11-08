@@ -44,7 +44,7 @@
         android:layout_marginTop="20dp"
         style="@style/ParseLoginUI.Button.ThirdPartyLogin"
         android:visibility="gone"
-        android:text="@string/edit_profile_btn_next_tlg_edit" />
+        android:text="@string/edit_ph" />
 
 
 </RelativeLayout>
