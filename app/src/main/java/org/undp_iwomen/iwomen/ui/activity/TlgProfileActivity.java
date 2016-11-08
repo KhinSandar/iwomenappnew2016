@@ -18,7 +18,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.makeramen.RoundedImageView;
@@ -83,7 +82,7 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
     String tlgId;
     private Context mContext;
 
-    String tlgLeaderPhno,tlgLeaderViberNo;
+    String tlgLeaderPhno, tlgLeaderViberNo;
     String tlgLeaderFbLink;
     private TLGTownship tlgTownship;
 
@@ -778,13 +777,17 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
 
             case R.id.tlg_viber_img:
 
-                    try {
+                try {
                     String sphone;
-                        if (tlgLeaderViberNo != null && tlgLeaderViberNo != "") {
-                            sphone = tlgLeaderViberNo;
-                        }else{
-                            sphone = tlgLeaderPhno;
-                        }
+                    Log.e("try tlgLeaderViberNog ","==>"+tlgLeaderViberNo);
+
+                    if (tlgLeaderViberNo != null && tlgLeaderViberNo != "") {
+                        sphone = tlgLeaderViberNo;
+                    } else {
+                        sphone = tlgLeaderPhno;
+                    }
+                    Log.e("try ","==>"+tlgLeaderPhno);
+
                     Uri uri = Uri.parse("tel:" + Uri.encode(sphone));
                     Intent intent = new Intent("android.intent.action.VIEW");
                     intent.setClassName("com.viber.voip", "com.viber.voip.WelcomeActivity");
@@ -798,11 +801,12 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
                     getApplicationContext().startActivity(intent);
                 } catch (ActivityNotFoundException ex) {
 
+                    Log.e("Replye","==>"+ex.toString());
                 }
-                    Intent callIntent = new Intent(Intent.ACTION_CALL);
+                    /*Intent callIntent = new Intent(Intent.ACTION_CALL);
                     String ph = tlgLeaderPhno;
                     callIntent.setData(Uri.parse("tel:" + Uri.encode(ph)));
-                    startActivity(callIntent);
+                    startActivity(callIntent);*/
                 break;
             case R.id.tlg_fb_img:
 
