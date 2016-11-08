@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -19,6 +20,7 @@ import com.google.gson.Gson;
 
 import org.smk.iwomen.GcmNotificationDialogActivity;
 import org.smk.model.GcmMessage;
+import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.ui.activity.DrawerMainActivity;
 
@@ -34,7 +36,9 @@ public class GcmIntentService extends IntentService {
 	public GcmIntentService() {
 		super(GcmCommon.SENDER_ID);
 	}
-	
+	private SharedPreferences mSharedPreferencesUserInfo;
+	private Context mContext;
+
 	/**
 	 * Push notification with message
 	 * @param context
@@ -46,44 +50,56 @@ public class GcmIntentService extends IntentService {
 			if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1){
 				icon = R.mipmap.ic_noti_launcher;
 			}
-
-			long when = System.currentTimeMillis();
-			NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
-			GcmMessage gcmMessage = new Gson().fromJson(message.getExtras().getString(GcmCommon.MESSAGE_KEY), GcmMessage.class);
-			Log.i("iWomen","Gcm Message: "+ message.getExtras().getString(GcmCommon.MESSAGE_KEY));
-			Intent notificationIntent = new Intent(context, DrawerMainActivity.class).putExtra("gcm_message", new Gson().toJson(gcmMessage));
-
-			notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-			PendingIntent intent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-			
-			NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
-			builder.setSmallIcon(icon);
-			builder.setContentTitle(gcmMessage.getTitle());
-			builder.setStyle(new NotificationCompat.BigTextStyle().bigText(gcmMessage.getMessage()));
-			builder.setContentText(gcmMessage.getMessage());
-			builder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
-			builder.setAutoCancel(true);
-			builder.setWhen(when);
-			builder.addAction(icon, "i-Women", intent);
+			mContext = context;
+			mSharedPreferencesUserInfo = mContext.getSharedPreferences(CommonConfig.SHARE_PREFERENCE_USER_INFO, Context.MODE_PRIVATE);
 
 
-			if(gcmMessage.getImage() != null && gcmMessage.getMessage().length() > 0){
-				Bitmap bmURL=getBitmapFromURL(gcmMessage.getImage().replace(" ", "%20"));
-				if(bmURL!=null){
-					float multiplier= getImageFactor(getResources());
-					bmURL=Bitmap.createScaledBitmap(bmURL, (int)(bmURL.getWidth()*multiplier), (int)(bmURL.getHeight()*multiplier), false);
-					builder.setLargeIcon(bmURL);
+			boolean willShowNoti = mSharedPreferencesUserInfo.getBoolean(CommonConfig.WILL_SHOW_NOTIFICATION, true);
+			if(willShowNoti) {
+				long when = System.currentTimeMillis();
+				NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
+				GcmMessage gcmMessage = new Gson().fromJson(message.getExtras().getString(GcmCommon.MESSAGE_KEY), GcmMessage.class);
+				Log.i("iWomen","Gcm Message: "+ message.getExtras().getString(GcmCommon.MESSAGE_KEY));
+				Intent notificationIntent = new Intent(context, DrawerMainActivity.class).putExtra("gcm_message", new Gson().toJson(gcmMessage));
+
+				notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+				PendingIntent intent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+				NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
+				builder.setSmallIcon(icon);
+				builder.setContentTitle(gcmMessage.getTitle());
+				builder.setStyle(new NotificationCompat.BigTextStyle().bigText(gcmMessage.getMessage()));
+				builder.setContentText(gcmMessage.getMessage());
+				builder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+				builder.setAutoCancel(true);
+				builder.setWhen(when);
+				builder.addAction(icon, "i-Women", intent);
+
+
+				if(gcmMessage.getImage() != null && gcmMessage.getMessage().length() > 0){
+					Bitmap bmURL=getBitmapFromURL(gcmMessage.getImage().replace(" ", "%20"));
+					if(bmURL!=null){
+						float multiplier= getImageFactor(getResources());
+						bmURL=Bitmap.createScaledBitmap(bmURL, (int)(bmURL.getWidth()*multiplier), (int)(bmURL.getHeight()*multiplier), false);
+						builder.setLargeIcon(bmURL);
+					}
 				}
-			}
-			builder.setContentIntent(intent);
-			  
-			Random random = new Random();
-			int m = random.nextInt(9999 - 1000) + 1000;
-			notificationManager.notify(m, builder.build());
+				builder.setContentIntent(intent);
 
-			Intent popuIntent = new Intent(context, GcmNotificationDialogActivity.class).putExtra("gcm_message", new Gson().toJson(gcmMessage));;
-			popuIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			this.getApplicationContext().startActivity(popuIntent);
+				Random random = new Random();
+				int m = random.nextInt(9999 - 1000) + 1000;
+				notificationManager.notify(m, builder.build());
+
+				Intent popuIntent = new Intent(context, GcmNotificationDialogActivity.class).putExtra("gcm_message", new Gson().toJson(gcmMessage));;
+				popuIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				this.getApplicationContext().startActivity(popuIntent);
+			}else{
+				//Nothing do
+
+				Log.i("iWomen==","Gcm Message: Close");
+
+			}
+
 		}
 	}
 	
@@ -113,6 +129,28 @@ public class GcmIntentService extends IntentService {
 		}
 	      
 	}
+	public void CloseNotificationByID() {
+		Random random = new Random();
+		int m = random.nextInt(9999 - 1000) + 1000;
+		if (Context.NOTIFICATION_SERVICE != null) {
+			String NS = Context.NOTIFICATION_SERVICE;
+			NotificationManager nMgr = (NotificationManager) getApplicationContext()
+					.getSystemService(NS);
+			nMgr.cancel(m);
+		}
+
+	}
+
+	public void CloseAllNotification() {
+		if (Context.NOTIFICATION_SERVICE != null) {
+			NotificationManager nMgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+			nMgr.cancelAll();
+		}
+
+	}
+
+
+
 
 	@Override
 	protected void onHandleIntent(Intent intent) {
@@ -124,5 +162,7 @@ public class GcmIntentService extends IntentService {
 			generateNotification(this, intent);	
 		}
 	}
+
+
 
 }

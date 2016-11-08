@@ -93,14 +93,26 @@
             android:visibility="gone"
             android:background="#c3c3c3" />
 
-        <CheckBox
+        <!--<CheckBox
             android:id="@+id/settings_getnotification"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:visibility="visible"
-            android:text="Get Notification" />
-
+            android:text="Get Notification" />-->
+        <Switch
+            android:id="@+id/setting_sw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:checked="true"
+            android:paddingLeft="10dp"
+            android:gravity="left"
+            android:textSize="13sp"
+            android:textOff="No"
+            android:textOn="Yes"
+            android:text="@string/title_notrification_eng" />
+                
 
         <View
             android:layout_width="match_parent"
