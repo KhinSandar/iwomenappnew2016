@@ -11,7 +11,20 @@
         android:layout_width="match_parent"
         android:layout_height="5dp"
         android:background="@drawable/toolbar_dropshawdow" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <include layout="@layout/fragment_leadership_tip_detail" />
+    </LinearLayout>
+    <!--<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom">
+        <include layout="@layout/activity_resource_detail_comment"/>
+    </LinearLayout>-->
 
 </LinearLayout>
+
+
+
