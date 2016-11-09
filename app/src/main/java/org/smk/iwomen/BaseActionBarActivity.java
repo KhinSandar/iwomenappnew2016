@@ -208,7 +208,9 @@ public class BaseActionBarActivity extends AppCompatActivity{
 		btn_now_know.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				finish();
+				//finish();
+
+
 			}
 		});
 
@@ -253,6 +255,7 @@ public class BaseActionBarActivity extends AppCompatActivity{
 
 	public void showFeedBack(final String userId){
 		final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+
 		View convertView = View.inflate(this,R.layout.dialog_feedback,null);
 		final EditText feedback = (EditText) convertView.findViewById(R.id.edt_review);
 		Button btn_ok = (Button)convertView.findViewById(R.id.btn_ok);
@@ -263,6 +266,7 @@ public class BaseActionBarActivity extends AppCompatActivity{
 		btn_now_know.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+
 				finish();
 			}
 		});

@@ -35,6 +35,8 @@ public class CommonConfig {
     public static final String USER_ROLE = "user_role";
     public static final String WILL_SHOW_NOTIFICATION = "show_noti";
 
+    public static final String SPLASH_FIRST_TIME = "splash_1st_time";
+
     public static final String USER_CODE = "user_code";
     public static final String USER_POINTS = "user_points";
     public static final String USER_SHARE_STATUS = "user_share_status";

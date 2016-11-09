@@ -9,10 +9,10 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 
 import com.smk.skalertmessage.SKToastMessage;
 
-import org.smk.application.StoreUtil;
 import org.smk.iwomen.BaseActionBarActivity;
 import org.smk.iwomen.TakeAndTourActivity;
 import org.undp_iwomen.iwomen.CommonConfig;
@@ -27,9 +27,12 @@ public class SplashActivity extends BaseActionBarActivity {
 
     SharePrefUtils sharePrefUtils;
 
+    private SharedPreferences mSharedPreferencesUserInfo;
+    private SharedPreferences.Editor mEditorUserInfo;
+
     // Splash screen timer
     private static int SPLASH_TIME_OUT = 1000;
-    private SharedPreferences mSharedPreferences;
+    //private SharedPreferences mSharedPreferences;
     private ProgressWheel mLoadingProgress;
     //private CustomTextView mNoInternetErrorTextView;
     private boolean isFetching = false;
@@ -48,7 +51,10 @@ public class SplashActivity extends BaseActionBarActivity {
         setContentView(R.layout.activity_splash_img);
         sharePrefUtils = SharePrefUtils.getInstance(this);
 
-        mSharedPreferences = getSharedPreferences(CommonConfig.SHARE_PREFERENCE_USER_INFO, Context.MODE_PRIVATE);
+        //mSharedPreferences = getSharedPreferences(CommonConfig.SHARE_PREFERENCE_USER_INFO, Context.MODE_PRIVATE);
+        mSharedPreferencesUserInfo = getSharedPreferences(CommonConfig.SHARE_PREFERENCE_USER_INFO, Context.MODE_PRIVATE);
+        mEditorUserInfo = mSharedPreferencesUserInfo.edit();
+
         mLoadingProgress = (ProgressWheel) findViewById(R.id.splash_loading);
         //mNoInternetErrorTextView = (CustomTextView) findViewById(R.id.no_internet_error_loading);
 
@@ -60,40 +66,38 @@ public class SplashActivity extends BaseActionBarActivity {
         doFetching();
     }
 
-    /*@Override
-    public boolean onTouchEvent(MotionEvent event) {
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                doFetching();
-                return true;
-        }
-        return super.onTouchEvent(event);
-    }*/
+
 
     private void doFetching() {
 
-        if (sharePrefUtils.isFirstTime()) {
+        Boolean isFirsttime = mSharedPreferencesUserInfo.getBoolean(CommonConfig.SPLASH_FIRST_TIME, true);
 
 
+        Log.e("doFetching","is1st====>"+isFirsttime);
+        if (isFirsttime) {
 
-            sharePrefUtils.setFirstTime(false);
-            startNextActivity(SPLASH_TIME_OUT);
-
+            //sharePrefUtils.setFirstTime(false);
+            mEditorUserInfo.putBoolean(CommonConfig.SPLASH_FIRST_TIME, false);
+            mEditorUserInfo.commit();
+            startNextActivity(SPLASH_TIME_OUT, isFirsttime);
 
         } else {
             // everything is ok, start next activity directly
             //sharePrefUtils.setFirstTime(false);
-            startNextActivity(SPLASH_TIME_OUT);
+            startNextActivity(SPLASH_TIME_OUT, isFirsttime);
         }
     }
 
 
-    private void startNextActivity(int splashTimeOut) {
+    private void startNextActivity(int splashTimeOut , final Boolean status) {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Boolean take_tour = StoreUtil.getInstance().selectFrom("user_guide");
-                if(take_tour != null && take_tour){
+                //Boolean take_tour = StoreUtil.getInstance().selectFrom("user_guide");
+
+                //Boolean take_tour = mSharedPreferencesUserInfo.getBoolean(CommonConfig.SPLASH_FIRST_TIME, true);
+                //Log.e("StartNextActivit","==>"+take_tour);
+                if(!status){ // != null && take_tour
                     Intent i = new Intent(SplashActivity.this, MainLoginActivity.class);//DrawerMainActivity
                     startActivity(i);
                 }else{
