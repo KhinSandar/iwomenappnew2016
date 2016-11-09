@@ -43,6 +43,7 @@ import org.smk.model.PhotoUpload;
 import org.undp_iwomen.iwomen.BuildConfig;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
+import org.undp_iwomen.iwomen.model.MyTypeFace;
 import org.undp_iwomen.iwomen.ui.activity.DrawerMainActivity;
 import org.undp_iwomen.iwomen.ui.activity.TalkTogetherMainActivity;
 import org.undp_iwomen.iwomen.ui.widget.CircleProgressBar;
@@ -128,6 +129,7 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
     private final String PREPARE_AUDIO_PERMISSION = "android.permission.MODIFY_AUDIO_SETTINGS";
     private final String STORAGE_READ_PERMISSION = "android.permission.READ_EXTERNAL_STORAGE";
     private ZProgressHUD zPDialog;
+    private Context mContext;
 
     public NewPostPostFragment() {
     }
@@ -164,6 +166,7 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
     }
 
     public void init(View rootView) {
+        mContext = getActivity().getApplicationContext();
 
         take_photo_btn = (CustomTextView) rootView.findViewById(R.id.new_post_photo_take_btn);
         upload_photo_btn = (CustomTextView) rootView.findViewById(R.id.new_post_photo_upload_btn);
@@ -196,11 +199,23 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
 
         audio_record_progress_view.setVisibility(View.INVISIBLE);
 
-        if (mstr_lang != null && mstr_lang.equals(Utils.MM_LANG)) {
+        /*if (mstr_lang != null && mstr_lang.equals(Utils.MM_LANG)) {
             et_postDesc.setHint(getResources().getString(R.string.post_body_hint_mm));
         } else {
 
             et_postDesc.setHint(getResources().getString(R.string.post_body_hint_eng));
+        }*/
+        if (mstr_lang != null && mstr_lang.equals(Utils.MM_LANG)) {
+            et_postDesc.setHint(getResources().getString(R.string.post_body_hint_mm));
+            et_postDesc.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
+        } else if (mstr_lang != null && mstr_lang.equals(Utils.MM_LANG_UNI)) {
+            et_postDesc.setHint(getResources().getString(R.string.post_body_hint_mm));
+            et_postDesc.setTypeface(MyTypeFace.get(mContext, MyTypeFace.UNI));
+        } else if (mstr_lang != null && mstr_lang.equals(Utils.MM_LANG_DEFAULT)) {
+            et_postDesc.setHint(getResources().getString(R.string.post_body_hint_mm));
+        } else {
+            et_postDesc.setHint(getResources().getString(R.string.post_body_hint_eng));
+            et_postDesc.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
         }
 
 

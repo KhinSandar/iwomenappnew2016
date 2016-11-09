@@ -349,12 +349,8 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
         //FB SHARE
         setContentView(R.layout.activity_post_detail_v2);
         sharePrefLanguageUtil = getSharedPreferences(Utils.PREF_SETTING, Context.MODE_PRIVATE);
-
         mstr_lang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
-
-
         //Log.e("<<<<PostID at Detail>>>>","===>" + postId);
-
         init();
         initEmojiIcon();
 
@@ -369,9 +365,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
 
         gridView.setOnScrollListener(this);
         //gridView.setOnItemClickListener(this);
-
         //storageUtil = StorageUtil.getInstance(getApplicationContext());
-
 
     }
 
@@ -504,71 +498,92 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
                         if (postType.equalsIgnoreCase("iWomenPost")) {
 
                             //Check status
-                            if (mstrReturn.equals("false") || mstrReturn.equalsIgnoreCase("false")) {
-                                //
-                                SMKserverAPI.getInstance().getService().postIWomenPostLike(postId, user_id, new Callback<LikeItem>() {
-                                    @Override
-                                    public void success(LikeItem item, Response response) {
-                                        Log.e("PostDetailLike>>", item.toString());
+                            if (mstrReturn != null) {
+                                if (mstrReturn.equals("false") || mstrReturn.equalsIgnoreCase("false")) {
+                                    //
+                                    SMKserverAPI.getInstance().getService().postIWomenPostLike(postId, user_id, new Callback<LikeItem>() {
+                                        @Override
+                                        public void success(LikeItem item, Response response) {
+                                            Log.e("PostDetailLike>>", item.toString());
 
-                                        mLikeAnimatedButton.setEnabled(false);
-                                        mLikeAnimatedButton.setText(String.valueOf(iWomenPost.getLikes() + 1));
-                                        mLikeAnimatedButton.setOnClickListener(PostDetailActivity.this);
+                                            mLikeAnimatedButton.setEnabled(false);
+                                            mLikeAnimatedButton.setText(String.valueOf(iWomenPost.getLikes() + 1));
+                                            mLikeAnimatedButton.setOnClickListener(PostDetailActivity.this);
 
-                                        txt_social_no_ear_like.setText(String.valueOf(iWomenPost.getLikes() + 1));
-                                        mSocialNoEarLikeAnimatedButton.setText(String.valueOf(iWomenPost.getLikes() + 1));
+                                            txt_social_no_ear_like.setText(String.valueOf(iWomenPost.getLikes() + 1));
+                                            mSocialNoEarLikeAnimatedButton.setText(String.valueOf(iWomenPost.getLikes() + 1));
 
-                                        mSocialNoEarLikeAnimatedButton.setEnabled(false);
-                                        mSocialNoEarLikeAnimatedButton.setOnClickListener(PostDetailActivity.this);
+                                            mSocialNoEarLikeAnimatedButton.setEnabled(false);
+                                            mSocialNoEarLikeAnimatedButton.setOnClickListener(PostDetailActivity.this);
+                                        }
+
+                                        @Override
+                                        public void failure(RetrofitError error) {
+                                            Log.e("PostDetailLike Fail>>", error.toString());
+
+                                        }
+                                    });
+                                } else {
+                                    if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+                                        org.undp_iwomen.iwomen.utils.Utils.doToastEng(mContext, getResources().getString(R.string.iWomenPost_Like));
+                                    } else {
+
+                                        org.undp_iwomen.iwomen.utils.Utils.doToastMM(mContext, getResources().getString(R.string.iWomenPost_Like_mm));
                                     }
-
-                                    @Override
-                                    public void failure(RetrofitError error) {
-                                        Log.e("PostDetailLike Fail>>", error.toString());
-
-                                    }
-                                });
+                                }
                             } else {
                                 if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
-                                    org.undp_iwomen.iwomen.utils.Utils.doToastEng(mContext, getResources().getString(R.string.iWomenPost_Like));
+                                    org.undp_iwomen.iwomen.utils.Utils.doToastEng(mContext, getResources().getString(R.string.audio_loading));
                                 } else {
 
-                                    org.undp_iwomen.iwomen.utils.Utils.doToastMM(mContext, getResources().getString(R.string.iWomenPost_Like_mm));
+                                    org.undp_iwomen.iwomen.utils.Utils.doToastMM(mContext, getResources().getString(R.string.audio_loading_mm));
                                 }
                             }
+
 
                         } else {
                             //Check status
-                            if (mstrPostReturn.equals("false") || mstrPostReturn.equalsIgnoreCase("false")) {
-                                SMKserverAPI.getInstance().getService().postPostsLike(postId, user_id, new Callback<LikeItem>() {
-                                    @Override
-                                    public void success(LikeItem item, Response response) {
+                            if (mstrPostReturn != null && mstrPostReturn != "") {
+                                if (mstrPostReturn.equals("false") || mstrPostReturn.equalsIgnoreCase("false")) {
+                                    SMKserverAPI.getInstance().getService().postPostsLike(postId, user_id, new Callback<LikeItem>() {
+                                        @Override
+                                        public void success(LikeItem item, Response response) {
 
-                                        mLikeAnimatedButton.setEnabled(false);
-                                        mLikeAnimatedButton.setText(String.valueOf(iWomenPost.getLikes() + 1));
-                                        mLikeAnimatedButton.setOnClickListener(PostDetailActivity.this);
-                                        txt_social_no_ear_like.setText(String.valueOf(iWomenPost.getLikes() + 1));
-                                        mSocialNoEarLikeAnimatedButton.setText(String.valueOf(iWomenPost.getLikes() + 1));
+                                            mLikeAnimatedButton.setEnabled(false);
+                                            mLikeAnimatedButton.setText(String.valueOf(iWomenPost.getLikes() + 1));
+                                            mLikeAnimatedButton.setOnClickListener(PostDetailActivity.this);
+                                            txt_social_no_ear_like.setText(String.valueOf(iWomenPost.getLikes() + 1));
+                                            mSocialNoEarLikeAnimatedButton.setText(String.valueOf(iWomenPost.getLikes() + 1));
 
-                                        mSocialNoEarLikeAnimatedButton.setEnabled(false);
-                                        mSocialNoEarLikeAnimatedButton.setOnClickListener(PostDetailActivity.this);
+                                            mSocialNoEarLikeAnimatedButton.setEnabled(false);
+                                            mSocialNoEarLikeAnimatedButton.setOnClickListener(PostDetailActivity.this);
 
-                                    }
+                                        }
 
-                                    @Override
-                                    public void failure(RetrofitError error) {
+                                        @Override
+                                        public void failure(RetrofitError error) {
 
-                                    }
-                                });
-                            }else {
-                                if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
-                                    org.undp_iwomen.iwomen.utils.Utils.doToastEng(mContext, getResources().getString(R.string.iWomenPost_Like));
+                                        }
+                                    });
                                 } else {
-                                    org.undp_iwomen.iwomen.utils.Utils.doToastMM(mContext, getResources().getString(R.string.iWomenPost_Like_mm));
+                                    if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+                                        org.undp_iwomen.iwomen.utils.Utils.doToastEng(mContext, getResources().getString(R.string.iWomenPost_Like));
+                                    } else {
+                                        org.undp_iwomen.iwomen.utils.Utils.doToastMM(mContext, getResources().getString(R.string.iWomenPost_Like_mm));
+                                    }
+                                }
+                            } else {
+                                if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+                                    org.undp_iwomen.iwomen.utils.Utils.doToastEng(mContext, getResources().getString(R.string.audio_loading));
+                                } else {
+
+                                    org.undp_iwomen.iwomen.utils.Utils.doToastMM(mContext, getResources().getString(R.string.audio_loading_mm));
                                 }
                             }
 
+
                         }
+
                     }
                 } else {
                     if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
@@ -752,7 +767,6 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
 
                             mSocialNoEarLikeAnimatedButton.setEnabled(true);
                             mSocialNoEarLikeAnimatedButton.setClickable(true);
-
 
 
                         }

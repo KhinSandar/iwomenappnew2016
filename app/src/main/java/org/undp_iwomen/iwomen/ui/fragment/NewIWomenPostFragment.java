@@ -43,6 +43,7 @@ import org.smk.model.PhotoUpload;
 import org.undp_iwomen.iwomen.BuildConfig;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
+import org.undp_iwomen.iwomen.model.MyTypeFace;
 import org.undp_iwomen.iwomen.ui.activity.DrawerMainActivity;
 import org.undp_iwomen.iwomen.ui.widget.CircleProgressBar;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
@@ -121,6 +122,7 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
     private final String CAMERA_PERMISSION = "android.permission.CAMERA";
     private SharedPreferences mSharedPreferencesUserInfo;
     private String uploadPhoto;
+    private Context mContext;
 
 
     private final String AUDIO_PERMISSION = "android.permission.RECORD_AUDIO";
@@ -163,6 +165,7 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
     }
 
     public void init(View rootView) {
+        mContext = getActivity().getApplicationContext();
 
         take_photo_btn = (CustomTextView) rootView.findViewById(R.id.new_post_photo_take_btn);
         upload_photo_btn = (CustomTextView) rootView.findViewById(R.id.new_post_photo_upload_btn);
@@ -197,9 +200,15 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
 
         if (mstr_lang != null && mstr_lang.equals(Utils.MM_LANG)) {
             et_postDesc.setHint(getResources().getString(R.string.new_iwomen_post_hint_title_mm));
+            et_postDesc.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
+        } else if (mstr_lang != null && mstr_lang.equals(Utils.MM_LANG_UNI)) {
+            et_postDesc.setHint(getResources().getString(R.string.new_iwomen_post_hint_title_mm));
+            et_postDesc.setTypeface(MyTypeFace.get(mContext, MyTypeFace.UNI));
+        } else if (mstr_lang != null && mstr_lang.equals(Utils.MM_LANG_DEFAULT)) {
+            et_postDesc.setHint(getResources().getString(R.string.new_iwomen_post_hint_title_mm));
         } else {
-
             et_postDesc.setHint(getResources().getString(R.string.new_iwomen_post_hint_title_eng));
+            et_postDesc.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
         }
 
 
@@ -213,7 +222,7 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.new_post_upload_btn:
-                Log.e("iWOmen Post Btn Click","===>");
+                Log.e("iWOmen Post Btn Click", "===>");
 
                 if (SKConnectionDetector.getInstance(getActivity()).isConnectingToInternet()) {
                     checkProcessWhattoDo();
@@ -245,7 +254,7 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
 
 
                         requestPermissions(perms, permsRequestCode);
-                    }else {
+                    } else {
                         takePicture();
                     }
                 }
@@ -293,11 +302,11 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
 
             case R.id.audio_record_done_btn:
 
-                if(mAudioFilePath == null || !new File(mAudioFilePath).exists()) {
+                if (mAudioFilePath == null || !new File(mAudioFilePath).exists()) {
                     SKToastMessage.showMessage(getActivity(), getResources().getString(R.string.audio_record_warning_1), SKToastMessage.WARNING);
-                }else if(isRecording){
+                } else if (isRecording) {
                     SKToastMessage.showMessage(getActivity(), getResources().getString(R.string.audio_record_warning_2), SKToastMessage.WARNING);
-                }else {
+                } else {
 
                     onAudioRecordDoneClick();
 
@@ -332,7 +341,7 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
 
     private void checkProcessWhattoDo() {
 
-        Log.e("iWOmen Post Btn Click","===>"+ crop_file_path);
+        Log.e("iWOmen Post Btn Click", "===>" + crop_file_path);
 
 
         if (crop_file_path != null) {
@@ -342,9 +351,9 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
             uploadingAudioFile(uploadUrl, mAudioFilePath);
         } else {
 
-            if(et_postDesc.getText().toString().isEmpty() && crop_file_path == null && mAudioFilePath == null){//this mean user doesn't choose nothing
+            if (et_postDesc.getText().toString().isEmpty() && crop_file_path == null && mAudioFilePath == null) {//this mean user doesn't choose nothing
                 SKToastMessage.showMessage(getActivity(), getResources().getString(R.string.audio_record_warning_post_something), SKToastMessage.WARNING);
-            }else {
+            } else {
 
                 //we will post all data to server, if it's here, we assume all data is ready
                 performPostUpload();
@@ -354,7 +363,7 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
     }
 
     private void takePicture() {
-        Log.e("iWOmen Post Btn Click","===> take Picture "+ crop_file_path);
+        Log.e("iWOmen Post Btn Click", "===> take Picture " + crop_file_path);
 
         chooserType = ChooserType.REQUEST_CAPTURE_PICTURE;
         imageChooserManager = new ImageChooserManager(this,
@@ -372,7 +381,7 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
     }
 
     private void chooseImage() {
-        Log.e("iWOmen Post Btn Click","===> Choose  Image"+ crop_file_path);
+        Log.e("iWOmen Post Btn Click", "===> Choose  Image" + crop_file_path);
 
         chooserType = ChooserType.REQUEST_PICK_PICTURE;
         imageChooserManager = new ImageChooserManager(this,
@@ -442,7 +451,7 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
     Callback<IWomenPost> createPostcallback = new Callback<IWomenPost>() {
         @Override
         public void success(IWomenPost iWomenPost, Response response) {
-            SKToastMessage.getInstance(getActivity()).showMessage(getActivity(),getResources().getString(R.string.audio_post_success), SKToastMessage.SUCCESS);
+            SKToastMessage.getInstance(getActivity()).showMessage(getActivity(), getResources().getString(R.string.audio_post_success), SKToastMessage.SUCCESS);
             getActivity().finish();
 
             progress_wheel.setVisibility(View.GONE);
@@ -451,7 +460,7 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
 
         @Override
         public void failure(RetrofitError error) {
-            SKToastMessage.getInstance(getActivity()).showMessage(getActivity(),getResources().getString(R.string.audio_post_error), SKToastMessage.ERROR);
+            SKToastMessage.getInstance(getActivity()).showMessage(getActivity(), getResources().getString(R.string.audio_post_error), SKToastMessage.ERROR);
 
             progress_wheel.setVisibility(View.GONE);
 
@@ -670,7 +679,7 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
             } else {
 
 
-                if (audio_record_progress_btn.getText().equals("Replay") ||audio_record_progress_btn.getText().equals("အသံ\u107Fပန္နားေထာင္မည္") ) {
+                if (audio_record_progress_btn.getText().equals("Replay") || audio_record_progress_btn.getText().equals("အသံ\u107Fပန္နားေထာင္မည္")) {
                     audio_record_progress_btn.setText(R.string.audio_stop);
                     onPlay(true);
                 } else {
@@ -708,10 +717,10 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
         onRecord(false);
 
 
-        if(mAudioFilePath != null)
-        if (new File(mAudioFilePath).exists()) {
-            wasAudioRecord = true;
-        }
+        if (mAudioFilePath != null)
+            if (new File(mAudioFilePath).exists()) {
+                wasAudioRecord = true;
+            }
 
     }
 
@@ -720,7 +729,7 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
         onPlay(false);
         onRecord(false);
 
-        if(mAudioFilePath != null) {
+        if (mAudioFilePath != null) {
             File file = new File(mAudioFilePath);
             file.delete();
         }
@@ -794,7 +803,7 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
                     //Toast.makeText(getActivity(), serverResponseMessage, Toast.LENGTH_LONG).show();
 
                     //audio_file_id = uploadId;
-                    audio_file_id = serverResponseMessage.replace("\"","").replace("\\","");
+                    audio_file_id = serverResponseMessage.replace("\"", "").replace("\\", "");
 
                     mAudioFilePath = null;
                     checkProcessWhattoDo();
@@ -844,7 +853,7 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
     }
 
     public void uploadImage() {
-        Log.e("iWOmen Post Btn Click","===> upload Image"+ crop_file_path);
+        Log.e("iWOmen Post Btn Click", "===> upload Image" + crop_file_path);
 
         File photo = new File(crop_file_path);
         MultipartTypedOutput multipartTypedOutput = new MultipartTypedOutput();
