@@ -799,10 +799,10 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
                 } catch (ActivityNotFoundException ex) {
 
                 }
-                    Intent callIntent = new Intent(Intent.ACTION_CALL);
+                   /* Intent callIntent = new Intent(Intent.ACTION_CALL);
                     String ph = tlgLeaderPhno;
                     callIntent.setData(Uri.parse("tel:" + Uri.encode(ph)));
-                    startActivity(callIntent);
+                    startActivity(callIntent);*/
                 break;
             case R.id.tlg_fb_img:
 
@@ -872,7 +872,7 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
 
                 }
 
-                break;
+                break;git
 
         }
     }
