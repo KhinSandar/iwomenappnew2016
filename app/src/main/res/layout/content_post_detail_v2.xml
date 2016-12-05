@@ -134,8 +134,8 @@
 
                 <FrameLayout
                     android:id="@+id/postdetail_credit_img_frame"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_marginRight="8dp"
                     >
 
@@ -147,8 +147,8 @@
                     <com.makeramen.RoundedImageView
                         xmlns:app="http://schemas.android.com/apk/res-auto"
                         android:id="@+id/postdetail_credit_img"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentTop="true"
@@ -165,8 +165,8 @@
                     <ProgressBar
                         android:id="@+id/postdetail_credit_progress"
                         style="?android:attr/progressBarStyle"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
 
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"

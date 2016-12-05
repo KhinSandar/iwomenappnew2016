@@ -36,6 +36,7 @@
                 android:id="@+id/btn_pre_user_guide"
                 android:textColor="@color/white"
                 android:textSize="13dp"
+                android:drawableLeft="@drawable/ic_prev"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true" />
             <View
@@ -54,6 +55,7 @@
                 android:id="@+id/btn_next_user_guide"
                 android:textColor="@color/white"
                 android:textSize="13dp"
+                android:drawableRight="@drawable/ic_next"
                 android:layout_alignParentRight="true" />
 
         </LinearLayout>

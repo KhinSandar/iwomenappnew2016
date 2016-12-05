@@ -470,7 +470,7 @@ female-pilots-iaa1s
     <string name="login_language_eng">Change Language</string>
     <string name="login_language_mm">ၿမန္မာစာ ေၿပာင္းရန္</string>
     <string name="login_language_un">မြန်မာစာ ပြောင်းရန်</string>
-    <string name="register_title_pwd">Password</string>
+    <string name="register_title_pwd">လွ်ိဳ ့၀ွက္ စာလံုုး</string>
     <string name="register_country_title">Country</string>
     <string name="register_state_title">State</string>
     <string name="register_photo_title">Upload Photo</string>
@@ -902,5 +902,8 @@ female-pilots-iaa1s
 
     <string name="coming_soon_cmt">Coming Soon</string>
     <string name="coming_soon_cmt_mm">မၾကာမီေဖာ္ၿပေပးပါမည္</string>
+
+    <string name="edit_ph">ဖုုန္းနံပါတ္ၿပင္ရန္</string>
+    <string name="edit_ph_mm">ဖုုန္းနံပါတ္ၿပင္ရန္</string>
 
 </resources>

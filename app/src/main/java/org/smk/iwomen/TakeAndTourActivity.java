@@ -13,6 +13,7 @@ import org.smk.application.StoreUtil;
 import org.smk.fragment.UserGuideFragment;
 import org.smk.model.UserIntro;
 import org.undp_iwomen.iwomen.R;
+import org.undp_iwomen.iwomen.model.MyTypeFace;
 import org.undp_iwomen.iwomen.ui.activity.DrawerMainActivity;
 import org.undp_iwomen.iwomen.ui.activity.MainLoginActivity;
 import org.undp_iwomen.iwomen.ui.widget.CustomButton;
@@ -41,6 +42,10 @@ public class TakeAndTourActivity extends AppCompatActivity {
 
         btn_nxt.setOnClickListener(clickListener);
         btn_pre.setOnClickListener(clickListener);
+
+
+        btn_nxt.setTypeface(MyTypeFace.get(getApplicationContext(), MyTypeFace.ZAWGYI));
+        btn_pre.setTypeface(MyTypeFace.get(getApplicationContext(), MyTypeFace.ZAWGYI));
 
 
         intro_list = new ArrayList<UserIntro>();

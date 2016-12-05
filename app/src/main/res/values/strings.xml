@@ -14,7 +14,7 @@
     <string name="action_settings_mm">ၿပင္ဆင္မည္</string>
     <string name="title_action_settings_eng">Language Settings</string>
     <string name="title_action_settings_mm">ဘာသာ စကားေၿပာင္းရန္</string>
-    <string name="title_notrification_eng">Get Notification  </string>
+    <string name="title_notrification_eng">Receive Notifications</string>
     <string name="title_notrification_mm">အသိေပးအေၾကာင္းၾကားစာလက္ခံရန္</string>
 
     <string name="title_change_theme_eng">Change Theme</string>
@@ -322,7 +322,7 @@
 
     <!-- Register Login Hint-->
     <string name="register_name_hint">Your Name</string>
-    <string name="register_ph_hint">Register with your real ph number otherwise you can not win prizes. </string>
+    <string name="register_ph_hint">Use your real phone number.</string>
 
     <!-- Register pwd Hint-->
     <string name="register_ph_hint_password_input_hint">Password</string>
@@ -370,7 +370,7 @@
     <string name="register_terms_greet1">Do You Agree With The Following </string>
     <string name="register_terms_greet2">Terms And Conditions?</string>
 
-    <string name="register_terms_body">Our privacy policy and terms of use   are accepted if you download this app. See More at Our Website
+    <string name="register_terms_body">Our privacy policy and terms of use are accepted if you download this app. See more on our Website
 </string>
 
     <string name="register_terms_link"> iwomenapp.org <a href="http://iwomenapp.org/"></a></string>
@@ -777,7 +777,7 @@ Shirin Ebadi, J.D., was awarded the 2003 Nobel Peace Prize for her efforts to pr
     <string name="audio_upload_post">UPLOAD POST</string>
     <string name="audio_upload_photo">UPLOAD PHOTO</string>
     <string name="aduio_take_photo">TAKE PHOTO</string>
-    <string name="audio_vid_file">Click Heret to Upload Video File</string>
+    <string name="audio_vid_file">Click Here to Upload Video File</string>
 
     <string name="win_prize_enter_code">Enter Your Friend Code</string>
 
@@ -822,7 +822,7 @@ Shirin Ebadi, J.D., was awarded the 2003 Nobel Peace Prize for her efforts to pr
 
     <string name="prize_visit_more">For more prizes visit: <a href="https://www.facebook.com/iwomenApp"></a></string>
 
-    <string name="register_photo_greet">Choose your gender ?</string>
+    <string name="register_photo_greet">Choose your gender</string>
 
     <string name="register_photo_f">Female</string>
     <string name="register_photo_m">Male</string>
@@ -904,4 +904,8 @@ Make many new friends, contact your local May Doe Kabar/TLG group. See number be
 
     <string name="coming_soon_cmt">Coming Soon</string>
     <string name="coming_soon_cmt_mm">မၾကာမီေဖာ္ၿပေပးပါမည္</string>
+
+
+    <string name="edit_ph">Edit Phone Number</string>
+    <string name="edit_ph_mm">ဖုုန္းနံပါတ္ၿပင္ရန္</string>
 </resources>

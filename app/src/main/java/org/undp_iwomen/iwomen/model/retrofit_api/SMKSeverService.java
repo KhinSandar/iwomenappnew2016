@@ -23,6 +23,7 @@ import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
 import retrofit.http.POST;
+import retrofit.http.PUT;
 import retrofit.http.Path;
 import retrofit.http.Query;
 import retrofit.mime.MultipartTypedOutput;
@@ -187,4 +188,12 @@ public interface SMKSeverService {
             @Field("postId") String postId,
             @Field("userId") String userId,
             Callback<String> callback);
+
+    @FormUrlEncoded
+    @PUT(CommonConfig.UPDATE_USER_PHONE_URL)
+    void postUserPhone(
+            @Path("id") String id,
+            @Field("phoneNo") String phoneNo,
+            Callback<User> callback);
+
 }
