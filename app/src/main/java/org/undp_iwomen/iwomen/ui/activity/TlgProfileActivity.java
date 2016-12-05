@@ -872,7 +872,7 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
 
                 }
 
-                break;git
+                break;
 
         }
     }

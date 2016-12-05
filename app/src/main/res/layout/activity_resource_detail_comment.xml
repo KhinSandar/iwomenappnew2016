@@ -48,7 +48,7 @@
                 android:paddingRight="@dimen/activity_vertical_margin">
 
                 <ImageView
-                    android:id="@+id/postdetail_submit_comment"
+                    android:id="@+id/resourcedetail_submit_comment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
