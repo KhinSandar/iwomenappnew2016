@@ -1,6 +1,8 @@
 package org.undp_iwomen.iwomen.ui.activity;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.ContentValues;
 import android.content.Context;
@@ -8,6 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,17 +18,25 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.Toolbar;
 import android.text.util.Linkify;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.algo.hha.emojiicon.EmojiconEditText;
+import com.algo.hha.emojiicon.EmojiconGridView;
+import com.algo.hha.emojiicon.EmojiconsPopup;
+import com.algo.hha.emojiicon.emoji.Emojicon;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareButton;
 import com.google.android.gms.analytics.HitBuilders;
@@ -34,26 +45,32 @@ import com.google.gson.Gson;
 import com.makeramen.RoundedImageView;
 import com.smk.model.CommentItem;
 import com.smk.skalertmessage.SKToastMessage;
+import com.smk.skconnectiondetector.SKConnectionDetector;
 import com.squareup.picasso.Picasso;
 import com.thuongnh.zprogresshud.ZProgressHUD;
 
 import org.smk.application.StoreUtil;
 import org.smk.clientapi.NetworkEngine;
 import org.smk.iwomen.BaseActionBarActivity;
+import org.smk.model.Sticker;
 import org.smk.model.SubResourceItem;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.manager.MainApplication;
 import org.undp_iwomen.iwomen.model.Helper;
 import org.undp_iwomen.iwomen.model.MyTypeFace;
+import org.undp_iwomen.iwomen.model.retrofit_api.SMKserverAPI;
 import org.undp_iwomen.iwomen.model.retrofit_api.SMKserverStringConverterAPI;
 import org.undp_iwomen.iwomen.provider.IwomenProviderData;
 import org.undp_iwomen.iwomen.ui.adapter.CommentAdapter;
+import org.undp_iwomen.iwomen.ui.adapter.StickerGridViewAdapter;
 import org.undp_iwomen.iwomen.ui.fragment.AudioVisualizerFragment;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.ui.widget.ProgressWheel;
+import org.undp_iwomen.iwomen.ui.widget.WrappedGridView;
 import org.undp_iwomen.iwomen.ui.widget.animatedbutton.AnimatedButton;
 import org.undp_iwomen.iwomen.utils.Connection;
+import org.undp_iwomen.iwomen.utils.StorageUtil;
 import org.undp_iwomen.iwomen.utils.Utils;
 
 import java.util.ArrayList;
@@ -64,7 +81,7 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 
-public class ResourceDetailActivity extends BaseActionBarActivity implements View.OnClickListener {
+public class ResourceDetailActivity extends BaseActionBarActivity implements View.OnClickListener, AbsListView.OnScrollListener {
 
 
     private CustomTextView textViewTitle;
@@ -121,16 +138,31 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
     private final String WRITE_STORAGE = "android.permission.WRITE_EXTERNAL_STORAGE";
     private final String STORAGE_READ_PERMISSION = "android.permission.READ_EXTERNAL_STORAGE";
     private final String PREPARE_AUDIO_PERMISSION = "android.permission.MODIFY_AUDIO_SETTINGS";
-
+    //TODO for sticker grid show up
+    private StickerGridViewAdapter mAdapter;
+    private WrappedGridView gridView;
+    private ArrayList<Sticker> stickerArrayList;
+    private int sticker_paginater = 1;
+    private com.pnikosis.materialishprogress.ProgressWheel progress_wheel;
     private ProgressBar feed_item_progressBar;
     private ProgressBar profile_item_progressBar;
     private RoundedImageView profile;
     CustomTextView post_content_user_name;
+
+    private ZProgressHUD zPDialog;
+    private boolean mHasRequestedMore;
+    private StorageUtil storageUtil;
+    private TextView txt_like_count, txt_cmd_count;
+    private TextView txt_social_no_ear_comment;
+    private ProgressDialog mProgressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_sub_resource);//activity_detail_sub_resource
         sharePrefLanguageUtil = getSharedPreferences(Utils.PREF_SETTING, Context.MODE_PRIVATE);
+
+        mProgressDialog = new ProgressDialog(ResourceDetailActivity.this);
+        mProgressDialog.setCancelable(false);
 
         mContext = getApplicationContext();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -143,6 +175,52 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+
+
+        init();
+        initEmojiIcon();
+
+
+        //Sticker Load
+        progress_wheel = (com.pnikosis.materialishprogress.ProgressWheel) findViewById(R.id.progress_wheel);
+        gridView = (WrappedGridView) findViewById(R.id.grid_view_cate); // Implement On Item click listener
+
+        //gridView.setLoadingView(progressBar);
+        progress_wheel.spin();
+        progress_wheel.setRimColor(Color.LTGRAY);
+        gridView.setLoadingView(progress_wheel);
+
+        gridView.setOnScrollListener(this);
+
+        final List<com.smk.model.CommentItem> comment = StoreUtil.getInstance().selectFrom("commentlist");
+        if (Connection.isOnline(mContext)) {
+            // Showing local data while loading from internet
+            if (comment != null && comment.size() > 0) {
+                listComment.addAll(comment);
+                adapter.notifyDataSetChanged();
+                zPDialog = new ZProgressHUD(this);
+                zPDialog.show();
+            }
+
+            getCommentByPagination();
+        } else {
+            //SKConnectionDetector.getInstance(this).showErrorMessage();
+            if (comment != null) {
+                listComment.clear();
+                listComment.addAll(comment);
+                adapter.notifyDataSetChanged();
+            }
+        }
+
+    }
+
+    private void init() {
+
+        ly_sticker_holder = (LinearLayout) findViewById(R.id.postdetail_ly_sticker_holder);
+        emojiIconToggle = (ImageView) findViewById(R.id.toggleEmojiIcon);
+        stickerImg = (RoundedImageView) findViewById(R.id.postdetail_img_sticker);
+        et_comment = (EmojiconEditText) findViewById(R.id.postdetail_et_comment_upload);
+        img_comment_submit = (ImageView) findViewById(R.id.resourcedetail_submit_comment);
 
         Intent i  =getIntent();
 
@@ -162,9 +240,6 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
         mstrAuthorId = i.getStringExtra("AuthorId");
         mstrAuthorImgPath = i.getStringExtra("AuthorImgPath");
         mstrPostDate = i.getStringExtra("PostDate");
-
-
-
 
         txtName = (CustomTextView)findViewById(R.id.tipdetail_title_name);
         txtBody = (CustomTextView)findViewById(R.id.tipdetail_body);
@@ -191,7 +266,6 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
         user_id = mSharedPreferencesUserInfo.getString(CommonConfig.USER_ID, null);
         userprofile_Image_path = mSharedPreferencesUserInfo.getString(CommonConfig.USER_UPLOAD_IMG_URL, null);
 
-
         txtName.setVisibility(View.GONE);
 
         strLang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
@@ -212,6 +286,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
 
             txtName.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
             txtBody.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
+            et_comment.setTypeface(MyTypeFace.get(mContext,MyTypeFace.NORMAL));
         }else if (strLang.equals(Utils.MM_LANG)) {
             profileName.setText(mstrAuthorNameMM);
 
@@ -225,6 +300,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
             txtName.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
             txtBody.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
             txtAuthorRole.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
+            et_comment.setTypeface(MyTypeFace.get(mContext,MyTypeFace.ZAWGYI));
 
         } else {//FOR ALl MM FONT
 
@@ -234,13 +310,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
             txtBody.setText(mstrContentMm);
             txtName.setText(mstrSubResourceTitleMm);
             txtAuthorRole.setText(mstrAuthorRoleMM);
-
-            //textViewTitle.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
-            //txtName.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
-            //txtBody.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
-
         }
-
 
 
         profileProgressbar.setVisibility(View.GONE);
@@ -274,8 +344,6 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
             profileProgressbar.setVisibility(View.GONE);
         }
 
-        //profileImg.setImageResource(R.drawable.astrid);
-
         txtMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -287,17 +355,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
                 mContext.startActivity(intent);
             }
         });
-        /*lysocial.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (strLang.equals(Utils.ENG_LANG)) {
-                    Utils.doToastEng(mContext, getResources().getString(R.string.resource_coming_soon_eng));
-                } else {
 
-                    Utils.doToastMM(mContext, getResources().getString(R.string.resource_coming_soon_mm));
-                }
-            }
-        });*/
         //Linn Wah
         listView_Comment = (ListView) findViewById(R.id.postdetail_comment_listview);
         img_viber_share = (ImageView) findViewById(R.id.social_no_ear_viber_img);
@@ -320,11 +378,11 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
 
 
 
-        /*profile_item_progressBar = (ProgressBar) findViewById(R.id.postdetail_progressBar_profile_item);
+        profile_item_progressBar = (ProgressBar) findViewById(R.id.postdetail_progressBar_profile_item);
         profile = (RoundedImageView) findViewById(R.id.postdetail_profilePic_rounded);
-        post_content_user_name = (CustomTextView) findViewById(R.id.postdetail_content_username);*/ //Linn Wah After UI Out
+        post_content_user_name = (CustomTextView) findViewById(R.id.postdetail_content_username);
 
-       // progressWheel_comment = (ProgressWheel) findViewById(R.id.postdetail_progress_wheel_comment);
+        progressWheel_comment = (ProgressWheel) findViewById(R.id.postdetail_progress_wheel_comment);
 
         txt_social_cmt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -353,7 +411,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
         mstrAudioFilePath = subResouceItemObj.getAudioFile();
         //strLang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
 
-         //temp for SQLite
+        //temp for SQLite
         /* cursorMain = getContentResolver().query(IwomenProviderData.SubResourceDetailProvider.CONTETNT_URI, null, "sub_resource_id = ? AND user_id = ?", new String[]{ postId,user_id },null );
 
          Log.e("Cursor Count >>>>"," " + cursorMain.getCount());
@@ -374,27 +432,27 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
             public void onClick() {
                 {
 
-                        SMKserverStringConverterAPI.getInstance().getService().postiWomenSubResourceDetailLikes(postId, user_id, new Callback<String>() {
-                            @Override
-                            public void success(String item, Response response) {
-                                Log.e("ResourceLike>>",item);
-                                mSocialNoEarLikeAnimatedButton.setEnabled(false);
-                                mSocialNoEarLikeAnimatedButton.setText(item);
-                                mSocialNoEarLikeAnimatedButton.setEnabled(false);
-                                mSocialNoEarLikeAnimatedButton.setOnClickListener(ResourceDetailActivity.this);
-                                saveLikeStatusToSQLite(postId,user_id,item);
+                    SMKserverStringConverterAPI.getInstance().getService().postiWomenSubResourceDetailLikes(postId, user_id, new Callback<String>() {
+                        @Override
+                        public void success(String item, Response response) {
+                            Log.e("ResourceLike>>",item);
+                            mSocialNoEarLikeAnimatedButton.setEnabled(false);
+                            mSocialNoEarLikeAnimatedButton.setText(item);
+                            mSocialNoEarLikeAnimatedButton.setEnabled(false);
+                            mSocialNoEarLikeAnimatedButton.setOnClickListener(ResourceDetailActivity.this);
+                            saveLikeStatusToSQLite(postId,user_id,item);
 
 
-                            }
+                        }
 
-                            @Override
-                            public void failure(RetrofitError error) {
-                                Log.e("ResourceLike Fail>>",error.toString());
-                            }
-                        });
-                    }
-
+                        @Override
+                        public void failure(RetrofitError error) {
+                            Log.e("ResourceLike Fail>>",error.toString());
+                        }
+                    });
                 }
+
+            }
         });
 
         img__social_audio.setOnClickListener(new View.OnClickListener() {
@@ -403,7 +461,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
             public void onClick(View v) {
                 // for Audio Streaming
 
-               if (mstrAudioFilePath.length() == 10) {
+                if (mstrAudioFilePath.length() == 10) {
                     SKToastMessage.showMessage(ResourceDetailActivity.this, getResources().getString(R.string.resource_coming_soon_eng), SKToastMessage.ERROR);
                 }
 
@@ -442,91 +500,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
 
         });
 
-        //getCommentByPagination();
-
-        //LinnWah AfterUI out
-
-       /* post_content_user_name.setText(subResouceItemObj.getAuthorName());
-        if (mstrAuthorImgPath != null && !mstrAuthorImgPath.isEmpty()) {
-            try {
-                //profilePictureView.setVisibility(View.GONE);
-                profile.setVisibility(View.VISIBLE);
-                Picasso.with(this)
-                        .load(subResouceItemObj.getAuthorImgUrl()) //"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
-                        .placeholder(R.drawable.blank_profile)
-                        .error(R.drawable.blank_profile)
-                        .into(profile, new ImageLoadedCallback(profile_item_progressBar) {
-                            @Override
-                            public void onSuccess() {
-                                if (this.progressBar != null) {
-                                    this.progressBar.setVisibility(View.GONE);
-                                } else {
-                                    this.progressBar.setVisibility(View.VISIBLE);
-                                }
-                            }
-
-                        });
-            } catch (OutOfMemoryError outOfMemoryError) {
-                outOfMemoryError.printStackTrace();
-            }
-        } else {
-
-            profile.setImageResource(R.drawable.blank_profile);
-            profile_item_progressBar.setVisibility(View.GONE);
-        }
-
-*/
-        // Feed image
-      /*  if (item.getImage() != null && !item.getImage().isEmpty()) {
-            try {
-                postIMg.setVisibility(View.VISIBLE);
-                feed_item_progressBar.setVisibility(View.VISIBLE);
-                share_img_url_data = item.getImage();
-                Picasso.with(this)
-                        .load(item.getImage()) //"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg" //deal.photo1
-                        .placeholder(R.drawable.place_holder)
-                        .error(R.drawable.place_holder)
-                        .into(postIMg, new PostDetailActivity.ImageLoadedCallback(feed_item_progressBar) {
-                            @Override
-                            public void onSuccess() {
-                                if (this.progressBar != null) {
-                                    this.progressBar.setVisibility(View.GONE);
-                                } else {
-                                    this.progressBar.setVisibility(View.VISIBLE);
-                                }
-                            }
-
-                        });
-            } catch (OutOfMemoryError outOfMemoryError) {
-                outOfMemoryError.printStackTrace();
-            }
-        } else {
-            postIMg.setVisibility(View.GONE);
-            feed_item_progressBar.setVisibility(View.GONE);
-        }*/
-
-
-        /*final List<com.smk.model.CommentItem> comment = StoreUtil.getInstance().selectFrom("commentlist");
-        if (Connection.isOnline(mContext)) {
-            // Showing local data while loading from internet
-            if (comment != null && comment.size() > 0) {
-                listComment.addAll(comment);
-                adapter.notifyDataSetChanged();
-                zPDialog = new ZProgressHUD(this);
-                zPDialog.show();
-            }
-
-            getCommentByPagination();
-        } else {
-            //SKConnectionDetector.getInstance(this).showErrorMessage();
-            if (comment != null) {
-                listComment.clear();
-                listComment.addAll(comment);
-                adapter.notifyDataSetChanged();
-            }
-        }*/
     }
-
 
 
     private boolean hasPermission(String permission) {
@@ -541,7 +515,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
     }
     public void getCommentByPagination() {
         if (Connection.isOnline(mContext)) {
-            NetworkEngine.getInstance().getCommentlistByPostIDByPagination(paginater, "tJG4qymeU8", new Callback<List<com.smk.model.CommentItem>>() {
+            NetworkEngine.getInstance().getCommentlistByPostIDByPagination(paginater, "7RFHAFd5yR", new Callback<List<com.smk.model.CommentItem>>() {
                 @Override
                 public void success(List<com.smk.model.CommentItem> commentItems, Response response) {
 
@@ -561,8 +535,8 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
 
                     StoreUtil.getInstance().saveTo("commentlist", listComment);
                     //TODO get sticker for comment
-                   /* if (!alreadySticker)
-                       LoadStickerData();*/
+                   if (!alreadySticker)
+                      LoadStickerData();
                 }
 
                 @Override
@@ -571,7 +545,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
                 }
             });
         } else {
-            //SKConnectionDetector.getInstance(this).showErrorMessage();
+            SKConnectionDetector.getInstance(this).showErrorMessage();
         }
 
     }
@@ -708,9 +682,105 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
                     Log.i("Social Viber",""+ex);
                 }
                 break;
+            case R.id.resourcedetail_submit_comment:
+                if (Connection.isOnline(getApplicationContext())) {
+
+                    if (et_comment.length() == 0) {
+
+                        if (strLang.equals(Utils.ENG_LANG)) {
+                            Utils.doToastEng(getApplicationContext(), getResources().getString(R.string.post_detail_comment_eng));
+                        } else {
+
+                            Utils.doToastMM(getApplicationContext(), getResources().getString(R.string.post_detail_comment_mm));
+                        }
+                    } else {
+
+                        Log.i("Comment Para"," " + et_comment.getText().toString() );
+                        mProgressDialog.show();
+                        //TODO Comment Post
+
+                        if (userprofile_Image_path != null) {
+
+                        } else {
+                            userprofile_Image_path = "http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-7f0323bc-a862-4184-9e51-d55189fcab18-ic_launcher.png";
+                        }
+
+
+                        SMKserverAPI.getInstance().getService().postCommentTestByPostID(postType, postObjId, user_obj_id, user_name, userprofile_Image_path, et_comment.getText().toString(), new Callback<CommentItem>() {
+
+                            @Override
+                            public void success(CommentItem calendarEvent, Response response) {
+
+                                et_comment.setText(" ");  // clear commment after success //Linn Wah
+                                txt_cmd_count.setText(calendarEvent.getCommentCount() + "");
+                                txt_social_no_ear_comment.setText(calendarEvent.getCommentCount() + "");
+
+                                //TODO Comment load again
+                                if (Connection.isOnline(mContext)) {
+                                    progressWheel_comment.setVisibility(View.VISIBLE);
+                                    //TODO BY POST ID
+                                    NetworkEngine.getInstance().getCommentlistByPostIDByPagination(paginater, postObjId, new Callback<List<com.smk.model.CommentItem>>() {
+                                        @Override
+                                        public void success(List<com.smk.model.CommentItem> commentItems, Response response) {
+
+                                            listComment = new ArrayList<>();
+                                            listComment.addAll(commentItems);
+                                            adapter = new CommentAdapter(ResourceDetailActivity.this, listComment);
+                                            listView_Comment.setAdapter(adapter);
+
+                                            progressWheel_comment.setVisibility(View.INVISIBLE);
+                                            mProgressDialog.dismiss();
+
+                                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                                listView_Comment.setNestedScrollingEnabled(true);
+                                            } else {
+
+                                            }
+                                            Helper.getListViewSize(listView_Comment);
+                                            //TODO get sticker for comment
+                                        }
+
+                                        @Override
+                                        public void failure(RetrofitError error) {
+                                            progressWheel_comment.setVisibility(View.INVISIBLE);
+                                            mProgressDialog.dismiss();
+                                        }
+                                    });
+                                } else {
+                                    //SKConnectionDetector.getInstance(PostDetailActivity.this).showErrorMessage();
+                                }
+
+                            }
+
+                            @Override
+                            public void failure(RetrofitError error) {
+                                mProgressDialog.dismiss();
+                            }
+                        });
+
+
+                    }
+                } else {
+
+                    if (strLang.equals(Utils.ENG_LANG)) {
+                        Utils.doToastEng(getApplicationContext(), getResources().getString(R.string.open_internet_warning_eng));
+                    } else {
+
+                        Utils.doToastMM(getApplicationContext(), getResources().getString(R.string.open_internet_warning_mm));
+                    }
+                }
+                break;
         }
 
+    }
 
+    @Override
+    public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+    }
+
+    @Override
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 
     }
 
@@ -731,4 +801,252 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
 
         }
     }
+
+    //For Comment LinnWah
+    public void LoadStickerData() {
+        if (Connection.isOnline(getApplicationContext())) {
+
+            if (sticker_paginater == 1) {
+                stickerArrayList = new ArrayList<Sticker>();
+            }
+            SMKserverAPI.getInstance().getService().getStickersByPagination(sticker_paginater, new Callback<List<Sticker>>() {
+                @Override
+                public void success(List<Sticker> stickers, Response response) {
+                    alreadySticker = true;
+                    //stickerArrayList = new ArrayList<Sticker>();
+                    stickerArrayList.addAll(stickers);
+                    /* if (mAdapter == null) {
+                        mAdapter = new StickerGridViewAdapter(PostDetailActivity.this, mContext, stickerArrayList);
+
+                    }*/
+                    if (stickerArrayList.size() > 0) {
+                        gridView.setVisibility(View.VISIBLE);
+
+                        if (sticker_paginater <= 1) {
+                            //storageUtil.SaveArrayListToSD("StickersList", stickerArrayList);
+                            mAdapter = new StickerGridViewAdapter(ResourceDetailActivity.this, mContext, stickerArrayList);
+                            progress_wheel.setVisibility(View.GONE);
+                            //progressBar.setVisibility(View.GONE);
+                            gridView.setAdapter(mAdapter);
+                        } else {
+                            mAdapter.notifyDataSetChanged();
+                        }
+
+                    }
+                    sticker_paginater++;
+
+                    mHasRequestedMore = false;
+
+                    //sticker_paginater++;
+                    progress_wheel.setVisibility(View.GONE);
+                    gridView.setAdapter(mAdapter);
+                    mAdapter.notifyDataSetChanged();
+                }
+
+
+                @Override
+                public void failure(RetrofitError error) {
+                    progress_wheel.setVisibility(View.GONE);
+                }
+            });
+
+
+        } else {
+            //SKConnectionDetector.getInstance(this).showErrorMessage();
+            //List<Sticker> stickers = StoreUtil.getInstance().selectFrom("StickersList");
+            ArrayList<Sticker> stickers_storgae = (ArrayList<Sticker>) storageUtil.ReadArrayListFromSD("StickersList");
+            Log.e("NoInternetStorgaeList", "==>" + stickers_storgae.size());
+            if (stickers_storgae.size() > 0) {
+                mAdapter = new StickerGridViewAdapter(this, mContext, stickers_storgae);
+                gridView.setAdapter(mAdapter);
+            }
+
+        }
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+                                    long arg3) {
+                //Toast.makeText(mContext, mAdapter.getItem(position), Toast.LENGTH_SHORT).show();
+                //popup.dismiss();
+                ly_sticker_holder.setVisibility(View.GONE);
+                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+
+                et_comment.setFocusableInTouchMode(false);
+
+
+                String cmt_text = null;
+                if (et_comment.length() != 0) {
+                    cmt_text = et_comment.getText().toString();
+                }
+                //TODO it is not postId , it is postObj id
+
+                if (userprofile_Image_path != null) {
+
+                } else {
+                    userprofile_Image_path = "http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-7f0323bc-a862-4184-9e51-d55189fcab18-ic_launcher.png";
+                }
+                //Log.e("<<Comment>>","==>" +postType,postObjId, user_obj_id, user_name, stickerArrayList.get(position).getStickerImgPath()+""+ userprofile_Image_path+""+ cmt_text );
+                SMKserverAPI.getInstance().getService().postCommentByPostID(postType, postObjId, user_obj_id, user_name, stickerArrayList.get(position).getStickerImgPath(), userprofile_Image_path, cmt_text, new Callback<CommentItem>() {
+                    @Override
+                    public void success(CommentItem calendarEvent, Response response) {
+
+                        txt_cmd_count.setText(calendarEvent.getCommentCount() + "");
+                        txt_social_no_ear_comment.setText(calendarEvent.getCommentCount() + "");
+                        getCommentByPagination();
+
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                        mProgressDialog.dismiss();
+                    }
+                });
+                //TODO COMMENT POST
+
+
+            }
+        });
+        img_comment_submit.setOnClickListener(this);
+    }
+
+
+    public void initEmojiIcon() {
+        boolean isLargerLollipop = (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP);
+
+        int reduceheight = 0;
+        if (isLargerLollipop) {
+            reduceheight = (int) getResources().getDimension(R.dimen.reduceeheight);
+        }
+        // Give the topmost view of your activity layout hierarchy. This will be used to measure soft keyboard height
+        final EmojiconsPopup popup = new EmojiconsPopup(getWindow().getDecorView().getRootView(), this, reduceheight);
+
+
+        //Will automatically set size according to the soft keyboard size
+        popup.setSizeForSoftKeyboard();
+
+
+        //If the emoji popup is dismissed, change emojiButton to smiley icon
+        popup.setOnDismissListener(new PopupWindow.OnDismissListener() {
+
+
+            @Override
+            public void onDismiss() {
+                changeEmojiKeyboardIcon(emojiIconToggle, R.drawable.smiley);
+            }
+        });
+
+
+        //If the text keyboard closes, also dismiss the emoji popup
+        popup.setOnSoftKeyboardOpenCloseListener(new EmojiconsPopup.OnSoftKeyboardOpenCloseListener() {
+
+            @Override
+            public void onKeyboardOpen(int keyBoardHeight) {
+
+
+            }
+
+            @Override
+            public void onKeyboardClose() {
+                if (popup.isShowing())
+                    popup.dismiss();
+            }
+        });
+
+
+        //On emoji clicked, add it to edittext
+        popup.setOnEmojiconClickedListener(new EmojiconGridView.OnEmojiconClickedListener() {
+
+
+            @Override
+            public void onEmojiconClicked(Emojicon emojicon) {
+                if (et_comment == null || emojicon == null) {
+                    return;
+                }
+
+
+                int start = et_comment.getSelectionStart();
+                int end = et_comment.getSelectionEnd();
+                if (start < 0) {
+                    et_comment.append(emojicon.getEmoji());
+                } else {
+                    et_comment.getText().replace(Math.min(start, end),
+                            Math.max(start, end), emojicon.getEmoji(), 0,
+                            emojicon.getEmoji().length());
+                }
+            }
+        });
+
+
+        //On backspace clicked, emulate the KEYCODE_DEL key event
+        popup.setOnEmojiconBackspaceClickedListener(new EmojiconsPopup.OnEmojiconBackspaceClickedListener() {
+
+
+            @Override
+            public void onEmojiconBackspaceClicked(View v) {
+                KeyEvent event = new KeyEvent(
+                        0, 0, 0, KeyEvent.KEYCODE_DEL, 0, 0, 0, 0, KeyEvent.KEYCODE_ENDCALL);
+                et_comment.dispatchKeyEvent(event);
+            }
+        });
+
+
+        emojiIconToggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //If popup is not showing => emoji keyboard is not visible, we need to show it
+                if (!popup.isShowing()) {
+                    ly_sticker_holder.setVisibility(View.GONE);
+
+                    //If keyboard is visible, simply show the emoji popup
+                    if (popup.isKeyBoardOpen()) {
+                        popup.showAtBottom();
+                        changeEmojiKeyboardIcon(emojiIconToggle, R.drawable.ic_action_keyboard);
+                    }
+
+                    //else, open the text keyboard first and immediately after that show the emoji popup
+                    else {
+                        et_comment.setFocusableInTouchMode(true);
+                        et_comment.requestFocus();
+                        popup.showAtBottomPending();
+                        final InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                        inputMethodManager.showSoftInput(et_comment, InputMethodManager.SHOW_IMPLICIT);
+                        changeEmojiKeyboardIcon(emojiIconToggle, R.drawable.ic_action_keyboard);
+                    }
+                }
+
+                //If popup is showing, simply dismiss it to show the undelying text keyboard
+                else {
+                    popup.dismiss();
+
+                }
+            }
+        });
+        //Sticker icon onClickListern
+        stickerImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("Sticker Image","onClick");
+                popup.dismiss();
+
+                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+
+                et_comment.setFocusableInTouchMode(false);
+
+                KeyEvent event = new KeyEvent(
+                        0, 0, 0, KeyEvent.KEYCODE_DEL, 0, 0, 0, 0, KeyEvent.KEYCODE_ENDCALL);
+                et_comment.dispatchKeyEvent(event);
+
+                ly_sticker_holder.setVisibility(View.VISIBLE);
+
+
+            }
+        });
+    }
+
+    private void changeEmojiKeyboardIcon(ImageView iconToBeChanged, int drawableResourceId) {
+        iconToBeChanged.setImageResource(drawableResourceId);
+    }
+
 }

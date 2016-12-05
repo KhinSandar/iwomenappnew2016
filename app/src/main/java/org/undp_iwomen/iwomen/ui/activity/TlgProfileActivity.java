@@ -355,7 +355,6 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
                     try {
 
                         JSONObject whole_object = new JSONObject(s);
-
                         TlgProfileItem item = new TlgProfileItem();
                         if (!whole_object.isNull("createdAt")) {
 
@@ -803,10 +802,6 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
 
                     Log.e("Replye","==>"+ex.toString());
                 }
-                    /*Intent callIntent = new Intent(Intent.ACTION_CALL);
-                    String ph = tlgLeaderPhno;
-                    callIntent.setData(Uri.parse("tel:" + Uri.encode(ph)));
-                    startActivity(callIntent);*/
                 break;
             case R.id.tlg_fb_img:
 
