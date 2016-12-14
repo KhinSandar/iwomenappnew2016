@@ -221,7 +221,8 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
         stickerImg = (RoundedImageView) findViewById(R.id.postdetail_img_sticker);
         et_comment = (EmojiconEditText) findViewById(R.id.postdetail_et_comment_upload);
         img_comment_submit = (ImageView) findViewById(R.id.resourcedetail_submit_comment);
-
+        txt_cmd_count = (TextView) findViewById(R.id.postdetail_cmd_count);
+        txt_social_no_ear_comment = (TextView) findViewById(R.id.social_no_ear_comment_txt);
         Intent i  =getIntent();
 
         mstrTitleEng = i.getStringExtra("TitleEng");
@@ -404,7 +405,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
         if (bundle != null) {
             subResouceItemObj = new Gson().fromJson(bundle.getString("postObj"), SubResourceItem.class);
         }
-        Log.e("SubResource---->>>"," "+subResouceItemObj.getLikes().toString());
+
         postType = i.getStringExtra("post_type");
         postId = subResouceItemObj.getId().toString();// i.getStringExtra("post_id");
         postObjId = subResouceItemObj.getObjectId();
@@ -426,7 +427,13 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
         }else{
             mSocialNoEarLikeAnimatedButton.setText("0");
         }
-
+       /* if (subResouceItemObj.getCommentCount() != null){
+            txt_social_no_ear_comment.setText(subResouceItemObj.getCommentCount());
+        }else{
+            txt_social_no_ear_comment.setText("0");
+        }
+*/
+        Log.i("GetComment Count>>>",""+subResouceItemObj.getCommentCount());
         mSocialNoEarLikeAnimatedButton.setCallbackListener(new AnimatedButton.Callbacks() {
             @Override
             public void onClick() {
@@ -515,7 +522,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
     }
     public void getCommentByPagination() {
         if (Connection.isOnline(mContext)) {
-            NetworkEngine.getInstance().getCommentlistByPostIDByPagination(paginater, "7RFHAFd5yR", new Callback<List<com.smk.model.CommentItem>>() {
+            NetworkEngine.getInstance().getCommentlistByPostIDByPagination(paginater, postObjId, new Callback<List<com.smk.model.CommentItem>>() {
                 @Override
                 public void success(List<com.smk.model.CommentItem> commentItems, Response response) {
 
@@ -545,7 +552,10 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
                 }
             });
         } else {
-            SKConnectionDetector.getInstance(this).showErrorMessage();
+                if (!alreadySticker)
+                    LoadStickerData();
+                //SKConnectionDetector.getInstance(this).showErrorMessage();
+
         }
 
     }
@@ -695,7 +705,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
                         }
                     } else {
 
-                        Log.i("Comment Para"," " + et_comment.getText().toString() );
+                        Log.i("Comment Para>>>"," " + et_comment.getText().toString() );
                         mProgressDialog.show();
                         //TODO Comment Post
 
@@ -706,13 +716,13 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
                         }
 
 
-                        SMKserverAPI.getInstance().getService().postCommentTestByPostID(postType, postObjId, user_obj_id, user_name, userprofile_Image_path, et_comment.getText().toString(), new Callback<CommentItem>() {
+                        SMKserverAPI.getInstance().getService().postCommentBeKnowledgableByPostID("SubResourceDetail", postObjId, user_obj_id, user_name, userprofile_Image_path, et_comment.getText().toString(), new Callback<CommentItem>() {
 
                             @Override
                             public void success(CommentItem calendarEvent, Response response) {
-
-                                et_comment.setText(" ");  // clear commment after success //Linn Wah
-                                txt_cmd_count.setText(calendarEvent.getCommentCount() + "");
+                                Log.i("TAG","Success Posting");
+                                et_comment.setText(" ");
+                              //  txt_cmd_count.setText(calendarEvent.getCommentCount() + "");
                                 txt_social_no_ear_comment.setText(calendarEvent.getCommentCount() + "");
 
                                 //TODO Comment load again
@@ -780,7 +790,22 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
     }
 
     @Override
-    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+    public void onScroll(AbsListView absListView, int i, int i1, int i2) {
+        if (!mHasRequestedMore) {
+            int lastInScreen = i + i1;
+            //Log.i("count limit", "12"  + "last n Screen " +lastInScreen + String.valueOf(sticker_paginater));
+            if (lastInScreen >= i2 && sticker_paginater <= 12 && sticker_paginater != -1) {
+                //Log.d(TAG, "onScroll lastInScreen - so load more");
+                //gridView.addFooterView(footer);
+                mHasRequestedMore = true;
+                progress_wheel.setVisibility(View.VISIBLE);
+                //new BackgroundAsyncTask(getActivity()).execute();
+                LoadStickerData();
+                /*AsyncControlClass asyncControlClass = new AsyncControlClass(getActivity());
+                asyncControlClass.execute();
+                */
+            }
+        }
 
     }
 
@@ -866,8 +891,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
 
             public void onItemClick(AdapterView<?> arg0, View arg1, int position,
                                     long arg3) {
-                //Toast.makeText(mContext, mAdapter.getItem(position), Toast.LENGTH_SHORT).show();
-                //popup.dismiss();
+
                 ly_sticker_holder.setVisibility(View.GONE);
                 InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
                 inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
@@ -887,11 +911,12 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
                     userprofile_Image_path = "http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-7f0323bc-a862-4184-9e51-d55189fcab18-ic_launcher.png";
                 }
                 //Log.e("<<Comment>>","==>" +postType,postObjId, user_obj_id, user_name, stickerArrayList.get(position).getStickerImgPath()+""+ userprofile_Image_path+""+ cmt_text );
-                SMKserverAPI.getInstance().getService().postCommentByPostID(postType, postObjId, user_obj_id, user_name, stickerArrayList.get(position).getStickerImgPath(), userprofile_Image_path, cmt_text, new Callback<CommentItem>() {
+                SMKserverAPI.getInstance().getService().postCommentByPostID("SubResourceDetail", postObjId, user_obj_id, user_name, stickerArrayList.get(position).getStickerImgPath(), userprofile_Image_path, cmt_text, new Callback<CommentItem>() {
                     @Override
                     public void success(CommentItem calendarEvent, Response response) {
-
-                        txt_cmd_count.setText(calendarEvent.getCommentCount() + "");
+                         Log.i("Comment Count>>>>>",""+calendarEvent.getCommentCount());
+                        et_comment.setText("");
+                        //txt_cmd_count.setText(calendarEvent.getCommentCount() + "");
                         txt_social_no_ear_comment.setText(calendarEvent.getCommentCount() + "");
                         getCommentByPagination();
 

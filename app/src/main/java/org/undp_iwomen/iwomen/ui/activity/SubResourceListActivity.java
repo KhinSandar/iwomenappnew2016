@@ -161,7 +161,7 @@ public class SubResourceListActivity extends BaseActionBarActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("likeCount",SubResourceItems.get(i).getLikes());
-
+                intent.putExtra("commentCount",SubResourceItems.get(i).getCommentCount());
                 intent.putExtra("post_type", "subResourcePost");
                 intent.putExtra("postObj", new Gson().toJson(adapterView.getAdapter().getItem(i)));
                 mContext.startActivity(intent);

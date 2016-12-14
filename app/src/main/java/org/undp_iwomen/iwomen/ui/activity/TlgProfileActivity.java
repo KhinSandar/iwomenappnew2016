@@ -355,7 +355,7 @@ public class TlgProfileActivity extends BaseActionBarActivity implements View.On
                     try {
 
                         JSONObject whole_object = new JSONObject(s);
-gi
+
                         TlgProfileItem item = new TlgProfileItem();
                         if (!whole_object.isNull("createdAt")) {
 
