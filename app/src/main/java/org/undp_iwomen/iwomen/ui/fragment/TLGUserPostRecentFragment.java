@@ -47,7 +47,7 @@ import org.undp_iwomen.iwomen.provider.IwomenProviderData;
 import org.undp_iwomen.iwomen.ui.activity.NewPostActivity;
 import org.undp_iwomen.iwomen.ui.activity.PostDetailActivity;
 import org.undp_iwomen.iwomen.ui.adapter.IWomenPostListByDateRecyclerViewAdapter;
-import org.undp_iwomen.iwomen.ui.adapter.StoriesRecentListAdapter;
+import org.undp_iwomen.iwomen.ui.adapter.TLGUserPostRecentListAdapter;
 import org.undp_iwomen.iwomen.utils.Connection;
 import org.undp_iwomen.iwomen.utils.StorageUtil;
 import org.undp_iwomen.iwomen.utils.Utils;
@@ -82,7 +82,7 @@ public class TLGUserPostRecentFragment extends Fragment implements View.OnClickL
     private ZProgressHUD zPDialog;
     private LinearLayoutManager linearLayoutManager;
     private int paginater = 1;
-    private StoriesRecentListAdapter stories;
+    private TLGUserPostRecentListAdapter stories;
 
     String  mstrCatName , mCatID;
 
@@ -132,7 +132,7 @@ public class TLGUserPostRecentFragment extends Fragment implements View.OnClickL
         skListView = (SKListView) rootView.findViewById(R.id.lst_stories);
 
         iWomenPostList = new ArrayList<>();
-        stories = new StoriesRecentListAdapter(getActivity(), iWomenPostList, mstr_lang);
+        stories = new TLGUserPostRecentListAdapter(getActivity(), iWomenPostList, mstr_lang);
         skListView.setAdapter(stories);
         skListView.setCallbacks(skCallbacks);
         skListView.setNextPage(true);

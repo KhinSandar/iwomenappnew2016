@@ -7,22 +7,34 @@
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:focusable="true"
+    android:fillViewport="true"
     android:focusableInTouchMode="true">
 
     <FrameLayout
+
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/white"
         android:focusable="true"
         android:focusableInTouchMode="true">
-
-        <LinearLayout
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/white"
             android:orientation="vertical">
 
-            <include layout="@layout/toolbar" />
+        <include layout="@layout/toolbar" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@drawable/toolbar_dropshawdow" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:orientation="vertical">
+
 
 
             <View
@@ -40,11 +52,157 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="bottom">
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                android:layout_alignParentBottom="true"
+
+                android:orientation="vertical"
+                >
+<!--
                 <include layout="@layout/activity_resource_detail_comment" />
+-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/bottom_bar"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:background="@color/primary"
+
+                        android:gravity="center_vertical"
+                        android:minHeight="56dp"
+                        android:orientation="horizontal"
+                        android:visibility="visible">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:paddingLeft="@dimen/activity_vertical_margin">
+
+                            <com.algo.hha.emojiicon.EmojiconEditText
+                                android:id="@+id/postdetail_et_comment_upload"
+                                android:layout_width="250dp"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="8dp"
+                                android:background="@null"
+                                android:hint="@string/post_detail_comment_eng"
+                                android:paddingLeft="@dimen/activity_vertical_margin"
+                                android:singleLine="false"
+                                android:textColor="#fff"
+                                android:textColorHint="#8fff"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:gravity="right"
+                            android:orientation="horizontal"
+                            android:paddingRight="@dimen/activity_vertical_margin">
+
+                            <ImageView
+                                android:id="@+id/resourcedetail_submit_comment"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/ic_send_white" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/postdetail_ly_icons_holder"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:background="@color/primary"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:paddingLeft="@dimen/activity_vertical_margin">
+
+                            <ImageView
+                                android:id="@+id/toggleEmojiIcon"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/ic_mood_white" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:paddingLeft="@dimen/activity_vertical_margin">
+
+                            <com.makeramen.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                                android:id="@+id/postdetail_img_sticker"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginRight="8dp"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/ic_iwomen_for_sticker"
+
+                                android:visibility="visible"
+                                app:riv_border_color="#333333"
+                                app:riv_border_width="0dip"
+                                app:riv_corner_radius="30dip"
+                                app:riv_mutate_background="true"
+                                app:riv_oval="true" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/postdetail_ly_sticker_holder"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:background="@color/light_blue_500"
+                        android:orientation="horizontal"
+                        android:layout_alignParentBottom="true"
+                        android:gravity="bottom"
+                        android:visibility="gone">
+
+                        <FrameLayout
+
+                            android:id="@+id/content_frame"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <ScrollView
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:background="@color/line_color">
+
+                                <include
+                                    layout="@layout/activity_talk_together_sticker_grid"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center_horizontal"></include>
+                            </ScrollView>
+                        </FrameLayout>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
             </LinearLayout>
 
+        </RelativeLayout>
         </LinearLayout>
 
 

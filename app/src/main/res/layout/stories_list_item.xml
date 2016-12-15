@@ -65,6 +65,17 @@
                 android:paddingTop="@dimen/feed_item_padding_top_bottom">
 
                 <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                    android:id="@+id/txtPostDeleted"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:text="Deleted"
+                    android:visibility="invisible"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/feed_item_profile_name"
+                    android:textStyle="bold" />
+
+                <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                     android:id="@+id/txtPostTitle"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"

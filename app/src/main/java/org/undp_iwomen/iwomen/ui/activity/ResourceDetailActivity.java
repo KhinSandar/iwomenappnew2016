@@ -31,7 +31,6 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.algo.hha.emojiicon.EmojiconEditText;
 import com.algo.hha.emojiicon.EmojiconGridView;
@@ -155,6 +154,8 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
     private TextView txt_like_count, txt_cmd_count;
     private TextView txt_social_no_ear_comment;
     private ProgressDialog mProgressDialog;
+    View comment_View;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -404,7 +405,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
         if (bundle != null) {
             subResouceItemObj = new Gson().fromJson(bundle.getString("postObj"), SubResourceItem.class);
         }
-        Log.e("SubResource---->>>"," "+subResouceItemObj.getLikes().toString());
+        Log.e("SubResource---->>>"," "+subResouceItemObj.getObjectId().toString());
         postType = i.getStringExtra("post_type");
         postId = subResouceItemObj.getId().toString();// i.getStringExtra("post_id");
         postObjId = subResouceItemObj.getObjectId();
@@ -499,6 +500,22 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
             }
 
         });
+
+        /*final LayoutInflater layoutInflater = getParent().getLayoutInflater();
+        comment_View = layoutInflater.inflate(R.layout.special_content_stories_list_item, null);
+        Snackbar snackbar = Snackbar
+                .make(comment_View, "Message is deleted", Snackbar.LENGTH_LONG)
+                .setAction("UNDO", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Snackbar snackbar1 = Snackbar.make(comment_View, "Message is restored!", Snackbar.LENGTH_SHORT);
+                        snackbar1.show();
+                    }
+                });
+
+        snackbar.show();*/
+        /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();*/
 
     }
 
@@ -780,8 +797,23 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
     }
 
     @Override
-    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+    public void onScroll(AbsListView absListView, int i, int i1, int i2) {
 
+        if (!mHasRequestedMore) {
+            int lastInScreen = i + i1;
+            //Log.i("count limit", "12"  + "last n Screen " +lastInScreen + String.valueOf(sticker_paginater));
+            if (lastInScreen >= i2 && sticker_paginater <= 12 && sticker_paginater != -1) {
+                //Log.d(TAG, "onScroll lastInScreen - so load more");
+                //gridView.addFooterView(footer);
+                mHasRequestedMore = true;
+                progress_wheel.setVisibility(View.VISIBLE);
+                //new BackgroundAsyncTask(getActivity()).execute();
+                LoadStickerData();
+                /*AsyncControlClass asyncControlClass = new AsyncControlClass(getActivity());
+                asyncControlClass.execute();
+                */
+            }
+        }
     }
 
     private class ImageLoadedCallback implements com.squareup.picasso.Callback {
