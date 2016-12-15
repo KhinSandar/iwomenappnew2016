@@ -44,7 +44,6 @@ import com.google.gson.Gson;
 import com.makeramen.RoundedImageView;
 import com.smk.model.CommentItem;
 import com.smk.skalertmessage.SKToastMessage;
-import com.smk.skconnectiondetector.SKConnectionDetector;
 import com.squareup.picasso.Picasso;
 import com.thuongnh.zprogresshud.ZProgressHUD;
 
@@ -78,6 +77,7 @@ import java.util.List;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+import retrofit.http.HEAD;
 
 
 public class ResourceDetailActivity extends BaseActionBarActivity implements View.OnClickListener, AbsListView.OnScrollListener {
@@ -97,10 +97,10 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
     private Context mContext;
     SharedPreferences sharePrefLanguageUtil;
     String strLang;
-    String mstrAudioFilePath ;
+    String mstrAudioFilePath;
 
 
-    String mstrTitleEng, mstrTitleMm, mstrContentEng, mstrContentMm, mstrAuthorName ,mstrAuthorNameMM, mstrAuthorId, mstrAuthorImgPath, mstrPostDate , mstrAuthorRoleMM, mstrAuthorRoleEng;
+    String mstrTitleEng, mstrTitleMm, mstrContentEng, mstrContentMm, mstrAuthorName, mstrAuthorNameMM, mstrAuthorId, mstrAuthorImgPath, mstrPostDate, mstrAuthorRoleMM, mstrAuthorRoleEng;
     String mstrSubResourceTitleEng, mstrSubResourceTitleMm;
 
     private CustomTextView txtSocialShare;
@@ -113,10 +113,10 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
     private AnimatedButton mSocialNoEarLikeAnimatedButton;
     private SubResourceItem subResouceItemObj;
     private String postId, postObjId, like_status, postType;
-    private String user_name, user_obj_id, user_ph, user_id,userprofile_Image_path;
+    private String user_name, user_obj_id, user_ph, user_id, userprofile_Image_path;
     private SharedPreferences mSharedPreferencesUserInfo;
-    private TextView txt_social_no_ear_like_counts,txt_social_cmt;
-    private ImageView img_viber_share,img__social_audio;
+    private TextView txt_social_no_ear_like_counts, txt_social_cmt;
+    private ImageView img_viber_share, img__social_audio;
 
     private Cursor cursorMain;
     public ImageView emojiIconToggle;
@@ -172,7 +172,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
 
         textViewTitle = (CustomTextView) toolbar.findViewById(R.id.title_action2);
 
-        if(toolbar != null){
+        if (toolbar != null) {
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
@@ -222,13 +222,14 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
         stickerImg = (RoundedImageView) findViewById(R.id.postdetail_img_sticker);
         et_comment = (EmojiconEditText) findViewById(R.id.postdetail_et_comment_upload);
         img_comment_submit = (ImageView) findViewById(R.id.resourcedetail_submit_comment);
-
-        Intent i  =getIntent();
+        txt_cmd_count = (TextView) findViewById(R.id.postdetail_cmd_count);
+        txt_social_no_ear_comment = (TextView) findViewById(R.id.social_no_ear_comment_txt);
+        Intent i = getIntent();
 
         mstrTitleEng = i.getStringExtra("TitleEng");
         mstrTitleMm = i.getStringExtra("TitleMM");
 
-        mstrSubResourceTitleEng= i.getStringExtra("SubResourceDetailTitleEng");
+        mstrSubResourceTitleEng = i.getStringExtra("SubResourceDetailTitleEng");
         mstrSubResourceTitleMm = i.getStringExtra("SubResourceDetailTitleMM");
 
 
@@ -236,28 +237,28 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
         mstrContentMm = i.getStringExtra("ContentMM");
         mstrAuthorName = i.getStringExtra("AuthorName");
         mstrAuthorNameMM = i.getStringExtra("AuthorNameMM");
-        mstrAuthorRoleEng= i.getStringExtra("AuthorTitleEng");
-        mstrAuthorRoleMM= i.getStringExtra("AuthorTitleMM");
+        mstrAuthorRoleEng = i.getStringExtra("AuthorTitleEng");
+        mstrAuthorRoleMM = i.getStringExtra("AuthorTitleMM");
         mstrAuthorId = i.getStringExtra("AuthorId");
         mstrAuthorImgPath = i.getStringExtra("AuthorImgPath");
         mstrPostDate = i.getStringExtra("PostDate");
 
-        txtName = (CustomTextView)findViewById(R.id.tipdetail_title_name);
-        txtBody = (CustomTextView)findViewById(R.id.tipdetail_body);
-        profileImg = (RoundedImageView)findViewById(R.id.tipdetail_profilePic_rounded);
-        profileName = (TextView)findViewById(R.id.tipdetail_content_username);
-        profileProgressbar = (ProgressBar)findViewById(R.id.tipdetail_progressBar_profile_item);
-        txtMore = (TextView)findViewById(R.id.tipdetail_content_user_role_more);
-        txtAuthorRole = (TextView)findViewById(R.id.tipdetail_content_user_role);
+        txtName = (CustomTextView) findViewById(R.id.tipdetail_title_name);
+        txtBody = (CustomTextView) findViewById(R.id.tipdetail_body);
+        profileImg = (RoundedImageView) findViewById(R.id.tipdetail_profilePic_rounded);
+        profileName = (TextView) findViewById(R.id.tipdetail_content_username);
+        profileProgressbar = (ProgressBar) findViewById(R.id.tipdetail_progressBar_profile_item);
+        txtMore = (TextView) findViewById(R.id.tipdetail_content_user_role_more);
+        txtAuthorRole = (TextView) findViewById(R.id.tipdetail_content_user_role);
 
 
-        lysocial = (LinearLayout)findViewById(R.id.tipdetail_ly_social);
+        lysocial = (LinearLayout) findViewById(R.id.tipdetail_ly_social);
 
         // Google Analytics
         MainApplication application = (MainApplication) getApplication();
         Tracker mTracker = application.getDefaultTracker();
         //Update Tracking name in Oct 25 after version 1.7 release
-        mTracker.setScreenName("Resource Detail ~ "+  mstrTitleEng + ">" +mstrSubResourceTitleEng);
+        mTracker.setScreenName("Resource Detail ~ " + mstrTitleEng + ">" + mstrSubResourceTitleEng);
         mTracker.send(new HitBuilders.ScreenViewBuilder().build());
 
         mSharedPreferencesUserInfo = getSharedPreferences(CommonConfig.SHARE_PREFERENCE_USER_INFO, Context.MODE_PRIVATE);
@@ -270,7 +271,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
         txtName.setVisibility(View.GONE);
 
         strLang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
-        if(strLang.equals(Utils.ENG_LANG)){
+        if (strLang.equals(Utils.ENG_LANG)) {
 
             textViewTitle.setText(mstrTitleEng);
             txtBody.setText(mstrContentEng);
@@ -284,11 +285,10 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
             profileName.setText(mstrAuthorName);
 
 
-
             txtName.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
             txtBody.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
-            et_comment.setTypeface(MyTypeFace.get(mContext,MyTypeFace.NORMAL));
-        }else if (strLang.equals(Utils.MM_LANG)) {
+            et_comment.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
+        } else if (strLang.equals(Utils.MM_LANG)) {
             profileName.setText(mstrAuthorNameMM);
 
             textViewTitle.setText(mstrTitleMm);
@@ -301,7 +301,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
             txtName.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
             txtBody.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
             txtAuthorRole.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
-            et_comment.setTypeface(MyTypeFace.get(mContext,MyTypeFace.ZAWGYI));
+            et_comment.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
 
         } else {//FOR ALl MM FONT
 
@@ -319,7 +319,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
         profileImg.setAdjustViewBounds(true);
         profileImg.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
-        if(mstrAuthorImgPath != null && mstrAuthorImgPath != "" && !mstrAuthorImgPath.isEmpty() && mstrAuthorImgPath != "null") {
+        if (mstrAuthorImgPath != null && mstrAuthorImgPath != "" && !mstrAuthorImgPath.isEmpty() && mstrAuthorImgPath != "null") {
 
             try {
 
@@ -341,7 +341,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
             } catch (OutOfMemoryError outOfMemoryError) {
                 outOfMemoryError.printStackTrace();
             }
-        }else{
+        } else {
             profileProgressbar.setVisibility(View.GONE);
         }
 
@@ -362,7 +362,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
         img_viber_share = (ImageView) findViewById(R.id.social_no_ear_viber_img);
         img_viber_share.setOnClickListener(this);
 
-        txtSocialShare =(CustomTextView)findViewById(R.id.social_no_ear_share_txt);
+        txtSocialShare = (CustomTextView) findViewById(R.id.social_no_ear_share_txt);
         txtSocialShare.setOnClickListener(this);
 
         shareButton = (ShareButton) findViewById(R.id.social_no_ear_fb_share_button);
@@ -375,8 +375,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
         mSocialNoEarLikeAnimatedButton.setEnabled(true);
 
 
-        txt_social_cmt = (TextView)findViewById(R.id.social_no_ear_comment_txt);
-
+        txt_social_cmt = (TextView) findViewById(R.id.social_no_ear_comment_txt);
 
 
         profile_item_progressBar = (ProgressBar) findViewById(R.id.postdetail_progressBar_profile_item);
@@ -405,7 +404,6 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
         if (bundle != null) {
             subResouceItemObj = new Gson().fromJson(bundle.getString("postObj"), SubResourceItem.class);
         }
-        Log.e("SubResource---->>>"," "+subResouceItemObj.getObjectId().toString());
         postType = i.getStringExtra("post_type");
         postId = subResouceItemObj.getId().toString();// i.getStringExtra("post_id");
         postObjId = subResouceItemObj.getObjectId();
@@ -422,12 +420,18 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
             String sqLiteLikeCount = cursorMain.getString(cursorMain.getColumnIndex("like_count"));
             Log.e("Like Count >>>>"," " + sqLiteLikeCount);
         }*/
-        if(subResouceItemObj.getLikes() != null){
+        if (subResouceItemObj.getLikes() != null) {
             mSocialNoEarLikeAnimatedButton.setText(subResouceItemObj.getLikes().toString());
-        }else{
+        } else {
             mSocialNoEarLikeAnimatedButton.setText("0");
         }
-
+       /* if (subResouceItemObj.getCommentCount() != null){
+            txt_social_no_ear_comment.setText(subResouceItemObj.getCommentCount());
+        }else{
+            txt_social_no_ear_comment.setText("0");
+        }
+*/
+        Log.i("GetComment Count>>>", "" + subResouceItemObj.getCommentCount());
         mSocialNoEarLikeAnimatedButton.setCallbackListener(new AnimatedButton.Callbacks() {
             @Override
             public void onClick() {
@@ -436,19 +440,19 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
                     SMKserverStringConverterAPI.getInstance().getService().postiWomenSubResourceDetailLikes(postId, user_id, new Callback<String>() {
                         @Override
                         public void success(String item, Response response) {
-                            Log.e("ResourceLike>>",item);
+                            Log.e("ResourceLike>>", item);
                             mSocialNoEarLikeAnimatedButton.setEnabled(false);
                             mSocialNoEarLikeAnimatedButton.setText(item);
                             mSocialNoEarLikeAnimatedButton.setEnabled(false);
                             mSocialNoEarLikeAnimatedButton.setOnClickListener(ResourceDetailActivity.this);
-                            saveLikeStatusToSQLite(postId,user_id,item);
+                            saveLikeStatusToSQLite(postId, user_id, item);
 
 
                         }
 
                         @Override
                         public void failure(RetrofitError error) {
-                            Log.e("ResourceLike Fail>>",error.toString());
+                            Log.e("ResourceLike Fail>>", error.toString());
                         }
                     });
                 }
@@ -530,9 +534,10 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
 
 
     }
+
     public void getCommentByPagination() {
         if (Connection.isOnline(mContext)) {
-            NetworkEngine.getInstance().getCommentlistByPostIDByPagination(paginater, "7RFHAFd5yR", new Callback<List<com.smk.model.CommentItem>>() {
+            NetworkEngine.getInstance().getCommentlistByPostIDByPagination(paginater, postObjId, new Callback<List<com.smk.model.CommentItem>>() {
                 @Override
                 public void success(List<com.smk.model.CommentItem> commentItems, Response response) {
 
@@ -552,8 +557,8 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
 
                     StoreUtil.getInstance().saveTo("commentlist", listComment);
                     //TODO get sticker for comment
-                   if (!alreadySticker)
-                      LoadStickerData();
+                    if (!alreadySticker)
+                        LoadStickerData();
                 }
 
                 @Override
@@ -562,17 +567,20 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
                 }
             });
         } else {
-            SKConnectionDetector.getInstance(this).showErrorMessage();
+            if (!alreadySticker)
+                LoadStickerData();
+            //SKConnectionDetector.getInstance(this).showErrorMessage();
+
         }
 
     }
 
     private void saveLikeStatusToSQLite(String postId, String user_id, String item) {
         ContentValues cv = new ContentValues();
-        cv.put("sub_resource_id",postId);
-        cv.put("user_id",user_id);
-        cv.put("like_count",item);
-        cv.put("status","1");
+        cv.put("sub_resource_id", postId);
+        cv.put("user_id", user_id);
+        cv.put("like_count", item);
+        cv.put("status", "1");
         getContentResolver().insert(IwomenProviderData.SubResourceDetailProvider.CONTETNT_URI, cv);
     }
 
@@ -641,7 +649,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        if(item.getItemId() == android.R.id.home){
+        if (item.getItemId() == android.R.id.home) {
             finish();
             return true;
         }
@@ -655,7 +663,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.social_no_ear_like_animated_button:
                 if (Connection.isOnline(getApplicationContext())) {
 
@@ -694,9 +702,9 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
                     intent.putExtra(Intent.EXTRA_TEXT, CommonConfig.SHARE_URL);
                     intent.setType("text/plain");
                     getApplicationContext().startActivity(intent);
-                    Log.i("Resource Detail","Viber Complete");
+                    Log.i("Resource Detail", "Viber Complete");
                 } catch (ActivityNotFoundException ex) {
-                    Log.i("Social Viber",""+ex);
+                    Log.i("Social Viber", "" + ex);
                 }
                 break;
             case R.id.resourcedetail_submit_comment:
@@ -712,7 +720,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
                         }
                     } else {
 
-                        Log.i("Comment Para"," " + et_comment.getText().toString() );
+                        Log.i("Comment Para>>>", " " + et_comment.getText().toString());
                         mProgressDialog.show();
                         //TODO Comment Post
 
@@ -723,13 +731,13 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
                         }
 
 
-                        SMKserverAPI.getInstance().getService().postCommentTestByPostID(postType, postObjId, user_obj_id, user_name, userprofile_Image_path, et_comment.getText().toString(), new Callback<CommentItem>() {
+                        SMKserverAPI.getInstance().getService().postCommentBeKnowledgableByPostID("SubResourceDetail", postObjId, user_obj_id, user_name, userprofile_Image_path, et_comment.getText().toString(), new Callback<CommentItem>() {
 
                             @Override
                             public void success(CommentItem calendarEvent, Response response) {
-
-                                et_comment.setText(" ");  // clear commment after success //Linn Wah
-                                txt_cmd_count.setText(calendarEvent.getCommentCount() + "");
+                                Log.i("TAG", "Success Posting");
+                                et_comment.setText(" ");
+                                //  txt_cmd_count.setText(calendarEvent.getCommentCount() + "");
                                 txt_social_no_ear_comment.setText(calendarEvent.getCommentCount() + "");
 
                                 //TODO Comment load again
@@ -798,7 +806,6 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
 
     @Override
     public void onScroll(AbsListView absListView, int i, int i1, int i2) {
-
         if (!mHasRequestedMore) {
             int lastInScreen = i + i1;
             //Log.i("count limit", "12"  + "last n Screen " +lastInScreen + String.valueOf(sticker_paginater));
@@ -898,8 +905,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
 
             public void onItemClick(AdapterView<?> arg0, View arg1, int position,
                                     long arg3) {
-                //Toast.makeText(mContext, mAdapter.getItem(position), Toast.LENGTH_SHORT).show();
-                //popup.dismiss();
+
                 ly_sticker_holder.setVisibility(View.GONE);
                 InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
                 inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
@@ -919,11 +925,12 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
                     userprofile_Image_path = "http://files.parsetfss.com/a7e7daa5-3bd6-46a6-b715-5c9ac02237ee/tfss-7f0323bc-a862-4184-9e51-d55189fcab18-ic_launcher.png";
                 }
                 //Log.e("<<Comment>>","==>" +postType,postObjId, user_obj_id, user_name, stickerArrayList.get(position).getStickerImgPath()+""+ userprofile_Image_path+""+ cmt_text );
-                SMKserverAPI.getInstance().getService().postCommentByPostID(postType, postObjId, user_obj_id, user_name, stickerArrayList.get(position).getStickerImgPath(), userprofile_Image_path, cmt_text, new Callback<CommentItem>() {
+                SMKserverAPI.getInstance().getService().postCommentByPostID("SubResourceDetail", postObjId, user_obj_id, user_name, stickerArrayList.get(position).getStickerImgPath(), userprofile_Image_path, cmt_text, new Callback<CommentItem>() {
                     @Override
                     public void success(CommentItem calendarEvent, Response response) {
-
-                        txt_cmd_count.setText(calendarEvent.getCommentCount() + "");
+                        Log.i("Comment Count>>>>>", "" + calendarEvent.getCommentCount());
+                        et_comment.setText("");
+                        //txt_cmd_count.setText(calendarEvent.getCommentCount() + "");
                         txt_social_no_ear_comment.setText(calendarEvent.getCommentCount() + "");
                         getCommentByPagination();
 
@@ -1058,7 +1065,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
         stickerImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.i("Sticker Image","onClick");
+                Log.i("Sticker Image", "onClick");
                 popup.dismiss();
 
                 InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);

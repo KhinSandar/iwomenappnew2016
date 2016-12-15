@@ -76,6 +76,17 @@ public interface SMKSeverService {
             @Field("user_img_path") String user_img_path,
             @Field("comment_contents") String comment_contents,
             Callback<CommentItem> callback);
+//Linn for BeKnowledgable Comment
+    @FormUrlEncoded
+    @POST(CommonConfig.POST_COMMENT_BEKNOWLEDGABLE)
+    void postCommentBeKnowledgableByPostID(
+            @Field("postType") String postType,
+            @Field("postId") String postId,
+            @Field("userId") String userId,
+            @Field("user_name") String user_name,
+            @Field("user_img_path") String user_img_path,
+            @Field("comment_contents") String comment_contents,
+            Callback<CommentItem> callback);
 
 
     @GET(CommonConfig.GET_SUB_RESOURCE_LIST_BY_RESOURCID_URL)

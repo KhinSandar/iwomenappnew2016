@@ -170,7 +170,7 @@ public class CommonConfig {
 
     public static final String UPDATE_USER_PHONE_URL = "/api/v1/users/{id}";
 
-
+    public static final String POST_COMMENT_BEKNOWLEDGABLE = "/api/v1/comments";
 
 
 }
