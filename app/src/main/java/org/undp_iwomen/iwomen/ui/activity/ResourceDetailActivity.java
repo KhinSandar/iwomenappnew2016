@@ -289,6 +289,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
             txtBody.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
             et_comment.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
         } else if (strLang.equals(Utils.MM_LANG)) {
+            Log.i("ResourceDetailActiivty",""+Utils.MM_LANG.toString());
             profileName.setText(mstrAuthorNameMM);
 
             textViewTitle.setText(mstrTitleMm);
@@ -301,6 +302,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
             txtName.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
             txtBody.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
             txtAuthorRole.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
+            et_comment.setHint(R.string.post_detail_comment_mm);
             et_comment.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
 
         } else {//FOR ALl MM FONT
@@ -311,6 +313,9 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
             txtBody.setText(mstrContentMm);
             txtName.setText(mstrSubResourceTitleMm);
             txtAuthorRole.setText(mstrAuthorRoleMM);
+            et_comment.setHint(R.string.post_detail_comment_mm);
+
+            et_comment.setTypeface(MyTypeFace.get(this, MyTypeFace.ZAWGYI));
         }
 
 
