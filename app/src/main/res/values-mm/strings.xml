@@ -152,7 +152,7 @@
     <string name="tlg_who_we_r_mm">အဖြဲ ့အေၾကာင္း</string>
     <string name="tlg_who_we_r_eng">Who we are</string>
 
-    <string name="tlg_member_lbl_mm">ၿမိဳ ့နယ္ဦးေဆာင္အဖြဲ ့ </string>
+    <string name="tlg_member_lbl_mm">ကိုယ့္အားကိုယ္ကိုးအဖြဲ႔မ်ား </string>
     <string name="tlg_member_lbl_eng">TLG Member</string>
     <string name="tlg_member_txt_mm">၁၅</string>
     <string name="tlg_member_txt_eng">15</string>
@@ -435,7 +435,7 @@ female-pilots-iaa1s
 
     <string name="tlg_who_we_r_un">အဖွဲ့အကြောင်း</string>
 
-    <string name="tlg_member_lbl_un">မြို့နယ်ဦးဆောင်အဖွဲ့ </string>
+    <string name="tlg_member_lbl_un">ကိုယ့်အားကိုယ်ကိုးအဖွဲ့များ</string>
 
     <string name="tlg_member_txt_un">၁၅</string>
 
