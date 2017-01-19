@@ -10,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.makeramen.RoundedImageView;
 import com.squareup.picasso.Picasso;
@@ -93,7 +94,7 @@ public class TLGUserPostRecentListAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        IWomenPost item = getItem(position);
+        final IWomenPost item = getItem(position);
 
         holder.profile.setAdjustViewBounds(true);
         holder.profile.setScaleType(ImageView.ScaleType.CENTER_CROP);
@@ -165,6 +166,14 @@ public class TLGUserPostRecentListAdapter extends BaseAdapter {
         Log.e("<<Talk Together >>","==usrID=>" + userID+ "/"+ item.getUserId());
         if(item.getUserId().toString().equals(userID)){
             holder.post_deleted.setVisibility(View.VISIBLE);
+
+            holder.post_deleted.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(mContext, "ImageView clicked for the row = "+userID + item.getObjectId(), Toast.LENGTH_SHORT).show();
+
+                }
+            });
 
         }else{
             holder.post_deleted.setVisibility(View.GONE);

@@ -1,6 +1,8 @@
 package org.undp_iwomen.iwomen.ui.fragment;
 
+import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,6 +18,7 @@ import android.os.CountDownTimer;
 import android.os.Environment;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.system.ErrnoException;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,6 +57,7 @@ import org.undp_iwomen.iwomen.utils.Utils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.text.Format;
 import java.text.SimpleDateFormat;
@@ -71,7 +75,7 @@ import retrofit.mime.TypedFile;
 public class NewPostPostFragment extends Fragment implements View.OnClickListener, ImageChooserListener {
 
     public static final String TAG = "New Post";
-    private static String cateId,cateName;
+    private static String cateId, cateName;
     public Button mPostBtn;
     public EditText et_postDesc;
     public CustomTextView take_photo_btn, upload_photo_btn, audio_upload_btn, video_upload_btn;
@@ -125,7 +129,7 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
     private final String CAMERA_PERMISSION = "android.permission.CAMERA";
     private final String AUDIO_PERMISSION = "android.permission.RECORD_AUDIO";
     private final String WRITE_PERMISSION = "android.permission.WRITE_EXTERNAL_STORAGE";
-    private final String READ_PERMISSIOIN = "android.permission.WRITE_EXTERNAL_STORAGE";
+    private final String READ_PERMISSIOIN = "android.permission.READ_EXTERNAL_STORAGE";
     private final String PREPARE_AUDIO_PERMISSION = "android.permission.MODIFY_AUDIO_SETTINGS";
     private final String STORAGE_READ_PERMISSION = "android.permission.READ_EXTERNAL_STORAGE";
     private ZProgressHUD zPDialog;
@@ -133,7 +137,8 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
 
     public NewPostPostFragment() {
     }
-    public static NewPostPostFragment newInstance(String categoryId , String catName) {
+
+    public static NewPostPostFragment newInstance(String categoryId, String catName) {
         NewPostPostFragment fragment = new NewPostPostFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
@@ -265,7 +270,7 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
 
 
                         requestPermissions(perms, permsRequestCode);
-                    }else {
+                    } else {
                         takePicture();
                     }
                 }
@@ -313,11 +318,11 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
 
             case R.id.audio_record_done_btn:
 
-                if(mAudioFilePath == null || !new File(mAudioFilePath).exists()) {
+                if (mAudioFilePath == null || !new File(mAudioFilePath).exists()) {
                     SKToastMessage.showMessage(getActivity(), getResources().getString(R.string.audio_record_warning_1), SKToastMessage.WARNING);
-                }else if(isRecording){
+                } else if (isRecording) {
                     SKToastMessage.showMessage(getActivity(), getResources().getString(R.string.audio_record_warning_2), SKToastMessage.WARNING);
-                }else {
+                } else {
 
                     onAudioRecordDoneClick();
 
@@ -353,7 +358,6 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
     private void checkProcessWhattoDo() {
 
 
-
         if (crop_file_path != null) {
             uploadImage();
         } else if (mAudioFilePath != null) {
@@ -361,13 +365,13 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
             uploadingAudioFile(uploadUrl, mAudioFilePath);
         } else {
 
-            if(et_postDesc.getText().toString().isEmpty() && crop_file_path == null && mAudioFilePath == null){//this mean user doesn't choose nothing
+            if (et_postDesc.getText().toString().isEmpty() && crop_file_path == null && mAudioFilePath == null) {//this mean user doesn't choose nothing
                 //progress_wheel.setVisibility(View.GONE);
-                if(zPDialog != null && zPDialog.isShowing()){
+                if (zPDialog != null && zPDialog.isShowing()) {
                     zPDialog.dismissWithSuccess();
                 }
                 SKToastMessage.showMessage(getActivity(), getResources().getString(R.string.audio_record_warning_post_something), SKToastMessage.WARNING);
-            }else {
+            } else {
 
 
                 //we will post all data to server, if it's here, we assume all data is ready
@@ -435,9 +439,9 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
         }
 
         if (audio_file_id != null) { //to check if user upload audio
-            content_type = "audio";
+            content_type = "Audio";
         } else { // user doesn't choose audio nor video
-            content_type = "letter";
+            content_type = "Letter";
         }
 
         // Get the date today using Calendar object.
@@ -467,7 +471,7 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
     Callback<IWomenPost> createPostcallback = new Callback<IWomenPost>() {
         @Override
         public void success(IWomenPost iWomenPost, Response response) {
-            SKToastMessage.getInstance(getActivity()).showMessage(getActivity(),getResources().getString(R.string.audio_post_success), SKToastMessage.SUCCESS);
+            SKToastMessage.getInstance(getActivity()).showMessage(getActivity(), getResources().getString(R.string.audio_post_success), SKToastMessage.SUCCESS);
             //getActivity().finish();
 
             /*Intent i = new Intent(getActivity().getApplicationContext(), TalkTogetherMainActivity.class);
@@ -481,7 +485,7 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
             startActivity(i);
 
             progress_wheel.setVisibility(View.GONE);
-            if(zPDialog != null && zPDialog.isShowing()){
+            if (zPDialog != null && zPDialog.isShowing()) {
                 zPDialog.dismissWithSuccess();
             }
 
@@ -489,10 +493,10 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
 
         @Override
         public void failure(RetrofitError error) {
-            Log.e("New Post Post","===>p"+error.getMessage());
-            SKToastMessage.getInstance(getActivity()).showMessage(getActivity(),getResources().getString(R.string.audio_post_error), SKToastMessage.ERROR);
+            Log.e("New Post Post", "===>p" + error.getMessage());
+            SKToastMessage.getInstance(getActivity()).showMessage(getActivity(), getResources().getString(R.string.audio_post_error), SKToastMessage.ERROR);
             progress_wheel.setVisibility(View.GONE);
-            if(zPDialog != null && zPDialog.isShowing()){
+            if (zPDialog != null && zPDialog.isShowing()) {
                 zPDialog.dismissWithSuccess();
             }
         }
@@ -505,7 +509,7 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
             //textViewFile.setText(image.getFilePathOriginal());
             croppedImageFile = new File(image.getFilePathOriginal());
             Uri croppedImage = Uri.fromFile(croppedImageFile);
-            CropImageIntentBuilder cropImage = new CropImageIntentBuilder(512, 512, croppedImage);
+            CropImageIntentBuilder cropImage = new CropImageIntentBuilder(650, 650, croppedImage);
             cropImage.setSourceImage(croppedImage);
             startActivityForResult(cropImage.getIntent(getActivity().getApplicationContext()), REQUEST_CROP_PICTURE);
 
@@ -551,7 +555,7 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
             public void run() {
                 progress_wheel.setVisibility(View.GONE);
                 //Toast.makeText(getActivity().getApplicationContext(), reason,
-                        //Toast.LENGTH_LONG).show();
+                //Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -709,7 +713,7 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
             } else {
 
 
-                if (audio_record_progress_btn.getText().equals("Replay") ||audio_record_progress_btn.getText().equals("အသံ\u107Fပန္နားေထာင္မည္") ) {
+                if (audio_record_progress_btn.getText().equals("Replay") || audio_record_progress_btn.getText().equals("အသံ\u107Fပန္နားေထာင္မည္")) {
                     audio_record_progress_btn.setText(R.string.audio_stop);
                     onPlay(true);
                 } else {
@@ -747,10 +751,10 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
         onRecord(false);
 
 
-        if(mAudioFilePath != null)
-        if (new File(mAudioFilePath).exists()) {
-            wasAudioRecord = true;
-        }
+        if (mAudioFilePath != null)
+            if (new File(mAudioFilePath).exists()) {
+                wasAudioRecord = true;
+            }
 
     }
 
@@ -759,7 +763,7 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
         onPlay(false);
         onRecord(false);
 
-        if(mAudioFilePath != null) {
+        if (mAudioFilePath != null) {
             File file = new File(mAudioFilePath);
             file.delete();
         }
@@ -833,7 +837,7 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
                     //Toast.makeText(getActivity(), serverResponseMessage, Toast.LENGTH_LONG).show();
 
                     //audio_file_id = uploadId;
-                    audio_file_id = serverResponseMessage.replace("\"","").replace("\\","");
+                    audio_file_id = serverResponseMessage.replace("\"", "").replace("\\", "");
 
                     mAudioFilePath = null;
                     checkProcessWhattoDo();
@@ -861,12 +865,32 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
         if ((requestCode == REQUEST_CROP_PICTURE) && (resultCode == getActivity().RESULT_OK)) {
             // When we are done cropping, display it in the ImageView.
 
-            selectedImage.setVisibility(View.VISIBLE);
-            selectedImage.setImageBitmap(BitmapFactory.decodeFile(croppedImageFile.getAbsolutePath()));
-            //img_job.setMaxWidth(300);
-            selectedImage.setMaxHeight(400);
-            crop_file_name = Uri.fromFile(croppedImageFile).getLastPathSegment().toString();
-            crop_file_path = Uri.fromFile(croppedImageFile).getPath();
+
+            // For API >= 23 we need to check specifically that we have permissions to read external storage,
+            // but we don't know if we need to for the URI so the simplest is to try open the stream and see if we get error.
+            boolean requirePermissions = false;
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
+
+                    getActivity().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED &&
+                    isUriRequiresPermissions(Uri.fromFile(croppedImageFile))) {
+
+                // request permissions and handle the result in onRequestPermissionsResult()
+                requirePermissions = true;
+                //mCropImageUri = imageUri;
+                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
+            }
+
+            if (!requirePermissions) {
+                //mCropImageView.setImageUriAsync(imageUri);
+                selectedImage.setVisibility(View.VISIBLE);
+                selectedImage.setImageBitmap(BitmapFactory.decodeFile(croppedImageFile.getAbsolutePath()));
+                //img_job.setMaxWidth(300);
+                selectedImage.setMaxHeight(650);
+                crop_file_name = Uri.fromFile(croppedImageFile).getLastPathSegment().toString();
+                crop_file_path = Uri.fromFile(croppedImageFile).getPath();
+            }
+
 
         }
 
@@ -906,6 +930,24 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
                 return;
             }
         });
+    }
+
+    /**
+     * Test if we can open the given Android URI to test if permission required error is thrown.<br>
+     */
+    public boolean isUriRequiresPermissions(Uri uri) {
+        try {
+            ContentResolver resolver = getActivity().getContentResolver();
+            InputStream stream = resolver.openInputStream(uri);
+            stream.close();
+            return false;
+        } catch (FileNotFoundException e) {
+            if (e.getCause() instanceof ErrnoException) {
+                return true;
+            }
+        } catch (Exception e) {
+        }
+        return false;
     }
 
 }
