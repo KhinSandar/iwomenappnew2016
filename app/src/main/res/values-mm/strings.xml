@@ -906,4 +906,10 @@ female-pilots-iaa1s
     <string name="edit_ph">ဖုုန္းနံပါတ္ၿပင္ရန္</string>
     <string name="edit_ph_mm">ဖုုန္းနံပါတ္ၿပင္ရန္</string>
 
+    <string name="delete_post_ok">ၿပဳလုပ္မည္။</string>
+    <string name="delete_post_cancel">မၿပဳလုပ္ပါ။</string>
+
+    <string name="delete_post">ယခုပို ့စ္ကို ဖ်က္ မည္မွာ ေသခ်ာၿပီလား။</string>
+
+
 </resources>

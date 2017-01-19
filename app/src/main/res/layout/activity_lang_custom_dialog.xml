@@ -86,6 +86,6 @@
         android:layout_gravity="right"
         android:background="@android:color/transparent"
         android:gravity="center"
-        android:text="OK"
+        android:text="@string/ok"
         android:textColor="@android:color/white" />
 </LinearLayout>
