@@ -10,18 +10,10 @@
                 android:paddingTop="@dimen/activity_vertical_margin">
 
     <ImageView
-        android:id="@+id/gobus_text"
+        android:id="@+id/iwomen_imgview"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:visibility="gone"
-        />
 
-    <ImageView
-        android:id="@+id/gobus_logo"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/gobus_text"
         android:layout_centerInParent="true"
         android:visibility="gone"
         />
@@ -29,8 +21,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-        android:layout_below="@+id/gobus_text">
+        android:layout_below="@+id/iwomen_imgview">
 
         <org.undp_iwomen.iwomen.ui.widget.ProgressWheel
             android:id="@+id/splash_loading"
@@ -42,30 +33,6 @@
             wheel:matProg_barColor="@color/primary_light"
             wheel:matProg_progressIndeterminate="true"/>
 
-
-       <!-- <org.undp_iwomen.iwomen.ui.widget.CustomTextView
-            android:id="@+id/no_internet_error_loading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="@string/open_internet_warning"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="@color/body_text_2_inverse"
-            tools:text=""/>
--->
     </FrameLayout>
-
-    <!--android:layout_above="@+id/footer"
-        <LinearLayout
-        android:id="@+id/footer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true">
-
-
-
-    </LinearLayout>-->
 
 </RelativeLayout>
