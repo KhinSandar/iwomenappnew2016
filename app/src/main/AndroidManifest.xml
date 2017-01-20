@@ -27,7 +27,6 @@
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
     <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS"/>
 
@@ -46,6 +45,10 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <!--Permission: Writing to SDCard-->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--Permission: Read to SDCard-->
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
 
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
     <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS"/>

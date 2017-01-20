@@ -4,8 +4,11 @@ import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -40,12 +43,12 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 /**
  * Created by khinsandar on 8/7/15.
  */
-public class SettingsFragment extends Fragment implements CompoundButton.OnCheckedChangeListener{
+public class SettingsFragment extends Fragment implements CompoundButton.OnCheckedChangeListener {
 
     private RadioGroup radioLanguageGroup;
     private RadioButton radioLanguageButton;
 
-    CustomRadioButton rd_lang_en, rd_lang_mm_zawgyi, rd_lang_mm_uni, rd_lang_mm_default ,rd_shan, rd_mon;
+    CustomRadioButton rd_lang_en, rd_lang_mm_zawgyi, rd_lang_mm_uni, rd_lang_mm_default, rd_shan, rd_mon;
     SharedPreferences sharePrefLanguageUtil;
 
     private SharedPreferences mSharedPreferencesUserInfo;
@@ -58,7 +61,11 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
     private CustomTextView settings_changeTheme;
     RadioButton color_blue, color_pink, color_yellow;
 
-    public void SettingsFragment(Context context){
+    //Permission for file storage
+    private final String STORAGE_READ_PERMISSION = "android.permission.READ_EXTERNAL_STORAGE";
+    boolean storagePermissionAccepted = false;
+
+    public void SettingsFragment(Context context) {
 
     }
 
@@ -94,11 +101,11 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
         rd_lang_mm_default = (CustomRadioButton) rootView.findViewById(R.id.settings_mm_default_language);
         rd_shan = (CustomRadioButton) rootView.findViewById(R.id.settings_ethic_shan_language);
         rd_mon = (CustomRadioButton) rootView.findViewById(R.id.settings_ethic_mon_language);
-        settings_language_setting_title = (CustomTextView)rootView.findViewById(R.id.settings_language_setting_title);
-        settings_changeTheme = (CustomTextView)rootView.findViewById(R.id.settings_changeTheme);
+        settings_language_setting_title = (CustomTextView) rootView.findViewById(R.id.settings_language_setting_title);
+        settings_changeTheme = (CustomTextView) rootView.findViewById(R.id.settings_changeTheme);
         //chk_settings_getnotification = (CheckBox)rootView.findViewById(R.id.settings_getnotification);
 
-        sw_noti = (Switch)rootView.findViewById(R.id.setting_sw);
+        sw_noti = (Switch) rootView.findViewById(R.id.setting_sw);
         color_blue = (RadioButton) rootView.findViewById(R.id.setting_color_blue);
         color_pink = (RadioButton) rootView.findViewById(R.id.setting_color_pink);
         color_yellow = (RadioButton) rootView.findViewById(R.id.setting_color_yellow);
@@ -111,17 +118,16 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
         rd_shan.setOnCheckedChangeListener(this);
         rd_mon.setOnCheckedChangeListener(this);
 
-        if(lang.equals(Utils.ENG_LANG)){
+        if (lang.equals(Utils.ENG_LANG)) {
             rd_lang_en.setChecked(true);
             setEnglishFont();
-        }
-        else if(lang.equals(Utils.MM_LANG)){
+        } else if (lang.equals(Utils.MM_LANG)) {
             rd_lang_mm_zawgyi.setChecked(true);
             setMyanmarFont();
-        }else if(lang.equals(Utils.MM_LANG_UNI)){
+        } else if (lang.equals(Utils.MM_LANG_UNI)) {
             rd_lang_mm_uni.setChecked(true);
             setMyanmarFontUni();
-        }else if(lang.equals(Utils.MM_LANG_DEFAULT)){
+        } else if (lang.equals(Utils.MM_LANG_DEFAULT)) {
             rd_lang_mm_default.setChecked(true);
             setMyanmarFontDefault();
         }
@@ -131,7 +137,7 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
 
         boolean willShowNoti = mSharedPreferencesUserInfo.getBoolean(CommonConfig.WILL_SHOW_NOTIFICATION, true);
 
-        if(!willShowNoti) {
+        if (!willShowNoti) {
             /*Random random = new Random();
             int m = random.nextInt(9999 - 1000) + 1000;
             if (Context.NOTIFICATION_SERVICE != null) {
@@ -149,7 +155,7 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
 
             sw_noti.setChecked(false);
 
-        }else{
+        } else {
             sw_noti.setChecked(true);
         }
         mEditorUserInfo = mSharedPreferencesUserInfo.edit();
@@ -158,7 +164,7 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
 
-                if(b){
+                if (b) {
                     //switchStatus.setText("Switch is currently ON");
 
                     mEditorUserInfo.putBoolean(CommonConfig.WILL_SHOW_NOTIFICATION, true);
@@ -166,7 +172,7 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
                     //Toast.makeText(getContext(),"Open",Toast.LENGTH_SHORT).show();
 
 
-                }else{
+                } else {
 
                     if (NOTIFICATION_SERVICE != null) {
                         NotificationManager nMgr = (NotificationManager) getApplicationContext()
@@ -183,13 +189,13 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
             }
         });
         //check the current state before we display the screen
-        if(sw_noti.isChecked()){
+        if (sw_noti.isChecked()) {
             //switchStatus.setText("Switch is currently ON");
             mEditorUserInfo.putBoolean(CommonConfig.WILL_SHOW_NOTIFICATION, true);
             mEditorUserInfo.commit();
             //Toast.makeText(getContext(),"before open",Toast.LENGTH_SHORT).show();
 
-        }else{
+        } else {
 
             if (NOTIFICATION_SERVICE != null) {
                 NotificationManager nMgr = (NotificationManager) getApplicationContext()
@@ -216,28 +222,28 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
 
     }
 
-    public void setSelectedTheme(){
+    public void setSelectedTheme() {
         int selected_theme = sharePrefLanguageUtil.getInt(Utils.PREF_THEME, Utils.THEME_PINK);
 
-        if(selected_theme == Utils.THEME_PINK){
+        if (selected_theme == Utils.THEME_PINK) {
             color_pink.setChecked(true);
-        }else if(selected_theme == Utils.THEME_BLUE){
+        } else if (selected_theme == Utils.THEME_BLUE) {
             color_blue.setChecked(true);
-        }else if(selected_theme == Utils.THEME_YELLOW){
+        } else if (selected_theme == Utils.THEME_YELLOW) {
             color_yellow.setChecked(true);
         }
 
     }
 
 
-    public void setThemeToApp(int theme){
+    public void setThemeToApp(int theme) {
 
 
-        if(theme == Utils.THEME_BLUE){
+        if (theme == Utils.THEME_BLUE) {
             getActivity().setTheme(R.style.AppTheme_Blue);
-        }else if(theme == Utils.THEME_PINK){
+        } else if (theme == Utils.THEME_PINK) {
             getActivity().setTheme(R.style.AppTheme);
-        }else if(theme == Utils.THEME_YELLOW){
+        } else if (theme == Utils.THEME_YELLOW) {
             getActivity().setTheme(R.style.AppTheme_Yellow);
         }
 
@@ -250,7 +256,7 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
 
         SharedPreferences.Editor editor = sharePrefLanguageUtil.edit();
 
-        if(buttonView.getId() == R.id.setting_color_blue){
+       /* if(buttonView.getId() == R.id.setting_color_blue){
             if(isChecked){
 
                 editor.putInt(Utils.PREF_THEME, Utils.THEME_BLUE);
@@ -271,14 +277,22 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
                 Utils.changeToTheme(getActivity());
             }
         }else {
+        */
 
 
+        if (isChecked) {
+            if (buttonView.getId() == R.id.settings_english_language) {
 
+                if (!hasPermission(STORAGE_READ_PERMISSION)) {
 
-            if (isChecked) {
-                if (buttonView.getId() == R.id.settings_english_language) {
+                    //if no permission, request permission
+                    String[] perms = {STORAGE_READ_PERMISSION};
 
+                    int permsRequestCode = 200;
 
+                    requestPermissions(perms, permsRequestCode);
+
+                } else {
                     StoreUtil.getInstance().saveTo("fonts", "english");
                     editor.putString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
                     editor.commit();
@@ -288,7 +302,7 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
                     Locale.setDefault(locale);
                     Configuration config = new Configuration();
                     config.locale = locale;
-                    getActivity().getBaseContext().getResources().updateConfiguration(config,getActivity().getResources().getDisplayMetrics());
+                    getActivity().getBaseContext().getResources().updateConfiguration(config, getActivity().getResources().getDisplayMetrics());
 
 
                     SharedPreferences.Editor fontEditor = getActivity().getSharedPreferences("mLanguage", Activity.MODE_PRIVATE).edit();
@@ -296,12 +310,23 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
                     fontEditor.commit();
 
                     setEnglishFont();
+                }
 
-                } else if (buttonView.getId() == R.id.settings_mm_zawgyi_language) {
+            } else if (buttonView.getId() == R.id.settings_mm_zawgyi_language) {
+                if (!hasPermission(STORAGE_READ_PERMISSION)) {
+
+                    //if no permission, request permission
+                    String[] perms = {STORAGE_READ_PERMISSION};
+
+                    int permsRequestCode = 200;
+
+                    requestPermissions(perms, permsRequestCode);
+
+                } else {
                     StoreUtil.getInstance().saveTo("fonts", "zawgyione");
                     editor.putString(Utils.PREF_SETTING_LANG, Utils.MM_LANG);
 
-                    String languageToLoad  = "mm"; // your language
+                    String languageToLoad = "mm"; // your language
                     Locale locale = new Locale(languageToLoad);
                     Locale.setDefault(locale);
                     Configuration config = new Configuration();
@@ -313,13 +338,23 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
                     fontEditor.commit();
 
                     setMyanmarFont();
-
                 }
-                else if (buttonView.getId() == R.id.settings_mm_unicode_language) {
+
+            } else if (buttonView.getId() == R.id.settings_mm_unicode_language) {
+                if (!hasPermission(STORAGE_READ_PERMISSION)) {
+
+                    //if no permission, request permission
+                    String[] perms = {STORAGE_READ_PERMISSION};
+
+                    int permsRequestCode = 200;
+
+                    requestPermissions(perms, permsRequestCode);
+
+                } else {
                     StoreUtil.getInstance().saveTo("fonts", "myanmar3");
                     editor.putString(Utils.PREF_SETTING_LANG, Utils.MM_LANG_UNI);
 
-                    String languageToLoad  = "mm"; // your language
+                    String languageToLoad = "mm"; // your language
                     Locale locale = new Locale(languageToLoad);
                     Locale.setDefault(locale);
                     Configuration config = new Configuration();
@@ -331,12 +366,23 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
                     fontEditor.commit();
 
                     setMyanmarFontUni();
+                }
 
-                } else if (buttonView.getId() == R.id.settings_mm_default_language) {
+            } else if (buttonView.getId() == R.id.settings_mm_default_language) {
+                if (!hasPermission(STORAGE_READ_PERMISSION)) {
+
+                    //if no permission, request permission
+                    String[] perms = {STORAGE_READ_PERMISSION};
+
+                    int permsRequestCode = 200;
+
+                    requestPermissions(perms, permsRequestCode);
+
+                } else {
                     StoreUtil.getInstance().saveTo("fonts", "default");
                     editor.putString(Utils.PREF_SETTING_LANG, Utils.MM_LANG_DEFAULT);
 
-                    String languageToLoad  = "mm"; // your language
+                    String languageToLoad = "mm"; // your language
                     Locale locale = new Locale(languageToLoad);
                     Locale.setDefault(locale);
                     Configuration config = new Configuration();
@@ -348,22 +394,22 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
                     fontEditor.commit();
 
                     setMyanmarFontDefault();
-
-                }else if (buttonView.getId() == R.id.settings_ethic_shan_language) {
-                    SKToastMessage.showMessage(getActivity(), getResources().getString(R.string.resource_coming_soon_eng), SKToastMessage.ERROR);
-
-                }else if (buttonView.getId() == R.id.settings_ethic_mon_language) {
-                    SKToastMessage.showMessage(getActivity(), getResources().getString(R.string.resource_coming_soon_eng), SKToastMessage.ERROR);
-
                 }
 
+            } else if (buttonView.getId() == R.id.settings_ethic_shan_language) {
+                SKToastMessage.showMessage(getActivity(), getResources().getString(R.string.resource_coming_soon_eng), SKToastMessage.ERROR);
+
+            } else if (buttonView.getId() == R.id.settings_ethic_mon_language) {
+                SKToastMessage.showMessage(getActivity(), getResources().getString(R.string.resource_coming_soon_eng), SKToastMessage.ERROR);
 
             }
+
+
             editor.commit();
         }
     }
 
-    public void setEnglishFont(){
+    public void setEnglishFont() {
 
         // Set title bar
         ((SettingActivity) getActivity()).textViewTitle.setText(R.string.action_settings);
@@ -376,7 +422,8 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
         settings_changeTheme.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
 
     }
-    public void setMyanmarFont(){
+
+    public void setMyanmarFont() {
         // Set title bar
         ((SettingActivity) getActivity()).textViewTitle.setText(R.string.action_settings_mm);
         settings_language_setting_title.setText(R.string.title_action_settings_mm);
@@ -391,7 +438,9 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
         settings_changeTheme.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));*/
 
 
-    }public void setMyanmarFontUni(){
+    }
+
+    public void setMyanmarFontUni() {
         // Set title bar
         ((SettingActivity) getActivity()).textViewTitle.setText(R.string.action_settings_mm);
 
@@ -408,7 +457,9 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
         settings_changeTheme.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));*/
 
 
-    }public void setMyanmarFontDefault(){
+    }
+
+    public void setMyanmarFontDefault() {
         // Set title bar
         ((SettingActivity) getActivity()).textViewTitle.setText(R.string.action_settings_mm);
         settings_language_setting_title.setText(R.string.title_action_settings_mm);
@@ -430,6 +481,7 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
         inflater.inflate(R.menu.menu_post_news, menu);
 
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -444,6 +496,36 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
 
         return super.onOptionsItemSelected(item);
     }
+
+    //For permission of File access Storage
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+
+            case 200:
+
+                storagePermissionAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+
+                if (storagePermissionAccepted) {
+                    //chooseImage();
+                }
+
+                break;
+
+        }
+    }
+
+    private boolean hasPermission(String permission) {
+
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
+            return (getActivity().checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED);
+        } else {
+            return true;
+        }
+
+
+    }
+
     /*private void unregister() {
         new AsyncTask() {
             @Override

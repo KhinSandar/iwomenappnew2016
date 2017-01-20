@@ -1,6 +1,8 @@
 package org.undp_iwomen.iwomen.ui.fragment;
 
+import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,6 +18,7 @@ import android.os.CountDownTimer;
 import android.os.Environment;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.system.ErrnoException;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,6 +56,7 @@ import org.undp_iwomen.iwomen.utils.Utils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.text.Format;
 import java.text.SimpleDateFormat;
@@ -127,7 +131,7 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
 
     private final String AUDIO_PERMISSION = "android.permission.RECORD_AUDIO";
     private final String WRITE_PERMISSION = "android.permission.WRITE_EXTERNAL_STORAGE";
-    private final String READ_PERMISSIOIN = "android.permission.WRITE_EXTERNAL_STORAGE";
+    private final String READ_PERMISSIOIN = "android.permission.READ_EXTERNAL_STORAGE";
     private final String PREPARE_AUDIO_PERMISSION = "android.permission.MODIFY_AUDIO_SETTINGS";
     private final String STORAGE_READ_PERMISSION = "android.permission.READ_EXTERNAL_STORAGE";
 
@@ -475,7 +479,7 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
             //textViewFile.setText(image.getFilePathOriginal());
             croppedImageFile = new File(image.getFilePathOriginal());
             Uri croppedImage = Uri.fromFile(croppedImageFile);
-            CropImageIntentBuilder cropImage = new CropImageIntentBuilder(512, 512, croppedImage);
+            CropImageIntentBuilder cropImage = new CropImageIntentBuilder(650, 650, croppedImage);
             cropImage.setSourceImage(croppedImage);
             startActivityForResult(cropImage.getIntent(getActivity().getApplicationContext()), REQUEST_CROP_PICTURE);
 
@@ -830,13 +834,31 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
         }
         if ((requestCode == REQUEST_CROP_PICTURE) && (resultCode == getActivity().RESULT_OK)) {
             // When we are done cropping, display it in the ImageView.
+// For API >= 23 we need to check specifically that we have permissions to read external storage,
+            // but we don't know if we need to for the URI so the simplest is to try open the stream and see if we get error.
+            boolean requirePermissions = false;
 
-            selectedImage.setVisibility(View.VISIBLE);
-            selectedImage.setImageBitmap(BitmapFactory.decodeFile(croppedImageFile.getAbsolutePath()));
-            //img_job.setMaxWidth(300);
-            selectedImage.setMaxHeight(400);
-            crop_file_name = Uri.fromFile(croppedImageFile).getLastPathSegment().toString();
-            crop_file_path = Uri.fromFile(croppedImageFile).getPath();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
+
+                    getActivity().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED &&
+                    isUriRequiresPermissions(Uri.fromFile(croppedImageFile))) {
+
+                // request permissions and handle the result in onRequestPermissionsResult()
+                requirePermissions = true;
+                //mCropImageUri = imageUri;
+                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
+            }
+
+            if (!requirePermissions) {
+                //mCropImageView.setImageUriAsync(imageUri);
+                selectedImage.setVisibility(View.VISIBLE);
+                selectedImage.setImageBitmap(BitmapFactory.decodeFile(croppedImageFile.getAbsolutePath()));
+                //img_job.setMaxWidth(300);
+                selectedImage.setMaxHeight(650);
+                crop_file_name = Uri.fromFile(croppedImageFile).getLastPathSegment().toString();
+                crop_file_path = Uri.fromFile(croppedImageFile).getPath();
+            }
+
 
         }
 
@@ -882,6 +904,24 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
     @Override
     public void onDestroy() {
         super.onDestroy();
+    }
+
+    /**
+     * Test if we can open the given Android URI to test if permission required error is thrown.<br>
+     */
+    public boolean isUriRequiresPermissions(Uri uri) {
+        try {
+            ContentResolver resolver = getActivity().getContentResolver();
+            InputStream stream = resolver.openInputStream(uri);
+            stream.close();
+            return false;
+        } catch (FileNotFoundException e) {
+            if (e.getCause() instanceof ErrnoException) {
+                return true;
+            }
+        } catch (Exception e) {
+        }
+        return false;
     }
 
 }

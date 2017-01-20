@@ -2,14 +2,17 @@ package org.undp_iwomen.iwomen.ui.adapter;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.makeramen.RoundedImageView;
 import com.squareup.picasso.Picasso;
@@ -77,23 +80,23 @@ public class TLGUserPostRecentListAdapter extends BaseAdapter {
         ViewHolder holder = null;
         if (convertView == null) {
             holder = new ViewHolder();
-            convertView = mInflater.inflate(R.layout.stories_list_item, null);
+            convertView = mInflater.inflate(R.layout.tlg_user_post_stories_list_item, null);
 
-            holder.mPostTile = (CustomTextView) convertView.findViewById(R.id.txtPostTitle);
-            holder.post_content = (CustomTextView) convertView.findViewById(R.id.txtContent);
-            holder.post_content_user_name = (CustomTextView) convertView.findViewById(R.id.name);
-            holder.post_timestamp = (TextView) convertView.findViewById(R.id.timestamp);
-            holder.profile = (RoundedImageView) convertView.findViewById(R.id.profilePic_rounded);
-            holder.feed_item_progressBar = (ProgressBar) convertView.findViewById(R.id.feed_item_progressBar);
-            holder.profile_item_progressBar = (ProgressBar) convertView.findViewById(R.id.progressBar_profile_item);
-            holder.postIMg = (ResizableImageView) convertView.findViewById(R.id.postImg);
-            holder.profilePictureView = (ProfilePictureView) convertView.findViewById(R.id.profilePic);
-            holder.post_deleted = (CustomTextView)convertView.findViewById(R.id.txtPostDeleted);
+            holder.mPostTile = (CustomTextView) convertView.findViewById(R.id.tlg_txtPostTitle);
+            holder.post_content = (CustomTextView) convertView.findViewById(R.id.tlg_txtContent);
+            holder.post_content_user_name = (CustomTextView) convertView.findViewById(R.id.tlg_post_name);
+            holder.post_timestamp = (TextView) convertView.findViewById(R.id.tlg_timestamp);
+            holder.profile = (RoundedImageView) convertView.findViewById(R.id.tlg_profilePic_rounded);
+            holder.feed_item_progressBar = (ProgressBar) convertView.findViewById(R.id.tlg_feed_item_progressBar);
+            holder.profile_item_progressBar = (ProgressBar) convertView.findViewById(R.id.tlg_progressBar_profile_item);
+            holder.postIMg = (ResizableImageView) convertView.findViewById(R.id.tlg_postImg);
+            holder.profilePictureView = (ProfilePictureView) convertView.findViewById(R.id.tlg_profilePic);
+            holder.post_deleted = (CustomTextView)convertView.findViewById(R.id.tlg_txtPostDeleted);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        IWomenPost item = getItem(position);
+        final IWomenPost item = getItem(position);
 
         holder.profile.setAdjustViewBounds(true);
         holder.profile.setScaleType(ImageView.ScaleType.CENTER_CROP);
@@ -165,6 +168,60 @@ public class TLGUserPostRecentListAdapter extends BaseAdapter {
         Log.e("<<Talk Together >>","==usrID=>" + userID+ "/"+ item.getUserId());
         if(item.getUserId().toString().equals(userID)){
             holder.post_deleted.setVisibility(View.VISIBLE);
+
+            holder.post_deleted.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //Toast.makeText(mContext, "ImageView clicked for the row = "+userID + item.getObjectId(), Toast.LENGTH_SHORT).show();
+
+
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                    // ...Irrelevant code for customizing the buttons and title
+                    View dialogView = mInflater.inflate(R.layout.fragment_talk_together_delete_dialog, null);
+                    builder.setView(dialogView);
+
+                    Button btn_ok = (Button) dialogView.findViewById(R.id.dialog_ok_btn);
+                    Button btn_cancel = (Button) dialogView.findViewById(R.id.dialog_cancel_btn);
+
+                    btn_ok.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Toast.makeText(mContext, "ImageView clicked for the row = "+userID + item.getObjectId(), Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+                    btn_cancel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                        }
+                    });
+
+                    /*
+                    builder.setTitle(getString(R.string.dialog_title));
+                    builder.setMessage(getString(R.string.dialog_message));
+                    String positiveText = getString(android.R.string.ok);
+                    builder.setPositiveButton(positiveText,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // positive button logic
+                                }
+                            });
+
+                    String negativeText = getString(android.R.string.cancel);
+                    builder.setNegativeButton(negativeText,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // negative button logic
+                                }
+                            });*/
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+
+                }
+            });
 
         }else{
             holder.post_deleted.setVisibility(View.GONE);
