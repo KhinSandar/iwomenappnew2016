@@ -23,6 +23,7 @@ import org.smk.model.GcmMessage;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.ui.activity.DrawerMainActivity;
+import org.undp_iwomen.iwomen.ui.activity.PostDetailActivityGcmNoti;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -65,14 +66,12 @@ public class GcmIntentService extends IntentService {
 				Log.i("GCM Message"+"Message:",gcmMessage.getMessage().toString());
 				//Log.i("GCM Message"+"UserID:",gcmMessage.getUserId().toString());
 				if(gcmMessage.getTitle() != null){
-					if(gcmMessage.getTitle().toString().equalsIgnoreCase("Q&A")  ){
+					if(gcmMessage.getTitle().toString().equalsIgnoreCase("Q&A") || gcmMessage.getTitle().toString().equalsIgnoreCase("Market") ){
 						Log.i("GcmIntentService:","Q&A");
-						Log.i("GcmIntentMessage:",gcmMessage.getMessage());
+						Log.i("GcmIntentMessage:",gcmMessage.getPostId().toString());
 
-					}else{
-						Log.i("GcmIntentService:","Q&A");
-						Log.i("GcmIntentMessage:",gcmMessage.getMessage());
-						Intent notificationIntent = new Intent(context, DrawerMainActivity.class).putExtra("gcm_message", new Gson().toJson(gcmMessage));
+						Intent notificationIntent = new Intent(context, PostDetailActivityGcmNoti.class).putExtra("gcm_message", new Gson().toJson(gcmMessage));
+						notificationIntent.putExtra("Post_ID", gcmMessage.getPostId().toString());//mCatNames.get((Integer)view.getTag()).toString()
 
 						notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
 						PendingIntent intent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -103,6 +102,44 @@ public class GcmIntentService extends IntentService {
 						notificationManager.notify(m, builder.build());
 
 						Intent popuIntent = new Intent(context, GcmNotificationDialogActivity.class).putExtra("gcm_message", new Gson().toJson(gcmMessage));;
+						popuIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+						this.getApplicationContext().startActivity(popuIntent);
+
+					}else{
+						Log.i("GcmIntentService:","Q&A");
+						Log.i("GcmIntentMessage:",gcmMessage.getMessage());
+						Intent notificationIntent = new Intent(context, DrawerMainActivity.class).putExtra("gcm_message", new Gson().toJson(gcmMessage));
+
+						notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+						PendingIntent intent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+						NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
+						builder.setSmallIcon(icon);
+						builder.setContentTitle(gcmMessage.getTitle());
+						builder.setStyle(new NotificationCompat.BigTextStyle().bigText(gcmMessage.getMessage()));
+						builder.setContentText(gcmMessage.getMessage());
+						builder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+						builder.setAutoCancel(true);
+						builder.setWhen(when);
+						builder.addAction(icon, "i-Women", intent);
+
+
+						if (gcmMessage.getImage() != null && gcmMessage.getMessage().length() > 0) {
+							Bitmap bmURL = getBitmapFromURL(gcmMessage.getImage().replace(" ", "%20"));
+							if (bmURL != null) {
+								float multiplier = getImageFactor(getResources());
+								bmURL = Bitmap.createScaledBitmap(bmURL, (int) (bmURL.getWidth() * multiplier), (int) (bmURL.getHeight() * multiplier), false);
+								builder.setLargeIcon(bmURL);
+							}
+						}
+						builder.setContentIntent(intent);
+
+						Random random = new Random();
+						int m = random.nextInt(9999 - 1000) + 1000;
+						notificationManager.notify(m, builder.build());
+
+						Intent popuIntent = new Intent(context, GcmNotificationDialogActivity.class).putExtra("gcm_message", new Gson().toJson(gcmMessage));
+						;
 						popuIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 						this.getApplicationContext().startActivity(popuIntent);
 					}

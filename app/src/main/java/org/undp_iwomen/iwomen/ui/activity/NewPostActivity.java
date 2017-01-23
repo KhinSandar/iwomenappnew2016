@@ -67,11 +67,19 @@ public class NewPostActivity extends BaseActionBarActivity {
 
     }
 
-    @Override
+    /*@Override
     public boolean onSupportNavigateUp() {
         finish();
         super.onBackPressed();
         return true;
-    }
+    }*/
+    /*@Override
+    public void onBackPressed() {
+        NewPostPostFragment fragment = (NewPostPostFragment)
+                getSupportFragmentManager().findFragmentById(R.id.contentFrame);
+        if(fragment != null){
+            fragment.onHomePressed();
+        }
+    }*/
 
 }

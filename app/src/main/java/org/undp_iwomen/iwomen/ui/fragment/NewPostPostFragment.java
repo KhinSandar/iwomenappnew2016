@@ -482,7 +482,13 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
             Intent i = new Intent(getActivity().getApplicationContext(), TalkTogetherMainActivity.class);
             i.putExtra("CategoryName", cateName);//CategoryName
             i.putExtra("CategoryID", cateId);//CategoryName
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(i);
+            getActivity().finish();
+
+
+
 
             progress_wheel.setVisibility(View.GONE);
             if (zPDialog != null && zPDialog.isShowing()) {
@@ -949,5 +955,22 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
         }
         return false;
     }
+   /* @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
 
+        switch (id) {
+            case android.R.id.home:
+                onHomePressed();
+                return true;
+
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+    public void onHomePressed() {
+
+            getActivity().finish();
+
+    }*/
 }

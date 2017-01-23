@@ -143,8 +143,11 @@ public class TLGUserPostRecentFragment extends Fragment implements View.OnClickL
 
         Bundle bundle = getArguments();
 
-        mstrCatName = bundle.getString("CategoryName");
-        mCatID = bundle.getString("CategoryID");
+        if(bundle != null) {
+
+            mstrCatName = bundle.getString("CategoryName");
+            mCatID = bundle.getString("CategoryID");
+        }
 
         Log.e("<< Post Cat ID>>>","==>" + mCatID);
 
