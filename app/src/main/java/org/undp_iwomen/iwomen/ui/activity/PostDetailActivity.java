@@ -252,6 +252,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
     private TextView txt_social_no_ear_share;
     private ImageView img_social_no_ear_fb;
     private ImageView img_social_no_ear_viber;
+    private ImageView img_social_no_ear_audioIcon;
     private ZProgressHUD zPDialog;
 
     private ImageView img_social_audio;
@@ -459,7 +460,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
         img_social_no_ear_viber = (ImageView) findViewById(R.id.social_no_ear_viber_img);
         img_social_audio = (ImageView) findViewById(R.id.social_audio);
         mSocialNoEarLikeAnimatedButton = (AnimatedButton) findViewById(R.id.social_no_ear_like_animated_button);
-
+        img_social_no_ear_audioIcon = (ImageView) findViewById(R.id.social_no_ear_earphone_img);
         strLang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
 
 
@@ -647,8 +648,9 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
         img_social_no_ear_viber.setOnClickListener(this);
         img_social_audio.setOnClickListener(this);
         txt_social_share.setOnClickListener(this);
-        txt_player.setOnClickListener(this
-        );
+        txt_player.setOnClickListener(this);
+        img_social_no_ear_audioIcon.setOnClickListener(this);
+
         //mLikeAnimatedButton.setText(item.getLikes() + "");.setOnClickListener(this);
         /*ly_postdetail_audio.setOnClickListener(this);
         ly_postdetail_download.setOnClickListener(this);
@@ -2437,9 +2439,10 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
                         img_social_audio.performClick();
                     }
 
-
                 }
-
+                break;
+            case R.id.social_no_ear_earphone_img:
+                img_social_audio.performClick();
 
                 break;
 
