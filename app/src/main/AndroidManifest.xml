@@ -27,8 +27,8 @@
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
-    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
-    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS"/>
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
 
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.RECORD_VIDEO" />
@@ -47,11 +47,11 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!--Permission: Read to SDCard-->
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
 
-    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
-    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS"/>
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
 
 
     <!--
@@ -110,20 +110,22 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Iwomen.SignUp"
-            android:windowSoftInputMode="adjustResize|stateHidden" >
+            android:windowSoftInputMode="adjustResize|stateHidden">
             <intent-filter android:label="@string/app_name">
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <!-- Accepts URIs that begin with "http://www.example.com/gizmos” -->
-                <data android:scheme="http"
+                <data
                     android:host="www.iwomenapp.org"
-                    />
+                    android:scheme="http" />
                 <!--android:pathPrefix="/home"  note that the leading "/" is required for pathPrefix-->
                 <!-- Accepts URIs that begin with "example://gizmos” -->
                 <!-- https://developer.android.com/training/app-indexing/deep-linking.html-->
-                <data android:scheme="iwomenapp"
-                    android:host="iwomenapp" />
+                <data
+                    android:host="iwomenapp"
+                    android:scheme="iwomenapp" />
 
             </intent-filter>
 
@@ -484,7 +486,13 @@
         <activity
             android:name=".ui.activity.NewPostActivity"
             android:label="@string/title_activity_new_post"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme" android:parentActivityName=".ui.activity.TalkTogetherMainActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".ui.activity.DrawerMainActivity" />
+        </activity>
         <activity
             android:name="org.smk.iwomen.GcmNotificationDialogActivity"
             android:label="@string/title_activity_gcm_notification_dialog"
@@ -508,6 +516,16 @@
             android:parentActivityName="org.youtube.Youtube_MainActivity" />
         <activity
             android:name=".ui.activity.IWomenPostSearchActivity"
+            android:label="@string/title_activity_post_detail"
+            android:parentActivityName=".ui.activity.DrawerMainActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.activity.DrawerMainActivity" />
+        </activity>
+        <activity
+            android:name=".ui.activity.PostDetailActivityGcmNoti"
             android:label="@string/title_activity_post_detail"
             android:parentActivityName=".ui.activity.DrawerMainActivity"
             android:screenOrientation="portrait"

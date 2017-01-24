@@ -183,17 +183,19 @@ public class TLGUserPostRecentListAdapter extends BaseAdapter {
                     Button btn_ok = (Button) dialogView.findViewById(R.id.dialog_ok_btn);
                     Button btn_cancel = (Button) dialogView.findViewById(R.id.dialog_cancel_btn);
 
+                    final AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
                     btn_ok.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             Toast.makeText(mContext, "ImageView clicked for the row = "+userID + item.getObjectId(), Toast.LENGTH_SHORT).show();
-
+                            alertDialog.dismiss();
                         }
                     });
                     btn_cancel.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-
+                            alertDialog.dismiss();
                         }
                     });
 
@@ -217,8 +219,7 @@ public class TLGUserPostRecentListAdapter extends BaseAdapter {
                                     // negative button logic
                                 }
                             });*/
-                    AlertDialog alertDialog = builder.create();
-                    alertDialog.show();
+
 
                 }
             });

@@ -202,6 +202,11 @@ public interface INetworkEngine {
             @Path("id") String id,
             Callback<IWomenPost> callback);
 
+    @GET(CommonConfig.GET_POST_BY_POST_ID_URL)
+    void getPostByPostID(
+            @Path("id") String id,
+            Callback<IWomenPost> callback);
+
     @GET(CommonConfig.GET_CATEGORIES_LIST__URL)
     void getCategoriesByPagination(
             @Query("page") int page,

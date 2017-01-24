@@ -121,6 +121,10 @@ public class CommonConfig {
 
     public static final String GET_IWOMEN_POST_BY_POST_ID_URL = "/api/v1/iwomenPosts/{id}";
 
+    //http://api.iwomenapp.org/api/v1/posts/2185
+    public static final String GET_POST_BY_POST_ID_URL = "/api/v1/posts/{id}";
+
+
     public static final String GET_CATEGORIES_LIST__URL = "/api/v1/categories";
 
     public static final String CREATE_CALENDAR_EVENT_URL= "/api/v1/calendars";

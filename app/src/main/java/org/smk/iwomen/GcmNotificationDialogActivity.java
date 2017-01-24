@@ -1,6 +1,7 @@
 package org.smk.iwomen;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import com.google.gson.Gson;
 
 import org.smk.model.GcmMessage;
 import org.undp_iwomen.iwomen.R;
+import org.undp_iwomen.iwomen.ui.activity.PostDetailActivityGcmNoti;
 import org.undp_iwomen.iwomen.utils.Utils;
 
 import java.util.Locale;
@@ -44,12 +46,26 @@ public class GcmNotificationDialogActivity extends AppCompatActivity {
 
             txt_title.setText(Html.fromHtml(gcmMessage.getTitle()));
             txt_message.setText(Html.fromHtml(gcmMessage.getMessage()));
+
+
         }
 
         btn_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                if(gcmMessage.getTitle().toString().equalsIgnoreCase("Q&A") || gcmMessage.getTitle().toString().equalsIgnoreCase("Market") ) {
+                   /* Log.i("GcmIntentService:", "Q&A");
+                    Log.i("GcmIntentMessage:", gcmMessage.getPostId().toString());
+                    */
+                    Intent notificationIntent = new Intent(getApplicationContext(), PostDetailActivityGcmNoti.class).putExtra("gcm_message", new Gson().toJson(gcmMessage));
+                    notificationIntent.putExtra("Post_ID", gcmMessage.getPostId().toString());//mCatNames.get((Integer)view.getTag()).toString()
+                    notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    getApplicationContext().startActivity(notificationIntent);
+                    finish();
+                }else{
+                    finish();
+                }
+
             }
         });
 
