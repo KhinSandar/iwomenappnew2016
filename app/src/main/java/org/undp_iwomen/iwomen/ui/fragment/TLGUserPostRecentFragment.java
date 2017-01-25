@@ -46,7 +46,6 @@ import org.undp_iwomen.iwomen.model.retrofit_api.UserPostAPI;
 import org.undp_iwomen.iwomen.provider.IwomenProviderData;
 import org.undp_iwomen.iwomen.ui.activity.NewPostActivity;
 import org.undp_iwomen.iwomen.ui.activity.PostDetailActivity;
-import org.undp_iwomen.iwomen.ui.adapter.IWomenPostListByDateRecyclerViewAdapter;
 import org.undp_iwomen.iwomen.ui.adapter.TLGUserPostRecentListAdapter;
 import org.undp_iwomen.iwomen.utils.Connection;
 import org.undp_iwomen.iwomen.utils.StorageUtil;
@@ -69,7 +68,7 @@ public class TLGUserPostRecentFragment extends Fragment implements View.OnClickL
     private Context mContext;
     private SKListView skListView;
     //private PostListRecyclerViewAdapter mPostListRecyclerViewAdapter;
-    private IWomenPostListByDateRecyclerViewAdapter mIWomonePostListAdapter;
+    //private IWomenPostListByDateRecyclerViewAdapter mIWomonePostListAdapter;
     private List<IWomenPost> iWomenPostList;
     private List<FeedItem> feedItems;
     private FloatingActionButton fab;
@@ -130,9 +129,15 @@ public class TLGUserPostRecentFragment extends Fragment implements View.OnClickL
 
         feedItems = new ArrayList<FeedItem>();
         skListView = (SKListView) rootView.findViewById(R.id.lst_stories);
+        Bundle bundle = getArguments();
 
+        if(bundle != null) {
+
+            mstrCatName = bundle.getString("CategoryName");
+            mCatID = bundle.getString("CategoryID");
+        }
         iWomenPostList = new ArrayList<>();
-        stories = new TLGUserPostRecentListAdapter(getActivity(), iWomenPostList, mstr_lang);
+        stories = new TLGUserPostRecentListAdapter(getActivity(), iWomenPostList, mstr_lang, mCatID, mstrCatName);
         skListView.setAdapter(stories);
         skListView.setCallbacks(skCallbacks);
         skListView.setNextPage(true);
@@ -141,13 +146,7 @@ public class TLGUserPostRecentFragment extends Fragment implements View.OnClickL
         fab = (FloatingActionButton) rootView.findViewById(R.id.post_news);
         fab.setOnClickListener(this);
 
-        Bundle bundle = getArguments();
 
-        if(bundle != null) {
-
-            mstrCatName = bundle.getString("CategoryName");
-            mCatID = bundle.getString("CategoryID");
-        }
 
         Log.e("<< Post Cat ID>>>","==>" + mCatID);
 

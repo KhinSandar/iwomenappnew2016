@@ -96,6 +96,26 @@
                     android:layout_marginTop="8dp" />
 
                 <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:paddingRight="@dimen/keyline_1"
+                    android:orientation="horizontal">
+                    <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                        android:id="@+id/tlg_txtPostDeleted"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_delete_trash"
+                        android:paddingRight="@dimen/keyline_1"
+                        android:layout_marginLeft="@dimen/keyline_1"
+                        android:text=""
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/feed_item_profile_name"
+                        android:textStyle="bold"
+                        android:visibility="visible" />
+
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -167,18 +187,6 @@
                             android:textColor="@color/secondary_text"
                             android:textSize="@dimen/feed_item_profile_name"
                             android:textStyle="bold" />
-                        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
-                            android:id="@+id/tlg_txtPostDeleted"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/ic_delete_forever_black_48dp"
-                            android:paddingRight="@dimen/keyline_1"
-                            android:layout_marginLeft="@dimen/keyline_1"
-                            android:text=""
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/feed_item_profile_name"
-                            android:textStyle="bold"
-                            android:visibility="visible" />
 
                         <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                             android:id="@+id/tlg_timestamp"

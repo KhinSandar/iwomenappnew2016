@@ -1,8 +1,10 @@
 package org.undp_iwomen.iwomen.ui.activity;
 
+import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,6 +16,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
+import android.system.ErrnoException;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -52,6 +55,8 @@ import org.undp_iwomen.iwomen.utils.Connection;
 import org.undp_iwomen.iwomen.utils.Utils;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import retrofit.Callback;
@@ -648,13 +653,30 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
             profileProgressbar.setVisibility(View.GONE);
         }
         if ((requestCode == REQUEST_CROP_PICTURE) && (resultCode == RESULT_OK)) {
-            // When we are done cropping, display it in the ImageView.
-            profileImg.setVisibility(View.VISIBLE);
-            profileImg.setImageBitmap(BitmapFactory.decodeFile(croppedImageFile.getAbsolutePath()));
-            //img_job.setMaxWidth(300);
-            profileImg.setMaxHeight(400);
-            crop_file_name = Uri.fromFile(croppedImageFile).getLastPathSegment().toString();
-            crop_file_path = Uri.fromFile(croppedImageFile).getPath();
+
+            boolean requirePermissions = false;
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
+
+                    checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED &&
+                    isUriRequiresPermissions(Uri.fromFile(croppedImageFile))) {
+
+                // request permissions and handle the result in onRequestPermissionsResult()
+                requirePermissions = true;
+
+                //mCropImageUri = imageUri;
+                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
+            }
+            if (!requirePermissions) {
+                // When we are done cropping, display it in the ImageView.
+
+                profileImg.setVisibility(View.VISIBLE);
+                profileImg.setImageBitmap(BitmapFactory.decodeFile(croppedImageFile.getAbsolutePath()));
+                //img_job.setMaxWidth(300);
+                profileImg.setMaxHeight(400);
+                crop_file_name = Uri.fromFile(croppedImageFile).getLastPathSegment().toString();
+                crop_file_path = Uri.fromFile(croppedImageFile).getPath();
+            }
 
         }
 
@@ -771,5 +793,23 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
         }
 
 
+    }
+
+    /**
+     * Test if we can open the given Android URI to test if permission required error is thrown.<br>
+     */
+    public boolean isUriRequiresPermissions(Uri uri) {
+        try {
+            ContentResolver resolver = getContentResolver();
+            InputStream stream = resolver.openInputStream(uri);
+            stream.close();
+            return false;
+        } catch (FileNotFoundException e) {
+            if (e.getCause() instanceof ErrnoException) {
+                return true;
+            }
+        } catch (Exception e) {
+        }
+        return false;
     }
 }

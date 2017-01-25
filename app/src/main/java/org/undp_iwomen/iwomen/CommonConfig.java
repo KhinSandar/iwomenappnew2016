@@ -176,5 +176,7 @@ public class CommonConfig {
 
     public static final String POST_COMMENT_BEKNOWLEDGABLE = "/api/v1/comments";
 
+    public static final String UPDATE_DELETE_POST_URL = "/api/v1/posts/{id}";
+
 
 }

@@ -1,14 +1,13 @@
 package org.undp_iwomen.iwomen.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -21,6 +20,9 @@ import org.smk.model.IWomenPost;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.model.MyTypeFace;
+import org.undp_iwomen.iwomen.model.retrofit_api.SMKserverAPI;
+import org.undp_iwomen.iwomen.ui.activity.TalkTogetherMainActivity;
+import org.undp_iwomen.iwomen.ui.widget.CustomButton;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.ui.widget.ProfilePictureView;
 import org.undp_iwomen.iwomen.ui.widget.ResizableImageView;
@@ -31,6 +33,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 /**
  * Created by SMK on 2/19/2016.
@@ -44,13 +50,16 @@ public class TLGUserPostRecentListAdapter extends BaseAdapter {
     private ArrayList<IWomenPost> arraylist;
     private SharedPreferences mSharedPreferencesUserInfo;
     String userID;
+    private static String cateId, cateName;
 
 
-    public TLGUserPostRecentListAdapter(Context ctx, List<IWomenPost> list, String typeFaceName) {
+    public TLGUserPostRecentListAdapter(Context ctx, List<IWomenPost> list, String typeFaceName , String categoryId, String catName) {
         mInflater = LayoutInflater.from(ctx);
         this.mContext = ctx;
         this.list = list;
         mstr_lang = typeFaceName;
+        cateId = categoryId;
+        cateName = catName;
         this.arraylist = new ArrayList<IWomenPost>();
         this.arraylist.addAll(list);
 
@@ -165,7 +174,7 @@ public class TLGUserPostRecentListAdapter extends BaseAdapter {
 
         }
 
-        Log.e("<<Talk Together >>","==usrID=>" + userID+ "/"+ item.getUserId());
+        //Log.e("<<Talk Together >>","==usrID=>" + userID+ "/"+ item.getUserId());
         if(item.getUserId().toString().equals(userID)){
             holder.post_deleted.setVisibility(View.VISIBLE);
 
@@ -180,8 +189,8 @@ public class TLGUserPostRecentListAdapter extends BaseAdapter {
                     View dialogView = mInflater.inflate(R.layout.fragment_talk_together_delete_dialog, null);
                     builder.setView(dialogView);
 
-                    Button btn_ok = (Button) dialogView.findViewById(R.id.dialog_ok_btn);
-                    Button btn_cancel = (Button) dialogView.findViewById(R.id.dialog_cancel_btn);
+                    CustomButton btn_ok = (CustomButton) dialogView.findViewById(R.id.dialog_ok_btn);
+                    CustomButton btn_cancel = (CustomButton) dialogView.findViewById(R.id.dialog_cancel_btn);
 
                     final AlertDialog alertDialog = builder.create();
                     alertDialog.show();
@@ -189,7 +198,32 @@ public class TLGUserPostRecentListAdapter extends BaseAdapter {
                         @Override
                         public void onClick(View view) {
                             Toast.makeText(mContext, "ImageView clicked for the row = "+userID + item.getObjectId(), Toast.LENGTH_SHORT).show();
-                            alertDialog.dismiss();
+                            SMKserverAPI.getInstance().getService().postDeletePost(item.getId(), userID, "0", new Callback<IWomenPost>() {
+                                @Override
+                                public void success(IWomenPost iWomenPost, Response response) {
+
+
+
+                                    alertDialog.dismiss();
+                                    //notifyDataSetChanged();
+                                    Intent i = new Intent(mContext, TalkTogetherMainActivity.class);
+                                    i.putExtra("CategoryName", cateName);//CategoryName
+                                    i.putExtra("CategoryID", cateId);//CategoryName
+                                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    mContext.startActivity(i);
+                                    //getActivity().finish();
+
+                                }
+
+                                @Override
+                                public void failure(RetrofitError error) {
+
+                                }
+                            });
+
+
+
                         }
                     });
                     btn_cancel.setOnClickListener(new View.OnClickListener() {
@@ -199,26 +233,7 @@ public class TLGUserPostRecentListAdapter extends BaseAdapter {
                         }
                     });
 
-                    /*
-                    builder.setTitle(getString(R.string.dialog_title));
-                    builder.setMessage(getString(R.string.dialog_message));
-                    String positiveText = getString(android.R.string.ok);
-                    builder.setPositiveButton(positiveText,
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    // positive button logic
-                                }
-                            });
 
-                    String negativeText = getString(android.R.string.cancel);
-                    builder.setNegativeButton(negativeText,
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    // negative button logic
-                                }
-                            });*/
 
 
                 }
@@ -307,6 +322,7 @@ public class TLGUserPostRecentListAdapter extends BaseAdapter {
 
         return convertView;
     }
+
 
     private class ImageLoadedCallback implements com.squareup.picasso.Callback {
         ProgressBar progressBar;
