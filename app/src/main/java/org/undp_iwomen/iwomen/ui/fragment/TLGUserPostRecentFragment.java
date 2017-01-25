@@ -46,7 +46,6 @@ import org.undp_iwomen.iwomen.model.retrofit_api.UserPostAPI;
 import org.undp_iwomen.iwomen.provider.IwomenProviderData;
 import org.undp_iwomen.iwomen.ui.activity.NewPostActivity;
 import org.undp_iwomen.iwomen.ui.activity.PostDetailActivity;
-import org.undp_iwomen.iwomen.ui.adapter.IWomenPostListByDateRecyclerViewAdapter;
 import org.undp_iwomen.iwomen.ui.adapter.TLGUserPostRecentListAdapter;
 import org.undp_iwomen.iwomen.utils.Connection;
 import org.undp_iwomen.iwomen.utils.StorageUtil;
@@ -69,7 +68,7 @@ public class TLGUserPostRecentFragment extends Fragment implements View.OnClickL
     private Context mContext;
     private SKListView skListView;
     //private PostListRecyclerViewAdapter mPostListRecyclerViewAdapter;
-    private IWomenPostListByDateRecyclerViewAdapter mIWomonePostListAdapter;
+    //private IWomenPostListByDateRecyclerViewAdapter mIWomonePostListAdapter;
     private List<IWomenPost> iWomenPostList;
     private List<FeedItem> feedItems;
     private FloatingActionButton fab;

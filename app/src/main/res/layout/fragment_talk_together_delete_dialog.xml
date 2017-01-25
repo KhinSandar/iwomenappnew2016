@@ -35,17 +35,18 @@
         android:gravity="right"
         android:layout_marginTop="10dp"
         android:orientation="horizontal">
-    <Button
+    <org.undp_iwomen.iwomen.ui.widget.CustomButton
         android:id="@+id/dialog_ok_btn"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:background="@android:color/transparent"
         android:gravity="center"
+        android:textAllCaps="false"
         android:text="@string/delete_post_ok"
         android:textColor="@android:color/white" />
 
-    <Button
+    <org.undp_iwomen.iwomen.ui.widget.CustomButton
         android:id="@+id/dialog_cancel_btn"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
@@ -53,6 +54,7 @@
         android:background="@android:color/transparent"
         android:gravity="center"
         android:text="@string/delete_post_cancel"
+        android:textAllCaps="false"
         android:textColor="@android:color/white" />
         </LinearLayout>
 </LinearLayout>

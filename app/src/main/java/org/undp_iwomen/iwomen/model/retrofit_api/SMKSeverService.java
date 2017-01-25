@@ -207,4 +207,13 @@ public interface SMKSeverService {
             @Field("phoneNo") String phoneNo,
             Callback<User> callback);
 
+    @FormUrlEncoded
+    @PUT(CommonConfig.UPDATE_DELETE_POST_URL)
+    void postDeletePost(
+            @Path("id") int id,
+            @Field("userId") String userID,
+            @Field("isAllow") String isAllow,
+            Callback<IWomenPost> callback);
+
+
 }
