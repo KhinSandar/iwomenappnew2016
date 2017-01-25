@@ -129,9 +129,15 @@ public class TLGUserPostRecentFragment extends Fragment implements View.OnClickL
 
         feedItems = new ArrayList<FeedItem>();
         skListView = (SKListView) rootView.findViewById(R.id.lst_stories);
+        Bundle bundle = getArguments();
 
+        if(bundle != null) {
+
+            mstrCatName = bundle.getString("CategoryName");
+            mCatID = bundle.getString("CategoryID");
+        }
         iWomenPostList = new ArrayList<>();
-        stories = new TLGUserPostRecentListAdapter(getActivity(), iWomenPostList, mstr_lang);
+        stories = new TLGUserPostRecentListAdapter(getActivity(), iWomenPostList, mstr_lang, mCatID, mstrCatName);
         skListView.setAdapter(stories);
         skListView.setCallbacks(skCallbacks);
         skListView.setNextPage(true);
@@ -140,13 +146,7 @@ public class TLGUserPostRecentFragment extends Fragment implements View.OnClickL
         fab = (FloatingActionButton) rootView.findViewById(R.id.post_news);
         fab.setOnClickListener(this);
 
-        Bundle bundle = getArguments();
 
-        if(bundle != null) {
-
-            mstrCatName = bundle.getString("CategoryName");
-            mCatID = bundle.getString("CategoryID");
-        }
 
         Log.e("<< Post Cat ID>>>","==>" + mCatID);
 

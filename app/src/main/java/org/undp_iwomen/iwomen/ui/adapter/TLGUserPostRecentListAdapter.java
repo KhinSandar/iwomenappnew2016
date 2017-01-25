@@ -50,13 +50,16 @@ public class TLGUserPostRecentListAdapter extends BaseAdapter {
     private ArrayList<IWomenPost> arraylist;
     private SharedPreferences mSharedPreferencesUserInfo;
     String userID;
+    private static String cateId, cateName;
 
 
-    public TLGUserPostRecentListAdapter(Context ctx, List<IWomenPost> list, String typeFaceName) {
+    public TLGUserPostRecentListAdapter(Context ctx, List<IWomenPost> list, String typeFaceName , String categoryId, String catName) {
         mInflater = LayoutInflater.from(ctx);
         this.mContext = ctx;
         this.list = list;
         mstr_lang = typeFaceName;
+        cateId = categoryId;
+        cateName = catName;
         this.arraylist = new ArrayList<IWomenPost>();
         this.arraylist.addAll(list);
 
@@ -204,8 +207,8 @@ public class TLGUserPostRecentListAdapter extends BaseAdapter {
                                     alertDialog.dismiss();
                                     //notifyDataSetChanged();
                                     Intent i = new Intent(mContext, TalkTogetherMainActivity.class);
-                                    i.putExtra("CategoryName", "Activities");//CategoryName
-                                    i.putExtra("CategoryID", "dbJ0K3Ek2q");//CategoryName
+                                    i.putExtra("CategoryName", cateName);//CategoryName
+                                    i.putExtra("CategoryID", cateId);//CategoryName
                                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                     i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                     mContext.startActivity(i);
