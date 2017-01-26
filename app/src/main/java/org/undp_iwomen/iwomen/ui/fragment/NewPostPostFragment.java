@@ -495,7 +495,7 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
 
         @Override
         public void failure(RetrofitError error) {
-            Log.e("New Post Post", "===>p" + error.getMessage());
+            //Log.e("New Post Post", "===>p" + error.getMessage());
             SKToastMessage.getInstance(getActivity()).showMessage(getActivity(), getResources().getString(R.string.audio_post_error), SKToastMessage.ERROR);
             progress_wheel.setVisibility(View.GONE);
             if (zPDialog != null && zPDialog.isShowing()) {
