@@ -80,7 +80,7 @@
                 android:id="@+id/postdetail_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Let's Honestly Help Each Other"
+                tools:text="Let's Honestly Help Each Other"
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
             <TextView
@@ -105,7 +105,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="1.5sp"
-                android:text="Dear Moe Moe, \n\nAlternative text is text associated with an image that serves the same purpose and conveys the same essential information as the image.Alternative text is text associated with an image that serves the same purpose and conveys the same essential information as the image."
+                tools:text="Dear Moe Moe, \n\nAlternative text is text associated with an image that serves the same purpose and conveys the same essential information as the image.Alternative text is text associated with an image that serves the same purpose and conveys the same essential information as the image."
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="?android:textColorSecondary"
                 android:autoLink="web"
@@ -185,7 +185,7 @@
                     android:paddingLeft="10dp"
                     android:textSize="15sp"
                     android:layout_toRightOf="@+id/postdetail_credit_img_frame"
-                    android:text="Create to Great Women Speak Out" />
+                    tools:text="Create to Great Women Speak Out" />
 
             </RelativeLayout>
 
@@ -245,7 +245,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/postdetail_content_username"
                     android:layout_toRightOf="@+id/postdetail_profilePic_rounded_frame"
-                    android:text="Founder and Director of Akhaya Women"
+                    tools:text="Founder and Director of Akhaya Women"
                     android:textSize="13sp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
 

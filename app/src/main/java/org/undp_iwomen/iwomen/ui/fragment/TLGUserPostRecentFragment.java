@@ -137,10 +137,12 @@ public class TLGUserPostRecentFragment extends Fragment implements View.OnClickL
             mCatID = bundle.getString("CategoryID");
         }
         iWomenPostList = new ArrayList<>();
+
         stories = new TLGUserPostRecentListAdapter(getActivity(), iWomenPostList, mstr_lang, mCatID, mstrCatName);
         skListView.setAdapter(stories);
         skListView.setCallbacks(skCallbacks);
         skListView.setNextPage(true);
+
         final Activity parentActivity = getActivity();
 
         fab = (FloatingActionButton) rootView.findViewById(R.id.post_news);
@@ -461,6 +463,9 @@ public class TLGUserPostRecentFragment extends Fragment implements View.OnClickL
 
         int id = item.getItemId();
         switch (id) {
+            case android.R.id.home:
+                onHomePressed();
+                return true;
 
             case R.id.action_refresh:
 
@@ -1505,6 +1510,7 @@ public class TLGUserPostRecentFragment extends Fragment implements View.OnClickL
                 intent.putExtra("categoryId", mCatID);
                 intent.putExtra("categoryName", mstrCatName);
                 startActivity(intent);
+                getActivity().finish();
 
                 //Utils.doToastEng(mContext, "Coming Soon!");
 
@@ -1529,6 +1535,12 @@ public class TLGUserPostRecentFragment extends Fragment implements View.OnClickL
         else
             stories.notifyDataSetChanged();
         return false;
+    }
+
+    public void onHomePressed() {
+
+        getActivity().finish();
+
     }
 
 }
