@@ -1,7 +1,6 @@
 package org.undp_iwomen.iwomen.ui.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -11,7 +10,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.makeramen.RoundedImageView;
 import com.squareup.picasso.Picasso;
@@ -26,6 +24,7 @@ import org.undp_iwomen.iwomen.ui.widget.CustomButton;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.ui.widget.ProfilePictureView;
 import org.undp_iwomen.iwomen.ui.widget.ResizableImageView;
+import org.undp_iwomen.iwomen.utils.Connection;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -53,7 +52,7 @@ public class TLGUserPostRecentListAdapter extends BaseAdapter {
     private static String cateId, cateName;
 
 
-    public TLGUserPostRecentListAdapter(Context ctx, List<IWomenPost> list, String typeFaceName , String categoryId, String catName) {
+    public TLGUserPostRecentListAdapter( Context ctx, List<IWomenPost> list, String typeFaceName, String categoryId, String catName) {
         mInflater = LayoutInflater.from(ctx);
         this.mContext = ctx;
         this.list = list;
@@ -100,7 +99,7 @@ public class TLGUserPostRecentListAdapter extends BaseAdapter {
             holder.profile_item_progressBar = (ProgressBar) convertView.findViewById(R.id.tlg_progressBar_profile_item);
             holder.postIMg = (ResizableImageView) convertView.findViewById(R.id.tlg_postImg);
             holder.profilePictureView = (ProfilePictureView) convertView.findViewById(R.id.tlg_profilePic);
-            holder.post_deleted = (CustomTextView)convertView.findViewById(R.id.tlg_txtPostDeleted);
+            holder.post_deleted = (CustomTextView) convertView.findViewById(R.id.tlg_txtPostDeleted);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -175,7 +174,7 @@ public class TLGUserPostRecentListAdapter extends BaseAdapter {
         }
 
         //Log.e("<<Talk Together >>","==usrID=>" + userID+ "/"+ item.getUserId());
-        if(item.getUserId().toString().equals(userID)){
+        if (item.getUserId().toString().equals(userID)) {
             holder.post_deleted.setVisibility(View.VISIBLE);
 
             holder.post_deleted.setOnClickListener(new View.OnClickListener() {
@@ -197,35 +196,50 @@ public class TLGUserPostRecentListAdapter extends BaseAdapter {
                     btn_ok.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Toast.makeText(mContext, "ImageView clicked for the row = "+userID + item.getObjectId(), Toast.LENGTH_SHORT).show();
-                            SMKserverAPI.getInstance().getService().postDeletePost(item.getId(), userID, "0", new Callback<IWomenPost>() {
-                                @Override
-                                public void success(IWomenPost iWomenPost, Response response) {
+                            //Toast.makeText(mContext, "ImageView clicked for the row = "+userID + item.getObjectId(), Toast.LENGTH_SHORT).show();
+
+                            if (Connection.isOnline(mContext)) {
+
+                                SMKserverAPI.getInstance().getService().postDeletePost(item.getId(), userID, "0", new Callback<IWomenPost>() {
+                                    @Override
+                                    public void success(IWomenPost iWomenPost, Response response) {
+
+                                        alertDialog.dismiss();
+
+                                        ((TalkTogetherMainActivity)mContext).reload();
 
 
+                                       /* TalkTogetherMainActivity talkTogetherMainActivity = new TalkTogetherMainActivity();
+                                        talkTogetherMainActivity.reload();*/
+                                        //notifyDataSetChanged();
+                                       /* Intent i = new Intent(mContext, TalkTogetherMainActivity.class);
+                                        i.putExtra("CategoryName", cateName);//CategoryName
+                                        i.putExtra("CategoryID", cateId);//CategoryName
+                                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        mContext.startActivity(i);*/
 
-                                    alertDialog.dismiss();
-                                    //notifyDataSetChanged();
-                                    Intent i = new Intent(mContext, TalkTogetherMainActivity.class);
-                                    i.putExtra("CategoryName", cateName);//CategoryName
-                                    i.putExtra("CategoryID", cateId);//CategoryName
-                                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    mContext.startActivity(i);
-                                    //getActivity().finish();
+                                    }
 
+                                    @Override
+                                    public void failure(RetrofitError error) {
+                                        alertDialog.dismiss();
+
+                                    }
+                                });
+                            }else {
+
+                                if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+                                    org.undp_iwomen.iwomen.utils.Utils.doToastEng(mContext, mContext.getResources().getString(R.string.no_connection));
+                                } else {
+
+                                    org.undp_iwomen.iwomen.utils.Utils.doToastMM(mContext, mContext.getResources().getString(R.string.no_connection));
                                 }
-
-                                @Override
-                                public void failure(RetrofitError error) {
-
-                                }
-                            });
-
-
+                            }
 
                         }
                     });
+
                     btn_cancel.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -234,12 +248,10 @@ public class TLGUserPostRecentListAdapter extends BaseAdapter {
                     });
 
 
-
-
                 }
             });
 
-        }else{
+        } else {
             holder.post_deleted.setVisibility(View.GONE);
         }
 

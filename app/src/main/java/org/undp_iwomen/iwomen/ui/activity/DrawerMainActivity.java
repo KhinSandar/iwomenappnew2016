@@ -123,6 +123,8 @@ public class DrawerMainActivity extends BaseActionBarActivity {
     private ClipboardManager myClipboard;
     private ClipData myClip;
 
+    private String mstrBackParam;
+
 
     @Override
     protected void onStart() {

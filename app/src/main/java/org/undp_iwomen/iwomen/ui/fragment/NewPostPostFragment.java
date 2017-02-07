@@ -472,12 +472,7 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
         @Override
         public void success(IWomenPost iWomenPost, Response response) {
             SKToastMessage.getInstance(getActivity()).showMessage(getActivity(), getResources().getString(R.string.audio_post_success), SKToastMessage.SUCCESS);
-            //getActivity().finish();
 
-            /*Intent i = new Intent(getActivity().getApplicationContext(), TalkTogetherMainActivity.class);
-            i.putExtra("CategoryName", CategoriesModelList.get(position).getName());//CategoryName
-            i.putExtra("CategoryID", CategoriesModelList.get(position).getObjectId());//CategoryName
-            startActivity(i);*/
 
             Intent i = new Intent(getActivity().getApplicationContext(), TalkTogetherMainActivity.class);
             i.putExtra("CategoryName", cateName);//CategoryName
@@ -485,6 +480,7 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(i);
+            //Kill this activity after back from TalkTogetherMain
             getActivity().finish();
 
 
@@ -499,7 +495,7 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
 
         @Override
         public void failure(RetrofitError error) {
-            Log.e("New Post Post", "===>p" + error.getMessage());
+            //Log.e("New Post Post", "===>p" + error.getMessage());
             SKToastMessage.getInstance(getActivity()).showMessage(getActivity(), getResources().getString(R.string.audio_post_error), SKToastMessage.ERROR);
             progress_wheel.setVisibility(View.GONE);
             if (zPDialog != null && zPDialog.isShowing()) {

@@ -21,7 +21,7 @@ public class TalkTogetherMainActivity extends BaseActionBarActivity {
     private CustomTextView textViewTitle;
     private Context mContext;
     SharedPreferences sharePrefLanguageUtil;
-    String strLang, mstrTitle ,mstrTileMM, mCatID;
+    String strLang, mstrTitle, mstrTileMM, mCatID;
     Bundle bundle;
 
     @Override
@@ -49,7 +49,7 @@ public class TalkTogetherMainActivity extends BaseActionBarActivity {
         Intent i = getIntent();
 
         mstrTitle = i.getStringExtra("CategoryName");
-        mstrTileMM =i.getStringExtra("CategoryNameMM");
+        mstrTileMM = i.getStringExtra("CategoryNameMM");
         mCatID = i.getStringExtra("CategoryID");
 
 
@@ -106,14 +106,27 @@ public class TalkTogetherMainActivity extends BaseActionBarActivity {
         int id = item.getItemId();
 
         if (item.getItemId() == android.R.id.home) {
-
             finish();
+            //startDrawerMainActivity();
             return true;
-
 
         }
 
 
         return super.onOptionsItemSelected(item);
     }
+
+
+    public void reload() {
+        Intent intent = getIntent();
+        overridePendingTransition(0, 0);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(intent);
+    }
+
+
 }
