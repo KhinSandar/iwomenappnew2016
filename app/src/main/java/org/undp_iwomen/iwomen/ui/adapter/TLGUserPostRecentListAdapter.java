@@ -52,7 +52,7 @@ public class TLGUserPostRecentListAdapter extends BaseAdapter {
     private static String cateId, cateName;
 
 
-    public TLGUserPostRecentListAdapter( Context ctx, List<IWomenPost> list, String typeFaceName, String categoryId, String catName) {
+    public TLGUserPostRecentListAdapter(Context ctx, List<IWomenPost> list, String typeFaceName, String categoryId, String catName) {
         mInflater = LayoutInflater.from(ctx);
         this.mContext = ctx;
         this.list = list;
@@ -205,14 +205,11 @@ public class TLGUserPostRecentListAdapter extends BaseAdapter {
                                     public void success(IWomenPost iWomenPost, Response response) {
 
                                         alertDialog.dismiss();
-
-                                        ((TalkTogetherMainActivity)mContext).reload();
-
-
-                                       /* TalkTogetherMainActivity talkTogetherMainActivity = new TalkTogetherMainActivity();
+                                        ((TalkTogetherMainActivity) mContext).reload();
+                                        /* TalkTogetherMainActivity talkTogetherMainActivity = new TalkTogetherMainActivity();
                                         talkTogetherMainActivity.reload();*/
                                         //notifyDataSetChanged();
-                                       /* Intent i = new Intent(mContext, TalkTogetherMainActivity.class);
+                                        /* Intent i = new Intent(mContext, TalkTogetherMainActivity.class);
                                         i.putExtra("CategoryName", cateName);//CategoryName
                                         i.putExtra("CategoryID", cateId);//CategoryName
                                         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -227,7 +224,8 @@ public class TLGUserPostRecentListAdapter extends BaseAdapter {
 
                                     }
                                 });
-                            }else {
+                            } else {
+                                alertDialog.dismiss();
 
                                 if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
                                     org.undp_iwomen.iwomen.utils.Utils.doToastEng(mContext, mContext.getResources().getString(R.string.no_connection));

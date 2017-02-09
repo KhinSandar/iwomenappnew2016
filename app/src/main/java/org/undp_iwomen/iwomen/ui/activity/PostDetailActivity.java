@@ -916,12 +916,18 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
             img_credit_icon_img.setVisibility(View.VISIBLE);
             txt_credit_link.setVisibility(View.VISIBLE);
             post_content_posted_date.setVisibility(View.VISIBLE);
+            post_content_user_role.setVisibility(View.VISIBLE);
+            post_content_user_more_id.setVisibility(View.VISIBLE);
         } else {
             postdetail_username.setVisibility(View.INVISIBLE);
             img_credit_logo.setVisibility(View.INVISIBLE);
             img_credit_icon_img.setVisibility(View.INVISIBLE);
             txt_credit_link.setVisibility(View.INVISIBLE);
             post_content_posted_date.setVisibility(View.INVISIBLE);
+            post_content_user_more_id.setVisibility(View.INVISIBLE);
+            post_content_user_role.setVisibility(View.INVISIBLE);
+
+
 
         }
 

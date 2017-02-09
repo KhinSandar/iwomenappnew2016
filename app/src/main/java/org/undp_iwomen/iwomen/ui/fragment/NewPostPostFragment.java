@@ -209,7 +209,12 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
         } else {
 
             et_postDesc.setHint(getResources().getString(R.string.post_body_hint_eng));
-        }*/
+        }
+            <string name="post_body_hint_eng">Ask a question to the iWomen community, post a poem you have written and share it with iWomen community, post about a successful TLG/SRG/May Doe Kabar activity to inspire other women, post about entrepreneurship trainings, ideas and more.
+    <string name="post_body_hint_mm">iWomen အဖြဲ႕အစည္း ကိုု ေမးခြန္းမ်ားေမးျမန္းပါ။ သင္ေရးထားေသာ ကဗ်ာမ်ားကိုု iWomen အဖြဲ႕အစည္းတြင္ ေ၀မွ်ပါ။ အျခား အမ်ိဳးသမီးမ်ား စိတ္အားတက္ႀကြေစရန္
+ျမိဳ႕နယ္ ဦးေဆာင္အဖြဲ႕ ၊ ကိုုယ့္အားကိုုယ္ကိုုးအဖြဲ႕နွင့္ ေမတိုု႕ကမာၻကြန္ရက္တိုု႕ ၏ လႈပ္ရွားမႈမ်ား ၊ အသက္ေမြး၀မ္းေႀကာင္း သင္တန္းမ်ား နွင့္ အႀကံဥာဏ္မ်ား ကိုု ေ၀မွ်ပါ။</string>
+
+        */
         if (mstr_lang != null && mstr_lang.equals(Utils.MM_LANG)) {
             et_postDesc.setHint(getResources().getString(R.string.post_body_hint_mm));
             et_postDesc.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));

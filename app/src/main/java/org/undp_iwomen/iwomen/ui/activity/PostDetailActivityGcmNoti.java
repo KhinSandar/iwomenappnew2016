@@ -351,7 +351,7 @@ public class PostDetailActivityGcmNoti extends BaseActionBarActivity implements 
         mstr_lang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
         //Log.e("<<<<PostID at Detail>>>>","===>" + postId);
         init();
-        initEmojiIcon();
+        //initEmojiIcon();
 
         //Sticker Load
         progress_wheel = (com.pnikosis.materialishprogress.ProgressWheel) findViewById(R.id.progress_wheel);
@@ -394,6 +394,8 @@ public class PostDetailActivityGcmNoti extends BaseActionBarActivity implements 
             finish();
             return;// add this to prevent from doing unnecessary stuffs
         }
+
+
         profile = (RoundedImageView) findViewById(R.id.postdetail_profilePic_rounded);
         mPostTile = (CustomTextView) findViewById(R.id.postdetail_title);
         post_content = (CustomTextView) findViewById(R.id.postdetail_content);
@@ -490,6 +492,7 @@ public class PostDetailActivityGcmNoti extends BaseActionBarActivity implements 
         checkPostLikeStatus();
         setPostItem(iWomenPost);*/
 
+        initEmojiIcon();
 
         mSocialNoEarLikeAnimatedButton.setCallbackListener(new AnimatedButton.Callbacks() {
             @Override
@@ -919,12 +922,16 @@ public class PostDetailActivityGcmNoti extends BaseActionBarActivity implements 
             img_credit_icon_img.setVisibility(View.VISIBLE);
             txt_credit_link.setVisibility(View.VISIBLE);
             post_content_posted_date.setVisibility(View.VISIBLE);
+            post_content_user_role.setVisibility(View.VISIBLE);
+            post_content_user_more_id.setVisibility(View.VISIBLE);
         } else {
             postdetail_username.setVisibility(View.INVISIBLE);
             img_credit_logo.setVisibility(View.INVISIBLE);
             img_credit_icon_img.setVisibility(View.INVISIBLE);
             txt_credit_link.setVisibility(View.INVISIBLE);
             post_content_posted_date.setVisibility(View.INVISIBLE);
+            post_content_user_more_id.setVisibility(View.INVISIBLE);
+            post_content_user_role.setVisibility(View.INVISIBLE);
 
         }
 
