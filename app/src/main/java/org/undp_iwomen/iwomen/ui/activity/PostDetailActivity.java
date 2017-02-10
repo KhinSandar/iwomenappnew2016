@@ -36,7 +36,6 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -177,7 +176,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
     private LinearLayout ly_media_main;
 
     //TODO Comment
-    ListView listView_Comment;
+    SKListView listView_Comment;
     private int paginater = 1;
     private List<com.smk.model.CommentItem> listComment;
     private CommentAdapter adapter;
@@ -304,6 +303,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
         }
     };
 
+    //FOR Pagination
     private boolean isLoading = true;
     private SKListView.Callbacks skCallbacks = new SKListView.Callbacks() {
         @Override
@@ -409,7 +409,8 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
         feed_item_progressBar = (ProgressBar) findViewById(R.id.postdetail_feed_item_progressBar);
         profile_item_progressBar = (ProgressBar) findViewById(R.id.postdetail_progressBar_profile_item);
 
-        listView_Comment = (ListView) findViewById(R.id.postdetail_comment_listview);
+        //FOR Pagination
+        listView_Comment = (SKListView) findViewById(R.id.postdetail_comment_listview);
         ly_likes_button = (LinearLayout) findViewById(R.id.postdetail_like_button);
         //img_like = (ImageView) findViewById(R.id.postdetail_like_txt);
         txt_like_count = (TextView) findViewById(R.id.postdetail_like_count);
@@ -613,8 +614,12 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
 
         listComment = new ArrayList<>();
         adapter = new CommentAdapter(PostDetailActivity.this, listComment);
+        //listView_Comment.setAdapter(adapter);
         listView_Comment.setAdapter(adapter);
+        listView_Comment.setCallbacks(skCallbacks);
+        listView_Comment.setNextPage(true);
         adapter.notifyDataSetChanged();
+
 
         checkPostLikeStatus();
         setPostItem(iWomenPost);
@@ -926,7 +931,6 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
             post_content_posted_date.setVisibility(View.INVISIBLE);
             post_content_user_more_id.setVisibility(View.INVISIBLE);
             post_content_user_role.setVisibility(View.INVISIBLE);
-
 
 
         }
@@ -1475,14 +1479,45 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
 
     public void getCommentByPagination() {
         if (Connection.isOnline(mContext)) {
+            //FOR Pagination
+            isLoading = true;
             progressWheel_comment.setVisibility(View.VISIBLE);
             //TODO BY POST ID
 
             NetworkEngine.getInstance().getCommentlistByPostIDByPagination(paginater, postObjId, new Callback<List<com.smk.model.CommentItem>>() {
                 @Override
                 public void success(List<com.smk.model.CommentItem> commentItems, Response response) {
+                    if (zPDialog != null && zPDialog.isShowing()) {
+                        listComment.clear();
+                        zPDialog.dismissWithSuccess();
+                    }
+                    listComment.addAll(commentItems);
+                    adapter.notifyDataSetChanged();
+                    progressWheel_comment.setVisibility(View.INVISIBLE);
+                    isLoading = false;
+                    //StoreUtil.getInstance().saveTo("SisterAppList", sisterAppItemList);
+                    final ArrayList<com.smk.model.CommentItem> storagelist = new ArrayList<com.smk.model.CommentItem>();
+                    storagelist.addAll(listComment);
+                    storageUtil.SaveArrayListToSD("CommentList_" + postId, storagelist);
+                    if (commentItems.size() == 20) {
+                        listView_Comment.setNextPage(true);
+                        paginater++;
 
-                    listComment = new ArrayList<>();
+                    } else {
+                        // If no more item
+                        listView_Comment.setNextPage(false);
+                    }
+
+                    if (commentItems.size() > 0) {
+
+                        View padding = new View(getApplicationContext());
+                        padding.setMinimumHeight(20);
+                        listView_Comment.addFooterView(padding);
+                        Helper.getListViewSize(listView_Comment);
+                    }
+                    if (!alreadySticker)
+                        LoadStickerData();
+                    /*listComment = new ArrayList<>();
                     listComment.addAll(commentItems);
                     adapter = new CommentAdapter(PostDetailActivity.this, listComment);
                     listView_Comment.setAdapter(adapter);
@@ -1499,7 +1534,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
                     StoreUtil.getInstance().saveTo("commentlist", listComment);
                     //TODO get sticker for comment
                     if (!alreadySticker)
-                        LoadStickerData();
+                        LoadStickerData();*/
                 }
 
                 @Override
@@ -1508,9 +1543,21 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
                 }
             });
         } else {
+            /*if (!alreadySticker)
+                LoadStickerData();*/
+            //SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
+
+            List<com.smk.model.CommentItem> storagelist = (ArrayList<com.smk.model.CommentItem>) storageUtil.ReadArrayListFromSD("CommentList_" + postId);
+            if (storagelist != null) {
+                listComment.clear();
+                listComment.addAll(storagelist);
+                adapter.notifyDataSetChanged();
+                Helper.getListViewSize(listView_Comment);
+
+            }
             if (!alreadySticker)
                 LoadStickerData();
-            //SKConnectionDetector.getInstance(this).showErrorMessage();
+
         }
     }
 

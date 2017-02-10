@@ -3,7 +3,7 @@ package org.undp_iwomen.iwomen.database;
 import android.provider.BaseColumns;
 
 /**
- * Created by thitoo on 5/14/15.
+ * Created by KSD on 5/14/15.
  */
 public class TableAndColumnsName {
 

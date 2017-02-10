@@ -605,140 +605,152 @@ public class PostDetailActivityGcmNoti extends BaseActionBarActivity implements 
 
     private void getPostByPostID(String post_Id) {
         if (Connection.isOnline(getApplicationContext())) {
-            NetworkEngine.getInstance().getPostByPostID(post_Id, new Callback<IWomenPost>() {
+            NetworkEngine.getInstance().getPostByPostID(post_Id, 1, new Callback<IWomenPost>() {
                 @Override
                 public void success(final IWomenPost iWomenPost_, Response response) {
 
-                    //setPostItem(iWomenPost);//
-                    //TODO comment after finish this Detail Post thread
-                    //getCommentByPagination();
 
-                    postType = "Post";//i.getStringExtra("post_type");
-                    postId = iWomenPost_.getId().toString();// i.getStringExtra("post_id");
-                    postObjId = iWomenPost_.getObjectId();
-                    mstrAudioFilePath = iWomenPost_.getAudioFile();
-                    checkPostLikeStatus();
-                    setPostItem(iWomenPost_);
+                    if (iWomenPost_.getId() != null) {
 
 
-                    /***************************************
-                     * Goolge Analytics Tracking
-                     *****************************************/
-                    MainApplication application = (MainApplication) getApplication();
-                    Tracker mTracker = application.getDefaultTracker();
-                    mTracker.setScreenName("Post Detail ~ " + iWomenPost_.getTitle());
-                    mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+                        //setPostItem(iWomenPost);//
+                        //TODO comment after finish this Detail Post thread
+                        //getCommentByPagination();
+
+                        postType = "Post";//i.getStringExtra("post_type");
+                        postId = iWomenPost_.getId().toString();// i.getStringExtra("post_id");
+                        postObjId = iWomenPost_.getObjectId();
+                        mstrAudioFilePath = iWomenPost_.getAudioFile();
+                        checkPostLikeStatus();
+                        setPostItem(iWomenPost_);
 
 
-                    mLikeAnimatedButton.setCallbackListener(new AnimatedButton.Callbacks() {
-                        @Override
-                        public void onClick() {
-                            if (Connection.isOnline(getApplicationContext())) {
+                        /***************************************
+                         * Goolge Analytics Tracking
+                         *****************************************/
+                        MainApplication application = (MainApplication) getApplication();
+                        Tracker mTracker = application.getDefaultTracker();
+                        mTracker.setScreenName("Post Detail ~ " + iWomenPost_.getTitle());
+                        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
 
-                                if (mLikeAnimatedButton.isEnabled()) {
-                                    if (postType.equalsIgnoreCase("iWomenPost")) {
 
-                                        //Check status
-                                        if (mstrReturn != null) {
-                                            if (mstrReturn.equals("false") || mstrReturn.equalsIgnoreCase("false")) {
-                                                //
-                                                SMKserverAPI.getInstance().getService().postIWomenPostLike(postId, user_id, new Callback<LikeItem>() {
-                                                    @Override
-                                                    public void success(LikeItem item, Response response) {
-                                                        Log.e("PostDetailLike>>", item.toString());
+                        mLikeAnimatedButton.setCallbackListener(new AnimatedButton.Callbacks() {
+                            @Override
+                            public void onClick() {
+                                if (Connection.isOnline(getApplicationContext())) {
 
-                                                        mLikeAnimatedButton.setEnabled(false);
-                                                        mLikeAnimatedButton.setText(String.valueOf(iWomenPost_.getLikes() + 1));
-                                                        mLikeAnimatedButton.setOnClickListener(PostDetailActivityGcmNoti.this);
+                                    if (mLikeAnimatedButton.isEnabled()) {
+                                        if (postType.equalsIgnoreCase("iWomenPost")) {
 
-                                                        txt_social_no_ear_like.setText(String.valueOf(iWomenPost_.getLikes() + 1));
-                                                        mSocialNoEarLikeAnimatedButton.setText(String.valueOf(iWomenPost_.getLikes() + 1));
+                                            //Check status
+                                            if (mstrReturn != null) {
+                                                if (mstrReturn.equals("false") || mstrReturn.equalsIgnoreCase("false")) {
+                                                    //
+                                                    SMKserverAPI.getInstance().getService().postIWomenPostLike(postId, user_id, new Callback<LikeItem>() {
+                                                        @Override
+                                                        public void success(LikeItem item, Response response) {
+                                                            Log.e("PostDetailLike>>", item.toString());
 
-                                                        mSocialNoEarLikeAnimatedButton.setEnabled(false);
-                                                        mSocialNoEarLikeAnimatedButton.setOnClickListener(PostDetailActivityGcmNoti.this);
+                                                            mLikeAnimatedButton.setEnabled(false);
+                                                            mLikeAnimatedButton.setText(String.valueOf(iWomenPost_.getLikes() + 1));
+                                                            mLikeAnimatedButton.setOnClickListener(PostDetailActivityGcmNoti.this);
+
+                                                            txt_social_no_ear_like.setText(String.valueOf(iWomenPost_.getLikes() + 1));
+                                                            mSocialNoEarLikeAnimatedButton.setText(String.valueOf(iWomenPost_.getLikes() + 1));
+
+                                                            mSocialNoEarLikeAnimatedButton.setEnabled(false);
+                                                            mSocialNoEarLikeAnimatedButton.setOnClickListener(PostDetailActivityGcmNoti.this);
+                                                        }
+
+                                                        @Override
+                                                        public void failure(RetrofitError error) {
+                                                            Log.e("PostDetailLike Fail>>", error.toString());
+
+                                                        }
+                                                    });
+                                                } else {
+                                                    if (mstr_lang.equals(Utils.ENG_LANG)) {
+                                                        Utils.doToastEng(mContext, getResources().getString(R.string.iWomenPost_Like));
+                                                    } else {
+
+                                                        Utils.doToastMM(mContext, getResources().getString(R.string.iWomenPost_Like_mm));
                                                     }
-
-                                                    @Override
-                                                    public void failure(RetrofitError error) {
-                                                        Log.e("PostDetailLike Fail>>", error.toString());
-
-                                                    }
-                                                });
+                                                }
                                             } else {
                                                 if (mstr_lang.equals(Utils.ENG_LANG)) {
-                                                    Utils.doToastEng(mContext, getResources().getString(R.string.iWomenPost_Like));
+                                                    Utils.doToastEng(mContext, getResources().getString(R.string.audio_loading));
                                                 } else {
 
-                                                    Utils.doToastMM(mContext, getResources().getString(R.string.iWomenPost_Like_mm));
+                                                    Utils.doToastMM(mContext, getResources().getString(R.string.audio_loading_mm));
                                                 }
                                             }
-                                        } else {
-                                            if (mstr_lang.equals(Utils.ENG_LANG)) {
-                                                Utils.doToastEng(mContext, getResources().getString(R.string.audio_loading));
-                                            } else {
-
-                                                Utils.doToastMM(mContext, getResources().getString(R.string.audio_loading_mm));
-                                            }
-                                        }
 
 
-                                    } else { // Post Type Post Condition
-                                        //Check status
-                                        if (mstrPostReturn != null && mstrPostReturn != "") {
-                                            if (mstrPostReturn.equals("false") || mstrPostReturn.equalsIgnoreCase("false")) {
-                                                SMKserverAPI.getInstance().getService().postPostsLike(postId, user_id, new Callback<LikeItem>() {
-                                                    @Override
-                                                    public void success(LikeItem item, Response response) {
+                                        } else { // Post Type Post Condition
+                                            //Check status
+                                            if (mstrPostReturn != null && mstrPostReturn != "") {
+                                                if (mstrPostReturn.equals("false") || mstrPostReturn.equalsIgnoreCase("false")) {
+                                                    SMKserverAPI.getInstance().getService().postPostsLike(postId, user_id, new Callback<LikeItem>() {
+                                                        @Override
+                                                        public void success(LikeItem item, Response response) {
 
-                                                        mLikeAnimatedButton.setEnabled(false);
-                                                        mLikeAnimatedButton.setText(String.valueOf(iWomenPost_.getLikes() + 1));
-                                                        mLikeAnimatedButton.setOnClickListener(PostDetailActivityGcmNoti.this);
-                                                        txt_social_no_ear_like.setText(String.valueOf(iWomenPost_.getLikes() + 1));
-                                                        mSocialNoEarLikeAnimatedButton.setText(String.valueOf(iWomenPost_.getLikes() + 1));
+                                                            mLikeAnimatedButton.setEnabled(false);
+                                                            mLikeAnimatedButton.setText(String.valueOf(iWomenPost_.getLikes() + 1));
+                                                            mLikeAnimatedButton.setOnClickListener(PostDetailActivityGcmNoti.this);
+                                                            txt_social_no_ear_like.setText(String.valueOf(iWomenPost_.getLikes() + 1));
+                                                            mSocialNoEarLikeAnimatedButton.setText(String.valueOf(iWomenPost_.getLikes() + 1));
 
-                                                        mSocialNoEarLikeAnimatedButton.setEnabled(false);
-                                                        mSocialNoEarLikeAnimatedButton.setOnClickListener(PostDetailActivityGcmNoti.this);
+                                                            mSocialNoEarLikeAnimatedButton.setEnabled(false);
+                                                            mSocialNoEarLikeAnimatedButton.setOnClickListener(PostDetailActivityGcmNoti.this);
 
+                                                        }
+
+                                                        @Override
+                                                        public void failure(RetrofitError error) {
+
+                                                        }
+                                                    });
+                                                } else {
+                                                    if (mstr_lang.equals(Utils.ENG_LANG)) {
+                                                        Utils.doToastEng(mContext, getResources().getString(R.string.iWomenPost_Like));
+                                                    } else {
+                                                        Utils.doToastMM(mContext, getResources().getString(R.string.iWomenPost_Like_mm));
                                                     }
-
-                                                    @Override
-                                                    public void failure(RetrofitError error) {
-
-                                                    }
-                                                });
+                                                }
                                             } else {
                                                 if (mstr_lang.equals(Utils.ENG_LANG)) {
-                                                    Utils.doToastEng(mContext, getResources().getString(R.string.iWomenPost_Like));
+                                                    Utils.doToastEng(mContext, getResources().getString(R.string.audio_loading));
                                                 } else {
-                                                    Utils.doToastMM(mContext, getResources().getString(R.string.iWomenPost_Like_mm));
+
+                                                    Utils.doToastMM(mContext, getResources().getString(R.string.audio_loading_mm));
                                                 }
                                             }
-                                        } else {
-                                            if (mstr_lang.equals(Utils.ENG_LANG)) {
-                                                Utils.doToastEng(mContext, getResources().getString(R.string.audio_loading));
-                                            } else {
 
-                                                Utils.doToastMM(mContext, getResources().getString(R.string.audio_loading_mm));
-                                            }
                                         }
 
                                     }
-
-                                }
-                            } else {
-                                if (mstr_lang.equals(Utils.ENG_LANG)) {
-                                    Utils.doToastEng(mContext, getResources().getString(R.string.no_connection));
                                 } else {
+                                    if (mstr_lang.equals(Utils.ENG_LANG)) {
+                                        Utils.doToastEng(mContext, getResources().getString(R.string.no_connection));
+                                    } else {
 
-                                    Utils.doToastMM(mContext, getResources().getString(R.string.no_connection_mm));
+                                        Utils.doToastMM(mContext, getResources().getString(R.string.no_connection_mm));
+                                    }
                                 }
+
+
                             }
+                        });
 
-
-                        }
-                    });
-
-
+                    } else {
+                        //TODO
+                        Intent intent = new Intent(mContext, MainLoginActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        mContext.startActivity(intent);
+                        finish();
+                        return;
+                    }
                 }
 
                 @Override

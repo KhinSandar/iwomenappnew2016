@@ -205,6 +205,7 @@ public interface INetworkEngine {
     @GET(CommonConfig.GET_POST_BY_POST_ID_URL)
     void getPostByPostID(
             @Path("id") String id,
+            @Query("isAllow") int isAllow,
             Callback<IWomenPost> callback);
 
     @GET(CommonConfig.GET_CATEGORIES_LIST__URL)
