@@ -291,10 +291,16 @@ public class TLGUserPostRecentListAdapter extends BaseAdapter {
                                     @Override
                                     public void success(ReportPosts retObj, Response response) {
 
-                                        Log.i("Report Success"," ");
+                                        if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+                                            org.undp_iwomen.iwomen.utils.Utils.doToastEng(mContext, mContext.getResources().getString(R.string.report_success));
+                                            // Toast.makeText(mContext," "+ error.toString(),Toast.LENGTH_LONG).show();
+                                        } else {
+
+                                            org.undp_iwomen.iwomen.utils.Utils.doToastMM(mContext, mContext.getResources().getString(R.string.report_success));
+                                        }
                                         alertDialog.dismiss();
                                         String retPoint = retObj.getPoint().toString();
-                                        Log.i("Return Point >>>",retPoint);
+                                        Log.i("Return Point >>>"," " + retPoint);
                                         Log.i("Return>>>",response.getReason());
                                         if(retPoint.equalsIgnoreCase("10")){
                                             SMKserverAPI.getInstance().getService().postDeletePost(item.getId(), item.getUserId(), "0", new Callback<IWomenPost>() {
@@ -324,6 +330,7 @@ public class TLGUserPostRecentListAdapter extends BaseAdapter {
                                     public void failure(RetrofitError error) {
                                         if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
                                             org.undp_iwomen.iwomen.utils.Utils.doToastEng(mContext, mContext.getResources().getString(R.string.report));
+                                           // Toast.makeText(mContext," "+ error.toString(),Toast.LENGTH_LONG).show();
                                         } else {
 
                                             org.undp_iwomen.iwomen.utils.Utils.doToastMM(mContext, mContext.getResources().getString(R.string.report));

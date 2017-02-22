@@ -862,6 +862,7 @@ female-pilots-iaa1s
     <string name="post_detail_read_more">More &gt;&gt;</string>
     <string name="post_detail_read_more_mm"> ပိုုိမိုုဖတ္ရွဳရန္ &gt;&gt; </string>
     <string name="report">သင္ၿပဳလုပ္ထားၿပီးပါၿပီ</string>
+    <string name="report_success">သတင္းပို႔ၿခင္းေအာင္ၿမင္ပါသည္</string>
 
     <!--<string name="login_dialog_mm_zawgyi">ၿမန္မာေဇာ္ဂ်ီေဖာင့္</string>
     <string name="login_dialog_mm_uni">ၿမန္မာ ယူနီကုုတ္ေဖာင့္</string>
