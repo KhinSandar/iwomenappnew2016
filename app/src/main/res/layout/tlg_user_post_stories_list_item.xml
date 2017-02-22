@@ -102,6 +102,18 @@
                     android:paddingRight="@dimen/keyline_1"
                     android:orientation="horizontal">
                     <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                        android:id="@+id/tlg_txtPostReported"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_report_button"
+                        android:paddingRight="@dimen/keyline_1"
+                        android:layout_marginLeft="@dimen/keyline_1"
+                        android:text=""
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/feed_item_profile_name"
+                        android:textStyle="bold"
+                        android:visibility="visible" />
+                    <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                         android:id="@+id/tlg_txtPostDeleted"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -113,6 +125,8 @@
                         android:textSize="@dimen/feed_item_profile_name"
                         android:textStyle="bold"
                         android:visibility="visible" />
+
+
 
                 </LinearLayout>
                 <LinearLayout

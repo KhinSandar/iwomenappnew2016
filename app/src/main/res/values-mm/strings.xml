@@ -422,7 +422,8 @@ female-pilots-iaa1s
 
     <string name="post_body_hint_eng">Ask a question to the iWomen community, post a poem you have written and share it with iWomen community, post about a successful TLG/SRG/May Doe Kabar activity to inspire other women, post about entrepreneurship trainings, ideas and more.
 </string>
-    <string name="post_body_hint_mm">iWomenအဖြဲ႔သို႔စာမ်ားမေပးပို႔ခင္ ေမတို႔ဘယ္အပိုင္းကိုေရာက္ေနတယ္ဆိုတာအရင္စစ္ေဆးပါ။ကဗ်ာက႑မွာေရာက္ေနလ်ွင္ကဗ်ာမ်ားသာေရးပို႔ရပါမည္။အေရာင္းအဝယ္က႑ကိုေရာက္ေနလ်ွင္အေရာင္းအဝယ္ႏွင့္ပတ္သက္သည္မ်ားကိုသာေပးပို႔ရမည္။ ေပးပို႔မႈအတြက္ေက်းဇူးတင္ပါသည္။</string>
+    <string name="post_body_hint_mm">iWomen မွာပို႔စ္အသစ္မတင္ခင္ သင္ဘယ္ေခါင္းစဥ္တြင္ေရာက္ေနလဲဆိုတာအရင္ေလ့လာပါ။ ယခုေရာက္ေနေသာေနရာတြင္သက္ဆိုင္ေသာပို႔စ္မွာ</string>
+    <string name="post_body_hint_end_closing_mm">ပို႔စ္အသစ္တင္ၿခင္းအတြက္ေက်းဇူးတင္ပါသည္။</string>
 
     <string name="tlg_group_name_un">မေတို့အားမာန်</string>
 
@@ -860,6 +861,7 @@ female-pilots-iaa1s
     <string name="current_version_mm">ယခု လက္ရွိ ေဆာ့၀ဲလ္ ဗားရွင္း</string>
     <string name="post_detail_read_more">More &gt;&gt;</string>
     <string name="post_detail_read_more_mm"> ပိုုိမိုုဖတ္ရွဳရန္ &gt;&gt; </string>
+    <string name="report">သင္ၿပဳလုပ္ထားၿပီးပါၿပီ</string>
 
     <!--<string name="login_dialog_mm_zawgyi">ၿမန္မာေဇာ္ဂ်ီေဖာင့္</string>
     <string name="login_dialog_mm_uni">ၿမန္မာ ယူနီကုုတ္ေဖာင့္</string>
@@ -909,6 +911,11 @@ female-pilots-iaa1s
     <string name="delete_post_cancel">မၿပဳလုပ္ပါ။</string>
 
     <string name="delete_post">ယခုပို ့စ္ကို ဖ်က္ မည္မွာ ေသခ်ာၿပီလား။</string>
+
+    <string name="report_post_ok">ၿပဳလုပ္မည္။</string>
+    <string name="report_post_cancel">မၿပဳလုပ္ပါ။</string>
+
+    <string name="report_post">ဒါဟာေႏွာက္ယွက္မွု (သို႔) အမုန္းပြားစကားၿခိမ္းေျခာက္ျခင္း၊ အၾကမ္းဖက္ၿခင္းပို႔စ္ၿဖစ္သည္္ iWomen အဖြဲ႔အစည္းအတြင္းရွိအသံုးၿပဳသူမ်ားၿဖင့္မသင္႔ေတာ္ပါ ထို႔ေၾကာင့္ iWomen အဖြဲ႔ကိုသတင္းေပးပို႔ပါမည္</string>
 
 
 </resources>

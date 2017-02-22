@@ -14,6 +14,7 @@ import org.smk.model.User;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.data.AuthorItem;
 import org.undp_iwomen.iwomen.data.PrizePointsItem;
+import org.undp_iwomen.iwomen.data.ReportPosts;
 
 import java.util.List;
 
@@ -215,5 +216,10 @@ public interface SMKSeverService {
             @Field("isAllow") String isAllow,
             Callback<IWomenPost> callback);
 
-
+    @FormUrlEncoded
+    @POST(CommonConfig.REPORT_POST_URL)
+    void reportPost(
+            @Field("postId") int postId,
+            @Field("userId") String userId,
+            Callback<ReportPosts> callback);
 }

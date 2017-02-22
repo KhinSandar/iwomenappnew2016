@@ -178,5 +178,8 @@ public class CommonConfig {
 
     public static final String UPDATE_DELETE_POST_URL = "/api/v1/posts/{id}";
 
+    public static final String REPORT_POST_URL = "/api/v1/reportPosts";
+
+
 
 }

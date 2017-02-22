@@ -64,10 +64,10 @@
    <string name="new_iwomen_post_hint_title_mm">ယခုု ေနရာတြင္ မိမိဘ၀တစ္ေလ်ာက္လံုုးအမွတ္ရေနသည္ ့လြမ္းမိုုးသည္ ့စိတ္ဓာတ္ခြန္အားေပးသည့္
 အေၾကာင္းအရာကိုုေရးသားတင္ပိုု ့ေပးႏိုုင္ပါသည္။</string>
 
-    <string name="post_body_hint_eng">Before posting here to the iWomen Community, check in which category you are. If you are in the Poem Category only post poems. If you are in the Market Category only post market related comments. Thanks for posting!
-</string>
-    <string name="post_body_hint_mm">iWomen အဖြဲ႕အစည္း ကိုု ေမးခြန္းမ်ားေမးျမန္းပါ။ သင္ေရးထားေသာ ကဗ်ာမ်ားကိုု iWomen အဖြဲ႕အစည္းတြင္ ေ၀မွ်ပါ။ အျခား အမ်ိဳးသမီးမ်ား စိတ္အားတက္ႀကြေစရန္
-ျမိဳ႕နယ္ ဦးေဆာင္အဖြဲ႕ ၊ ကိုုယ့္အားကိုုယ္ကိုုးအဖြဲ႕နွင့္ ေမတိုု႕ကမာၻကြန္ရက္တိုု႕ ၏ လႈပ္ရွားမႈမ်ား ၊ အသက္ေမြး၀မ္းေႀကာင္း သင္တန္းမ်ား နွင့္ အႀကံဥာဏ္မ်ား ကိုု ေ၀မွ်ပါ။</string>
+    <string name="post_body_hint_eng">Before posting to the iWomen Community, check in which category you are. Here only post questions and messages related to</string>
+    <string name="post_body_hint_end_closing">. Thanks for posting!</string>
+    <string name="post_body_hint_mm">iWomen မွာပို႔စ္အသစ္မတင္ခင္ သင္ဘယ္ေခါင္းစဥ္တြင္ေရာက္ေနလဲဆိုတာအရင္ေလ့လာပါ။ ယခုေရာက္ေနေသာေနရာတြင္သက္ဆိုင္ေသာပို႔စ္မွာ</string>
+    <string name="post_body_hint_end_closing_mm">ပို႔စ္အသစ္တင္ၿခင္းအတြက္ေက်းဇူးတင္ပါသည္။</string>
     <string name="new_post_hint_body_mm">ပိုု ့စ္အသစ္</string>
     <string name="new_post_hint_body_eng">Story</string>
 
@@ -848,7 +848,7 @@ Shirin Ebadi, J.D., was awarded the 2003 Nobel Peace Prize for her efforts to pr
     <string name="no_connection_mm">No Internet Connection</string>
 
     <string name="weekly_special_be_inspired">Topic Of the Month</string>
-
+    <string name="report">You already report this post</string>
 
     <!--<string name="login_dialog_mm_zawgyi">ၿမန္မာေဇာ္ဂ်ီေဖာင့္</string>
     <string name="login_dialog_mm_uni">ၿမန္မာ ယူနီကုုတ္ေဖာင့္</string>
@@ -912,6 +912,10 @@ Make many new friends, contact your local May Doe Kabar/TLG group. See number be
     <string name="delete_post">Are you sure you want to delete this post?</string>
     <string name="delete_post_ok">Yes</string>
     <string name="delete_post_cancel">Cancel</string>
+
+    <string name="report_post">Report this post to iWomen Team because it advocates violence, it is a fake news story, it is in unappropriate for iWomen Community and it should not be here</string>
+    <string name="report_post_ok">Report</string>
+    <string name="report_post_cancel">Cancel</string>
 
 
 </resources>

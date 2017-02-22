@@ -134,6 +134,7 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
     private final String STORAGE_READ_PERMISSION = "android.permission.READ_EXTERNAL_STORAGE";
     private ZProgressHUD zPDialog;
     private Context mContext;
+    private String mmStrCateName, engStrCateName;
 
     public NewPostPostFragment() {
     }
@@ -215,16 +216,25 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
 ျမိဳ႕နယ္ ဦးေဆာင္အဖြဲ႕ ၊ ကိုုယ့္အားကိုုယ္ကိုုးအဖြဲ႕နွင့္ ေမတိုု႕ကမာၻကြန္ရက္တိုု႕ ၏ လႈပ္ရွားမႈမ်ား ၊ အသက္ေမြး၀မ္းေႀကာင္း သင္တန္းမ်ား နွင့္ အႀကံဥာဏ္မ်ား ကိုု ေ၀မွ်ပါ။</string>
 
         */
+        //for separate category
+
         if (mstr_lang != null && mstr_lang.equals(Utils.MM_LANG)) {
-            et_postDesc.setHint(getResources().getString(R.string.post_body_hint_mm));
-            et_postDesc.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
+                mmStrCateName = "MM Para will Coming Here";
+                et_postDesc.setHint(getResources().getString(R.string.post_body_hint_mm)+" "+mmStrCateName+" "+getResources().getString(R.string.post_body_hint_end_closing_mm));
+                et_postDesc.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
+
         } else if (mstr_lang != null && mstr_lang.equals(Utils.MM_LANG_UNI)) {
-            et_postDesc.setHint(getResources().getString(R.string.post_body_hint_mm));
-            et_postDesc.setTypeface(MyTypeFace.get(mContext, MyTypeFace.UNI));
+                mmStrCateName = "MM Para will Coming Here";
+                et_postDesc.setHint( getResources().getString(R.string.post_body_hint_mm)+" "+mmStrCateName+" "+getResources().getString(R.string.post_body_hint_end_closing_mm));
+                et_postDesc.setTypeface(MyTypeFace.get(mContext, MyTypeFace.UNI));
+
+
         } else if (mstr_lang != null && mstr_lang.equals(Utils.MM_LANG_DEFAULT)) {
-            et_postDesc.setHint(getResources().getString(R.string.post_body_hint_mm));
+            mmStrCateName = "Myanmar Para will Coming Here";
+            et_postDesc.setHint( getResources().getString(R.string.post_body_hint_mm)+" "+mmStrCateName+" "+getResources().getString(R.string.post_body_hint_end_closing_mm));
         } else {
-            et_postDesc.setHint(getResources().getString(R.string.post_body_hint_eng));
+            engStrCateName = cateName;
+            et_postDesc.setHint(getResources().getString(R.string.post_body_hint_eng)+" "+ engStrCateName+" " + getResources().getString(R.string.post_body_hint_end_closing));
             et_postDesc.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
         }
 

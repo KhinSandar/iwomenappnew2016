@@ -19,7 +19,8 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="50dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
 
 
         <org.undp_iwomen.iwomen.ui.widget.CustomTextView
@@ -41,17 +42,16 @@
     <LinearLayout
         android:layout_marginTop="50dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-
+        android:layout_height="52dp"
+        android:orientation="vertical"
+        android:background="@drawable/dropdown" >
 
         <Spinner
             android:id="@+id/register_state_state_spn"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-
+            android:layout_height="52dp"
             android:enabled="false"
+            android:background="@null"
             android:text="@string/register_township_title" />
     </LinearLayout>
 

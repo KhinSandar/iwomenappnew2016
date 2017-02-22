@@ -3,6 +3,7 @@ package org.undp_iwomen.iwomen.ui.adapter;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,15 +11,21 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.api.client.json.Json;
 import com.makeramen.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.smk.model.IWomenPost;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
+import org.undp_iwomen.iwomen.data.ReportPosts;
 import org.undp_iwomen.iwomen.model.MyTypeFace;
 import org.undp_iwomen.iwomen.model.retrofit_api.SMKserverAPI;
+import org.undp_iwomen.iwomen.model.retrofit_api.SMKserverStringConverterAPI;
 import org.undp_iwomen.iwomen.ui.activity.TalkTogetherMainActivity;
 import org.undp_iwomen.iwomen.ui.widget.CustomButton;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
@@ -100,6 +107,8 @@ public class TLGUserPostRecentListAdapter extends BaseAdapter {
             holder.postIMg = (ResizableImageView) convertView.findViewById(R.id.tlg_postImg);
             holder.profilePictureView = (ProfilePictureView) convertView.findViewById(R.id.tlg_profilePic);
             holder.post_deleted = (CustomTextView) convertView.findViewById(R.id.tlg_txtPostDeleted);
+            holder.post_reported = (CustomTextView) convertView.findViewById(R.id.tlg_txtPostReported);
+
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -252,7 +261,103 @@ public class TLGUserPostRecentListAdapter extends BaseAdapter {
         } else {
             holder.post_deleted.setVisibility(View.GONE);
         }
+        if (item.getUserId().toString() != userID) {
+            holder.post_reported.setVisibility(View.VISIBLE);
+            holder.post_reported.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                    // ...Irrelevant code for customizing the buttons and title
+                    View dialogView = mInflater.inflate(R.layout.fragment_talk_together_report_dialog, null);
+                    builder.setView(dialogView);
+
+                    CustomButton btn_ok = (CustomButton) dialogView.findViewById(R.id.dialog_ok_btn);
+                    CustomButton btn_cancel = (CustomButton) dialogView.findViewById(R.id.dialog_cancel_btn);
+
+                    final AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+                    btn_ok.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            //Toast.makeText(mContext, "ImageView clicked for the row = "+userID + item.getObjectId(), Toast.LENGTH_SHORT).show();
+                            Log.i("Share Perf Id >>>", " " + userID);
+                            Log.i("Post ID is>>>", item.getId().toString());
+                            Log.i("Post User Id is>>>", item.getUserId().toString());
+                            if (Connection.isOnline(mContext)) {
+
+                                SMKserverAPI.getInstance().getService().reportPost(item.getId(), userID, new Callback<ReportPosts>() {
+                                   // item.getUserId() post owner ID
+                                    @Override
+                                    public void success(ReportPosts retObj, Response response) {
+
+                                        Log.i("Report Success"," ");
+                                        alertDialog.dismiss();
+                                        String retPoint = retObj.getPoint().toString();
+                                        Log.i("Return Point >>>",retPoint);
+                                        Log.i("Return>>>",response.getReason());
+                                        if(retPoint.equalsIgnoreCase("10")){
+                                            SMKserverAPI.getInstance().getService().postDeletePost(item.getId(), item.getUserId(), "0", new Callback<IWomenPost>() {
+                                                @Override
+                                                public void success(IWomenPost iWomenPost, Response response) {
+
+                                                    alertDialog.dismiss();
+                                                    ((TalkTogetherMainActivity) mContext).reload();
+
+                                                }
+
+                                                @Override
+                                                public void failure(RetrofitError error) {
+                                                    alertDialog.dismiss();
+
+                                                }
+                                            });
+
+                                        }
+
+                                        //  ((TalkTogetherMainActivity) mContext).reload();
+
+
+                                    }
+
+                                    @Override
+                                    public void failure(RetrofitError error) {
+                                        if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+                                            org.undp_iwomen.iwomen.utils.Utils.doToastEng(mContext, mContext.getResources().getString(R.string.report));
+                                        } else {
+
+                                            org.undp_iwomen.iwomen.utils.Utils.doToastMM(mContext, mContext.getResources().getString(R.string.report));
+                                        }
+
+                                        alertDialog.dismiss();
+
+                                    }
+                                });
+                            } else {
+                                alertDialog.dismiss();
+
+                                if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+                                    org.undp_iwomen.iwomen.utils.Utils.doToastEng(mContext, mContext.getResources().getString(R.string.no_connection));
+                                } else {
+
+                                    org.undp_iwomen.iwomen.utils.Utils.doToastMM(mContext, mContext.getResources().getString(R.string.no_connection));
+                                }
+                            }
+
+                        }
+                    });
+
+                    btn_cancel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            alertDialog.dismiss();
+                        }
+                    });
+
+
+                }
+            });
+        }
 
         if (item.getPostUploadUserImgPath() != null && !item.getPostUploadUserImgPath().isEmpty()) {
 
@@ -375,7 +480,7 @@ public class TLGUserPostRecentListAdapter extends BaseAdapter {
         TextView post_content_type;
         TextView post_content_user_id;
         CustomTextView post_content_user_name;
-        CustomTextView post_deleted;
+        CustomTextView post_deleted, post_reported;
         TextView post_content_user_img_path;
         TextView post_timestamp;
         ProgressBar feed_item_progressBar;
