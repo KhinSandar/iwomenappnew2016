@@ -4,9 +4,9 @@
     xmlns:wheel="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:background="@color/line_color"
+    android:background="@color/comment_grid_bg2"
     android:layout_height="fill_parent">
-
+ <!--android:background="@color/line color -->
 
 
     <FrameLayout
@@ -28,6 +28,7 @@
             android:layout_gravity="center"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
+            android:visibility="gone"
             wheel:barColor="#bd2a2a"
             wheel:progressIndeterminate="true" />
 
@@ -41,7 +42,7 @@
             android:horizontalSpacing="5dp"
             android:numColumns="4"
             android:columnWidth="150dp"
-
+            android:divider="@android:color/transparent"
             android:stretchMode="columnWidth"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"

@@ -422,6 +422,8 @@ female-pilots-iaa1s
 
     <string name="post_body_hint_eng">Ask a question to the iWomen community, post a poem you have written and share it with iWomen community, post about a successful TLG/SRG/May Doe Kabar activity to inspire other women, post about entrepreneurship trainings, ideas and more.
 </string>
+    <string name="post_body_hint_end_closing">. Thanks for posting!</string>
+
     <string name="post_body_hint_mm">iWomen မွာပို႔စ္အသစ္မတင္ခင္ သင္ဘယ္ေခါင္းစဥ္တြင္ေရာက္ေနလဲဆိုတာအရင္ေလ့လာပါ။ ယခုေရာက္ေနေသာေနရာတြင္သက္ဆိုင္ေသာပို႔စ္မွာ</string>
     <string name="post_body_hint_end_closing_mm">ပို႔စ္အသစ္တင္ၿခင္းအတြက္ေက်းဇူးတင္ပါသည္။</string>
 

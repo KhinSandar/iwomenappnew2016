@@ -487,6 +487,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
          *****************************************/
         MainApplication application = (MainApplication) getApplication();
         Tracker mTracker = application.getDefaultTracker();
+        //mTracker.setScreenName("Post Detail ~ " + "post_ID = " +postId+ "~" + iWomenPost.getTitle());
         mTracker.setScreenName("Post Detail ~ " + iWomenPost.getTitle());
         mTracker.send(new HitBuilders.ScreenViewBuilder().build());
 
@@ -1254,7 +1255,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
                             //storageUtil.SaveArrayListToSD("StickersList", stickerArrayList);
                             mAdapter = new StickerGridViewAdapter(PostDetailActivity.this, mContext, stickerArrayList);
                             progress_wheel.setVisibility(View.GONE);
-                            //progressBar.setVisibility(View.GONE);
+                            //progressBars.setVisibility(View.GONE);
                             gridView.setAdapter(mAdapter);
                         } else {
                             mAdapter.notifyDataSetChanged();

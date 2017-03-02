@@ -54,6 +54,9 @@ android {
         multiDexEnabled true
         versionCode 10
         versionName "1.9"
+        // Optional: Specify the language(s) your app supports.
+        resConfigs "en", "fr", "pt-rBR"
+
     }
     buildTypes {
         release {
