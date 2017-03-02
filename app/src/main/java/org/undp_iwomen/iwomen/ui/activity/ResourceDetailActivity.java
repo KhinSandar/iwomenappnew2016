@@ -65,6 +65,7 @@ import org.undp_iwomen.iwomen.ui.adapter.StickerGridViewAdapter;
 import org.undp_iwomen.iwomen.ui.fragment.AudioVisualizerFragment;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.ui.widget.ProgressWheel;
+import org.undp_iwomen.iwomen.ui.widget.ResizableImageView;
 import org.undp_iwomen.iwomen.ui.widget.WrappedGridView;
 import org.undp_iwomen.iwomen.ui.widget.animatedbutton.AnimatedButton;
 import org.undp_iwomen.iwomen.utils.Connection;
@@ -100,7 +101,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
     String mstrAudioFilePath;
 
 
-    String mstrTitleEng, mstrTitleMm, mstrContentEng, mstrContentMm, mstrAuthorName, mstrAuthorNameMM, mstrAuthorId, mstrAuthorImgPath, mstrPostDate, mstrAuthorRoleMM, mstrAuthorRoleEng;
+    String mstrTitleEng, mstrTitleMm, mstrContentEng, mstrContentMm, mstrAuthorName, mstrAuthorNameMM, mstrAuthorId, mstrAuthorImgPath, mstrPostDate, mstrAuthorRoleMM, mstrAuthorRoleEng,mstrDetailImg;
     String mstrSubResourceTitleEng, mstrSubResourceTitleMm;
 
     private CustomTextView txtSocialShare;
@@ -143,7 +144,6 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
     private ArrayList<Sticker> stickerArrayList;
     private int sticker_paginater = 1;
     private com.pnikosis.materialishprogress.ProgressWheel progress_wheel;
-    private ProgressBar feed_item_progressBar;
     private ProgressBar profile_item_progressBar;
     private RoundedImageView profile;
     CustomTextView post_content_user_name;
@@ -154,17 +154,22 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
     private TextView txt_like_count, txt_cmd_count;
     private TextView txt_social_no_ear_comment;
     private ProgressDialog mProgressDialog;
+    private ResizableImageView beknowledegable_postIMg;
+    private ProgressBar feed_item_progressBar;
     View comment_View;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_sub_resource);//activity_detail_sub_resource
+        beknowledegable_postIMg = (ResizableImageView) findViewById(R.id.resource_detail_content_img);
+        feed_item_progressBar = (ProgressBar) findViewById(R.id.resouce_detail_feed_item_progressBar);
         sharePrefLanguageUtil = getSharedPreferences(Utils.PREF_SETTING, Context.MODE_PRIVATE);
 
         mProgressDialog = new ProgressDialog(ResourceDetailActivity.this);
         mProgressDialog.setCancelable(false);
 
+        mContext = getApplicationContext();
         mContext = getApplicationContext();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
@@ -242,6 +247,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
         mstrAuthorId = i.getStringExtra("AuthorId");
         mstrAuthorImgPath = i.getStringExtra("AuthorImgPath");
         mstrPostDate = i.getStringExtra("PostDate");
+        mstrDetailImg = i.getStringExtra("subResourceDetailImg");
 
         txtName = (CustomTextView) findViewById(R.id.tipdetail_title_name);
         txtBody = (CustomTextView) findViewById(R.id.tipdetail_body);
@@ -361,6 +367,45 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
                 mContext.startActivity(intent);
             }
         });
+        //Linn Wah For Resouuce Deail Image
+        // Feed image
+
+        if (mstrDetailImg != null && mstrDetailImg != "" && !mstrDetailImg.isEmpty() && mstrDetailImg != "null" ) {
+            try {
+                beknowledegable_postIMg.setVisibility(View.VISIBLE);
+                feed_item_progressBar.setVisibility(View.VISIBLE);
+                Picasso.with(mContext)
+                        .load(mstrDetailImg) //"http://cheapandcheerfulshopper.com/wp-content/uploads/2013/08/shopping1257549438_1370386595.jpg"//deal.photo1  //
+                        .placeholder(R.drawable.place_holder)
+                        .error(R.drawable.place_holder)
+                        .into(beknowledegable_postIMg, new ImageLoadedCallback(feed_item_progressBar) {
+                            @Override
+                            public void onSuccess() {
+                                if (this.progressBar != null) {
+                                    this.progressBar.setVisibility(View.GONE);
+                                } else {
+                                    this.progressBar.setVisibility(View.VISIBLE);
+                                }
+                            }
+                            @Override
+                            public void onError() {
+                                super.onError();
+                                if (this.progressBar != null) {
+                                    this.progressBar.setVisibility(View.GONE);
+                                }
+                            }
+
+                        });
+
+        } catch (OutOfMemoryError outOfMemoryError) {
+            outOfMemoryError.printStackTrace();
+            feed_item_progressBar.setVisibility(View.GONE);
+        }
+        } else {
+            Log.i("In the Else statement"," ");
+            beknowledegable_postIMg.setVisibility(View.GONE);
+            feed_item_progressBar.setVisibility(View.GONE);
+        }
 
         //Linn Wah
         listView_Comment = (ListView) findViewById(R.id.postdetail_comment_listview);

@@ -293,7 +293,7 @@ public class TLGUserPostRecentListAdapter extends BaseAdapter {
 
                                         if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
                                             org.undp_iwomen.iwomen.utils.Utils.doToastEng(mContext, mContext.getResources().getString(R.string.report_success));
-                                            // Toast.makeText(mContext," "+ error.toString(),Toast.LENGTH_LONG).show();
+
                                         } else {
 
                                             org.undp_iwomen.iwomen.utils.Utils.doToastMM(mContext, mContext.getResources().getString(R.string.report_success));
@@ -330,7 +330,7 @@ public class TLGUserPostRecentListAdapter extends BaseAdapter {
                                     public void failure(RetrofitError error) {
                                         if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
                                             org.undp_iwomen.iwomen.utils.Utils.doToastEng(mContext, mContext.getResources().getString(R.string.report));
-                                           // Toast.makeText(mContext," "+ error.toString(),Toast.LENGTH_LONG).show();
+
                                         } else {
 
                                             org.undp_iwomen.iwomen.utils.Utils.doToastMM(mContext, mContext.getResources().getString(R.string.report));

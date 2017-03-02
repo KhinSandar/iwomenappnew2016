@@ -57,9 +57,9 @@
  </string>
     <string name="new_post_hint_title_eng">Here you can ask a question to other TLGs, ask for advice to other TLGs and share your livelihood skills with other TLGs.And of course you can aslo post your successful TLG activities.</string>
 
-    <string name="new_iwomen_post_hint_title_eng">Here you can post an insiprational story of your life.</string>
+    <string name="new_iwomen_post_hint_title_eng">Here you can post a personal story of your life to inspire other women and men in the iWomen community. iWomen Team will select and publish the best stories. </string>
     <string name="new_iwomen_post_hint_title_mm">ယခုု ေနရာတြင္ မိမိဘ၀တစ္ေလ်ာက္လံုုးအမွတ္ရေနသည္ ့လြမ္းမိုုးသည္ ့စိတ္ဓာတ္ခြန္အားေပးသည့္
-အေၾကာင္းအရာကိုုေရးသားတင္ပိုု ့ေပးႏိုုင္ပါသည္။</string>
+အေၾကာင္းအရာကိုုေရးသားတင္ပိုု ့ေပးႏိုုင္ပါသည္။ iWomen အဖြဲ႔မွေနၿပီး အေကာင္းဆံုးစာသားမ်ားကို ေရြးခ်ယ္ၿပီိးေဖာ္ၿပေပးသြားပါမည္</string>
 
     <string name="new_post_hint_body_mm">ပိုု ့စ္အသစ္</string>
     <string name="new_post_hint_body_eng">Story</string>
@@ -849,6 +849,7 @@ female-pilots-iaa1s
     <string name="mayDoeKaBarFBPage">ေမတို႕ကမာၻ Page ကို Like လုပ္ပါ</string>
 
     <string name="audio_not_availabe_msg">ယခု အသံဖိုင္ မရွိေသးပါ ။</string>
+    <string name="audio_not_available_msg_women_post">ယခုပို႔စ္တြင္အသံဖိုင္မပါပါ။အသံဖိုင္တင္လိုလွ်င္ပို႔စ္အသစ္ေရးသည့္အခ်ိန္တြင္အသံသြင္းေသာခလုတ္ကိုႏိွပ္ပါ</string>
 
     <string name="no_connection_mm">အင္တာနက္မဖြင့္ထားပါ</string>
 

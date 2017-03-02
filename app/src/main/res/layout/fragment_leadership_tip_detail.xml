@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@android:color/white"
     android:focusable="true"
     android:focusableInTouchMode="true">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,6 +22,7 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin">
 
+
             <FrameLayout
                 android:id="@+id/tip_leader_icon_frame"
                 android:layout_width="60dp"
@@ -32,7 +33,6 @@
                     android:id="@+id/tipdetail_profilePic_rounded"
                     android:layout_width="@dimen/feed_item_profile_pic"
                     android:layout_height="@dimen/feed_item_profile_pic"
-
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
@@ -50,7 +50,6 @@
                     style="?android:attr/progressBarStyle"
                     android:layout_width="@dimen/feed_item_profile_pic"
                     android:layout_height="@dimen/feed_item_profile_pic"
-
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
@@ -91,6 +90,38 @@
                 android:textColor="@color/text_sub_head_color" />
 
         </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        <FrameLayout
+            android:id="@+id/head_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="12dp">
+
+
+            <org.undp_iwomen.iwomen.ui.widget.ResizableImageView
+                android:id="@+id/resource_detail_content_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:src="@drawable/place_holder"
+                android:visibility="visible"
+               />
+
+            <ProgressBar
+                android:id="@+id/resouce_detail_feed_item_progressBar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:visibility="visible" />
+
+        </FrameLayout>
+        </RelativeLayout>
+
 
         <org.undp_iwomen.iwomen.ui.widget.CustomTextView
             android:id="@+id/tipdetail_title_name"
@@ -102,7 +133,6 @@
             android:paddingTop="@dimen/activity_vertical_margin"
             android:text="Title of Post"
             android:textColor="@color/text_sub_head_color"
-
             android:textSize="18sp"
             android:visibility="gone" />
 
@@ -130,20 +160,15 @@
             <include layout="@layout/social_without_ear_phone" />
         </LinearLayout>
 
-        <!--<ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">-->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="bottom"
-            >
+            android:layout_gravity="bottom">
+
             <include layout="@layout/content_resource_detail_comment_list" />
         </LinearLayout>
-<!--
-        </ScrollView>
--->
 
     </LinearLayout>
 
-</ScrollView>
+</android.support.v4.widget.NestedScrollView>

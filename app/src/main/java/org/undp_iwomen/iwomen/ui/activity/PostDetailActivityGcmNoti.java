@@ -2596,7 +2596,14 @@ public class PostDetailActivityGcmNoti extends BaseActionBarActivity implements 
                     } else {
                         //TODO Audio File Null case
                         // TODO Auto-generated method stub
-                        SKToastMessage.showMessage(PostDetailActivityGcmNoti.this, getResources().getString(R.string.audio_not_availabe_msg), SKToastMessage.INFO);
+
+                        if (postType.equalsIgnoreCase("iWomenPost")) {
+                            SKToastMessage.showMessage(PostDetailActivityGcmNoti.this, getResources().getString(R.string.audio_not_availabe_msg), SKToastMessage.INFO);
+
+                        }else{
+                            SKToastMessage.showMessage(PostDetailActivityGcmNoti.this, getResources().getString(R.string.audio_not_available_msg_women_post), SKToastMessage.INFO);
+
+                        }
 
 
                     }

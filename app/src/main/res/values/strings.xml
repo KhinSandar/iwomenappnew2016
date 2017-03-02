@@ -60,9 +60,9 @@
 </string>
     <string name="new_post_hint_title_eng">Here you can ask a question to other TLGs, ask for advice to other TLGs and share your livelihood skills with other TLGs.And of course you can aslo post your successful TLG activities.</string>
 
-    <string name="new_iwomen_post_hint_title_eng">Here you can post an inspirational story.</string>
+    <string name="new_iwomen_post_hint_title_eng">Here you can post a personal story of your life to inspire other women and men in the iWomen community. iWomen Team will select and publish the best stories. </string>
    <string name="new_iwomen_post_hint_title_mm">ယခုု ေနရာတြင္ မိမိဘ၀တစ္ေလ်ာက္လံုုးအမွတ္ရေနသည္ ့လြမ္းမိုုးသည္ ့စိတ္ဓာတ္ခြန္အားေပးသည့္
-အေၾကာင္းအရာကိုုေရးသားတင္ပိုု ့ေပးႏိုုင္ပါသည္။</string>
+အေၾကာင္းအရာကိုုေရးသားတင္ပိုု ့ေပးႏိုုင္ပါသည္။ iWomen အဖြဲ႔မွေနၿပီး အေကာင္းဆံုးစာသားမ်ားကို ေရြးခ်ယ္ၿပီိးေဖာ္ၿပေပးသြားပါမည္</string>
 
     <string name="post_body_hint_eng">Before posting to the iWomen Community, check in which category you are. Here only post questions and messages related to</string>
     <string name="post_body_hint_end_closing">. Thanks for posting!</string>
@@ -844,6 +844,7 @@ Shirin Ebadi, J.D., was awarded the 2003 Nobel Peace Prize for her efforts to pr
     <string name="competition_not_game">Game is not started</string>
     <string name="mayDoeKaBarFBPage">Like May Doe Kabar Network on Facebook</string>
     <string name="audio_not_availabe_msg">This audio file is not available yet !</string>
+    <string name="audio_not_available_msg_women_post">This post does not include any audio content.To post audio content please click on Record Audio icon when writing a post. </string>
     <string name="no_connection">No Internet Connection</string>
     <string name="no_connection_mm">No Internet Connection</string>
 
