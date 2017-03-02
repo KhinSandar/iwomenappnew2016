@@ -162,6 +162,7 @@ public class SubResourceListActivity extends BaseActionBarActivity {
                 intent.putExtra("commentCount",SubResourceItems.get(i).getCommentCount());
                 intent.putExtra("post_type", "subResourcePost");
                 intent.putExtra("postObj", new Gson().toJson(adapterView.getAdapter().getItem(i)));
+                intent.putExtra("subResourceDetailImg",SubResourceItems.get(i).getSubResIconImgUrl());
                 mContext.startActivity(intent);
             }
         });

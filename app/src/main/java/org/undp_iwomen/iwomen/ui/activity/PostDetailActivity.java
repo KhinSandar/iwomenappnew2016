@@ -2629,7 +2629,13 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
                     } else {
                         //TODO Audio File Null case
                         // TODO Auto-generated method stub
-                        SKToastMessage.showMessage(PostDetailActivity.this, getResources().getString(R.string.audio_not_availabe_msg), SKToastMessage.INFO);
+                        if (postType.equalsIgnoreCase("iWomenPost")) {
+                            SKToastMessage.showMessage(PostDetailActivity.this, getResources().getString(R.string.audio_not_availabe_msg), SKToastMessage.INFO);
+
+                        }else{
+                            SKToastMessage.showMessage(PostDetailActivity.this, getResources().getString(R.string.audio_not_available_msg_women_post), SKToastMessage.INFO);
+
+                        }
 
 
                     }
