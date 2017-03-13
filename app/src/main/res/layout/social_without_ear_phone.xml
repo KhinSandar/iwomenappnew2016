@@ -13,7 +13,9 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         app:src="@drawable/ic_heart_rate_off_18dp"
+        android:textColor="?android:textColorSecondary"
         app:srcChecked="@drawable/ic_heart_rate_on_18dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
         app:text="2" />
 
     <TextView
@@ -21,18 +23,21 @@
         style="@style/PostDetailIconStyle"
         android:drawableLeft="@drawable/ic_heart_rate_off_18dp"
         android:text="150"
+        android:textColor="?android:textColorSecondary"
         android:visibility="gone" />
 
     <TextView
         android:id="@+id/social_no_ear_comment_txt"
         style="@style/PostDetailIconStyle"
         android:drawableLeft="@drawable/ic_comment"
+        android:textColor="?android:textColorSecondary"
         android:text="0" />
 
     <org.undp_iwomen.iwomen.ui.widget.CustomTextView
         android:id="@+id/social_no_ear_share_txt"
         style="@style/PostDetailIconStyle"
         android:drawableLeft="@drawable/ic_share"
+        android:textColor="?android:textColorSecondary"
         android:text="@string/share" />
 
     <FrameLayout
