@@ -75,7 +75,7 @@ import retrofit.mime.TypedFile;
 public class NewPostPostFragment extends Fragment implements View.OnClickListener, ImageChooserListener {
 
     public static final String TAG = "New Post";
-    private static String cateId, cateName;
+    private static String cateId, categoryName;
     public Button mPostBtn;
     public EditText et_postDesc;
     public CustomTextView take_photo_btn, upload_photo_btn, audio_upload_btn, video_upload_btn;
@@ -134,7 +134,7 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
     private final String STORAGE_READ_PERMISSION = "android.permission.READ_EXTERNAL_STORAGE";
     private ZProgressHUD zPDialog;
     private Context mContext;
-    private String mmStrCateName, engStrCateName;
+    private String  engStrCateName,mmStrCateName;
 
     public NewPostPostFragment() {
     }
@@ -144,7 +144,7 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
         Bundle args = new Bundle();
         fragment.setArguments(args);
         cateId = categoryId;
-        cateName = catName;
+        categoryName = catName;
         return fragment;
     }
 
@@ -219,21 +219,21 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
         //for separate category
 
         if (mstr_lang != null && mstr_lang.equals(Utils.MM_LANG)) {
-                mmStrCateName = "MM Para will Coming Here";
-                et_postDesc.setHint(getResources().getString(R.string.post_body_hint_mm)+" "+mmStrCateName+" "+getResources().getString(R.string.post_body_hint_end_closing_mm));
+                mmStrCateName = categoryName;
+                et_postDesc.setHint(getResources().getString(R.string.post_body_hint_mm)+" "+mmStrCateName+" "+"ၿဖစ္ပါသည္။"+getResources().getString(R.string.post_body_hint_end_closing_mm));
                 et_postDesc.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
 
         } else if (mstr_lang != null && mstr_lang.equals(Utils.MM_LANG_UNI)) {
-                mmStrCateName = "MM Para will Coming Here";
-                et_postDesc.setHint( getResources().getString(R.string.post_body_hint_mm)+" "+mmStrCateName+" "+getResources().getString(R.string.post_body_hint_end_closing_mm));
+                mmStrCateName = categoryName;
+                et_postDesc.setHint( getResources().getString(R.string.post_body_hint_mm)+" "+mmStrCateName+" "+"ၿဖစ္ပါသည္။"+getResources().getString(R.string.post_body_hint_end_closing_mm));
                 et_postDesc.setTypeface(MyTypeFace.get(mContext, MyTypeFace.UNI));
 
 
         } else if (mstr_lang != null && mstr_lang.equals(Utils.MM_LANG_DEFAULT)) {
-            mmStrCateName = "Myanmar Para will Coming Here";
-            et_postDesc.setHint( getResources().getString(R.string.post_body_hint_mm)+" "+mmStrCateName+" "+getResources().getString(R.string.post_body_hint_end_closing_mm));
+            mmStrCateName = categoryName;
+            et_postDesc.setHint( getResources().getString(R.string.post_body_hint_mm)+" "+mmStrCateName+" "+"ၿဖစ္ပါသည္။"+getResources().getString(R.string.post_body_hint_end_closing_mm));
         } else {
-            engStrCateName = cateName;
+            engStrCateName = categoryName;
             et_postDesc.setHint(getResources().getString(R.string.post_body_hint_eng)+" "+ engStrCateName+" " + getResources().getString(R.string.post_body_hint_end_closing));
             et_postDesc.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
         }
@@ -490,7 +490,8 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
 
 
             Intent i = new Intent(getActivity().getApplicationContext(), TalkTogetherMainActivity.class);
-            i.putExtra("CategoryName", cateName);//CategoryName
+            i.putExtra("CategoryNameMM", mmStrCateName);
+            i.putExtra("CategoryName", categoryName);//CategoryName
             i.putExtra("CategoryID", cateId);//CategoryName
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

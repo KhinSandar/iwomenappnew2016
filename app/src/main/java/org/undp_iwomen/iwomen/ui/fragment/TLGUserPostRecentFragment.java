@@ -83,7 +83,7 @@ public class TLGUserPostRecentFragment extends Fragment implements View.OnClickL
     private int paginater = 1;
     private TLGUserPostRecentListAdapter stories;
 
-    String  mstrCatName , mCatID;
+    String strCategoryName, mCatID, strCategoryNameMM;
 
     String storage_arraylistname;
     private SharedPreferences mSharedPreferencesUserInfo;
@@ -133,12 +133,13 @@ public class TLGUserPostRecentFragment extends Fragment implements View.OnClickL
 
         if(bundle != null) {
 
-            mstrCatName = bundle.getString("CategoryName");
+            strCategoryName = bundle.getString("CategoryName");
             mCatID = bundle.getString("CategoryID");
+            strCategoryNameMM = bundle.getString("CategoryNameMM");
         }
         iWomenPostList = new ArrayList<>();
 
-        stories = new TLGUserPostRecentListAdapter(getActivity(), iWomenPostList, mstr_lang, mCatID, mstrCatName);
+        stories = new TLGUserPostRecentListAdapter(getActivity(), iWomenPostList, mstr_lang, mCatID, strCategoryName);
         skListView.setAdapter(stories);
         skListView.setCallbacks(skCallbacks);
         skListView.setNextPage(true);
@@ -153,7 +154,7 @@ public class TLGUserPostRecentFragment extends Fragment implements View.OnClickL
         Log.e("<< Post Cat ID>>>","==>" + mCatID);
 
         //TODO NO more post for Archive
-        if(mstrCatName.equalsIgnoreCase("Archive")){
+        if(strCategoryName.equalsIgnoreCase("Archive")){
 
             fab.setVisibility(View.GONE);
         }else{
@@ -1508,7 +1509,8 @@ public class TLGUserPostRecentFragment extends Fragment implements View.OnClickL
                 Intent intent = new Intent(mContext, NewPostActivity.class);
 
                 intent.putExtra("categoryId", mCatID);
-                intent.putExtra("categoryName", mstrCatName);
+                intent.putExtra("categoryName", strCategoryName);
+                intent.putExtra("categoryNameMM",strCategoryNameMM);
                 startActivity(intent);
                 getActivity().finish();
 

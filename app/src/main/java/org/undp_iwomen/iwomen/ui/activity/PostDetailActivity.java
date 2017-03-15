@@ -2606,7 +2606,10 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
                     SKToastMessage.showMessage(PostDetailActivity.this, getResources().getString(R.string.resource_coming_soon_eng), SKToastMessage.ERROR);
                 }
 
-                if (!hasPermission(RECORD_AUDIO) || !hasPermission(WRITE_STORAGE) || !hasPermission(STORAGE_READ_PERMISSION) || !hasPermission(PREPARE_AUDIO_PERMISSION)) {
+
+
+                //Audio Function Correct
+               if (!hasPermission(RECORD_AUDIO) || !hasPermission(WRITE_STORAGE) || !hasPermission(STORAGE_READ_PERMISSION) || !hasPermission(PREPARE_AUDIO_PERMISSION)) {
                     //if no permission, request permission
                     String[] perms = {RECORD_AUDIO, WRITE_STORAGE, STORAGE_READ_PERMISSION, PREPARE_AUDIO_PERMISSION};
                     int permsRequestCode = 200;
@@ -2621,9 +2624,20 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
                     if (mstrAudioFilePath != null && mstrAudioFilePath.length() > 20) {
 
 
-                        Log.e("<<PostDetail>>", "<<isPlay>>" + "show audio visualizer dialog" + mstrAudioFilePath);
+                       Log.e("<<PostDetail>>", "<<isPlay>>" + "show audio visualizer dialog" + mstrAudioFilePath);
                         DialogFragment visualizerFragment = AudioVisualizerFragment.newInstance(mstrAudioFilePath, mstr_lang);
                         visualizerFragment.show(getSupportFragmentManager(), "AudioVisualizer");
+
+
+
+
+                        /*Intent intent = new Intent(mContext,AudioListActivity.class);
+                        intent.putExtra("postId",postId);
+                        intent.putExtra("language",mstr_lang);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        mContext.startActivity(intent);*/
+
 
 
                     } else {

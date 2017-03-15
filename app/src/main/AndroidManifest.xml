@@ -533,6 +533,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.activity.DrawerMainActivity" />
         </activity>
+        <activity android:name=".ui.activity.AudioListActivity"></activity>
     </application>
 
 </manifest>

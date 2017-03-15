@@ -28,6 +28,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.FacebookSdk;
 import com.google.gson.Gson;
@@ -259,6 +260,18 @@ public class DrawerMainActivity extends BaseActionBarActivity {
         //TODO USER POST COUNT and USER POINTS
         getUserPostCount();
         getCompetitionQuestion();
+
+        txt_menu_user_post_count.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+                    org.undp_iwomen.iwomen.utils.Utils.doToastEng(getApplicationContext(), getResources().getString(R.string.my_post_coming_soon_cmt));
+                } else {
+
+                    org.undp_iwomen.iwomen.utils.Utils.doToastMM(getApplicationContext(), getResources().getString(R.string.my_post_coming_soon_cmt_mm));
+                }
+            }
+        });
 
         ly_menu_profile_area.setOnClickListener(new View.OnClickListener() {
             @Override
