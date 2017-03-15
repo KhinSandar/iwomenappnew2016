@@ -535,6 +535,7 @@
                 android:value=".ui.activity.DrawerMainActivity" />
         </activity>
         <activity android:name="org.smk.iwomen.TakeAndTourActivity"></activity>
+        <activity android:name=".ui.activity.AudioListActivity"></activity>
     </application>
 
 </manifest>

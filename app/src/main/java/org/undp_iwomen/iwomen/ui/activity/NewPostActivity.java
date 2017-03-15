@@ -17,7 +17,7 @@ import org.undp_iwomen.iwomen.utils.Utils;
 
 public class NewPostActivity extends BaseActionBarActivity {
 
-    private String categoryId, categoryName;
+    private String categoryId, categoryName,categoryNameMM;
     private CustomTextView textViewTitle;
     SharedPreferences sharePrefLanguageUtil;
     String strLang;
@@ -40,6 +40,7 @@ public class NewPostActivity extends BaseActionBarActivity {
         if(bundle != null){
             categoryId = bundle.getString("categoryId");
             categoryName = bundle.getString("categoryName");
+            categoryNameMM= bundle.getString("categoryNameMM");
         }
 
         if (strLang.equals(Utils.ENG_LANG)) {
@@ -51,8 +52,22 @@ public class NewPostActivity extends BaseActionBarActivity {
 
         }
         if(null == savedInstanceState){
-            if(bundle != null && categoryId != null)
-                initFragment(NewPostPostFragment.newInstance(categoryId , categoryName));
+            if (strLang.equals(Utils.ENG_LANG)) {
+                textViewTitle.setText(R.string.title_activity_new_post);
+
+            } else
+            {
+                textViewTitle.setText(R.string.title_activity_new_post);
+
+            }
+            if(bundle != null && categoryId != null){
+                if(strLang.equals(Utils.ENG_LANG)){
+                    initFragment(NewPostPostFragment.newInstance(categoryId , categoryName));
+                }else{
+                    initFragment(NewPostPostFragment.newInstance(categoryId , categoryNameMM));
+                }
+
+            }
             else
                 initFragment(NewIWomenPostFragment.newInstance());
 

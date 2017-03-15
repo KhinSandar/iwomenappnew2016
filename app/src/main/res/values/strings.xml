@@ -850,7 +850,7 @@ Shirin Ebadi, J.D., was awarded the 2003 Nobel Peace Prize for her efforts to pr
 
     <string name="weekly_special_be_inspired">Topic Of the Month</string>
     <string name="report">You already report this post</string>
-    <string name="report_success">Successfully Report</string>
+    <string name="report_success">Reported</string>
 
     <!--<string name="login_dialog_mm_zawgyi">ၿမန္မာေဇာ္ဂ်ီေဖာင့္</string>
     <string name="login_dialog_mm_uni">ၿမန္မာ ယူနီကုုတ္ေဖာင့္</string>
@@ -907,6 +907,8 @@ Make many new friends, contact your local May Doe Kabar/TLG group. See number be
     <string name="coming_soon_cmt">Coming Soon</string>
     <string name="coming_soon_cmt_mm">မၾကာမီေဖာ္ၿပေပးပါမည္</string>
 
+    <string name="my_post_coming_soon_cmt">Your uploaded  posts will be shown here soon</string>
+    <string name="my_post_coming_soon_cmt_mm">သင္တင္ထားေသာပို႔စ္မ်ားကိုမၾကာခင္ေဖာ္ၿပေပးပါမည္</string>
 
     <string name="edit_ph">Edit Phone Number</string>
     <string name="edit_ph_mm">ဖုုန္းနံပါတ္ၿပင္ရန္</string>
