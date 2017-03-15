@@ -217,7 +217,7 @@
                             android:padding="2dip"
                             android:paddingLeft="16dip"
                             android:singleLine="true"
-                            android:text="Post"
+                            android:text="@string/my_post"
                             android:textColor="@color/white"
                             android:textSize="14sp" />
                     </LinearLayout>
