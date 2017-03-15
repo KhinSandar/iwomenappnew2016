@@ -216,7 +216,8 @@
                 <ScrollView
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:background="@color/line_color">
+                    android:background="@color/white">
+                    <!--android:background="@color/line color -->
 
                     <include
                         layout="@layout/activity_talk_together_sticker_grid"

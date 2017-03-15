@@ -208,7 +208,7 @@ public class BaseActionBarActivity extends AppCompatActivity{
 		btn_now_know.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				//finish();
+				finish();
 
 
 			}
@@ -224,6 +224,8 @@ public class BaseActionBarActivity extends AppCompatActivity{
 				postReview(userId, Double.valueOf(talk_together.getRating()), "Talk Together", "");
 
 				showFeedBack(userId);
+				finish();
+
 
 			}
 		});
@@ -254,6 +256,7 @@ public class BaseActionBarActivity extends AppCompatActivity{
 	}
 
 	public void showFeedBack(final String userId){
+		//final Dialog alertDialog = new Dialog(BaseActionBarActivity.this);
 		final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
 
 		View convertView = View.inflate(this,R.layout.dialog_feedback,null);
@@ -262,12 +265,16 @@ public class BaseActionBarActivity extends AppCompatActivity{
 		Button btn_now_know = (Button)convertView.findViewById(R.id.btn_not_now);
 		alertDialog.setView(convertView);
 		alertDialog.show();
+		//alertDialog.setContentView(convertView);
+		//alertDialog.show();
 
 		btn_now_know.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 
 				finish();
+				//alertDialog.dismiss();
+
 			}
 		});
 
@@ -281,7 +288,9 @@ public class BaseActionBarActivity extends AppCompatActivity{
                     postReview(userId, 0.0, "Talk Together", feedback.getText().toString());
                     StoreUtil.getInstance().saveTo("feedback", true);
                     finish();
-                }else{
+					//alertDialog.dismiss();
+
+				}else{
                     SKToastMessage.showMessage(BaseActionBarActivity.this, getResources().getString(R.string.str_required), SKToastMessage.ERROR);
                 }
 

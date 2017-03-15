@@ -29,6 +29,7 @@
         android:layout_weight="1"
         app:src="@drawable/ic_heart_rate_off_18dp"
         app:srcChecked="@drawable/ic_heart_rate_on_18dp"
+        android:textColor="?android:textColorSecondary"
         app:text="0" />
 
     <org.undp_iwomen.iwomen.ui.widget.LikeButtonView
@@ -46,11 +47,15 @@
         android:id="@+id/postdetail_cmd_count"
         style="@style/PostDetailIconStyle"
         android:drawableLeft="@drawable/ic_comment"
-        android:text="12" />
+        android:textColor="?android:textColorSecondary"
+
+        android:text="0" />
 
     <org.undp_iwomen.iwomen.ui.widget.CustomTextView
         android:id="@+id/social_share"
         style="@style/PostDetailIconStyle"
+        android:textColor="?android:textColorSecondary"
+
         android:drawableLeft="@drawable/ic_share"
         android:text="@string/share" />
 

@@ -142,10 +142,12 @@ public class DrawerMainActivity extends BaseActionBarActivity {
         UsageCount = StoreUtil.getInstance().selectFrom("usage" + versionCode);
         if (UsageCount != null && UsageCount > 0) {
             UsageCount = StoreUtil.getInstance().saveTo("usage" + versionCode, UsageCount + 1);
-            Log.i("Usage Count:", "Usage : " + UsageCount);
-        } else
+            Log.i("Usage Count:", "if Usage : " + UsageCount);
+        } else {
             UsageCount = StoreUtil.getInstance().saveTo("usage" + versionCode, 1);
+            Log.i("Usage Count:", "else Usage : " + UsageCount);
 
+        }
 
         FacebookSdk.sdkInitialize(getApplicationContext());
         // Initialize the SDK before executing any other operations,
@@ -1022,17 +1024,30 @@ public class DrawerMainActivity extends BaseActionBarActivity {
 
     @Override
     public void onBackPressed() {
-        Log.i("Reviews", "Reviews : here");
+        Log.i("Reviews", "Back Press : here obj-" + user_obj_id +"/count/"+UsageCount );
         if (user_obj_id != null) {
             Review review = StoreUtil.getInstance().selectFrom(user_obj_id + versionCode);
             Boolean feedback = StoreUtil.getInstance().selectFrom("feedback");
-            Log.i("Reviews", "Reviews :" + review);
-            if (review == null && UsageCount != null && UsageCount > 3) {
+            Log.i("Reviews", "Back Press Review check :" + review + "feedback"+ feedback );
+            if (review == null && UsageCount != null && UsageCount > 10) {
+                Log.i("Reviews", " if Reviews :" + UsageCount);
                 showReviewDialog(user_obj_id);
-            } else if (UsageCount != null && UsageCount > 3 && feedback == null) {
+
+                UsageCount = StoreUtil.getInstance().saveTo("usage" + versionCode, 0);
+
+
+            } else if (UsageCount != null && UsageCount > 10 && feedback == null) {//UsageCount != null && UsageCount > 3 && feedback == null
+                Log.i("Reviews", " else if  Reviews :" + UsageCount );
+
                 showFeedBack(user_obj_id);
+
+                UsageCount = StoreUtil.getInstance().saveTo("usage" + versionCode, 0);
+
             } else {
+                Log.i("Reviews", " else end  Reviews :" );
+
                 finish();
+
             }
         } else {
             finish();

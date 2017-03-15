@@ -65,10 +65,12 @@ public class ZProgressHUD extends Dialog {
 		setSpinnerType(FADED_ROUND_SPINNER);
 		this.setContentView(view);
 	}
-    
+
+	@SuppressWarnings("ResourceType")
 	public void setSpinnerType(int spinnerType) {
 		switch (spinnerType) {
             case 0:
+
                 ivProgressSpinner.setImageResource(R.anim.round_spinner_fade);
                 break;
             case 1:

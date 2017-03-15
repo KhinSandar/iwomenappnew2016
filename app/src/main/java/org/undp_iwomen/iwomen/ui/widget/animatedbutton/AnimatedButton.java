@@ -7,6 +7,7 @@ import android.animation.ObjectAnimator;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.text.TextUtils;
@@ -86,7 +87,7 @@ public class AnimatedButton extends FrameLayout implements View.OnClickListener 
         if (mNormalDrawable != null) {
             mIcon.setImageDrawable(mChecked ? mCheckedDrawable : mNormalDrawable);
         }
-
+        mTextView.setTextColor(Color.parseColor("#727272"));
         if (TextUtils.isEmpty(text)) {
             mTextView.setVisibility(View.GONE);
         } else {
