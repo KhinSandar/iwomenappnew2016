@@ -4,7 +4,7 @@
     <string name="ak_login_protocol_scheme" translatable="false">ak909633732437583</string>
     <string name="client_token" translatable="false">cc4e9efad50239ee436c6ad9d7ddf416</string>
     <string name="log_in_email_button">Log In via Email</string>
-    <string name="log_in_phone_button">Log In via Phone</string>
+    <string name="log_in_phone_button">Your Phone Number</string>
     <string name="permissions_get_accounts_message">
         Grant permission to read your email address from your device to pre-fill.
     </string>
@@ -25,7 +25,7 @@
     <string name="email_label">Email</string>
     <string name="na">NA</string>
 
-    <string name="app_name">iwomen</string>
+    <string name="app_name">iWomen</string>
     <string name="app_name_mm">စြမ္းရည္ၿမင္ ့မား ေမ့အင္အား</string>
     <string name="parse_app_id">WyU802fB70eNhyF9uSoj1SgKVKGLYYAZ0kX96xhr</string>
     <string name="parse_client_key">qnaqxGzfOLEgFAWXUTUJpTkgbOgn3CVxTqtTD6pn</string>
@@ -329,7 +329,7 @@
     <string name="register_township_title">TLG/SRG Township</string>
     <string name="register_state_title">State</string>
     <string name="register_photo_title">Upload Photo</string>
-    <string name="register_terms_title">Terms and Condition</string>
+    <string name="register_terms_title">Terms and Conditions</string>
     <string name="register_congrat_title">Congratulations</string>
 
     <!-- Register Activity Action Bar Title MM-->
@@ -397,7 +397,9 @@
     <string name="register_terms_body">Our privacy policy and terms of use are accepted if you download this app. See more on our Website
 </string>
 
-    <string name="register_terms_link"> iwomenapp.org <a href="http://iwomenapp.org/"></a></string>
+    <string name="register_terms_link"> iWomenapp.org <a href="http://iwomenapp.org/"></a></string>
+    <string name="register_privacy_link"> iWomenapp.org/Privacy.html <a href="http://iwomenapp.org/Privacy.html"></a></string>
+
 
 
     <!-- string resources used in Event Detail -->

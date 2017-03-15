@@ -28,7 +28,6 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.facebook.FacebookSdk;
 import com.google.gson.Gson;
@@ -397,7 +396,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                 @Override
                 public void success(String s, Response response) {
                     post_count = s;
-                    txt_menu_user_post_count.setText(post_count + " Post");
+                    txt_menu_user_post_count.setText(post_count + getResources().getString(R.string.my_post));
                     //TODO get User points too
 
                 }

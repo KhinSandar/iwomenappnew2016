@@ -24,7 +24,7 @@
     <string name="error_label">Error</string>
     <string name="loading_placeholder">Loading&#8230;</string>
     <string name="user_id_label">Account ID</string>
-    <string name="phone_number_label">Phone Number</string>
+    <string name="phone_number_label">သင့္ ဖုုန္း နံပါတ္</string>
     <string name="email_label">Email</string>
     <string name="na">NA</string>
 
@@ -512,6 +512,7 @@ female-pilots-iaa1s
     <string name="register_terms_title_mm">Terms and Condition</string>
     <string name="register_congrat_title_mm">Congratulations</string>
     <string name="register_terms_link"> iwomenapp.org <a href="http://iwomenapp.org/"></a></string>
+    <string name="register_privacy_link"> iWomenapp.org/Privacy.html <a href="http://iwomenapp.org/Privacy.html"></a></string>
 
     <!-- string resources used in Event Detail -->
     <string name="large_sample_text">"A material metaphor is the unifying theory of a rationalized space and a system of motion."

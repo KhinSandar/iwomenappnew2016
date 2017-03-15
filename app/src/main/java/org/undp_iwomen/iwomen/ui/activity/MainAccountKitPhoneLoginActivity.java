@@ -49,6 +49,8 @@ import com.facebook.accountkit.ui.LoginType;
 import org.smk.iwomen.BaseActionBarActivity;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
+import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
+import org.undp_iwomen.iwomen.utils.Utils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -64,6 +66,9 @@ public class MainAccountKitPhoneLoginActivity extends BaseActionBarActivity {
     private SharedPreferences.Editor mEditorUserInfo;
     String mphoneNumberString;
     private Context mContext;
+    private CustomTextView textViewTitle;
+    SharedPreferences sharePrefLanguageUtil;
+    String strLang;
 
     private interface OnCompleteListener {
         void onComplete();
@@ -74,17 +79,32 @@ public class MainAccountKitPhoneLoginActivity extends BaseActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_kit);
         mContext = getApplicationContext();
+        sharePrefLanguageUtil = getSharedPreferences(Utils.PREF_SETTING, Context.MODE_PRIVATE);
+        mSharedPreferencesUserInfo = getSharedPreferences(CommonConfig.SHARE_PREFERENCE_USER_INFO, Context.MODE_PRIVATE);
+        strLang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
 
-        //textViewTitle = (CustomTextView) toolbar.findViewById(R.id.title_action2);
+        textViewTitle = (CustomTextView) toolbar.findViewById(R.id.title_action2);
+
 
         if (toolbar != null) {
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        mSharedPreferencesUserInfo = getSharedPreferences(CommonConfig.SHARE_PREFERENCE_USER_INFO, Context.MODE_PRIVATE);
-        /*if (AccountKit.getCurrentAccessToken() != null) {
+        if (strLang.equals(Utils.ENG_LANG)) {
+
+            textViewTitle.setText(R.string.phone_number_label);
+
+
+        } else //FOR ALl MM FONT
+        {
+            textViewTitle.setText(R.string.phone_number_label);
+
+
+        }
+ /*if (AccountKit.getCurrentAccessToken() != null) {
             startActivity(new Intent(this, TokenActivity.class));
         }*/
     }
