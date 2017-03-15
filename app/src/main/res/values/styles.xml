@@ -11,7 +11,16 @@
         // the color of the radio button normal state
         <item name="colorControlNormal">@android:color/white</item>-->
     </style>
+    <!-- AccountKit theme. -->
+    <style name="AppLoginTheme" parent="Theme.AccountKit">
+        <item name="com_accountkit_primary_color">@color/primary</item><!--ef0414 -->
+        <item name="com_accountkit_primary_text_color">@android:color/white</item><!--#white -->
+        <item name="com_accountkit_secondary_text_color">@color/secondary_text</item><!--#f10910 -->
+        <item name="com_accountkit_status_bar_color">@color/primary_dark</item><!--#e40416 -->
 
+        <item name="com_accountkit_input_accent_color">?attr/com_accountkit_primary_color</item>
+        <item name="com_accountkit_input_border_color">?attr/com_accountkit_primary_color</item>
+    </style>
     <!-- Base application theme. -->
     <style name="AppTheme.Blue" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/blue_500</item>

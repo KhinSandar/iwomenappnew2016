@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_id" translatable="false">909633732437583</string>
+    <string name="ak_login_protocol_scheme" translatable="false">ak909633732437583</string>
+    <string name="client_token" translatable="false">cc4e9efad50239ee436c6ad9d7ddf416</string>
+    <string name="log_in_email_button">Log In via Email</string>
+    <string name="log_in_phone_button">Log In via Phone</string>
+    <string name="permissions_get_accounts_message">
+        Grant permission to read your email address from your device to pre-fill.
+    </string>
+    <string name="permissions_get_accounts_title">Read Email Address</string>
+    <string name="permissions_read_phone_state_message">
+        Grant permission to read your phone number from your device to pre-fill.
+    </string>
+    <string name="permissions_read_phone_state_title">Read Phone Number</string>
+    <string name="permissions_receive_sms_message">
+        Grant permission to read your SMS code from your device to pre-fill.
+    </string>
+    <string name="permissions_receive_sms_title">Read SMS Code</string>
+    <string name="log_out_button">Log Out</string>
+    <string name="error_label">Error</string>
+    <string name="loading_placeholder">Loading&#8230;</string>
+    <string name="user_id_label">Account ID</string>
+    <string name="phone_number_label">Phone Number</string>
+    <string name="email_label">Email</string>
+    <string name="na">NA</string>
+
     <string name="app_name">iwomen</string>
     <string name="app_name_mm">စြမ္းရည္ၿမင္ ့မား ေမ့အင္အား</string>
     <string name="parse_app_id">WyU802fB70eNhyF9uSoj1SgKVKGLYYAZ0kX96xhr</string>
@@ -55,13 +79,13 @@
 
     <string name="character_count_placeholder">0/400</string>
 
-   <string name="new_post_hint_title_mm">ယခုု ေနရာတြင္ အၿခားTLGs အဖြဲ ့၀င္မ်ားသိုု ့ေမးခြန္းမ်ားေမးၿခင္း၊ အၾကံညဏ္မ်ားေတာင္းၿခင္း ႏွင့္ မိမိတိုု ့အဖြဲ ့အသက္ေမြး၀မ္းေၾကာင္းဆိုုင္ရာကြ်မ္းက်င္မွုုတိုု ့ကိုုမွွ်ေ၀ေဖာ္ၿပႏိုုင္ပါသည္။
+    <string name="new_post_hint_title_mm">ယခုု ေနရာတြင္ အၿခားTLGs အဖြဲ ့၀င္မ်ားသိုု ့ေမးခြန္းမ်ားေမးၿခင္း၊ အၾကံညဏ္မ်ားေတာင္းၿခင္း ႏွင့္ မိမိတိုု ့အဖြဲ ့အသက္ေမြး၀မ္းေၾကာင္းဆိုုင္ရာကြ်မ္းက်င္မွုုတိုု ့ကိုုမွွ်ေ၀ေဖာ္ၿပႏိုုင္ပါသည္။
 ေအာင္ၿမင္ေသာ လုုပ္ငန္းေဆာင္တာမ်ား အဖြဲ ့လွုုပ္ရွားေဆာင္ရြက္ ခ်က္မ်ား ကိုုလည္းတင္ၿပႏိုုင္ပါသည္။
 </string>
     <string name="new_post_hint_title_eng">Here you can ask a question to other TLGs, ask for advice to other TLGs and share your livelihood skills with other TLGs.And of course you can aslo post your successful TLG activities.</string>
 
     <string name="new_iwomen_post_hint_title_eng">Here you can post a personal story of your life to inspire other women and men in the iWomen community. iWomen Team will select and publish the best stories. </string>
-   <string name="new_iwomen_post_hint_title_mm">ယခုု ေနရာတြင္ မိမိဘ၀တစ္ေလ်ာက္လံုုးအမွတ္ရေနသည္ ့လြမ္းမိုုးသည္ ့စိတ္ဓာတ္ခြန္အားေပးသည့္
+    <string name="new_iwomen_post_hint_title_mm">ယခုု ေနရာတြင္ မိမိဘ၀တစ္ေလ်ာက္လံုုးအမွတ္ရေနသည္ ့လြမ္းမိုုးသည္ ့စိတ္ဓာတ္ခြန္အားေပးသည့္
 အေၾကာင္းအရာကိုုေရးသားတင္ပိုု ့ေပးႏိုုင္ပါသည္။ iWomen အဖြဲ႔မွေနၿပီး အေကာင္းဆံုးစာသားမ်ားကို ေရြးခ်ယ္ၿပီိးေဖာ္ၿပေပးသြားပါမည္</string>
 
     <string name="post_body_hint_eng">Before posting to the iWomen Community, check in which category you are. Here only post questions and messages related to</string>
@@ -125,7 +149,7 @@
     <string name="post">Post</string>
     <string name="prompt_post">Post</string>
     <string name="error_dialog_title">Error!</string>
-       <string name="native_share_error">Native sharing requires the Facebook for Android
+    <string name="native_share_error">Native sharing requires the Facebook for Android
        application.</string>
 
     <!-- Detail -->
@@ -210,9 +234,9 @@
 
 
     <string name="iwomen_postupload_success_toast_eng">Thank you for submitting your inspiring story. The administrator will review it and will publish it. You will be motified when your story is being published.</string>
-<string name="iwomen_postupload_success_toast_mm">သင္၏ စိတ္ဓာတ္ခြန္အားေပးၿဖစ္ရပ္အေၾကာင္းအရာေပးပိုု ့မွုုလက္ခံရရွိပါသည္။ တာ၀န္ရွိသူမွ စစ္ေဆး
+    <string name="iwomen_postupload_success_toast_mm">သင္၏ စိတ္ဓာတ္ခြန္အားေပးၿဖစ္ရပ္အေၾကာင္းအရာေပးပိုု ့မွုုလက္ခံရရွိပါသည္။ တာ၀န္ရွိသူမွ စစ္ေဆး
 ၾကည့္ရွုု ၿပီးမွ ပိုု ့စ္ေပါ ္လာပါမည္။</string>
-<string name="iwomen_postupload_success_toast_un">သင်၏ စိတ်ဓာတ်ခွန်အားပေးဖြစ်ရပ်အကြောင်းအရာပေးပို့မှုလက်ခံရရှိပါသည်။ တာဝန်ရှိသူမှ စစ်ဆေး
+    <string name="iwomen_postupload_success_toast_un">သင်၏ စိတ်ဓာတ်ခွန်အားပေးဖြစ်ရပ်အကြောင်းအရာပေးပို့မှုလက်ခံရရှိပါသည်။ တာဝန်ရှိသူမှ စစ်ဆေး
 ကြည့်ရှု ပြီးမှ ပို့စ်ပေါ်လာပါမည်။
 </string>
 
@@ -377,7 +401,7 @@
 
 
     <!-- string resources used in Event Detail -->
-<string name="large_sample_text">"A material metaphor is the unifying theory of a rationalized space and a system of motion."
+    <string name="large_sample_text">"A material metaphor is the unifying theory of a rationalized space and a system of motion."
    "The material is grounded in tactile reality, inspired by the study of paper and ink, yet "
    "technologically advanced and open to imagination and magic."</string>
 
@@ -625,9 +649,9 @@ Rana Plaza complex collapsed in Dhaka,
 Bangladesh. We believe that’s too many
  people to lose on one day. That’s when Fashion Revolution was born. Fashion Revolution is a global movement aimed to change the way clothes are produced.  Fashion Revolution believes fashion can be made in a safe,  clean and beautiful way. Where creativity, quality,  environment and people are valued equally.
 </string>
-<string name="may_des">In May 2015, Nigerian Government has passed a bill to ban female genital mutilation (a cultural practice which comprises all procedures that involve partial or total removal of the external female genitalia, or other injury to the female genital organs for non-medical reasons).
+    <string name="may_des">In May 2015, Nigerian Government has passed a bill to ban female genital mutilation (a cultural practice which comprises all procedures that involve partial or total removal of the external female genitalia, or other injury to the female genital organs for non-medical reasons).
 </string>
-<string name="jun_des">Soviet cosmonaut Valentina Tereshkova became the first woman to fly to space when she launched on the Vostok 6 mission June 16, 1963.
+    <string name="jun_des">Soviet cosmonaut Valentina Tereshkova became the first woman to fly to space when she launched on the Vostok 6 mission June 16, 1963.
 Shirin Ebadi, J.D., was awarded the 2003 Nobel Peace Prize for her efforts to promote human rights, in particular, the rights of women, children, and political prisoners in Iran. She is the first Muslim woman to receive the Nobel Peace Prize, and only the fifth Muslim to receive a Nobel Prize in any field.</string>
     <string name="jul_des"></string>
     <string name="aug_des"></string>
@@ -793,7 +817,6 @@ Shirin Ebadi, J.D., was awarded the 2003 Nobel Peace Prize for her efforts to pr
     <string name="menu9">Check Updates</string>
 
 
-
     <string name="menu1_mm">စိတ္ဓာတ္ခြန္အားျဖည့္ရန္</string>
     <string name="menu2_mm">ဗဟုသုတရရန္</string>
     <string name="menu3_mm">ေပါင္းစည္းေဆာင္ရြက္ရန္</string>
@@ -804,7 +827,6 @@ Shirin Ebadi, J.D., was awarded the 2003 Nobel Peace Prize for her efforts to pr
     <string name="menu8_mm">ျပင္ဆင္ရန္</string>
     <string name="menu9_mm">ဗားရွင္းစစ္ရန္</string>
     <string name="menu_sing_out_mm">ထြက္ရန္</string>
-
 
 
     <string name="menu_sing_out">Sign Out</string>

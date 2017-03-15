@@ -1,11 +1,14 @@
 package org.undp_iwomen.iwomen.manager;
 
 import android.app.Application;
+import android.os.Build;
+import android.os.StrictMode;
 import android.support.multidex.MultiDexApplication;
 import android.util.Log;
 
 import com.alexbbb.uploadservice.UploadService;
 import com.facebook.FacebookSdk;
+import com.facebook.accountkit.AccountKit;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.Logger;
 import com.google.android.gms.analytics.Tracker;
@@ -71,6 +74,26 @@ public class MainApplication extends MultiDexApplication {
         UploadService.NAMESPACE = "org.undp_iwomen.iwomen";
 
         configureJobManager();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            // Kitkat and lower has a bug that can cause in correct strict mode
+            // warnings about expected activity counts
+            enableStrictMode();
+        }
+
+        AccountKit.initialize(getApplicationContext());
+        //AccountKit.initialize(getApplicationContext());
+    }
+    public void enableStrictMode() {
+        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+                .detectAll()
+                .penaltyLog()
+                .penaltyDeath()
+                .build());
+        StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
+                .detectAll()
+                .penaltyLog()
+                .penaltyDeath()
+                .build());
     }
 
     private void configureJobManager() {
