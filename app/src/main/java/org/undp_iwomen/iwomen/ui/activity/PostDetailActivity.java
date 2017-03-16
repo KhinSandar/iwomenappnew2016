@@ -2624,19 +2624,19 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
                     if (mstrAudioFilePath != null && mstrAudioFilePath.length() > 20) {
 
 
-                       Log.e("<<PostDetail>>", "<<isPlay>>" + "show audio visualizer dialog" + mstrAudioFilePath);
+                      /* Log.e("<<PostDetail>>", "<<isPlay>>" + "show audio visualizer dialog" + mstrAudioFilePath);
                         DialogFragment visualizerFragment = AudioVisualizerFragment.newInstance(mstrAudioFilePath, mstr_lang);
-                        visualizerFragment.show(getSupportFragmentManager(), "AudioVisualizer");
+                        visualizerFragment.show(getSupportFragmentManager(), "AudioVisualizer");*/
 
 
 
 
-                        /*Intent intent = new Intent(mContext,AudioListActivity.class);
+                        Intent intent = new Intent(mContext,AudioListActivity.class);
                         intent.putExtra("postId",postId);
                         intent.putExtra("language",mstr_lang);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        mContext.startActivity(intent);*/
+                        mContext.startActivity(intent);
 
 
 
