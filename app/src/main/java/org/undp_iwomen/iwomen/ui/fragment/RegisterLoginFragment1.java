@@ -6,16 +6,12 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
-import android.transition.ChangeBounds;
-import android.transition.Slide;
 import android.util.Base64;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +25,7 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.facebook.accountkit.AccountKit;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
@@ -37,6 +34,7 @@ import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.data.Sample;
 import org.undp_iwomen.iwomen.model.MyTypeFace;
+import org.undp_iwomen.iwomen.ui.activity.MainAccountKitPhoneLoginActivity;
 import org.undp_iwomen.iwomen.ui.activity.RegisterMainActivity;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.utils.Utils;
@@ -114,7 +112,7 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_register_fblogin, container, false);
         //final Sample sample = (Sample) getArguments().getSerializable(EXTRA_SAMPLE);
-        printHashKey();
+        //printHashKey();
 
         Bundle bundleArgs = getArguments();
         if (bundleArgs != null) {
@@ -134,7 +132,7 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
         mUserNameTextInputLayout = (TextInputLayout) view.findViewById(R.id.register_fb_user_name);
         mMobileNoForNrcTextInputLayout = (TextInputLayout) view.findViewById(R.id.register_fb_phone_number);
         usernameField = (EditText) view.findViewById(R.id.register_fb_username_input);
-        mobileNoForNrcField = (EditText) view.findViewById(R.id.register_fb_phone_number_input);
+        //mobileNoForNrcField = (EditText) view.findViewById(R.id.register_fb_phone_number_input);
         txtErrorDuplicateNameMsg = (CustomTextView)view.findViewById(R.id.register_fb_error_duplicate_msg);
 
 
@@ -209,9 +207,16 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
 
     private void addNextFragment(Button squareBlue, boolean overlap) {
 
+        //When login in again with new account , we need to clear if log in
+        if (AccountKit.getCurrentAccessToken() != null) {
+            //startActivity(new Intent(this, TokenActivity.class));
+            AccountKit.logOut();
+        }
+
 
         final String username = usernameField.getText().toString().trim();
-        final String mobileNoForNrc = mobileNoForNrcField.getText().toString().trim();
+
+        //final String mobileNoForNrc = mobileNoForNrcField.getText().toString().trim();
         if (TextUtils.isEmpty(username)) {
             mUserNameTextInputLayout.setError(getResources().getString(R.string.your_name_error));
 
@@ -228,7 +233,7 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
 
         boolean inputMobileOk = true;
 
-        if (TextUtils.isEmpty(mobileNoForNrc)) {
+        /*if (TextUtils.isEmpty(mobileNoForNrc)) {
             mMobileNoForNrcTextInputLayout.setError(getResources().getString(R.string.mobile_number_error));
             //doToast(getResources().getString(R.string.mobile_number_error));
             if (lang.equals(Utils.ENG_LANG)) {
@@ -238,7 +243,7 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
             }
             inputMobileOk = false;
             return;
-        }
+        }*/
         /*else if (!ValidatorUtils.isValidMobileNo(mobileNoForNrc)) {
             mMobileNoForNrcTextInputLayout.setError(getResources().getString(R.string.invalid_mobile_number));
             //doToast(getResources().getString(R.string.invalid_mobile_number));
@@ -251,15 +256,15 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
             inputMobileOk = false;
             return;
         }*/
-        if (inputMobileOk) {
+        /*if (inputMobileOk) {
             mMobileNoForNrcTextInputLayout.setErrorEnabled(false);
-        }
+        }*/
 
 
         mEditorUserInfo = mSharedPreferencesUserInfo.edit();
-
         mEditorUserInfo.putString(CommonConfig.USER_NAME, username);
-        mEditorUserInfo.putString(CommonConfig.USER_PH, mobileNoForNrc);
+
+        //mEditorUserInfo.putString(CommonConfig.USER_PH, mobileNoForNrc);
 
         if (user_fb_email != null && user_fb_email != "") {
             mEditorUserInfo.putString(CommonConfig.USER_EMAIL, user_fb_email);
@@ -270,7 +275,10 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
         mEditorUserInfo.commit();
 
 
-        RegisterPwdFragment2 registerPwdFragment2 = RegisterPwdFragment2.newInstance();
+        Intent i = new Intent(getActivity(), MainAccountKitPhoneLoginActivity.class);//DrawerMainActivity
+        startActivity(i);
+        getActivity().finish();
+       /* RegisterPwdFragment2 registerPwdFragment2 = RegisterPwdFragment2.newInstance();
 
         Slide slideTransition = null;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -295,7 +303,7 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
                 .replace(R.id.container, registerPwdFragment2)
                 .addToBackStack(null)
                 .addSharedElement(squareBlue, getString(R.string.register_next))
-                .commit();
+                .commit();*/
     }
 
     @Override
@@ -314,15 +322,14 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
         // Set title bar
         ((RegisterMainActivity) getActivity()).textViewTitle.setText(R.string.register_title);
 
-        //((RegisterMainActivity) getActivity()).textViewTitle.setTypeface(MyTypeFace.get(getActivity().getApplicationContext(), MyTypeFace.NORMAL));
         usernameField.setHint(getResources().getString(R.string.register_name_hint));
-        mobileNoForNrcField.setHint(getResources().getString(R.string.register_ph_hint));
+        //mobileNoForNrcField.setHint(getResources().getString(R.string.register_ph_hint));
 
 
         //Set Type Face
 
         usernameField.setTypeface(MyTypeFace.get(getActivity().getApplicationContext(), MyTypeFace.NORMAL));
-        mobileNoForNrcField.setTypeface(MyTypeFace.get(getActivity().getApplicationContext(), MyTypeFace.NORMAL));
+        //mobileNoForNrcField.setTypeface(MyTypeFace.get(getActivity().getApplicationContext(), MyTypeFace.NORMAL));
 
 
     }
@@ -334,11 +341,11 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
         ((RegisterMainActivity) getActivity()).textViewTitle.setTypeface(MyTypeFace.get(getActivity().getApplicationContext(), MyTypeFace.ZAWGYI));
 
         usernameField.setHint(getResources().getString(R.string.register_name_hint));
-        mobileNoForNrcField.setHint(getResources().getString(R.string.register_ph_hint));
+        //mobileNoForNrcField.setHint(getResources().getString(R.string.register_ph_hint));
 
         //Set Type Face
         usernameField.setTypeface(MyTypeFace.get(getActivity().getApplicationContext(), MyTypeFace.ZAWGYI));
-        mobileNoForNrcField.setTypeface(MyTypeFace.get(getActivity().getApplicationContext(), MyTypeFace.ZAWGYI));
+        //mobileNoForNrcField.setTypeface(MyTypeFace.get(getActivity().getApplicationContext(), MyTypeFace.ZAWGYI));
 
 
     }

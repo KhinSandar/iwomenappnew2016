@@ -180,6 +180,9 @@ public class CommonConfig {
 
     public static final String REPORT_POST_URL = "/api/v1/reportPosts";
 
+    public static final String PHONE_SUCCESS = "phone_success";
+    public static final String PHONE_SUCCESS_BUNDLE = "phone_success_b";
+
 
 
 }

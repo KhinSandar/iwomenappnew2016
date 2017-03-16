@@ -111,6 +111,27 @@
                     android:text="@string/register_terms_link" />
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/sister_app_gen_ly_2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/sister_app_iWomen_img_2"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/globe" />
+
+                <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                    android:id="@+id/register_app_iwomen_txt_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="8dp"
+                    android:text="@string/register_privacy_link" />
+            </LinearLayout>
+            <LinearLayout
                 android:id="@+id/sister_app_err_ly"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

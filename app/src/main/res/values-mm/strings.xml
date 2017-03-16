@@ -6,6 +6,28 @@
     <string name="parse_client_key">qnaqxGzfOLEgFAWXUTUJpTkgbOgn3CVxTqtTD6pn</string>
     <string name="hello_world">Hello world!</string>
 
+    <string name="log_in_email_button">Log In via Email</string>
+    <string name="log_in_phone_button">Log In via Phone</string>
+    <string name="permissions_get_accounts_message">
+        Grant permission to read your email address from your device to pre-fill.
+    </string>
+    <string name="permissions_get_accounts_title">Read Email Address</string>
+    <string name="permissions_read_phone_state_message">
+        Grant permission to read your phone number from your device to pre-fill.
+    </string>
+    <string name="permissions_read_phone_state_title">Read Phone Number</string>
+    <string name="permissions_receive_sms_message">
+        Grant permission to read your SMS code from your device to pre-fill.
+    </string>
+    <string name="permissions_receive_sms_title">Read SMS Code</string>
+    <string name="log_out_button">Log Out</string>
+    <string name="error_label">Error</string>
+    <string name="loading_placeholder">Loading&#8230;</string>
+    <string name="user_id_label">Account ID</string>
+    <string name="phone_number_label">သင့္ ဖုုန္း နံပါတ္</string>
+    <string name="email_label">Email</string>
+    <string name="na">NA</string>
+
     <string name="betogether_title_eng">Be Together</string>
     <string name="betogether_title_mm">ေပါင္းစည္းေဆာင္ရြက္ရန္</string>
 
@@ -490,6 +512,7 @@ female-pilots-iaa1s
     <string name="register_terms_title_mm">Terms and Condition</string>
     <string name="register_congrat_title_mm">Congratulations</string>
     <string name="register_terms_link"> iwomenapp.org <a href="http://iwomenapp.org/"></a></string>
+    <string name="register_privacy_link"> iWomenapp.org/Privacy.html <a href="http://iwomenapp.org/Privacy.html"></a></string>
 
     <!-- string resources used in Event Detail -->
     <string name="large_sample_text">"A material metaphor is the unifying theory of a rationalized space and a system of motion."
@@ -924,6 +947,7 @@ female-pilots-iaa1s
     <string name="report_post_cancel">မၿပဳလုပ္ပါ။</string>
 
     <string name="report_post">ဒါဟာေႏွာက္ယွက္မွု (သို႔) အမုန္းပြားစကားၿခိမ္းေျခာက္ျခင္း၊ အၾကမ္းဖက္ၿခင္းပို႔စ္ၿဖစ္သည္္ iWomen အဖြဲ႔အစည္းအတြင္းရွိအသံုးၿပဳသူမ်ားၿဖင့္မသင္႔ေတာ္ပါ ထို႔ေၾကာင့္ iWomen အဖြဲ႔ကိုသတင္းေပးပို႔ပါမည္</string>
+    <string name="my_post">က်နု္ပ္ပိုုစ့္မ်ား</string>
 
 
 </resources>

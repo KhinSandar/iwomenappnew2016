@@ -3,19 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="org.undp_iwomen.iwomen">
     <!-- crop images library -->
-    <uses-sdk tools:overrideLibrary="com.android.camera" />
+    <uses-sdk tools:overrideLibrary="com.android.camera,com.facebook.accountkit" />
 
     <!-- Permissions -->
     <!-- google map my location permission above 6.0 phone -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <!-- google map my location permission above 6.0 phone -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     //for GCM permission
+<!--
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+-->
     <!-- Permission Push Notrification -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -24,8 +23,6 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
 
-    <uses-feature android:name="android.hardware.camera" />
-    <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
@@ -33,7 +30,6 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.RECORD_VIDEO" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-    <uses-permission android:name="android.permission.CAMERA" />
 
     <!--Account Kit Permission-->
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
@@ -56,15 +52,11 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
 
-    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
-    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
-
 
     <!--
  The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but are recommended.
     -->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <permission
@@ -88,6 +80,8 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
+        android:supportsRtl="true"
+
         android:theme="@style/AppTheme">
 
         <!-- replace @drawable/push_icon with your push icon identifier -->
@@ -166,8 +160,39 @@
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/app_id" />
+        <meta-data
+            android:name="com.facebook.accountkit.ApplicationName"
+            android:value="@string/app_name"
+            />
+        <meta-data
+            android:name="com.facebook.accountkit.ClientToken"
+            android:value="@string/client_token"
+            />
+        <activity
+            android:name="com.facebook.accountkit.ui.AccountKitActivity"
+            android:theme="@style/AppLoginTheme"
+            tools:replace="android:theme"/>
+
+       <!-- <meta-data android:name="com.facebook.accountkit.ApplicationName"
+            android:value="@string/app_name" />
+
+        <meta-data android:name="com.facebook.accountkit.ClientToken"
+            android:value="@string/client_token" />
+        <activity
+            android:name="com.facebook.accountkit.ui.AccountKitActivity"
+            android:theme="@style/AppTheme"
+            tools:replace="android:theme"/>-->
+
+        <!--<meta-data android:name="com.facebook.accountkit.FacebookAppEventsEnabled"
+            android:value="false"/>
+
+        <activity
+            android:name="com.facebook.accountkit.ui.AccountKitActivity"
+            android:theme="@style/AppTheme"
+            tools:replace="android:theme"/>-->
         <!-- FB LOGIN AND MAIN ACTIVITY -->
         <activity
+            tools:replace="android:theme"
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
@@ -188,27 +213,12 @@
             <!--
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             -->
 
         </activity>
 
-        <!--<activity android:name=".ui.activity.IntroActivity"
-            android:label="@string/app_name">
-            &lt;!&ndash;<intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>&ndash;&gt;
-
-        </activity>-->
-
-        <!--
-        Optionally, register AnalyticsReceiver and AnalyticsService to support background
-        dispatching on non-Google Play devices
-        -->
         <receiver
             android:name="com.google.android.gms.analytics.AnalyticsReceiver"
             android:enabled="true">
@@ -222,55 +232,7 @@
             android:enabled="true"
             android:exported="false" />
         <!-- PARSE PUSH NOTRIFICATION -->
-        <!--
-        <service android:name="com.parse.PushService" />
 
-        <receiver android:name="com.parse.ParseBroadcastReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="android.intent.action.USER_PRESENT" />
-            </intent-filter>
-        </receiver>
-        <receiver
-            android:name=".Receiver"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.parse.push.intent.RECEIVE" />
-                <action android:name="com.parse.push.intent.DELETE" />
-                <action android:name="com.parse.push.intent.OPEN" />
-            </intent-filter>
-        </receiver>
-        <receiver
-            android:name="com.parse.GcmBroadcastReceiver"
-            android:permission="com.google.android.c2dm.permission.SEND">
-            <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
-
-                &lt;!&ndash; IMPORTANT: Change "com.parse.tutorials.pushnotifications" to match your app's package name. &ndash;&gt;
-                <category android:name="org.undp_iwomen.iwomen" />
-            </intent-filter>
-        </receiver>
-        -->
-
-
-        <!-- PARSE PUSH NOTRIFICATION -->
-        <!--
-        <receiver
-            android:name="com.parse.ParsePushBroadcastReceiver"
-            android:exported="false" >
-            <intent-filter>
-                <action android:name="com.parse.push.intent.RECEIVE" />
-                <action android:name="com.parse.push.intent.DELETE" />
-                <action android:name="com.parse.push.intent.OPEN" />
-            </intent-filter>
-        </receiver>
-        -->
-        <!-- PARSE PUSH NOTRIFICATION END -->
-        <!--
-             Optionally, register CampaignTrackingReceiver and CampaignTrackingService to enable
-             installation campaign reporting
-        -->
         <receiver
             android:name="com.google.android.gms.analytics.CampaignTrackingReceiver"
             android:exported="true">
@@ -495,9 +457,9 @@
             android:theme="@style/AppTheme" android:parentActivityName=".ui.activity.TalkTogetherMainActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden">
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value=".ui.activity.DrawerMainActivity" />
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.activity.DrawerMainActivity" />
         </activity>
         <activity
             android:name="org.smk.iwomen.GcmNotificationDialogActivity"
@@ -541,6 +503,36 @@
                 android:value=".ui.activity.DrawerMainActivity" />
         </activity>
         <activity android:name="org.smk.iwomen.TakeAndTourActivity"></activity>
+
+        <activity
+            android:name=".ui.activity.MainAccountKitPhoneLoginActivity"
+            android:label="@string/title_activity_post_detail"
+            android:parentActivityName=".ui.activity.MainLoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MaterialAnimations.Blue"
+            android:windowSoftInputMode="stateAlwaysHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.activity.MainLoginActivity" />
+        </activity>
+        <activity
+            android:name=".ui.activity.TokenActivity"
+            android:label="@string/title_activity_post_detail"
+            android:parentActivityName=".ui.activity.DrawerMainActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.activity.DrawerMainActivity" />
+        </activity>
+        <activity
+            android:name=".ui.activity.ErrorActivity"
+            android:label="@string/title_activity_post_detail"
+            android:parentActivityName=".ui.activity.DrawerMainActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.activity.DrawerMainActivity" />
+        </activity>
         <activity android:name=".ui.activity.AudioListActivity"></activity>
     </application>
 

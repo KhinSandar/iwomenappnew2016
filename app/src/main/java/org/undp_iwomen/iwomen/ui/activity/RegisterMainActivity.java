@@ -10,9 +10,10 @@ import android.transition.Slide;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.ui.fragment.RegisterLoginFragment1;
-import org.undp_iwomen.iwomen.ui.fragment.Register_Congrat_Fragment;
+import org.undp_iwomen.iwomen.ui.fragment.RegisterPwdFragment2;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.utils.Utils;
 
@@ -23,6 +24,8 @@ public class RegisterMainActivity extends BaseDetailTransitionActivity {
     private Context mContext;
     SharedPreferences sharePrefLanguageUtil;
     String strLang, mstrTitle;
+
+    private Boolean isPhoneNumberCorrectSuccess;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +69,17 @@ public class RegisterMainActivity extends BaseDetailTransitionActivity {
 
         if (savedInstanceState == null) {
 
+            Bundle bundleArgs = getIntent().getExtras();
+            if (bundleArgs != null) {
+
+                //bundleArgs.getString(CommonConfig.PHONE_SUCCESS_BUNDLE);
+                isPhoneNumberCorrectSuccess = true;
+            }else{
+                isPhoneNumberCorrectSuccess = false;
+            }
+
+
+
             Slide slideTransition = null;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 slideTransition = new Slide(Gravity.LEFT);
@@ -80,16 +94,26 @@ public class RegisterMainActivity extends BaseDetailTransitionActivity {
                 sharedElementFragment1.setSharedElementEnterTransition(new ChangeBounds());
             }
 
+            RegisterPwdFragment2 registerPwdFragment2 = RegisterPwdFragment2.newInstance();
+            registerPwdFragment2.setReenterTransition(slideTransition);
+            registerPwdFragment2.setExitTransition(slideTransition);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                registerPwdFragment2.setSharedElementEnterTransition(new ChangeBounds());
+            }
 
-            Register_Congrat_Fragment register_congrat_fragment = new Register_Congrat_Fragment();
+            if(isPhoneNumberCorrectSuccess){
 
-            /*Bundle b = new Bundle();
-            b.putString(CommonConfig.BOOKING_ID,strBookId);
-            b.putString(CommonConfig.TICKET_PAYMENT_STATUS, strPaymentStatus);
-            ticketFragment.setArguments(b);*/
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, sharedElementFragment1)
-                    .commit();
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.container, registerPwdFragment2)
+                        .commit();
+
+            }else{
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.container, sharedElementFragment1)
+                        .commit();
+            }
+
+
         }
 
     }
