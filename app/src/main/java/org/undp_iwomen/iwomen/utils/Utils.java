@@ -20,14 +20,26 @@ import java.io.OutputStream;
 public class Utils {
 
     //public static String HOCKEY_APPID = "ab8e61deeab46d679d4f6d14757e8c27";
-    public static String PREF_SETTING = "settings";
-    public static String PREF_SETTING_LANG = "language";
-    public static String ENG_LANG = "english";
-    public static String MM_LANG = "myanmar";
+    public static String PREF_SETTING = "mLanguage";//"settings"
+    public static String PREF_SETTING_LANG = "lang";//"language"
+
+
+    public static String ENG_LANG = "eng";//english
+    public static String MM_LANG = "mm";//myanmar Old apk
     public static String PREF_THEME = "themecolor";
 
     public static String MM_LANG_UNI = "myanmar_uni";
     public static String MM_LANG_DEFAULT = "myanmar_default";
+
+
+    //FOR SMK FONT Setting
+    public static String ENG_LANG_FONT = "english";//english
+    public static String MM_ZAWGYI_LANG_FONT = "zawgyione";//english
+    public static String MM3_LANG_FONT = "myanmar3";//english
+    public static String MM_DEFAULT_FONT = "default";//english
+
+
+
 
     public static int THEME_BLUE = 11;
     public static int THEME_PINK = 12;

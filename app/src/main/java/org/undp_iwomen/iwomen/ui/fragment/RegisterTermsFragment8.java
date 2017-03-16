@@ -44,7 +44,7 @@ public class RegisterTermsFragment8 extends Fragment implements View.OnClickList
     private SharedPreferences mSharedPreferencesUserInfo;
     private SharedPreferences.Editor mEditorUserInfo;
     private ZProgressHUD zPDialog;
-    private TextView txt_iwomen_link , txt_reg_name_duplicate_err;
+    private TextView txt_iwomen_link ,txt_privacy_link, txt_reg_name_duplicate_err;
 
     private Button btn_next;
 
@@ -92,9 +92,15 @@ public class RegisterTermsFragment8 extends Fragment implements View.OnClickList
         btn_next.setOnClickListener(this);
 
         txt_iwomen_link = (TextView)view.findViewById(R.id.register_app_iwomen_txt);
+        txt_privacy_link =(TextView)view.findViewById(R.id.register_app_iwomen_txt_2);
+
         txt_reg_name_duplicate_err = (TextView)view.findViewById(R.id.register_terms_err);
+
         txt_iwomen_link.setText("www.iwomenapp.org");
         Linkify.addLinks(txt_iwomen_link, Linkify.WEB_URLS);
+
+        txt_privacy_link.setText("www.iwomenapp.org/Privacy.html");
+        Linkify.addLinks(txt_privacy_link, Linkify.WEB_URLS);
 
         setEnglishFont();
 

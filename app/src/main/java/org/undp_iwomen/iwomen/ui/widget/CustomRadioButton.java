@@ -4,12 +4,11 @@ package org.undp_iwomen.iwomen.ui.widget;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
-import android.widget.RadioButton;
 
 import org.undp_iwomen.iwomen.model.FontConverter;
 import org.undp_iwomen.iwomen.utils.StoreUtil;
 
-public class CustomRadioButton extends RadioButton{
+public class CustomRadioButton extends android.support.v7.widget.AppCompatRadioButton{
 	public CustomRadioButton(Context context){
 		super(context);
 		if(!isInEditMode()){

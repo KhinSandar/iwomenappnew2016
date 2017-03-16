@@ -116,6 +116,7 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
 
         lang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
 
+        Log.e("MainLogin==","<<Lang>>"+ lang);
         if (lang.equals(Utils.ENG_LANG)) {
 
             String languageToLoad = "eng"; // your language
@@ -190,7 +191,7 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
             case R.id.parse_signup_button:
                 Intent i = new Intent(MainLoginActivity.this, RegisterMainActivity.class);//DrawerMainActivity
                 startActivity(i);
-                finish();
+                //finish();
                 break;
         }
     }
@@ -374,7 +375,7 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
 
 
                             StoreUtil.getInstance().saveTo("fonts", "english");
-                            editor.putString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
+                            editor.putString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG_FONT);
                             editor.commit();
 
                             String languageToLoad = "eng"; // your language
@@ -385,8 +386,8 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
                             getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
 
 
-                            SharedPreferences.Editor fontEditor = getSharedPreferences("mLanguage", Activity.MODE_PRIVATE).edit();
-                            fontEditor.putString("lang", "eng");
+                            SharedPreferences.Editor fontEditor = getSharedPreferences(Utils.PREF_SETTING, Activity.MODE_PRIVATE).edit();
+                            fontEditor.putString(Utils.PREF_SETTING_LANG, "eng");
                             fontEditor.commit();
 
                             setEnglishFont();
@@ -403,7 +404,7 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
 
                         } else {
                             StoreUtil.getInstance().saveTo("fonts", "zawgyione");
-                            editor.putString(Utils.PREF_SETTING_LANG, Utils.MM_LANG);
+                            editor.putString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG_FONT);
                             editor.commit();
 
                             String languageToLoadm = "mm"; // your language
@@ -413,8 +414,8 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
                             configm.locale = localem;
                             getBaseContext().getResources().updateConfiguration(configm, getBaseContext().getResources().getDisplayMetrics());
 
-                            SharedPreferences.Editor fontEditorMM = getSharedPreferences("mLanguage", Activity.MODE_PRIVATE).edit();
-                            fontEditorMM.putString("lang", "mm");
+                            SharedPreferences.Editor fontEditorMM = getSharedPreferences(Utils.PREF_SETTING, Activity.MODE_PRIVATE).edit();
+                            fontEditorMM.putString(Utils.PREF_SETTING_LANG, "mm");
                             fontEditorMM.commit();
 
                             setMyanmarFontZawgyi();
@@ -431,7 +432,7 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
 
                         } else {
                             StoreUtil.getInstance().saveTo("fonts", "myanmar3");
-                            editor.putString(Utils.PREF_SETTING_LANG, Utils.MM_LANG_UNI);
+                            editor.putString(Utils.PREF_SETTING_LANG, Utils.MM3_LANG_FONT);
                             editor.commit();
 
                             String languageToLoaduni = "mm"; // your language
@@ -441,8 +442,8 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
                             configuni.locale = localeuni;
                             getBaseContext().getResources().updateConfiguration(configuni, getBaseContext().getResources().getDisplayMetrics());
 
-                            SharedPreferences.Editor fontEditorUni = getSharedPreferences("mLanguage", Activity.MODE_PRIVATE).edit();
-                            fontEditorUni.putString("lang", "mm");
+                            SharedPreferences.Editor fontEditorUni = getSharedPreferences(Utils.PREF_SETTING, Activity.MODE_PRIVATE).edit();
+                            fontEditorUni.putString(Utils.PREF_SETTING_LANG, "mm");
                             fontEditorUni.commit();
 
                             setMyanmarFontUni();
@@ -460,7 +461,7 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
 
                         } else {
                             StoreUtil.getInstance().saveTo("fonts", "default");
-                            editor.putString(Utils.PREF_SETTING_LANG, Utils.MM_LANG_DEFAULT);
+                            editor.putString(Utils.PREF_SETTING_LANG, Utils.MM_DEFAULT_FONT);
                             editor.commit();
 
                             String languageToLoadDe = "mm"; // your language
@@ -470,8 +471,8 @@ public class MainLoginActivity extends BaseActionBarActivity implements View.OnC
                             configDe.locale = localeDe;
                             getBaseContext().getResources().updateConfiguration(configDe, getBaseContext().getResources().getDisplayMetrics());
 
-                            SharedPreferences.Editor fontEditorDe = getSharedPreferences("mLanguage", Activity.MODE_PRIVATE).edit();
-                            fontEditorDe.putString("lang", "mm");
+                            SharedPreferences.Editor fontEditorDe = getSharedPreferences(Utils.PREF_SETTING, Activity.MODE_PRIVATE).edit();
+                            fontEditorDe.putString(Utils.PREF_SETTING_LANG, "mm");
                             fontEditorDe.commit();
 
                             setMyanmarFontDefault();

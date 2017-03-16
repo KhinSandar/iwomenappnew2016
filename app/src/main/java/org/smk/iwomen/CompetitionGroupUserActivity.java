@@ -1,15 +1,11 @@
 package org.smk.iwomen;
 
-import android.Manifest;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,6 +30,7 @@ import org.smk.model.GroupUser;
 import org.smk.model.GroupUserList;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
+import org.undp_iwomen.iwomen.utils.Utils;
 
 import java.util.List;
 
@@ -92,8 +89,8 @@ public class CompetitionGroupUserActivity extends BaseActionBarActivity {
 		txt_complete = (TextView) groupHeader.findViewById(R.id.txt_competition_complete);
 		layout_progress_bar = (RelativeLayout) groupHeader.findViewById(R.id.layout_progress_bar);
 		lst_group_user.addHeaderView(groupHeader);
-		SharedPreferences langRef = getSharedPreferences("mLanguage", MODE_PRIVATE);
-		if (langRef.getString("lang", "").equals("mm")) {
+		SharedPreferences langRef = getSharedPreferences(Utils.PREF_SETTING, MODE_PRIVATE);
+		if (langRef.getString(Utils.PREF_SETTING_LANG, "").equals("mm")) {
 			txt_question.setText(Html.fromHtml(competitionQuestion.getQuestionMm()));
 			txt_question_desc.setText(Html.fromHtml(competitionQuestion.getGroupDescriptionMm()));
 			txt_group_name.setText(competitionGroupUserList.getGroupUsers().get(0).getGroupName());

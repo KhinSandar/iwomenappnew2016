@@ -33,7 +33,36 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical">
-            <Button
+
+        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+            android:id="@+id/register_phone_head_txt1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="@string/register_ph_head1"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+            android:id="@+id/register_phone_head_txt2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:gravity="center"
+            android:text="@string/register_ph_head2"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+        <org.undp_iwomen.iwomen.ui.widget.CustomButton
+            android:id="@+id/register_phone_btn"
+            android:layout_margin="16dp"
+            style="@style/ParseLoginUI.Button.SignUp"
+            android:onClick="onLoginPhone"
+            android:textAllCaps="false"
+            android:text="@string/log_in_phone_button"
+            android:textSize="15sp" />
+            <!--<Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="onLoginPhone"
@@ -45,6 +74,6 @@
                 android:onClick="onLoginEmail"
                 android:text="@string/log_in_email_button"
                 android:visibility="gone"
-                />
+                />-->
     </LinearLayout>
 </LinearLayout>

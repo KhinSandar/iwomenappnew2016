@@ -58,6 +58,9 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
     private TextInputLayout mMobileNoForNrcTextInputLayout;
     private CustomTextView txtErrorDuplicateNameMsg;
 
+    private CustomTextView txtHead1;
+    private CustomTextView txtHead2;
+
     private EditText usernameField;
     private EditText mobileNoForNrcField;
     private LoginButton loginButton;
@@ -134,10 +137,16 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
         usernameField = (EditText) view.findViewById(R.id.register_fb_username_input);
         //mobileNoForNrcField = (EditText) view.findViewById(R.id.register_fb_phone_number_input);
         txtErrorDuplicateNameMsg = (CustomTextView)view.findViewById(R.id.register_fb_error_duplicate_msg);
+        txtHead1 = (CustomTextView)view.findViewById(R.id.register_fb_greet1);
+
+        txtHead2 = (CustomTextView)view.findViewById(R.id.register_fb_greet1);
+
 
 
         if(isError){
             txtErrorDuplicateNameMsg.setVisibility(View.VISIBLE);
+
+
         }else{
             txtErrorDuplicateNameMsg.setVisibility(View.GONE);
         }
@@ -173,13 +182,23 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
 
         //setEnglishFont();
         if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+
             setEnglishFont();
+            txtHead1.setText(getResources().getString(R.string.register_fb_login_greet1));
+            txtHead2.setText(getResources().getString(R.string.register_fb_login_greet2));
+
         } else if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.MM_LANG)) {
             setMyanmarFont();
+            txtHead1.setText(getResources().getString(R.string.register_fb_login_greet1_mm));
+            txtHead2.setText(getResources().getString(R.string.register_fb_login_greet2_mm));
         } else if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.MM_LANG_UNI)) {
             setMyanmarFontUni();
+            txtHead1.setText(getResources().getString(R.string.register_fb_login_greet1_mm));
+            txtHead2.setText(getResources().getString(R.string.register_fb_login_greet2_mm));
         } else if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.MM_LANG_DEFAULT)) {
             setMyanmarFontDefault();
+            txtHead1.setText(getResources().getString(R.string.register_fb_login_greet1_mm));
+            txtHead2.setText(getResources().getString(R.string.register_fb_login_greet2_mm));
         }
 
 
@@ -277,7 +296,7 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
 
         Intent i = new Intent(getActivity(), MainAccountKitPhoneLoginActivity.class);//DrawerMainActivity
         startActivity(i);
-        getActivity().finish();
+        //getActivity().finish();
        /* RegisterPwdFragment2 registerPwdFragment2 = RegisterPwdFragment2.newInstance();
 
         Slide slideTransition = null;
@@ -340,7 +359,7 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
         ((RegisterMainActivity) getActivity()).textViewTitle.setText(R.string.register_title_mm);
         ((RegisterMainActivity) getActivity()).textViewTitle.setTypeface(MyTypeFace.get(getActivity().getApplicationContext(), MyTypeFace.ZAWGYI));
 
-        usernameField.setHint(getResources().getString(R.string.register_name_hint));
+        usernameField.setHint(getResources().getString(R.string.register_title_mm));
         //mobileNoForNrcField.setHint(getResources().getString(R.string.register_ph_hint));
 
         //Set Type Face
@@ -352,12 +371,12 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
 
     public void setMyanmarFontUni() {
         // Set title bar
-        ((RegisterMainActivity) getActivity()).textViewTitle.setText(R.string.register_title);
+        ((RegisterMainActivity) getActivity()).textViewTitle.setText(R.string.register_title_mm);
     }
 
     public void setMyanmarFontDefault() {
         // Set title bar
-        ((RegisterMainActivity) getActivity()).textViewTitle.setText(R.string.register_title);
+        ((RegisterMainActivity) getActivity()).textViewTitle.setText(R.string.register_title_mm);
     }
 
     @Override

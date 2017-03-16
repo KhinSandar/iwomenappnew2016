@@ -132,7 +132,7 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
             setMyanmarFontDefault();
         }
 
-        setSelectedTheme();
+        //setSelectedTheme();
         //sw_noti.setChecked(true);
 
         boolean willShowNoti = mSharedPreferencesUserInfo.getBoolean(CommonConfig.WILL_SHOW_NOTIFICATION, true);
@@ -293,8 +293,9 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
                     requestPermissions(perms, permsRequestCode);
 
                 } else {
+                    //FOR SMK
                     StoreUtil.getInstance().saveTo("fonts", "english");
-                    editor.putString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
+                    editor.putString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG_FONT);
                     editor.commit();
 
                     String languageToLoad = "eng"; // your language
@@ -305,8 +306,9 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
                     getActivity().getBaseContext().getResources().updateConfiguration(config, getActivity().getResources().getDisplayMetrics());
 
 
-                    SharedPreferences.Editor fontEditor = getActivity().getSharedPreferences("mLanguage", Activity.MODE_PRIVATE).edit();
-                    fontEditor.putString("lang", "eng");
+                    //FOR KSD
+                    SharedPreferences.Editor fontEditor = getActivity().getSharedPreferences(Utils.PREF_SETTING, Activity.MODE_PRIVATE).edit();
+                    fontEditor.putString(Utils.PREF_SETTING_LANG, "eng");
                     fontEditor.commit();
 
                     setEnglishFont();
@@ -324,7 +326,8 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
 
                 } else {
                     StoreUtil.getInstance().saveTo("fonts", "zawgyione");
-                    editor.putString(Utils.PREF_SETTING_LANG, Utils.MM_LANG);
+                    editor.putString(Utils.PREF_SETTING_LANG, Utils.MM_ZAWGYI_LANG_FONT);
+                    editor.commit();
 
                     String languageToLoad = "mm"; // your language
                     Locale locale = new Locale(languageToLoad);
@@ -333,8 +336,8 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
                     config.locale = locale;
                     getActivity().getBaseContext().getResources().updateConfiguration(config, getResources().getDisplayMetrics());
 
-                    SharedPreferences.Editor fontEditor = getActivity().getSharedPreferences("mLanguage", Activity.MODE_PRIVATE).edit();
-                    fontEditor.putString("lang", "mm");
+                    SharedPreferences.Editor fontEditor = getActivity().getSharedPreferences(Utils.PREF_SETTING, Activity.MODE_PRIVATE).edit();
+                    fontEditor.putString(Utils.PREF_SETTING_LANG, "mm");
                     fontEditor.commit();
 
                     setMyanmarFont();
@@ -352,7 +355,8 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
 
                 } else {
                     StoreUtil.getInstance().saveTo("fonts", "myanmar3");
-                    editor.putString(Utils.PREF_SETTING_LANG, Utils.MM_LANG_UNI);
+                    editor.putString(Utils.PREF_SETTING_LANG, Utils.MM3_LANG_FONT);
+                    editor.commit();
 
                     String languageToLoad = "mm"; // your language
                     Locale locale = new Locale(languageToLoad);
@@ -361,8 +365,8 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
                     config.locale = locale;
                     getActivity().getBaseContext().getResources().updateConfiguration(config, getResources().getDisplayMetrics());
 
-                    SharedPreferences.Editor fontEditor = getActivity().getSharedPreferences("mLanguage", Activity.MODE_PRIVATE).edit();
-                    fontEditor.putString("lang", "mm");
+                    SharedPreferences.Editor fontEditor = getActivity().getSharedPreferences(Utils.PREF_SETTING, Activity.MODE_PRIVATE).edit();
+                    fontEditor.putString(Utils.PREF_SETTING_LANG, "mm");
                     fontEditor.commit();
 
                     setMyanmarFontUni();
@@ -380,7 +384,8 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
 
                 } else {
                     StoreUtil.getInstance().saveTo("fonts", "default");
-                    editor.putString(Utils.PREF_SETTING_LANG, Utils.MM_LANG_DEFAULT);
+                    editor.putString(Utils.PREF_SETTING_LANG, Utils.MM_DEFAULT_FONT);
+                    editor.commit();
 
                     String languageToLoad = "mm"; // your language
                     Locale locale = new Locale(languageToLoad);
@@ -389,8 +394,8 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
                     config.locale = locale;
                     getActivity().getBaseContext().getResources().updateConfiguration(config, getResources().getDisplayMetrics());
 
-                    SharedPreferences.Editor fontEditor = getActivity().getSharedPreferences("mLanguage", Activity.MODE_PRIVATE).edit();
-                    fontEditor.putString("lang", "mm");
+                    SharedPreferences.Editor fontEditor = getActivity().getSharedPreferences(Utils.PREF_SETTING, Activity.MODE_PRIVATE).edit();
+                    fontEditor.putString(Utils.PREF_SETTING_LANG, "mm");
                     fontEditor.commit();
 
                     setMyanmarFontDefault();

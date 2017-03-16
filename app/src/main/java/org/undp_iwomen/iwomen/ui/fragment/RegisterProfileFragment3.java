@@ -88,7 +88,18 @@ public class RegisterProfileFragment3 extends Fragment implements  View.OnClickL
         rd_worth_no = (CustomRadioButton)view.findViewById(R.id.register_pro_worth_no) ;
         ly_pact = (LinearLayout) view.findViewById(R.id.pact_layout);
 
-        setEnglishFont();
+        if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+            setEnglishFont();
+        }else if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.MM_LANG)) {
+            setMyanmarFont();
+        }else if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.MM_LANG_UNI)) {
+            setMyanmarFont();
+
+        }else if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.MM_LANG_DEFAULT)) {
+            setMyanmarFont();
+
+        }
+
 
 
 
@@ -240,9 +251,9 @@ public class RegisterProfileFragment3 extends Fragment implements  View.OnClickL
         // Set title bar
         ((RegisterMainActivity) getActivity()).textViewTitle.setText(R.string.register_title_profile);
     }
-    /*public void setMyanmarFont() {
+    public void setMyanmarFont() {
 
         // Set title bar
-        ((RegisterMainActivity) getActivity()).textViewTitle.setText(R.string.register_title_profile);
-    }*/
+        ((RegisterMainActivity) getActivity()).textViewTitle.setText(R.string.register_title_profile_mm);
+    }
 }

@@ -9,7 +9,7 @@ import android.widget.CheckBox;
 import org.undp_iwomen.iwomen.model.FontConverter;
 import org.undp_iwomen.iwomen.utils.StoreUtil;
 
-public class CustomCheckBox extends CheckBox{
+public class CustomCheckBox extends android.support.v7.widget.AppCompatCheckBox{
 	public CustomCheckBox(Context context){
 		super(context);
 		if(!isInEditMode()){

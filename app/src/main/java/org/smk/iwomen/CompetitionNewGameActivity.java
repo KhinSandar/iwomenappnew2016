@@ -23,6 +23,7 @@ import org.smk.model.GroupUser;
 import org.smk.model.GroupUserList;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
+import org.undp_iwomen.iwomen.utils.Utils;
 
 import java.util.List;
 
@@ -70,8 +71,8 @@ public class CompetitionNewGameActivity extends BaseActionBarActivity {
 		if(bundle != null){
 			competitionQuestion = new Gson().fromJson(bundle.getString("competition_question"), CompetitionQuestion.class);
 		}
-		SharedPreferences langRef = getSharedPreferences("mLanguage", MODE_PRIVATE); 
-		if(langRef.getString("lang","").equals("mm")){
+		SharedPreferences langRef = getSharedPreferences(Utils.PREF_SETTING, MODE_PRIVATE);
+		if(langRef.getString(Utils.PREF_SETTING_LANG,"").equals("mm")){
 			txt_question.setText(Html.fromHtml(competitionQuestion.getQuestionMm()));
 			txt_question_desc.setText(Html.fromHtml(competitionQuestion.getDescriptionMm()));
 			txt_instruction_desc.setText(Html.fromHtml(competitionQuestion.getInstructionAboutGameMm()));

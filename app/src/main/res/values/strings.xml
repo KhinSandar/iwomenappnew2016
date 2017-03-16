@@ -3,27 +3,7 @@
     <string name="app_id" translatable="false">909633732437583</string>
     <string name="ak_login_protocol_scheme" translatable="false">ak909633732437583</string>
     <string name="client_token" translatable="false">cc4e9efad50239ee436c6ad9d7ddf416</string>
-    <string name="log_in_email_button">Log In via Email</string>
-    <string name="log_in_phone_button">Your Phone Number</string>
-    <string name="permissions_get_accounts_message">
-        Grant permission to read your email address from your device to pre-fill.
-    </string>
-    <string name="permissions_get_accounts_title">Read Email Address</string>
-    <string name="permissions_read_phone_state_message">
-        Grant permission to read your phone number from your device to pre-fill.
-    </string>
-    <string name="permissions_read_phone_state_title">Read Phone Number</string>
-    <string name="permissions_receive_sms_message">
-        Grant permission to read your SMS code from your device to pre-fill.
-    </string>
-    <string name="permissions_receive_sms_title">Read SMS Code</string>
-    <string name="log_out_button">Log Out</string>
-    <string name="error_label">Error</string>
-    <string name="loading_placeholder">Loading&#8230;</string>
-    <string name="user_id_label">Account ID</string>
-    <string name="phone_number_label">Phone Number</string>
-    <string name="email_label">Email</string>
-    <string name="na">NA</string>
+
 
     <string name="app_name">iWomen</string>
     <string name="app_name_mm">စြမ္းရည္ၿမင္ ့မား ေမ့အင္အား</string>
@@ -287,8 +267,12 @@
     <string name="competition_second">Seconds</string>
     <string name="competition_not_answer">This user has not yet submitted her answers.</string>
     <string name="competition_finished">Finished</string>
-    <string name="competition_play_game">Ready To Play ?</string>
+    <string name="competition_play_game" >Ready To Play ?</string>
+    <string name="competition_play_game_mm">စ ၿပိဳင္ပါမည္</string>
+
     <string name="competition_discover_winner">Discover Who is the WINNER</string>
+    <string name="competition_discover_winner_mm">ဘယ္သူ ႏိုုင္လဲ</string>
+
     <string name="competition_how_to_play_game">How to Play The Game</string>
     <string name="title_activity_competition_new_game">CompetitionNewGameActivity</string>
     <string name="title_activity_competition_winner_group">Competition Winner Group</string>
@@ -308,7 +292,7 @@
     <string name="str_ok">OK</string>
     <string name="str_not_now">Not Now</string>
     <string name="title_activity_audio_recording">Audio Recording</string>
-    <string name="str_write_reviews">Please Write Your Reviews !</string>
+    <string name="str_write_reviews">Thank you for your Reviews</string>
     <string name="str_your_review">Your Review</string>
     <string name="str_submit">Submit</string>
     <string name="competition_answer">This user has already submitted her answers.</string>
@@ -324,6 +308,7 @@
     <!-- Register Activity Action Bar Title  Eng-->
     <string name="register_title">Name</string>
     <string name="register_title_profile">Profile</string>
+
     <string name="register_title_pwd">Password</string>
     <string name="register_country_title">Country</string>
     <string name="register_township_title">TLG/SRG Township</string>
@@ -365,6 +350,8 @@
 
     <string name="register_fb_login_greet1">Register with Your Facebook Account</string>
     <string name="register_fb_login_greet2">Or Your Name and Phone Number</string>
+    <string name="register_fb_login_greet1_mm">Facebook Accountနဲ႔မွတ္ပုံတင္ပါ</string>
+    <string name="register_fb_login_greet2_mm">သို႔မဟုတ္ သင့္နာမည္ႏွင့္ဖုန္းနံပါတ္</string>
 
     <string name="register_next">Next</string>
 
@@ -398,7 +385,7 @@
 </string>
 
     <string name="register_terms_link"> iWomenapp.org <a href="http://iwomenapp.org/"></a></string>
-    <string name="register_privacy_link"> iWomenapp.org/Privacy.html <a href="http://iwomenapp.org/Privacy.html"></a></string>
+    <string name="register_privacy_link"> iwomenapp.org/Privacy.html <a href="http://iwomenapp.org/Privacy.html"></a></string>
 
 
 
@@ -945,6 +932,38 @@ Make many new friends, contact your local May Doe Kabar/TLG group. See number be
     <string name="report_post_ok">Report</string>
     <string name="report_post_cancel">Cancel</string>
 
-    <string name="my_post">My Posts</string>
+
+    <string name="log_in_email_button">Log In via Email</string>
+    <string name="log_in_phone_button">Click here to add your phone number</string>
+    <string name="permissions_get_accounts_message">
+        Grant permission to read your email address from your device to pre-fill.
+    </string>
+    <string name="permissions_get_accounts_title">Read Email Address</string>
+    <string name="permissions_read_phone_state_message">
+        Grant permission to read your phone number from your device to pre-fill.
+    </string>
+    <string name="permissions_read_phone_state_title">Read Phone Number</string>
+    <string name="permissions_receive_sms_message">
+        Grant permission to read your SMS code from your device to pre-fill.
+    </string>
+    <string name="permissions_receive_sms_title">Read SMS Code</string>
+    <string name="log_out_button">Log Out</string>
+    <string name="error_label">Error</string>
+    <string name="loading_placeholder">Loading&#8230;</string>
+    <string name="user_id_label">Account ID</string>
+    <string name="phone_number_label" >Phone Number</string>
+    <string name="phone_number_label_mm" >သင့္ ဖုုန္း နံပါတ္</string>
+
+    <string name="email_label">Email</string>
+    <string name="na">NA</string>
+
+    <string name="my_post" >My Posts</string>
+    <string name="my_post_mm">က်နု္ပ္ပိုုစ့္မ်ား</string>
+    <string name="log_in_phone_button_mm">ဖုန္းနံပါတ္ထည့္ရန္ ႏွိပ္ပါ</string>
+
+    <string name="register_ph_head1">Please add your phone number, we will</string>
+    <string name="register_ph_head2">send you a verification code through SMS.</string>
+    <string name="register_ph_head1_mm">သင့္ဖုန္းနံပါတ္ကို ရိုက္ထည့္ပါ။</string>
+    <string name="register_ph_head2_mm">ဖုန္း SMS မွတစ္ဆင္ ့ ကုဒ္နံပါတ္ကို ပို ့ေပးပါမည္။</string>
 
 </resources>

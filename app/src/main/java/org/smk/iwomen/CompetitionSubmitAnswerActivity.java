@@ -59,6 +59,7 @@ import org.undp_iwomen.iwomen.ui.widget.CustomCheckBox;
 import org.undp_iwomen.iwomen.ui.widget.CustomEditText;
 import org.undp_iwomen.iwomen.ui.widget.CustomRadioButton;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
+import org.undp_iwomen.iwomen.utils.Utils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -116,8 +117,8 @@ public class CompetitionSubmitAnswerActivity extends BaseActionBarActivity imple
 		txt_question = (TextView) findViewById(R.id.txt_competition_question);
 		txt_description = (TextView) findViewById(R.id.txt_competition_description);
 		
-		langRef = getSharedPreferences("mLanguage", MODE_PRIVATE);
-		if(langRef.getString("lang","").equals("mm")){
+		langRef = getSharedPreferences(Utils.PREF_SETTING, MODE_PRIVATE);
+		if(langRef.getString(Utils.PREF_SETTING_LANG,"").equals("mm")){
 			txt_question.setText(Html.fromHtml(competitionQuestion.getQuestionMm()));
 			txt_description.setText(Html.fromHtml(competitionQuestion.getAnswerSubmitDescriptionMm()));
 		}else{

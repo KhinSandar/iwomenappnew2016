@@ -6,27 +6,6 @@
     <string name="parse_client_key">qnaqxGzfOLEgFAWXUTUJpTkgbOgn3CVxTqtTD6pn</string>
     <string name="hello_world">Hello world!</string>
 
-    <string name="log_in_email_button">Log In via Email</string>
-    <string name="log_in_phone_button">Log In via Phone</string>
-    <string name="permissions_get_accounts_message">
-        Grant permission to read your email address from your device to pre-fill.
-    </string>
-    <string name="permissions_get_accounts_title">Read Email Address</string>
-    <string name="permissions_read_phone_state_message">
-        Grant permission to read your phone number from your device to pre-fill.
-    </string>
-    <string name="permissions_read_phone_state_title">Read Phone Number</string>
-    <string name="permissions_receive_sms_message">
-        Grant permission to read your SMS code from your device to pre-fill.
-    </string>
-    <string name="permissions_receive_sms_title">Read SMS Code</string>
-    <string name="log_out_button">Log Out</string>
-    <string name="error_label">Error</string>
-    <string name="loading_placeholder">Loading&#8230;</string>
-    <string name="user_id_label">Account ID</string>
-    <string name="phone_number_label">သင့္ ဖုုန္း နံပါတ္</string>
-    <string name="email_label">Email</string>
-    <string name="na">NA</string>
 
     <string name="betogether_title_eng">Be Together</string>
     <string name="betogether_title_mm">ေပါင္းစည္းေဆာင္ရြက္ရန္</string>
@@ -251,7 +230,11 @@
     <string name="title_activity_competition_group_user">Competition GroupUser</string>
     <string name="title_activity_game_over">Game Over</string>
     <string name="competition_play_game">စ ၿပိဳင္ပါမည္</string>
+    <string name="competition_play_game_mm">စ ၿပိဳင္ပါမည္</string>
+
     <string name="competition_discover_winner">ဘယ္သူ ႏိုုင္လဲ</string>
+    <string name="competition_discover_winner_mm">ဘယ္သူ ႏိုုင္လဲ</string>
+
 
     <string name="edit_profile_btn_cancel">ၿပင္ဆင္မွုုမၿပဳလုုပ္ပါ</string>
     <string name="edit_profile_btn_next_tlg_edit">TLG or SRG အခ်က္အလက္ၿပင္ဆင္ရန္ဒိေနရာကိုုႏွိပ္ပါ။!</string>
@@ -265,7 +248,7 @@
     <string name="str_talk_together">ေမးျမန္းေဆြးေႏြးရန္</string>
     <string name="str_ok">ရၿပီး</string>
     <string name="str_not_now">မလုပ္ေသးပါ</string>
-    <string name="str_write_reviews">သင့္၏ အႀကံျပဳစာ ေရးပါ</string>
+    <string name="str_write_reviews">ေက်းဇူးတင္ပါတယ္ရွင္</string>
     <string name="str_your_review">သင့္၏ အႀကံျပဳ</string>
     <string name="str_submit">ေပးပို႕မည္</string>
     <string name="competition_answer">အေျဖမ်ားကို ေျဖၿပီးၿပီ။</string>
@@ -292,6 +275,8 @@
 
     <string name="register_fb_login_greet1">Facebook Accountနဲ႔မွတ္ပုံတင္ပါ</string>
     <string name="register_fb_login_greet2">သို႔မဟုတ္ သင့္နာမည္ႏွင့္ဖုန္းနံပါတ္</string>
+    <string name="register_fb_login_greet1_mm">Facebook Accountနဲ႔မွတ္ပုံတင္ပါ</string>
+    <string name="register_fb_login_greet2_mm">သို႔မဟုတ္ သင့္နာမည္ႏွင့္ဖုန္းနံပါတ္</string>
 
     <string name="register_next">ေနာက္တစ္ဆင့္</string>
 
@@ -325,6 +310,7 @@
     <string name="register_ph_hint_password_input_hint">လွ်ိဳ ့၀ွက္ စာလံုုး</string>
     <string name="register_ph_hint_confirm_password_input_hint">လ်ိဳ ့ ၀ွက္ စာလံုုးေနာက္တစ္ၾကိမ္ၿပန္ရိုုက္ပါ</string>
     <string name="register_title_profile">ကိုုယ္ေရး အခ်က္ အလက္</string>
+
 
     <string name="register_township_title">TLG/SRG ၿမိဳ ့နယ္ေရြးမည္</string>
     <!--Women Remember Day  -->
@@ -947,7 +933,39 @@ female-pilots-iaa1s
     <string name="report_post_cancel">မၿပဳလုပ္ပါ။</string>
 
     <string name="report_post">ဒါဟာေႏွာက္ယွက္မွု (သို႔) အမုန္းပြားစကားၿခိမ္းေျခာက္ျခင္း၊ အၾကမ္းဖက္ၿခင္းပို႔စ္ၿဖစ္သည္္ iWomen အဖြဲ႔အစည္းအတြင္းရွိအသံုးၿပဳသူမ်ားၿဖင့္မသင္႔ေတာ္ပါ ထို႔ေၾကာင့္ iWomen အဖြဲ႔ကိုသတင္းေပးပို႔ပါမည္</string>
-    <string name="my_post">က်နု္ပ္ပိုုစ့္မ်ား</string>
 
+    <string name="log_in_email_button">Log In via Email</string>
+    <string name="log_in_phone_button">ဖုန္းနံပါတ္ထည့္ရန္ ႏွိပ္ပါ</string>
+    <string name="permissions_get_accounts_message">
+        Grant permission to read your email address from your device to pre-fill.
+    </string>
+    <string name="permissions_get_accounts_title">Read Email Address</string>
+    <string name="permissions_read_phone_state_message">
+        Grant permission to read your phone number from your device to pre-fill.
+    </string>
+    <string name="permissions_read_phone_state_title">Read Phone Number</string>
+    <string name="permissions_receive_sms_message">
+        Grant permission to read your SMS code from your device to pre-fill.
+    </string>
+    <string name="permissions_receive_sms_title">Read SMS Code</string>
+    <string name="log_out_button">Log Out</string>
+    <string name="error_label">Error</string>
+    <string name="loading_placeholder">Loading&#8230;</string>
+    <string name="user_id_label">Account ID</string>
+    <string name="phone_number_label">သင့္ ဖုုန္း နံပါတ္</string>
+    <string name="phone_number_label_mm" >သင့္ ဖုုန္း နံပါတ္</string>
+
+    <string name="email_label">Email</string>
+    <string name="na">NA</string>
+
+    <string name="my_post">က်နု္ပ္ပိုုစ့္မ်ား</string>
+    <string name="my_post_mm">က်နု္ပ္ပိုုစ့္မ်ား</string>
+
+    <string name="log_in_phone_button_mm">ဖုန္းနံပါတ္ထည့္ရန္ ႏွိပ္ပါ</string>
+
+    <string name="register_ph_head1">သင့္ဖုန္းနံပါတ္ကို ရိုက္ထည့္ပါ။</string>
+    <string name="register_ph_head2">ဖုန္း SMS မွတစ္ဆင္ ့ ကုဒ္နံပါတ္ကို ပို ့ေပးပါမည္။</string>
+    <string name="register_ph_head1_mm">သင့္ဖုန္းနံပါတ္ကို ရိုက္ထည့္ပါ။</string>
+    <string name="register_ph_head2_mm">ဖုန္း SMS မွတစ္ဆင္ ့ ကုဒ္နံပါတ္ကို ပို ့ေပးပါမည္။</string>
 
 </resources>

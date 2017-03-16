@@ -9,11 +9,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+
 import org.smk.model.CompetitionQuestion;
 import org.smk.model.CorrectAnswer;
-
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
+import org.undp_iwomen.iwomen.utils.Utils;
 
 public class CompetitionWinnerGroupActivity extends BaseActionBarActivity {
 
@@ -35,8 +36,8 @@ public class CompetitionWinnerGroupActivity extends BaseActionBarActivity {
 		
 		txt_winner = (TextView) findViewById(R.id.txt_winner_group);
 		layout_answers = (LinearLayout) findViewById(R.id.layout_answers);
-		SharedPreferences langRef = getSharedPreferences("mLanguage", MODE_PRIVATE); 
-		if(langRef.getString("lang","").equals("mm")){
+		SharedPreferences langRef = getSharedPreferences(Utils.PREF_SETTING, MODE_PRIVATE);
+		if(langRef.getString(Utils.PREF_SETTING_LANG,"").equals("mm")){
 			boolean first = true;
 			for (CorrectAnswer answer : competitionQuestion.getCorrectAnswer()){
 				if(first) {

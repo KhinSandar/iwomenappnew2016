@@ -218,6 +218,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
         user_img_path = mSharedPreferencesUserInfo.getString(CommonConfig.USER_UPLOAD_IMG_URL, null);
 
         user_code = user_obj_id;
+        mstr_lang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
 
         //Log.e("<<USer Point>>", "==>" + mSharedPreferencesUserInfo.getString(CommonConfig.USER_POINTS, null));
 
@@ -288,6 +289,13 @@ public class DrawerMainActivity extends BaseActionBarActivity {
 
             }
         });
+
+        if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+            txt_sing_out.setText(getResources().getString(R.string.menu_sing_out));
+        }else{
+            txt_sing_out.setText(getResources().getString(R.string.menu_sing_out_mm));
+
+        }
 
         txt_sing_out.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -396,8 +404,14 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                 @Override
                 public void success(String s, Response response) {
                     post_count = s;
-                    txt_menu_user_post_count.setText(post_count + getResources().getString(R.string.my_post));
-                    //TODO get User points too
+                    if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+                        txt_menu_user_post_count.setText(post_count + getResources().getString(R.string.my_post));
+                        //TODO get User points too
+                    }else{
+                        txt_menu_user_post_count.setText(post_count + getResources().getString(R.string.my_post_mm));
+                        //TODO get User points too
+                    }
+
 
                 }
 
@@ -438,7 +452,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
 
 
     public void setThemeToApp() {
-        sharePrefLanguageUtil = getSharedPreferences(Utils.PREF_SETTING_LANG, MODE_PRIVATE);
+        sharePrefLanguageUtil = getSharedPreferences(Utils.PREF_SETTING, MODE_PRIVATE);
         int theme = sharePrefLanguageUtil.getInt(org.undp_iwomen.iwomen.utils.Utils.PREF_THEME, org.undp_iwomen.iwomen.utils.Utils.THEME_PINK);
 
         if (theme == org.undp_iwomen.iwomen.utils.Utils.THEME_BLUE) {
@@ -887,7 +901,13 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                             case 403:
                                 layout_play_game.setVisibility(View.VISIBLE);
                                 img_play_game.setImageResource(R.drawable.sticker2);
-                                btn_play_game.setText(getResources().getString(R.string.competition_play_game));
+                                if (mstr_lang.equals(Utils.ENG_LANG)) {
+                                    btn_play_game.setText(getResources().getString(R.string.competition_play_game));
+                                }else{
+                                    btn_play_game.setText(getResources().getString(R.string.competition_play_game_mm));
+
+                                }
+
                                 btn_play_game.setOnClickListener(new View.OnClickListener() {
 
                                     @Override
@@ -926,7 +946,12 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                     Log.i("Competition : ", "Size = " + arg0.getCorrectAnswer().size());
                     if (arg0 != null && arg0.getCorrectAnswer().size() == 0) {
                         img_play_game.setImageResource(R.drawable.sticker2);
-                        btn_play_game.setText(getResources().getString(R.string.competition_play_game));
+                        if (mstr_lang.equals(Utils.ENG_LANG)) {
+                            btn_play_game.setText(getResources().getString(R.string.competition_play_game));
+                        }else{
+                            btn_play_game.setText(getResources().getString(R.string.competition_play_game_mm));
+
+                        }
                         btn_play_game.setOnClickListener(new View.OnClickListener() {
 
                             @Override
@@ -939,7 +964,12 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                     } else if(arg0 != null && arg0.getCorrectAnswer().size() > 0) {
                         Log.i("Competition : ", "Who is discover");
                         img_play_game.setImageResource(R.drawable.sticker1);
-                        btn_play_game.setText(getResources().getString(R.string.competition_discover_winner));
+                        if (mstr_lang.equals(Utils.ENG_LANG)) {
+                            btn_play_game.setText(getResources().getString(R.string.competition_discover_winner));
+                        }else{
+                            btn_play_game.setText(getResources().getString(R.string.competition_discover_winner_mm));
+
+                        }
                         btn_play_game.setOnClickListener(new View.OnClickListener() {
 
                             @Override
@@ -955,8 +985,12 @@ public class DrawerMainActivity extends BaseActionBarActivity {
         } else {
 
             layout_play_game.setVisibility(View.VISIBLE);
-            btn_play_game.setText(getResources().getString(R.string.competition_play_game));
+            if (mstr_lang.equals(Utils.ENG_LANG)) {
+                btn_play_game.setText(getResources().getString(R.string.competition_play_game));
+            }else{
+                btn_play_game.setText(getResources().getString(R.string.competition_play_game_mm));
 
+            }
             layout_play_game.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

@@ -1,15 +1,15 @@
 /**
  * Copyright (c) 2014-present, Facebook, Inc. All rights reserved.
- *
+ * <p>
  * You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
  * copy, modify, and distribute this software in source code or binary form for use
  * in connection with the web services and APIs provided by Facebook.
- *
+ * <p>
  * As with any software that integrates with the Facebook platform, your use of
  * this software is subject to the Facebook Developer Principles and Policies
  * [http://developers.facebook.com/policy/]. This copyright notice shall be
  * included in all copies or substantial portions of the software.
- *
+ * <p>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
  * FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
@@ -49,6 +49,7 @@ import com.facebook.accountkit.ui.LoginType;
 import org.smk.iwomen.BaseActionBarActivity;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
+import org.undp_iwomen.iwomen.ui.widget.CustomButton;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.utils.Utils;
 
@@ -66,7 +67,8 @@ public class MainAccountKitPhoneLoginActivity extends BaseActionBarActivity {
     private SharedPreferences.Editor mEditorUserInfo;
     String mphoneNumberString;
     private Context mContext;
-    private CustomTextView textViewTitle;
+    private CustomTextView textViewTitle, txtHead1, txtHead2;
+    private CustomButton btnPhone;
     SharedPreferences sharePrefLanguageUtil;
     String strLang;
 
@@ -87,6 +89,10 @@ public class MainAccountKitPhoneLoginActivity extends BaseActionBarActivity {
         toolbar.setTitle("");
 
         textViewTitle = (CustomTextView) toolbar.findViewById(R.id.title_action2);
+        txtHead1 = (CustomTextView) findViewById(R.id.register_phone_head_txt1);
+
+        txtHead2 = (CustomTextView) findViewById(R.id.register_phone_head_txt2);
+        btnPhone = (CustomButton) findViewById(R.id.register_phone_btn);
 
 
         if (toolbar != null) {
@@ -96,14 +102,26 @@ public class MainAccountKitPhoneLoginActivity extends BaseActionBarActivity {
         if (strLang.equals(Utils.ENG_LANG)) {
 
             textViewTitle.setText(R.string.phone_number_label);
-
+            txtHead1.setText(R.string.register_ph_head1);
+            txtHead2.setText(R.string.register_ph_head2);
+            btnPhone.setText(R.string.log_in_phone_button);
 
         } else //FOR ALl MM FONT
         {
-            textViewTitle.setText(R.string.phone_number_label);
+            textViewTitle.setText(R.string.phone_number_label_mm);
+            txtHead1.setText(R.string.register_ph_head1_mm);
+            txtHead2.setText(R.string.register_ph_head2_mm);
+            btnPhone.setText(R.string.log_in_phone_button_mm);
 
 
         }
+        btnPhone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onLogin(LoginType.PHONE);
+
+            }
+        });
  /*if (AccountKit.getCurrentAccessToken() != null) {
             startActivity(new Intent(this, TokenActivity.class));
         }*/
@@ -126,9 +144,10 @@ public class MainAccountKitPhoneLoginActivity extends BaseActionBarActivity {
 
         if (requestCode != FRAMEWORK_REQUEST_CODE) {
             //return;
+            Log.e("PhoneConOnActiResult", "====>" + requestCode);
             Intent i = new Intent(MainAccountKitPhoneLoginActivity.this, RegisterMainActivity.class);//DrawerMainActivity
             startActivity(i);
-            finish();
+            //finish();
         }
         mEditorUserInfo = mSharedPreferencesUserInfo.edit();
 
@@ -143,17 +162,17 @@ public class MainAccountKitPhoneLoginActivity extends BaseActionBarActivity {
                 String accountKitId = account.getId();
                 PhoneNumber phoneNumber = account.getPhoneNumber();
                 mphoneNumberString = phoneNumber.toString();
-                Log.e("OnActivity Ok","====>" + mphoneNumberString);
+                //Log.e("OnActivity Ok","====>" + mphoneNumberString);
                 if (mphoneNumberString != null && mphoneNumberString != "") {
                     mEditorUserInfo.putString(CommonConfig.USER_PH, mphoneNumberString);
                 }
                 mEditorUserInfo.commit();
 
                 Bundle bundle = new Bundle();
-                bundle.putString(CommonConfig.PHONE_SUCCESS,mphoneNumberString );
+                bundle.putString(CommonConfig.PHONE_SUCCESS, mphoneNumberString);
 
                 Intent i = new Intent(MainAccountKitPhoneLoginActivity.this, RegisterMainActivity.class);//DrawerMainActivity
-                i.putExtra(CommonConfig.PHONE_SUCCESS_BUNDLE,bundle);
+                i.putExtra(CommonConfig.PHONE_SUCCESS_BUNDLE, bundle);
                 startActivity(i);
                 finish();
                 // Get email
@@ -163,7 +182,7 @@ public class MainAccountKitPhoneLoginActivity extends BaseActionBarActivity {
             @Override
             public void onError(final AccountKitError error) {
                 // Handle Error
-                Log.e("OnActivity Errr","====>" + error.toString());
+                //Log.e("OnActivity Errr","====>" + error.toString());
             }
         });
 
@@ -233,7 +252,7 @@ public class MainAccountKitPhoneLoginActivity extends BaseActionBarActivity {
                 };
                 break;
             case PHONE:
-                Log.e("On Click Ph","==Ph===>");
+                Log.e("On Click Ph", "==Ph===>");
                 if (configuration.isReceiveSMSEnabled()) {
                     final OnCompleteListener receiveSMSCompleteListener = completeListener;
                     completeListener = new OnCompleteListener() {
@@ -307,7 +326,7 @@ public class MainAccountKitPhoneLoginActivity extends BaseActionBarActivity {
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(final DialogInterface dialog, final int which) {
-                            requestPermissions(new String[] { permission }, requestCode);
+                            requestPermissions(new String[]{permission}, requestCode);
                         }
                     })
                     .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -320,7 +339,7 @@ public class MainAccountKitPhoneLoginActivity extends BaseActionBarActivity {
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .show();
         } else {
-            requestPermissions(new String[]{ permission }, requestCode);
+            requestPermissions(new String[]{permission}, requestCode);
         }
     }
 

@@ -24,7 +24,6 @@ import android.widget.TextView;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.path.android.jobqueue.JobManager;
-import com.smk.skalertmessage.SKToastMessage;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -277,8 +276,16 @@ public class BaseActionBarActivity extends AppCompatActivity{
 
 			}
 		});
-
 		btn_ok.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				StoreUtil.getInstance().saveTo("feedback", true);
+
+				finish();
+			}
+		});
+
+		/*btn_ok.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
                 if(feedback.getText().length() > 0){
@@ -296,7 +303,7 @@ public class BaseActionBarActivity extends AppCompatActivity{
 
 
 			}
-		});
+		});*/
 	}
 
 	public static int getRatingIcon(Double ratings){

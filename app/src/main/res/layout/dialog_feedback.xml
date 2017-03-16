@@ -20,12 +20,13 @@
             android:layout_height="match_parent">
 
             <org.undp_iwomen.iwomen.ui.widget.CustomTextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/str_write_reviews"
                 android:id="@+id/textView5"
                 android:textColor="@color/white"
+                android:gravity="center"
                 android:textStyle="bold"
                 android:singleLine="true"
                 android:ellipsize="marquee"
@@ -39,6 +40,8 @@
                 android:textColor="@color/white"
                 android:layout_marginTop="24dp"
                 android:textSize="22dp"
+                android:visibility="gone"
+
                 android:text="@string/str_write_feedback" />
 
             <org.undp_iwomen.iwomen.ui.widget.CustomEditText
@@ -48,7 +51,26 @@
                 android:hint="@string/str_your_review"
                 android:textColorHint="@color/white"
                 android:textColor="@color/white"
+                android:visibility="gone"
+
                 android:id="@+id/edt_review" />
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="200dp"
+                android:gravity="center"
+                android:layout_marginTop="30dp"
+                android:background="@color/primary">
+
+                <org.undp_iwomen.iwomen.ui.widget.ResizableImageView
+                    android:id="@+id/edit_profile_img_item"
+                    android:background="@drawable/dialog_thz_u"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    android:layout_gravity="center"
+
+                    />
+            </RelativeLayout>
 
             <RelativeLayout
                 android:orientation="horizontal"
@@ -65,6 +87,7 @@
                     android:background="@android:color/transparent"
                     android:textColor="@color/white"
                     android:textSize="18dp"
+                    android:visibility="gone"
                     android:layout_toLeftOf="@+id/btn_ok"
                     android:layout_alignParentTop="true"
                     android:layout_marginRight="20dp" />
@@ -72,7 +95,7 @@
                 <org.undp_iwomen.iwomen.ui.widget.CustomButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/str_submit"
+                    android:text="@string/str_ok"
                     android:id="@+id/btn_ok"
                     android:layout_gravity="right"
                     android:background="@android:color/transparent"

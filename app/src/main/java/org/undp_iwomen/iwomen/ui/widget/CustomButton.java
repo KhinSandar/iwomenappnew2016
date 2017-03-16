@@ -11,7 +11,7 @@ import org.undp_iwomen.iwomen.utils.StoreUtil;
 
 import retrofit.http.HEAD;
 
-public class CustomButton extends Button{
+public class CustomButton extends android.support.v7.widget.AppCompatButton{
 	public CustomButton(Context context){
 		super(context);
 		if(!isInEditMode()){
