@@ -37,7 +37,7 @@ public class AudioListActivity extends AppCompatActivity {
 
     private List<IWomenPostAudios> iWomenPostList;
     private DataAdapter adaAudio;
-    private CustomTextView textViewTitle;
+   // private CustomTextView textViewTitle;
     private String language;
     private Context mContext;
 
@@ -54,7 +54,9 @@ public class AudioListActivity extends AppCompatActivity {
        language =  i.getStringExtra("language");
 
         SKListView recyclerView = (SKListView)findViewById(R.id.audio_list);
-
+        /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("");
+        textViewTitle = (CustomTextView) toolbar.findViewById(R.id.title_action2);*/
         iWomenPostList = new ArrayList<>();
             for (int count=1; count<=5; count++){
                 audioList.setName("TestingAudio");
@@ -75,13 +77,13 @@ public class AudioListActivity extends AppCompatActivity {
                 visualizerFragment.show(getSupportFragmentManager(), "AudioVisualizer");
             }
         });
-        if (language.equals(Utils.ENG_LANG)) {
+       /* if (language.equals(Utils.ENG_LANG)) {
             textViewTitle.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
             textViewTitle.setText("Audio Lists");
         } else {//FOR Default and Custom
             //textViewTitle.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
             textViewTitle.setText("အသံဖိုင္မ်ား");
-        }
+        }*/
 
     }
 }
