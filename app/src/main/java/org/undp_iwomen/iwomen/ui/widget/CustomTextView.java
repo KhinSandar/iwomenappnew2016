@@ -13,6 +13,7 @@ public class CustomTextView extends android.support.v7.widget.AppCompatTextView{
 		super(context);
 		if(!isInEditMode()){
 			String selected_font = StoreUtil.getInstance().selectFrom("fonts");
+			//Log.e("<<CustomTextView>>","1font-"+ selected_font);
 			if(selected_font != null){
 				if(selected_font.equals("default")){
 
@@ -34,6 +35,8 @@ public class CustomTextView extends android.support.v7.widget.AppCompatTextView{
 		super(context, attrs);
 		if(!isInEditMode()){
 			String selected_font = StoreUtil.getInstance().selectFrom("fonts");
+			//Log.e("<<CustomTextView>>","2font-"+ selected_font);
+
 			if(selected_font != null){
 				if(selected_font.equals("default")){
 

@@ -139,7 +139,7 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
         txtErrorDuplicateNameMsg = (CustomTextView)view.findViewById(R.id.register_fb_error_duplicate_msg);
         txtHead1 = (CustomTextView)view.findViewById(R.id.register_fb_greet1);
 
-        txtHead2 = (CustomTextView)view.findViewById(R.id.register_fb_greet1);
+        txtHead2 = (CustomTextView)view.findViewById(R.id.register_fb_greet2);
 
 
 
