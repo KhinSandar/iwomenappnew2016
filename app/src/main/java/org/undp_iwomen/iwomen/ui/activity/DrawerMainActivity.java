@@ -258,7 +258,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
         }
 
         //TODO USER POST COUNT and USER POINTS
-        getUserPostCount();
+        //getUserPostCount();
         getCompetitionQuestion();
 
         txt_menu_user_post_count.setOnClickListener(new View.OnClickListener() {
@@ -292,8 +292,10 @@ public class DrawerMainActivity extends BaseActionBarActivity {
 
         if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
             txt_sing_out.setText(getResources().getString(R.string.menu_sing_out));
+            txt_menu_user_post_count.setText(getResources().getString(R.string.my_post));
         }else{
             txt_sing_out.setText(getResources().getString(R.string.menu_sing_out_mm));
+            txt_menu_user_post_count.setText(getResources().getString(R.string.my_post_mm));
 
         }
 
