@@ -183,6 +183,10 @@ public class CommonConfig {
     public static final String PHONE_SUCCESS = "phone_success";
     public static final String PHONE_SUCCESS_BUNDLE = "phone_success_b";
 
+    //http://api.iwomenapp.org/api/v1/iWomenPostAudios?post_id=1AqvkXYsJz
+    public static final String GET_AUDIO_LIST_BY_POST_ID_URL="/api/v1/iWomenPostAudios";
+
+
 
 
 }

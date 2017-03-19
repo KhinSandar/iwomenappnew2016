@@ -5,6 +5,7 @@ import com.smk.model.ResourceItem;
 
 import org.smk.model.CalendarEvent;
 import org.smk.model.IWomenPost;
+import org.smk.model.IWomenPostAudios;
 import org.smk.model.LikeItem;
 import org.smk.model.PhotoUpload;
 import org.smk.model.Sticker;
@@ -222,4 +223,10 @@ public interface SMKSeverService {
             @Field("postId") int postId,
             @Field("userId") String userId,
             Callback<ReportPosts> callback);
+
+    @GET(CommonConfig.GET_AUDIO_LIST_BY_POST_ID_URL)
+    void getAudioListByPostIDByPagination(
+            @Query("page") int page,
+            @Query("post_id") String postID,
+            Callback<List<IWomenPostAudios>> callback);
 }

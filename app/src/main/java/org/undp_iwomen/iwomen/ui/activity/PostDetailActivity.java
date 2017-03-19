@@ -19,7 +19,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.BaseColumns;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
@@ -94,7 +93,6 @@ import org.undp_iwomen.iwomen.model.retrofit_api.UserPostAPI;
 import org.undp_iwomen.iwomen.provider.IwomenProviderData;
 import org.undp_iwomen.iwomen.ui.adapter.CommentAdapter;
 import org.undp_iwomen.iwomen.ui.adapter.StickerGridViewAdapter;
-import org.undp_iwomen.iwomen.ui.fragment.AudioVisualizerFragment;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.ui.widget.ProgressWheel;
 import org.undp_iwomen.iwomen.ui.widget.ResizableImageView;
@@ -2620,6 +2618,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
                 if (Connection.isOnline(getApplicationContext())) {
 
 
+                    //TODO next version audiofile careful here
                     //String url = "https://dl.dropboxusercontent.com/u/10281242/sample_audio.mp3"; //Default
                     if (mstrAudioFilePath != null && mstrAudioFilePath.length() > 20) {
 

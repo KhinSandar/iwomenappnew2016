@@ -965,5 +965,7 @@ Make many new friends, contact your local May Doe Kabar/TLG group. See number be
     <string name="register_ph_head2">send you a verification code through SMS.</string>
     <string name="register_ph_head1_mm">သင့္ဖုန္းနံပါတ္ကို ရိုက္ထည့္ပါ။</string>
     <string name="register_ph_head2_mm">ဖုန္း SMS မွတစ္ဆင္ ့ ကုဒ္နံပါတ္ကို ပို ့ေပးပါမည္။</string>
+    <string name="audio_not_availabe_msg_mm">ယခု အသံဖိုင္ မရွိေသးပါ ။</string>
+
 
 </resources>
