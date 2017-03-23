@@ -25,6 +25,7 @@ import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.data.Sample;
 import org.undp_iwomen.iwomen.ui.activity.RegisterMainActivity;
 import org.undp_iwomen.iwomen.ui.adapter.TLGTownshipSpinnerAdapter;
+import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.utils.Connection;
 import org.undp_iwomen.iwomen.utils.Utils;
 
@@ -51,6 +52,8 @@ public class RegisterTlgFragment4 extends Fragment implements View.OnClickListen
     private ProgressDialog mProgressDialog;
     private Spinner spnTLG;
     private String tlgCityID, tlgCityName;
+
+    private CustomTextView txtlblSelectTLGTownship;
 
     public static RegisterTlgFragment4 newInstance(Sample sample) {
 
@@ -94,10 +97,23 @@ public class RegisterTlgFragment4 extends Fragment implements View.OnClickListen
         btn_next = (Button) view.findViewById(R.id.Next);
         btn_tlg_back = (Button)view.findViewById(R.id.register_tlg_back_btn);
         spnTLG = (Spinner) view.findViewById(R.id.register_tlg_spn_township);
+        txtlblSelectTLGTownship = (CustomTextView)view.findViewById(R.id.register_tlg_greet1);
+
         btn_next.setOnClickListener(this);
         btn_tlg_back.setOnClickListener(this);
 
-        setEnglishFont();
+        if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+            setEnglishFont();
+        }else if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.MM_LANG)) {
+            setMyanmarFont();
+        }else if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.MM_LANG_UNI)) {
+            setMyanmarFont();
+
+        }else if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.MM_LANG_DEFAULT)) {
+            setMyanmarFont();
+
+        }
+        //setEnglishFont();
 
         getTlgTownship();
 
@@ -217,10 +233,17 @@ public class RegisterTlgFragment4 extends Fragment implements View.OnClickListen
     public void setEnglishFont() {
         // Set title bar
         ((RegisterMainActivity) getActivity()).textViewTitle.setText(R.string.register_township_title);
+        txtlblSelectTLGTownship.setText(getResources().getString(R.string.register_tlg_greet1));
+        btn_next.setText(getResources().getString(R.string.register_next));
+        btn_tlg_back.setText(getResources().getString(R.string.register_tlg_btn_wrong));
     }
 
     public void setMyanmarFont() {
         // Set title bar
         ((RegisterMainActivity) getActivity()).textViewTitle.setText(R.string.register_township_title);
+        txtlblSelectTLGTownship.setText(getResources().getString(R.string.register_tlg_greet1_mm));
+        btn_next.setText(getResources().getString(R.string.register_next_mm));
+        btn_tlg_back.setText(getResources().getString(R.string.register_tlg_btn_wrong_mm));
+
     }
 }

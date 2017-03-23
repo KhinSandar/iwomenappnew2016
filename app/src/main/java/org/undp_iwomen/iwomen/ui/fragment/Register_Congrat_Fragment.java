@@ -22,6 +22,7 @@ import org.smk.iwomen.TakeAndTourActivity;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.ui.activity.DrawerMainActivity;
 import org.undp_iwomen.iwomen.ui.activity.RegisterMainActivity;
+import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.utils.Utils;
 
 import java.io.IOException;
@@ -42,8 +43,10 @@ public class Register_Congrat_Fragment extends Fragment implements View.OnClickL
     private ZProgressHUD zPDialog;
     private Button btnTakeATour;
 
+    private CustomTextView txtlbl1, txtlbl2, txtlbl3;
 
-    public static Register_Congrat_Fragment newInstance( ) {
+
+    public static Register_Congrat_Fragment newInstance() {
 
         Bundle args = new Bundle();
 
@@ -81,6 +84,22 @@ public class Register_Congrat_Fragment extends Fragment implements View.OnClickL
         btnEnjoyApp = (Button) rootView.findViewById(R.id.Next);
         btnTakeATour = (Button) rootView.findViewById(R.id.register_take_tour);
 
+        txtlbl1 = (CustomTextView) rootView.findViewById(R.id.register_congrat_head_txt);
+        txtlbl2 = (CustomTextView) rootView.findViewById(R.id.register_congrat_head_txt1);
+        txtlbl3 = (CustomTextView) rootView.findViewById(R.id.register_congrat_head_txt2);
+
+
+        if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+            setEnglishFont();
+        } else if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.MM_LANG)) {
+            setMyanmarFont();
+        } else if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.MM_LANG_UNI)) {
+            setMyanmarFont();
+
+        } else if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.MM_LANG_DEFAULT)) {
+            setMyanmarFont();
+
+        }
 
         btnTakeATour.setOnClickListener(this);
         btnEnjoyApp.setOnClickListener(this);
@@ -101,7 +120,6 @@ public class Register_Congrat_Fragment extends Fragment implements View.OnClickL
         } catch (IOException e) {
             e.printStackTrace();
         }
-
 
 
     }
@@ -135,8 +153,6 @@ public class Register_Congrat_Fragment extends Fragment implements View.OnClickL
     }
 
 
-
-
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
@@ -166,10 +182,25 @@ public class Register_Congrat_Fragment extends Fragment implements View.OnClickL
 
         // Set title bar
         ((RegisterMainActivity) getActivity()).textViewTitle.setText(R.string.register_congrat_title);
+
+        txtlbl1.setText(getResources().getString(R.string.register_congrat_eng1));
+        txtlbl2.setText(getResources().getString(R.string.register_congrat_eng2));
+        txtlbl3.setText(getResources().getString(R.string.register_congrat_eng3));
+
+        btnEnjoyApp.setText(getResources().getString(R.string.register_enjoy));
+        btnTakeATour.setText(getResources().getString(R.string.register_tour));
     }
+
     public void setMyanmarFont() {
 
         // Set title bar
-        ((RegisterMainActivity) getActivity()).textViewTitle.setText(R.string.register_congrat_title);
+        ((RegisterMainActivity) getActivity()).textViewTitle.setText(R.string.register_congrat_eng1_mm);
+
+        txtlbl1.setText(getResources().getString(R.string.register_congrat_eng1_mm));
+        txtlbl2.setText(getResources().getString(R.string.register_congrat_eng2_mm));
+        txtlbl3.setText(getResources().getString(R.string.register_congrat_eng3_mm));
+
+        btnEnjoyApp.setText(getResources().getString(R.string.register_enjoy_mm));
+        btnTakeATour.setText(getResources().getString(R.string.register_tour_mm));
     }
 }

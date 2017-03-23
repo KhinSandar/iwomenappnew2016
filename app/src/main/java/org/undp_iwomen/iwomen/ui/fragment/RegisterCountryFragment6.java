@@ -20,6 +20,7 @@ import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.data.Sample;
 import org.undp_iwomen.iwomen.ui.activity.RegisterMainActivity;
+import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.utils.Utils;
 
 /**
@@ -35,6 +36,7 @@ public class RegisterCountryFragment6 extends Fragment implements  View.OnClickL
     private SharedPreferences.Editor mEditorUserInfo;
     private Button btn_next;
     private TextInputLayout mCountryTextInputLayout;
+    private CustomTextView txtLblHeading;
 
     private EditText countryField;
 
@@ -78,9 +80,22 @@ public class RegisterCountryFragment6 extends Fragment implements  View.OnClickL
         btn_next = (Button)view.findViewById(R.id.Next);
         mCountryTextInputLayout = (TextInputLayout) view.findViewById(R.id.register_country_type_input_ly);
         countryField = (EditText) view.findViewById(R.id.register_country_input);
+        txtLblHeading = (CustomTextView) view.findViewById(R.id.register_country_greet1);
+
         btn_next.setOnClickListener(this);
 
-        setEnglishFont();
+        //setEnglishFont();
+        if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+            setEnglishFont();
+        }else if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.MM_LANG)) {
+            setMyanmarFont();
+        }else if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.MM_LANG_UNI)) {
+            setMyanmarFont();
+
+        }else if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.MM_LANG_DEFAULT)) {
+            setMyanmarFont();
+
+        }
 
         return view;
     }
@@ -170,10 +185,19 @@ public class RegisterCountryFragment6 extends Fragment implements  View.OnClickL
 
         // Set title bar
         ((RegisterMainActivity) getActivity()).textViewTitle.setText(R.string.register_country_title);
+        btn_next.setText(getResources().getString(R.string.register_next));
+        txtLblHeading.setText(getResources().getString(R.string.register_country_greet1));
+        countryField.setHint(getResources().getString(R.string.register_country_hint));
+
+
     }
     public void setMyanmarFont() {
 
         // Set title bar
-        ((RegisterMainActivity) getActivity()).textViewTitle.setText(R.string.register_country_title);
+        ((RegisterMainActivity) getActivity()).textViewTitle.setText(R.string.register_country_title_mm);
+        btn_next.setText(getResources().getString(R.string.register_next_mm));
+        txtLblHeading.setText(getResources().getString(R.string.register_country_greet1_mm));
+        countryField.setHint(getResources().getString(R.string.register_country_hint_mm));
+
     }
 }

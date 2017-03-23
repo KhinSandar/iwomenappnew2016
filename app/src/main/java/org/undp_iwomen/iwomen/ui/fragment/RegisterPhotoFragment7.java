@@ -43,6 +43,7 @@ import org.undp_iwomen.iwomen.data.Sample;
 import org.undp_iwomen.iwomen.ui.activity.RegisterMainActivity;
 import org.undp_iwomen.iwomen.ui.adapter.StickerGridViewAdapter;
 import org.undp_iwomen.iwomen.ui.widget.CustomRadioButton;
+import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -99,6 +100,9 @@ public class RegisterPhotoFragment7 extends Fragment implements View.OnClickList
     private String mGenderStatus;
 
 
+    private CustomTextView txtlblgender, txtlblPhotoUpload;
+
+
 
 
 
@@ -144,6 +148,8 @@ public class RegisterPhotoFragment7 extends Fragment implements View.OnClickList
 
         rd_female = (CustomRadioButton) view.findViewById(R.id.register_photo_female);
         rd_male = (CustomRadioButton) view.findViewById(R.id.register_photo_male);
+        txtlblgender = (CustomTextView) view.findViewById(R.id.register_photo_upload_gender_lbl);
+        txtlblPhotoUpload = (CustomTextView) view.findViewById(R.id.register_photo_upload_lbl1);
         register_profilePic_progressBar = (ProgressBar) view.findViewById(R.id.register_photo_profilePic_pgbar);
         register_profilePic_progressBar.setVisibility(View.GONE);
 
@@ -182,7 +188,19 @@ public class RegisterPhotoFragment7 extends Fragment implements View.OnClickList
         progress_wheel_gv.setVisibility(View.GONE);
         LoadStickerData();
 
-        setEnglishFont();
+        //setEnglishFont();
+        if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+            setEnglishFont();
+        }else if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.MM_LANG)) {
+            setMyanmarFont();
+        }else if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.MM_LANG_UNI)) {
+            setMyanmarFont();
+
+        }else if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.MM_LANG_DEFAULT)) {
+            setMyanmarFont();
+
+        }
+        //setEnglishFont();
 
 
         return view;
@@ -364,12 +382,24 @@ public class RegisterPhotoFragment7 extends Fragment implements View.OnClickList
 
         // Set title bar
         ((RegisterMainActivity) getActivity()).textViewTitle.setText(R.string.register_photo_title);
+        txtlblgender.setText(getResources().getString(R.string.register_photo_greet));
+        txtlblPhotoUpload.setText(getResources().getString(R.string.register_photo_upload_greet1));
+        btn_next.setText(getResources().getString(R.string.register_next));
+
+        rd_female.setText(getResources().getString(R.string.register_photo_f));
+        rd_male.setText(getResources().getString(R.string.register_photo_m));
     }
 
     public void setMyanmarFont() {
 
         // Set title bar
         ((RegisterMainActivity) getActivity()).textViewTitle.setText(R.string.register_photo_title);
+        txtlblgender.setText(getResources().getString(R.string.register_photo_greet_mm));
+        txtlblPhotoUpload.setText(getResources().getString(R.string.register_photo_upload_greet1_mm));
+        btn_next.setText(getResources().getString(R.string.register_next_mm));
+
+        rd_female.setText(getResources().getString(R.string.register_photo_f_mm));
+        rd_male.setText(getResources().getString(R.string.register_photo_m_mm));
     }
 
     /**

@@ -73,8 +73,6 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
     private Boolean isError;
 
 
-
-
     public static RegisterLoginFragment1 newInstance(Sample sample) {
 
         Bundle args = new Bundle();
@@ -120,7 +118,7 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
         Bundle bundleArgs = getArguments();
         if (bundleArgs != null) {
             isError = true;
-        }else{
+        } else {
             isError = false;
         }
         mContext = getActivity().getApplicationContext();
@@ -136,22 +134,27 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
         mMobileNoForNrcTextInputLayout = (TextInputLayout) view.findViewById(R.id.register_fb_phone_number);
         usernameField = (EditText) view.findViewById(R.id.register_fb_username_input);
         //mobileNoForNrcField = (EditText) view.findViewById(R.id.register_fb_phone_number_input);
-        txtErrorDuplicateNameMsg = (CustomTextView)view.findViewById(R.id.register_fb_error_duplicate_msg);
-        txtHead1 = (CustomTextView)view.findViewById(R.id.register_fb_greet1);
+        txtErrorDuplicateNameMsg = (CustomTextView) view.findViewById(R.id.register_fb_error_duplicate_msg);
+        txtHead1 = (CustomTextView) view.findViewById(R.id.register_fb_greet1);
 
-        txtHead2 = (CustomTextView)view.findViewById(R.id.register_fb_greet2);
+        txtHead2 = (CustomTextView) view.findViewById(R.id.register_fb_greet2);
 
 
-
-        if(isError){
+        if (isError) {
             txtErrorDuplicateNameMsg.setVisibility(View.VISIBLE);
+            if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+                txtErrorDuplicateNameMsg.setText(getResources().getString(R.string.register_name_duplicate_err));
+            } else {
+                txtErrorDuplicateNameMsg.setText(getResources().getString(R.string.register_name_duplicate_err_mm));
+
+            }
 
 
-        }else{
+        } else {
             txtErrorDuplicateNameMsg.setVisibility(View.GONE);
         }
 
-        try{
+        try {
             loginButton = (LoginButton) view.findViewById(R.id.login_button);
             loginButton.setReadPermissions("public_profile", "email", "user_friends");
             loginButton.setFragment(this);
@@ -172,7 +175,7 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
                     Toast.makeText(getActivity(), "Login error", Toast.LENGTH_SHORT).show();
                 }
             });
-        } catch (Exception e){
+        } catch (Exception e) {
 
         }
 
@@ -213,7 +216,7 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
 
                 MessageDigest md = MessageDigest.getInstance("SHA");
                 md.update(signature.toByteArray());
-                Log.i("TEMPTAGHASH KEY:","FB HashKey : "+ Base64.encodeToString(md.digest(), Base64.DEFAULT));
+                Log.i("TEMPTAGHASH KEY:", "FB HashKey : " + Base64.encodeToString(md.digest(), Base64.DEFAULT));
 
             }
         } catch (PackageManager.NameNotFoundException e) {
@@ -237,11 +240,12 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
 
         //final String mobileNoForNrc = mobileNoForNrcField.getText().toString().trim();
         if (TextUtils.isEmpty(username)) {
-            mUserNameTextInputLayout.setError(getResources().getString(R.string.your_name_error));
 
             if (lang.equals(Utils.ENG_LANG)) {
+                mUserNameTextInputLayout.setError(getResources().getString(R.string.your_name_error));
                 Utils.doToastEng(mContext, getResources().getString(R.string.your_name_error));
             } else if (lang.equals(Utils.MM_LANG)) {
+                mUserNameTextInputLayout.setError(getResources().getString(R.string.your_name_error_mm));
                 Utils.doToastMM(mContext, getResources().getString(R.string.your_name_error_mm));
             }
 

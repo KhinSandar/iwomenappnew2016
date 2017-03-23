@@ -25,6 +25,7 @@ import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.data.Sample;
 import org.undp_iwomen.iwomen.ui.activity.RegisterMainActivity;
+import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.utils.Connection;
 import org.undp_iwomen.iwomen.utils.Utils;
 
@@ -47,6 +48,8 @@ public class RegisterTermsFragment8 extends Fragment implements View.OnClickList
     private TextView txt_iwomen_link ,txt_privacy_link, txt_reg_name_duplicate_err;
 
     private Button btn_next;
+
+    private CustomTextView txtGreet1,txtGreet2 , txtTermsCondition;
 
     int isTlgExit = 0;
 
@@ -94,6 +97,10 @@ public class RegisterTermsFragment8 extends Fragment implements View.OnClickList
         txt_iwomen_link = (TextView)view.findViewById(R.id.register_app_iwomen_txt);
         txt_privacy_link =(TextView)view.findViewById(R.id.register_app_iwomen_txt_2);
 
+        txtGreet1 = (CustomTextView)view.findViewById(R.id.register_terms_greet1);
+        txtGreet2 = (CustomTextView) view.findViewById(R.id.register_terms_greet2);
+        txtTermsCondition = (CustomTextView)view.findViewById(R.id.register_trems_and_condition);
+
         txt_reg_name_duplicate_err = (TextView)view.findViewById(R.id.register_terms_err);
 
         txt_iwomen_link.setText("www.iwomenapp.org");
@@ -102,7 +109,18 @@ public class RegisterTermsFragment8 extends Fragment implements View.OnClickList
         txt_privacy_link.setText("www.iwomenapp.org/Privacy.html");
         Linkify.addLinks(txt_privacy_link, Linkify.WEB_URLS);
 
-        setEnglishFont();
+        if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+            setEnglishFont();
+        }else if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.MM_LANG)) {
+            setMyanmarFont();
+        }else if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.MM_LANG_UNI)) {
+            setMyanmarFont();
+
+        }else if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.MM_LANG_DEFAULT)) {
+            setMyanmarFont();
+
+        }
+        //setEnglishFont();
 
         return view;
     }
@@ -320,11 +338,22 @@ public class RegisterTermsFragment8 extends Fragment implements View.OnClickList
 
         // Set title bar
         ((RegisterMainActivity) getActivity()).textViewTitle.setText(R.string.register_terms_title);
+        txtGreet1.setText(getResources().getString(R.string.register_terms_greet1));
+        txtGreet2.setText(getResources().getString(R.string.register_terms_greet2));
+        txtTermsCondition.setText(getResources().getString(R.string.register_terms_body));
+        btn_next.setText(getResources().getString(R.string.register_next));
+
     }
 
     public void setMyanmarFont() {
 
         // Set title bar
-        ((RegisterMainActivity) getActivity()).textViewTitle.setText(R.string.register_terms_title);
+        ((RegisterMainActivity) getActivity()).textViewTitle.setText(R.string.register_terms_greet2_mm);
+
+        txtGreet1.setText(getResources().getString(R.string.register_terms_greet1_mm));
+        txtGreet2.setText(getResources().getString(R.string.register_terms_greet2_mm));
+        txtTermsCondition.setText(getResources().getString(R.string.register_terms_body_mm));
+        btn_next.setText(getResources().getString(R.string.register_next_mm));
+
     }
 }

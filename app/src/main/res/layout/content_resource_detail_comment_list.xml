@@ -28,7 +28,7 @@
             wheel:matProg_barColor="@color/primary"
             wheel:matProg_progressIndeterminate="true" />
 
-        <ListView
+        <com.smk.sklistview.SKListView
             android:id="@+id/postdetail_comment_listview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

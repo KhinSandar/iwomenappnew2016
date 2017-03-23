@@ -51,11 +51,11 @@ public class WinPrizeActivity extends BaseActionBarActivity {
             textViewTitle.setText(R.string.menu5);
         }
         else if(lang.equals(Utils.MM_LANG)){
-            textViewTitle.setText(R.string.menu5);
+            textViewTitle.setText(R.string.menu5_mm);
         }else if(lang.equals(Utils.MM_LANG_UNI)){
-            textViewTitle.setText(R.string.menu5);
+            textViewTitle.setText(R.string.menu5_mm);
         }else if(lang.equals(Utils.MM_LANG_DEFAULT)){
-            textViewTitle.setText(R.string.menu5);
+            textViewTitle.setText(R.string.menu5_mm);
         }
 
         Intent i = getIntent();

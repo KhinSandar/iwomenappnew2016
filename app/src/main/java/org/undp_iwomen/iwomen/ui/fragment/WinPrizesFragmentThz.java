@@ -50,7 +50,7 @@ public class WinPrizesFragmentThz extends Fragment {
     private String user_name, user_obj_id, user_id, user_role, user_ph, register_msg, user_img_path;
     private ZProgressHUD zPDialog;
 
-    private CustomTextView txt_points, txt_prize_thz_link,txt_prize_thz_link_fb;
+    private CustomTextView txt_points, txt_prize_thz_link, txt_congrat ,txt_visit_lbl, txt_fb_lbl ,txt_prize_thz_link_fb;
     private ListView lv_prize_points;
     private WinPrizeListViewAdapter adapter;
     private CustomButton btn_share;
@@ -112,12 +112,30 @@ public class WinPrizesFragmentThz extends Fragment {
     private void initViewsThz(View rootView) {
 
         mContext = getActivity().getApplicationContext();
+        txt_congrat = (CustomTextView)rootView.findViewById(R.id.menu_setting_name_txt);
         txt_points = (CustomTextView) rootView.findViewById(R.id.win_prize_points);
+        txt_fb_lbl= (CustomTextView) rootView.findViewById(R.id.win_prize_share_suggest_link);
+
         txt_prize_thz_link = (CustomTextView) rootView.findViewById(R.id.win_prize_thz_link);
         txt_prize_thz_link_fb = (CustomTextView) rootView.findViewById(R.id.win_prize_share_link);
         btn_share = (CustomButton)rootView.findViewById(R.id.win_prize_thz_share_btn);
         lv_prize_points = (ListView)rootView.findViewById(R.id.win_prize_lv);
 
+        if (lang.equals(Utils.ENG_LANG)) {
+            txt_congrat.setText(getResources().getString(R.string.competition_congratulation));
+            txt_prize_thz_link.setText(getResources().getString(R.string.prize_visit_more));
+
+            txt_fb_lbl.setText(getResources().getString(R.string.win_prize_share_code_suggestion));
+            btn_share.setText(getResources().getString(R.string.share));
+
+        }else {
+            txt_congrat.setText(getResources().getString(R.string.competition_congratulation_mm));
+            txt_prize_thz_link.setText(getResources().getString(R.string.prize_visit_more_mm));
+            txt_fb_lbl.setText(getResources().getString(R.string.win_prize_share_code_suggestion_mm));
+            btn_share.setText(getResources().getString(R.string.share_mm));
+
+
+        }
 
         txt_prize_thz_link_fb.setText("https://www.facebook.com/iwomenApp");
         Linkify.addLinks(txt_prize_thz_link_fb, Linkify.WEB_URLS);

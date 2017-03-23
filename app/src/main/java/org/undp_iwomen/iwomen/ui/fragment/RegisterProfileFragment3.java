@@ -20,6 +20,7 @@ import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.data.Sample;
 import org.undp_iwomen.iwomen.ui.activity.RegisterMainActivity;
 import org.undp_iwomen.iwomen.ui.widget.CustomRadioButton;
+import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 
 /**
  * Created by lgvalle on 05/09/15.
@@ -36,6 +37,7 @@ public class RegisterProfileFragment3 extends Fragment implements  View.OnClickL
     private RadioGroup radioGroupMM, radioGroupTlg;
     private CustomRadioButton rd_mm_yes, rd_mm_no, rd_tlg_yes, rd_tlg_no , rd_worth_yes, rd_worth_no;
     private LinearLayout ly_pact;
+    private CustomTextView txtMMques, txtWorthques, txtTLGques;
 
     public static RegisterProfileFragment3 newInstance(Sample sample) {
 
@@ -87,6 +89,9 @@ public class RegisterProfileFragment3 extends Fragment implements  View.OnClickL
         rd_worth_yes = (CustomRadioButton)view.findViewById(R.id.register_pro_worth_yes) ;
         rd_worth_no = (CustomRadioButton)view.findViewById(R.id.register_pro_worth_no) ;
         ly_pact = (LinearLayout) view.findViewById(R.id.pact_layout);
+        txtMMques =(CustomTextView)view.findViewById(R.id.register_pro_mm_ques);
+        txtTLGques = (CustomTextView)view.findViewById(R.id.register_pro_tlg_ques);
+        txtWorthques = (CustomTextView) view.findViewById(R.id.register_pro_Worth_ques);
 
         if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
             setEnglishFont();
@@ -250,10 +255,32 @@ public class RegisterProfileFragment3 extends Fragment implements  View.OnClickL
 
         // Set title bar
         ((RegisterMainActivity) getActivity()).textViewTitle.setText(R.string.register_title_profile);
+        txtMMques.setText(getResources().getString(R.string.register_pro_greet1));
+        txtTLGques.setText(getResources().getString(R.string.register_pro_greet2));
+        txtWorthques.setText(getResources().getString(R.string.register_pro_greet3));
+
+        rd_mm_yes.setText(getResources().getString(R.string.register_pro_yes));
+        rd_mm_no.setText(getResources().getString(R.string.register_pro_no));
+        rd_tlg_yes.setText(getResources().getString(R.string.register_pro_yes));
+        rd_tlg_no.setText(getResources().getString(R.string.register_pro_no));
+        rd_worth_yes.setText(getResources().getString(R.string.register_pro_yes));
+        rd_worth_no.setText(getResources().getString(R.string.register_pro_no));
+        btn_next.setText(getResources().getString(R.string.register_next));
     }
     public void setMyanmarFont() {
 
         // Set title bar
         ((RegisterMainActivity) getActivity()).textViewTitle.setText(R.string.register_title_profile_mm);
+        txtMMques.setText(getResources().getString(R.string.register_pro_greet1_mm));
+        txtTLGques.setText(getResources().getString(R.string.register_pro_greet2_mm));
+        txtWorthques.setText(getResources().getString(R.string.register_pro_greet3_mm));
+
+        rd_mm_yes.setText(getResources().getString(R.string.register_pro_yes_mm));
+        rd_mm_no.setText(getResources().getString(R.string.register_pro_no_mm));
+        rd_tlg_yes.setText(getResources().getString(R.string.register_pro_yes_mm));
+        rd_tlg_no.setText(getResources().getString(R.string.register_pro_no_mm));
+        rd_worth_yes.setText(getResources().getString(R.string.register_pro_yes_mm));
+        rd_worth_no.setText(getResources().getString(R.string.register_pro_no_mm));
+        btn_next.setText(getResources().getString(R.string.register_next_mm));
     }
 }

@@ -40,7 +40,7 @@
 
 
                 <org.undp_iwomen.iwomen.ui.widget.CustomTextView
-                    android:id="@+id/register_pro_greet1"
+                    android:id="@+id/register_pro_mm_ques"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="8dp"
@@ -95,7 +95,7 @@
 
 
                 <org.undp_iwomen.iwomen.ui.widget.CustomTextView
-                    android:id="@+id/register_pro_greet2"
+                    android:id="@+id/register_pro_tlg_ques"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="8dp"
@@ -147,7 +147,7 @@
 
 
                 <org.undp_iwomen.iwomen.ui.widget.CustomTextView
-                    android:id="@+id/register_pro_greet3"
+                    android:id="@+id/register_pro_Worth_ques"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="8dp"

@@ -1209,7 +1209,7 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
         }
 
 
-        final List<com.smk.model.CommentItem> comment = StoreUtil.getInstance().selectFrom("commentlist");
+        final List<com.smk.model.CommentItem> comment = StoreUtil.getInstance().selectFrom("CommentList_" + postId);
         if (Connection.isOnline(mContext)) {
             // Showing local data while loading from internet
             if (comment != null && comment.size() > 0) {
@@ -1281,12 +1281,12 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
         } else {
             //SKConnectionDetector.getInstance(this).showErrorMessage();
             //List<Sticker> stickers = StoreUtil.getInstance().selectFrom("StickersList");
-            ArrayList<Sticker> stickers_storgae = (ArrayList<Sticker>) storageUtil.ReadArrayListFromSD("StickersList");
+            /*ArrayList<Sticker> stickers_storgae = (ArrayList<Sticker>) storageUtil.ReadArrayListFromSD("StickersList");
             Log.e("NoInternetStorgaeList", "==>" + stickers_storgae.size());
             if (stickers_storgae.size() > 0) {
                 mAdapter = new StickerGridViewAdapter(this, mContext, stickers_storgae);
                 gridView.setAdapter(mAdapter);
-            }
+            }*/
 
         }
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

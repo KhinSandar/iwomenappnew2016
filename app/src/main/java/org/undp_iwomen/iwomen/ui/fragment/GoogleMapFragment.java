@@ -77,6 +77,7 @@ public class GoogleMapFragment extends Fragment {//
 
     private CustomTextView txtName;
     private CustomTextView txtBody;
+    private CustomTextView txtMdkbfbPage;
     private RoundedImageView profileImg;
     //private ProgressBar profileProgressbar;
     private CustomTextView txtAuthorTitle;
@@ -122,13 +123,29 @@ public class GoogleMapFragment extends Fragment {//
         txtName = (CustomTextView) rootView.findViewById(R.id.map_mdk_name);
         txtAuthorTitle = (CustomTextView) rootView.findViewById(R.id.map_mdy_network);
         txtBody = (CustomTextView) rootView.findViewById(R.id.map_about_mdk);
+        txtMdkbfbPage = (CustomTextView) rootView.findViewById(R.id.txt_mdkb_fb);
         profileImg = (RoundedImageView) rootView.findViewById(R.id.map_profilePic_rounded);
         //profileProgressbar = (ProgressBar) rootView.findViewById(R.id.map_progressBar_profile_item);
         tlgArraylist = new ArrayList<TLGTownship>();
         tlgArraylist = (ArrayList<TLGTownship>) storageUtil.ReadArrayListFromSD("TlgArrayList");
 
 
-        txtBody.setText(getResources().getString(R.string.may_doe_kabar));
+
+        if (mstr_lang.equals(Utils.ENG_LANG)) {
+            txtName.setText(getResources().getString(R.string.may_doe_kabar_name));
+            txtAuthorTitle.setText(getResources().getString(R.string.may_doe_kabar_role_title));
+            txtBody.setText(getResources().getString(R.string.may_doe_kabar));
+
+            txtMdkbfbPage.setText(getResources().getString(R.string.mayDoeKaBarFBPage));
+
+        }else{
+            txtName.setText(getResources().getString(R.string.may_doe_kabar_name_mm));
+            txtAuthorTitle.setText(getResources().getString(R.string.may_doe_kabar_role_title_mm));
+            txtBody.setText(getResources().getString(R.string.may_doe_kabar_mm));
+
+            txtMdkbfbPage.setText(getResources().getString(R.string.mayDoeKaBarFBPage_mm));
+        }
+
         if (!isGooglePlayServicesAvailable()) {
             Log.e("Google Map not ok", "==>");
             SKToastMessage.showMessage(getActivity(), getResources().getString(R.string.google_not_support), SKToastMessage.ERROR);

@@ -23,6 +23,7 @@ import org.undp_iwomen.iwomen.data.CityForShow;
 import org.undp_iwomen.iwomen.data.Sample;
 import org.undp_iwomen.iwomen.ui.activity.RegisterMainActivity;
 import org.undp_iwomen.iwomen.ui.adapter.StateSpinnerAdapter;
+import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 
 import java.util.ArrayList;
 
@@ -41,6 +42,7 @@ public class RegisterStateFragment5 extends Fragment implements  View.OnClickLis
 
     private Spinner spn_state;
     private String stateName;
+    private CustomTextView txtLbl;
     public static RegisterStateFragment5 newInstance(Sample sample) {
 
         Bundle args = new Bundle();
@@ -79,10 +81,23 @@ public class RegisterStateFragment5 extends Fragment implements  View.OnClickLis
         mSharedPreferencesUserInfo = getActivity().getSharedPreferences(CommonConfig.SHARE_PREFERENCE_USER_INFO, Context.MODE_PRIVATE);
 
         btn_next = (Button)view.findViewById(R.id.Next);
+        txtLbl = (CustomTextView)view.findViewById(R.id.register_state_greet1);
         spn_state = (Spinner)view.findViewById(R.id.register_state_state_spn);
         btn_next.setOnClickListener(this);
 
-        setEnglishFont();
+
+        if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+            setEnglishFont();
+        }else if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.MM_LANG)) {
+            setMyanmarFont();
+        }else if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.MM_LANG_UNI)) {
+            setMyanmarFont();
+
+        }else if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.MM_LANG_DEFAULT)) {
+            setMyanmarFont();
+
+        }
+        //setEnglishFont();
         bindSpinnerAdapter(spn_state);
 
         return view;
@@ -200,10 +215,15 @@ public class RegisterStateFragment5 extends Fragment implements  View.OnClickLis
 
         // Set title bar
         ((RegisterMainActivity) getActivity()).textViewTitle.setText(R.string.register_state_title);
+        txtLbl.setText(getResources().getString(R.string.register_state_greet1));
+        btn_next.setText(getResources().getString(R.string.register_next));
     }
     public void setMyanmarFont() {
 
         // Set title bar
-        ((RegisterMainActivity) getActivity()).textViewTitle.setText(R.string.register_state_title);
+        ((RegisterMainActivity) getActivity()).textViewTitle.setText(R.string.register_state_title_mm);
+        txtLbl.setText(getResources().getString(R.string.register_state_greet1_mm));
+
+        btn_next.setText(getResources().getString(R.string.register_next));
     }
 }

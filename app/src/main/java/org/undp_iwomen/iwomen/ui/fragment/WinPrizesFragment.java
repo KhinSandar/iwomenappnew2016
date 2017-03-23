@@ -38,6 +38,7 @@ public class WinPrizesFragment extends Fragment {
     private CustomButton btnSubmit;
     private TextView txt_Prize1;
     private CustomEditText et_code;
+    private CustomTextView txt_lbl_code;
     private TextInputLayout mCodeTextInputLayout;
 
     private SharedPreferences mSharedPreferencesUserInfo;
@@ -118,8 +119,18 @@ public class WinPrizesFragment extends Fragment {
         mContext = getActivity().getApplicationContext();
         btnSubmit = (CustomButton)rootView.findViewById(R.id.win_prize_submit_btn);
         et_code = (CustomEditText) rootView.findViewById(R.id.win_prize_code_input);
+        txt_lbl_code = (CustomTextView)rootView.findViewById(R.id.menu_setting_name_txt);
+
         mCodeTextInputLayout = (TextInputLayout)rootView.findViewById(R.id.win_prize_code_input_ly);
 
+        if (lang.equals(Utils.ENG_LANG)) {
+            txt_lbl_code.setText(getResources().getString(R.string.win_prize_enter_code));
+            btnSubmit.setText(getResources().getString(R.string.competition_submit));
+        }else {
+            txt_lbl_code.setText(getResources().getString(R.string.win_prize_enter_code_mm));
+            btnSubmit.setText(getResources().getString(R.string.competition_submit_mm));
+
+        }
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

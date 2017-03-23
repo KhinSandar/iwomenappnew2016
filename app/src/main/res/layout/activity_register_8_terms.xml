@@ -40,7 +40,7 @@
 
 
                 <org.undp_iwomen.iwomen.ui.widget.CustomTextView
-                    android:id="@+id/register_pwd_greet1"
+                    android:id="@+id/register_terms_greet1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="8dp"
@@ -51,7 +51,7 @@
                     android:textStyle="bold" />
 
                 <org.undp_iwomen.iwomen.ui.widget.CustomTextView
-                    android:id="@+id/register_pwd_greet2"
+                    android:id="@+id/register_terms_greet2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="8dp"

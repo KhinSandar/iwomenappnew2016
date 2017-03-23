@@ -120,6 +120,7 @@
             android:layout_marginBottom="16dp"
             >
             <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                android:id="@+id/txt_mdkb_fb"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/mayDoeKaBarFBPage"

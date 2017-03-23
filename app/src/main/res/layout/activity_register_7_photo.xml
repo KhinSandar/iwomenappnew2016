@@ -24,7 +24,7 @@
 
 
         <org.undp_iwomen.iwomen.ui.widget.CustomTextView
-            android:id="@+id/register_pro_greet2"
+            android:id="@+id/register_photo_upload_gender_lbl"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="8dp"
@@ -121,7 +121,7 @@
 
 
         <org.undp_iwomen.iwomen.ui.widget.CustomTextView
-            android:id="@+id/register_country_greet1"
+            android:id="@+id/register_photo_upload_lbl1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="8dp"

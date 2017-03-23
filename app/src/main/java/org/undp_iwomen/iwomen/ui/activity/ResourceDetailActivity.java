@@ -27,7 +27,6 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -44,6 +43,7 @@ import com.google.gson.Gson;
 import com.makeramen.RoundedImageView;
 import com.smk.model.CommentItem;
 import com.smk.skalertmessage.SKToastMessage;
+import com.smk.sklistview.SKListView;
 import com.squareup.picasso.Picasso;
 import com.thuongnh.zprogresshud.ZProgressHUD;
 
@@ -128,7 +128,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
     private boolean alreadySticker = false;
 
     //TODO Comment
-    ListView listView_Comment;
+    SKListView listView_Comment;
     private int paginater = 1;
     private List<com.smk.model.CommentItem> listComment;
     private CommentAdapter adapter;
@@ -157,6 +157,26 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
     private ProgressBar feed_item_progressBar;
     View comment_View;
 
+    //FOR Pagination
+    private boolean isLoading = true;
+    private SKListView.Callbacks skCallbacks = new SKListView.Callbacks() {
+        @Override
+        public void onScrollState(int scrollSate) {
+
+        }
+
+        @Override
+        public void onScrollChanged(int scrollY) {
+
+        }
+
+        @Override
+        public void onNextPageRequest() {
+            if (!isLoading) {
+                getCommentByPagination();
+            }
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -197,25 +217,6 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
 
         gridView.setOnScrollListener(this);
 
-        final List<com.smk.model.CommentItem> comment = StoreUtil.getInstance().selectFrom("commentlist");
-        if (Connection.isOnline(mContext)) {
-            // Showing local data while loading from internet
-            if (comment != null && comment.size() > 0) {
-                listComment.addAll(comment);
-                adapter.notifyDataSetChanged();
-                zPDialog = new ZProgressHUD(this);
-                zPDialog.show();
-            }
-
-            getCommentByPagination();
-        } else {
-            //SKConnectionDetector.getInstance(this).showErrorMessage();
-            if (comment != null) {
-                listComment.clear();
-                listComment.addAll(comment);
-                adapter.notifyDataSetChanged();
-            }
-        }
 
     }
 
@@ -407,7 +408,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
         }
 
         //Linn Wah
-        listView_Comment = (ListView) findViewById(R.id.postdetail_comment_listview);
+        listView_Comment = (SKListView) findViewById(R.id.postdetail_comment_listview);
         img_viber_share = (ImageView) findViewById(R.id.social_no_ear_viber_img);
         img_viber_share.setOnClickListener(this);
 
@@ -559,21 +560,33 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
 
         });
 
-        /*final LayoutInflater layoutInflater = getParent().getLayoutInflater();
-        comment_View = layoutInflater.inflate(R.layout.special_content_stories_list_item, null);
-        Snackbar snackbar = Snackbar
-                .make(comment_View, "Message is deleted", Snackbar.LENGTH_LONG)
-                .setAction("UNDO", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Snackbar snackbar1 = Snackbar.make(comment_View, "Message is restored!", Snackbar.LENGTH_SHORT);
-                        snackbar1.show();
-                    }
-                });
+        listComment = new ArrayList<>();
+        adapter = new CommentAdapter(ResourceDetailActivity.this, listComment);
+        listView_Comment.setAdapter(adapter);
+        listView_Comment.setCallbacks(skCallbacks);
+        listView_Comment.setNextPage(true);
+        adapter.notifyDataSetChanged();
 
-        snackbar.show();*/
-        /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show();*/
+        final List<com.smk.model.CommentItem> comment = StoreUtil.getInstance().selectFrom("commentlist_" +postObjId);
+        if (Connection.isOnline(mContext)) {
+            // Showing local data while loading from internet
+            if (comment != null && comment.size() > 0) {
+                listComment.addAll(comment);
+                adapter.notifyDataSetChanged();
+                zPDialog = new ZProgressHUD(this);
+                zPDialog.show();
+            }
+
+            getCommentByPagination();
+        } else {
+            //SKConnectionDetector.getInstance(this).showErrorMessage();
+            if (comment != null) {
+                listComment.clear();
+                listComment.addAll(comment);
+                adapter.notifyDataSetChanged();
+            }
+        }
+
 
     }
 
@@ -609,7 +622,7 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
                     }
                     Helper.getListViewSize(listView_Comment);
 
-                    StoreUtil.getInstance().saveTo("commentlist", listComment);
+                    StoreUtil.getInstance().saveTo("commentlist_" +postObjId, listComment);
                     //TODO get sticker for comment
                     if (!alreadySticker)
                         LoadStickerData();
@@ -947,12 +960,12 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
         } else {
             //SKConnectionDetector.getInstance(this).showErrorMessage();
             //List<Sticker> stickers = StoreUtil.getInstance().selectFrom("StickersList");
-            ArrayList<Sticker> stickers_storgae = (ArrayList<Sticker>) storageUtil.ReadArrayListFromSD("StickersList");
+            /*ArrayList<Sticker> stickers_storgae = (ArrayList<Sticker>) storageUtil.ReadArrayListFromSD("StickersList");
             Log.e("NoInternetStorgaeList", "==>" + stickers_storgae.size());
             if (stickers_storgae.size() > 0) {
                 mAdapter = new StickerGridViewAdapter(this, mContext, stickers_storgae);
                 gridView.setAdapter(mAdapter);
-            }
+            }*/
 
         }
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

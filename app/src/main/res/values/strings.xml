@@ -323,7 +323,7 @@
     <string name="register_title_pwd_mm">လွ်ိဳ ့၀ွက္ စာလံုုး</string>
     <string name="register_country_title_mm">နိုုင္ငံ</string>
     <string name="register_township_title_mm">TLG/SRG Township</string>
-    <string name="register_state_title_mm">State</string>
+    <string name="register_state_title_mm">ၿပည္နယ္ႏွင္ ့တိုင္း</string>
     <string name="register_photo_title_mm">Upload Photo</string>
     <string name="register_terms_title_mm">Terms and Condition</string>
     <string name="register_congrat_title_mm">Congratulations</string>
@@ -979,5 +979,62 @@ Make many new friends, contact your local May Doe Kabar/TLG group. See number be
 
     <string name="register_ph_hint_password_input_hint_mm">လွ်ိဳ ့၀ွက္ စာလံုုး</string>
     <string name="register_ph_hint_confirm_password_input_hint_mm">လ်ိဳ ့ ၀ွက္ စာလံုုးေနာက္တစ္ၾကိမ္ၿပန္ရိုုက္ပါ</string>
+
+    <string name="register_pro_greet1_mm">သင္ျမန္မာႏုိင္ငံကလား</string>
+    <string name="register_pro_greet2_mm">သင္ကTLG/SRGအဖြဲ႕ဝင္ျဖစ္ပါသလား</string>
+    <string name="register_pro_greet3_mm">သင္ အမ်ိဳးသမီး စြမ္းအားျမွင့္ အဖဲြ႕၀င္ ဟုတ္ပါသလား။</string>
+
+    <string name="register_pro_yes_mm">ဟုတ္ပါတယ္</string>
+    <string name="register_pro_no_mm">မဟုတ္ပါ</string>
+
+    <string name="register_tlg_greet1_mm">သင့္ရဲ့TLG/SRGၿမိဳ႕နယ္ကိုေရြးပါ</string>
+    <string name="register_tlg_btn_wrong_mm">သင္ကTLG/SRGအဖြဲ႕ဝင္မဟုတ္ပါကဒီမွာႏွိပ္ပါ</string>
+
+    <string name="register_country_greet1_mm">သင့္တိုင္းျပည္ကိုရိုက္ထည့္ပါ</string>
+    <string name="register_country_hint_mm"> သင့္တိုင္းျပည္ကိုရိုက္ထည့္ပါ</string>
+
+    <string name="register_photo_greet_mm">က်ား /မ  ေရြးခ်ယ္ပါ။ ?</string>
+    <string name="register_photo_upload_greet1_mm">ေက်းဇူးျပဳ ၿပီးသင့္ဓါတ္ပုံကိုuploadလုပ္ပါ</string>
+
+    <string name="register_photo_f_mm">မ</string>
+    <string name="register_photo_m_mm">က်ား</string>
+
+    <string name="register_terms_greet1_mm">ေအာက္ပါတို႔ကိုသေဘာတူပါသလား</string>
+    <string name="register_terms_greet2_mm">သေဘာတူညီခ်က္မ်ား</string>
+
+    <string name="register_terms_body_mm">သင္သည္ iWomen Application ကိုု ေဒါင္းလုုတ္ခ်ျပီးသည္နွင့္ တျပိဳင္နက္ ကၽြနုု္ပ္ တိုု႕၏ စည္းမ်ဥ္းမ်ားကိုု နားလည္ လက္ခံျပီးျဖစ္ပါသည္။
+ပိုုမိုုဖတ္ရႈရန္ </string>
+
+    <string name="register_congrat_eng1_mm">ဂုဏ္ယူပါတယ္</string>
+    <string name="register_congrat_eng2_mm">သင္ဟာအခုခ်ိန္မွစတင္ၿပီး</string>
+    <string name="register_congrat_eng3_mm">စြမ္းရည္ျမင့္မားသူတစ္ေယာက္ျဖစ္ပါသည္</string>
+
+    <string name="register_enjoy_mm">Appကိုခံစားၾကည့္ပါ</string>
+    <string name="register_tour_mm">အသံုးျပဳပံု</string>
+
+    <string name="may_doe_kabar_name">May Doe Kabar</string>
+    <string name="may_doe_kabar_role_title">National Network of Rural Myanmar Women</string>
+
+    <string name="may_doe_kabar_name_mm">ေမတို႕ကမာၻ </string>
+    <string name="may_doe_kabar_role_title_mm">ႏုိင္ငံလံုးဆိုင္ရာ ေက်းလက္အမ်ိဳးသမီးမ်ားကြန္ယက္</string>
+    <string name="may_doe_kabar_mm">ေမတို႔ကမၻာသည္ ေက်းရြာအေျချပဳ အမ်ိဳးသမီးကိုယ့္အားကိုယ္ကိုး အုပ္စုမ်ား(SRGs) ႏွင့္ ယင္းတို႔ကို ေပါင္းစည္းထားေသာ ၿမိဳ႕နယ္ ဦးေဆာင္အုပ္စုမ်ား (TLGs) ကို ခ်ိတ္ဆက္ထားေသာ ႏိုင္ငံလံုး ဆိုင္ရာ ကြန္ယက္တစ္ခု ျဖစ္ပါသည္။ ဤကြန္ယက္သည္ ျမစ္၀ကၽြန္းေပၚ ၊ အပူပိုင္းဇုန္၊ ခ်င္း၊ ကခ်င္၊ ကယား၊ မြန္၊ ရခိုင္ႏွင့္ ရွမ္းျပည္နယ္တို႔မွ ၿမိဳ႕နယ္ေပါင္း ၃၁ ၿမိဳ႕နယ္ရွိ ေက်းရြာေပါင္း ၂,၀၀၀ မွ အဖဲြ႕၀င္ေပါင္း ၂၂,၀၀၀ ကို လႊမ္းျခံဳခ်ိတ္ဆက္ထားပါသည္။ </string>
+
+    <string name="mayDoeKaBarFBPage_mm">ေမတို႕ကမာၻ Page ကို Like လုပ္ပါ</string>
+
+    <string name="win_prize_enter_code_mm">သူငယ္ခ်င္း app ေပးသူ ၏ ကုတ္ ကိုရိုုက္ထည့္ပါ။</string>
+    <string name="competition_submit_mm">ေပးပို႕မည္</string>
+
+    <string name="prize_visit_more_mm">ဆုုမ်ားအေသးစိတ္ၾကည့္ရန္ <a href="https://www.facebook.com/iwomenApp"></a></string>
+    <string name="win_prize_share_code_suggestion_mm">အမွတ္ရရန္ ဒီေနရာကိုု ႏွိပ္ပီး သင္ ့ကုတ္ကိုု မွ်ေ၀ႏိုင္ပါသည္။</string>
+    <string name="share_mm">ရွဲရန္</string>
+
+    <string name="register_state_greet1_mm">ေက်းဇူးျပဳ ၿပီးသင့္ျပည္နယ္/တိုင္းကိုေရြးပါ</string>
+
+    <string name="register_name_duplicate_err_mm">အမည္တူ ရွိေနပါသၿဖင့္ မိမိနာမယ္အေနာက္တြင္နံပါတ္စဥ္တပ္၍ အေကာင္ ့အသစ္ဖြင့္ႏိုုင္ပါသည္။ဥပမာ - ညိဳညိဳ၁၂၃၄</string>
+
+
+
+
+
 
 </resources>
