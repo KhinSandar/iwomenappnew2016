@@ -404,6 +404,8 @@ public class GoogleMapFragment extends Fragment {//
 
         this.menu = menu;
         this.menu.findItem(R.id.action_rating).setVisible(false);
+        this.menu.findItem(R.id.action_menu_search).setVisible(false);
+
 
     }
 

@@ -20,7 +20,6 @@ import org.smk.model.User;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.data.PrizePointsItem;
-import org.undp_iwomen.iwomen.model.Helper;
 import org.undp_iwomen.iwomen.model.retrofit_api.SMKserverAPI;
 import org.undp_iwomen.iwomen.ui.adapter.WinPrizeListViewAdapter;
 import org.undp_iwomen.iwomen.ui.widget.CustomButton;
@@ -213,8 +212,8 @@ public class WinPrizesFragmentThz extends Fragment {
                     padding.setMinimumHeight(20);
                     lv_prize_points.addFooterView(padding);
                     lv_prize_points.setAdapter(adapter);
-                    //setListViewHeightBasedOnChildren(lv_prize_points);
-                    Helper.getListViewSize(lv_prize_points);
+                    setListViewHeightBasedOnChildren(lv_prize_points);
+                    //Helper.getListViewSize(lv_prize_points);
 
                 }
 

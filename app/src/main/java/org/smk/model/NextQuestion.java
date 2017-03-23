@@ -3,7 +3,9 @@ package org.smk.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class NextQuestion {
+import java.io.Serializable;
+
+public class NextQuestion implements Serializable {
 
 @SerializedName("id")
 @Expose

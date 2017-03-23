@@ -66,6 +66,8 @@ public class SisterAppFragment extends Fragment {
     private StorageUtil storageUtil;
     private ZProgressHUD zPDialog;
     List<SisterAppItem> StoragesisterAppItems;
+    private Menu menu;
+
 
     //private ProgressDialog mProgressDialog;
 
@@ -406,6 +408,9 @@ public class SisterAppFragment extends Fragment {
 
 
         inflater.inflate(R.menu.refresh_menu, menu);
+        this.menu = menu;
+
+        this.menu.findItem(R.id.action_menu_search).setVisible(false);
 
     }
 

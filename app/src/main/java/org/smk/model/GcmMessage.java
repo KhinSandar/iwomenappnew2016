@@ -1,8 +1,11 @@
 package org.smk.model;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class GcmMessage {
+import java.io.Serializable;
+
+public class GcmMessage implements Serializable {
 
     @SerializedName("_token")
     @Expose

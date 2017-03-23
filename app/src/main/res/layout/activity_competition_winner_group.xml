@@ -31,7 +31,7 @@
                 android:src="@drawable/sticker3" />
 
             <org.undp_iwomen.iwomen.ui.widget.CustomTextView
-                android:id="@+id/textView1"
+                android:id="@+id/winner_txt_congrat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/competition_congratulation"
@@ -39,7 +39,7 @@
                 android:textColor="@color/competition_text_color" />
 
             <org.undp_iwomen.iwomen.ui.widget.CustomTextView
-                android:id="@+id/textView2"
+                android:id="@+id/winner_txt_winner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/competition_vertical_margin"
@@ -64,7 +64,7 @@
                 android:orientation="vertical" >
 
                 <org.undp_iwomen.iwomen.ui.widget.CustomTextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/winner_txt_win_ans"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/competition_winning_answer"

@@ -3,7 +3,9 @@ package org.smk.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class AccessToken {
+import java.io.Serializable;
+
+public class AccessToken implements Serializable {
 
 @SerializedName("access_token")
 @Expose

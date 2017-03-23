@@ -20,6 +20,7 @@ import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.data.Sample;
 import org.undp_iwomen.iwomen.ui.activity.RegisterMainActivity;
+import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.utils.Utils;
 
 public class RegisterPwdFragment2 extends Fragment implements View.OnClickListener{
@@ -38,6 +39,8 @@ public class RegisterPwdFragment2 extends Fragment implements View.OnClickListen
     private TextInputLayout mConfirmPasswordTextInputLayout;
     private int minPasswordLength;
     private static final int DEFAULT_MIN_PASSWORD_LENGTH = 6;
+
+    private CustomTextView txtGreet1, txtGreet2;
 
 
     public static RegisterPwdFragment2 newInstance(Sample sample) {
@@ -82,6 +85,8 @@ public class RegisterPwdFragment2 extends Fragment implements View.OnClickListen
 
         mPasswordTextInputLayout = (TextInputLayout) view.findViewById(R.id.register_pwd_input_ly);
         mConfirmPasswordTextInputLayout = (TextInputLayout) view.findViewById(R.id.register_pwd_con_input_ly);
+        txtGreet1 = (CustomTextView)view.findViewById(R.id.register_pwd_greet1);
+        txtGreet2 = (CustomTextView)view.findViewById(R.id.register_pwd_greet2);
 
         btn_next.setOnClickListener(this);
         //Sample sample = (Sample) getArguments().getSerializable(EXTRA_SAMPLE);
@@ -89,7 +94,13 @@ public class RegisterPwdFragment2 extends Fragment implements View.OnClickListen
         //ImageView squareBlue = (ImageView) view.findViewById(R.id.square_blue);
         //DrawableCompat.setTint(squareBlue.getDrawable(), sample.color);
 
-        setEnglishFont();
+        //setEnglishFont();
+        if (lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+            setEnglishFont();
+
+        }else{
+            setMyanmarFont();
+        }
         return view;
     }
 
@@ -209,10 +220,23 @@ public class RegisterPwdFragment2 extends Fragment implements View.OnClickListen
 
         // Set title bar
         ((RegisterMainActivity) getActivity()).textViewTitle.setText(R.string.register_title_pwd);
+        txtGreet1.setText(getResources().getString(R.string.register_pwd_greet1));
+        txtGreet2.setText(getResources().getString(R.string.register_pwd_greet2));
+
+        btn_next.setText(getResources().getString(R.string.register_next));
+        passwordField.setHint(getResources().getString(R.string.register_ph_hint_password_input_hint));
+        confirmPasswordField.setHint(getResources().getString(R.string.register_ph_hint_confirm_password_input_hint));
+
     }
     public void setMyanmarFont() {
 
         // Set title bar
         ((RegisterMainActivity) getActivity()).textViewTitle.setText(R.string.register_title_pwd);
+        txtGreet1.setText(getResources().getString(R.string.register_pwd_greet1_mm));
+        txtGreet2.setText(getResources().getString(R.string.register_pwd_greet2_mm));
+        btn_next.setText(getResources().getString(R.string.register_next_mm));
+        passwordField.setHint(getResources().getString(R.string.register_ph_hint_password_input_hint_mm));
+        confirmPasswordField.setHint(getResources().getString(R.string.register_ph_hint_confirm_password_input_hint_mm));
+
     }
 }

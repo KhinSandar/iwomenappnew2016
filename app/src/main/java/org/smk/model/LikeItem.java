@@ -3,7 +3,9 @@ package org.smk.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class LikeItem {
+import java.io.Serializable;
+
+public class LikeItem implements Serializable {
 
 @SerializedName("postId")
 @Expose

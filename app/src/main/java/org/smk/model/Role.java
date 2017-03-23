@@ -3,7 +3,9 @@ package org.smk.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Role {
+import java.io.Serializable;
+
+public class Role implements Serializable {
 
 @SerializedName("id")
 @Expose

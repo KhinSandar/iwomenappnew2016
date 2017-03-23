@@ -1,6 +1,8 @@
 package org.smk.model;
 
-public class Download {
+import java.io.Serializable;
+
+public class Download implements Serializable {
 	private Boolean status;
 	private Integer totalSize;
 	private Integer finishedSize;

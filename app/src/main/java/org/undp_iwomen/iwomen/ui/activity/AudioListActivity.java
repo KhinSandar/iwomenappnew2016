@@ -71,6 +71,11 @@ public class AudioListActivity extends BaseActionBarActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
         textViewTitle = (CustomTextView) toolbar.findViewById(R.id.title_action2);
+        if (toolbar != null) {
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
         initViews();
     }
 
@@ -225,7 +230,7 @@ public class AudioListActivity extends BaseActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.refresh_menu, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -236,15 +241,13 @@ public class AudioListActivity extends BaseActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        /*
-        //When click on back , out from Activity
         if (item.getItemId() == android.R.id.home) {
 
             finish();
             return true;
 
 
-        }*/
+        }
 
 
         return super.onOptionsItemSelected(item);

@@ -78,7 +78,6 @@ import java.util.List;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-import retrofit.http.HEAD;
 
 
 public class ResourceDetailActivity extends BaseActionBarActivity implements View.OnClickListener, AbsListView.OnScrollListener {
@@ -541,9 +540,14 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
                     } else {
                         //TODO Audio File Null case
                         // TODO Auto-generated method stub
-                        SKToastMessage.showMessage(ResourceDetailActivity.this, getResources().getString(R.string.audio_not_availabe_msg), SKToastMessage.INFO);
+                        //SKToastMessage.showMessage(ResourceDetailActivity.this, getResources().getString(R.string.audio_not_availabe_msg), SKToastMessage.INFO);
 
+                        if (strLang.equals(Utils.ENG_LANG)) {
+                            Utils.doToastEng(getApplicationContext(), getResources().getString(R.string.audio_not_availabe_msg));
+                        } else {
 
+                            Utils.doToastMM(getApplicationContext(), getResources().getString(R.string.audio_not_availabe_msg_mm));
+                        }
                     }
 
 

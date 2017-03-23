@@ -414,7 +414,8 @@ public class CompetitionSubmitAnswerActivity extends BaseActionBarActivity imple
 		image_upload_question.setText(getResources().getString(R.string.str_upload_image));
 		image_upload_question.setTag(image_upload_view.getId());
 		image_upload_question.setBackgroundResource(android.R.color.transparent);
-		image_upload_question.setTextSize(22f);
+		image_upload_question.setTextSize(18f);
+		image_upload_question.setTextColor(getResources().getColor(R.color.competition_text_color));
 		image_upload_question.setCompoundDrawablePadding(16);
 		image_upload_question.setCompoundDrawablesWithIntrinsicBounds( R.drawable.ic_competition_camera, 0, 0, 0);
 		image_upload_question.setOnClickListener(new View.OnClickListener() {
@@ -481,7 +482,8 @@ public class CompetitionSubmitAnswerActivity extends BaseActionBarActivity imple
 		audio_upload_question.setTag(audio_upload_question.getId());
 		audio_upload_question.setText(getResources().getString(R.string.str_upload_audio));
 		audio_upload_question.setBackgroundResource(android.R.color.transparent);
-		audio_upload_question.setTextSize(22f);
+		audio_upload_question.setTextSize(18f);
+		audio_upload_question.setTextColor(getResources().getColor(R.color.competition_text_color));
 		audio_upload_question.setCompoundDrawablePadding(16);
 		audio_upload_question.setCompoundDrawablesWithIntrinsicBounds( R.drawable.ic_competition_audio, 0, 0, 0);
 		audio_upload_question.setOnClickListener(new View.OnClickListener() {

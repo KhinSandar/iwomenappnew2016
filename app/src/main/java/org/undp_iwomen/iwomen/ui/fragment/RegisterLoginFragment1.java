@@ -348,6 +348,8 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
         //Set Type Face
 
         usernameField.setTypeface(MyTypeFace.get(getActivity().getApplicationContext(), MyTypeFace.NORMAL));
+        btn_next.setText(getResources().getString(R.string.register_next));
+
         //mobileNoForNrcField.setTypeface(MyTypeFace.get(getActivity().getApplicationContext(), MyTypeFace.NORMAL));
 
 
@@ -365,6 +367,7 @@ public class RegisterLoginFragment1 extends Fragment implements View.OnClickList
         //Set Type Face
         usernameField.setTypeface(MyTypeFace.get(getActivity().getApplicationContext(), MyTypeFace.ZAWGYI));
         //mobileNoForNrcField.setTypeface(MyTypeFace.get(getActivity().getApplicationContext(), MyTypeFace.ZAWGYI));
+        btn_next.setText(getResources().getString(R.string.register_next_mm));
 
 
     }

@@ -966,6 +966,18 @@ Make many new friends, contact your local May Doe Kabar/TLG group. See number be
     <string name="register_ph_head1_mm">သင့္ဖုန္းနံပါတ္ကို ရိုက္ထည့္ပါ။</string>
     <string name="register_ph_head2_mm">ဖုန္း SMS မွတစ္ဆင္ ့ ကုဒ္နံပါတ္ကို ပို ့ေပးပါမည္။</string>
     <string name="audio_not_availabe_msg_mm">ယခု အသံဖိုင္ မရွိေသးပါ ။</string>
+    <string name="audio_not_available_msg_women_post_mm">ယခုပို႔စ္တြင္အသံဖိုင္မပါပါ။အသံဖိုင္တင္လိုလွ်င္ပို႔စ္အသစ္ေရးသည့္အခ်ိန္တြင္အသံသြင္းေသာခလုတ္ကိုႏိွပ္ပါ</string>
 
+    <string name="competition_congratulation_mm">ဂုဏ္ယူပါတယ္</string>
+    <string name="competition_winner_mm">အႏိုင္ရ အဖြဲ႕</string>
+    <string name="competition_winning_answer_mm">အႏိုင္ရသူ၏ အေျဖ</string>
+
+    <!-- Register -->
+    <string name="register_pwd_greet1_mm">လၽွို႔ဝွက္စကားလုံးထည့္ပါ</string>
+    <string name="register_pwd_greet2_mm">လၽွို႔ဝွက္စကားလုံးအနည္းဆုံးေျခာက္လုံးရွိရပါမည္</string>
+    <string name="register_next_mm">ေနာက္တစ္ဆင့္</string>
+
+    <string name="register_ph_hint_password_input_hint_mm">လွ်ိဳ ့၀ွက္ စာလံုုး</string>
+    <string name="register_ph_hint_confirm_password_input_hint_mm">လ်ိဳ ့ ၀ွက္ စာလံုုးေနာက္တစ္ၾကိမ္ၿပန္ရိုုက္ပါ</string>
 
 </resources>

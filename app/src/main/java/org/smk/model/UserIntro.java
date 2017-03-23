@@ -1,9 +1,11 @@
 package org.smk.model;
 
+import java.io.Serializable;
+
 /**
  * Created by SMK on 5/9/2016.
  */
-public class UserIntro {
+public class UserIntro implements Serializable {
     private int drawable;
     private String description;
 

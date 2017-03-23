@@ -2643,10 +2643,23 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
                         //TODO Audio File Null case
                         // TODO Auto-generated method stub
                         if (postType.equalsIgnoreCase("iWomenPost")) {
-                            SKToastMessage.showMessage(PostDetailActivity.this, getResources().getString(R.string.audio_not_availabe_msg), SKToastMessage.INFO);
+                            if (strLang.equals(Utils.ENG_LANG)) {
+                                Utils.doToastEng(getApplicationContext(), getResources().getString(R.string.audio_not_availabe_msg));
+                            } else {
+
+                                Utils.doToastMM(getApplicationContext(), getResources().getString(R.string.audio_not_availabe_msg_mm));
+                            }
+
+                            //SKToastMessage.showMessage(PostDetailActivity.this, getResources().getString(R.string.audio_not_availabe_msg), SKToastMessage.INFO);
 
                         }else{
-                            SKToastMessage.showMessage(PostDetailActivity.this, getResources().getString(R.string.audio_not_available_msg_women_post), SKToastMessage.INFO);
+                            if (strLang.equals(Utils.ENG_LANG)) {
+                                Utils.doToastEng(getApplicationContext(), getResources().getString(R.string.audio_not_available_msg_women_post));
+                            } else {
+
+                                Utils.doToastMM(getApplicationContext(), getResources().getString(R.string.audio_not_available_msg_women_post_mm));
+                            }
+                            //SKToastMessage.showMessage(PostDetailActivity.this, getResources().getString(R.string.audio_not_available_msg_women_post), SKToastMessage.INFO);
 
                         }
 

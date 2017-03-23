@@ -3,7 +3,9 @@ package com.smk.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class CommentItem {
+import java.io.Serializable;
+
+public class CommentItem implements Serializable {
 
     @SerializedName("id")
     @Expose

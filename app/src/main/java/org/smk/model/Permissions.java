@@ -3,7 +3,9 @@ package org.smk.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Permissions {
+import java.io.Serializable;
+
+public class Permissions implements Serializable {
 
 @SerializedName("user.create")
 @Expose

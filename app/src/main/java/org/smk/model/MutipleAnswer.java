@@ -1,9 +1,11 @@
 package org.smk.model;
 
+import java.io.Serializable;
+
 /**
  * Created by SMK on 3/5/2016.
  */
-public class MutipleAnswer {
+public class MutipleAnswer implements Serializable {
     private int id;
     private String answer;
 

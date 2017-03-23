@@ -388,7 +388,7 @@ public class TLGUserPostRecentFragment extends Fragment implements View.OnClickL
             this.menu.findItem(R.id.action_rating).setIcon(BaseActionBarActivity.getRatingIcon(TLGUserPostRecentFragment.avgRatings.getTotalRatings()));
 
         }
-
+        this.menu.findItem(R.id.action_menu_search).setVisible(false);
         /*final MenuItem item = menu.add(0, 12, 0, "Search");
         //menu.removeItem(12);
         item.setIcon(R.drawable.ic_action_search);

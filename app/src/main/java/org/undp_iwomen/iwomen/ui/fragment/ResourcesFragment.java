@@ -659,6 +659,8 @@ public class ResourcesFragment extends Fragment {
         inflater.inflate(R.menu.refresh_menu, menu);
         this.menu = menu;
         this.menu.findItem(R.id.action_rating).setVisible(false);
+        this.menu.findItem(R.id.action_menu_search).setVisible(false);
+
 
     }
 

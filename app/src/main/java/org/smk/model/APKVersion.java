@@ -3,7 +3,9 @@ package org.smk.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class APKVersion {
+import java.io.Serializable;
+
+public class APKVersion implements Serializable {
 
 @SerializedName("id")
 @Expose
