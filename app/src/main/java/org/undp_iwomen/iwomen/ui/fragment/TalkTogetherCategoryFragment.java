@@ -20,6 +20,7 @@ import com.thuongnh.zprogresshud.ZProgressHUD;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.smk.application.StoreUtil;
 import org.smk.clientapi.NetworkEngine;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
@@ -127,7 +128,8 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
         gridView.setAdapter(mAdapter);
 
 
-        List<Categories> categories = (ArrayList<Categories>) storageUtil.ReadArrayListFromSD("Categories");
+
+        final List<Categories> categories = StoreUtil.getInstance().selectFrom("Categories");//(ArrayList<Categories>) storageUtil.ReadArrayListFromSD("Categories");
         if (Connection.isOnline(ctx)) {
             if (categories != null && categories.size() > 0) {
                 CategoriesModelList.addAll(categories);
@@ -210,7 +212,9 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
 
                     final ArrayList<Categories> storageCategoryModelList = new ArrayList<Categories>();
                     storageCategoryModelList.addAll(CategoriesModelList);
-                    storageUtil.SaveArrayListToSD("Categories", storageCategoryModelList);
+
+                    StoreUtil.getInstance().saveTo("Categories" , storageCategoryModelList);
+                    //storageUtil.SaveArrayListToSD("Categories", storageCategoryModelList);
 
                     if (mAdapter == null) {
                         mAdapter = new TalkTogetherGridViewAdapter(getActivity(), ctx, CategoriesModelList, mstr_lang);
@@ -234,7 +238,8 @@ public class TalkTogetherCategoryFragment extends android.support.v4.app.Fragmen
         } else {
 
             //SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
-            List<Categories> categories = (ArrayList<Categories>) storageUtil.ReadArrayListFromSD("Categories");
+            //List<Categories> categories = (ArrayList<Categories>) storageUtil.ReadArrayListFromSD("Categories");
+            final List<Categories> categories = StoreUtil.getInstance().selectFrom("Categories");
             //CategoriesModelList = (ArrayList<Categories>) storageUtil.ReadArrayListFromSD("Categories");
             Log.e("NoInterntCategoryList", "==>" + categories.size());
 

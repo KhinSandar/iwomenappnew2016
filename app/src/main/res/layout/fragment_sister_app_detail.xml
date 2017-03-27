@@ -2,8 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/white"
+    android:orientation="vertical"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin">
@@ -13,34 +13,77 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:scrollbars="none"
-        android:paddingBottom="8dp">
+        android:paddingBottom="8dp"
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <FrameLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_marginBottom="8dp"
-                android:layout_height="80dp">
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
-                <ImageView
-                    android:layout_width="80dp"
+                <FrameLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="80dp"
-                    android:src="@drawable/sample_circle" />
-            </FrameLayout>
+                    android:layout_marginBottom="8dp">
 
-            <TextView
+                    <com.makeramen.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/sister_app_img"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/blank_profile"
+                        android:visibility="visible"
+                        app:riv_border_color="#333333"
+                        app:riv_border_width="0dip"
+                        app:riv_corner_radius="30dip"
+                        app:riv_mutate_background="true"
+                        app:riv_oval="true"></com.makeramen.RoundedImageView>
+                    <ProgressBar
+                        android:id="@+id/sister_app_img_progress_Bar"
+                        style="?android:attr/progressBarStyle"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_gravity="left"
+                        android:visibility="visible" />
+
+                </FrameLayout>
+
+                <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                    android:id="@+id/sister_app_txt_app_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:paddingTop="8dp"
+                    android:text="Bindez"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                android:id="@+id/sister_app_txt_app_about"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/large_text" />
         </LinearLayout>
     </ScrollView>
 
-    <Button
-        android:id="@+id/button_skip"
+    <org.undp_iwomen.iwomen.ui.widget.CustomButton
+        android:id="@+id/sister_app_btn_download"
         style="?android:borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

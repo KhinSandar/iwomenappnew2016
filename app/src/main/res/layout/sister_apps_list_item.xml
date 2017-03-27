@@ -1,73 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:emojicon="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="8dp"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin">
+    android:orientation="vertical">
 
-    <FrameLayout
-        android:id="@+id/sister_app_fy"
 
-        android:layout_width="@dimen/feed_item_profile_pic"
-        android:layout_height="@dimen/feed_item_profile_pic">
-
-        <org.undp_iwomen.iwomen.ui.widget.ResizableImageView
-            android:id="@+id/sister_app_logo_img"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentLeft="true"
-            android:layout_marginRight="8dp"
-            android:src="@drawable/place_holder" />
-
-        <ProgressBar
-            android:id="@+id/sister_app_logo_img_progress"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="@dimen/feed_item_profile_pic"
-            android:layout_height="@dimen/feed_item_profile_pic"
-
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_gravity="left"
-            android:visibility="visible" />
-    </FrameLayout>
-
-    <!--<org.undp_iwomen.iwomen.ui.widget.CustomTextView
-        android:id="@+id/custom_comment_name"
-        android:layout_width="wrap_content"
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:text="Khin Khin"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:layout_toRightOf="@id/sister_app_logo_img"/>-->
+        android:layout_marginBottom="3dp"
+        android:layout_marginLeft="@dimen/feed_item_margin"
+        android:layout_marginRight="@dimen/feed_item_margin"
+        android:layout_marginTop="@dimen/feed_item_margin"
+        android:orientation="vertical"
+        card_view:cardCornerRadius="4dp">
 
-    <org.undp_iwomen.iwomen.ui.widget.CustomTextView
-        android:id="@+id/sister_app_txt_app_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_toRightOf="@id/sister_app_fy"
-        android:paddingTop="8dp"
-        android:text="Bindez"
-        android:textColor="@color/secondary_text"
-        android:textSize="22sp"
+        <LinearLayout
 
-        android:textStyle="bold" />
+            android:id="@+id/ly_list_head"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
 
-    <org.undp_iwomen.iwomen.ui.widget.CustomTextView
-        android:id="@+id/sister_app_txt_download"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/sister_app_txt_app_name"
-        android:layout_alignParentRight="true"
-        android:paddingTop="8dp"
-        android:text="Download"
-        android:textColor="@color/border_color" />
+            android:layout_weight="5.33"
+            android:orientation="horizontal"
+            android:padding="5dp">
 
-</RelativeLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+
+                android:id="@+id/ly_sister">
+                <FrameLayout
+                    android:id="@+id/sister_app_fy"
+                    android:layout_width="@dimen/feed_item_profile_pic"
+                    android:layout_height="@dimen/feed_item_profile_pic">
+
+                    <org.undp_iwomen.iwomen.ui.widget.ResizableImageView
+                        android:id="@+id/sister_app_logo_img"
+                        android:layout_width="@dimen/feed_item_profile_pic"
+                        android:layout_height="@dimen/feed_item_profile_pic"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginRight="8dp"
+                        android:src="@drawable/place_holder" />
+
+                    <ProgressBar
+                        android:id="@+id/sister_app_logo_img_progress"
+                        style="?android:attr/progressBarStyle"
+                        android:layout_width="@dimen/feed_item_profile_pic"
+                        android:layout_height="@dimen/feed_item_profile_pic"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_gravity="left"
+                        android:visibility="visible" />
+                </FrameLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+
+                >
+            <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                android:id="@+id/sister_app_txt_app_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_toRightOf="@id/ly_sister"
+                android:paddingTop="8dp"
+                android:text="Bindez"
+                android:textColor="@color/secondary_text"
+                android:textSize="22sp"
+
+                android:textStyle="bold" />
+
+                <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                    android:id="@+id/sister_app_txt_about"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/sister_app_txt_app_name"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="16dp"
+
+                    android:paddingTop="8dp"
+                    android:text="Download"
+                    android:textColor="@color/secondary_text" />
+
+            <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                android:id="@+id/sister_app_txt_discover"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/sister_app_txt_app_name"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="16dp"
+
+                android:text="@string/dicover"
+                android:textColor="@color/secondary_text" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+    </android.support.v7.widget.CardView>
+</LinearLayout>

@@ -5,7 +5,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.util.Linkify;
@@ -21,6 +20,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.pnikosis.materialishprogress.ProgressWheel;
 import com.smk.model.SisterAppItem;
 import com.smk.sklistview.SKListView;
@@ -29,11 +29,12 @@ import com.thuongnh.zprogresshud.ZProgressHUD;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.smk.application.StoreUtil;
 import org.smk.clientapi.NetworkEngine;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.model.Helper;
 import org.undp_iwomen.iwomen.model.retrofit_api.UserPostAPI;
-import org.undp_iwomen.iwomen.ui.activity.AboutUsWebActivity;
+import org.undp_iwomen.iwomen.ui.activity.SisterAppDetailActivity;
 import org.undp_iwomen.iwomen.ui.adapter.SisterAppListAdapter;
 import org.undp_iwomen.iwomen.utils.Connection;
 import org.undp_iwomen.iwomen.utils.StorageUtil;
@@ -65,7 +66,7 @@ public class SisterAppFragment extends Fragment {
     private TextView txt_undp_link;
     private StorageUtil storageUtil;
     private ZProgressHUD zPDialog;
-    List<SisterAppItem> StoragesisterAppItems;
+    //List<SisterAppItem> StoragesisterAppItems;
     private Menu menu;
 
 
@@ -119,7 +120,7 @@ public class SisterAppFragment extends Fragment {
         progress = (ProgressWheel) rootView.findViewById(R.id.sister_progress_wheel);
         sisterAppItemList = new ArrayList<>();
 
-        sisterAppListAdapter = new SisterAppListAdapter(getActivity(), sisterAppItemList);
+        sisterAppListAdapter = new SisterAppListAdapter(getActivity(), sisterAppItemList,mstr_lang);
 
         lv_sister.setAdapter(sisterAppListAdapter);
         lv_sister.setCallbacks(skCallbacks);
@@ -128,7 +129,8 @@ public class SisterAppFragment extends Fragment {
 
 
         //StoragesisterAppItems = StoreUtil.getInstance().selectFrom("SisterAppList");
-        StoragesisterAppItems = (ArrayList<SisterAppItem>) storageUtil.ReadArrayListFromSD("SisterAppList");
+        //StoragesisterAppItems = (ArrayList<SisterAppItem>) storageUtil.ReadArrayListFromSD("SisterAppList");
+        final List<SisterAppItem> StoragesisterAppItems = StoreUtil.getInstance().selectFrom("SisterAppList");
         if (Connection.isOnline(mContext)){
             // Showing local data while loading from internet
             if(StoragesisterAppItems != null && StoragesisterAppItems.size() > 0){
@@ -173,10 +175,10 @@ public class SisterAppFragment extends Fragment {
         }*/
         lv_sister.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long l) {
 
                 try {
-                    if (sisterAppItemList.get(i).getAppPackageName() != null && !sisterAppItemList.get(i).getAppPackageName().isEmpty()) {
+                    /*if (sisterAppItemList.get(i).getAppPackageName() != null && !sisterAppItemList.get(i).getAppPackageName().isEmpty()) {
 
                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + sisterAppItemList.get(i).getAppPackageName())));
                     } else {
@@ -186,7 +188,15 @@ public class SisterAppFragment extends Fragment {
                         intent2.putExtra("URL", sisterAppItemList.get(i).getAppLink());
                         startActivity(intent2);
 
-                    }
+                    }*/
+                    Intent intent = new Intent(mContext, SisterAppDetailActivity.class);
+
+                    intent.putExtra("SisterObj", new Gson().toJson(parent.getAdapter().getItem(position)));
+
+                    //intent.putExtra(EventDetailFragment.EXTRA_ID, sisterAppItemList.get(position).getId());
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    mContext.startActivity(intent);
                 } catch (ActivityNotFoundException e) {
 
                 }
@@ -215,7 +225,9 @@ public class SisterAppFragment extends Fragment {
                     //StoreUtil.getInstance().saveTo("SisterAppList", sisterAppItemList);
                     final ArrayList<SisterAppItem> storagelist = new ArrayList<SisterAppItem>();
                     storagelist.addAll(sisterAppItemList);
-                    storageUtil.SaveArrayListToSD("SisterAppList", storagelist);
+
+                    StoreUtil.getInstance().saveTo("SisterAppList" , storagelist);
+                    //storageUtil.SaveArrayListToSD("SisterAppList", storagelist);
                     if (sisterAppItems.size() == 12) {
                         lv_sister.setNextPage(true);
                         paginater++;
@@ -243,8 +255,9 @@ public class SisterAppFragment extends Fragment {
             });
 
         }else {
-            //SKConnectionDetector.getInstance(getActivity()).showErrorMessage();
-            List<SisterAppItem> storagelist = (ArrayList < SisterAppItem >) storageUtil.ReadArrayListFromSD("SisterAppList");
+
+            //List<SisterAppItem> storagelist = (ArrayList < SisterAppItem >) storageUtil.ReadArrayListFromSD("SisterAppList");
+            final List<SisterAppItem> storagelist = StoreUtil.getInstance().selectFrom("SisterAppList");
             if(storagelist != null){
                 sisterAppItemList.clear();
                 sisterAppItemList.addAll(storagelist);
@@ -340,7 +353,7 @@ public class SisterAppFragment extends Fragment {
                             }
                         } else {
                             storageUtil.SaveArrayListToSD("SisterAppArrayList", sisterAppItemList);
-                            sisterAppListAdapter = new SisterAppListAdapter(mContext, sisterAppItemList);
+                            sisterAppListAdapter = new SisterAppListAdapter(mContext, sisterAppItemList,mstr_lang);
                             lv_sister.setAdapter(sisterAppListAdapter);
                             View padding = new View(getActivity().getApplicationContext());
                             padding.setMinimumHeight(20);

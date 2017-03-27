@@ -23,10 +23,12 @@ public class SisterAppListAdapter extends BaseAdapter {
 
     List<SisterAppItem> datalist;
     private Context mContext;
+    String mstr_lang;
 
-    public SisterAppListAdapter(Context context, List<SisterAppItem> dl){
+    public SisterAppListAdapter(Context context, List<SisterAppItem> dl ,String typeFaceName){
         this.datalist = dl;
         mContext = context;
+        mstr_lang = typeFaceName;
     }
 
     @Override
@@ -57,7 +59,10 @@ public class SisterAppListAdapter extends BaseAdapter {
             vh = new ViewHolder();
             vh.imgApp = (ResizableImageView) view.findViewById(R.id.sister_app_logo_img);
             vh.tv_name = (TextView) view.findViewById(R.id.sister_app_txt_app_name);
-            vh.tv_download = (TextView) view.findViewById(R.id.sister_app_txt_download);
+
+
+            vh.tv_discover = (TextView) view.findViewById(R.id.sister_app_txt_discover);
+            vh.tv_about = (TextView) view.findViewById(R.id.sister_app_txt_about);
             vh.progressBar = (ProgressBar)view.findViewById(R.id.sister_app_logo_img_progress);
 
             view.setTag(vh);
@@ -66,7 +71,18 @@ public class SisterAppListAdapter extends BaseAdapter {
             vh = (ViewHolder) view.getTag();
         }
 
-        vh.tv_name.setText(datalist.get(i).getAppName());//
+        if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+            vh.tv_name.setText(datalist.get(i).getAppName());//
+            vh.tv_about.setText(datalist.get(i).getAppAbout());
+            vh.tv_discover.setText(mContext.getResources().getString(R.string.dicover));
+        }else{
+            vh.tv_name.setText(datalist.get(i).getAppNameMM());//
+            vh.tv_about.setText(datalist.get(i).getAppAboutMM());
+            vh.tv_discover.setText(mContext.getResources().getString(R.string.dicover_mm));
+
+        }
+
+
 
 
         // Feed image
@@ -97,8 +113,8 @@ public class SisterAppListAdapter extends BaseAdapter {
 
 
 
-        vh.tv_download.setClickable(true);
-        vh.tv_download.setOnClickListener(new View.OnClickListener() {
+        vh.tv_discover.setClickable(true);
+        vh.tv_discover.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Utils.doToastEng(mContext,"OnCLickDownload");
@@ -112,7 +128,7 @@ public class SisterAppListAdapter extends BaseAdapter {
 
     public class ViewHolder{
         ResizableImageView imgApp;
-        TextView tv_name , tv_download;
+        TextView tv_name , tv_discover,tv_about;
         ProgressBar progressBar;
 
     }

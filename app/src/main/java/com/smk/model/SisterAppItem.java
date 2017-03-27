@@ -5,217 +5,213 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class SisterAppItem implements Serializable{
+public class SisterAppItem implements Serializable {
 
-@SerializedName("id")
-@Expose
-private Integer id;
-@SerializedName("objectId")
-@Expose
-private String objectId;
-@SerializedName("app_img")
-@Expose
-private String appImg;
-@SerializedName("app_link")
-@Expose
-private String appLink;
-@SerializedName("app_name")
-@Expose
-private String appName;
-@SerializedName("app_package_name")
-@Expose
-private String appPackageName;
-@SerializedName("isAllow")
-@Expose
-private Boolean isAllow;
-@SerializedName("created_at")
-@Expose
-private String createdAt;
-@SerializedName("updated_at")
-@Expose
-private String updatedAt;
-@SerializedName("deleted_at")
-@Expose
-private Object deletedAt;
+    @SerializedName("id")
+    @Expose
+    private Integer id;
+    @SerializedName("objectId")
+    @Expose
+    private String objectId;
+    @SerializedName("app_img")
+    @Expose
+    private String appImg;
+    @SerializedName("app_link")
+    @Expose
+    private String appLink;
+    @SerializedName("app_name")
+    @Expose
+    private String appName;
+    @SerializedName("app_name_mm")
+    @Expose
+    private String appNameMM;
 
-/**
-* 
-* @return
-* The id
-*/
-public Integer getId() {
-return id;
-}
+    @SerializedName("app_about_mm")
+    @Expose
+    private String appAboutMM;
 
-/**
-* 
-* @param id
-* The id
-*/
-public void setId(Integer id) {
-this.id = id;
-}
+    @SerializedName("app_about")
+    @Expose
+    private String appAbout;
 
-/**
-* 
-* @return
-* The objectId
-*/
-public String getObjectId() {
-return objectId;
-}
+    @SerializedName("app_package_name")
+    @Expose
+    private String appPackageName;
+    @SerializedName("isAllow")
+    @Expose
+    private Boolean isAllow;
+    @SerializedName("created_at")
+    @Expose
+    private String createdAt;
+    @SerializedName("updated_at")
+    @Expose
+    private String updatedAt;
+    @SerializedName("deleted_at")
+    @Expose
+    private Object deletedAt;
 
-/**
-* 
-* @param objectId
-* The objectId
-*/
-public void setObjectId(String objectId) {
-this.objectId = objectId;
-}
+    /**
+     * @return The id
+     */
+    public Integer getId() {
+        return id;
+    }
 
-/**
-* 
-* @return
-* The appImg
-*/
-public String getAppImg() {
-return appImg;
-}
+    /**
+     * @param id The id
+     */
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-/**
-* 
-* @param appImg
-* The app_img
-*/
-public void setAppImg(String appImg) {
-this.appImg = appImg;
-}
+    /**
+     * @return The objectId
+     */
+    public String getObjectId() {
+        return objectId;
+    }
 
-/**
-* 
-* @return
-* The appLink
-*/
-public String getAppLink() {
-return appLink;
-}
+    /**
+     * @param objectId The objectId
+     */
+    public void setObjectId(String objectId) {
+        this.objectId = objectId;
+    }
 
-/**
-* 
-* @param appLink
-* The app_link
-*/
-public void setAppLink(String appLink) {
-this.appLink = appLink;
-}
+    /**
+     * @return The appImg
+     */
+    public String getAppImg() {
+        return appImg;
+    }
 
-/**
-* 
-* @return
-* The appName
-*/
-public String getAppName() {
-return appName;
-}
+    /**
+     * @param appImg The app_img
+     */
+    public void setAppImg(String appImg) {
+        this.appImg = appImg;
+    }
 
-/**
-* 
-* @param appName
-* The app_name
-*/
-public void setAppName(String appName) {
-this.appName = appName;
-}
+    /**
+     * @return The appLink
+     */
+    public String getAppLink() {
+        return appLink;
+    }
 
-/**
-* 
-* @return
-* The appPackageName
-*/
-public String getAppPackageName() {
-return appPackageName;
-}
+    /**
+     * @param appLink The app_link
+     */
+    public void setAppLink(String appLink) {
+        this.appLink = appLink;
+    }
 
-/**
-* 
-* @param appPackageName
-* The app_package_name
-*/
-public void setAppPackageName(String appPackageName) {
-this.appPackageName = appPackageName;
-}
+    /**
+     * @return The appName
+     */
+    public String getAppName() {
+        return appName;
+    }
 
-/**
-* 
-* @return
-* The isAllow
-*/
-public Boolean getIsAllow() {
-return isAllow;
-}
+    /**
+     * @param appName The app_name
+     */
+    public void setAppName(String appName) {
+        this.appName = appName;
+    }
 
-/**
-* 
-* @param isAllow
-* The isAllow
-*/
-public void setIsAllow(Boolean isAllow) {
-this.isAllow = isAllow;
-}
+    public String getAppNameMM() {
+        return appNameMM;
+    }
 
-/**
-* 
-* @return
-* The createdAt
-*/
-public String getCreatedAt() {
-return createdAt;
-}
+    public void setAppNameMM(String appNameMM) {
+        this.appNameMM = appNameMM;
+    }
 
-/**
-* 
-* @param createdAt
-* The created_at
-*/
-public void setCreatedAt(String createdAt) {
-this.createdAt = createdAt;
-}
+    public String getAppAboutMM() {
+        return appAboutMM;
+    }
 
-/**
-* 
-* @return
-* The updatedAt
-*/
-public String getUpdatedAt() {
-return updatedAt;
-}
+    public void setAppAboutMM(String appAboutMM) {
+        this.appAboutMM = appAboutMM;
+    }
 
-/**
-* 
-* @param updatedAt
-* The updated_at
-*/
-public void setUpdatedAt(String updatedAt) {
-this.updatedAt = updatedAt;
-}
+    public String getAppAbout() {
+        return appAbout;
+    }
 
-/**
-* 
-* @return
-* The deletedAt
-*/
-public Object getDeletedAt() {
-return deletedAt;
-}
+    public void setAppAbout(String appAbout) {
+        this.appAbout = appAbout;
+    }
 
-/**
-* 
-* @param deletedAt
-* The deleted_at
-*/
-public void setDeletedAt(Object deletedAt) {
-this.deletedAt = deletedAt;
-}
+    /**
+     * @return The appPackageName
+     */
+    public String getAppPackageName() {
+        return appPackageName;
+    }
+
+    /**
+     * @param appPackageName The app_package_name
+     */
+    public void setAppPackageName(String appPackageName) {
+        this.appPackageName = appPackageName;
+    }
+
+    /**
+     * @return The isAllow
+     */
+    public Boolean getIsAllow() {
+        return isAllow;
+    }
+
+    /**
+     * @param isAllow The isAllow
+     */
+    public void setIsAllow(Boolean isAllow) {
+        this.isAllow = isAllow;
+    }
+
+    /**
+     * @return The createdAt
+     */
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    /**
+     * @param createdAt The created_at
+     */
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    /**
+     * @return The updatedAt
+     */
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
+    /**
+     * @param updatedAt The updated_at
+     */
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    /**
+     * @return The deletedAt
+     */
+    public Object getDeletedAt() {
+        return deletedAt;
+    }
+
+    /**
+     * @param deletedAt The deleted_at
+     */
+    public void setDeletedAt(Object deletedAt) {
+        this.deletedAt = deletedAt;
+    }
 
 }
