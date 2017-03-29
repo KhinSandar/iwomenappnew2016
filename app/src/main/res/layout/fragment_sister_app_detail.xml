@@ -29,7 +29,7 @@
                 <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="80dp"
-                    android:layout_marginBottom="8dp">
+                    >
 
                     <com.makeramen.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                         android:id="@+id/sister_app_img"
@@ -56,26 +56,28 @@
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentTop="true"
-                        android:layout_gravity="left"
+                        android:layout_gravity="left|center"
+
                         android:visibility="visible" />
 
                 </FrameLayout>
 
                 <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                     android:id="@+id/sister_app_txt_app_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="left|center"
                     android:layout_marginLeft="16dp"
-                    android:paddingTop="8dp"
                     android:text="Bindez"
-                    android:textColor="@color/secondary_text"
-                    android:textSize="22sp"
+                    android:textColor="@color/sister_app_text"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
             <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                 android:id="@+id/sister_app_txt_app_about"
 
+                android:paddingTop="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/large_text" />

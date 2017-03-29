@@ -13,10 +13,12 @@
         android:id="@+id/ly_list_head"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="2dp"
 
         android:orientation="horizontal"
-        android:padding="3dp">
+        android:padding="3dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <FrameLayout
             android:layout_width="wrap_content"

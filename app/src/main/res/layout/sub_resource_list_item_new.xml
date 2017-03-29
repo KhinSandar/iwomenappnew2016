@@ -19,40 +19,6 @@
         android:orientation="horizontal"
         android:padding="10dp">
 
-        <!--<FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <com.makeramen.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/sub_resouce_list_item_img"
-                android:layout_width="72dp"
-                android:layout_height="72dp"
-
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_gravity="center"
-                android:gravity="center_horizontal"
-                android:scaleType="fitXY"
-                android:src="@drawable/blank_profile"
-                android:visibility="visible"
-                app:riv_border_color="#333333"
-                app:riv_border_width="0dip"
-                app:riv_corner_radius="30dip"
-                app:riv_mutate_background="true"
-                app:riv_oval="true"></com.makeramen.RoundedImageView>
-            <ProgressBar
-                android:id="@+id/sub_resouce_list_item_progressBar"
-                style="?android:attr/progressBarStyle"
-                android:layout_width="72dp"
-                android:layout_height="72dp"
-
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_gravity="left"
-                android:visibility="visible" />
-        </FrameLayout>-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -65,36 +31,22 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <!--<org.undp_iwomen.iwomen.ui.widget.CustomTextView
-                    android:id="@+id/sub_resouce_list_item_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="10dp"
-                    android:ellipsize="end"
-                    android:maxEms="30"
-                    android:maxLines="1"
-                    android:paddingBottom="16dp"
-                    android:paddingRight="5dp"
-                    android:paddingTop="16dp"
-                    android:text="Name"
-                    android:textColor="@color/black"
-                    android:textSize="16dp" />-->
+
                 <LinearLayout
-                    android:paddingBottom="16dp"
-                    android:paddingTop="16dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:paddingBottom="16dp"
+                    android:paddingTop="16dp">
 
                     <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                         android:id="@+id/sub_resouce_list_item_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Title"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                         android:textColor="@color/text_sub_head_color"
-                        android:textStyle="bold"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+                        android:textStyle="bold" />
 
                     <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                         android:id="@+id/sub_resouce_list_item_author"
@@ -102,47 +54,14 @@
                         android:layout_height="wrap_content"
                         android:paddingTop="8dp"
                         android:text="By @author name"
-                        android:textColor="@color/text_sub_head_color"
-                        android:textStyle="normal"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                         />
+                        android:textColor="@color/text_sub_head_color"
+                        android:textStyle="normal" />
 
                 </LinearLayout>
             </LinearLayout>
 
-            <!--<LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
 
-                <org.undp_iwomen.iwomen.ui.widget.CustomTextView
-                    android:id="@+id/sub_resouce_list_item_author_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Change Theme"
-                    android:visibility="gone" />
-
-                <org.undp_iwomen.iwomen.ui.widget.CustomTextView
-                    android:id="@+id/sub_resouce_list_item_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Change Theme"
-                    android:visibility="gone" />
-            </LinearLayout>-->
-
-            <!--<org.undp_iwomen.iwomen.ui.widget.CustomTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="New Text"
-                android:id="@+id/resource_item_text"
-                android:layout_marginLeft="16dp"
-                android:textColor="@color/secondary_text"
-                android:ellipsize="end"
-                android:maxEms="30"
-                android:maxLines="3"/>-->
         </LinearLayout>
 
 

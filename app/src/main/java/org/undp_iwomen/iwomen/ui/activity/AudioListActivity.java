@@ -89,7 +89,7 @@ public class AudioListActivity extends BaseActionBarActivity {
 
         if (mstr_lang.equals(Utils.ENG_LANG)) {
             textViewTitle.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
-            textViewTitle.setText("Audio Lists");
+            textViewTitle.setText("Audio List");
         } else {//FOR Default and Custom
             textViewTitle.setText("အသံဖိုင္မ်ား");
         }

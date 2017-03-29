@@ -267,7 +267,7 @@ public class BaseActionBarActivity extends AppCompatActivity{
 		//alertDialog.setContentView(convertView);
 		//alertDialog.show();
 
-		btn_now_know.setOnClickListener(new View.OnClickListener() {
+		/*btn_now_know.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 
@@ -275,7 +275,7 @@ public class BaseActionBarActivity extends AppCompatActivity{
 				//alertDialog.dismiss();
 
 			}
-		});
+		});*/
 		btn_ok.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {

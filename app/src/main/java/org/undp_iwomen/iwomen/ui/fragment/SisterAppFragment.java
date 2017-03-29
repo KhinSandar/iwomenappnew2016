@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,10 +17,8 @@ import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.pnikosis.materialishprogress.ProgressWheel;
 import com.smk.model.SisterAppItem;
 import com.smk.sklistview.SKListView;
 import com.thuongnh.zprogresshud.ZProgressHUD;
@@ -32,7 +29,6 @@ import org.json.JSONObject;
 import org.smk.application.StoreUtil;
 import org.smk.clientapi.NetworkEngine;
 import org.undp_iwomen.iwomen.R;
-import org.undp_iwomen.iwomen.model.Helper;
 import org.undp_iwomen.iwomen.model.retrofit_api.UserPostAPI;
 import org.undp_iwomen.iwomen.ui.activity.SisterAppDetailActivity;
 import org.undp_iwomen.iwomen.ui.adapter.SisterAppListAdapter;
@@ -57,13 +53,13 @@ public class SisterAppFragment extends Fragment {
     private Context mContext;
 
     private SKListView lv_sister;
-    private ProgressWheel progress;
+    //private ProgressWheel progress;
     private int paginater = 1;
     private ArrayList<SisterAppItem> sisterAppItemList;
 
     private SisterAppListAdapter sisterAppListAdapter;
-    private TextView txt_gen_link;
-    private TextView txt_undp_link;
+    /*private TextView txt_gen_link;
+    private TextView txt_undp_link;*/
     private StorageUtil storageUtil;
     private ZProgressHUD zPDialog;
     //List<SisterAppItem> StoragesisterAppItems;
@@ -83,7 +79,7 @@ public class SisterAppFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.activity_sister, container, false);
+        View view = inflater.inflate(R.layout.fragment_resources, container, false);
         init(view);
         return view;
     }
@@ -116,8 +112,8 @@ public class SisterAppFragment extends Fragment {
         sharePrefLanguageUtil = getActivity().getSharedPreferences(Utils.PREF_SETTING, Context.MODE_PRIVATE);
         mstr_lang = sharePrefLanguageUtil.getString(Utils.PREF_SETTING_LANG, Utils.ENG_LANG);
 
-        lv_sister = (SKListView) rootView.findViewById(R.id.sister_app_listview);
-        progress = (ProgressWheel) rootView.findViewById(R.id.sister_progress_wheel);
+        lv_sister = (SKListView) rootView.findViewById(R.id.resource_lv);
+        //progress = (ProgressWheel) rootView.findViewById(R.id.sister_progress_wheel);
         sisterAppItemList = new ArrayList<>();
 
         sisterAppListAdapter = new SisterAppListAdapter(getActivity(), sisterAppItemList,mstr_lang);
@@ -146,11 +142,11 @@ public class SisterAppFragment extends Fragment {
                 sisterAppItemList.clear();
                 sisterAppItemList.addAll(StoragesisterAppItems);
                 sisterAppListAdapter.notifyDataSetChanged();
-                Helper.getListViewSize(lv_sister);
+                //Helper.getListViewSize(lv_sister);
             }
         }
 
-
+        /*
         txt_gen_link = (TextView) rootView.findViewById(R.id.sister_app_gen_txt);
         txt_undp_link = (TextView) rootView.findViewById(R.id.sister_app_undp_link_txt);
 
@@ -159,20 +155,8 @@ public class SisterAppFragment extends Fragment {
         Linkify.addLinks(txt_gen_link, Linkify.WEB_URLS);
 
         txt_undp_link.setText("www.undpmyanmar.org");
-        Linkify.addLinks(txt_undp_link, Linkify.WEB_URLS);
+        Linkify.addLinks(txt_undp_link, Linkify.WEB_URLS);*/
 
-        /*sisterAppItemList = (ArrayList<SisterAppItem>) storageUtil.ReadArrayListFromSD("SisterAppArrayList");
-        Log.e("sisterAppItemList size", "===>" + sisterAppItemList.size());
-        if (sisterAppItemList.size() > 0) {
-            sisterAppListAdapter = new SisterAppListAdapter(mContext, sisterAppItemList);
-            lv_sister.setAdapter(sisterAppListAdapter);
-            View padding = new View(getActivity().getApplicationContext());
-            padding.setMinimumHeight(20);
-            lv_sister.addFooterView(padding);
-            Helper.getListViewSize(lv_sister);
-        } else {
-            getSisterAppListFromServer();
-        }*/
         lv_sister.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long l) {
@@ -208,7 +192,6 @@ public class SisterAppFragment extends Fragment {
 
     private void getSisterListPaginationFromSever() {
         if (Connection.isOnline(mContext)) {
-            progress.setVisibility(View.VISIBLE);
             isLoading = true;
             NetworkEngine.getInstance().getSisterAppByPagination(paginater, new Callback<List<SisterAppItem>>() {
                 @Override
@@ -220,7 +203,6 @@ public class SisterAppFragment extends Fragment {
                     }
                     sisterAppItemList.addAll(sisterAppItems);
                     sisterAppListAdapter.notifyDataSetChanged();
-                    progress.setVisibility(View.INVISIBLE);
                     isLoading = false;
                     //StoreUtil.getInstance().saveTo("SisterAppList", sisterAppItemList);
                     final ArrayList<SisterAppItem> storagelist = new ArrayList<SisterAppItem>();
@@ -242,7 +224,7 @@ public class SisterAppFragment extends Fragment {
                         View padding = new View(getActivity().getApplicationContext());
                         padding.setMinimumHeight(20);
                         lv_sister.addFooterView(padding);
-                        Helper.getListViewSize(lv_sister);
+                        //Helper.getListViewSize(lv_sister);
                     }
 
 
@@ -250,11 +232,19 @@ public class SisterAppFragment extends Fragment {
 
                 @Override
                 public void failure(RetrofitError error) {
-                    progress.setVisibility(View.INVISIBLE);
+                    //progress.setVisibility(View.INVISIBLE);
+                    if(zPDialog != null && zPDialog.isShowing()){
+                        zPDialog.dismissWithSuccess();
+                    }
                 }
             });
 
         }else {
+
+            if(zPDialog != null && zPDialog.isShowing()){
+                sisterAppItemList.clear();
+                zPDialog.dismissWithSuccess();
+            }
 
             //List<SisterAppItem> storagelist = (ArrayList < SisterAppItem >) storageUtil.ReadArrayListFromSD("SisterAppList");
             final List<SisterAppItem> storagelist = StoreUtil.getInstance().selectFrom("SisterAppList");
@@ -262,7 +252,7 @@ public class SisterAppFragment extends Fragment {
                 sisterAppItemList.clear();
                 sisterAppItemList.addAll(storagelist);
                 sisterAppListAdapter.notifyDataSetChanged();
-                Helper.getListViewSize(lv_sister);
+                //Helper.getListViewSize(lv_sister);
             }
         }
     }
@@ -358,7 +348,7 @@ public class SisterAppFragment extends Fragment {
                             View padding = new View(getActivity().getApplicationContext());
                             padding.setMinimumHeight(20);
                             lv_sister.addFooterView(padding);
-                            Helper.getListViewSize(lv_sister);
+                            //Helper.getListViewSize(lv_sister);
                         }
                         //mProgressDialog.dismiss();
 

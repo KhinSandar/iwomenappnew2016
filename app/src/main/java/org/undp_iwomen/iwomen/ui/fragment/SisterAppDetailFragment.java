@@ -121,11 +121,14 @@ public class SisterAppDetailFragment extends Fragment {
 
             txtAppName.setText(sisterAppItemMain.getAppName());
             txtAboutApp.setText(sisterAppItemMain.getAppAbout());
+            btnDownload.setText(getResources().getString(R.string.download_app));
 
 
         } else {
             txtAppName.setText(sisterAppItemMain.getAppNameMM());
             txtAboutApp.setText(sisterAppItemMain.getAppAboutMM());
+            btnDownload.setText(getResources().getString(R.string.download_app_mm));
+
         }
 
         btnDownload.setOnClickListener(new View.OnClickListener() {

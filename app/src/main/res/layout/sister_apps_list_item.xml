@@ -22,7 +22,7 @@
 
             android:id="@+id/ly_list_head"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
 
             android:layout_weight="5.33"
             android:orientation="horizontal"
@@ -74,19 +74,22 @@
                 android:layout_toRightOf="@id/ly_sister"
                 android:paddingTop="8dp"
                 android:text="Bindez"
-                android:textColor="@color/secondary_text"
-                android:textSize="22sp"
+                android:textColor="@color/sister_app_text"
+                android:textSize="18sp"
 
                 android:textStyle="bold" />
 
                 <org.undp_iwomen.iwomen.ui.widget.CustomTextView
                     android:id="@+id/sister_app_txt_about"
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@id/sister_app_txt_app_name"
                     android:layout_alignParentRight="true"
                     android:layout_marginLeft="16dp"
 
+                    android:ellipsize="end"
+                    android:maxEms="30"
+                    android:maxLines="2"
                     android:paddingTop="8dp"
                     android:text="Download"
                     android:textColor="@color/secondary_text" />
@@ -100,7 +103,8 @@
                 android:layout_marginLeft="16dp"
 
                 android:text="@string/dicover"
-                android:textColor="@color/secondary_text" />
+                android:paddingBottom="8dp"
+                android:textColor="@color/discover_text" />
 
             </LinearLayout>
 

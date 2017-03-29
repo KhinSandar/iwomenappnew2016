@@ -292,7 +292,7 @@
     <string name="str_ok">OK</string>
     <string name="str_not_now">Not Now</string>
     <string name="title_activity_audio_recording">Audio Recording</string>
-    <string name="str_write_reviews">Thank you for your Reviews</string>
+    <string name="str_write_reviews">Thank you</string>
     <string name="str_your_review">Your Review</string>
     <string name="str_submit">Submit</string>
     <string name="competition_answer">This user has already submitted her answers.</string>
@@ -1037,6 +1037,9 @@ Make many new friends, contact your local May Doe Kabar/TLG group. See number be
 
     <string name="dicover">Discover &gt;&gt;</string>
     <string name="dicover_mm">အေသးစိတ္ၾကည့္ရန္ &gt;&gt;</string>
+    <string name="download_app">DOWNLOAD THIS APP</string>
+    <string name="download_app_mm">ေဒါင္းလုုပ္ခ်ရန္ ႏွိပ္ပါ </string>
+
 
 
 
