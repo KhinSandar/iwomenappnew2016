@@ -113,6 +113,8 @@ public class DownloadFileFromURL extends AsyncTask<String, String, String> {
         pDialog.dismiss();
         String apkPath = Environment.getExternalStorageDirectory().toString() + "/iwomen.apk";
 
+        Log.e("==Download Apk Path","=="+ apkPath);
+      // ==/storage/emulated/0/iwomen.apk
 
         Toast.makeText(context, "Finish Download", Toast.LENGTH_SHORT).show();
         //install apk
@@ -133,8 +135,21 @@ public class DownloadFileFromURL extends AsyncTask<String, String, String> {
     private void installApk(String apkPath){
         Intent intent = new Intent(Intent.ACTION_VIEW);
         Uri uri = Uri.fromFile(new File(apkPath));
-        intent.setDataAndType(uri, "application/vnd.android.package-archive");
+
+        Log.e("==Uril File Path","=="+ uri.toString());
+        //E/==Uril File Path: ==file:///storage/emulated/0/iwomen.apk
+
+        //intent.setDataAndType(uri, "application/vnd.android.package-archive");
+        intent.setDataAndType(Uri.parse(uri.toString()), "application/vnd.android.package-archive");
+
+        //KSD new two lines
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        intent.setClassName("com.android.packageinstaller",
+                "com.android.packageinstaller.PackageInstallerActivity");
+
         context.startActivity(intent);
+
+
     }
 
     private void deleteApk(Uri uri){

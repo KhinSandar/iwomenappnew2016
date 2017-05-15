@@ -101,6 +101,7 @@ public class CompetitionSubmitAnswerActivity extends BaseActionBarActivity imple
 	private AudioPicker audioPicker;
 	private ProgressDialog pgDialog;
 	private ZProgressHUD dialog;
+	private CustomTextView txt_competition_submit_lbl;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -116,6 +117,7 @@ public class CompetitionSubmitAnswerActivity extends BaseActionBarActivity imple
 		
 		txt_question = (TextView) findViewById(R.id.txt_competition_question);
 		txt_description = (TextView) findViewById(R.id.txt_competition_description);
+		txt_competition_submit_lbl = (CustomTextView)findViewById(R.id.txt_competition_answer_submit);
 		
 		langRef = getSharedPreferences(Utils.PREF_SETTING, MODE_PRIVATE);
 		if(langRef.getString(Utils.PREF_SETTING_LANG,"").equals("mm")){
