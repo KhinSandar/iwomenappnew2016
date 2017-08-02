@@ -17,7 +17,7 @@ import com.smk.sklistview.SKListView;
 import com.thuongnh.zprogresshud.ZProgressHUD;
 
 import org.smk.iwomen.BaseActionBarActivity;
-import org.smk.model.IWomenPostAudios;
+import org.smk.model.SubResourceDetailAudios;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.model.MyTypeFace;
 import org.undp_iwomen.iwomen.model.retrofit_api.SMKserverAPI;
@@ -37,20 +37,20 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 /**
- * Created by User on 09-Mar-17.
+ * Created by mac on 7/20/17.
  */
-public class AudioListActivity extends BaseActionBarActivity {
 
-    private IWomenPostAudios audioList = new IWomenPostAudios();
+public class SubResourceDetailAuidoListActivity extends BaseActionBarActivity{
+    private SubResourceDetailAudios audioList = new SubResourceDetailAudios();
 
-    private List<IWomenPostAudios> iWomenPostList;
-    private DataAdapter mAdapter;
+    private List<SubResourceDetailAudios> subResourceDetailAudioLists;
+    private SubResourceDetailDataAdapter mAdapter;
     private String mstrPostID;
     private Context mContext;
     private SKListView lv_recyclerView;
     private SharedPreferences sharePrefLanguageUtil;
     private String mstr_lang;
-    private List<IWomenPostAudios> storageiWomenPostList;
+    private List<SubResourceDetailAudios> storageSubResourceDetailList;
     private StorageUtil storageUtil;
     private ZProgressHUD zPDialog;
     private String storagelistname;
@@ -84,6 +84,8 @@ public class AudioListActivity extends BaseActionBarActivity {
         Intent i = getIntent();
         mstrPostID = i.getStringExtra("postId");
 
+        Log.e("SubResource Post ID","return==>" + mstrPostID);
+
 
         mstr_lang = i.getStringExtra("language");
         lv_recyclerView = (SKListView) findViewById(R.id.audio_list);
@@ -94,9 +96,9 @@ public class AudioListActivity extends BaseActionBarActivity {
         } else {//FOR Default and Custom
             textViewTitle.setText("အသံဖိုင္မ်ား");
         }
-        iWomenPostList = new ArrayList<>();
+        subResourceDetailAudioLists = new ArrayList<>();
 
-        mAdapter = new DataAdapter(mContext, iWomenPostList, mstr_lang);
+        mAdapter = new SubResourceDetailDataAdapter(mContext, subResourceDetailAudioLists, mstr_lang);
         lv_recyclerView.setAdapter(mAdapter);
         lv_recyclerView.setCallbacks(skCallbacks);
         lv_recyclerView.setNextPage(true);
@@ -105,11 +107,11 @@ public class AudioListActivity extends BaseActionBarActivity {
 
         storagelistname = "AudioList" + mstrPostID;
         //StoragesubResourceItems = StoreUtil.getInstance().selectFrom(storagelistname);
-        storageiWomenPostList = (ArrayList<IWomenPostAudios>) storageUtil.ReadArrayListFromSD(storagelistname);
+        storageSubResourceDetailList = (ArrayList<SubResourceDetailAudios>) storageUtil.ReadArrayListFromSD(storagelistname);
         if (Connection.isOnline(mContext)) {
             // Showing local data while loading from internet
-            if (storageiWomenPostList != null && storageiWomenPostList.size() > 0) {
-                iWomenPostList.addAll(storageiWomenPostList);
+            if (storageSubResourceDetailList != null && storageSubResourceDetailList.size() > 0) {
+                subResourceDetailAudioLists.addAll(storageSubResourceDetailList);
                 mAdapter.notifyDataSetChanged();
                 zPDialog = new ZProgressHUD(this);
                 zPDialog.show();
@@ -118,9 +120,9 @@ public class AudioListActivity extends BaseActionBarActivity {
         } else {
             //SKConnectionDetector.getInstance(this).showErrorMessage();
 
-            if (storageiWomenPostList != null) {
-                iWomenPostList.clear();
-                iWomenPostList.addAll(storageiWomenPostList);
+            if (storageSubResourceDetailList != null) {
+                subResourceDetailAudioLists.clear();
+                subResourceDetailAudioLists.addAll(storageSubResourceDetailList);
                 mAdapter.notifyDataSetChanged();
             }
         }
@@ -130,8 +132,8 @@ public class AudioListActivity extends BaseActionBarActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //Toast.makeText(getApplicationContext(), "OnClick On Audio List", Toast.LENGTH_LONG).show();
 
-                if (iWomenPostList.size() >= 0) {
-                    DialogFragment visualizerFragment = AudioVisualizerFragment.newInstance(iWomenPostList.get(position).getLinksPath(), mstr_lang);
+                if (subResourceDetailAudioLists.size() >= 0) {
+                    DialogFragment visualizerFragment = AudioVisualizerFragment.newInstance(subResourceDetailAudioLists.get(position).getLinksPath(), mstr_lang);
                     visualizerFragment.show(getSupportFragmentManager(), "AudioVisualizer");
                 } else {
                     /*if (mstr_lang.equals(Utils.ENG_LANG)) {
@@ -170,34 +172,35 @@ public class AudioListActivity extends BaseActionBarActivity {
     private void getAudioListDataFromSever(final String id) {
         if (Connection.isOnline(mContext)) {
             isLoading = true;
-            SMKserverAPI.getInstance().getService().getAudioListByPostIDByPagination(paginater, mstrPostID, new Callback<List<IWomenPostAudios>>() {
+            Log.e("PostID: Server=> ",mstrPostID);
+            SMKserverAPI.getInstance().getService().getSubResourceAudioListByPagination(mstrPostID, new Callback<List<SubResourceDetailAudios>>() {
                 @Override
-                public void success(List<IWomenPostAudios> iWomenPostAudioses, Response response) {
+                public void success(List<SubResourceDetailAudios> subResourceDetailAudios, Response response) {
                     if (isFirstLoading) {
                         isFirstLoading = false;
 
-                        Log.e("AudioPost","return==>" + iWomenPostAudioses.toString());
-                        if(iWomenPostAudioses == null || iWomenPostAudioses.toString() == "[]"){
+                        Log.e("AudioPost","return==>" + subResourceDetailAudios.toString());
+                        if(subResourceDetailAudios == null || subResourceDetailAudios.toString() == "[]"){
                             if (mstr_lang.equals(Utils.ENG_LANG)) {
-                                SKToastMessage.showMessage(AudioListActivity.this, getResources().getString(R.string.audio_not_availabe_msg), SKToastMessage.INFO);
+                                SKToastMessage.showMessage(SubResourceDetailAuidoListActivity.this, getResources().getString(R.string.audio_not_availabe_msg), SKToastMessage.INFO);
 
                             } else {
-                                SKToastMessage.showMessage(AudioListActivity.this, getResources().getString(R.string.audio_not_availabe_msg_mm), SKToastMessage.INFO);
+                                SKToastMessage.showMessage(SubResourceDetailAuidoListActivity.this, getResources().getString(R.string.audio_not_availabe_msg_mm), SKToastMessage.INFO);
 
                             }
                             return;
                         }
-                        iWomenPostList.clear();
+                        subResourceDetailAudioLists.clear();
                         if (zPDialog != null && zPDialog.isShowing())
                             zPDialog.dismissWithSuccess();
 
-                        iWomenPostList.addAll(iWomenPostAudioses);
+                        subResourceDetailAudioLists.addAll(subResourceDetailAudios);
                         mAdapter.notifyDataSetChanged();
-                        final ArrayList<IWomenPostAudios> storagelist = new ArrayList<IWomenPostAudios>();
-                        storagelist.addAll(iWomenPostAudioses);
+                        final ArrayList<SubResourceDetailAudios> storagelist = new ArrayList<SubResourceDetailAudios>();
+                        storagelist.addAll(subResourceDetailAudios);
                         storageUtil.SaveArrayListToSD("AudioList" + mstrPostID, storagelist);
                         isLoading = false;
-                        if (iWomenPostAudioses.size() == 12) {
+                        if (subResourceDetailAudios.size() == 12) {
                             lv_recyclerView.setNextPage(true);
                             paginater++;
                         } else {

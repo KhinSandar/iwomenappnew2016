@@ -540,6 +540,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.activity.PostDetailActivity" />
         </activity>
+        <activity android:name=".ui.activity.SubResourceDetailAuidoListActivity"
+            android:parentActivityName=".ui.activity.ResourceDetailActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.activity.ResourceDetailActivity" />
+        </activity>
     </application>
 
 </manifest>

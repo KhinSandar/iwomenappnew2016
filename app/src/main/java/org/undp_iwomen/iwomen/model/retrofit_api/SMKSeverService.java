@@ -9,6 +9,7 @@ import org.smk.model.IWomenPostAudios;
 import org.smk.model.LikeItem;
 import org.smk.model.PhotoUpload;
 import org.smk.model.Sticker;
+import org.smk.model.SubResourceDetailAudios;
 import org.smk.model.SubResourceItem;
 import org.smk.model.TLGTownship;
 import org.smk.model.User;
@@ -229,4 +230,9 @@ public interface SMKSeverService {
             @Query("page") int page,
             @Query("post_id") String postID,
             Callback<List<IWomenPostAudios>> callback);
+
+    @GET(CommonConfig.GET_SUB_RESOURCE_AUDIO_LIST_BY_POST_ID_URL)
+    void getSubResourceAudioListByPagination(
+            @Query("post_id") String postID,  //post_id equals sub_resource_id
+            Callback<List<SubResourceDetailAudios>> callback);
 }

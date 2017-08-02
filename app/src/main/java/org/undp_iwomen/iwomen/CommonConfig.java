@@ -186,7 +186,8 @@ public class CommonConfig {
     //http://api.iwomenapp.org/api/v1/iWomenPostAudios?post_id=1AqvkXYsJz
     public static final String GET_AUDIO_LIST_BY_POST_ID_URL="/api/v1/iWomenPostAudios";
 
-
-
+    //Linn BeKnowledgable audioList
+    public static final String GET_SUB_RESOURCE_AUDIO_LIST_BY_POST_ID_URL="/api/v1/subResourceDetailAudios";
+     // /api/v1/subResourceDetailAudios
 
 }

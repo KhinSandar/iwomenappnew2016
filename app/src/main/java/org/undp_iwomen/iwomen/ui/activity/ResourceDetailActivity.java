@@ -530,12 +530,20 @@ public class ResourceDetailActivity extends BaseActionBarActivity implements Vie
 
                 if (Connection.isOnline(getApplicationContext())) {
 
-                    //String url = "https://dl.dropboxusercontent.com/u/10281242/sample_audio.mp3"; //Default
+
+                    mstrAudioFilePath = "https://dl.dropboxusercontent.com/u/10281242/sample_audio.mp3";  //sample testing
                     if (mstrAudioFilePath != null && mstrAudioFilePath.length() > 20) {
 
-                        Log.e("<<ResourceDetail>>", "<<isPlay>>" + "show audio visualizer dialog" + mstrAudioFilePath);
+                        /*Log.e("<<ResourceDetail>>", "<<isPlay>>" + "show audio visualizer dialog" + mstrAudioFilePath);
                         DialogFragment visualizerFragment = AudioVisualizerFragment.newInstance(mstrAudioFilePath, strLang);
-                        visualizerFragment.show(getSupportFragmentManager(), "AudioVisualizer");
+                        visualizerFragment.show(getSupportFragmentManager(), "AudioVisualizer");*/
+
+                        Intent intent = new Intent(mContext,SubResourceDetailAuidoListActivity.class);
+                        intent.putExtra("postId",postId);      //post_id equals sub_resource_id
+                        intent.putExtra("language",strLang);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        mContext.startActivity(intent);
 
 
                     } else {

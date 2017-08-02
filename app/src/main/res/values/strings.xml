@@ -267,7 +267,7 @@
     <string name="competition_second">Seconds</string>
     <string name="competition_not_answer">This user has not yet submitted her answers.</string>
     <string name="competition_finished">Finished</string>
-    <string name="competition_play_game" >Ready To Play ?</string>
+    <string name="competition_play_game">Ready To Play ?</string>
     <string name="competition_play_game_mm">စ ၿပိဳင္ပါမည္</string>
 
     <string name="competition_discover_winner">Discover Who is the WINNER</string>
@@ -386,7 +386,6 @@
 
     <string name="register_terms_link"> iWomenapp.org <a href="http://iwomenapp.org/"></a></string>
     <string name="register_privacy_link"> iwomenapp.org/Privacy.html <a href="http://iwomenapp.org/Privacy.html"></a></string>
-
 
 
     <!-- string resources used in Event Detail -->
@@ -951,13 +950,13 @@ Make many new friends, contact your local May Doe Kabar/TLG group. See number be
     <string name="error_label">Error</string>
     <string name="loading_placeholder">Loading&#8230;</string>
     <string name="user_id_label">Account ID</string>
-    <string name="phone_number_label" >Phone Number</string>
-    <string name="phone_number_label_mm" >သင့္ ဖုုန္း နံပါတ္</string>
+    <string name="phone_number_label">Phone Number</string>
+    <string name="phone_number_label_mm">သင့္ ဖုုန္း နံပါတ္</string>
 
     <string name="email_label">Email</string>
     <string name="na">NA</string>
 
-    <string name="my_post" >My Posts</string>
+    <string name="my_post">My Posts</string>
     <string name="my_post_mm">က်နု္ပ္ပိုုစ့္</string>
     <string name="log_in_phone_button_mm">ဖုန္းနံပါတ္ထည့္ရန္ ႏွိပ္ပါ</string>
 
@@ -1033,14 +1032,10 @@ Make many new friends, contact your local May Doe Kabar/TLG group. See number be
     <string name="register_name_duplicate_err_mm">အမည္တူ ရွိေနပါသၿဖင့္ မိမိနာမယ္အေနာက္တြင္နံပါတ္စဥ္တပ္၍ အေကာင္ ့အသစ္ဖြင့္ႏိုုင္ပါသည္။ဥပမာ - ညိဳညိဳ၁၂၃၄</string>
 
 
-
-
     <string name="dicover">Discover &gt;&gt;</string>
     <string name="dicover_mm">အေသးစိတ္ၾကည့္ရန္ &gt;&gt;</string>
     <string name="download_app">DOWNLOAD THIS APP</string>
     <string name="download_app_mm">ေဒါင္းလုုပ္ခ်ရန္ ႏွိပ္ပါ </string>
-
-
 
 
 </resources>
