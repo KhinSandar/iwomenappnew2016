@@ -131,10 +131,11 @@
                         android:textColor="@color/competition_text_color" />
 
                     <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                        android:id="@+id/txt_competition_answer_submit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:text="@string/competition_submit_desc"
+                        android:text="@string/competition_submit_desc_individual"
                         android:textColor="@color/competition_text_color" />
                 </LinearLayout>
 

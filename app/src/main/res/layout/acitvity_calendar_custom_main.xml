@@ -6,28 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <!--<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/toolbar_detail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        app:popupTheme="@style/AppTheme"
-        app:theme="@style/ToolbarCustomIconColor">
-
-        <TextView
-            android:id="@+id/title_action2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:text="Title"
-            android:textColor="@color/white"
-            android:textSize="20dp" />
-
-
-    </android.support.v7.widget.Toolbar>-->
-    <include layout="@layout/toolbar" />
+      <include layout="@layout/toolbar" />
 
     <ScrollView
         android:id="@+id/hsv_calendar"

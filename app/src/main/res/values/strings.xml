@@ -251,7 +251,9 @@
     <string name="competition_save">Save</string>
     <string name="competition_save_desc">Click here to save your answer and come back later.</string>
     <string name="competition_submit">Submit</string>
-    <string name="competition_submit_desc">Click here to submit your answers to your group.</string>
+    <string name="competition_submit_desc_individual">Click here to submit your answers.</string>
+    <string name="competition_submit_desc_many">Click here to submit your answers to your group.</string>
+
     <string name="competition_group_answer">Group Answer</string>
     <string name="competition_group_answer_desc">Click here to see your group members answers.</string>
     <string name="competition_answer_hit_1">Type your answer 1 here</string>
