@@ -10,8 +10,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class SqliteHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "IWOMENDB";
-    private static int DATABASE_VERSION = 9;//Version Code 5 in 4 , Version Code 6 in 5 ,Versison code 7 6
+    private static int DATABASE_VERSION = 11;//Version Code 5 in 4 , Version Code 6 in 5 ,Versison code 7 6
     //,Versison code 8 7 //Version 9 8 //Version Code 10 in 9////Version Code 11 in 10
+    // Android app version 2.0 , version code 11 , Db version 10
+    // Android app version 2.1 , version code 12 , Db version 11
+
 
 
     public SqliteHelper(Context context) {

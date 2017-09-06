@@ -96,7 +96,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
     private SharedPreferences.Editor mEditorUserInfo;
     private String user_name, user_obj_id, user_id, user_ph, register_msg, user_img_path;
     SharedPreferences sharePrefLanguageUtil;
-    String mstr_lang;
+    public String mstr_lang;
     Runnable run;
     DrawerListViewAdapter drawer_adapter;
     //ProfilePictureView userProfilePicture;
@@ -1100,10 +1100,10 @@ public class DrawerMainActivity extends BaseActionBarActivity {
                     try {
                         if (arg0 != null) {
                             if (arg0.getVersionId() > mversionCode) {
-                                showVersionDialog(DrawerMainActivity.this ,true );
+                                showVersionDialog(DrawerMainActivity.this ,true , mstr_lang);
 
                             }else{
-                                showVersionDialog(DrawerMainActivity.this ,false );
+                                showVersionDialog(DrawerMainActivity.this ,false , mstr_lang);
                             }
                         }
                     } catch (NullPointerException ex) {
@@ -1127,7 +1127,7 @@ public class DrawerMainActivity extends BaseActionBarActivity {
         }
 
     }
-    public static void showVersionDialog(final Activity activity , Boolean isAvalibale) {
+    public static void showVersionDialog(final Activity activity , Boolean isAvalibale, String mstr_lang) {
 
 
         final Dialog alertDialog = new Dialog(activity);
@@ -1140,18 +1140,35 @@ public class DrawerMainActivity extends BaseActionBarActivity {
         alertDialog.show();
 
         if(isAvalibale){
-            mtext.setText(activity.getResources().getString(R.string.version_new_yes));
+
+            if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+                mtext.setText(activity.getResources().getString(R.string.version_new_yes));
+
+            } else {
+
+                mtext.setText(activity.getResources().getString(R.string.version_new_yes_mm));
+            }
             btn_no.setVisibility(View.VISIBLE);
             btn_ok.setVisibility(View.VISIBLE);
 
 
         }else{
-            mtext.setText(activity.getResources().getString(R.string.version_new_no));
+            //Your Version is already up to date.
+            //mtext.setText(activity.getResources().getString(R.string.version_new_no));
+
+            if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+                mtext.setText(activity.getResources().getString(R.string.version_new_no));
+                btn_no.setText(activity.getResources().getString(R.string.ok));
+
+            } else {
+
+                mtext.setText(activity.getResources().getString(R.string.version_new_no_mm));
+                btn_no.setText(activity.getResources().getString(R.string.ok));
+
+            }
             btn_ok.setVisibility(View.INVISIBLE);
 
             btn_no.setVisibility(View.VISIBLE);
-            btn_no.setText(activity.getResources().getString(R.string.ok));
-            //btn_no.setVisibility(View.INVISIBLE);
 
         }
 

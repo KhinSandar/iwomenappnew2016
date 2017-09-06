@@ -1043,4 +1043,8 @@ female-pilots-iaa1s
     <string name="download_app">DOWNLOAD THIS APP</string>
     <string name="download_app_mm">ေဒါင္းလုုပ္ခ်ရန္ ႏွိပ္ပါ </string>
 
+
+    <string name="version_new_yes_mm">ဗားရွင္းအသစ္ရပါပီ</string>
+    <string name="version_new_no_mm">ဗားရွင္း အသစ္မထြက္ေသးပါ</string>
+
 </resources>

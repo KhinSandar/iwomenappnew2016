@@ -1040,4 +1040,11 @@ Make many new friends, contact your local May Doe Kabar/TLG group. See number be
     <string name="download_app_mm">ေဒါင္းလုုပ္ခ်ရန္ ႏွိပ္ပါ </string>
 
 
+    <string name="version_new_yes_mm">ဗားရွင္းအသစ္ရပါပီ</string>
+    <string name="version_new_no_mm">ဗားရွင္း အသစ္မထြက္ေသးပါ</string>
+
+    <string name="competition_submit_desc">မိမိ၏ အေျဖကို ေပးပို႕မည္ဆိုလွ်င္ ဒီ ခလုပ္ကိုႏိွပ္ပါ။</string>
+
+
+
 </resources>

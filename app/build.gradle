@@ -9,7 +9,7 @@ buildscript {
         // replace with the current version of the Android plugin
         //classpath 'com.android.tools.build:gradle:2.1.0'
 
-        classpath 'com.android.tools.build:gradle:2.3.1'
+        classpath 'com.android.tools.build:gradle:2.3.3'
         //classpath 'com.android.tools.build:gradle:2.2.0'
 
         // Since Android's Gradle plugin 0.11, you have to use android-apt >= 1.3
@@ -23,13 +23,14 @@ repositories {
     jcenter()
     maven {
         url 'http://lorenzo.villani.me/android-cropimage/'
+        //url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/'
     }
 
 }
 
 apply plugin: 'com.android.application'
-//apply plugin: 'com.android.databinding'
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'android-apt'
 
 
 android {
@@ -38,14 +39,15 @@ android {
         release {
             keyAlias 'iwomen'
             keyPassword 'iwomen'
-            storeFile file('/Users/khinsandar/Documents/VipPro/UNDP/Application/KeyFile/iwomen.jks')
+            storeFile file('/Volumes/Transcend/VipPro/UNDP/Application/KeyFile/iwomen.jks')
+            //storeFile file('/Users/khinsandar/Documents/VipPro/UNDP/Application/KeyFile/iwomen.jks')
             //storeFile file('D:/iWomen/iwomenappnew2016/iwomen.jks')
             storePassword 'undp2015'
             v2SigningEnabled false
 
         }
     }
-    compileSdkVersion 23
+    compileSdkVersion 24
     buildToolsVersion '25.0.0'
     useLibrary 'org.apache.http.legacy'
     defaultConfig {
@@ -53,8 +55,8 @@ android {
         minSdkVersion 15
         targetSdkVersion 23
         multiDexEnabled true
-        versionCode 10
-        versionName "1.9"
+        versionCode 12
+        versionName "2.1"
         // Optional: Specify the language(s) your app supports.
         resConfigs "en", "fr", "pt-rBR"
         //testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -123,7 +125,7 @@ dependencies {
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'com.path:android-priority-jobqueue:1.1.2'
     compile 'com.android.support:appcompat-v7:23.4.0'
-    compile 'com.android.support:support-v4:23.4.0'
+    //compile 'com.android.support:support-v4:23.4.0'
     compile 'com.android.support:design:23.4.0'
     compile 'com.facebook.android:facebook-android-sdk:4.0.0'
     compile 'com.shamanland:fab:0.0.8'
@@ -159,4 +161,16 @@ dependencies {
     compile 'com.google.code.gson:gson:2.2.4'
     compile 'com.mcxiaoke.volley:library:1.0.18'
 
+
+    compile 'com.github.hotchemi:permissionsdispatcher:2.4.0'
+    apt 'com.github.hotchemi:permissionsdispatcher-processor:2.1.3'
+
+    compile ('com.android.support:support-v4:23.4.0'){
+        force = true;
+    }
+    /*compile 'com.github.hotchemi:permissionsdispatcher:2.4.0'{
+        // if you don't use android.app.Fragment you can exclude support for them
+        exclude module: "support-v13"
+    }*/
+    //apt 'com.github.hotchemi:permissionsdispatcher-processor:2.1.3'
 }

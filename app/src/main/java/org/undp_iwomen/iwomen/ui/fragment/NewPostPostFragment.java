@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Environment;
 import android.os.Handler;
+import android.support.v13.app.FragmentCompat;
 import android.support.v4.app.Fragment;
 import android.system.ErrnoException;
 import android.util.Log;
@@ -272,7 +273,9 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
 
                     int permsRequestCode = 200;
 
-                    requestPermissions(perms, permsRequestCode);
+                    //Fragment.requestPermissions(perms, permsRequestCode);
+                    requestPermissions(new String[]{Manifest.permission.CAMERA}, permsRequestCode);
+
 
                 } else {
 
@@ -284,9 +287,24 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
                         int permsRequestCode = 200;
 
 
-                        requestPermissions(perms, permsRequestCode);
+                        //FragmentCompat.requestPermissions(perms, permsRequestCode);
+                        //FragmentCompat.requestPermissions(getFragmentManager().getClass(), perms, permsRequestCode);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                            requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, permsRequestCode);
+                        }
+
                     } else {
                         takePicture();
+
+                        /*Intent i = new Intent(getActivity().getApplicationContext(), CameraActivity.class);
+                        i.putExtra("CategoryNameMM", mmStrCateName);
+                        i.putExtra("CategoryName", categoryName);//CategoryName
+                        i.putExtra("CategoryID", cateId);//CategoryName
+                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(i);
+                        //Kill this activity after back from TalkTogetherMain
+                        getActivity().finish();*/
                     }
                 }
                 break;
@@ -300,7 +318,9 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
 
                     int permsRequestCode = 200;
 
-                    requestPermissions(perms, permsRequestCode);
+                    //requestPermissions(perms, permsRequestCode);
+                    requestPermissions(new String[]{Manifest.permission.CAMERA}, permsRequestCode);
+
 
                 } else {
 
@@ -315,7 +335,9 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
 
                         int permsRequestCode = 200;
 
-                        requestPermissions(perms, permsRequestCode);
+                        //requestPermissions(perms, permsRequestCode);
+                        requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO}, permsRequestCode);
+
                     } else {
                         performAudioRecord();
                     }
@@ -896,7 +918,11 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
                 // request permissions and handle the result in onRequestPermissionsResult()
                 requirePermissions = true;
                 //mCropImageUri = imageUri;
-                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
+                //requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
+                int permsRequestCode = 200;
+
+                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, permsRequestCode);
+
             }
 
             if (!requirePermissions) {
