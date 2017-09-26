@@ -48,6 +48,7 @@ import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.model.MyTypeFace;
 import org.undp_iwomen.iwomen.ui.activity.DrawerMainActivity;
+import org.undp_iwomen.iwomen.ui.activity.SplashActivity;
 import org.undp_iwomen.iwomen.ui.widget.CircleProgressBar;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.ui.widget.ResizableImageView;
@@ -74,6 +75,7 @@ import retrofit.mime.TypedFile;
 public class NewIWomenPostFragment extends Fragment implements View.OnClickListener, ImageChooserListener {
 
     public static final String TAG = "New Post";
+    private static final int PERMISSION_REQUEST = 10002;
 
     public Button mPostBtn;
     public EditText et_postDesc;
@@ -134,6 +136,9 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
     private final String READ_PERMISSIOIN = "android.permission.READ_EXTERNAL_STORAGE";
     private final String PREPARE_AUDIO_PERMISSION = "android.permission.MODIFY_AUDIO_SETTINGS";
     private final String STORAGE_READ_PERMISSION = "android.permission.READ_EXTERNAL_STORAGE";
+
+    private static final String CAMERA = Manifest.permission.CAMERA;
+
 
     public NewIWomenPostFragment() {
     }
@@ -238,30 +243,32 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
                 break;
 
             case R.id.new_post_photo_take_btn:
-                if (!hasPermission(CAMERA_PERMISSION)) {
+                SKToastMessage.showMessage(getActivity(), "Click Photo ", SKToastMessage.WARNING);
+
+                if (!hasPermission(CAMERA) ) {
+                    requestPermissions(new String[]{STORAGE_READ_PERMISSION, CAMERA}, PERMISSION_REQUEST);
+                    return;
+                }
+                takePicture();
+
+                /*if (!hasPermission(CAMERA_PERMISSION)) {
 
                     //if no permission, request permission
                     String[] perms = {CAMERA_PERMISSION};
-
                     int permsRequestCode = 200;
-
                     requestPermissions(perms, permsRequestCode);
 
                 } else {
-
                     if (!hasPermission(STORAGE_READ_PERMISSION)) {
 
                         //if no permission, request permission
                         String[] perms = {STORAGE_READ_PERMISSION};
-
                         int permsRequestCode = 200;
-
-
                         requestPermissions(perms, permsRequestCode);
                     } else {
                         takePicture();
                     }
-                }
+                }*/
                 break;
 
             case R.id.new_post_photo_upload_btn:
@@ -533,6 +540,22 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
     @Override
     public void onImagesChosen(ChosenImages images) {
 
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case PERMISSION_REQUEST: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    //doFetching();
+                    SKToastMessage.showMessage(getActivity().getApplicationContext(), " permission accepted", SKToastMessage.ERROR);
+
+                } else {
+                    SKToastMessage.showMessage(getActivity().getApplicationContext(), "The app was not allowed to write to your storage. Hence, it cannot function properly. Please consider granting it this permission", SKToastMessage.ERROR);
+                }
+            }
+        }
     }
 
     /***
