@@ -1,6 +1,7 @@
 package org.undp_iwomen.iwomen.ui.fragment;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -17,7 +18,10 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Environment;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.system.ErrnoException;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,6 +29,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.alexbbb.uploadservice.MultipartUploadRequest;
@@ -36,6 +41,10 @@ import com.kbeanie.imagechooser.api.ChosenImage;
 import com.kbeanie.imagechooser.api.ChosenImages;
 import com.kbeanie.imagechooser.api.ImageChooserListener;
 import com.kbeanie.imagechooser.api.ImageChooserManager;
+import com.kbeanie.multipicker.api.CameraImagePicker;
+import com.kbeanie.multipicker.api.ImagePicker;
+import com.kbeanie.multipicker.api.Picker;
+import com.kbeanie.multipicker.api.callbacks.ImagePickerCallback;
 import com.pnikosis.materialishprogress.ProgressWheel;
 import com.smk.skalertmessage.SKToastMessage;
 import com.smk.skconnectiondetector.SKConnectionDetector;
@@ -48,7 +57,11 @@ import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.model.MyTypeFace;
 import org.undp_iwomen.iwomen.ui.activity.DrawerMainActivity;
+import org.undp_iwomen.iwomen.ui.activity.ImagePickerActivity;
+import org.undp_iwomen.iwomen.ui.activity.NewPostActivity;
+import org.undp_iwomen.iwomen.ui.activity.PhotoIntentActivity;
 import org.undp_iwomen.iwomen.ui.activity.SplashActivity;
+import org.undp_iwomen.iwomen.ui.adapter.MediaResultsAdapter;
 import org.undp_iwomen.iwomen.ui.widget.CircleProgressBar;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.ui.widget.ResizableImageView;
@@ -63,6 +76,8 @@ import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -72,7 +87,7 @@ import retrofit.client.Response;
 import retrofit.mime.MultipartTypedOutput;
 import retrofit.mime.TypedFile;
 
-public class NewIWomenPostFragment extends Fragment implements View.OnClickListener, ImageChooserListener {
+public class NewIWomenPostFragment extends Fragment implements View.OnClickListener, ImageChooserListener,ImagePickerCallback  {
 
     public static final String TAG = "New Post";
     private static final int PERMISSION_REQUEST = 10002;
@@ -140,6 +155,19 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
     private static final String CAMERA = Manifest.permission.CAMERA;
 
 
+    private static final int REQUEST_EXTERNAL_STORAGE_AND_CAMERA_RESULT = 1;
+    private static final int REQUEST_EXTERNAL_STORAGE_RESULT = 1;
+    private static final int REQUEST_CAMERA_RESULT = 1;
+
+    Uri fileUri;
+
+    private static final String IMAGE_DIRECTORY_NAME = "Camera Images";
+
+    //New Code
+    private String pickerPath;
+    private ListView lvResults;
+
+
     public NewIWomenPostFragment() {
     }
 
@@ -193,6 +221,9 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
         audio_record_progress_bar = (CircleProgressBar) rootView.findViewById(R.id.audio_record_progressBar);
         background_audio_record_process = rootView.findViewById(R.id.background_audio_record);
 
+        //Image
+        lvResults = (ListView) rootView.findViewById(R.id.lvResults);
+
         mPostBtn.setOnClickListener(this);
         take_photo_btn.setOnClickListener(this);
         upload_photo_btn.setOnClickListener(this);
@@ -231,7 +262,7 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.new_post_upload_btn:
-                Log.e("iWOmen Post Btn Click", "===>");
+                //Log.e("iWOmen Post Btn Click", "===>");
 
                 if (SKConnectionDetector.getInstance(getActivity()).isConnectingToInternet()) {
                     checkProcessWhattoDo();
@@ -243,13 +274,22 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
                 break;
 
             case R.id.new_post_photo_take_btn:
-                SKToastMessage.showMessage(getActivity(), "Click Photo ", SKToastMessage.WARNING);
+
+
 
                 if (!hasPermission(CAMERA) ) {
+
                     requestPermissions(new String[]{STORAGE_READ_PERMISSION, CAMERA}, PERMISSION_REQUEST);
                     return;
                 }
-                takePicture();
+
+                /*Intent intent = new Intent(mContext, ImagePickerActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(intent);*/
+                takePictureNew();
+
+                //takePicture();
 
                 /*if (!hasPermission(CAMERA_PERMISSION)) {
 
@@ -283,8 +323,9 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
                     requestPermissions(perms, permsRequestCode);
 
                 } else {
+                    pickImageMultiple();
 
-                    chooseImage();
+                    //chooseImage();
                 }
                 break;
 
@@ -374,7 +415,9 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
     }
 
     private void takePicture() {
-        Log.e("iWOmen Post Btn Click", "===> take Picture " + crop_file_path);
+
+
+        Log.e("iWOmen Post Btn Click", "===> take Picture4 " + crop_file_path);
 
         chooserType = ChooserType.REQUEST_CAPTURE_PICTURE;
         imageChooserManager = new ImageChooserManager(this,
@@ -485,7 +528,9 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
         if (image != null) {
             //textViewFile.setText(image.getFilePathOriginal());
             croppedImageFile = new File(image.getFilePathOriginal());
-            Uri croppedImage = Uri.fromFile(croppedImageFile);
+            //Uri croppedImage = Uri.fromFile(croppedImageFile);
+            Uri croppedImage  = FileProvider.getUriForFile(mContext, mContext.getApplicationContext().getPackageName() + ".org.undp_iwomen.iwomen.provider", croppedImageFile);
+
             CropImageIntentBuilder cropImage = new CropImageIntentBuilder(650, 650, croppedImage);
             cropImage.setSourceImage(croppedImage);
             startActivityForResult(cropImage.getIntent(getActivity().getApplicationContext()), REQUEST_CROP_PICTURE);
@@ -538,9 +583,17 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
     }
 
     @Override
-    public void onImagesChosen(ChosenImages images) {
+    public void onImagesChosen(ChosenImages chosenImages) {
 
     }
+
+    //@Override
+    /*public void onImagesChosen(ChosenImages images) {
+        MediaResultsAdapter adapter = new MediaResultsAdapter(images, getActivity());
+        lvResults.setAdapter(adapter);
+        Utils.setListViewHeightBasedOnChildren(lvResults);
+
+    }*/
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
@@ -857,7 +910,7 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
         }
         if ((requestCode == REQUEST_CROP_PICTURE) && (resultCode == getActivity().RESULT_OK)) {
             // When we are done cropping, display it in the ImageView.
-// For API >= 23 we need to check specifically that we have permissions to read external storage,
+            // For API >= 23 we need to check specifically that we have permissions to read external storage,
             // but we don't know if we need to for the URI so the simplest is to try open the stream and see if we get error.
             boolean requirePermissions = false;
 
@@ -883,6 +936,23 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
             }
 
 
+        }
+
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == Picker.PICK_IMAGE_DEVICE) {
+                if (imagePicker == null) {
+                    imagePicker = new ImagePicker(this);
+                    imagePicker.setImagePickerCallback(this);
+                }
+                imagePicker.submit(data);
+            } else if (requestCode == Picker.PICK_IMAGE_CAMERA) {
+                if (cameraPicker == null) {
+                    cameraPicker = new CameraImagePicker(this);
+                    cameraPicker.setImagePickerCallback(this);
+                    cameraPicker.reinitialize(pickerPath);
+                }
+                cameraPicker.submit(data);
+            }
         }
 
         super.onActivityResult(requestCode, resultCode, data);
@@ -947,4 +1017,66 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
         return false;
     }
 
+    /**
+     * For Image use new Lib for  new version N
+     */
+    @Override
+    public void onImagesChosen(List<com.kbeanie.multipicker.api.entity.ChosenImage> images) {
+        MediaResultsAdapter adapter = new MediaResultsAdapter(images, getActivity());
+        lvResults.setAdapter(adapter);
+        Utils.setListViewHeightBasedOnChildren(lvResults);
+
+    }
+
+    private ImagePicker imagePicker;
+
+    public void pickImageSingle() {
+        imagePicker = new ImagePicker(this);
+        imagePicker.shouldGenerateMetadata(true);
+        imagePicker.shouldGenerateThumbnails(true);
+        imagePicker.setImagePickerCallback(this);
+        imagePicker.pickImage();
+    }
+
+    public void pickImageMultiple() {
+        imagePicker = new ImagePicker(this);
+        imagePicker.allowMultiple();
+        imagePicker.shouldGenerateMetadata(true);
+        imagePicker.shouldGenerateThumbnails(true);
+        imagePicker.setImagePickerCallback(this);
+        imagePicker.pickImage();
+    }
+
+    private CameraImagePicker cameraPicker;
+
+    public void takePictureNew() {
+        cameraPicker = new CameraImagePicker(this);
+        cameraPicker.shouldGenerateMetadata(true);
+        cameraPicker.shouldGenerateThumbnails(true);
+        cameraPicker.setImagePickerCallback(this);
+        pickerPath = cameraPicker.pickImage();
+    }
+
+    /*@Override
+    public void onError(String message) {
+        Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+    }*/
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        // You have to save path in case your activity is killed.
+        // In such a scenario, you will need to re-initialize the CameraImagePicker
+        outState.putString("picker_path", pickerPath);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (savedInstanceState != null) {
+            if (savedInstanceState.containsKey("picker_path")) {
+                pickerPath = savedInstanceState.getString("picker_path");
+            }
+        }
+    }
 }

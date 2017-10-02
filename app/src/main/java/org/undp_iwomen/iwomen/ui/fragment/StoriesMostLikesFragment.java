@@ -1107,6 +1107,8 @@ public class StoriesMostLikesFragment extends Fragment implements View.OnClickLi
         switch (v.getId()) {
             case R.id.post_news:
                 Intent intent = new Intent(mContext, NewPostActivity.class);
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
                 intent.putExtra("PostType", "BeInspiredIwomenPost");
                 startActivity(intent);
                 break;

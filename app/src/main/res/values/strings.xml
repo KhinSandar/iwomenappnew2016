@@ -1045,6 +1045,11 @@ Make many new friends, contact your local May Doe Kabar/TLG group. See number be
 
     <string name="competition_submit_desc">မိမိ၏ အေျဖကို ေပးပို႕မည္ဆိုလွ်င္ ဒီ ခလုပ္ကိုႏိွပ္ပါ။</string>
 
-
+    <string name="hello">Hello World, PhotoIntentActivity!</string>
+    <string name="btnIntend">Take (big) Picture</string>
+    <string name="btnIntendS">Take (small) Picture</string>
+    <string name="btnIntendV">Take Video</string>
+    <string name="cannot">Cannot</string>
+    <string name="album_name">CameraSample</string>
 
 </resources>

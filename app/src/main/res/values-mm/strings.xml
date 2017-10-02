@@ -1047,4 +1047,11 @@ female-pilots-iaa1s
     <string name="version_new_yes_mm">ဗားရွင္းအသစ္ရပါပီ</string>
     <string name="version_new_no_mm">ဗားရွင္း အသစ္မထြက္ေသးပါ</string>
 
+    <string name="hello">Hello World, PhotoIntentActivity!</string>
+    <string name="btnIntend">Take (big) Picture</string>
+    <string name="btnIntendS">Take (small) Picture</string>
+    <string name="btnIntendV">Take Video</string>
+    <string name="cannot">Cannot</string>
+    <string name="album_name">CameraSample</string>
+
 </resources>
