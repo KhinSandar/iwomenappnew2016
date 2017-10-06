@@ -105,11 +105,11 @@ gradle.taskGraph.whenReady { taskGraph ->
         /**
          * Configure Release key
          */
-        def props = new Properties()
+        /*def props = new Properties()
         props.load(new FileInputStream(rootProject.file("extras/secret.properties")))
         android.signingConfigs.release.keyAlias props.getProperty("alias")
         android.signingConfigs.release.storePassword props.getProperty('keyStorePassword')
-        android.signingConfigs.release.keyPassword props.getProperty('keyAliasPassword')
+        android.signingConfigs.release.keyPassword props.getProperty('keyAliasPassword')*/
     }
 }
 

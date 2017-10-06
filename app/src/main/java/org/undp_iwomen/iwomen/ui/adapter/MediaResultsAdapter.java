@@ -194,7 +194,8 @@ public class MediaResultsAdapter extends BaseAdapter {
         tvDimension.setText(String.format(FORMAT_IMAGE_VIDEO_DIMENSIONS, image.getWidth(), image.getHeight()));
 
         TextView tvMimeType = (TextView) view.findViewById(R.id.tvMimeType);
-        tvMimeType.setText(file.getFileExtensionFromMimeTypeWithoutDot());
+        //tvMimeType.setText(file.getFileExtensionFromMimeTypeWithoutDot());
+        tvMimeType.setText(image.getOriginalPath());
 
         TextView tvSize = (TextView) view.findViewById(R.id.tvSize);
         tvSize.setText(file.getHumanReadableSize(false));

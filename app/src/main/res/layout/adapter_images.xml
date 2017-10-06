@@ -51,7 +51,7 @@
             android:textColor="@color/white"
             android:textSize="9sp"
             android:textStyle="bold"
-            android:visibility="gone"
+            android:visibility="visible"
             tools:text="jpeg" />
 
         <TextView
