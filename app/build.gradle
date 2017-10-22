@@ -1,22 +1,3 @@
-buildscript {
-    repositories {
-        mavenCentral()
-        jcenter()
-    }
-
-
-    dependencies {
-        // replace with the current version of the Android plugin
-        //classpath 'com.android.tools.build:gradle:2.1.0'
-
-        classpath 'com.android.tools.build:gradle:2.3.3'
-        //classpath 'com.android.tools.build:gradle:2.2.0'
-
-        // Since Android's Gradle plugin 0.11, you have to use android-apt >= 1.3
-        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
-        classpath 'com.google.gms:google-services:2.0.0-alpha6'
-    }
-}
 repositories {
     mavenCentral()
     mavenLocal()
@@ -29,9 +10,7 @@ repositories {
 }
 
 apply plugin: 'com.android.application'
-apply plugin: 'com.google.gms.google-services'
 apply plugin: 'android-apt'
-
 
 android {
     ///Users/khinsandar/Documents/VipPro/UNDP/Application/iwomen/iwomen.jks
@@ -48,20 +27,17 @@ android {
         }
     }
 
-    /*compileSdkVersion 23
-    buildToolsVersion '25.0.0'*/
-
-    compileSdkVersion 25
-    buildToolsVersion '25.0.2'
-
-    useLibrary 'org.apache.http.legacy'
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+	useLibrary 'org.apache.http.legacy'
+	
     defaultConfig {
         applicationId "org.undp_iwomen.iwomen"
-        minSdkVersion 15
-        targetSdkVersion 25
+		versionCode Integer.parseInt("${version_code}")
+        versionName "${version_name}"
+        minSdkVersion rootProject.ext.minSdkVersion
+		targetSdkVersion rootProject.ext.targetSdkVersion
         multiDexEnabled true
-        versionCode 12
-        versionName "2.1"
         // Optional: Specify the language(s) your app supports.
         resConfigs "en", "fr", "pt-rBR"
         //testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -82,12 +58,10 @@ android {
     lintOptions {
         abortOnError false
     }
-    configurations {
+    /*configurations {
         all*.exclude group: 'com.android.support', module: 'support-v4'
         all*.exclude group: 'com.android.support', module: 'support-annotations'
-
-
-    }
+    }*/
 
     configurations.all {
         resolutionStrategy.force 'com.google.code.findbugs:jsr305:1.3.9'
@@ -104,7 +78,14 @@ android {
 
 dependencies {
 
-
+	// Android Support Libraries
+    compile "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
+    compile "com.android.support:support-v4:$rootProject.supportLibraryVersion"
+    compile "com.android.support:support-v13:$rootProject.supportLibraryVersion"
+    compile "com.android.support:design:$rootProject.supportLibraryVersion"
+    compile "com.android.support:cardview-v7:$rootProject.supportLibraryVersion"
+    compile "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
+	
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
@@ -119,11 +100,10 @@ dependencies {
         exclude group: 'org.apache.httpcomponents', module: 'httpclient'
         exclude group: 'com.android.support'
     }
-    */
     compile('com.android.support:support-v4:22.+') {
         exclude group: 'org.apache.httpcomponents', module: 'httpclient'
         exclude group: 'com.android.support'
-    }
+    }*/
     compile project(':library')
     compile project(':emojiicon')
     compile project(':sKAlertMessage')
@@ -138,16 +118,12 @@ dependencies {
     compile files('libs/YouTubeAndroidPlayerApi.jar')
     compile 'com.path:android-priority-jobqueue:1.1.2'
 
-    compile 'com.android.support:appcompat-v7:23.4.0'
-    compile 'com.android.support:design:23.4.0'
     //compile 'com.android.support:support-v4:23.4.0'
-    compile 'com.android.support:cardview-v7:23.4.0'
-    compile 'com.android.support:recyclerview-v7:23.4.0'
-    compile 'com.android.support:multidex:1.0.0'
+    compile 'com.android.support:multidex:1.0.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile('com.android.support:support-v4:23.2.1') {
+    /*compile('com.android.support:support-v4:23.2.1') {
         force = true;
-    }
+    }*/
 
     compile(project(':GifImageViewlibrary')) {
         exclude group: 'com.android.support'
@@ -187,9 +163,9 @@ dependencies {
     compile 'com.makeramen:roundedimageview:1.5.0'
     compile 'com.github.traex.rippleeffect:library:1.3'
     compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
-    compile 'com.google.android.gms:play-services-maps:8.3.0'
-    compile 'com.google.android.gms:play-services-gcm:8.3.0'
-    compile 'com.google.android.gms:play-services-analytics:8.3.0'
+    compile 'com.google.android.gms:play-services-maps:8.1.0'
+    compile 'com.google.android.gms:play-services-gcm:8.1.0'
+    compile 'com.google.android.gms:play-services-analytics:8.1.0'
     compile 'com.alexbbb:uploadservice:1.6'
     compile 'com.mikepenz:iconics-core:2.5.4@aar'
     compile 'com.mikepenz:fontawesome-typeface:4.5.0.1@aar'
@@ -198,7 +174,7 @@ dependencies {
     //compile 'com.kbeanie:image-chooser-library:1.6.0'
     compile 'com.orhanobut:dialogplus:1.11@aar'
     compile 'com.kbeanie:multipicker:0.9.5@aar'
-    compile 'com.google.android.gms:play-services-plus:8.3.0'
+    compile 'com.google.android.gms:play-services-plus:8.1.0'
     compile 'com.google.apis:google-api-services-youtube:v3-rev120-1.19.0'
     compile 'com.google.http-client:google-http-client-android:1.22.0'
     compile 'me.relex:circleindicator:1.1.6@aar'
@@ -212,6 +188,17 @@ dependencies {
     //For camera and photo taking for Android N and above
     compile project(':multipicker')
     compile 'com.github.bumptech.glide:glide:3.7.0'
-
-
 }
+
+/*
+Resolves dependency versions across test and production APKs, specifically, transitive
+dependencies.
+*/
+configurations.all {
+    resolutionStrategy.force "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
+    resolutionStrategy.force "com.android.support:support-v4:$rootProject.supportLibraryVersion"
+    resolutionStrategy.force "com.android.support:support-annotations:$rootProject.supportLibraryVersion"
+    resolutionStrategy.force "com.android.support:support-v13:$rootProject.supportLibraryVersion"
+}
+
+apply plugin: 'com.google.gms.google-services'
