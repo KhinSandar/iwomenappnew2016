@@ -40,7 +40,7 @@ public class Utils {
     public static String ENG_LANG_FONT = "english";//english
     public static String MM_ZAWGYI_LANG_FONT = "zawgyione";//english
     public static String MM3_LANG_FONT = "myanmar3";//english
-    public static String MM_DEFAULT_FONT = "default";//english
+    public static String MM_DEFAULT_FONT = "myanmar_default";//english
 
 
 

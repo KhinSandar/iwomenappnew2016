@@ -247,14 +247,47 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
         if (mstr_lang != null && mstr_lang.equals(Utils.MM_LANG)) {
             et_postDesc.setHint(getResources().getString(R.string.new_iwomen_post_hint_title_mm));
             et_postDesc.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
+
+            upload_photo_btn.setText(getResources().getString(R.string.audio_upload_photo_mm));
+            take_photo_btn.setText(getResources().getString(R.string.aduio_take_photo_mm));
+            audio_upload_btn.setText(getResources().getString(R.string.audio_record_btn_txt_mm));
+            video_upload_btn.setText(getResources().getString(R.string.audio_vid_file_mm));
+            mPostBtn.setText(getResources().getString(R.string.audio_upload_post_mm));
+
+
         } else if (mstr_lang != null && mstr_lang.equals(Utils.MM_LANG_UNI)) {
             et_postDesc.setHint(getResources().getString(R.string.new_iwomen_post_hint_title_mm));
             et_postDesc.setTypeface(MyTypeFace.get(mContext, MyTypeFace.UNI));
+
+            upload_photo_btn.setText(getResources().getString(R.string.audio_upload_photo_mm));
+            take_photo_btn.setText(getResources().getString(R.string.aduio_take_photo_mm));
+            audio_upload_btn.setText(getResources().getString(R.string.audio_record_btn_txt_mm));
+            video_upload_btn.setText(getResources().getString(R.string.audio_vid_file_mm));
+            mPostBtn.setText(getResources().getString(R.string.audio_upload_post_mm));
+
+
         } else if (mstr_lang != null && mstr_lang.equals(Utils.MM_LANG_DEFAULT)) {
             et_postDesc.setHint(getResources().getString(R.string.new_iwomen_post_hint_title_mm));
+
+            upload_photo_btn.setText(getResources().getString(R.string.audio_upload_photo_mm));
+            take_photo_btn.setText(getResources().getString(R.string.aduio_take_photo_mm));
+            audio_upload_btn.setText(getResources().getString(R.string.audio_record_btn_txt_mm));
+            video_upload_btn.setText(getResources().getString(R.string.audio_vid_file_mm));
+            mPostBtn.setText(getResources().getString(R.string.audio_upload_post_mm));
+
+
         } else {
             et_postDesc.setHint(getResources().getString(R.string.new_iwomen_post_hint_title_eng));
             et_postDesc.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
+
+            upload_photo_btn.setText(getResources().getString(R.string.audio_upload_photo));
+            take_photo_btn.setText(getResources().getString(R.string.aduio_take_photo));
+            audio_upload_btn.setText(getResources().getString(R.string.audio_record_btn_txt));
+            video_upload_btn.setText(getResources().getString(R.string.audio_vid_file));
+            mPostBtn.setText(getResources().getString(R.string.audio_upload_post));
+
+
+
         }
 
 

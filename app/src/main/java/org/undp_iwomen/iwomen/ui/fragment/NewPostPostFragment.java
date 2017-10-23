@@ -1,12 +1,14 @@
 package org.undp_iwomen.iwomen.ui.fragment;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.media.MediaPlayer;
@@ -17,6 +19,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Environment;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.support.v13.app.FragmentCompat;
 import android.support.v4.app.Fragment;
 import android.system.ErrnoException;
@@ -26,6 +29,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 
 import com.alexbbb.uploadservice.MultipartUploadRequest;
 import com.alexbbb.uploadservice.UploadNotificationConfig;
@@ -36,6 +40,11 @@ import com.kbeanie.imagechooser.api.ChosenImage;
 import com.kbeanie.imagechooser.api.ChosenImages;
 import com.kbeanie.imagechooser.api.ImageChooserListener;
 import com.kbeanie.imagechooser.api.ImageChooserManager;
+import com.kbeanie.multipicker.api.CameraImagePicker;
+import com.kbeanie.multipicker.api.ImagePicker;
+import com.kbeanie.multipicker.api.Picker;
+import com.kbeanie.multipicker.api.callbacks.ImagePickerCallback;
+import com.kbeanie.multipicker.api.entity.ChosenFile;
 import com.pnikosis.materialishprogress.ProgressWheel;
 import com.smk.skalertmessage.SKToastMessage;
 import com.smk.skconnectiondetector.SKConnectionDetector;
@@ -50,6 +59,7 @@ import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.model.MyTypeFace;
 import org.undp_iwomen.iwomen.ui.activity.DrawerMainActivity;
 import org.undp_iwomen.iwomen.ui.activity.TalkTogetherMainActivity;
+import org.undp_iwomen.iwomen.ui.adapter.MediaResultsAdapter;
 import org.undp_iwomen.iwomen.ui.widget.CircleProgressBar;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.ui.widget.ResizableImageView;
@@ -64,6 +74,7 @@ import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -73,9 +84,11 @@ import retrofit.client.Response;
 import retrofit.mime.MultipartTypedOutput;
 import retrofit.mime.TypedFile;
 
-public class NewPostPostFragment extends Fragment implements View.OnClickListener, ImageChooserListener {
+public class NewPostPostFragment extends Fragment implements View.OnClickListener, ImageChooserListener , ImagePickerCallback {
 
     public static final String TAG = "New Post";
+    private static final int PERMISSION_REQUEST = 10002;
+
     private static String cateId, categoryName;
     public Button mPostBtn;
     public EditText et_postDesc;
@@ -137,6 +150,23 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
     private Context mContext;
     private String  engStrCateName,mmStrCateName;
 
+    private static final String CAMERA = Manifest.permission.CAMERA;
+
+
+    private static final int REQUEST_EXTERNAL_STORAGE_AND_CAMERA_RESULT = 1;
+    private static final int REQUEST_EXTERNAL_STORAGE_RESULT = 1;
+    private static final int REQUEST_CAMERA_RESULT = 1;
+
+    Uri fileUri;
+
+    private static final String IMAGE_DIRECTORY_NAME = "Camera Images";
+
+    //New Code for Image
+    private String pickerPath;
+    private ListView lvResults;
+    private List<? extends ChosenFile> files;
+    private String choseImageOriginalPath, outPutfileUri, takePhotoUriPath;
+
     public NewPostPostFragment() {
     }
 
@@ -192,6 +222,9 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
         audio_record_progress_bar = (CircleProgressBar) rootView.findViewById(R.id.audio_record_progressBar);
         background_audio_record_process = rootView.findViewById(R.id.background_audio_record);
 
+        //Image
+        lvResults = (ListView) rootView.findViewById(R.id.lvResults);
+
         mPostBtn.setOnClickListener(this);
         take_photo_btn.setOnClickListener(this);
         upload_photo_btn.setOnClickListener(this);
@@ -206,17 +239,7 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
 
         audio_record_progress_view.setVisibility(View.INVISIBLE);
 
-        /*if (mstr_lang != null && mstr_lang.equals(Utils.MM_LANG)) {
-            et_postDesc.setHint(getResources().getString(R.string.post_body_hint_mm));
-        } else {
 
-            et_postDesc.setHint(getResources().getString(R.string.post_body_hint_eng));
-        }
-            <string name="post_body_hint_eng">Ask a question to the iWomen community, post a poem you have written and share it with iWomen community, post about a successful TLG/SRG/May Doe Kabar activity to inspire other women, post about entrepreneurship trainings, ideas and more.
-    <string name="post_body_hint_mm">iWomen အဖြဲ႕အစည္း ကိုု ေမးခြန္းမ်ားေမးျမန္းပါ။ သင္ေရးထားေသာ ကဗ်ာမ်ားကိုု iWomen အဖြဲ႕အစည္းတြင္ ေ၀မွ်ပါ။ အျခား အမ်ိဳးသမီးမ်ား စိတ္အားတက္ႀကြေစရန္
-ျမိဳ႕နယ္ ဦးေဆာင္အဖြဲ႕ ၊ ကိုုယ့္အားကိုုယ္ကိုုးအဖြဲ႕နွင့္ ေမတိုု႕ကမာၻကြန္ရက္တိုု႕ ၏ လႈပ္ရွားမႈမ်ား ၊ အသက္ေမြး၀မ္းေႀကာင္း သင္တန္းမ်ား နွင့္ အႀကံဥာဏ္မ်ား ကိုု ေ၀မွ်ပါ။</string>
-
-        */
         //for separate category
 
         if (mstr_lang != null && mstr_lang.equals(Utils.MM_LANG)) {
@@ -224,19 +247,41 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
                 et_postDesc.setHint(getResources().getString(R.string.post_body_hint_mm)+" "+mmStrCateName+" "+"ၿဖစ္ပါသည္။"+getResources().getString(R.string.post_body_hint_end_closing_mm));
                 et_postDesc.setTypeface(MyTypeFace.get(mContext, MyTypeFace.ZAWGYI));
 
+            upload_photo_btn.setText(getResources().getString(R.string.audio_upload_photo_mm));
+            take_photo_btn.setText(getResources().getString(R.string.aduio_take_photo_mm));
+            audio_upload_btn.setText(getResources().getString(R.string.audio_record_btn_txt_mm));
+            video_upload_btn.setText(getResources().getString(R.string.audio_vid_file_mm));
+            mPostBtn.setText(getResources().getString(R.string.audio_upload_post_mm));
         } else if (mstr_lang != null && mstr_lang.equals(Utils.MM_LANG_UNI)) {
                 mmStrCateName = categoryName;
                 et_postDesc.setHint( getResources().getString(R.string.post_body_hint_mm)+" "+mmStrCateName+" "+"ၿဖစ္ပါသည္။"+getResources().getString(R.string.post_body_hint_end_closing_mm));
                 et_postDesc.setTypeface(MyTypeFace.get(mContext, MyTypeFace.UNI));
-
+            upload_photo_btn.setText(getResources().getString(R.string.audio_upload_photo_mm));
+            take_photo_btn.setText(getResources().getString(R.string.aduio_take_photo_mm));
+            audio_upload_btn.setText(getResources().getString(R.string.audio_record_btn_txt_mm));
+            video_upload_btn.setText(getResources().getString(R.string.audio_vid_file_mm));
+            mPostBtn.setText(getResources().getString(R.string.audio_upload_post_mm));
 
         } else if (mstr_lang != null && mstr_lang.equals(Utils.MM_LANG_DEFAULT)) {
             mmStrCateName = categoryName;
             et_postDesc.setHint( getResources().getString(R.string.post_body_hint_mm)+" "+mmStrCateName+" "+"ၿဖစ္ပါသည္။"+getResources().getString(R.string.post_body_hint_end_closing_mm));
+
+            upload_photo_btn.setText(getResources().getString(R.string.audio_upload_photo_mm));
+            take_photo_btn.setText(getResources().getString(R.string.aduio_take_photo_mm));
+            audio_upload_btn.setText(getResources().getString(R.string.audio_record_btn_txt_mm));
+            video_upload_btn.setText(getResources().getString(R.string.audio_vid_file_mm));
+            mPostBtn.setText(getResources().getString(R.string.audio_upload_post_mm));
         } else {
             engStrCateName = categoryName;
             et_postDesc.setHint(getResources().getString(R.string.post_body_hint_eng)+" "+ engStrCateName+" " + getResources().getString(R.string.post_body_hint_end_closing));
             et_postDesc.setTypeface(MyTypeFace.get(mContext, MyTypeFace.NORMAL));
+
+            upload_photo_btn.setText(getResources().getString(R.string.audio_upload_photo));
+            take_photo_btn.setText(getResources().getString(R.string.aduio_take_photo));
+            audio_upload_btn.setText(getResources().getString(R.string.audio_record_btn_txt));
+            video_upload_btn.setText(getResources().getString(R.string.audio_vid_file));
+            mPostBtn.setText(getResources().getString(R.string.audio_upload_post));
+
         }
 
 
@@ -266,50 +311,19 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
                 break;
 
             case R.id.new_post_photo_take_btn:
-                if (!hasPermission(CAMERA_PERMISSION)) {
+                if (!hasPermission(CAMERA)) {
 
-                    //if no permission, request permission
-                    String[] perms = {CAMERA_PERMISSION};
-
-                    int permsRequestCode = 200;
-
-                    //Fragment.requestPermissions(perms, permsRequestCode);
-                    requestPermissions(new String[]{Manifest.permission.CAMERA}, permsRequestCode);
-
-
-                } else {
-
-                    if (!hasPermission(STORAGE_READ_PERMISSION)) {
-
-                        //if no permission, request permission
-                        String[] perms = {STORAGE_READ_PERMISSION};
-
-                        int permsRequestCode = 200;
-
-
-                        //FragmentCompat.requestPermissions(perms, permsRequestCode);
-                        //FragmentCompat.requestPermissions(getFragmentManager().getClass(), perms, permsRequestCode);
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                            requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, permsRequestCode);
-                        }
-
-                    } else {
-                        takePicture();
-
-                        /*Intent i = new Intent(getActivity().getApplicationContext(), CameraActivity.class);
-                        i.putExtra("CategoryNameMM", mmStrCateName);
-                        i.putExtra("CategoryName", categoryName);//CategoryName
-                        i.putExtra("CategoryID", cateId);//CategoryName
-                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(i);
-                        //Kill this activity after back from TalkTogetherMain
-                        getActivity().finish();*/
-                    }
+                    requestPermissions(new String[]{STORAGE_READ_PERMISSION, CAMERA}, PERMISSION_REQUEST);
+                    return;
                 }
+
+
+                takePictureNew();
+
                 break;
 
             case R.id.new_post_photo_upload_btn:
+                //check whether there is permission for READ_STORAGE_PERMISSION
                 //check whether there is permission for READ_STORAGE_PERMISSION
                 if (!hasPermission(CAMERA_PERMISSION)) {
 
@@ -318,15 +332,14 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
 
                     int permsRequestCode = 200;
 
-                    //requestPermissions(perms, permsRequestCode);
-                    requestPermissions(new String[]{Manifest.permission.CAMERA}, permsRequestCode);
-
+                    requestPermissions(perms, permsRequestCode);
 
                 } else {
+                    pickImageMultiple();
 
-                    chooseImage();
                 }
                 break;
+
 
             case R.id.new_post_audio_upload_btn:
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -342,7 +355,6 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
                         performAudioRecord();
                     }
 
-                    //SKToastMessage.showMessage(getActivity(), getResources().getString(R.string.resource_coming_soon_eng), SKToastMessage.ERROR);
                 } else {
                     performAudioRecord();
                 }
@@ -395,25 +407,24 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
     private void checkProcessWhattoDo() {
 
 
-        if (crop_file_path != null) {
-            uploadImage();
-        } else if (mAudioFilePath != null) {
+        //Log.e("iWOmen Post Btn Click", "checkProcessWhattoDo===>" + choseImageOriginalPath +"/**/"+ takePhotoUriPath);
+
+        if (choseImageOriginalPath != null  ) {
+
+            uploadImage(choseImageOriginalPath);
+        } else if(takePhotoUriPath != null ){
+            uploadImage(takePhotoUriPath);
+        } else  if (mAudioFilePath != null) {
             String uploadUrl = "http://api.iwomenapp.org/api/v1/file/audioUpload";
             uploadingAudioFile(uploadUrl, mAudioFilePath);
         } else {
-
-            if (et_postDesc.getText().toString().isEmpty() && crop_file_path == null && mAudioFilePath == null) {//this mean user doesn't choose nothing
-                //progress_wheel.setVisibility(View.GONE);
-                if (zPDialog != null && zPDialog.isShowing()) {
-                    zPDialog.dismissWithSuccess();
-                }
+            if (et_postDesc.getText().toString().isEmpty() && choseImageOriginalPath == null && takePhotoUriPath == null && mAudioFilePath == null) {//this mean user doesn't choose nothing
                 SKToastMessage.showMessage(getActivity(), getResources().getString(R.string.audio_record_warning_post_something), SKToastMessage.WARNING);
             } else {
-
-
                 //we will post all data to server, if it's here, we assume all data is ready
                 performPostUpload();
             }
+
         }
 
     }
@@ -456,9 +467,7 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
     void performPostUpload() {
 
         progress_wheel.setVisibility(View.VISIBLE);
-        /*zPDialog = new ZProgressHUD(getActivity());
-        zPDialog.setCancelable(false);
-        zPDialog.show();*/
+
 
 
         String content = null, content_type = null, content_mm = null, postUploadName = null;
@@ -604,6 +613,23 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
     public void onImagesChosen(ChosenImages images) {
 
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case PERMISSION_REQUEST: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    //doFetching();
+                    SKToastMessage.showMessage(getActivity().getApplicationContext(), " permission accepted", SKToastMessage.ERROR);
+
+                } else {
+                    SKToastMessage.showMessage(getActivity().getApplicationContext(), "The app was not allowed to write to your storage. Hence, it cannot function properly. Please consider granting it this permission", SKToastMessage.ERROR);
+                }
+            }
+        }
+    }
+
 
     /***
      * to check where given permission is already permitted or not
@@ -893,15 +919,7 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == getActivity().RESULT_OK && (requestCode == ChooserType.REQUEST_PICK_PICTURE || requestCode == ChooserType.REQUEST_CAPTURE_PICTURE)) {
-            if (imageChooserManager == null) {
-                reinitializeImageChooser();
-            }
-            imageChooserManager.submit(requestCode, data);
-            //startActivityForResult(MediaStoreUtils.getPickImageIntent(getActivity().getApplicationContext()),REQUEST_PICTURE );
-        } else {
-            progress_wheel.setVisibility(View.GONE);
-        }
+
         if ((requestCode == REQUEST_CROP_PICTURE) && (resultCode == getActivity().RESULT_OK)) {
             // When we are done cropping, display it in the ImageView.
 
@@ -925,14 +943,57 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
 
             }
 
-            if (!requirePermissions) {
-                //mCropImageView.setImageUriAsync(imageUri);
-                selectedImage.setVisibility(View.VISIBLE);
-                selectedImage.setImageBitmap(BitmapFactory.decodeFile(croppedImageFile.getAbsolutePath()));
-                //img_job.setMaxWidth(300);
-                selectedImage.setMaxHeight(650);
-                crop_file_name = Uri.fromFile(croppedImageFile).getLastPathSegment().toString();
-                crop_file_path = Uri.fromFile(croppedImageFile).getPath();
+            /*if (!requirePermissions) {
+
+            }*/
+
+
+        }
+
+        if (resultCode == Activity.RESULT_OK) {
+
+            boolean requirePermissions = false;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
+
+                    getActivity().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED &&
+                    isUriRequiresPermissions(Uri.fromFile(croppedImageFile))) {
+
+                // request permissions and handle the result in onRequestPermissionsResult()
+                requirePermissions = true;
+                //mCropImageUri = imageUri;
+                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
+            }
+
+            if (requestCode == Picker.PICK_IMAGE_DEVICE) {
+                if (imagePicker == null) {
+                    imagePicker = new ImagePicker(this);
+                    imagePicker.setImagePickerCallback(this);
+                }
+                imagePicker.submit(data);
+                if (!requirePermissions) {
+
+                    //crop_file_name = Uri.fromFile(croppedImageFile).getLastPathSegment().toString();
+                    Log.e("iWOmen Post Btn Click", "11111===> Permission" + choseImageOriginalPath + "/" + data.getData());
+                    choseImageOriginalPath = getImagePath(data.getData());//Uri.fromFile(croppedImageFile).getPath();
+                }
+
+            } else if (requestCode == Picker.PICK_IMAGE_CAMERA) {
+                if (cameraPicker == null) {
+                    cameraPicker = new CameraImagePicker(this);
+                    cameraPicker.setImagePickerCallback(this);
+                    cameraPicker.reinitialize(pickerPath);
+
+                }
+                cameraPicker.submit(data);
+
+                /*if (!requirePermissions) {
+
+
+
+
+
+
+                }*/
             }
 
 
@@ -941,6 +1002,23 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+    //For Upload Photo
+    public String getImagePath(Uri uri) {
+        Cursor cursor = mContext.getContentResolver().query(uri, null, null, null, null);
+        cursor.moveToFirst();
+        String document_id = cursor.getString(0);
+        document_id = document_id.substring(document_id.lastIndexOf(":") + 1);
+        cursor.close();
+
+        cursor = mContext.getContentResolver().query(
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                null, MediaStore.Images.Media._ID + " = ? ", new String[]{document_id}, null);
+        cursor.moveToFirst();
+        String path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
+        cursor.close();
+
+        return path;
+    }
     // Should be called if for some reason the ImageChooserManager is null (Due
     // to destroying of activity for low memory situations)
     private void reinitializeImageChooser() {
@@ -950,9 +1028,13 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
         imageChooserManager.reinitialize(filePath);
     }
 
-    public void uploadImage() {
-        //progress_wheel.setVisibility(View.VISIBLE);
-        File photo = new File(crop_file_path);
+    public void uploadImage(String filename) {
+        Log.e("iWOmen Post Btn Click", "2222===> upload Image" + filename);
+        //content://com.android.providers.media.documents/document/image%3A17530
+        progress_wheel.setVisibility(View.VISIBLE);
+
+
+        File photo = new File(filename);
         MultipartTypedOutput multipartTypedOutput = new MultipartTypedOutput();
         multipartTypedOutput.addPart("image", new TypedFile("image/png", photo));
         NetworkEngine.getInstance().postUserPhoto(multipartTypedOutput, new Callback<PhotoUpload>() {
@@ -961,7 +1043,8 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
 
                 if (photo.getResizeUrl().size() > 0) {
                     uploadPhoto = photo.getResizeUrl().get(0);
-                    crop_file_path = null;
+                    choseImageOriginalPath = null;
+                    takePhotoUriPath = null;
                 }
 
                 checkProcessWhattoDo();
@@ -970,6 +1053,8 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
             @Override
             public void failure(RetrofitError error) {
                 Log.e("<<<<Fail>>>", "===>" + error.toString());
+                progress_wheel.setVisibility(View.INVISIBLE);
+
 
                 return;
             }
@@ -993,22 +1078,73 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
         }
         return false;
     }
-   /* @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
 
-        switch (id) {
-            case android.R.id.home:
-                onHomePressed();
-                return true;
 
-        }
+    @Override
+    public void onImagesChosen(List<com.kbeanie.multipicker.api.entity.ChosenImage> images) {
+        MediaResultsAdapter adapter = new MediaResultsAdapter(images, getActivity());
+        lvResults.setAdapter(adapter);
+        Utils.setListViewHeightBasedOnChildren(lvResults);
+        this.files = images;
 
-        return super.onOptionsItemSelected(item);
+        takePhotoUriPath = files.get(0).getOriginalPath();
+
+        //Log.e("iWOmen ImageChoose", "0000===> Permission" + takePhotoUriPath +"/"+ files.get(0).getQueryUri());
+        //0000===> Permission/storage/emulated/0/Random/Random Pictures/38b71e97-5f8e-4b88-a5b5-45fed0a9ff43.jpeg/file:///data/user/0/org.undp_iwomen.iwomen/files/pictures/38b71e97-5f8e-4b88-a5b5-45fed0a9ff43.jpeg
+
     }
-    public void onHomePressed() {
 
-            getActivity().finish();
+    private ImagePicker imagePicker;
 
+    public void pickImageSingle() {
+        imagePicker = new ImagePicker(this);
+        imagePicker.shouldGenerateMetadata(true);
+        imagePicker.shouldGenerateThumbnails(true);
+        imagePicker.setImagePickerCallback(this);
+        imagePicker.pickImage();
+    }
+
+    public void pickImageMultiple() {
+        imagePicker = new ImagePicker(this);
+        imagePicker.allowMultiple();
+        imagePicker.shouldGenerateMetadata(true);
+        imagePicker.shouldGenerateThumbnails(true);
+        imagePicker.setImagePickerCallback(this);
+        imagePicker.pickImage();
+    }
+
+    private CameraImagePicker cameraPicker;
+
+    public void takePictureNew() {
+        cameraPicker = new CameraImagePicker(this);
+        cameraPicker.shouldGenerateMetadata(true);
+        cameraPicker.shouldGenerateThumbnails(true);
+        cameraPicker.setImagePickerCallback(this);
+        pickerPath = cameraPicker.pickImage();
+    }
+
+    /*@Override
+    public void onError(String message) {
+        Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
     }*/
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        // You have to save path in case your activity is killed.
+        // In such a scenario, you will need to re-initialize the CameraImagePicker
+        outState.putString("picker_path", pickerPath);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (savedInstanceState != null) {
+            if (savedInstanceState.containsKey("picker_path")) {
+                pickerPath = savedInstanceState.getString("picker_path");
+            }
+        }
+    }
+
+    //New Code for Image Uri to Upload Uri
 }
