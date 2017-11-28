@@ -355,7 +355,7 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
 
                 } else {
                     StoreUtil.getInstance().saveTo("fonts", "myanmar3");
-                    editor.putString(Utils.PREF_SETTING_LANG, Utils.MM3_LANG_FONT);
+                    editor.putString(Utils.PREF_SETTING_LANG, Utils.MM_LANG_UNI);
                     editor.commit();
 
                     String languageToLoad = "mm"; // your language
@@ -365,9 +365,9 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
                     config.locale = locale;
                     getActivity().getBaseContext().getResources().updateConfiguration(config, getResources().getDisplayMetrics());
 
-                    SharedPreferences.Editor fontEditor = getActivity().getSharedPreferences(Utils.PREF_SETTING, Activity.MODE_PRIVATE).edit();
+                   /* SharedPreferences.Editor fontEditor = getActivity().getSharedPreferences(Utils.PREF_SETTING, Activity.MODE_PRIVATE).edit();
                     fontEditor.putString(Utils.PREF_SETTING_LANG, "mm");
-                    fontEditor.commit();
+                    fontEditor.commit();*/
 
                     setMyanmarFontUni();
                 }
@@ -394,9 +394,9 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
                     config.locale = locale;
                     getActivity().getBaseContext().getResources().updateConfiguration(config, getResources().getDisplayMetrics());
 
-                    SharedPreferences.Editor fontEditor = getActivity().getSharedPreferences(Utils.PREF_SETTING, Activity.MODE_PRIVATE).edit();
+                    /*SharedPreferences.Editor fontEditor = getActivity().getSharedPreferences(Utils.PREF_SETTING, Activity.MODE_PRIVATE).edit();
                     fontEditor.putString(Utils.PREF_SETTING_LANG, "mm");
-                    fontEditor.commit();
+                    fontEditor.commit();*/
 
                     setMyanmarFontDefault();
                 }
