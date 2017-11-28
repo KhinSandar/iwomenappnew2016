@@ -31,7 +31,6 @@ import android.widget.Toast;
 import com.alexbbb.uploadservice.MultipartUploadRequest;
 import com.alexbbb.uploadservice.UploadNotificationConfig;
 import com.alexbbb.uploadservice.UploadServiceBroadcastReceiver;
-import com.android.camera.CropImageIntentBuilder;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
@@ -907,9 +906,9 @@ public class MainPhotoIWomenPostFragment extends Fragment implements ImageChoose
 
 
                     Uri croppedImage = Uri.fromFile(croppedImageFile);
-                    CropImageIntentBuilder cropImage = new CropImageIntentBuilder(512, 512, croppedImage);
+                    /*CropImageIntentBuilder cropImage = new CropImageIntentBuilder(512, 512, croppedImage);
                     cropImage.setSourceImage(croppedImage);
-                    startActivityForResult(cropImage.getIntent(getActivity().getApplicationContext()), REQUEST_CROP_PICTURE);
+                    startActivityForResult(cropImage.getIntent(getActivity().getApplicationContext()), REQUEST_CROP_PICTURE);*/
 
 
                     chosenImage = image;

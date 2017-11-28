@@ -2,11 +2,11 @@ package org.smk.application;
 
 import android.util.Log;
 
-import com.path.android.jobqueue.Job;
-import com.path.android.jobqueue.Params;
+/*import com.path.android.jobqueue.Job;
+import com.path.android.jobqueue.Params;*/
 
 @SuppressWarnings("serial")
-public class DownloadManager extends Job {
+public class DownloadManager  {//extends Job
 	/**
 	 * 
 	 */
@@ -17,13 +17,13 @@ public class DownloadManager extends Job {
 	private String fileName;
 	
 	public DownloadManager(String url, String fileName) {
-		super(new Params(PRIORITY).requireNetwork().persist());
+		//super(new Params(PRIORITY).requireNetwork().persist());
 		// TODO Auto-generated constructor stub
 		this.url = url;
 		this.fileName = fileName;
 	}
 	
-	@Override
+	/*@Override
 	public void onAdded() {
 		// TODO Auto-generated method stub
 		
@@ -46,6 +46,6 @@ public class DownloadManager extends Job {
 	protected boolean shouldReRunOnThrowable(Throwable throwable) {
 		// TODO Auto-generated method stub
 		return false;
-	}
+	}*/
 
 }

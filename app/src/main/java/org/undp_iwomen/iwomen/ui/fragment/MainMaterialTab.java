@@ -16,6 +16,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.util.TypedValue;
@@ -63,15 +64,6 @@ public class MainMaterialTab extends Fragment {
         public void onTaskFinished() { }
     };
 
-    // Save a reference to the fragment manager. This is initialised in onCreate().
-    private android.app.FragmentManager mFM;
-
-    // Code to identify the fragment that is calling onActivityResult(). We don't really need
-    // this since we only have one fragment to deal with.
-    static final int TASK_FRAGMENT = 0;
-
-    // Tag so we can find the task fragment again, in another instance of this fragment after rotation.
-    static final String TASK_FRAGMENT_TAG = "task";
 
     private View v = null;
     private Context ctx;
@@ -85,7 +77,8 @@ public class MainMaterialTab extends Fragment {
     /********MaterialTab*******/
     private final Handler handler = new Handler();
 
-    private PagerSlidingTabStrip tabs;
+    //private PagerSlidingTabStrip tabs;
+    private PagerTabStrip tabs;
     private ViewPager pager;
     private MyPagerAdapter adapter;
 
@@ -187,11 +180,11 @@ public class MainMaterialTab extends Fragment {
         v = inflater.inflate(R.layout.activity_material_tab_main, container, false);
 
 
-        tabs = (PagerSlidingTabStrip)v.findViewById(R.id.tabs);
+        tabs = (PagerTabStrip) v.findViewById(R.id.tabs);
         tabs.setTextColor(ContextCompat.getColor(ctx, R.color.white));
         tabs.setBackgroundColor(ContextCompat.getColor(ctx, R.color.line_color));
-        tabs.setIndicatorColor(ContextCompat.getColor(ctx, R.color.white));
-        tabs.setIndicatorHeight(2);
+        /*tabs.setIndicatorColor(ContextCompat.getColor(ctx, R.color.white));
+        tabs.setIndicatorHeight(2);*/
 
 
 
@@ -204,18 +197,18 @@ public class MainMaterialTab extends Fragment {
         if (mstr_lang.equals(Utils.ENG_LANG)) {
 
             adapter = new MyPagerAdapter(getChildFragmentManager(), fragments,mstr_lang);
-            tabs.setTypeface(MyTypeFace.get(ctx,MyTypeFace.NORMAL),0);
+            //tabs.setTypeface(MyTypeFace.get(ctx,MyTypeFace.NORMAL),0);
 
         } else if (mstr_lang.equals(Utils.MM_LANG)) {
 
             adapter = new MyPagerAdapter(getChildFragmentManager(), fragments,mstr_lang);
-            tabs.setTypeface(MyTypeFace.get(ctx,MyTypeFace.ZAWGYI),0);
+            //tabs.setTypeface(MyTypeFace.get(ctx,MyTypeFace.ZAWGYI),0);
 
         }else if (mstr_lang.equals(Utils.MM_LANG_UNI)) {
 
             adapter = new MyPagerAdapter(getChildFragmentManager(), fragments,mstr_lang);
             //String text = FontConverter.zg12uni51(tabs..toString());
-            tabs.setTypeface(MyTypeFace.get(ctx,MyTypeFace.UNI),0);
+            //tabs.setTypeface(MyTypeFace.get(ctx,MyTypeFace.UNI),0);
 
         }else if (mstr_lang.equals(Utils.MM_LANG_DEFAULT)) {
 
@@ -243,7 +236,8 @@ public class MainMaterialTab extends Fragment {
         tabs.setTextColor(getResources().getColor(R.color.drawer_list_item_txt));
 
 
-        tabs.setViewPager(pager);
+
+        /*tabs.setViewPager(pager);
         tabs.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -253,9 +247,9 @@ public class MainMaterialTab extends Fragment {
 
             @Override
             public void onPageSelected(int position) {
-                /*(position == 0){
+                *//*(position == 0){
                     pager.setCurrentItem();
-                }*/
+                }*//*
                 //Toast.makeText(getActivity().getApplicationContext(),"onPageSelected" + position,Toast.LENGTH_SHORT).show();
             }
 
@@ -263,7 +257,7 @@ public class MainMaterialTab extends Fragment {
             public void onPageScrollStateChanged(int state) {
                 //Toast.makeText(getActivity().getApplicationContext(),"onPageScrollStateChanged",Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
 
         //tabs.setIndicatorColor(Color.parseColor("#be0000"));
 
@@ -378,98 +372,9 @@ public class MainMaterialTab extends Fragment {
 
     }
 
-    /*//Check Pare Version
-    private void checkPareAppVersion(){
-        ParseQuery<AppVersion> query = ParseQuery.getQuery("AppVersion");
-        query.orderByDescending("createdAt");
-        query.getFirstInBackground(new GetCallback<AppVersion>() {
-            @Override
-            public void done(AppVersion appVersion, ParseException e) {
-                if(appVersion == null){
-                    IsGreater = false;
-                    Toast.makeText(getActivity().getApplicationContext(),
-                            "The getFirst request failed." + e.getMessage(),
-                            Toast.LENGTH_LONG).show();
-                }else {
 
 
 
-                    if(appVersion.getString("versionName") == null){
-
-                    }else {
-                        if (isGreater(appVersion.getString("versionName"), curVersionName)) {
-
-
-                            IsGreater = true;
-                            strDownLink = appVersion.getString("DownloadLinks");
-                            Toast.makeText(getActivity(), "New Version Available at " + strDownLink, Toast.LENGTH_SHORT).show();
-
-                            DownAPKTask downAPKTask = new DownAPKTask();
-                            downAPKTask.execute();
-
-
-                        } else {
-
-                            IsGreater = false;
-                            //Toast.makeText(getActivity(), "ServerReplyversion-"+appVersion.getString("versionName")  + "IsGreater-" +IsGreater, Toast.LENGTH_SHORT).show();
-
-                        }
-                    }
-
-                }
-            }
-        });
-
-
-    }*/
-
-
-
-    public class DownAPKTask extends AsyncTask<String, Integer, String> {
-        @Override
-        protected String doInBackground(String... sUrl) {
-            String path = "/sdcard/lostandfound.apk";
-            try {
-                URL url = new URL(strDownLink);//sUrl[0]//http://goo.gl/4NlNYF"
-                URLConnection connection = url.openConnection();
-                connection.connect();
-
-                int fileLength = connection.getContentLength();
-
-                // download the file
-                InputStream input = new BufferedInputStream(url.openStream());
-                OutputStream output = new FileOutputStream(path);
-
-                byte data[] = new byte[1024];
-                long total = 0;
-                int count;
-                while ((count = input.read(data)) != -1) {
-                    total += count;
-                    publishProgress((int) (total * 100 / fileLength));
-                    output.write(data, 0, count);
-                }
-
-                output.flush();
-                output.close();
-                input.close();
-            } catch (Exception e) {
-                Log.e("YourApp", "Well that didn't work out so well...");
-                Log.e("YourApp", e.getMessage());
-            }
-            return path;
-        }
-
-        // begin the installation by opening the resulting file
-        @Override
-        protected void onPostExecute(String path) {
-            Intent i = new Intent();
-            i.setAction(Intent.ACTION_VIEW);
-            i.setDataAndType(Uri.fromFile(new File(path)), "application/vnd.android.package-archive");
-            Log.d("Lofting", "About to install new .apk");
-            getActivity().startActivity(i);
-        }
-
-    }
     /*
      * check whether @param one is greater than @param two
      *

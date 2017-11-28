@@ -2,11 +2,11 @@ package org.undp_iwomen.iwomen.downloadclient;
 
 import android.util.Log;
 
-import com.path.android.jobqueue.Job;
-import com.path.android.jobqueue.Params;
+/*import com.path.android.jobqueue.Job;
+import com.path.android.jobqueue.Params;*/
 
 @SuppressWarnings("serial")
-public class DownloadManager extends Job {
+public class DownloadManager  {//extends Job
 	/**
 	 * 
 	 */
@@ -15,13 +15,13 @@ public class DownloadManager extends Job {
 
 	public DownloadTask downloadTask;
 	public DownloadManager(String url, String filename) {
-		super(new Params(PRIORITY).requireNetwork().persist());
+		//super(new Params(PRIORITY).requireNetwork().persist());
 		// TODO Auto-generated constructor stub
 		this.url = url;
 		this.fileName = filename;
 	}
 	
-	@Override
+	/*@Override
 	public void onAdded() {
 		// TODO Auto-generated method stub
 		
@@ -44,6 +44,6 @@ public class DownloadManager extends Job {
 	protected boolean shouldReRunOnThrowable(Throwable throwable) {
 		// TODO Auto-generated method stub
 		return false;
-	}
+	}*/
 
 }

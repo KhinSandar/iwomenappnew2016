@@ -27,7 +27,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.android.camera.CropImageIntentBuilder;
 import com.kbeanie.imagechooser.api.ChooserType;
 import com.kbeanie.imagechooser.api.ChosenImage;
 import com.kbeanie.imagechooser.api.ChosenImages;
@@ -701,9 +700,9 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
                     // setting the output image file and size to 200x200 pixels square.
 
                     Uri croppedImage = Uri.fromFile(croppedImageFile);
-                    CropImageIntentBuilder cropImage = new CropImageIntentBuilder(512, 512, croppedImage);
+                    /*CropImageIntentBuilder cropImage = new CropImageIntentBuilder(512, 512, croppedImage);
                     cropImage.setSourceImage(croppedImage);
-                    startActivityForResult(cropImage.getIntent(getApplicationContext()), REQUEST_CROP_PICTURE);
+                    startActivityForResult(cropImage.getIntent(getApplicationContext()), REQUEST_CROP_PICTURE);*/
 
 
                     chosenImage = image;

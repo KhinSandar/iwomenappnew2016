@@ -1,10 +1,20 @@
+<!--
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <com.astuetz.PagerSlidingTabStrip
+    <android.support.v4.view.PagerTabStrip
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="48dip"
+
+        android:background="@drawable/background_tabs"
+        >
+
+    </android.support.v4.view.PagerTabStrip>
+    &lt;!&ndash;<com.astuetz.PagerSlidingTabStrip
         app:pstsShouldExpand="true"
         app:pstsTextAllCaps="false"
         app:pstsIndicatorColor="@color/black"
@@ -15,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="48dip"
         android:background="@drawable/background_tabs"
-        />
+        />&ndash;&gt;
 
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"
@@ -27,4 +37,19 @@
 
 
 
-</RelativeLayout>
+</RelativeLayout>-->
+
+<android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/pager"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="org.undp_iwomen.iwomen.ui.fragment.MainMaterialTab">
+
+    <android.support.v4.view.PagerTabStrip
+        android:id="@+id/tabs"
+        android:layout_height="48dip"
+        android:layout_width="match_parent"
+        android:layout_gravity="top"/>
+
+</android.support.v4.view.ViewPager>

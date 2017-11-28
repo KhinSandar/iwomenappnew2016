@@ -3,6 +3,7 @@ package org.undp_iwomen.iwomen.ui.activity;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DialogFragment;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.ContentValues;
@@ -93,6 +94,7 @@ import org.undp_iwomen.iwomen.model.retrofit_api.UserPostAPI;
 import org.undp_iwomen.iwomen.provider.IwomenProviderData;
 import org.undp_iwomen.iwomen.ui.adapter.CommentAdapter;
 import org.undp_iwomen.iwomen.ui.adapter.StickerGridViewAdapter;
+import org.undp_iwomen.iwomen.ui.fragment.AudioVisualizerFragment;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.ui.widget.ProgressWheel;
 import org.undp_iwomen.iwomen.ui.widget.ResizableImageView;
@@ -2626,16 +2628,22 @@ public class PostDetailActivity extends BaseActionBarActivity implements AbsList
                       /* Log.e("<<PostDetail>>", "<<isPlay>>" + "show audio visualizer dialog" + mstrAudioFilePath);
                         DialogFragment visualizerFragment = AudioVisualizerFragment.newInstance(mstrAudioFilePath, mstr_lang);
                         visualizerFragment.show(getSupportFragmentManager(), "AudioVisualizer");*/
+                        if (postType.equalsIgnoreCase("iWomenPost")) {
+
+                            Intent intent = new Intent(mContext,AudioListActivity.class);
+                            intent.putExtra("postId",postId);
+                            intent.putExtra("language",mstr_lang);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            mContext.startActivity(intent);
+                        }else{
+                            android.support.v4.app.DialogFragment visualizerFragment = AudioVisualizerFragment.newInstance(mstrAudioFilePath, mstr_lang);
+                            visualizerFragment.show(getSupportFragmentManager(), "AudioVisualizer");
+                        }
 
 
 
 
-                        Intent intent = new Intent(mContext,AudioListActivity.class);
-                        intent.putExtra("postId",postId);
-                        intent.putExtra("language",mstr_lang);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        mContext.startActivity(intent);
 
 
 

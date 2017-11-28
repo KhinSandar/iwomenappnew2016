@@ -26,7 +26,6 @@ import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.android.camera.CropImageIntentBuilder;
 import com.kbeanie.imagechooser.api.ChooserType;
 import com.kbeanie.imagechooser.api.ChosenImage;
 import com.kbeanie.imagechooser.api.ChosenImages;
@@ -486,10 +485,10 @@ public class RegisterPhotoFragment7 extends Fragment implements View.OnClickList
                     // setting the output image file and size to 200x200 pixels square.
 
                     Uri croppedImage = Uri.fromFile(croppedImageFile);
-                    CropImageIntentBuilder cropImage = new CropImageIntentBuilder(512, 512, croppedImage);
+                    /*CropImageIntentBuilder cropImage = new CropImageIntentBuilder(512, 512, croppedImage);
                     cropImage.setSourceImage(croppedImage);
                     startActivityForResult(cropImage.getIntent(getActivity().getApplicationContext()), REQUEST_CROP_PICTURE);
-
+                    */
 
                     chosenImage = image;
 

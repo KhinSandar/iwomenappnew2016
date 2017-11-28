@@ -24,7 +24,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.camera.CropImageIntentBuilder;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
@@ -769,10 +768,10 @@ public class MainPhotoPostFragment extends Fragment implements ImageChooserListe
 
 
                     Uri croppedImage = Uri.fromFile(croppedImageFile);
-                    CropImageIntentBuilder cropImage = new CropImageIntentBuilder(512, 512, croppedImage);
+                    /*CropImageIntentBuilder cropImage = new CropImageIntentBuilder(512, 512, croppedImage);
                     cropImage.setSourceImage(croppedImage);
                     startActivityForResult(cropImage.getIntent(getActivity().getApplicationContext()), REQUEST_CROP_PICTURE);
-
+*/
 
                     chosenImage = image;
 

@@ -4,13 +4,15 @@ import android.app.Application;
 import android.support.multidex.MultiDexApplication;
 import android.util.Log;
 
+/*
 import com.path.android.jobqueue.JobManager;
 import com.path.android.jobqueue.config.Configuration;
 import com.path.android.jobqueue.log.CustomLogger;
+*/
 
 public class MyApplication extends MultiDexApplication {
 	private static MyApplication instance;
-    private JobManager jobManager;
+    //private JobManager jobManager;
 
     public MyApplication() {
         instance = this;
@@ -18,14 +20,15 @@ public class MyApplication extends MultiDexApplication {
 
     public void onCreate() {
         super.onCreate();
-        configureJobManager();
+        //configureJobManager();
     }
 
+/*
     private void configureJobManager() {
         Configuration configuration = new Configuration.Builder(this)
         .customLogger(new CustomLogger() {
             private static final String TAG = "JOBS";
-            
+
             public boolean isDebugEnabled() {
                 return true;
             }
@@ -47,12 +50,13 @@ public class MyApplication extends MultiDexApplication {
         .loadFactor(1)//3 jobs per consumer
         .consumerKeepAlive(120)//wait 2 minute
         .build();
-        jobManager = new JobManager(this, configuration);
+        //jobManager = new JobManager(this, configuration);
     }
+*/
 
-    public JobManager getJobManager() {
+    /*public JobManager getJobManager() {
         return jobManager;
-    }
+    }*/
 
     public static MyApplication getInstance() {
     	if(instance == null){

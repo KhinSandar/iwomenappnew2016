@@ -34,7 +34,6 @@ import android.widget.ListView;
 import com.alexbbb.uploadservice.MultipartUploadRequest;
 import com.alexbbb.uploadservice.UploadNotificationConfig;
 import com.alexbbb.uploadservice.UploadServiceBroadcastReceiver;
-import com.android.camera.CropImageIntentBuilder;
 import com.kbeanie.imagechooser.api.ChooserType;
 import com.kbeanie.imagechooser.api.ChosenImage;
 import com.kbeanie.imagechooser.api.ChosenImages;
@@ -558,10 +557,10 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
             //textViewFile.setText(image.getFilePathOriginal());
             croppedImageFile = new File(image.getFilePathOriginal());
             Uri croppedImage = Uri.fromFile(croppedImageFile);
-            CropImageIntentBuilder cropImage = new CropImageIntentBuilder(650, 650, croppedImage);
+            /*CropImageIntentBuilder cropImage = new CropImageIntentBuilder(650, 650, croppedImage);
             cropImage.setSourceImage(croppedImage);
             startActivityForResult(cropImage.getIntent(getActivity().getApplicationContext()), REQUEST_CROP_PICTURE);
-
+*/
 
             chosenImage = image;
 

@@ -23,7 +23,7 @@ import android.widget.TextView;
 
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
-import com.path.android.jobqueue.JobManager;
+//import com.path.android.jobqueue.JobManager;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -111,9 +111,9 @@ public class BaseActionBarActivity extends AppCompatActivity {
                                             @Subscribe
                                             public void onClick(DialogInterface dialog, int id) {
                                                 EventBus.getDefault().register(BaseActionBarActivity.this);
-                                                JobManager jobManager = MainApplication.getInstance().getJobManager();
+                                                /*JobManager jobManager = MainApplication.getInstance().getJobManager();
                                                 DownloadManager downloadManager = new DownloadManager(arg0.getName(), "iWomenAPK-" + arg0.getVersionName());
-                                                jobManager.addJob(downloadManager);
+                                                jobManager.addJob(downloadManager);*/
 
                                                 pgDialog = new ProgressDialog(BaseActionBarActivity.this);
                                                 pgDialog.setTitle("iWomen Update Downloading");

@@ -11,7 +11,7 @@ android {
 }
 
 dependencies {
-    compile "com.android.support:support-v4:$rootProject.supportLibraryVersion"
+    implementation "com.android.support:support-v4:$rootProject.supportLibraryVersion"
     implementation 'com.darwinsys:hirondelle-date4j:1.5.1'
 }
 

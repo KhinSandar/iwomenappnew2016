@@ -12,9 +12,9 @@ import com.facebook.accountkit.AccountKit;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.Logger;
 import com.google.android.gms.analytics.Tracker;
-import com.path.android.jobqueue.JobManager;
+/*import com.path.android.jobqueue.JobManager;
 import com.path.android.jobqueue.config.Configuration;
-import com.path.android.jobqueue.log.CustomLogger;
+import com.path.android.jobqueue.log.CustomLogger;*/
 
 import org.undp_iwomen.iwomen.R;
 
@@ -26,7 +26,7 @@ import java.util.HashMap;
  */
 public class MainApplication extends MultiDexApplication {
     private static MainApplication instance;
-    private JobManager jobManager;
+    //private JobManager jobManager;
 
     public MainApplication() {
         instance = this;
@@ -73,7 +73,7 @@ public class MainApplication extends MultiDexApplication {
 
         UploadService.NAMESPACE = "org.undp_iwomen.iwomen";
 
-        configureJobManager();
+        //configureJobManager();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             // Kitkat and lower has a bug that can cause in correct strict mode
             // warnings about expected activity counts
@@ -96,7 +96,7 @@ public class MainApplication extends MultiDexApplication {
                 .build());
     }
 
-    private void configureJobManager() {
+    /*private void configureJobManager() {
         Configuration configuration = new Configuration.Builder(this)
                 .customLogger(new CustomLogger() {
                     private static final String TAG = "JOBS";
@@ -122,12 +122,12 @@ public class MainApplication extends MultiDexApplication {
                 .loadFactor(1)//3 jobs per consumer
                 .consumerKeepAlive(120)//wait 2 minute
                 .build();
-        jobManager = new JobManager(this, configuration);
+        //jobManager = new JobManager(this, configuration);
     }
-
-    public JobManager getJobManager() {
+*/
+    /*public JobManager getJobManager() {
         return jobManager;
-    }
+    }*/
     public enum TrackerName {
         APP_TRACKER, // Tracker used only in this app.
         GLOBAL_TRACKER, // Tracker used by all the apps from a company. eg: roll-up tracking.

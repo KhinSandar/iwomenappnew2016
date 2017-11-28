@@ -40,6 +40,6 @@ ext {
     compileSdkVersion = 26
     buildToolsVersion = '26.0.2'
 
-    // App dependencies
+    // App dependencies 26.0.2
     supportLibraryVersion = '26.0.2'
 }

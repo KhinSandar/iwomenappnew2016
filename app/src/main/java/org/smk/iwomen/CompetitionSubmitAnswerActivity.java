@@ -25,7 +25,6 @@ import android.widget.Toast;
 import com.alexbbb.uploadservice.MultipartUploadRequest;
 import com.alexbbb.uploadservice.UploadNotificationConfig;
 import com.alexbbb.uploadservice.UploadServiceBroadcastReceiver;
-import com.android.camera.CropImageIntentBuilder;
 import com.google.gson.Gson;
 import com.kbeanie.imagechooser.api.ChooserType;
 import com.kbeanie.imagechooser.api.ChosenImage;
@@ -887,9 +886,10 @@ public class CompetitionSubmitAnswerActivity extends BaseActionBarActivity imple
 					croppedImageFile = new File(image.getFilePathOriginal());
 					Log.i("Image Chooser: ", croppedImageFile.toString());
 					Uri croppedImage = Uri.fromFile(croppedImageFile);
-					CropImageIntentBuilder cropImage = new CropImageIntentBuilder(512, 512, croppedImage);
+					/*CropImageIntentBuilder cropImage = new CropImageIntentBuilder(512, 512, croppedImage);
 					cropImage.setSourceImage(croppedImage);
-					startActivityForResult(cropImage.getIntent(getApplicationContext()), REQUEST_CROP_PICTURE);
+					startActivityForResult(cropImage.getIntent(getApplicationContext()), REQUEST_CROP_PICTURE);*/
+					//chosenImage = image;
 				}
 			}
 		});
