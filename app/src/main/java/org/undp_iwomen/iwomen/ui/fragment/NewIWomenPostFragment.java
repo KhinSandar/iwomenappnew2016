@@ -1005,7 +1005,7 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
                 if (!requirePermissions) {
 
                     //crop_file_name = Uri.fromFile(croppedImageFile).getLastPathSegment().toString();
-                    Log.e("iWOmen Post Btn Click", "11111===> Permission" + choseImageOriginalPath + "/" + data.getData());
+                    //Log.e("iWOmen Post Btn Click", "11111===> Permission" + choseImageOriginalPath + "/" + data.getData());
                     choseImageOriginalPath = getImagePath(data.getData());//Uri.fromFile(croppedImageFile).getPath();
                 }
 
@@ -1141,7 +1141,7 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
 
         takePhotoUriPath = files.get(0).getOriginalPath();
 
-        //Log.e("iWOmen ImageChoose", "0000===> Permission" + takePhotoUriPath +"/"+ files.get(0).getQueryUri());
+        //Log.e("Edit ImageChoose", "0000===> Permission" + takePhotoUriPath +"/"+ files.get(0).getQueryUri());
         //0000===> Permission/storage/emulated/0/Random/Random Pictures/38b71e97-5f8e-4b88-a5b5-45fed0a9ff43.jpeg/file:///data/user/0/org.undp_iwomen.iwomen/files/pictures/38b71e97-5f8e-4b88-a5b5-45fed0a9ff43.jpeg
 
     }

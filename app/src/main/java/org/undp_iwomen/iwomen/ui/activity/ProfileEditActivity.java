@@ -2,6 +2,7 @@ package org.undp_iwomen.iwomen.ui.activity;
 
 import android.Manifest;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
@@ -10,10 +11,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
 import android.system.ErrnoException;
@@ -24,6 +27,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -32,6 +36,11 @@ import com.kbeanie.imagechooser.api.ChosenImage;
 import com.kbeanie.imagechooser.api.ChosenImages;
 import com.kbeanie.imagechooser.api.ImageChooserListener;
 import com.kbeanie.imagechooser.api.ImageChooserManager;
+import com.kbeanie.multipicker.api.CameraImagePicker;
+import com.kbeanie.multipicker.api.ImagePicker;
+import com.kbeanie.multipicker.api.Picker;
+import com.kbeanie.multipicker.api.callbacks.ImagePickerCallback;
+import com.kbeanie.multipicker.api.entity.ChosenFile;
 import com.makeramen.RoundedImageView;
 import com.smk.skalertmessage.SKToastMessage;
 import com.squareup.picasso.Picasso;
@@ -47,6 +56,7 @@ import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.model.retrofit_api.SMKserverStringConverterAPI;
 import org.undp_iwomen.iwomen.ui.adapter.EditProfileGridviewAdapter;
+import org.undp_iwomen.iwomen.ui.adapter.MediaResultsAdapter;
 import org.undp_iwomen.iwomen.ui.widget.CustomButton;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
 import org.undp_iwomen.iwomen.ui.widget.WrappedGridView;
@@ -57,6 +67,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -65,7 +76,7 @@ import retrofit.mime.MultipartTypedOutput;
 import retrofit.mime.TypedFile;
 
 
-public class ProfileEditActivity extends BaseActionBarActivity implements ImageChooserListener {
+public class ProfileEditActivity extends BaseActionBarActivity implements ImageChooserListener, ImagePickerCallback {
 
 
     private CustomTextView textViewTitle;
@@ -108,7 +119,6 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
     private final String CAMERA_PERMISSION = "android.permission.CAMERA";
     boolean cameraPermissionAccepted = false;
 
-    private final String STORAGE_READ_PERMISSION = "android.permission.READ_EXTERNAL_STORAGE";
     boolean storagePermissionAccepted = false;
 
 
@@ -117,10 +127,23 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
     private static final int CAMERA_REQUEST = INITIAL_REQUEST + 2;
     private static final int READ_EXTERNAL_STORAGE = INITIAL_REQUEST + 3;
 
-    private static final int CAMERA = 0;
+    private static final int iCAMERA = 0;
     private static final int GALLERY = 1;
 
     private com.pnikosis.materialishprogress.ProgressWheel progress_wheel_gv;
+
+    /**
+     * For Image use new Lib for  new version N
+     */
+    private String pickerPath;
+    private ListView lvResults;
+    private List<? extends ChosenFile> files;
+    private String choseImageOriginalPath, outPutfileUri, takePhotoUriPath;
+    private final String STORAGE_READ_PERMISSION = "android.permission.READ_EXTERNAL_STORAGE";
+    private static final int PERMISSION_REQUEST = 10002;
+    private String uploadPhoto;
+
+    private static final String CAMERA = Manifest.permission.CAMERA;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,6 +160,7 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
         toolbar.setTitle("");
 
         textViewTitle = (CustomTextView) toolbar.findViewById(R.id.title_action2);
+
 
         if (toolbar != null) {
             setSupportActionBar(toolbar);
@@ -157,7 +181,8 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
         btn_edit = (Button) findViewById(R.id.edit_profile_btn_save);
         btn_cancel = (Button) findViewById(R.id.edit_profile_btn_cancel);
         img_camera = (ImageView) findViewById(R.id.edit_profile_camera_icon);
-
+        //Image
+        lvResults = (ListView) findViewById(R.id.lvResults);
         progress_wheel_gv = (com.pnikosis.materialishprogress.ProgressWheel) findViewById(R.id.edit_profile_progress_wheel);
 
         progress_wheel_gv.setVisibility(View.GONE);
@@ -264,7 +289,15 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
             }
         });
 
+        /**
+         * For Image use new Lib for  new version N
+         */
 
+        if (savedInstanceState != null) {
+            if (savedInstanceState.containsKey("picker_path")) {
+                pickerPath = savedInstanceState.getString("picker_path");
+            }
+        }
     }
 
 
@@ -375,7 +408,23 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
                 if (Connection.isOnline(mContext)) {
 
 
-                    if (crop_file_path != null) {
+
+                    if (choseImageOriginalPath != null  ) {
+                        mProgressDialog.setMessage("Loading...");
+                        mProgressDialog.show();
+                        uploadImageChoosePhoto(choseImageOriginalPath);
+
+                    } else if(takePhotoUriPath != null ){
+                        mProgressDialog.setMessage("Loading...");
+                        mProgressDialog.show();
+                        uploadImageTakePhoto(takePhotoUriPath);
+
+                    }
+                    /*if (crop_file_path != null) {
+
+
+
+
                         mProgressDialog.setMessage("Loading...");
                         mProgressDialog.show();
                         MultipartTypedOutput multipartTypedOutput = new MultipartTypedOutput();
@@ -407,7 +456,8 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
                             }
                         });
 
-                    } else if (userprofile_Image_path != null && !userprofile_Image_path.isEmpty()) {
+                    } */
+                    else if (userprofile_Image_path != null && !userprofile_Image_path.isEmpty()) {
                         mProgressDialog.setMessage("Loading...");
                         mProgressDialog.show();
                         mEditorUserInfo = mSharedPreferencesUserInfo.edit();
@@ -513,14 +563,14 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
     /**
      * *****************Image Chooser***************
      */
-    private void updateUserInfo(final String user_img_path){
+    private void updateUserInfo(final String user_img_path) {
         if (Connection.isOnline(mContext)) {
             //Log.e("<<UserID,img>>","==>"+ mstrUserId + user_img_path);
             NetworkEngine.getInstance().postUpdateUser(Integer.parseInt(mstrUserId), user_img_path, new Callback<User>() {
                 @Override
                 public void success(User user, Response response) {
 
-                    if(mProgressDialog != null){
+                    if (mProgressDialog != null) {
                         mProgressDialog.dismiss();
                     }
                     startDrawerMainActivity();
@@ -529,7 +579,7 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
 
                 @Override
                 public void failure(RetrofitError error) {
-                    if(mProgressDialog != null){
+                    if (mProgressDialog != null) {
                         mProgressDialog.dismiss();
                     }
                     //Log.e("<<updateUserInfo Fail>>","==>"+ mstrUserId + user_img_path);
@@ -538,7 +588,7 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
             });
 
 
-        }else {
+        } else {
 
             if (strLang.equals(Utils.ENG_LANG)) {
                 Utils.doToastEng(mContext, getResources().getString(R.string.open_internet_warning_eng));
@@ -597,18 +647,16 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
                             @TargetApi(Build.VERSION_CODES.M)
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                if (i == CAMERA) {
-                                    if (!hasPermission(CAMERA_PERMISSION)) {
-                                        //if no permission, request permission
-                                        String[] perms = {CAMERA_PERMISSION};
-                                        requestPermissions(perms, CAMERA_REQUEST);
+                                if (i == iCAMERA) {
+                                    if (!hasPermission(CAMERA)) {
 
-                                    } else {
-                                        takePicture();
+                                        requestPermissions(new String[]{STORAGE_READ_PERMISSION, CAMERA}, PERMISSION_REQUEST);
+                                        return;
                                     }
+                                    takePictureNew();
 
                                 } else if (i == GALLERY) {
-                                    if (!hasPermission(STORAGE_READ_PERMISSION)) {
+                                    /*if (!hasPermission(STORAGE_READ_PERMISSION)) {
                                         //if no permission, request permission
                                         String[] perms = {STORAGE_READ_PERMISSION};
                                         int permsRequestCode = 200;
@@ -616,6 +664,20 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
 
                                     } else {
                                         chooseImage();
+                                    }*/
+                                    if (!hasPermission(CAMERA_PERMISSION)) {
+
+                                        //if no permission, request permission
+                                        String[] perms = {CAMERA_PERMISSION};
+
+                                        int permsRequestCode = 200;
+
+                                        requestPermissions(perms, permsRequestCode);
+
+                                    } else {
+                                        pickImageMultiple();
+
+                                        //chooseImage();
                                     }
                                 }
                             }
@@ -679,9 +741,100 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
 
         }
 
+        if (resultCode == Activity.RESULT_OK) {
+
+            boolean requirePermissions = false;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
+
+                    mContext.checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED &&
+                    isUriRequiresPermissions(Uri.fromFile(croppedImageFile))) {
+
+                // request permissions and handle the result in onRequestPermissionsResult()
+                requirePermissions = true;
+                //mCropImageUri = imageUri;
+                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
+            }
+
+            if (requestCode == Picker.PICK_IMAGE_DEVICE) {
+                if (imagePicker == null) {
+                    imagePicker = new ImagePicker(this);
+                    imagePicker.setImagePickerCallback(this);
+                }
+                imagePicker.submit(data);
+                if (!requirePermissions) {
+
+                    //crop_file_name = Uri.fromFile(croppedImageFile).getLastPathSegment().toString();
+                    //Log.e("iWOmen Post Btn Click", "11111===> Permission" + choseImageOriginalPath + "/" + data.getData());
+                    choseImageOriginalPath = getImagePath(data.getData());//Uri.fromFile(croppedImageFile).getPath();
+
+                    profileImg.setVisibility(View.VISIBLE);
+                    profileImg.setImageBitmap(BitmapFactory.decodeFile(choseImageOriginalPath));
+                    //img_job.setMaxWidth(300);
+                    profileImg.setMaxHeight(400);
+                    //crop_file_name = Uri.fromFile(croppedImageFile).getLastPathSegment().toString();
+                    //crop_file_path = choseImageOriginalPath;
+                }
+
+            } else if (requestCode == Picker.PICK_IMAGE_CAMERA) {
+                if (cameraPicker == null) {
+                    cameraPicker = new CameraImagePicker(this);
+                    cameraPicker.setImagePickerCallback(this);
+                    cameraPicker.reinitialize(pickerPath);
+
+                }
+                cameraPicker.submit(data);
+
+                if (!requirePermissions) {
+
+                    Log.e("Edit onActivityResult", "11112===> Permission" +"/"+takePhotoUriPath );
+                    //choseImageOriginalPath = "/data/user/0/org.undp_iwomen.iwomen/files/pictures/f0fa0a60-2e41-4988-a7ac-1b0f454bd7bd.jpeg";
+
+                    // permission has been granted, continue as usual
+                    /*Intent captureIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                    File file = new File(Environment.getExternalStorageDirectory(), "MyPhoto.jpg");
+                    Uri takeImageUri = Uri.fromFile(file);
+
+                    //crop_file_name = Uri.fromFile(croppedImageFile).getLastPathSegment().toString();
+                    Log.e("iWOmen Post Btn Click", "11112===> Permission" + file +"//" + takeImageUri.getPath());
+                    //storage/emulated/0/MyPhoto.jpg/
+                    choseImageOriginalPath = takeImageUri.getPath();//getImagePath(takeImageUri.getPath().toString());//Uri.fromFile(croppedImageFile).getPath();
+                    */
+
+                    profileImg.setVisibility(View.VISIBLE);
+                    profileImg.setImageBitmap(BitmapFactory.decodeFile(takePhotoUriPath));
+                    //img_job.setMaxWidth(300);
+                    profileImg.setMaxHeight(400);
+                    //crop_file_name = Uri.fromFile(croppedImageFile).getLastPathSegment().toString();
+                    //crop_file_path = Uri.fromFile(croppedImageFile).getPath();
+
+
+                }
+            }
+
+
+        }
+
         super.onActivityResult(requestCode, resultCode, data);
         //callbackManager.onActivityResult(requestCode, resultCode, data);
 
+    }
+
+    //For Upload Photo
+    public String getImagePath(Uri uri) {
+        Cursor cursor = mContext.getContentResolver().query(uri, null, null, null, null);
+        cursor.moveToFirst();
+        String document_id = cursor.getString(0);
+        document_id = document_id.substring(document_id.lastIndexOf(":") + 1);
+        cursor.close();
+
+        cursor = mContext.getContentResolver().query(
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                null, MediaStore.Images.Media._ID + " = ? ", new String[]{document_id}, null);
+        cursor.moveToFirst();
+        String path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
+        cursor.close();
+
+        return path;
     }
 
     @Override
@@ -768,14 +921,16 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
                 cameraPermissionAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
                 if (cameraPermissionAccepted) {
                     //TODO camera function
-                    takePicture();
+                    //takePicture();
+                    takePictureNew();
                 }
                 break;
 
             case 200:
                 storagePermissionAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
                 if (storagePermissionAccepted) {
-                    chooseImage();
+                    //chooseImage();
+                    pickImageMultiple();
                 }
                 break;
 
@@ -811,4 +966,161 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
         }
         return false;
     }
+
+
+    /**
+     * New ImageChooser Code
+     */
+    /**
+     * For Image use new Lib for  new version N
+     */
+    @Override
+    public void onImagesChosen(List<com.kbeanie.multipicker.api.entity.ChosenImage> images) {
+        MediaResultsAdapter adapter = new MediaResultsAdapter(images, mContext);
+        lvResults.setAdapter(adapter);
+        Utils.setListViewHeightBasedOnChildren(lvResults);
+        this.files = images;
+
+        takePhotoUriPath = files.get(0).getOriginalPath();
+
+        Log.e("Edit ImageChoose", "0000===> Permission" + takePhotoUriPath +"/"+ files.get(0).getQueryUri());
+        //0000===> Permission/storage/emulated/0/Random/Random Pictures/38b71e97-5f8e-4b88-a5b5-45fed0a9ff43.jpeg/file:///data/user/0/org.undp_iwomen.iwomen/files/pictures/38b71e97-5f8e-4b88-a5b5-45fed0a9ff43.jpeg
+
+    }
+
+    private ImagePicker imagePicker;
+
+    public void pickImageSingle() {
+        imagePicker = new ImagePicker(this);
+        imagePicker.shouldGenerateMetadata(true);
+        imagePicker.shouldGenerateThumbnails(true);
+        imagePicker.setImagePickerCallback(this);
+        imagePicker.pickImage();
+    }
+
+    public void pickImageMultiple() {
+        imagePicker = new ImagePicker(this);
+        imagePicker.allowMultiple();
+        imagePicker.shouldGenerateMetadata(true);
+        imagePicker.shouldGenerateThumbnails(true);
+        imagePicker.setImagePickerCallback(this);
+        imagePicker.pickImage();
+    }
+
+    private CameraImagePicker cameraPicker;
+
+    public void takePictureNew() {
+        cameraPicker = new CameraImagePicker(this);
+        cameraPicker.shouldGenerateMetadata(true);
+        cameraPicker.shouldGenerateThumbnails(true);
+        cameraPicker.setImagePickerCallback(this);
+        pickerPath = cameraPicker.pickImage();
+    }
+
+    /*@Override
+    public void onError(String message) {
+        Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+    }*/
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        // You have to save path in case your activity is killed.
+        // In such a scenario, you will need to re-initialize the CameraImagePicker
+        outState.putString("picker_path", pickerPath);
+        super.onSaveInstanceState(outState);
+    }
+
+    public void uploadImageChoosePhoto(String filename) {
+        Log.e("Edit Post Btn Click", "2222===> upload Image" + filename);
+        //content://com.android.providers.media.documents/document/image%3A17530
+        //progress_wheel.setVisibility(View.VISIBLE);
+
+
+        File photo = new File(filename);
+        MultipartTypedOutput multipartTypedOutput = new MultipartTypedOutput();
+        multipartTypedOutput.addPart("image", new TypedFile("image/png", photo));
+        NetworkEngine.getInstance().postUserPhoto(multipartTypedOutput, new Callback<PhotoUpload>() {
+            @Override
+            public void success(PhotoUpload photo, Response response) {
+
+                if (photo.getResizeUrl().size() > 0) {
+                    uploadPhoto = photo.getResizeUrl().get(0);
+                    choseImageOriginalPath = null;
+                    //takePhotoUriPath = null;
+                }
+
+                mEditorUserInfo = mSharedPreferencesUserInfo.edit();
+                mEditorUserInfo.putString(CommonConfig.USER_UPLOAD_IMG_NAME, photo.getName());
+
+                mEditorUserInfo.putString(CommonConfig.USER_UPLOAD_IMG_URL, photo.getResizeUrl().get(2).toString());
+                mEditorUserInfo.commit();
+                updateUserInfo(photo.getResizeUrl().get(2).toString());
+
+                //checkProcessWhattoDo();
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Log.e("<<<<Fail>>>", "===>" + error.toString());
+                //progress_wheel.setVisibility(View.INVISIBLE);
+
+
+                return;
+            }
+        });
+    }
+
+    public void uploadImageTakePhoto(String filename) {
+        Log.e("Edit Post Btn Click", "2222===> upload Image" + filename);
+        //content://com.android.providers.media.documents/document/image%3A17530
+        //progress_wheel.setVisibility(View.VISIBLE);
+
+
+        File photo = new File(filename);
+        MultipartTypedOutput multipartTypedOutput = new MultipartTypedOutput();
+        multipartTypedOutput.addPart("image", new TypedFile("image/png", photo));
+        NetworkEngine.getInstance().postUserPhoto(multipartTypedOutput, new Callback<PhotoUpload>() {
+            @Override
+            public void success(PhotoUpload photo, Response response) {
+
+                if (photo.getResizeUrl().size() > 0) {
+                    uploadPhoto = photo.getResizeUrl().get(0);
+                    //choseImageOriginalPath = null;
+                    takePhotoUriPath = null;
+                }
+
+                mEditorUserInfo = mSharedPreferencesUserInfo.edit();
+                mEditorUserInfo.putString(CommonConfig.USER_UPLOAD_IMG_NAME, photo.getName());
+
+                mEditorUserInfo.putString(CommonConfig.USER_UPLOAD_IMG_URL, photo.getResizeUrl().get(2).toString());
+                mEditorUserInfo.commit();
+                updateUserInfo(photo.getResizeUrl().get(2).toString());
+
+                //checkProcessWhattoDo();
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Log.e("<<<<Fail>>>", "===>" + error.toString());
+                //progress_wheel.setVisibility(View.INVISIBLE);
+
+
+                return;
+            }
+        });
+    }
+
+    /*@Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (savedInstanceState != null) {
+            if (savedInstanceState.containsKey("picker_path")) {
+                pickerPath = savedInstanceState.getString("picker_path");
+            }
+        }
+    }*/
+
+    //New Code for Image Uri to Upload Uri
+
+
 }
