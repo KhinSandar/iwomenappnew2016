@@ -107,7 +107,7 @@
         android:paddingTop="@dimen/activity_vertical_margin">
 
         <ListView
-            android:id="@+id/lvResults"
+            android:id="@+id/edit_profile_lvResults"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_weight="1" />

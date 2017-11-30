@@ -181,8 +181,11 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
         btn_edit = (Button) findViewById(R.id.edit_profile_btn_save);
         btn_cancel = (Button) findViewById(R.id.edit_profile_btn_cancel);
         img_camera = (ImageView) findViewById(R.id.edit_profile_camera_icon);
-        //Image
-        lvResults = (ListView) findViewById(R.id.lvResults);
+
+        /**
+         * For Image use new Lib for  new version N
+         */
+        lvResults = (ListView) findViewById(R.id.edit_profile_lvResults);
         progress_wheel_gv = (com.pnikosis.materialishprogress.ProgressWheel) findViewById(R.id.edit_profile_progress_wheel);
 
         progress_wheel_gv.setVisibility(View.GONE);
@@ -408,56 +411,17 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
                 if (Connection.isOnline(mContext)) {
 
 
-
-                    if (choseImageOriginalPath != null  ) {
+                    if (choseImageOriginalPath != null) {
                         mProgressDialog.setMessage("Loading...");
                         mProgressDialog.show();
                         uploadImageChoosePhoto(choseImageOriginalPath);
 
-                    } else if(takePhotoUriPath != null ){
+                    } else if (takePhotoUriPath != null) {
                         mProgressDialog.setMessage("Loading...");
                         mProgressDialog.show();
                         uploadImageTakePhoto(takePhotoUriPath);
 
-                    }
-                    /*if (crop_file_path != null) {
-
-
-
-
-                        mProgressDialog.setMessage("Loading...");
-                        mProgressDialog.show();
-                        MultipartTypedOutput multipartTypedOutput = new MultipartTypedOutput();
-                        multipartTypedOutput.addPart("image", new TypedFile("image/png", new File(crop_file_path)));
-
-
-                        NetworkEngine.getInstance().postUserPhoto(multipartTypedOutput, new Callback<PhotoUpload>() {
-                            @Override
-                            public void success(PhotoUpload photoUpload, Response response) {
-                                Log.e("<<<<Success>>>", "===>" + photoUpload.getResizeUrl().get(2).toString());
-
-                                mEditorUserInfo = mSharedPreferencesUserInfo.edit();
-                                mEditorUserInfo.putString(CommonConfig.USER_UPLOAD_IMG_NAME, photoUpload.getName());
-
-                                mEditorUserInfo.putString(CommonConfig.USER_UPLOAD_IMG_URL, photoUpload.getResizeUrl().get(2).toString());
-                                mEditorUserInfo.commit();
-                                updateUserInfo(photoUpload.getResizeUrl().get(2).toString());
-
-                            }
-
-                            @Override
-                            public void failure(RetrofitError error) {
-                                Log.e("<<<<Fail>>>", "===>" + error.toString());
-
-                                mProgressDialog.dismiss();
-
-
-                                return;
-                            }
-                        });
-
-                    } */
-                    else if (userprofile_Image_path != null && !userprofile_Image_path.isEmpty()) {
+                    } else if (userprofile_Image_path != null && !userprofile_Image_path.isEmpty()) {
                         mProgressDialog.setMessage("Loading...");
                         mProgressDialog.show();
                         mEditorUserInfo = mSharedPreferencesUserInfo.edit();
@@ -502,102 +466,11 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
                 showPhotoChoice();
 
                 //TODO Material Dialog
-                /*if (strLang.equals(Utils.ENG_LANG)) {
-                    new MaterialDialog.Builder(ProfileEditActivity.this)
-                            .title(R.string.choose_photo_eng)
-                            .items(cameraList)
-                            .typeface("roboto-medium.ttf", "roboto-medium.ttf")
-                            .itemsCallback(new MaterialDialog.ListCallback() {
-                                @Override
-                                public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
 
-
-                                    if (which == 0) {
-                                        takePicture();
-                                    } else {
-                                        chooseImage();
-                                    }
-                                    //Utils.doToastEng(mContext, "Choose Comming Soon" + which + text.toString());
-
-                                *//*String phno = "tel:" + text.toString();
-                                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse(phno));
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-                                startActivity(intent);*//*
-
-                                }
-                            })
-                            .show();
-                } else {
-                    new MaterialDialog.Builder(ProfileEditActivity.this)
-                            .title(R.string.choose_photo_mm)
-                            .items(cameraList)
-                            .typeface("zawgyi.ttf", "zawgyi.ttf")
-
-                            .itemsCallback(new MaterialDialog.ListCallback() {
-                                @Override
-                                public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
-
-                                    //Utils.doToastEng(mContext, "Choose Comming Soon" + which + text.toString());
-
-                                    if (which == 0) {
-                                        takePicture();
-                                    } else {
-                                        chooseImage();
-                                    }
-                                *//*String phno = "tel:" + text.toString();
-                                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse(phno));
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-                                startActivity(intent);*//*
-
-                                }
-                            })
-                            .show();
-
-                }*/
             }
         }
     };
 
-    /**
-     * *****************Image Chooser***************
-     */
-    private void updateUserInfo(final String user_img_path) {
-        if (Connection.isOnline(mContext)) {
-            //Log.e("<<UserID,img>>","==>"+ mstrUserId + user_img_path);
-            NetworkEngine.getInstance().postUpdateUser(Integer.parseInt(mstrUserId), user_img_path, new Callback<User>() {
-                @Override
-                public void success(User user, Response response) {
-
-                    if (mProgressDialog != null) {
-                        mProgressDialog.dismiss();
-                    }
-                    startDrawerMainActivity();
-                    //Log.e("<<updateUserInfo S>>","==>"+ mstrUserId + user_img_path);
-                }
-
-                @Override
-                public void failure(RetrofitError error) {
-                    if (mProgressDialog != null) {
-                        mProgressDialog.dismiss();
-                    }
-                    //Log.e("<<updateUserInfo Fail>>","==>"+ mstrUserId + user_img_path);
-
-                }
-            });
-
-
-        } else {
-
-            if (strLang.equals(Utils.ENG_LANG)) {
-                Utils.doToastEng(mContext, getResources().getString(R.string.open_internet_warning_eng));
-            } else {
-                Utils.doToastMM(mContext, getResources().getString(R.string.open_internet_warning_mm));
-            }
-
-        }
-    }
 
 
     @TargetApi(Build.VERSION_CODES.M)
@@ -653,18 +526,13 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
                                         requestPermissions(new String[]{STORAGE_READ_PERMISSION, CAMERA}, PERMISSION_REQUEST);
                                         return;
                                     }
+                                    /**
+                                     * For Image use new Lib for  new version N
+                                     */
                                     takePictureNew();
 
                                 } else if (i == GALLERY) {
-                                    /*if (!hasPermission(STORAGE_READ_PERMISSION)) {
-                                        //if no permission, request permission
-                                        String[] perms = {STORAGE_READ_PERMISSION};
-                                        int permsRequestCode = 200;
-                                        requestPermissions(perms, permsRequestCode);
 
-                                    } else {
-                                        chooseImage();
-                                    }*/
                                     if (!hasPermission(CAMERA_PERMISSION)) {
 
                                         //if no permission, request permission
@@ -677,7 +545,6 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
                                     } else {
                                         pickImageMultiple();
 
-                                        //chooseImage();
                                     }
                                 }
                             }
@@ -713,6 +580,7 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
         } else {
             profileProgressbar.setVisibility(View.GONE);
         }
+        //Crop is remove
         if ((requestCode == REQUEST_CROP_PICTURE) && (resultCode == RESULT_OK)) {
 
             boolean requirePermissions = false;
@@ -741,6 +609,12 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
 
         }
 
+        /*
+        //Final image without crop function
+        */
+        /**
+         * For Image use new Lib for  new version N
+         */
         if (resultCode == Activity.RESULT_OK) {
 
             boolean requirePermissions = false;
@@ -749,9 +623,7 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
                     mContext.checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED &&
                     isUriRequiresPermissions(Uri.fromFile(croppedImageFile))) {
 
-                // request permissions and handle the result in onRequestPermissionsResult()
                 requirePermissions = true;
-                //mCropImageUri = imageUri;
                 requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
             }
 
@@ -763,16 +635,12 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
                 imagePicker.submit(data);
                 if (!requirePermissions) {
 
-                    //crop_file_name = Uri.fromFile(croppedImageFile).getLastPathSegment().toString();
-                    //Log.e("iWOmen Post Btn Click", "11111===> Permission" + choseImageOriginalPath + "/" + data.getData());
                     choseImageOriginalPath = getImagePath(data.getData());//Uri.fromFile(croppedImageFile).getPath();
 
                     profileImg.setVisibility(View.VISIBLE);
                     profileImg.setImageBitmap(BitmapFactory.decodeFile(choseImageOriginalPath));
-                    //img_job.setMaxWidth(300);
                     profileImg.setMaxHeight(400);
-                    //crop_file_name = Uri.fromFile(croppedImageFile).getLastPathSegment().toString();
-                    //crop_file_path = choseImageOriginalPath;
+
                 }
 
             } else if (requestCode == Picker.PICK_IMAGE_CAMERA) {
@@ -786,23 +654,13 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
 
                 if (!requirePermissions) {
 
-                    Log.e("Edit onActivityResult", "11112===> Permission" +"/"+takePhotoUriPath );
-                    //choseImageOriginalPath = "/data/user/0/org.undp_iwomen.iwomen/files/pictures/f0fa0a60-2e41-4988-a7ac-1b0f454bd7bd.jpeg";
-
-                    // permission has been granted, continue as usual
-                    /*Intent captureIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                    File file = new File(Environment.getExternalStorageDirectory(), "MyPhoto.jpg");
-                    Uri takeImageUri = Uri.fromFile(file);
-
-                    //crop_file_name = Uri.fromFile(croppedImageFile).getLastPathSegment().toString();
-                    Log.e("iWOmen Post Btn Click", "11112===> Permission" + file +"//" + takeImageUri.getPath());
-                    //storage/emulated/0/MyPhoto.jpg/
-                    choseImageOriginalPath = takeImageUri.getPath();//getImagePath(takeImageUri.getPath().toString());//Uri.fromFile(croppedImageFile).getPath();
-                    */
+                    //Log.e("Edit onActivityResult", "11112===> Permission" +pickerPath+"/"+takePhotoUriPath );
+                    /**
+                     * For Take Picture with camera --Image Path is located under pickerPath
+                     */
 
                     profileImg.setVisibility(View.VISIBLE);
-                    profileImg.setImageBitmap(BitmapFactory.decodeFile(takePhotoUriPath));
-                    //img_job.setMaxWidth(300);
+                    profileImg.setImageBitmap(BitmapFactory.decodeFile(pickerPath));
                     profileImg.setMaxHeight(400);
                     //crop_file_name = Uri.fromFile(croppedImageFile).getLastPathSegment().toString();
                     //crop_file_path = Uri.fromFile(croppedImageFile).getPath();
@@ -815,27 +673,9 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
         }
 
         super.onActivityResult(requestCode, resultCode, data);
-        //callbackManager.onActivityResult(requestCode, resultCode, data);
 
     }
 
-    //For Upload Photo
-    public String getImagePath(Uri uri) {
-        Cursor cursor = mContext.getContentResolver().query(uri, null, null, null, null);
-        cursor.moveToFirst();
-        String document_id = cursor.getString(0);
-        document_id = document_id.substring(document_id.lastIndexOf(":") + 1);
-        cursor.close();
-
-        cursor = mContext.getContentResolver().query(
-                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                null, MediaStore.Images.Media._ID + " = ? ", new String[]{document_id}, null);
-        cursor.moveToFirst();
-        String path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
-        cursor.close();
-
-        return path;
-    }
 
     @Override
     public void onImageChosen(final ChosenImage image) {
@@ -974,6 +814,25 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
     /**
      * For Image use new Lib for  new version N
      */
+
+    //For Upload Photo
+    public String getImagePath(Uri uri) {
+        Cursor cursor = mContext.getContentResolver().query(uri, null, null, null, null);
+        cursor.moveToFirst();
+        String document_id = cursor.getString(0);
+        document_id = document_id.substring(document_id.lastIndexOf(":") + 1);
+        cursor.close();
+
+        cursor = mContext.getContentResolver().query(
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                null, MediaStore.Images.Media._ID + " = ? ", new String[]{document_id}, null);
+        cursor.moveToFirst();
+        String path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
+        cursor.close();
+
+        return path;
+    }
+
     @Override
     public void onImagesChosen(List<com.kbeanie.multipicker.api.entity.ChosenImage> images) {
         MediaResultsAdapter adapter = new MediaResultsAdapter(images, mContext);
@@ -983,8 +842,10 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
 
         takePhotoUriPath = files.get(0).getOriginalPath();
 
-        Log.e("Edit ImageChoose", "0000===> Permission" + takePhotoUriPath +"/"+ files.get(0).getQueryUri());
-        //0000===> Permission/storage/emulated/0/Random/Random Pictures/38b71e97-5f8e-4b88-a5b5-45fed0a9ff43.jpeg/file:///data/user/0/org.undp_iwomen.iwomen/files/pictures/38b71e97-5f8e-4b88-a5b5-45fed0a9ff43.jpeg
+        File file = new File(files.get(0).getOriginalPath());
+        if(file.exists())
+            file.delete();
+        //Log.e("Edit ImageChoose", "0000===> Permission" + takePhotoUriPath + "/" + files.get(0).getQueryUri());
 
     }
 
@@ -1017,24 +878,7 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
         pickerPath = cameraPicker.pickImage();
     }
 
-    /*@Override
-    public void onError(String message) {
-        Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
-    }*/
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        // You have to save path in case your activity is killed.
-        // In such a scenario, you will need to re-initialize the CameraImagePicker
-        outState.putString("picker_path", pickerPath);
-        super.onSaveInstanceState(outState);
-    }
-
     public void uploadImageChoosePhoto(String filename) {
-        Log.e("Edit Post Btn Click", "2222===> upload Image" + filename);
-        //content://com.android.providers.media.documents/document/image%3A17530
-        //progress_wheel.setVisibility(View.VISIBLE);
-
 
         File photo = new File(filename);
         MultipartTypedOutput multipartTypedOutput = new MultipartTypedOutput();
@@ -1045,6 +889,9 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
 
                 if (photo.getResizeUrl().size() > 0) {
                     uploadPhoto = photo.getResizeUrl().get(0);
+                    File file = new File(choseImageOriginalPath);
+                    if(file.exists())
+                        file.delete();
                     choseImageOriginalPath = null;
                     //takePhotoUriPath = null;
                 }
@@ -1052,10 +899,9 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
                 mEditorUserInfo = mSharedPreferencesUserInfo.edit();
                 mEditorUserInfo.putString(CommonConfig.USER_UPLOAD_IMG_NAME, photo.getName());
 
-                mEditorUserInfo.putString(CommonConfig.USER_UPLOAD_IMG_URL, photo.getResizeUrl().get(2).toString());
+                mEditorUserInfo.putString(CommonConfig.USER_UPLOAD_IMG_URL, photo.getResizeUrl().get(1).toString());
                 mEditorUserInfo.commit();
-                updateUserInfo(photo.getResizeUrl().get(2).toString());
-
+                updateUserInfo(photo.getResizeUrl().get(1).toString());
                 //checkProcessWhattoDo();
             }
 
@@ -1064,17 +910,14 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
                 Log.e("<<<<Fail>>>", "===>" + error.toString());
                 //progress_wheel.setVisibility(View.INVISIBLE);
 
-
                 return;
             }
         });
     }
 
+
     public void uploadImageTakePhoto(String filename) {
         Log.e("Edit Post Btn Click", "2222===> upload Image" + filename);
-        //content://com.android.providers.media.documents/document/image%3A17530
-        //progress_wheel.setVisibility(View.VISIBLE);
-
 
         File photo = new File(filename);
         MultipartTypedOutput multipartTypedOutput = new MultipartTypedOutput();
@@ -1086,29 +929,69 @@ public class ProfileEditActivity extends BaseActionBarActivity implements ImageC
                 if (photo.getResizeUrl().size() > 0) {
                     uploadPhoto = photo.getResizeUrl().get(0);
                     //choseImageOriginalPath = null;
+                    File file = new File(takePhotoUriPath);
+                    if(file.exists())
+                        file.delete();
+
                     takePhotoUriPath = null;
+
                 }
 
                 mEditorUserInfo = mSharedPreferencesUserInfo.edit();
                 mEditorUserInfo.putString(CommonConfig.USER_UPLOAD_IMG_NAME, photo.getName());
 
-                mEditorUserInfo.putString(CommonConfig.USER_UPLOAD_IMG_URL, photo.getResizeUrl().get(2).toString());
+                mEditorUserInfo.putString(CommonConfig.USER_UPLOAD_IMG_URL, photo.getResizeUrl().get(1).toString());
                 mEditorUserInfo.commit();
-                updateUserInfo(photo.getResizeUrl().get(2).toString());
-
+                updateUserInfo(photo.getResizeUrl().get(1).toString());
                 //checkProcessWhattoDo();
             }
 
             @Override
             public void failure(RetrofitError error) {
                 Log.e("<<<<Fail>>>", "===>" + error.toString());
-                //progress_wheel.setVisibility(View.INVISIBLE);
-
 
                 return;
             }
         });
     }
+    /**
+     * *****************Image Chooser***************
+     */
+    private void updateUserInfo(final String user_img_path) {
+        if (Connection.isOnline(mContext)) {
+            //Log.e("<<UserID,img>>","==>"+ mstrUserId + user_img_path);
+            NetworkEngine.getInstance().postUpdateUser(Integer.parseInt(mstrUserId), user_img_path, new Callback<User>() {
+                @Override
+                public void success(User user, Response response) {
+
+                    if (mProgressDialog != null) {
+                        mProgressDialog.dismiss();
+                    }
+
+                    startDrawerMainActivity();
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    if (mProgressDialog != null) {
+                        mProgressDialog.dismiss();
+                    }
+
+                }
+            });
+
+
+        } else {
+
+            if (strLang.equals(Utils.ENG_LANG)) {
+                Utils.doToastEng(mContext, getResources().getString(R.string.open_internet_warning_eng));
+            } else {
+                Utils.doToastMM(mContext, getResources().getString(R.string.open_internet_warning_mm));
+            }
+
+        }
+    }
+
 
     /*@Override
     public void onActivityCreated(Bundle savedInstanceState) {

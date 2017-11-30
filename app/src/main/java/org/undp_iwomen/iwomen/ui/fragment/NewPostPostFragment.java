@@ -418,6 +418,10 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
             uploadingAudioFile(uploadUrl, mAudioFilePath);
         } else {
             if (et_postDesc.getText().toString().isEmpty() && choseImageOriginalPath == null && takePhotoUriPath == null && mAudioFilePath == null) {//this mean user doesn't choose nothing
+
+                if (zPDialog != null && zPDialog.isShowing()) {
+                    zPDialog.dismissWithSuccess();
+                }
                 SKToastMessage.showMessage(getActivity(), getResources().getString(R.string.audio_record_warning_post_something), SKToastMessage.WARNING);
             } else {
                 //we will post all data to server, if it's here, we assume all data is ready
@@ -1042,6 +1046,19 @@ public class NewPostPostFragment extends Fragment implements View.OnClickListene
 
                 if (photo.getResizeUrl().size() > 0) {
                     uploadPhoto = photo.getResizeUrl().get(0);
+
+                    if(choseImageOriginalPath != null){
+                        File file = new File(choseImageOriginalPath);
+                        if(file.exists())
+                            file.delete();
+                    }
+                    if(takePhotoUriPath != null){
+                        File file = new File(takePhotoUriPath);
+                        if(file.exists())
+                            file.delete();
+                    }
+
+
                     choseImageOriginalPath = null;
                     takePhotoUriPath = null;
                 }

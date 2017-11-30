@@ -50,6 +50,7 @@ import com.kbeanie.multipicker.api.entity.ChosenFile;
 import com.pnikosis.materialishprogress.ProgressWheel;
 import com.smk.skalertmessage.SKToastMessage;
 import com.smk.skconnectiondetector.SKConnectionDetector;
+import com.thuongnh.zprogresshud.ZProgressHUD;
 
 import org.smk.clientapi.NetworkEngine;
 import org.smk.model.IWomenPost;
@@ -171,6 +172,7 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
     private List<? extends ChosenFile> files;
     private String choseImageOriginalPath, outPutfileUri, takePhotoUriPath;
 
+    private ZProgressHUD zPDialog;
 
 
     public NewIWomenPostFragment() {
@@ -303,6 +305,9 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
                 //Log.e("iWOmen Post Btn Click", "===>");
 
                 if (SKConnectionDetector.getInstance(getActivity()).isConnectingToInternet()) {
+                    zPDialog = new ZProgressHUD(getActivity());
+                    zPDialog.setCancelable(false);
+                    zPDialog.show();
                     checkProcessWhattoDo();
                 } else {
                     SKToastMessage.getInstance(getActivity()).showMessage(getActivity(), "No Internet!", SKToastMessage.ERROR);
@@ -449,6 +454,10 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
         } else {
 
             if (et_postDesc.getText().toString().isEmpty() && choseImageOriginalPath == null && takePhotoUriPath == null && mAudioFilePath == null) {//this mean user doesn't choose nothing
+                if (zPDialog != null && zPDialog.isShowing()) {
+                    zPDialog.dismissWithSuccess();
+                }
+
                 SKToastMessage.showMessage(getActivity(), getResources().getString(R.string.audio_record_warning_post_something), SKToastMessage.WARNING);
             } else {
                 //we will post all data to server, if it's here, we assume all data is ready
@@ -1088,6 +1097,16 @@ public class NewIWomenPostFragment extends Fragment implements View.OnClickListe
 
                 if (photo.getResizeUrl().size() > 0) {
                     uploadPhoto = photo.getResizeUrl().get(0);
+                    if(choseImageOriginalPath != null){
+                        File file = new File(choseImageOriginalPath);
+                        if(file.exists())
+                            file.delete();
+                    }
+                    if(takePhotoUriPath != null){
+                        File file = new File(takePhotoUriPath);
+                        if(file.exists())
+                            file.delete();
+                    }
                     choseImageOriginalPath = null;
                     takePhotoUriPath = null;
                 }

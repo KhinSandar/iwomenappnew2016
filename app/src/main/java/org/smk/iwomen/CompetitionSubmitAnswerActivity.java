@@ -100,7 +100,7 @@ public class CompetitionSubmitAnswerActivity extends BaseActionBarActivity imple
 	private AudioPicker audioPicker;
 	private ProgressDialog pgDialog;
 	private ZProgressHUD dialog;
-	private CustomTextView txt_competition_submit_lbl;
+	private CustomTextView txt_competition_submit_lbl, txt_competition_save_desc;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -117,15 +117,10 @@ public class CompetitionSubmitAnswerActivity extends BaseActionBarActivity imple
 		txt_question = (TextView) findViewById(R.id.txt_competition_question);
 		txt_description = (TextView) findViewById(R.id.txt_competition_description);
 		txt_competition_submit_lbl = (CustomTextView)findViewById(R.id.txt_competition_answer_submit);
-		
+		txt_competition_save_desc = (CustomTextView)findViewById(R.id.competition_save_desc);
+
+
 		langRef = getSharedPreferences(Utils.PREF_SETTING, MODE_PRIVATE);
-		if(langRef.getString(Utils.PREF_SETTING_LANG,"").equals("mm")){
-			txt_question.setText(Html.fromHtml(competitionQuestion.getQuestionMm()));
-			txt_description.setText(Html.fromHtml(competitionQuestion.getAnswerSubmitDescriptionMm()));
-		}else{
-			txt_question.setText(Html.fromHtml(competitionQuestion.getQuestion()));
-			txt_description.setText(Html.fromHtml(competitionQuestion.getAnswerSubmitDescription()));
-		}
 
 		layout_question = (LinearLayout) findViewById(R.id.layout_question);
 		
@@ -148,6 +143,24 @@ public class CompetitionSubmitAnswerActivity extends BaseActionBarActivity imple
         }else{
             btn_go_back.setVisibility(View.GONE);
         }
+		if(langRef.getString(Utils.PREF_SETTING_LANG,"").equals("mm")){
+			btn_save.setText(getResources().getString(R.string.competition_save_mm));
+			btn_submit.setText(getResources().getString(R.string.competition_submit_mm));
+			txt_competition_save_desc.setText(getResources().getString(R.string.competition_save_desc_mm));
+			txt_competition_submit_lbl.setText(getResources().getString(R.string.competition_submit_desc_individual_mm));
+
+			txt_question.setText(Html.fromHtml(competitionQuestion.getQuestionMm()));
+			txt_description.setText(Html.fromHtml(competitionQuestion.getAnswerSubmitDescriptionMm()));
+		}else{
+			btn_save.setText(getResources().getString(R.string.competition_save));
+			btn_submit.setText(getResources().getString(R.string.competition_submit));
+			txt_competition_save_desc.setText(getResources().getString(R.string.competition_save_desc));
+			txt_competition_submit_lbl.setText(getResources().getString(R.string.competition_submit_desc_individual));
+
+
+			txt_question.setText(Html.fromHtml(competitionQuestion.getQuestion()));
+			txt_description.setText(Html.fromHtml(competitionQuestion.getAnswerSubmitDescription()));
+		}
 
 		if(competitionQuestion.getMultipleQuestion() != null && competitionQuestion.getMultipleQuestion().size() > 0){
 			for(Question question: competitionQuestion.getMultipleQuestion()){

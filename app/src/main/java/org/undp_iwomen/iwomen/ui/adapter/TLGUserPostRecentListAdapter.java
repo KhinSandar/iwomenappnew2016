@@ -197,8 +197,25 @@ public class TLGUserPostRecentListAdapter extends BaseAdapter {
                     View dialogView = mInflater.inflate(R.layout.fragment_talk_together_delete_dialog, null);
                     builder.setView(dialogView);
 
+                    CustomTextView mtext = (CustomTextView) dialogView.findViewById(R.id.dialog_language_setting_title);
+
                     CustomButton btn_ok = (CustomButton) dialogView.findViewById(R.id.dialog_ok_btn);
                     CustomButton btn_cancel = (CustomButton) dialogView.findViewById(R.id.dialog_cancel_btn);
+
+                    if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+                        mtext.setText(mContext.getResources().getString(R.string.delete_post));
+                        btn_ok.setText(mContext.getResources().getString(R.string.delete_post_ok));
+                        btn_cancel.setText(mContext.getResources().getString(R.string.delete_post_cancel));
+
+
+                    } else {
+
+                        mtext.setText(mContext.getResources().getString(R.string.delete_post_mm));
+                        btn_ok.setText(mContext.getResources().getString(R.string.report_post_ok_mm));
+                        btn_cancel.setText(mContext.getResources().getString(R.string.report_post_cancel_mm));
+
+
+                    }
 
                     final AlertDialog alertDialog = builder.create();
                     alertDialog.show();
@@ -240,7 +257,7 @@ public class TLGUserPostRecentListAdapter extends BaseAdapter {
                                     org.undp_iwomen.iwomen.utils.Utils.doToastEng(mContext, mContext.getResources().getString(R.string.no_connection));
                                 } else {
 
-                                    org.undp_iwomen.iwomen.utils.Utils.doToastMM(mContext, mContext.getResources().getString(R.string.no_connection));
+                                    org.undp_iwomen.iwomen.utils.Utils.doToastMM(mContext, mContext.getResources().getString(R.string.no_connection_mm));
                                 }
                             }
 
@@ -271,9 +288,24 @@ public class TLGUserPostRecentListAdapter extends BaseAdapter {
                     // ...Irrelevant code for customizing the buttons and title
                     View dialogView = mInflater.inflate(R.layout.fragment_talk_together_report_dialog, null);
                     builder.setView(dialogView);
+                    CustomTextView mtext = (CustomTextView) dialogView.findViewById(R.id.report_dialog_language_setting_title);
 
                     CustomButton btn_ok = (CustomButton) dialogView.findViewById(R.id.dialog_ok_btn);
                     CustomButton btn_cancel = (CustomButton) dialogView.findViewById(R.id.dialog_cancel_btn);
+                    if (mstr_lang.equals(org.undp_iwomen.iwomen.utils.Utils.ENG_LANG)) {
+                        mtext.setText(mContext.getResources().getString(R.string.report_post));
+                        btn_ok.setText(mContext.getResources().getString(R.string.delete_post_ok));
+                        btn_cancel.setText(mContext.getResources().getString(R.string.delete_post_cancel));
+
+
+                    } else {
+
+                        mtext.setText(mContext.getResources().getString(R.string.report_post_mm));
+                        btn_ok.setText(mContext.getResources().getString(R.string.report_post_ok_mm));
+                        btn_cancel.setText(mContext.getResources().getString(R.string.report_post_cancel_mm));
+
+
+                    }
 
                     final AlertDialog alertDialog = builder.create();
                     alertDialog.show();

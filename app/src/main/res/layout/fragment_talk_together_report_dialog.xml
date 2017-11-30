@@ -17,7 +17,7 @@
         android:orientation="horizontal">
 
         <org.undp_iwomen.iwomen.ui.widget.CustomTextView
-            android:id="@+id/dialog_language_setting_title"
+            android:id="@+id/report_dialog_language_setting_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"

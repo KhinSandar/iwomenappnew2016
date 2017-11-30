@@ -108,6 +108,7 @@
                         android:textColor="@color/competition_text_color" />
 
                     <org.undp_iwomen.iwomen.ui.widget.CustomTextView
+                        android:id="@+id/competition_save_desc"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"

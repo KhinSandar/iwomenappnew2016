@@ -1,16 +1,22 @@
 package org.undp_iwomen.iwomen.ui.fragment;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.system.ErrnoException;
 import android.transition.ChangeBounds;
 import android.transition.Slide;
 import android.util.Log;
@@ -22,6 +28,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -31,20 +38,31 @@ import com.kbeanie.imagechooser.api.ChosenImage;
 import com.kbeanie.imagechooser.api.ChosenImages;
 import com.kbeanie.imagechooser.api.ImageChooserListener;
 import com.kbeanie.imagechooser.api.ImageChooserManager;
+import com.kbeanie.multipicker.api.CameraImagePicker;
+import com.kbeanie.multipicker.api.ImagePicker;
+import com.kbeanie.multipicker.api.Picker;
+import com.kbeanie.multipicker.api.callbacks.ImagePickerCallback;
+import com.kbeanie.multipicker.api.entity.ChosenFile;
 import com.makeramen.RoundedImageView;
 
 import org.smk.clientapi.NetworkEngine;
 import org.smk.model.PhotoUpload;
 import org.smk.model.Sticker;
+import org.smk.model.User;
 import org.undp_iwomen.iwomen.CommonConfig;
 import org.undp_iwomen.iwomen.R;
 import org.undp_iwomen.iwomen.data.Sample;
 import org.undp_iwomen.iwomen.ui.activity.RegisterMainActivity;
+import org.undp_iwomen.iwomen.ui.adapter.MediaResultsAdapter;
 import org.undp_iwomen.iwomen.ui.adapter.StickerGridViewAdapter;
 import org.undp_iwomen.iwomen.ui.widget.CustomRadioButton;
 import org.undp_iwomen.iwomen.ui.widget.CustomTextView;
+import org.undp_iwomen.iwomen.utils.Connection;
+import org.undp_iwomen.iwomen.utils.Utils;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,7 +75,7 @@ import retrofit.mime.TypedFile;
 /**
  * Created by lgvalle on 05/09/15.
  */
-public class RegisterPhotoFragment7 extends Fragment implements View.OnClickListener, ImageChooserListener {
+public class RegisterPhotoFragment7 extends Fragment implements View.OnClickListener, ImageChooserListener , ImagePickerCallback {
 
     private static final String EXTRA_SAMPLE = "sample";
     SharedPreferences sharePrefLanguageUtil;
@@ -83,7 +101,7 @@ public class RegisterPhotoFragment7 extends Fragment implements View.OnClickList
     private static int REQUEST_PICTURE = 1;
     private static int REQUEST_CROP_PICTURE = 2;
 
-    private final String STORAGE_READ_PERMISSION = "android.permission.READ_EXTERNAL_STORAGE";
+    //private final String STORAGE_READ_PERMISSION = "android.permission.READ_EXTERNAL_STORAGE";
     boolean storagePermissionAccepted = false;
 
     //TODO For Avator
@@ -101,7 +119,18 @@ public class RegisterPhotoFragment7 extends Fragment implements View.OnClickList
 
     private CustomTextView txtlblgender, txtlblPhotoUpload;
 
+    /**
+     * For Image use new Lib for  new version N
+     */
+    private String pickerPath;
+    private ListView lvResults;
+    private List<? extends ChosenFile> files;
+    private String choseImageOriginalPath, outPutfileUri, takePhotoUriPath;
+    private final String STORAGE_READ_PERMISSION = "android.permission.READ_EXTERNAL_STORAGE";
+    private static final int PERMISSION_REQUEST = 10002;
+    private String uploadPhoto;
 
+    private static final String CAMERA = Manifest.permission.CAMERA;
 
 
 
@@ -152,6 +181,10 @@ public class RegisterPhotoFragment7 extends Fragment implements View.OnClickList
         register_profilePic_progressBar = (ProgressBar) view.findViewById(R.id.register_photo_profilePic_pgbar);
         register_profilePic_progressBar.setVisibility(View.GONE);
 
+        /**
+         * For Image use new Lib for  new version N
+         */
+        lvResults = (ListView) view.findViewById(R.id.register_lvResults);
         profile_rounded = (RoundedImageView) view.findViewById(R.id.register_photo_profilePic);
         profile_rounded.setAdjustViewBounds(true);
         profile_rounded.setScaleType(ImageView.ScaleType.CENTER_CROP);
@@ -161,7 +194,6 @@ public class RegisterPhotoFragment7 extends Fragment implements View.OnClickList
             public void onClick(View v) {
                 //Utils.doToastEng(getActivity().getApplicationContext(),"Coming soon pls !");
                 //takePicture();
-
                 //check whether there is permission for READ_STORAGE_PERMISSION
                 if (!hasPermission(STORAGE_READ_PERMISSION)) {
 
@@ -174,7 +206,8 @@ public class RegisterPhotoFragment7 extends Fragment implements View.OnClickList
 
                 } else {
 
-                    chooseImage();
+                    //chooseImage();
+                    pickImageMultiple();
                 }
 
             }
@@ -201,7 +234,6 @@ public class RegisterPhotoFragment7 extends Fragment implements View.OnClickList
         }
         //setEnglishFont();
 
-
         return view;
     }
 
@@ -215,7 +247,8 @@ public class RegisterPhotoFragment7 extends Fragment implements View.OnClickList
                 storagePermissionAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
 
                 if (storagePermissionAccepted) {
-                    chooseImage();
+                    //chooseImage();
+                    pickImageMultiple();
                 }
 
                 break;
@@ -231,43 +264,43 @@ public class RegisterPhotoFragment7 extends Fragment implements View.OnClickList
             return true;
         }
 
-
     }
-
 
     private void addNextFragment(final Button squareBlue, final boolean overlap) {
 
-        Log.e("<<ImagePath>>","==>" + crop_file_path+"/"+ sticker_img_path);
-        if (crop_file_path != null) {
+        Log.e("<<Register ImagePath>>","==>" + choseImageOriginalPath+"/"+ sticker_img_path);
 
-
+        if (choseImageOriginalPath != null) {
             mProgressDialog.setMessage("Loading...");
-            mProgressDialog.show();//{"isAllow": true}
-
-
+            mProgressDialog.show();
             if(rd_female.isChecked()){
                 mGenderStatus = "female";
             }
             if(rd_male.isChecked()){
                 mGenderStatus = "male";
             }
-
-
+            //uploadImageChoosePhoto(choseImageOriginalPath);
             MultipartTypedOutput multipartTypedOutput = new MultipartTypedOutput();
-            multipartTypedOutput.addPart("image", new TypedFile("image/png", new File(crop_file_path)));
+            multipartTypedOutput.addPart("image", new TypedFile("image/png", new File(choseImageOriginalPath)));
 
 
             NetworkEngine.getInstance().postUserPhoto(multipartTypedOutput, new Callback<PhotoUpload>() {
                 @Override
                 public void success(PhotoUpload photoUpload, Response response) {
-                    Log.e("<<<<Success>>>", "===>" + photoUpload.getResizeUrl().get(2).toString());
+                    //Log.e("<<<<Success>>>", "===>" + photoUpload.getResizeUrl().get(1).toString());
 
                     //photo_20160205070904_7780379861454656029697.jpg
-
+                    if (photoUpload.getResizeUrl().size() > 0) {
+                        //uploadPhoto = photoUpload.getResizeUrl().get(0);
+                        File file = new File(choseImageOriginalPath);
+                        if(file.exists())
+                            file.delete();
+                        choseImageOriginalPath = null;
+                    }
                     mEditorUserInfo = mSharedPreferencesUserInfo.edit();
                     mEditorUserInfo.putString(CommonConfig.USER_UPLOAD_IMG_NAME, photoUpload.getName());
 
-                    mEditorUserInfo.putString(CommonConfig.USER_UPLOAD_IMG_URL, photoUpload.getResizeUrl().get(2).toString());
+                    mEditorUserInfo.putString(CommonConfig.USER_UPLOAD_IMG_URL, photoUpload.getResizeUrl().get(1).toString());
 
 
                     mEditorUserInfo.putString(CommonConfig.USER_GENDER,mGenderStatus );
@@ -313,7 +346,86 @@ public class RegisterPhotoFragment7 extends Fragment implements View.OnClickList
                 }
             });
 
-        } else if(sticker_img_path != null){
+
+        } else if (takePhotoUriPath != null) {
+            mProgressDialog.setMessage("Loading...");
+            mProgressDialog.show();
+            if(rd_female.isChecked()){
+                mGenderStatus = "female";
+            }
+            if(rd_male.isChecked()){
+                mGenderStatus = "male";
+            }
+
+            //uploadImageTakePhoto(takePhotoUriPath);
+            MultipartTypedOutput multipartTypedOutput = new MultipartTypedOutput();
+            multipartTypedOutput.addPart("image", new TypedFile("image/png", new File(takePhotoUriPath)));
+
+
+            NetworkEngine.getInstance().postUserPhoto(multipartTypedOutput, new Callback<PhotoUpload>() {
+                @Override
+                public void success(PhotoUpload photoUpload, Response response) {
+                    //Log.e("<<<<Success>>>", "===>" + photoUpload.getResizeUrl().get(1).toString());
+
+                    //photo_20160205070904_7780379861454656029697.jpg
+                    if (photoUpload.getResizeUrl().size() > 0) {
+                        //uploadPhoto = photoUpload.getResizeUrl().get(0);
+                        File file = new File(takePhotoUriPath);
+                        if(file.exists())
+                            file.delete();
+                        takePhotoUriPath = null;
+                    }
+                    mEditorUserInfo = mSharedPreferencesUserInfo.edit();
+                    mEditorUserInfo.putString(CommonConfig.USER_UPLOAD_IMG_NAME, photoUpload.getName());
+
+                    mEditorUserInfo.putString(CommonConfig.USER_UPLOAD_IMG_URL, photoUpload.getResizeUrl().get(1).toString());
+
+
+                    mEditorUserInfo.putString(CommonConfig.USER_GENDER,mGenderStatus );
+
+                    mEditorUserInfo.commit();
+                    RegisterTermsFragment8 registerTermsFragment8 = RegisterTermsFragment8.newInstance();
+
+                    Slide slideTransition = null;
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        slideTransition = new Slide(Gravity.LEFT);
+                        slideTransition.setDuration(getResources().getInteger(R.integer.anim_duration_long));
+
+                    }
+
+                    ChangeBounds changeBoundsTransition = null;
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
+                        changeBoundsTransition = new ChangeBounds();
+                        changeBoundsTransition.setDuration(getResources().getInteger(R.integer.anim_duration_medium));
+
+                    }
+
+                    mProgressDialog.dismiss();
+
+
+                    registerTermsFragment8.setEnterTransition(slideTransition);
+                    registerTermsFragment8.setAllowEnterTransitionOverlap(overlap);
+                    registerTermsFragment8.setAllowReturnTransitionOverlap(overlap);
+                    registerTermsFragment8.setSharedElementEnterTransition(changeBoundsTransition);
+
+                    getFragmentManager().beginTransaction()
+                            .replace(R.id.container, registerTermsFragment8)
+                            .addToBackStack(null)
+                            .addSharedElement(squareBlue, getString(R.string.register_next))
+                            .commit();
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    Log.e("<<<<Fail>>>", "===>" + error.toString());
+
+                    mProgressDialog.dismiss();
+                    return;
+                }
+            });
+
+
+        }else if(sticker_img_path != null){
 
             if(rd_female.isChecked()){
                 mGenderStatus = "female";
@@ -362,6 +474,21 @@ public class RegisterPhotoFragment7 extends Fragment implements View.OnClickList
         }else{
 
         }
+
+        /*if (choseImageOriginalPath != null) {
+
+
+            mProgressDialog.setMessage("Loading...");
+            mProgressDialog.show();//{"isAllow": true}
+
+
+            if(rd_female.isChecked()){
+                mGenderStatus = "female";
+            }
+            if(rd_male.isChecked()){
+                mGenderStatus = "male";
+            }
+        } */
 
 
     }
@@ -466,6 +593,71 @@ public class RegisterPhotoFragment7 extends Fragment implements View.OnClickList
 
         }
 
+        /*
+        //Final image without crop function
+        */
+        /**
+         * For Image use new Lib for  new version N
+         */
+        if (resultCode == Activity.RESULT_OK) {
+
+            boolean requirePermissions = false;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
+
+                    mContext.checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED &&
+                    isUriRequiresPermissions(Uri.fromFile(croppedImageFile))) {
+
+                requirePermissions = true;
+                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
+            }
+
+            if (requestCode == Picker.PICK_IMAGE_DEVICE) {
+                if (imagePicker == null) {
+                    imagePicker = new ImagePicker(this);
+                    imagePicker.setImagePickerCallback(this);
+                }
+                imagePicker.submit(data);
+                if (!requirePermissions) {
+
+                    choseImageOriginalPath = getImagePath(data.getData());//Uri.fromFile(croppedImageFile).getPath();
+
+                    profile_rounded.setVisibility(View.VISIBLE);
+                    profile_rounded.setImageBitmap(BitmapFactory.decodeFile(choseImageOriginalPath));
+                    profile_rounded.setMaxHeight(400);
+                    //crop_file_name = Uri.fromFile(croppedImageFile).getLastPathSegment().toString();
+                    //crop_file_path = choseImageOriginalPath;
+                    sticker_img_path = null;
+                }
+
+            } else if (requestCode == Picker.PICK_IMAGE_CAMERA) {
+                if (cameraPicker == null) {
+                    cameraPicker = new CameraImagePicker(this);
+                    cameraPicker.setImagePickerCallback(this);
+                    cameraPicker.reinitialize(pickerPath);
+
+                }
+                cameraPicker.submit(data);
+
+                if (!requirePermissions) {
+
+                    //Log.e("Edit onActivityResult", "11112===> Permission" +pickerPath+"/"+takePhotoUriPath );
+                    /**
+                     * For Take Picture with camera --Image Path is located under pickerPath
+                     */
+
+                    profile_rounded.setVisibility(View.VISIBLE);
+                    profile_rounded.setImageBitmap(BitmapFactory.decodeFile(pickerPath));
+                    profile_rounded.setMaxHeight(400);
+                    //crop_file_name = Uri.fromFile(croppedImageFile).getLastPathSegment().toString();
+                    //crop_file_path = Uri.fromFile(croppedImageFile).getPath();
+                    sticker_img_path = null;
+
+                }
+            }
+
+
+        }
+
     }
 
 
@@ -485,10 +677,6 @@ public class RegisterPhotoFragment7 extends Fragment implements View.OnClickList
                     // setting the output image file and size to 200x200 pixels square.
 
                     Uri croppedImage = Uri.fromFile(croppedImageFile);
-                    /*CropImageIntentBuilder cropImage = new CropImageIntentBuilder(512, 512, croppedImage);
-                    cropImage.setSourceImage(croppedImage);
-                    startActivityForResult(cropImage.getIntent(getActivity().getApplicationContext()), REQUEST_CROP_PICTURE);
-                    */
 
                     chosenImage = image;
 
@@ -592,6 +780,101 @@ public class RegisterPhotoFragment7 extends Fragment implements View.OnClickList
             }
         });
 
+    }
+
+    /**
+     * Test if we can open the given Android URI to test if permission required error is thrown.<br>
+     */
+    public boolean isUriRequiresPermissions(Uri uri) {
+        try {
+            ContentResolver resolver = getActivity().getContentResolver();
+            InputStream stream = resolver.openInputStream(uri);
+            stream.close();
+            return false;
+        } catch (FileNotFoundException e) {
+            if (e.getCause() instanceof ErrnoException) {
+                return true;
+            }
+        } catch (Exception e) {
+        }
+        return false;
+    }
+
+
+    /**
+     * New ImageChooser Code
+     */
+    /**
+     * For Image use new Lib for  new version N
+     */
+
+    //For Upload Photo
+    public String getImagePath(Uri uri) {
+        Cursor cursor = mContext.getContentResolver().query(uri, null, null, null, null);
+        cursor.moveToFirst();
+        String document_id = cursor.getString(0);
+        document_id = document_id.substring(document_id.lastIndexOf(":") + 1);
+        cursor.close();
+
+        cursor = mContext.getContentResolver().query(
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                null, MediaStore.Images.Media._ID + " = ? ", new String[]{document_id}, null);
+        cursor.moveToFirst();
+        String path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
+        cursor.close();
+
+        return path;
+    }
+
+    @Override
+    public void onImagesChosen(List<com.kbeanie.multipicker.api.entity.ChosenImage> images) {
+        MediaResultsAdapter adapter = new MediaResultsAdapter(images, mContext);
+        lvResults.setAdapter(adapter);
+        Utils.setListViewHeightBasedOnChildren(lvResults);
+        this.files = images;
+
+        takePhotoUriPath = files.get(0).getOriginalPath();
+        //Log.e("Edit ImageChoose", "0000===> Permission" + takePhotoUriPath + "/" + files.get(0).getQueryUri());
+
+    }
+
+    private ImagePicker imagePicker;
+
+    public void pickImageSingle() {
+        imagePicker = new ImagePicker(this);
+        imagePicker.shouldGenerateMetadata(true);
+        imagePicker.shouldGenerateThumbnails(true);
+        imagePicker.setImagePickerCallback(this);
+        imagePicker.pickImage();
+    }
+
+    public void pickImageMultiple() {
+        imagePicker = new ImagePicker(this);
+        imagePicker.allowMultiple();
+        imagePicker.shouldGenerateMetadata(true);
+        imagePicker.shouldGenerateThumbnails(true);
+        imagePicker.setImagePickerCallback(this);
+        imagePicker.pickImage();
+    }
+
+    private CameraImagePicker cameraPicker;
+
+    public void takePictureNew() {
+        cameraPicker = new CameraImagePicker(this);
+        cameraPicker.shouldGenerateMetadata(true);
+        cameraPicker.shouldGenerateThumbnails(true);
+        cameraPicker.setImagePickerCallback(this);
+        pickerPath = cameraPicker.pickImage();
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (savedInstanceState != null) {
+            if (savedInstanceState.containsKey("picker_path")) {
+                pickerPath = savedInstanceState.getString("picker_path");
+            }
+        }
     }
 
 

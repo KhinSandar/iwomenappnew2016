@@ -143,7 +143,7 @@ public class AboutUsWebActivity extends BaseActionBarActivity {
 
                         } else{
                             //setTitle(R.string.title_activity_about_us_mm);
-                            textViewTitle.setText(R.string.title_activity_about_us_mm);
+                            textViewTitle.setText(R.string.menu7_mm);
                             //textViewTitle.setTypeface(MyTypeFace.get(getApplicationContext(), MyTypeFace.ZAWGYI));
 
                         }

@@ -48,7 +48,7 @@ public class NewPostActivity extends BaseActionBarActivity {
 
         } else
         {
-            textViewTitle.setText(R.string.title_activity_new_post);
+            textViewTitle.setText(R.string.title_activity_new_post_mm);
 
         }
         if(null == savedInstanceState){
@@ -57,7 +57,7 @@ public class NewPostActivity extends BaseActionBarActivity {
 
             } else
             {
-                textViewTitle.setText(R.string.title_activity_new_post);
+                textViewTitle.setText(R.string.title_activity_new_post_mm);
 
             }
             if(bundle != null && categoryId != null){

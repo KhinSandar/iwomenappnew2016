@@ -596,6 +596,7 @@
     <string name="title_leadership_lesson">Leadership Lesson</string>
     <string name="title_activity_sister_app_detail">Sister Apps</string>
     <string name="title_activity_new_post">New Post</string>
+
     <string name="new_post_hint">Here you can ask question to other TLGs, ask for advice to other TLGs and share your livelihood skills with other TLGs, And of course you can also post your successful TLGs activities.</string>
     <string name="str_upload_image">Upload Photo</string>
     <string name="str_upload_audio">Upload Audio</string>
@@ -813,7 +814,7 @@ Shirin Ebadi, J.D., was awarded the 2003 Nobel Peace Prize for her efforts to pr
     <string name="menu4_mm">ေမးျမန္းေဆြးေႏြးရန္</string>
     <string name="menu5_mm">ဆုရယူရန္ အမွတ္ရရန္</string>
     <string name="menu6_mm">Sister Apps</string>
-    <string name="menu7_mm">ကြ်ႏု္ပ္တို.အေႀကာင္း</string>
+    <string name="menu7_mm">ကြ်ႏု္ပ္တို႕အေႀကာင္း</string>
     <string name="menu8_mm">ျပင္ဆင္ရန္</string>
     <string name="menu9_mm">ဗားရွင္းစစ္ရန္</string>
     <string name="menu_sing_out_mm">ထြက္ရန္</string>
@@ -959,7 +960,7 @@ Make many new friends, contact your local May Doe Kabar/TLG group. See number be
     <string name="na">NA</string>
 
     <string name="my_post">My Posts</string>
-    <string name="my_post_mm">က်နု္ပ္ပိုုစ့္</string>
+    <string name="my_post_mm">ကြ်ႏု္ပ္ပိုုစ့္</string>
     <string name="log_in_phone_button_mm">ဖုန္းနံပါတ္ထည့္ရန္ ႏွိပ္ပါ</string>
 
     <string name="register_ph_head1">Please add your phone number, we will</string>
@@ -1059,5 +1060,19 @@ Make many new friends, contact your local May Doe Kabar/TLG group. See number be
     <string name="audio_vid_file_mm">ရုုပ္သံဗီြဒီယိုုဖိုုင္တင္ရန္</string>
     <string name="audio_record_btn_txt_mm" >အသံသြင္းရန္ႏွိပ္ပါ</string>
     <string name="loading_video"> Loading Video </string>
+
+
+    <string name="delete_post_mm">ယခုပို ့စ္ကို ဖ်က္ မည္မွာ ေသခ်ာၿပီလား။</string>
+
+    <string name="report_post_ok_mm">ၿပဳလုပ္မည္။</string>
+    <string name="report_post_cancel_mm">မၿပဳလုပ္ပါ။</string>
+
+    <string name="report_post_mm">ဒါဟာေႏွာက္ယွက္မွု (သို႔) အမုန္းပြားစကားၿခိမ္းေျခာက္ျခင္း၊ အၾကမ္းဖက္ၿခင္းပို႔စ္ၿဖစ္သည္္ iWomen အဖြဲ႔အစည္းအတြင္းရွိအသံုးၿပဳသူမ်ားၿဖင့္မသင္႔ေတာ္ပါ ထို႔ေၾကာင့္ iWomen အဖြဲ႔ကိုသတင္းေပးပို႔ပါမည္</string>
+    <string name="competition_how_to_play_game_mm">ဂိမ္းကိုု ဘယ္လိုုပါဝင္ ကစားရမလဲ</string>
+    <string name="competition_take_challenge_mm">စြမ္းရည္ စမ္းသပ္မည္</string>
+    <string name="competition_save_mm">သိမ္းမည္</string>
+    <string name="competition_save_desc_mm">မိမိ၏ အေျဖကို ခဏသိမ္းထားမည္ဆိုလွ်င္ ဒီ ခလုပ္ကို ႏိွပ္ပါ။</string>
+
+    <string name="competition_submit_desc_individual_mm">မိမိ၏ အေျဖကို ေပးပို႕မည္ဆိုလွ်င္ ဒီ ခလုပ္ကိုႏိွပ္ပါ။</string>
 
 </resources>

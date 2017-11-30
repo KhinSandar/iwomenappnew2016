@@ -73,10 +73,16 @@ public class CompetitionNewGameActivity extends BaseActionBarActivity {
 		}
 		SharedPreferences langRef = getSharedPreferences(Utils.PREF_SETTING, MODE_PRIVATE);
 		if(langRef.getString(Utils.PREF_SETTING_LANG,"").equals("mm")){
+			txt_instruction.setText(getResources().getString(R.string.competition_how_to_play_game_mm));
+			btn_take_challenge.setText(getResources().getString(R.string.competition_take_challenge_mm));
+
 			txt_question.setText(Html.fromHtml(competitionQuestion.getQuestionMm()));
 			txt_question_desc.setText(Html.fromHtml(competitionQuestion.getDescriptionMm()));
 			txt_instruction_desc.setText(Html.fromHtml(competitionQuestion.getInstructionAboutGameMm()));
 		}else{
+			txt_instruction.setText(getResources().getString(R.string.competition_how_to_play_game));
+			btn_take_challenge.setText(getResources().getString(R.string.competition_take_challenge));
+
 			txt_question.setText(Html.fromHtml(competitionQuestion.getQuestion()));
 			txt_question_desc.setText(Html.fromHtml(competitionQuestion.getDescription()));
 			txt_instruction_desc.setText(Html.fromHtml(competitionQuestion.getInstructionAboutGame()));
